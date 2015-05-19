@@ -1,0 +1,70 @@
+2015-05-19T18:06:19+00:00 WARN (4): [2] stat(): stat failed for /Applications/AMPPS/www/Tarfee/application/packages/core-install-4.8.8.json (/Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 4b4c18
+Stack trace:
+#0 /Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/Applications/AMPPS/www/Tarfee/a...')
+#1 /Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/Applications/AMPPS/www/Tarfee/a...')
+#2 /Applications/AMPPS/www/Tarfee/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/packages/core-instal...')
+#3 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Action.php(516): ManageController->permsAction()
+#4 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Dispatcher/Standard.php(308): Zend_Controller_Action->dispatch('permsAction')
+#5 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#7 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /Applications/AMPPS/www/Tarfee/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2015-05-19T18:06:19+00:00 WARN (4): [2] stat(): stat failed for /Applications/AMPPS/www/Tarfee/application/packages/library-scaffold-4.8.8.json (/Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: ac4b3c
+Stack trace:
+#0 /Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/Applications/AMPPS/www/Tarfee/a...')
+#1 /Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/Applications/AMPPS/www/Tarfee/a...')
+#2 /Applications/AMPPS/www/Tarfee/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/packages/library-sca...')
+#3 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Action.php(516): ManageController->permsAction()
+#4 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Dispatcher/Standard.php(308): Zend_Controller_Action->dispatch('permsAction')
+#5 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#7 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /Applications/AMPPS/www/Tarfee/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2015-05-19T18:06:19+00:00 WARN (4): [2] stat(): stat failed for /Applications/AMPPS/www/Tarfee/application/packages/module-activity-4.8.8.json (/Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: d26eec
+Stack trace:
+#0 /Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/Applications/AMPPS/www/Tarfee/a...')
+#1 /Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/Applications/AMPPS/www/Tarfee/a...')
+#2 /Applications/AMPPS/www/Tarfee/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/packages/module-acti...')
+#3 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Action.php(516): ManageController->permsAction()
+#4 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Dispatcher/Standard.php(308): Zend_Controller_Action->dispatch('permsAction')
+#5 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#7 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /Applications/AMPPS/www/Tarfee/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2015-05-19T18:06:19+00:00 WARN (4): [2] stat(): stat failed for /Applications/AMPPS/www/Tarfee/application/packages/module-core-4.8.8.json (/Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: 6e79c7
+Stack trace:
+#0 /Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/Applications/AMPPS/www/Tarfee/a...')
+#1 /Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/Applications/AMPPS/www/Tarfee/a...')
+#2 /Applications/AMPPS/www/Tarfee/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/packages/module-core...')
+#3 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Action.php(516): ManageController->permsAction()
+#4 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Dispatcher/Standard.php(308): Zend_Controller_Action->dispatch('permsAction')
+#5 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#7 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /Applications/AMPPS/www/Tarfee/install/index.php(87): Zend_Application->run()
+#9 {main}
+
+2015-05-19T18:06:19+00:00 WARN (4): [2] stat(): stat failed for /Applications/AMPPS/www/Tarfee/application/packages/module-fields-4.8.8.json (/Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/System.php) [77]
+Error Code: a4b364
+Stack trace:
+#0 /Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/System.php(77): stat('/Applications/AMPPS/www/Tarfee/a...')
+#1 /Applications/AMPPS/www/Tarfee/application/libraries/Engine/Vfs/Adapter/Abstract.php(224): Engine_Vfs_Adapter_System->stat('/Applications/AMPPS/www/Tarfee/a...')
+#2 /Applications/AMPPS/www/Tarfee/install/controllers/ManageController.php(752): Engine_Vfs_Adapter_Abstract->info('application/packages/module-fiel...')
+#3 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Action.php(516): ManageController->permsAction()
+#4 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Dispatcher/Standard.php(308): Zend_Controller_Action->dispatch('permsAction')
+#5 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Controller/Front.php(954): Zend_Controller_Dispatcher_Standard->dispatch(Zend_Controller_Request_Http, Zend_Controller_Response_Http)
+#6 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Application/Bootstrap/Bootstrap.php(97): Zend_Controller_Front->dispatch()
+#7 /Applications/AMPPS/www/Tarfee/application/libraries/Zend/Application.php(366): Zend_Application_Bootstrap_Bootstrap->run()
+#8 /Applications/AMPPS/www/Tarfee/install/index.php(87): Zend_Application->run()
+#9 {main}
+
