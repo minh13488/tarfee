@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2015 at 06:07 PM
+-- Generation Time: May 20, 2015 at 06:17 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.5.24
 
@@ -76,8 +76,15 @@ CREATE TABLE IF NOT EXISTS `engine4_activity_actiontypes` (
 --
 
 INSERT INTO `engine4_activity_actiontypes` (`type`, `module`, `body`, `enabled`, `displayable`, `attachable`, `commentable`, `shareable`, `is_generated`) VALUES
+('comment_video', 'video', '{item:$subject} commented on {item:$owner}''s {item:$object:video}: {body:$body}', 1, 1, 1, 1, 1, 0),
 ('friends', 'user', '{item:$subject} is now friends with {item:$object}.', 1, 3, 0, 1, 1, 1),
 ('friends_follow', 'user', '{item:$subject} is now following {item:$object}.', 1, 3, 0, 1, 1, 1),
+('group_create', 'group', '{item:$subject} created a new group:', 1, 5, 1, 1, 1, 1),
+('group_join', 'group', '{item:$subject} joined the group {item:$object}', 1, 3, 1, 1, 1, 1),
+('group_photo_upload', 'group', '{item:$subject} added {var:$count} photo(s).', 1, 3, 2, 1, 1, 1),
+('group_promote', 'group', '{item:$subject} has been made an officer for the group {item:$object}', 1, 3, 1, 1, 1, 1),
+('group_topic_create', 'group', '{item:$subject} posted a {itemChild:$object:topic:$child_id} in the group {item:$object}: {body:$body}', 1, 3, 1, 1, 1, 1),
+('group_topic_reply', 'group', '{item:$subject} replied to a {itemChild:$object:topic:$child_id} in the group {item:$object}: {body:$body}', 1, 3, 1, 1, 1, 1),
 ('login', 'user', '{item:$subject} has signed in.', 0, 1, 0, 1, 1, 1),
 ('logout', 'user', '{item:$subject} has signed out.', 0, 1, 0, 1, 1, 1),
 ('network_join', 'network', '{item:$subject} joined the network {item:$object}', 1, 3, 1, 1, 1, 1),
@@ -87,7 +94,8 @@ INSERT INTO `engine4_activity_actiontypes` (`type`, `module`, `body`, `enabled`,
 ('share', 'activity', '{item:$subject} shared {item:$object}''s {var:$type}. {body:$body}', 1, 5, 1, 1, 0, 1),
 ('signup', 'user', '{item:$subject} has just signed up. Say hello!', 1, 5, 0, 1, 1, 1),
 ('status', 'user', '{item:$subject} {body:$body}', 1, 5, 0, 1, 4, 0),
-('tagged', 'user', '{item:$subject} tagged {item:$object} in a {var:$label}:', 1, 7, 1, 1, 0, 1);
+('tagged', 'user', '{item:$subject} tagged {item:$object} in a {var:$label}:', 1, 7, 1, 1, 0, 1),
+('video_new', 'video', '{item:$subject} posted a new video:', 1, 5, 1, 3, 1, 0);
 
 -- --------------------------------------------------------
 
@@ -191,12 +199,20 @@ INSERT INTO `engine4_activity_notificationtypes` (`type`, `module`, `body`, `is_
 ('friend_follow_accepted', 'user', 'You are now following {item:$subject}.', 0, '', 1),
 ('friend_follow_request', 'user', '{item:$subject} has requested to follow you.', 1, 'user.friends.request-follow', 1),
 ('friend_request', 'user', '{item:$subject} has requested to be your friend.', 1, 'user.friends.request-friend', 1),
+('group_accepted', 'group', 'Your request to join the group {item:$object} has been approved.', 0, '', 1),
+('group_approve', 'group', '{item:$subject} has requested to join the group {item:$object}.', 0, '', 1),
+('group_discussion_reply', 'group', '{item:$subject} has {item:$object:posted} on a {itemParent:$object::group topic} you posted on.', 0, '', 1),
+('group_discussion_response', 'group', '{item:$subject} has {item:$object:posted} on a {itemParent:$object::group topic} you created.', 0, '', 1),
+('group_invite', 'group', '{item:$subject} has invited you to the group {item:$object}.', 1, 'group.widget.request-group', 1),
+('group_promote', 'group', 'You were promoted to officer in the group {item:$object}.', 0, '', 1),
 ('liked', 'activity', '{item:$subject} likes your {item:$object:$label}.', 0, '', 1),
 ('liked_commented', 'activity', '{item:$subject} has commented on a {item:$object:$label} you liked.', 0, '', 1),
 ('message_new', 'messages', '{item:$subject} has sent you a {item:$object:message}.', 0, '', 1),
 ('post_user', 'user', '{item:$subject} has posted on your {item:$object:profile}.', 0, '', 1),
 ('shared', 'activity', '{item:$subject} has shared your {item:$object:$label}.', 0, '', 1),
-('tagged', 'user', '{item:$subject} tagged you in a {item:$object:$label}.', 0, '', 1);
+('tagged', 'user', '{item:$subject} tagged you in a {item:$object:$label}.', 0, '', 1),
+('video_processed', 'video', 'Your {item:$object:video} is ready to be viewed.', 0, '', 1),
+('video_processed_failed', 'video', 'Your {item:$object:video} has failed to process.', 0, '', 1);
 
 -- --------------------------------------------------------
 
@@ -317,6 +333,22 @@ INSERT INTO `engine4_authorization_permissions` (`level_id`, `type`, `name`, `va
 (1, 'core_link', 'view', 2, NULL),
 (1, 'general', 'activity', 2, NULL),
 (1, 'general', 'style', 2, NULL),
+(1, 'group', 'auth_comment', 5, '["registered", "member", "officer"]'),
+(1, 'group', 'auth_event', 5, '["registered", "member", "officer"]'),
+(1, 'group', 'auth_photo', 5, '["registered", "member", "officer"]'),
+(1, 'group', 'auth_view', 5, '["everyone", "registered", "member"]'),
+(1, 'group', 'comment', 2, NULL),
+(1, 'group', 'commentHtml', 3, 'blockquote, strong, b, em, i, u, strike, sub, sup, p, div, pre, address, h1, h2, h3, h4, h5, h6, span, ol, li, ul, a, img, embed, br, hr, iframe'),
+(1, 'group', 'create', 1, NULL),
+(1, 'group', 'delete', 2, NULL),
+(1, 'group', 'edit', 2, NULL),
+(1, 'group', 'event', 1, NULL),
+(1, 'group', 'invite', 1, NULL),
+(1, 'group', 'photo', 1, NULL),
+(1, 'group', 'photo.edit', 2, NULL),
+(1, 'group', 'style', 1, NULL),
+(1, 'group', 'topic.edit', 2, NULL),
+(1, 'group', 'view', 2, NULL),
 (1, 'messages', 'auth', 3, 'friends'),
 (1, 'messages', 'create', 1, NULL),
 (1, 'messages', 'editor', 3, 'plaintext'),
@@ -333,6 +365,15 @@ INSERT INTO `engine4_authorization_permissions` (`level_id`, `type`, `name`, `va
 (1, 'user', 'style', 2, NULL),
 (1, 'user', 'username', 2, NULL),
 (1, 'user', 'view', 2, NULL),
+(1, 'video', 'auth_comment', 5, '["everyone","owner_network","owner_member_member","owner_member","owner"]'),
+(1, 'video', 'auth_view', 5, '["everyone","owner_network","owner_member_member","owner_member","owner"]'),
+(1, 'video', 'comment', 2, NULL),
+(1, 'video', 'create', 1, NULL),
+(1, 'video', 'delete', 2, NULL),
+(1, 'video', 'edit', 2, NULL),
+(1, 'video', 'max', 3, '20'),
+(1, 'video', 'upload', 1, NULL),
+(1, 'video', 'view', 2, NULL),
 (2, 'admin', 'view', 1, NULL),
 (2, 'announcement', 'create', 1, NULL),
 (2, 'announcement', 'delete', 2, NULL),
@@ -343,6 +384,22 @@ INSERT INTO `engine4_authorization_permissions` (`level_id`, `type`, `name`, `va
 (2, 'core_link', 'view', 2, NULL),
 (2, 'general', 'activity', 2, NULL),
 (2, 'general', 'style', 2, NULL),
+(2, 'group', 'auth_comment', 5, '["registered", "member", "officer"]'),
+(2, 'group', 'auth_event', 5, '["registered", "member", "officer"]'),
+(2, 'group', 'auth_photo', 5, '["registered", "member", "officer"]'),
+(2, 'group', 'auth_view', 5, '["everyone", "registered", "member"]'),
+(2, 'group', 'comment', 2, NULL),
+(2, 'group', 'commentHtml', 3, 'blockquote, strong, b, em, i, u, strike, sub, sup, p, div, pre, address, h1, h2, h3, h4, h5, h6, span, ol, li, ul, a, img, embed, br, hr, iframe'),
+(2, 'group', 'create', 1, NULL),
+(2, 'group', 'delete', 2, NULL),
+(2, 'group', 'edit', 2, NULL),
+(2, 'group', 'event', 1, NULL),
+(2, 'group', 'invite', 1, NULL),
+(2, 'group', 'photo', 1, NULL),
+(2, 'group', 'photo.edit', 2, NULL),
+(2, 'group', 'style', 1, NULL),
+(2, 'group', 'topic.edit', 2, NULL),
+(2, 'group', 'view', 2, NULL),
 (2, 'messages', 'auth', 3, 'friends'),
 (2, 'messages', 'create', 1, NULL),
 (2, 'messages', 'editor', 3, 'plaintext'),
@@ -359,12 +416,37 @@ INSERT INTO `engine4_authorization_permissions` (`level_id`, `type`, `name`, `va
 (2, 'user', 'style', 2, NULL),
 (2, 'user', 'username', 2, NULL),
 (2, 'user', 'view', 2, NULL),
+(2, 'video', 'auth_comment', 5, '["everyone","owner_network","owner_member_member","owner_member","owner"]'),
+(2, 'video', 'auth_view', 5, '["everyone","owner_network","owner_member_member","owner_member","owner"]'),
+(2, 'video', 'comment', 2, NULL),
+(2, 'video', 'create', 1, NULL),
+(2, 'video', 'delete', 2, NULL),
+(2, 'video', 'edit', 2, NULL),
+(2, 'video', 'max', 3, '20'),
+(2, 'video', 'upload', 1, NULL),
+(2, 'video', 'view', 2, NULL),
 (3, 'announcement', 'view', 1, NULL),
 (3, 'core_link', 'create', 1, NULL),
 (3, 'core_link', 'delete', 2, NULL),
 (3, 'core_link', 'view', 2, NULL),
 (3, 'general', 'activity', 2, NULL),
 (3, 'general', 'style', 2, NULL),
+(3, 'group', 'auth_comment', 5, '["registered", "member", "officer"]'),
+(3, 'group', 'auth_event', 5, '["registered", "member", "officer"]'),
+(3, 'group', 'auth_photo', 5, '["registered", "member", "officer"]'),
+(3, 'group', 'auth_view', 5, '["everyone", "registered", "member"]'),
+(3, 'group', 'comment', 2, NULL),
+(3, 'group', 'commentHtml', 3, 'blockquote, strong, b, em, i, u, strike, sub, sup, p, div, pre, address, h1, h2, h3, h4, h5, h6, span, ol, li, ul, a, img, embed, br, hr, iframe'),
+(3, 'group', 'create', 1, NULL),
+(3, 'group', 'delete', 2, NULL),
+(3, 'group', 'edit', 2, NULL),
+(3, 'group', 'event', 1, NULL),
+(3, 'group', 'invite', 1, NULL),
+(3, 'group', 'photo', 1, NULL),
+(3, 'group', 'photo.edit', 2, NULL),
+(3, 'group', 'style', 1, NULL),
+(3, 'group', 'topic.edit', 2, NULL),
+(3, 'group', 'view', 2, NULL),
 (3, 'messages', 'auth', 3, 'friends'),
 (3, 'messages', 'create', 1, NULL),
 (3, 'messages', 'editor', 3, 'plaintext'),
@@ -381,11 +463,36 @@ INSERT INTO `engine4_authorization_permissions` (`level_id`, `type`, `name`, `va
 (3, 'user', 'style', 2, NULL),
 (3, 'user', 'username', 2, NULL),
 (3, 'user', 'view', 2, NULL),
+(3, 'video', 'auth_comment', 5, '["everyone","owner_network","owner_member_member","owner_member","owner"]'),
+(3, 'video', 'auth_view', 5, '["everyone","owner_network","owner_member_member","owner_member","owner"]'),
+(3, 'video', 'comment', 2, NULL),
+(3, 'video', 'create', 1, NULL),
+(3, 'video', 'delete', 2, NULL),
+(3, 'video', 'edit', 2, NULL),
+(3, 'video', 'max', 3, '20'),
+(3, 'video', 'upload', 1, NULL),
+(3, 'video', 'view', 2, NULL),
 (4, 'announcement', 'view', 1, NULL),
 (4, 'core_link', 'create', 1, NULL),
 (4, 'core_link', 'delete', 1, NULL),
 (4, 'core_link', 'view', 1, NULL),
 (4, 'general', 'style', 1, NULL),
+(4, 'group', 'auth_comment', 5, '["registered", "member", "officer"]'),
+(4, 'group', 'auth_event', 5, '["registered", "member", "officer"]'),
+(4, 'group', 'auth_photo', 5, '["registered", "member", "officer"]'),
+(4, 'group', 'auth_view', 5, '["everyone", "registered", "member"]'),
+(4, 'group', 'comment', 1, NULL),
+(4, 'group', 'commentHtml', 3, 'blockquote, strong, b, em, i, u, strike, sub, sup, p, div, pre, address, h1, h2, h3, h4, h5, h6, span, ol, li, ul, a, img, embed, br, hr, iframe'),
+(4, 'group', 'create', 1, NULL),
+(4, 'group', 'delete', 1, NULL),
+(4, 'group', 'edit', 1, NULL),
+(4, 'group', 'event', 1, NULL),
+(4, 'group', 'invite', 1, NULL),
+(4, 'group', 'photo', 1, NULL),
+(4, 'group', 'photo.edit', 1, NULL),
+(4, 'group', 'style', 1, NULL),
+(4, 'group', 'topic.edit', 1, NULL),
+(4, 'group', 'view', 1, NULL),
 (4, 'messages', 'auth', 3, 'friends'),
 (4, 'messages', 'create', 1, NULL),
 (4, 'messages', 'editor', 3, 'plaintext'),
@@ -401,9 +508,20 @@ INSERT INTO `engine4_authorization_permissions` (`level_id`, `type`, `name`, `va
 (4, 'user', 'style', 1, NULL),
 (4, 'user', 'username', 1, NULL),
 (4, 'user', 'view', 1, NULL),
+(4, 'video', 'auth_comment', 5, '["everyone","owner_network","owner_member_member","owner_member","owner"]'),
+(4, 'video', 'auth_view', 5, '["everyone","owner_network","owner_member_member","owner_member","owner"]'),
+(4, 'video', 'comment', 1, NULL),
+(4, 'video', 'create', 1, NULL),
+(4, 'video', 'delete', 1, NULL),
+(4, 'video', 'edit', 1, NULL),
+(4, 'video', 'max', 3, '20'),
+(4, 'video', 'upload', 1, NULL),
+(4, 'video', 'view', 1, NULL),
 (5, 'announcement', 'view', 1, NULL),
 (5, 'core_link', 'view', 1, NULL),
-(5, 'user', 'view', 1, NULL);
+(5, 'group', 'view', 1, NULL),
+(5, 'user', 'view', 1, NULL),
+(5, 'video', 'view', 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -550,7 +668,7 @@ CREATE TABLE IF NOT EXISTS `engine4_core_content` (
   `order` int(11) NOT NULL DEFAULT '1',
   `params` text COLLATE utf8_unicode_ci,
   `attribs` text COLLATE utf8_unicode_ci
-) ENGINE=InnoDB AUTO_INCREMENT=638 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=718 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `engine4_core_content`
@@ -690,7 +808,87 @@ INSERT INTO `engine4_core_content` (`content_id`, `page_id`, `type`, `name`, `pa
 (634, 26, 'container', 'main', NULL, 1, NULL, NULL),
 (635, 26, 'container', 'middle', 634, 1, NULL, NULL),
 (636, 26, 'widget', 'core.content', 635, 2, NULL, NULL),
-(637, 26, 'widget', 'messages.menu', 635, 1, NULL, NULL);
+(637, 26, 'widget', 'messages.menu', 635, 1, NULL, NULL),
+(638, 5, 'widget', 'video.profile-videos', 531, 12, '{"title":"Videos","titleCount":true}', NULL),
+(639, 27, 'container', 'main', NULL, 1, '', NULL),
+(640, 27, 'container', 'right', 639, 1, '', NULL),
+(641, 27, 'container', 'middle', 639, 3, '', NULL),
+(642, 27, 'widget', 'core.content', 641, 1, '', NULL),
+(643, 27, 'widget', 'core.comments', 641, 2, '', NULL),
+(644, 27, 'widget', 'video.show-same-tags', 640, 1, '', NULL),
+(645, 27, 'widget', 'video.show-also-liked', 640, 2, '', NULL),
+(646, 27, 'widget', 'video.show-same-poster', 640, 3, '', NULL),
+(647, 28, 'container', 'top', NULL, 1, NULL, NULL),
+(648, 28, 'container', 'main', NULL, 2, NULL, NULL),
+(649, 28, 'container', 'middle', 647, 1, NULL, NULL),
+(650, 28, 'container', 'middle', 648, 2, NULL, NULL),
+(651, 28, 'container', 'right', 648, 1, NULL, NULL),
+(652, 28, 'widget', 'video.browse-menu', 649, 1, NULL, NULL),
+(653, 28, 'widget', 'core.content', 650, 1, NULL, NULL),
+(654, 28, 'widget', 'video.browse-search', 651, 1, NULL, NULL),
+(655, 28, 'widget', 'video.browse-menu-quick', 651, 2, NULL, NULL),
+(656, 29, 'container', 'top', NULL, 1, NULL, NULL),
+(657, 29, 'container', 'main', NULL, 2, NULL, NULL),
+(658, 29, 'container', 'middle', 656, 1, NULL, NULL),
+(659, 29, 'container', 'middle', 657, 2, NULL, NULL),
+(660, 29, 'widget', 'video.browse-menu', 658, 1, NULL, NULL),
+(661, 29, 'widget', 'core.content', 659, 1, NULL, NULL),
+(662, 30, 'container', 'top', NULL, 1, NULL, NULL),
+(663, 30, 'container', 'main', NULL, 2, NULL, NULL),
+(664, 30, 'container', 'middle', 662, 1, NULL, NULL),
+(665, 30, 'container', 'middle', 663, 2, NULL, NULL),
+(666, 30, 'container', 'right', 663, 1, NULL, NULL),
+(667, 30, 'widget', 'video.browse-menu', 664, 1, NULL, NULL),
+(668, 30, 'widget', 'core.content', 665, 1, NULL, NULL),
+(669, 30, 'widget', 'video.browse-search', 666, 1, NULL, NULL),
+(670, 30, 'widget', 'video.browse-menu-quick', 666, 2, NULL, NULL),
+(671, 5, 'widget', 'group.profile-groups', 531, 9, '{"title":"Groups","titleCount":true}', NULL),
+(672, 31, 'container', 'main', NULL, 1, '', NULL),
+(673, 31, 'container', 'middle', 672, 3, '', NULL),
+(674, 31, 'container', 'left', 672, 1, '', NULL),
+(675, 31, 'widget', 'core.container-tabs', 673, 2, '{"max":"6"}', NULL),
+(676, 31, 'widget', 'group.profile-status', 673, 1, '', NULL),
+(677, 31, 'widget', 'group.profile-photo', 674, 1, '', NULL),
+(678, 31, 'widget', 'group.profile-options', 674, 2, '', NULL),
+(679, 31, 'widget', 'group.profile-info', 674, 3, '', NULL),
+(680, 31, 'widget', 'activity.feed', 675, 1, '{"title":"Updates"}', NULL),
+(681, 31, 'widget', 'group.profile-members', 675, 2, '{"title":"Members","titleCount":true}', NULL),
+(682, 31, 'widget', 'group.profile-photos', 675, 3, '{"title":"Photos","titleCount":true}', NULL),
+(683, 31, 'widget', 'group.profile-discussions', 675, 4, '{"title":"Discussions","titleCount":true}', NULL),
+(684, 31, 'widget', 'core.profile-links', 675, 5, '{"title":"Links","titleCount":true}', NULL),
+(685, 31, 'widget', 'group.profile-events', 675, 6, '{"title":"Events","titleCount":true}', NULL),
+(686, 32, 'container', 'main', NULL, 1, '', NULL),
+(687, 32, 'container', 'middle', 686, 2, '', NULL),
+(688, 32, 'widget', 'group.profile-status', 687, 3, '', NULL),
+(689, 32, 'widget', 'group.profile-photo', 687, 4, '', NULL),
+(690, 32, 'widget', 'group.profile-info', 687, 5, '', NULL),
+(691, 32, 'widget', 'core.container-tabs', 687, 6, '{"max":6}', NULL),
+(692, 32, 'widget', 'activity.feed', 691, 7, '{"title":"What''s New"}', NULL),
+(693, 32, 'widget', 'group.profile-members', 691, 8, '{"title":"Members","titleCount":true}', NULL),
+(694, 33, 'container', 'top', NULL, 1, NULL, NULL),
+(695, 33, 'container', 'main', NULL, 2, NULL, NULL),
+(696, 33, 'container', 'middle', 694, 1, NULL, NULL),
+(697, 33, 'container', 'middle', 695, 2, NULL, NULL),
+(698, 33, 'container', 'right', 695, 1, NULL, NULL),
+(699, 33, 'widget', 'group.browse-menu', 696, 1, NULL, NULL),
+(700, 33, 'widget', 'core.content', 697, 1, NULL, NULL),
+(701, 33, 'widget', 'group.browse-search', 698, 1, NULL, NULL),
+(702, 33, 'widget', 'group.browse-menu-quick', 698, 2, NULL, NULL),
+(703, 34, 'container', 'top', NULL, 1, NULL, NULL),
+(704, 34, 'container', 'main', NULL, 2, NULL, NULL),
+(705, 34, 'container', 'middle', 703, 1, NULL, NULL),
+(706, 34, 'container', 'middle', 704, 2, NULL, NULL),
+(707, 34, 'widget', 'group.browse-menu', 705, 1, NULL, NULL),
+(708, 34, 'widget', 'core.content', 706, 1, NULL, NULL),
+(709, 35, 'container', 'top', NULL, 1, NULL, NULL),
+(710, 35, 'container', 'main', NULL, 2, NULL, NULL),
+(711, 35, 'container', 'middle', 709, 1, NULL, NULL),
+(712, 35, 'container', 'middle', 710, 2, NULL, NULL),
+(713, 35, 'container', 'right', 710, 1, NULL, NULL),
+(714, 35, 'widget', 'group.browse-menu', 711, 1, NULL, NULL),
+(715, 35, 'widget', 'core.content', 712, 1, NULL, NULL),
+(716, 35, 'widget', 'group.browse-search', 713, 1, NULL, NULL),
+(717, 35, 'widget', 'group.browse-menu-quick', 713, 2, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -741,7 +939,7 @@ CREATE TABLE IF NOT EXISTS `engine4_core_jobtypes` (
   `enabled` tinyint(1) unsigned NOT NULL DEFAULT '1',
   `priority` mediumint(9) NOT NULL DEFAULT '100',
   `multi` tinyint(3) unsigned DEFAULT '1'
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `engine4_core_jobtypes`
@@ -754,7 +952,10 @@ INSERT INTO `engine4_core_jobtypes` (`jobtype_id`, `title`, `type`, `module`, `p
 (4, 'Rebuild Member Privacy', 'user_maintenance_rebuild_privacy', 'user', 'User_Plugin_Job_Maintenance_RebuildPrivacy', NULL, 1, 50, 1),
 (5, 'Rebuild Network Membership', 'network_maintenance_rebuild_membership', 'network', 'Network_Plugin_Job_Maintenance_RebuildMembership', NULL, 1, 50, 1),
 (6, 'Storage Transfer', 'storage_transfer', 'core', 'Storage_Plugin_Job_Transfer', 'Core_Form_Admin_Job_Generic', 1, 100, 1),
-(7, 'Storage Cleanup', 'storage_cleanup', 'core', 'Storage_Plugin_Job_Cleanup', 'Core_Form_Admin_Job_Generic', 1, 100, 1);
+(7, 'Storage Cleanup', 'storage_cleanup', 'core', 'Storage_Plugin_Job_Cleanup', 'Core_Form_Admin_Job_Generic', 1, 100, 1),
+(8, 'Video Encode', 'video_encode', 'video', 'Video_Plugin_Job_Encode', NULL, 1, 75, 2),
+(9, 'Rebuild Video Privacy', 'video_maintenance_rebuild_privacy', 'video', 'Video_Plugin_Job_Maintenance_RebuildPrivacy', NULL, 1, 50, 1),
+(10, 'Rebuild Group Privacy', 'group_maintenance_rebuild_privacy', 'group', 'Group_Plugin_Job_Maintenance_RebuildPrivacy', NULL, 1, 50, 1);
 
 -- --------------------------------------------------------
 
@@ -896,7 +1097,7 @@ CREATE TABLE IF NOT EXISTS `engine4_core_mailtemplates` (
   `type` varchar(255) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `module` varchar(64) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `vars` varchar(255) COLLATE utf8_unicode_ci NOT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `engine4_core_mailtemplates`
@@ -935,7 +1136,15 @@ INSERT INTO `engine4_core_mailtemplates` (`mailtemplate_id`, `type`, `module`, `
 (30, 'payment_subscription_overdue', 'payment', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[subscription_title],[subscription_description],[object_link]'),
 (31, 'payment_subscription_pending', 'payment', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[subscription_title],[subscription_description],[object_link]'),
 (32, 'payment_subscription_recurrence', 'payment', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[subscription_title],[subscription_description],[object_link]'),
-(33, 'payment_subscription_refunded', 'payment', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[subscription_title],[subscription_description],[object_link]');
+(33, 'payment_subscription_refunded', 'payment', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[subscription_title],[subscription_description],[object_link]'),
+(34, 'notify_video_processed', 'video', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
+(35, 'notify_video_processed_failed', 'video', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
+(36, 'notify_group_accepted', 'group', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
+(37, 'notify_group_approve', 'group', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
+(38, 'notify_group_discussion_reply', 'group', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
+(39, 'notify_group_discussion_response', 'group', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
+(40, 'notify_group_invite', 'group', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
+(41, 'notify_group_promote', 'group', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]');
 
 -- --------------------------------------------------------
 
@@ -955,7 +1164,7 @@ CREATE TABLE IF NOT EXISTS `engine4_core_menuitems` (
   `enabled` tinyint(1) NOT NULL DEFAULT '1',
   `custom` tinyint(1) NOT NULL DEFAULT '0',
   `order` smallint(6) NOT NULL DEFAULT '999'
-) ENGINE=InnoDB AUTO_INCREMENT=99 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=133 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `engine4_core_menuitems`
@@ -1059,7 +1268,41 @@ INSERT INTO `engine4_core_menuitems` (`id`, `name`, `module`, `label`, `plugin`,
 (95, 'core_admin_main_payment_settings', 'payment', 'Settings', '', '{"route":"admin_default","module":"payment","controller":"settings","action":"index"}', 'core_admin_main_payment', '', 1, 0, 2),
 (96, 'core_admin_main_payment_gateways', 'payment', 'Gateways', '', '{"route":"admin_default","module":"payment","controller":"gateway","action":"index"}', 'core_admin_main_payment', '', 1, 0, 3),
 (97, 'core_admin_main_payment_packages', 'payment', 'Plans', '', '{"route":"admin_default","module":"payment","controller":"package","action":"index"}', 'core_admin_main_payment', '', 1, 0, 4),
-(98, 'core_admin_main_payment_subscriptions', 'payment', 'Subscriptions', '', '{"route":"admin_default","module":"payment","controller":"subscription","action":"index"}', 'core_admin_main_payment', '', 1, 0, 5);
+(98, 'core_admin_main_payment_subscriptions', 'payment', 'Subscriptions', '', '{"route":"admin_default","module":"payment","controller":"subscription","action":"index"}', 'core_admin_main_payment', '', 1, 0, 5),
+(99, 'core_main_video', 'video', 'Videos', '', '{"route":"video_general"}', 'core_main', '', 1, 0, 7),
+(100, 'core_sitemap_video', 'video', 'Videos', '', '{"route":"video_general"}', 'core_sitemap', '', 1, 0, 7),
+(101, 'core_admin_main_plugins_video', 'video', 'Videos', '', '{"route":"admin_default","module":"video","controller":"manage"}', 'core_admin_main_plugins', '', 1, 0, 999),
+(102, 'video_main_browse', 'video', 'Browse Videos', '', '{"route":"video_general"}', 'video_main', '', 1, 0, 1),
+(103, 'video_main_manage', 'video', 'My Videos', 'Video_Plugin_Menus', '{"route":"video_general","action":"manage"}', 'video_main', '', 1, 0, 2),
+(104, 'video_main_create', 'video', 'Post New Video', 'Video_Plugin_Menus', '{"route":"video_general","action":"create"}', 'video_main', '', 1, 0, 3),
+(105, 'video_quick_create', 'video', 'Post New Video', 'Video_Plugin_Menus::canCreateVideos', '{"route":"video_general","action":"create","class":"buttonlink icon_video_new"}', 'video_quick', '', 1, 0, 1),
+(106, 'video_admin_main_manage', 'video', 'Manage Videos', '', '{"route":"admin_default","module":"video","controller":"manage"}', 'video_admin_main', '', 1, 0, 1),
+(107, 'video_admin_main_utility', 'video', 'Video Utilities', '', '{"route":"admin_default","module":"video","controller":"settings","action":"utility"}', 'video_admin_main', '', 1, 0, 2),
+(108, 'video_admin_main_settings', 'video', 'Global Settings', '', '{"route":"admin_default","module":"video","controller":"settings"}', 'video_admin_main', '', 1, 0, 3),
+(109, 'video_admin_main_level', 'video', 'Member Level Settings', '', '{"route":"admin_default","module":"video","controller":"settings","action":"level"}', 'video_admin_main', '', 1, 0, 4),
+(110, 'video_admin_main_categories', 'video', 'Categories', '', '{"route":"admin_default","module":"video","controller":"settings","action":"categories"}', 'video_admin_main', '', 1, 0, 5),
+(111, 'authorization_admin_level_video', 'video', 'Videos', '', '{"route":"admin_default","module":"video","controller":"settings","action":"level"}', 'authorization_admin_level', '', 1, 0, 999),
+(112, 'mobi_browse_video', 'video', 'Videos', '', '{"route":"video_general"}', 'mobi_browse', '', 1, 0, 9),
+(113, 'core_main_group', 'group', 'Groups', '', '{"route":"group_general"}', 'core_main', '', 1, 0, 6),
+(114, 'core_sitemap_group', 'group', 'Groups', '', '{"route":"group_general"}', 'core_sitemap', '', 1, 0, 6),
+(115, 'group_main_browse', 'group', 'Browse Groups', '', '{"route":"group_general","action":"browse"}', 'group_main', '', 1, 0, 1),
+(116, 'group_main_manage', 'group', 'My Groups', 'Group_Plugin_Menus', '{"route":"group_general","action":"manage"}', 'group_main', '', 1, 0, 2),
+(117, 'group_main_create', 'group', 'Create New Group', 'Group_Plugin_Menus', '{"route":"group_general","action":"create"}', 'group_main', '', 1, 0, 3),
+(118, 'group_quick_create', 'group', 'Create New Group', 'Group_Plugin_Menus::canCreateGroups', '{"route":"group_general","action":"create","class":"buttonlink icon_group_new"}', 'group_quick', '', 1, 0, 1),
+(119, 'group_profile_edit', 'group', 'Edit Profile', 'Group_Plugin_Menus', '', 'group_profile', '', 1, 0, 1),
+(120, 'group_profile_style', 'group', 'Edit Styles', 'Group_Plugin_Menus', '', 'group_profile', '', 1, 0, 2),
+(121, 'group_profile_member', 'group', 'Member', 'Group_Plugin_Menus', '', 'group_profile', '', 1, 0, 3),
+(122, 'group_profile_report', 'group', 'Report Group', 'Group_Plugin_Menus', '', 'group_profile', '', 1, 0, 4),
+(123, 'group_profile_share', 'group', 'Share', 'Group_Plugin_Menus', '', 'group_profile', '', 1, 0, 5),
+(124, 'group_profile_invite', 'group', 'Invite', 'Group_Plugin_Menus', '', 'group_profile', '', 1, 0, 6),
+(125, 'group_profile_message', 'group', 'Message Members', 'Group_Plugin_Menus', '', 'group_profile', '', 1, 0, 7),
+(126, 'core_admin_main_plugins_group', 'group', 'Groups', '', '{"route":"admin_default","module":"group","controller":"manage"}', 'core_admin_main_plugins', '', 1, 0, 999),
+(127, 'group_admin_main_manage', 'group', 'Manage Groups', '', '{"route":"admin_default","module":"group","controller":"manage"}', 'group_admin_main', '', 1, 0, 1),
+(128, 'group_admin_main_settings', 'group', 'Global Settings', '', '{"route":"admin_default","module":"group","controller":"settings"}', 'group_admin_main', '', 1, 0, 2),
+(129, 'group_admin_main_level', 'group', 'Member Level Settings', '', '{"route":"admin_default","module":"group","controller":"settings","action":"level"}', 'group_admin_main', '', 1, 0, 3),
+(130, 'group_admin_main_categories', 'group', 'Categories', '', '{"route":"admin_default","module":"group","controller":"settings","action":"categories"}', 'group_admin_main', '', 1, 0, 4),
+(131, 'authorization_admin_level_group', 'group', 'Groups', '', '{"route":"admin_default","module":"group","controller":"settings","action":"level"}', 'authorization_admin_level', '', 1, 0, 999),
+(132, 'mobi_browse_group', 'group', 'Groups', '', '{"route":"group_general"}', 'mobi_browse', '', 1, 0, 8);
 
 -- --------------------------------------------------------
 
@@ -1073,7 +1316,7 @@ CREATE TABLE IF NOT EXISTS `engine4_core_menus` (
   `type` enum('standard','hidden','custom') CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL DEFAULT 'standard',
   `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
   `order` smallint(3) NOT NULL DEFAULT '999'
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `engine4_core_menus`
@@ -1089,7 +1332,10 @@ INSERT INTO `engine4_core_menus` (`id`, `name`, `type`, `title`, `order`) VALUES
 (7, 'user_edit', 'standard', 'Member Edit Profile Navigation Menu', 999),
 (8, 'user_browse', 'standard', 'Member Browse Navigation Menu', 999),
 (9, 'user_settings', 'standard', 'Member Settings Navigation Menu', 999),
-(10, 'messages_main', 'standard', 'Messages Main Navigation Menu', 999);
+(10, 'messages_main', 'standard', 'Messages Main Navigation Menu', 999),
+(11, 'video_main', 'standard', 'Video Main Navigation Menu', 999),
+(12, 'group_main', 'standard', 'Group Main Navigation Menu', 999),
+(13, 'group_profile', 'standard', 'Group Profile Options Menu', 999);
 
 -- --------------------------------------------------------
 
@@ -1127,12 +1373,14 @@ INSERT INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `
 ('authorization', 'Authorization', 'Authorization', '4.7.0', 1, 'core'),
 ('core', 'Core', 'Core', '4.8.8', 1, 'core'),
 ('fields', 'Fields', 'Fields', '4.8.8', 1, 'core'),
+('group', 'Groups', 'Groups', '4.8.7', 1, 'extra'),
 ('invite', 'Invite', 'Invite', '4.8.7', 1, 'standard'),
 ('messages', 'Messages', 'Messages', '4.8.7', 1, 'standard'),
 ('network', 'Networks', 'Networks', '4.8.6', 1, 'standard'),
 ('payment', 'Payment', 'Payment', '4.8.7', 1, 'standard'),
 ('storage', 'Storage', 'Storage', '4.8.5', 1, 'core'),
-('user', 'Members', 'Members', '4.8.7', 1, 'core');
+('user', 'Members', 'Members', '4.8.7', 1, 'core'),
+('video', 'Videos', 'Videos', '4.8.7', 1, 'extra');
 
 -- --------------------------------------------------------
 
@@ -1170,7 +1418,7 @@ CREATE TABLE IF NOT EXISTS `engine4_core_pages` (
   `provides` text COLLATE utf8_unicode_ci,
   `view_count` int(11) unsigned NOT NULL DEFAULT '0',
   `search` tinyint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `engine4_core_pages`
@@ -1202,7 +1450,16 @@ INSERT INTO `engine4_core_pages` (`page_id`, `name`, `displayname`, `url`, `titl
 (23, 'messages_messages_inbox', 'Messages Inbox Page', NULL, 'Inbox', '', '', 0, 0, '', NULL, NULL, 0, 0),
 (24, 'messages_messages_outbox', 'Messages Outbox Page', NULL, 'Inbox', '', '', 0, 0, '', NULL, NULL, 0, 0),
 (25, 'messages_messages_search', 'Messages Search Page', NULL, 'Search', '', '', 0, 0, '', NULL, NULL, 0, 0),
-(26, 'messages_messages_view', 'Messages View Page', NULL, 'My Message', '', '', 0, 0, '', NULL, NULL, 0, 0);
+(26, 'messages_messages_view', 'Messages View Page', NULL, 'My Message', '', '', 0, 0, '', NULL, NULL, 0, 0),
+(27, 'video_index_view', 'Video View Page', NULL, 'View Video', 'This is the view page for a video.', '', 0, 0, '', NULL, 'subject=video', 0, 0),
+(28, 'video_index_browse', 'Video Browse Page', NULL, 'Video Browse', 'This page lists videos.', '', 0, 0, '', NULL, NULL, 0, 0),
+(29, 'video_index_create', 'Video Create Page', NULL, 'Video Create', 'This page allows video to be added.', '', 0, 0, '', NULL, NULL, 0, 0),
+(30, 'video_index_manage', 'Video Manage Page', NULL, 'My Videos', 'This page lists a user''s videos.', '', 0, 0, '', NULL, NULL, 0, 0),
+(31, 'group_profile_index', 'Group Profile', NULL, 'Group Profile', 'This is the profile for an group.', '', 0, 0, '', NULL, 'subject=group', 0, 0),
+(32, 'mobi_group_profile', 'Mobile Group Profile', NULL, 'Mobile Group Profile', 'This is the mobile verison of a group profile.', '', 0, 0, '', NULL, NULL, 0, 0),
+(33, 'group_index_browse', 'Group Browse Page', NULL, 'Group Browse', 'This page lists groups.', '', 0, 0, '', NULL, NULL, 0, 0),
+(34, 'group_index_create', 'Group Create Page', NULL, 'Group Create', 'This page allows users to create groups.', '', 0, 0, '', NULL, NULL, 0, 0),
+(35, 'group_index_manage', 'Group Manage Page', NULL, 'My Groups', 'This page lists a user''s groups.', '', 0, 0, '', NULL, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -1275,6 +1532,13 @@ CREATE TABLE IF NOT EXISTS `engine4_core_search` (
   `keywords` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `hidden` varchar(255) COLLATE utf8_unicode_ci NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `engine4_core_search`
+--
+
+INSERT INTO `engine4_core_search` (`type`, `id`, `title`, `description`, `keywords`, `hidden`) VALUES
+('user', 1, 'minhnc', '', '', '');
 
 -- --------------------------------------------------------
 
@@ -1370,12 +1634,21 @@ CREATE TABLE IF NOT EXISTS `engine4_core_session` (
 --
 
 INSERT INTO `engine4_core_session` (`id`, `modified`, `lifetime`, `data`, `user_id`) VALUES
+('02vtmgdejik37n19lapicdvph4', 1432101340, 86400, '', NULL),
+('067i7f5q0nckm60d8aq95u6a10', 1432059059, 86400, '', NULL),
+('0vu93adlbvlq4ls65hod6i8vn2', 1432101280, 86400, '', NULL),
 ('2a8ae09c9bc57081966f9f7363273f6d', 1432058131, 86400, 'Zend_Auth|a:1:{s:7:"storage";i:1;}', NULL),
+('2bcqjdr342f9551pb80n1aqr81', 1432059180, 86400, '', NULL),
 ('fugvoe0qb1o80gi2t57g54o8t5', 1432058788, 86400, '', NULL),
+('gni7kr34qvpgn2vpq0rlvkd9u0', 1432101842, 86400, '', NULL),
+('lornf02t5e5sncocaocuqnj375', 1432058937, 86400, '', NULL),
 ('m8bvd729npg7sdjtj82315lv96', 1432058549, 86400, '', NULL),
-('o0n5r3v4las3tqu47pqcfljl85', 1432058817, 86400, 'redirectURL|s:23:"/Tarfee/index.php/login";ActivityFormToken|a:1:{s:5:"token";s:32:"2f7f53d98b3823e79610c86f9c2e70a2";}Zend_Auth|a:1:{s:7:"storage";i:1;}login_id|s:1:"1";twitter_lock|i:1;twitter_uid|b:0;', 1),
+('mooqd0juca2bsrgil11glfcid6', 1432101584, 86400, '', NULL),
+('o0n5r3v4las3tqu47pqcfljl85', 1432101846, 86400, 'redirectURL|s:23:"/Tarfee/index.php/login";ActivityFormToken|a:1:{s:5:"token";s:32:"2f7f53d98b3823e79610c86f9c2e70a2";}Zend_Auth|a:1:{s:7:"storage";i:1;}login_id|s:1:"1";twitter_lock|i:1;twitter_uid|b:0;', 1),
 ('pgd9e5v4uc06rvrnp07o08jrc7', 1432058256, 86400, '', NULL),
-('rjrfmmcj3u82ppf8m7v1m18ne1', 1432058139, 86400, '', NULL);
+('rjrfmmcj3u82ppf8m7v1m18ne1', 1432058139, 86400, '', NULL),
+('u34npgqu2ustjhhj8i1uhgdga0', 1432101696, 86400, '', NULL),
+('u6n4a3ujvr92macrbvibh168j2', 1432101461, 86400, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -1429,7 +1702,7 @@ INSERT INTO `engine4_core_settings` (`name`, `value`) VALUES
 ('core.mail.name', 'Site Admin'),
 ('core.mail.queueing', '1'),
 ('core.secret', '32eb05c09aff3a918d5c5f5428e9a8efdda72b9a'),
-('core.site.counter', '2'),
+('core.site.counter', '3'),
 ('core.site.creation', '2015-05-19 17:48:58'),
 ('core.site.title', 'Social Network'),
 ('core.spam.censor', ''),
@@ -1445,7 +1718,7 @@ INSERT INTO `engine4_core_settings` (`name`, `value`) VALUES
 ('core.tasks.interval', '60'),
 ('core.tasks.jobs', '3'),
 ('core.tasks.key', '1eeabf37'),
-('core.tasks.last', '1432058788'),
+('core.tasks.last', '1432101842'),
 ('core.tasks.mode', 'curl'),
 ('core.tasks.pid', ''),
 ('core.tasks.processes', '2'),
@@ -1467,6 +1740,8 @@ INSERT INTO `engine4_core_settings` (`name`, `value`) VALUES
 ('core.twitter.enable', 'none'),
 ('core.twitter.key', ''),
 ('core.twitter.secret', ''),
+('group.bbcode', '1'),
+('group.html', '1'),
 ('invite.allowCustomMessage', '1'),
 ('invite.fromEmail', ''),
 ('invite.fromName', ''),
@@ -1490,7 +1765,10 @@ INSERT INTO `engine4_core_settings` (`name`, `value`) VALUES
 ('user.signup.terms', '1'),
 ('user.signup.username', '1'),
 ('user.signup.verifyemail', '0'),
-('user.support.links', '1');
+('user.support.links', '1'),
+('video.embeds', '1'),
+('video.ffmpeg.path', ''),
+('video.jobs', '2');
 
 -- --------------------------------------------------------
 
@@ -1511,6 +1789,8 @@ CREATE TABLE IF NOT EXISTS `engine4_core_statistics` (
 INSERT INTO `engine4_core_statistics` (`type`, `date`, `value`) VALUES
 ('core.views', '2015-05-19 17:00:00', 3),
 ('core.views', '2015-05-19 18:00:00', 2),
+('core.views', '2015-05-20 05:00:00', 2),
+('core.views', '2015-05-20 06:00:00', 6),
 ('user.logins', '2015-05-19 17:00:00', 1);
 
 -- --------------------------------------------------------
@@ -1597,13 +1877,13 @@ CREATE TABLE IF NOT EXISTS `engine4_core_tasks` (
 --
 
 INSERT INTO `engine4_core_tasks` (`task_id`, `title`, `module`, `plugin`, `timeout`, `processes`, `semaphore`, `started_last`, `started_count`, `completed_last`, `completed_count`, `failure_last`, `failure_count`, `success_last`, `success_count`) VALUES
-(1, 'Job Queue', 'core', 'Core_Plugin_Task_Jobs', 5, 1, 0, 1432058788, 4, 1432058788, 4, 0, 0, 1432058788, 4),
-(2, 'Background Mailer', 'core', 'Core_Plugin_Task_Mail', 15, 1, 0, 1432058788, 4, 1432058788, 4, 0, 0, 1432058788, 4),
-(3, 'Cache Prefetch', 'core', 'Core_Plugin_Task_Prefetch', 300, 1, 0, 1432058549, 2, 1432058549, 2, 0, 0, 1432058549, 2),
-(4, 'Statistics', 'core', 'Core_Plugin_Task_Statistics', 43200, 1, 0, 1432058255, 1, 1432058256, 1, 0, 0, 1432058256, 1),
-(5, 'Log Rotation', 'core', 'Core_Plugin_Task_LogRotation', 7200, 1, 0, 1432058788, 1, 1432058788, 1, 0, 0, 1432058788, 1),
-(6, 'Member Data Maintenance', 'user', 'User_Plugin_Task_Cleanup', 60, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0),
-(7, 'Payment Maintenance', 'user', 'Payment_Plugin_Task_Cleanup', 43200, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0);
+(1, 'Job Queue', 'core', 'Core_Plugin_Task_Jobs', 5, 1, 0, 1432101842, 13, 1432101842, 13, 0, 0, 1432101842, 13),
+(2, 'Background Mailer', 'core', 'Core_Plugin_Task_Mail', 15, 1, 0, 1432101842, 13, 1432101842, 13, 0, 0, 1432101842, 13),
+(3, 'Cache Prefetch', 'core', 'Core_Plugin_Task_Prefetch', 300, 1, 0, 1432101584, 5, 1432101584, 5, 0, 0, 1432101584, 5),
+(4, 'Statistics', 'core', 'Core_Plugin_Task_Statistics', 43200, 1, 0, 1432101461, 2, 1432101461, 2, 0, 0, 1432101461, 2),
+(5, 'Log Rotation', 'core', 'Core_Plugin_Task_LogRotation', 7200, 1, 0, 1432101340, 2, 1432101340, 2, 0, 0, 1432101340, 2),
+(6, 'Member Data Maintenance', 'user', 'User_Plugin_Task_Cleanup', 60, 1, 0, 1432101842, 4, 1432101842, 4, 0, 0, 1432101842, 4),
+(7, 'Payment Maintenance', 'user', 'Payment_Plugin_Task_Cleanup', 43200, 1, 0, 1432059059, 1, 1432059059, 1, 0, 0, 1432059059, 1);
 
 -- --------------------------------------------------------
 
@@ -1634,7 +1914,7 @@ INSERT INTO `engine4_core_themes` (`theme_id`, `name`, `title`, `description`, `
 (8, 'grid-brown', 'Grid Brown', '', 0),
 (9, 'grid-dark', 'Grid Dark', '', 0),
 (10, 'grid-gray', 'Grid Gray', '', 0),
-(11, 'grid-green', 'Grid Green', '', 0),
+(11, 'grid-green', 'Grid Green', '', 1),
 (12, 'grid-pink', 'Grid Pink', '', 0),
 (13, 'grid-purple', 'Grid Purple', '', 0),
 (14, 'grid-red', 'Grid Red', '', 0),
@@ -1651,7 +1931,7 @@ INSERT INTO `engine4_core_themes` (`theme_id`, `name`, `title`, `description`, `
 (25, 'musicbox-red', 'Musicbox Red', '', 0),
 (26, 'musicbox-yellow', 'Musicbox Yellow', '', 0),
 (27, 'quantum-beige', 'Quantum Beige', '', 0),
-(28, 'quantum-blue', 'Quantum Blue', '', 1),
+(28, 'quantum-blue', 'Quantum Blue', '', 0),
 (29, 'quantum-gray', 'Quantum Gray', '', 0),
 (30, 'quantum-green', 'Quantum Green', '', 0),
 (31, 'quantum-orange', 'Quantum Orange', '', 0),
@@ -1660,6 +1940,194 @@ INSERT INTO `engine4_core_themes` (`theme_id`, `name`, `title`, `description`, `
 (34, 'quantum-red', 'Quantum Red', '', 0),
 (35, 'slipstream', 'Slipstream', '', 0),
 (36, 'snowbot', 'Snowbot', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_group_albums`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_group_albums` (
+  `album_id` int(11) unsigned NOT NULL,
+  `group_id` int(11) unsigned NOT NULL,
+  `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `search` tinyint(1) NOT NULL DEFAULT '1',
+  `photo_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `view_count` int(11) unsigned NOT NULL DEFAULT '0',
+  `comment_count` int(11) unsigned NOT NULL DEFAULT '0',
+  `collectible_count` int(11) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_group_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_group_categories` (
+  `category_id` int(11) unsigned NOT NULL,
+  `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `engine4_group_categories`
+--
+
+INSERT INTO `engine4_group_categories` (`category_id`, `title`) VALUES
+(1, 'Animals'),
+(2, 'Business & Finance'),
+(3, 'Computers & Internet'),
+(4, 'Cultures & Community'),
+(5, 'Dating & Relationships'),
+(6, 'Entertainment & Arts'),
+(7, 'Family & Home'),
+(8, 'Games'),
+(9, 'Government & Politics'),
+(10, 'Health & Wellness'),
+(11, 'Hobbies & Crafts'),
+(12, 'Music'),
+(13, 'Recreation & Sports'),
+(14, 'Regional'),
+(15, 'Religion & Beliefs'),
+(16, 'Schools & Education'),
+(17, 'Science');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_group_groups`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_group_groups` (
+  `group_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `category_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `search` tinyint(1) NOT NULL DEFAULT '1',
+  `invite` tinyint(1) NOT NULL DEFAULT '1',
+  `approval` tinyint(1) NOT NULL DEFAULT '0',
+  `photo_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `member_count` smallint(6) unsigned NOT NULL,
+  `view_count` int(11) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_group_listitems`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_group_listitems` (
+  `listitem_id` int(11) unsigned NOT NULL,
+  `list_id` int(11) unsigned NOT NULL,
+  `child_id` int(11) unsigned NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_group_lists`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_group_lists` (
+  `list_id` int(11) unsigned NOT NULL,
+  `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `owner_id` int(11) unsigned NOT NULL,
+  `child_count` int(11) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_group_membership`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_group_membership` (
+  `resource_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `active` tinyint(1) NOT NULL DEFAULT '0',
+  `resource_approved` tinyint(1) NOT NULL DEFAULT '0',
+  `user_approved` tinyint(1) NOT NULL DEFAULT '0',
+  `message` text COLLATE utf8_unicode_ci,
+  `title` text COLLATE utf8_unicode_ci
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_group_photos`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_group_photos` (
+  `photo_id` int(11) unsigned NOT NULL,
+  `album_id` int(11) unsigned NOT NULL,
+  `group_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `title` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
+  `description` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
+  `collection_id` int(11) unsigned NOT NULL,
+  `file_id` int(11) unsigned NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `view_count` int(11) unsigned NOT NULL DEFAULT '0',
+  `comment_count` int(11) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_group_posts`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_group_posts` (
+  `post_id` int(11) unsigned NOT NULL,
+  `topic_id` int(11) unsigned NOT NULL,
+  `group_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `body` text COLLATE utf8_unicode_ci NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_group_topics`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_group_topics` (
+  `topic_id` int(11) unsigned NOT NULL,
+  `group_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `sticky` tinyint(1) NOT NULL DEFAULT '0',
+  `closed` tinyint(1) NOT NULL DEFAULT '0',
+  `post_count` int(11) unsigned NOT NULL DEFAULT '0',
+  `view_count` int(11) unsigned NOT NULL DEFAULT '0',
+  `lastpost_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `lastposter_id` int(11) unsigned NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_group_topicwatches`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_group_topicwatches` (
+  `resource_id` int(10) unsigned NOT NULL,
+  `topic_id` int(10) unsigned NOT NULL,
+  `user_id` int(10) unsigned NOT NULL,
+  `watch` tinyint(1) unsigned NOT NULL DEFAULT '1'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -2037,7 +2505,7 @@ CREATE TABLE IF NOT EXISTS `engine4_users` (
 --
 
 INSERT INTO `engine4_users` (`user_id`, `email`, `username`, `displayname`, `photo_id`, `status`, `status_date`, `password`, `salt`, `locale`, `language`, `timezone`, `search`, `show_profileviewers`, `level_id`, `invites_used`, `extra_invites`, `enabled`, `verified`, `approved`, `creation_date`, `creation_ip`, `modified_date`, `lastlogin_date`, `lastlogin_ip`, `update_date`, `member_count`, `view_count`) VALUES
-(1, 'minhnc@younetco.com', 'minhnc', 'minhnc', 0, NULL, NULL, '47c3e8fc96c8f5c52393f2fc069aaacb', '3926124', 'auto', 'en_US', 'Asia/Krasnoyarsk', 1, 1, 1, 0, 0, 1, 1, 1, '2015-05-19 17:55:31', '', '0000-00-00 00:00:00', '2015-05-19 17:55:50', 0x00000000000000000000000000000001, NULL, 0, 0);
+(1, 'minh13488@gmail.com', 'minhnc', 'minhnc', 0, NULL, NULL, '47c3e8fc96c8f5c52393f2fc069aaacb', '3926124', 'auto', 'en_US', 'Asia/Krasnoyarsk', 1, 1, 1, 0, 0, 1, 1, 1, '2015-05-19 17:55:31', '', '0000-00-00 00:00:00', '2015-05-19 17:55:50', 0x00000000000000000000000000000001, NULL, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -2305,8 +2773,8 @@ CREATE TABLE IF NOT EXISTS `engine4_user_online` (
 --
 
 INSERT INTO `engine4_user_online` (`ip`, `user_id`, `active`) VALUES
-(0x00000000000000000000000000000001, 0, '2015-05-19 18:06:28'),
-(0x00000000000000000000000000000001, 1, '2015-05-19 18:06:57');
+(0x00000000000000000000000000000001, 0, '2015-05-20 06:04:02'),
+(0x00000000000000000000000000000001, 1, '2015-05-20 06:04:06');
 
 -- --------------------------------------------------------
 
@@ -2367,6 +2835,81 @@ CREATE TABLE IF NOT EXISTS `engine4_user_verify` (
   `user_id` int(11) unsigned NOT NULL,
   `code` varchar(64) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `date` datetime NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_video_categories`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_video_categories` (
+  `category_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `category_name` varchar(128) COLLATE utf8_unicode_ci NOT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `engine4_video_categories`
+--
+
+INSERT INTO `engine4_video_categories` (`category_id`, `user_id`, `category_name`) VALUES
+(1, 0, 'Autos & Vehicles'),
+(2, 0, 'Comedy'),
+(3, 0, 'Education'),
+(4, 0, 'Entertainment'),
+(5, 0, 'Film & Animation'),
+(6, 0, 'Gaming'),
+(7, 0, 'Howto & Style'),
+(8, 0, 'Music'),
+(9, 0, 'News & Politics'),
+(10, 0, 'Nonprofits & Activism'),
+(11, 0, 'People & Blogs'),
+(12, 0, 'Pets & Animals'),
+(13, 0, 'Science & Technology'),
+(14, 0, 'Sports'),
+(15, 0, 'Travel & Events');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_video_ratings`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_video_ratings` (
+  `video_id` int(10) unsigned NOT NULL,
+  `user_id` int(9) unsigned NOT NULL,
+  `rating` tinyint(1) unsigned DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_video_videos`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_video_videos` (
+  `video_id` int(11) unsigned NOT NULL,
+  `title` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `description` text COLLATE utf8_unicode_ci NOT NULL,
+  `search` tinyint(1) NOT NULL DEFAULT '1',
+  `owner_type` varchar(128) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
+  `owner_id` int(11) NOT NULL,
+  `parent_type` varchar(128) CHARACTER SET latin1 COLLATE latin1_general_ci DEFAULT NULL,
+  `parent_id` int(11) unsigned DEFAULT NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  `view_count` int(11) unsigned NOT NULL DEFAULT '0',
+  `comment_count` int(11) unsigned NOT NULL DEFAULT '0',
+  `type` tinyint(1) NOT NULL,
+  `code` varchar(150) COLLATE utf8_unicode_ci NOT NULL,
+  `photo_id` int(11) unsigned DEFAULT NULL,
+  `rating` float NOT NULL,
+  `category_id` int(11) unsigned NOT NULL DEFAULT '0',
+  `status` tinyint(1) NOT NULL,
+  `file_id` int(11) unsigned NOT NULL,
+  `duration` int(9) unsigned NOT NULL,
+  `rotation` smallint(5) unsigned NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
@@ -2794,6 +3337,82 @@ ALTER TABLE `engine4_core_themes`
   ADD KEY `active` (`active`);
 
 --
+-- Indexes for table `engine4_group_albums`
+--
+ALTER TABLE `engine4_group_albums`
+  ADD PRIMARY KEY (`album_id`),
+  ADD KEY `group_id` (`group_id`);
+
+--
+-- Indexes for table `engine4_group_categories`
+--
+ALTER TABLE `engine4_group_categories`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `engine4_group_groups`
+--
+ALTER TABLE `engine4_group_groups`
+  ADD PRIMARY KEY (`group_id`),
+  ADD KEY `user_id` (`user_id`),
+  ADD KEY `search` (`search`);
+
+--
+-- Indexes for table `engine4_group_listitems`
+--
+ALTER TABLE `engine4_group_listitems`
+  ADD PRIMARY KEY (`listitem_id`),
+  ADD KEY `list_id` (`list_id`),
+  ADD KEY `child_id` (`child_id`);
+
+--
+-- Indexes for table `engine4_group_lists`
+--
+ALTER TABLE `engine4_group_lists`
+  ADD PRIMARY KEY (`list_id`),
+  ADD KEY `owner_id` (`owner_id`);
+
+--
+-- Indexes for table `engine4_group_membership`
+--
+ALTER TABLE `engine4_group_membership`
+  ADD PRIMARY KEY (`resource_id`,`user_id`),
+  ADD KEY `REVERSE` (`user_id`);
+
+--
+-- Indexes for table `engine4_group_photos`
+--
+ALTER TABLE `engine4_group_photos`
+  ADD PRIMARY KEY (`photo_id`),
+  ADD KEY `album_id` (`album_id`),
+  ADD KEY `group_id` (`group_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `engine4_group_posts`
+--
+ALTER TABLE `engine4_group_posts`
+  ADD PRIMARY KEY (`post_id`),
+  ADD KEY `topic_id` (`topic_id`),
+  ADD KEY `group_id` (`group_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `engine4_group_topics`
+--
+ALTER TABLE `engine4_group_topics`
+  ADD PRIMARY KEY (`topic_id`),
+  ADD KEY `group_id` (`group_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
+-- Indexes for table `engine4_group_topicwatches`
+--
+ALTER TABLE `engine4_group_topicwatches`
+  ADD PRIMARY KEY (`resource_id`,`topic_id`,`user_id`),
+  ADD KEY `user_id` (`user_id`);
+
+--
 -- Indexes for table `engine4_invites`
 --
 ALTER TABLE `engine4_invites`
@@ -3069,6 +3688,29 @@ ALTER TABLE `engine4_user_verify`
   ADD KEY `code` (`code`);
 
 --
+-- Indexes for table `engine4_video_categories`
+--
+ALTER TABLE `engine4_video_categories`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `engine4_video_ratings`
+--
+ALTER TABLE `engine4_video_ratings`
+  ADD PRIMARY KEY (`video_id`,`user_id`),
+  ADD KEY `INDEX` (`video_id`);
+
+--
+-- Indexes for table `engine4_video_videos`
+--
+ALTER TABLE `engine4_video_videos`
+  ADD PRIMARY KEY (`video_id`),
+  ADD KEY `owner_id` (`owner_id`,`owner_type`),
+  ADD KEY `search` (`search`),
+  ADD KEY `creation_date` (`creation_date`),
+  ADD KEY `view_count` (`view_count`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -3151,7 +3793,7 @@ ALTER TABLE `engine4_core_comments`
 -- AUTO_INCREMENT for table `engine4_core_content`
 --
 ALTER TABLE `engine4_core_content`
-  MODIFY `content_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=638;
+  MODIFY `content_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=718;
 --
 -- AUTO_INCREMENT for table `engine4_core_jobs`
 --
@@ -3161,7 +3803,7 @@ ALTER TABLE `engine4_core_jobs`
 -- AUTO_INCREMENT for table `engine4_core_jobtypes`
 --
 ALTER TABLE `engine4_core_jobtypes`
-  MODIFY `jobtype_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=8;
+  MODIFY `jobtype_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
 --
 -- AUTO_INCREMENT for table `engine4_core_languages`
 --
@@ -3206,17 +3848,17 @@ ALTER TABLE `engine4_core_mailrecipients`
 -- AUTO_INCREMENT for table `engine4_core_mailtemplates`
 --
 ALTER TABLE `engine4_core_mailtemplates`
-  MODIFY `mailtemplate_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=34;
+  MODIFY `mailtemplate_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=42;
 --
 -- AUTO_INCREMENT for table `engine4_core_menuitems`
 --
 ALTER TABLE `engine4_core_menuitems`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=99;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=133;
 --
 -- AUTO_INCREMENT for table `engine4_core_menus`
 --
 ALTER TABLE `engine4_core_menus`
-  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=11;
+  MODIFY `id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=14;
 --
 -- AUTO_INCREMENT for table `engine4_core_nodes`
 --
@@ -3226,7 +3868,7 @@ ALTER TABLE `engine4_core_nodes`
 -- AUTO_INCREMENT for table `engine4_core_pages`
 --
 ALTER TABLE `engine4_core_pages`
-  MODIFY `page_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=27;
+  MODIFY `page_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=36;
 --
 -- AUTO_INCREMENT for table `engine4_core_reports`
 --
@@ -3272,6 +3914,46 @@ ALTER TABLE `engine4_core_tasks`
 --
 ALTER TABLE `engine4_core_themes`
   MODIFY `theme_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=37;
+--
+-- AUTO_INCREMENT for table `engine4_group_albums`
+--
+ALTER TABLE `engine4_group_albums`
+  MODIFY `album_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `engine4_group_categories`
+--
+ALTER TABLE `engine4_group_categories`
+  MODIFY `category_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT for table `engine4_group_groups`
+--
+ALTER TABLE `engine4_group_groups`
+  MODIFY `group_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `engine4_group_listitems`
+--
+ALTER TABLE `engine4_group_listitems`
+  MODIFY `listitem_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `engine4_group_lists`
+--
+ALTER TABLE `engine4_group_lists`
+  MODIFY `list_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `engine4_group_photos`
+--
+ALTER TABLE `engine4_group_photos`
+  MODIFY `photo_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `engine4_group_posts`
+--
+ALTER TABLE `engine4_group_posts`
+  MODIFY `post_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
+--
+-- AUTO_INCREMENT for table `engine4_group_topics`
+--
+ALTER TABLE `engine4_group_topics`
+  MODIFY `topic_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `engine4_invites`
 --
@@ -3377,6 +4059,16 @@ ALTER TABLE `engine4_user_logins`
 --
 ALTER TABLE `engine4_user_signup`
   MODIFY `signup_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+--
+-- AUTO_INCREMENT for table `engine4_video_categories`
+--
+ALTER TABLE `engine4_video_categories`
+  MODIFY `category_id` int(11) unsigned NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=16;
+--
+-- AUTO_INCREMENT for table `engine4_video_videos`
+--
+ALTER TABLE `engine4_video_videos`
+  MODIFY `video_id` int(11) unsigned NOT NULL AUTO_INCREMENT;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
