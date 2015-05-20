@@ -30,18 +30,28 @@
     <?php echo $this->translate(array('%s view', '%s views', $this->subject->view_count),
         $this->locale()->toNumber($this->subject->view_count)) ?>
   </li>
-  <li>
     <?php $direction = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.friends.direction');
     if ( $direction == 0 ): ?>
-      <?php echo $this->translate('Followers:') ?>  
-      <?php echo $this->translate(array('%s follower', '%s followers', $this->subject->member_count),
-        $this->locale()->toNumber($this->subject->member_count)) ?>      
+    <li>
+      	<?php echo $this->translate('Followers:') ?>  
+      	<a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-followers', 'user_id' => $this->subject -> getIdentity()), 'user_extended')?>" class="smoothbox">
+      	<?php echo $this->translate(array('%s follower', '%s followers', $this->subject->member_count),
+        	$this->locale()->toNumber($this->subject->member_count)) ?>  </a>
+    </li>    
+    <li> 
+	    <?php echo $this->translate('Following:') ?>
+	    <a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-following', 'user_id' => $this->subject -> getIdentity()), 'user_extended')?>" class="smoothbox">
+	    <?php echo $this->translate(array('%s following', '%s following', $this->followingCount),
+	        $this->locale()->toNumber($this->followingCount)) ?></a>
+    </li>    
     <?php else: ?>  
-    <?php echo $this->translate('Friends:') ?>
-    <?php echo $this->translate(array('%s friend', '%s friends', $this->subject->member_count),
-        $this->locale()->toNumber($this->subject->member_count)) ?>
-    <?php endif; ?>
-  </li>
+     <li>	
+    	<?php echo $this->translate('Friends:') ?>
+    	<a href="" class="smoothbox">
+    	<?php echo $this->translate(array('%s friend', '%s friends', $this->subject->member_count),
+        	$this->locale()->toNumber($this->subject->member_count)) ?></a>
+  	</li>
+   <?php endif; ?>
   <li>
     <?php echo $this->translate('Last Update:'); ?>
     <?php 
