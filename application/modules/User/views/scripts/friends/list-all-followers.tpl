@@ -27,8 +27,7 @@
 </div>
 
 <?php  if(empty($this->is_ajax)) { ?>
-<a id="follower_members_profile" style="posituin:absolute;"></a>
-<div class="follower_members_popup">
+<div class="followers_members_popup">
 	<div class="top">
 		<?php
             $title = $this->translate('Followers who following you');

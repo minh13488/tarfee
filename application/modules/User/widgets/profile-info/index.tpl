@@ -34,22 +34,37 @@
     if ( $direction == 0 ): ?>
     <li>
       	<?php echo $this->translate('Followers:') ?>  
-      	<a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-followers', 'user_id' => $this->subject -> getIdentity()), 'user_extended')?>" class="smoothbox">
-      	<?php echo $this->translate(array('%s follower', '%s followers', $this->subject->member_count),
-        	$this->locale()->toNumber($this->subject->member_count)) ?>  </a>
+      	<?php if($this->subject->member_count):?>
+	      	<a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-followers', 'user_id' => $this->subject -> getIdentity()), 'user_extended')?>" class="smoothbox">
+	      	<?php echo $this->translate(array('%s follower', '%s followers', $this->subject->member_count),
+	        	$this->locale()->toNumber($this->subject->member_count)) ?>  </a>
+        <?php else:?>
+        	<?php echo $this->translate(array('%s follower', '%s followers', $this->subject->member_count),
+        	$this->locale()->toNumber($this->subject->member_count)) ?>
+        <?php endif;?>
     </li>    
     <li> 
 	    <?php echo $this->translate('Following:') ?>
-	    <a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-following', 'user_id' => $this->subject -> getIdentity()), 'user_extended')?>" class="smoothbox">
-	    <?php echo $this->translate(array('%s following', '%s following', $this->followingCount),
-	        $this->locale()->toNumber($this->followingCount)) ?></a>
+	    <?php if($this->followingCount):?>
+		    <a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-following', 'user_id' => $this->subject -> getIdentity()), 'user_extended')?>" class="smoothbox">
+		    <?php echo $this->translate(array('%s following', '%s following', $this->followingCount),
+		        $this->locale()->toNumber($this->followingCount)) ?></a>
+        <?php else:?>
+        	<?php echo $this->translate(array('%s following', '%s following', $this->followingCount),
+		        $this->locale()->toNumber($this->followingCount)) ?>
+    	<?php endif;?>
     </li>    
     <?php else: ?>  
      <li>	
     	<?php echo $this->translate('Friends:') ?>
-    	<a href="" class="smoothbox">
-    	<?php echo $this->translate(array('%s friend', '%s friends', $this->subject->member_count),
-        	$this->locale()->toNumber($this->subject->member_count)) ?></a>
+    	<?php if($this->subject->member_count):?>
+	    	<a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-friends', 'user_id' => $this->subject -> getIdentity()), 'user_extended')?>" class="smoothbox">
+	    	<?php echo $this->translate(array('%s friend', '%s friends', $this->subject->member_count),
+        		$this->locale()->toNumber($this->subject->member_count)) ?></a>
+         <?php else:?>
+         	<?php echo $this->translate(array('%s friend', '%s friends', $this->subject->member_count),
+        		$this->locale()->toNumber($this->subject->member_count)) ?>
+         <?php endif;?>
   	</li>
    <?php endif; ?>
   <li>

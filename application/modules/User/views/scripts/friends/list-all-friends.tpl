@@ -17,7 +17,7 @@
 				'is_ajax':1,
 			},
 			onSuccess : function(responseTree, responseElements, responseHTML, responseJavaScript) {
-				document.getElementById('follower_popup_content').innerHTML = responseHTML;
+				document.getElementById('friends_popup_content').innerHTML = responseHTML;
 				en4.core.runonce.trigger();
 			}
 		});					
@@ -27,15 +27,14 @@
 </div>
 
 <?php  if(empty($this->is_ajax)) { ?>
-<a id="follower_members_profile" style="posituin:absolute;"></a>
-<div class="follower_members_popup">
+<div class="friends_members_popup">
 	<div class="top">
 		<?php
             $title = $this->translate('Friends who following you');
 		?>
 		<div class="heading"><?php echo $title; ?></div>
 	</div>
-	<div class="friends_members_popup_content" id="follower_popup_content">
+	<div class="friends_members_popup_content" id="friends_popup_content">
 		<?php } ?>
     <?php if( !empty($this->friends) && count($this->friends) > 1 ): ?>
 				<?php if( $this->paginator->getCurrentPageNumber() > 1 ): ?>
