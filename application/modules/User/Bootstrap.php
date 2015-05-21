@@ -29,7 +29,10 @@ class User_Bootstrap extends Engine_Application_Bootstrap_Abstract
     // Add main user javascript
     //$headScript = new Zend_View_Helper_HeadScript();
     //$headScript->appendFile('application/modules/User/externals/scripts/core.js');
-
+	
+	$front = Zend_Controller_Front::getInstance();
+	$front -> registerPlugin(new User_Controller_Plugin_Dispatch);
+	
     // Get viewer
     $viewer = Engine_Api::_()->user()->getViewer();
 

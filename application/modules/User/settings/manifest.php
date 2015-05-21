@@ -77,13 +77,26 @@ return array(
     array(
       'event' => 'getAdminNotifications',
       'resource' => 'User_Plugin_Core',
-    )
+    ),
+    array(
+      'event' => 'onItemCreateAfter',
+      'resource' => 'User_Plugin_Core',
+    ),
+    array(
+      'event' => 'onItemUpdateAfter',
+      'resource' => 'User_Plugin_Core',
+    ),
+     array(
+      'event' => 'onItemDeleteAfter',
+      'resource' => 'User_Plugin_Core',
+    ),
   ),
   // Items ---------------------------------------------------------------------
   'items' => array(
     'user',
     'user_list',
     'user_list_item',
+    'user_library',
   ),
   // Routes --------------------------------------------------------------------
   'routes' => array(
