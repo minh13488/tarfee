@@ -239,4 +239,19 @@ return array(
       'no-subject',
     ),
   ),
+   array(
+    'title' => 'Profile Players',
+    'description' => 'Displays my players on their profile.',
+    'category' => 'User',
+    'type' => 'widget',
+    'name' => 'user.profile-players',
+    'isPaginated' => true,
+    'defaultParams' => array(
+      'title' => 'Players',
+      'titleCount' => true,
+    ),
+    'requirements' => array(
+      'subject' => 'user',
+    ),
+  ),
 ) ?>

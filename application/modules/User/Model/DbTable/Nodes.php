@@ -3,11 +3,8 @@
 class User_Model_DbTable_Nodes extends Engine_Db_Table {
 
 	protected $_rowClass = 'User_Model_Node';
-
 	protected $_rootLabel = 'All Categories';
-
 	protected $_relationTableName = '';
-
 	protected function _insertRoot() {
 		$row = $this -> fetchNew();
 		$row -> pleft = 1;
