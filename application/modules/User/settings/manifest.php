@@ -84,7 +84,8 @@ return array(
     'user',
     'user_list',
     'user_list_item',
-    'user_offerservice'
+    'user_offerservice',
+    'user_sportcategory'
   ),
   // Routes --------------------------------------------------------------------
   'routes' => array(
@@ -112,7 +113,8 @@ return array(
         'action' => '(home|browse|render-section|get-my-location)',
       )
     ),
-
+	
+	/*
     // User - Specific
     'user_profile' => array(
       'route' => 'profile/:id/*',
@@ -121,10 +123,9 @@ return array(
         'controller' => 'profile',
         'action' => 'index'
       )
-    ),
+    ),*/
     
     'user_login' => array(
-      //'type' => 'Zend_Controller_Router_Route_Static',
       'route' => '/login/*',
       'defaults' => array(
         'module' => 'user',

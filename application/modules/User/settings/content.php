@@ -240,8 +240,24 @@ return array(
     ),
   ),
   
-  //HOANGND widget for render profile sections
-  array(
+   array(
+    'title' => 'Profile Players',
+    'description' => 'Displays my players on their profile.',
+    'category' => 'User',
+    'type' => 'widget',
+    'name' => 'user.profile-players',
+    'isPaginated' => true,
+    'defaultParams' => array(
+      'title' => 'Players',
+      'titleCount' => true,
+    ),
+    'requirements' => array(
+      'subject' => 'user',
+    ),
+  ),
+  
+	//HOANGND widget for render profile sections
+  	array(
         'title' => 'Profile Sections',
         'description' => 'Displays Sections on User Profile page',
         'category' => 'User',

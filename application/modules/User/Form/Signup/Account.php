@@ -139,11 +139,10 @@ class User_Form_Signup_Account extends Engine_Form_Email
           ->_('This will be the end of your profile link, for example: <br /> ' .
               '<span id="profile_address">http://%s</span>');
       $description = sprintf($description, $_SERVER['HTTP_HOST']
-          . Zend_Controller_Front::getInstance()->getRouter()
-          ->assemble(array('id' => 'yourname'), 'user_profile'));
+          . Zend_Controller_Front::getInstance()->getBaseUrl().'/yourname');
 
       $this->addElement('Text', 'username', array(
-        'label' => 'Profile Address',
+        'label' => 'Profile URL',
         'description' => $description,
         'required' => true,
         'allowEmpty' => false,
@@ -158,14 +157,14 @@ class User_Form_Signup_Account extends Engine_Form_Email
           //'onblur' => 'var el = this; en4.user.checkUsernameTaken(this.value, function(taken){ el.style.marginBottom = taken * 100 + "px" });'
       ));
       $this->username->getDecorator('Description')->setOptions(array('placement' => 'APPEND', 'escape' => false));
-      $this->username->getValidator('NotEmpty')->setMessage('Please enter a valid profile address.', 'isEmpty');
-      $this->username->getValidator('Db_NoRecordExists')->setMessage('Someone has already picked this profile address, please use another one.', 'recordFound');
-      $this->username->getValidator('Regex')->setMessage('Profile addresses must start with a letter.', 'regexNotMatch');
-      $this->username->getValidator('Alnum')->setMessage('Profile addresses must be alphanumeric.', 'notAlnum');
+      $this->username->getValidator('NotEmpty')->setMessage('Please enter a valid profile url.', 'isEmpty');
+      $this->username->getValidator('Db_NoRecordExists')->setMessage('Someone has already picked this profile url, please use another one.', 'recordFound');
+      $this->username->getValidator('Regex')->setMessage('Profile url must start with a letter.', 'regexNotMatch');
+      $this->username->getValidator('Alnum')->setMessage('Profile url must be alphanumeric.', 'notAlnum');
 
       // Add banned username validator
       $bannedUsernameValidator = new Engine_Validate_Callback(array($this, 'checkBannedUsername'), $this->username);
-      $bannedUsernameValidator->setMessage("This profile address is not available, please use another one.");
+      $bannedUsernameValidator->setMessage("This profile url is not available, please use another one.");
       $this->username->addValidator($bannedUsernameValidator);
     }
     
@@ -374,6 +373,12 @@ class User_Form_Signup_Account extends Engine_Form_Email
   public function checkBannedUsername($value, $usernameElement)
   {
     $bannedUsernamesTable = Engine_Api::_()->getDbtable('BannedUsernames', 'core');
+	if(in_array($value, array('admin','index','groups','members','invite','videos','messages','login','logout','search','activity','annoucement','like','help','pages','report','link','tag','sitemap','utility',
+				'widget','comment','confirm','cross-domain','error','member','photo','album','post','profile','topic','signup','network','ipn','settings','subscription','upload','ajax','auth','block','edit','friends',
+				'video')))
+	{
+		return FALSE;
+	}
     return !$bannedUsernamesTable->isUsernameBanned($value);
   }
 }

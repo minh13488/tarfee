@@ -823,5 +823,102 @@ class User_FriendsController extends Core_Controller_Action_User
   {
     $this->view->notification = $notification = $this->_getParam('notification');
   }
+  
+  public function listAllFriendsAction()
+  {
+  	$user_id = $this -> _getParam('user_id', 0);
+	$this->view->is_ajax = $is_ajax = $this->_getParam('is_ajax', 0);
+	if($user_id)
+	{
+		$subject = Engine_Api::_() -> getItem('user', $user_id);
+	  	// Multiple friend mode
+	    $select = $subject->membership()->getMembersOfSelect();
+	    $this->view->paginator = $paginator = Zend_Paginator::factory($select);  
+	
+	    // Set item count per page and current page number
+	    $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 10));
+	    $paginator->setCurrentPageNumber($this->_getParam('page', 1));
+		
+		// Get stuff
+	    $ids = array();
+	    foreach( $paginator as $friend ) {
+	      $ids[] = $friend->resource_id;
+	    }
+		// Get the items
+	    $friendUsers = Engine_Api::_()->getItemTable('user')->find($ids);
+		$check_object_result = count($friendUsers);
+
+        $this->view->friends = array();
+        if (!empty($check_object_result)) {
+            $this->view->friends = $friendUsers;
+        } else {
+            $this->view->no_result_msg = $this->view->translate('No friends were found.');
+        }
+	}
+  }
+  public function listAllFollowersAction()
+  {
+  	$user_id = $this -> _getParam('user_id', 0);
+	$this->view->is_ajax = $is_ajax = $this->_getParam('is_ajax', 0);
+	if($user_id)
+	{
+		$subject = Engine_Api::_() -> getItem('user', $user_id);
+	  	// Multiple friend mode
+	    $select = $subject->membership()->getMembersSelect();
+	    $paginator = Zend_Paginator::factory($select);
+		// Set item count per page and current page number
+	    $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 10));
+	    $paginator->setCurrentPageNumber($this->_getParam('page', 1));
+		$this->view->paginator = $paginator;
+		// Get stuff
+	    $ids = array();
+	    foreach( $paginator as $friend ) {
+	      $ids[] = $friend->user_id;
+	    }
+	
+	    // Get the items
+	    $friendUsers = Engine_Api::_()->getItemTable('user')->find($ids);
+		$check_object_result = count($friendUsers);
+
+        $this->view->followers = array();
+        if (!empty($check_object_result)) {
+            $this->view->followers = $friendUsers;
+        } else {
+            $this->view->no_result_msg = $this->view->translate('No followers were found.');
+        }
+	}
+  }
+  public function listAllFollowingAction()
+  {
+  		$user_id = $this -> _getParam('user_id', 0);
+		$this->view->is_ajax = $is_ajax = $this->_getParam('is_ajax', 0);
+		if($user_id)
+		{
+			$subject = Engine_Api::_() -> getItem('user', $user_id);
+		  	// Multiple friend mode
+		    $select = $subject->membership()->getMembersOfSelect();
+		    $this->view->paginator = $paginator = Zend_Paginator::factory($select);
+		
+		    // Set item count per page and current page number
+		    $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 5));
+		    $paginator->setCurrentPageNumber($this->_getParam('page', 1));
+		    // Get stuff
+		    $ids = array();
+		    foreach( $paginator as $friend ) {
+		      $ids[] = $friend->resource_id;
+		    }
+		
+		    // Get the items
+		    $friendUsers = Engine_Api::_()->getItemTable('user')->find($ids);
+			$check_object_result = count($friendUsers);
+	
+	        $this->view->following = array();
+	        if (!empty($check_object_result)) {
+	            $this->view->following = $friendUsers;
+	        } else {
+	            $this->view->no_result_msg = $this->view->translate('No following were found.');
+	        }
+		}
+  }
 
 }

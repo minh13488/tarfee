@@ -1227,3 +1227,73 @@ body .activity_icon_tagged
 {
   background-image: url(~/application/modules/User/externals/images/types/tag.png);
 }
+
+body#global_page_user-friends-list-all-following,
+body#global_page_user-friends-list-all-followers,
+body#global_page_user-friends-list-all-friends{
+	text-align: center;
+}
+
+
+.following_members_popup,
+.followers_members_popup,
+.friends_members_popup
+{
+	padding: 10px;
+	display: block;
+	margin: auto;
+}
+.following_members_popup .top,
+.followers_members_popup .top,
+.friends_members_popup .top
+{
+	display: block;		
+}
+.following_members_popup .top .heading,
+.followers_members_popup .top .heading,
+.friends_members_popup .top .heading{
+	background: $theme_border_color;
+	padding: 5px 7px;
+	font-size: 16px;
+	border-radius: 5px;
+}
+
+.following_members_popup_content,
+.followers_members_popup_content,
+.friends_members_popup_content{
+	width: 100%;
+	margin-top: 10px;
+	overflow: hidden;
+}
+.item_member_name{
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+.item_member_thumb {
+	float: left;
+
+	a {
+		img {
+			width: 40px;
+			height: 40px;
+			margin-right: 7px;
+			border: none;
+		}
+	}
+}
+.item_member_details {
+	a.seao_common_add_tooltip_link {
+		font-size: 14px;
+		color: $theme_font_color;
+	}
+}
+.following_members_popup_bottom,
+.followers_members_popup_bottom,
+.friends_members_popup_bottom {
+	text-align: right;
+	display: block;
+	margin-top: 5px;
+	float: right;
+	padding: 10px;
+}
