@@ -236,7 +236,7 @@ class User_Model_DbTable_Nodes extends Engine_Db_Table {
 		$rows = $this -> fetchAll($this -> select()->where('pleft > 1') -> order('pleft'));
 		$result[""] =  $root_label;
 		foreach($rows as $row) {
-			$result[$row -> getIdentity()] = str_repeat($prefix, $row -> level -1) . ' ' . $row -> shortTitle();
+			$result[$row -> getIdentity()] = str_repeat($prefix, $row -> level -1) . ' ' . $row -> getTitle();
 		}
 		return $result;
 	}
@@ -295,7 +295,7 @@ class User_Model_DbTable_Nodes extends Engine_Db_Table {
 		$item_id = $item -> getIdentity();
 		$rel = $this -> getRelationTableName();
 		$db = $this -> getAdapter();
-		$key = 'category_id'; //$this -> _primary;
+		$key = 'category_id'; 
 		$sql = "select $key from $rel where item_id =  $item_id";
 		if($ids = $db -> fetchCol($sql)) {
 			$select = $this -> select() -> where($key . ' IN (?) ', $ids);
