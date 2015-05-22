@@ -27,12 +27,6 @@ class User_Model_User extends Core_Model_Item_Abstract
   public function getTitle()
   {
     // This will cause various problems
-    //$viewer = Engine_Api::_()->user()->getViewer();
-    //if( $viewer->getIdentity() && $viewer->getIdentity() == $this->getIdentity() )
-    //{
-    //  $translate = Zend_Registry::get('Zend_Translate');
-    //  return $translate->translate('You');
-    //}
     if( isset($this->displayname) && '' !== trim($this->displayname) ) {
       return $this->displayname;
     } else if( isset($this->username) && '' !== trim($this->username) ) {
@@ -60,18 +54,7 @@ class User_Model_User extends Core_Model_Item_Abstract
     } else {
       return 'javascript:void(0);';
     }
-    
-    $params = array_merge(array(
-      'route' => 'user_profile',
-      'reset' => true,
-      'id' => $profileAddress,
-    ), $params);
-    $route = $params['route'];
-    $reset = $params['reset'];
-    unset($params['route']);
-    unset($params['reset']);
-    return Zend_Controller_Front::getInstance()->getRouter()
-      ->assemble($params, $route, $reset);
+    return Zend_Controller_Front::getInstance()->getBaseUrl().'/'.$profileAddress;
   }
 
 

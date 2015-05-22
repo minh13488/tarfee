@@ -169,7 +169,8 @@ class User_Plugin_Menus
   public function onMenuInitialize_UserHomeView($row)
   {
     $viewer = Engine_Api::_()->user()->getViewer();
-    if( $viewer->getIdentity() ) {
+    if( $viewer->getIdentity() ) 
+    {
       return array(
         'label' => $row->label,
         'icon' => $row->params['icon'],
