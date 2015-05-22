@@ -27,7 +27,7 @@ INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`
 INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
 ('player_admin_main_managerelation', 'user', 'Manage Relation', '', '{"route":"admin_default","module":"user","controller":"manage-relation"}', 'player_admin_main', '', 2),
 ('player_admin_main_sportcategory', 'user', 'Sport Categories', '', '{"route":"admin_default","module":"user","controller":"sport-categories"}', 'player_admin_main', '', 4),
-('player_admin_main_usergroupsettings', 'user', 'User Group Settings', '', '{"route":"admin_default","module":"user","controller":"level-settings"}', 'player_admin_main', '', 3),
+('player_admin_main_usergroupsettings', 'user', 'Member Level Settings', '', '{"route":"admin_default","module":"user","controller":"level-settings"}', 'player_admin_main', '', 3),
 ('player_admin_main_globalsettings', 'user', 'Global Settings', '', '{"route":"admin_default","module":"user","controller":"global-settings"}', 'player_admin_main', '', 1);
 
 CREATE TABLE IF NOT EXISTS `engine4_user_sportcategories` (
