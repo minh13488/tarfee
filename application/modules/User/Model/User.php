@@ -598,5 +598,35 @@ class User_Model_User extends Core_Model_Item_Abstract
 
     parent::_readData($spec);
   }
-
+	
+	//HOANGND fuction for add section to user
+	public function addSection($section, $params) {
+        if (!$section || !$params) {
+            return false;
+        }
+        switch ($section) {
+			case 'bio':
+                $this -> bio = $params['bio'];
+				$this -> save();
+                break;
+        };
+    }
+	
+	//HOANGND function for remove section of user
+	public function removeSection($section, $params) {
+        if (!$section || !$params) {
+            return false;
+        }
+        switch ($section) {
+			case 'bio':
+                $this -> bio = "";
+				$this -> save();
+                break;
+		}
+    }
+	
+	//HOANGND function for get all offer services of user
+	public function getAllOfferServices() {
+		return Engine_Api::_()->getDbTable('offerservices', 'user')->getAllOfferServicesOfUser($this->getIdentity());
+	}
 }

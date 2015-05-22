@@ -43,7 +43,11 @@ class User_Api_Core extends Core_Api_Abstract
    */
   protected $_authAdapter;
 
-
+	//HOANGND sections of profile
+	protected $_sections = array(
+		'bio' => 'Bio',
+		'offerservice' => 'Service I Offer'
+    );
 
   // Users
 
@@ -325,4 +329,45 @@ class User_Api_Core extends Core_Api_Abstract
     $superadmins = $table->fetchAll($select);
     return $superadmins;
   }
+  
+  	//HOANGND get all profile sections
+  	public function getAllSections() {
+        return $this->_sections;    
+    }
+	
+	//HOANGND render profile sections
+	function renderSection($section, $user, $params = array()) {
+        $view = Zend_Registry::get('Zend_View');
+		$viewer = Engine_Api::_()->user()->getViewer();
+        $sections = $this->_sections;
+        if (array_key_exists($section, $sections)) {
+            if (isset($params['save']) && $params['save'] && ($viewer->getIdentity() == $user->getIdentity())) {
+                if (isset($params['item_id']) && $params['item_id']) {
+                    $user->editSection($section, $params);
+                }
+                else {
+                    $user->addSection($section, $params);
+                }
+            }
+            
+            if (isset($params['remove']) && $params['remove'] && ($viewer->getIdentity() == $user->getIdentity())) {
+                $user->removeSection($section, $params);
+            }
+            
+            $view->section = $section;
+            $view->user = $user;
+            $view->params = $params;
+            return $view -> render('_section_'.$section.'.tpl');
+        }
+        else return '';
+    }
+	
+	//HOANGND get section label
+	public function getSectionLabel($key) {
+        $sections = $this->_sections;
+        if (isset($sections[$key])) {
+            return $sections[$key];
+        }
+        return '';
+    }
 }

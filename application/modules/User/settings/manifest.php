@@ -84,6 +84,7 @@ return array(
     'user',
     'user_list',
     'user_list_item',
+    'user_offerservice'
   ),
   // Routes --------------------------------------------------------------------
   'routes' => array(
@@ -108,7 +109,7 @@ return array(
         'action' => 'browse'
       ),
       'reqs' => array(
-        'action' => '(home|browse)',
+        'action' => '(home|browse|render-section|get-my-location)',
       )
     ),
 

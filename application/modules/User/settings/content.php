@@ -239,4 +239,16 @@ return array(
       'no-subject',
     ),
   ),
+  
+  //HOANGND widget for render profile sections
+  array(
+        'title' => 'Profile Sections',
+        'description' => 'Displays Sections on User Profile page',
+        'category' => 'User',
+        'type' => 'widget',
+        'name' => 'user.profile-sections',
+        'requirements' => array(
+          'subject' => 'user',
+        ),
+    ),
 ) ?>
