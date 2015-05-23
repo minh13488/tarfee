@@ -98,6 +98,7 @@ return array(
     'user_list_item',
     'user_library',
     'user_sportcategory',
+    'user_playercard',
   ),
   // Routes --------------------------------------------------------------------
   'routes' => array(

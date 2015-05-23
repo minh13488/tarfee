@@ -1,9 +1,9 @@
-<?php echo $this -> form -> render($this); ?>
+<?php echo $this->form->render($this);?>
 <script type="text/javascript">
-	<?php if(!$this -> showOther):?>
+	<?php if(empty($this -> showOther)):?>
 		$('relation_other-wrapper').hide();
 	<?php endif;?>
-	<?php if(!$this -> showPreferredFoot):?>
+	<?php if(empty($this -> showPreferredFoot)):?>
 		$('referred_foot-wrapper').hide();
 	<?php endif;?>
 	<?php if(!$this -> showPosition):?>
@@ -20,7 +20,6 @@
 			$('relation_other-wrapper').hide();
 		}
 	}
-
 	function subCategories()
 	{
 		if ($('category_id').value == 2)
