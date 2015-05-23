@@ -77,7 +77,19 @@ return array(
     array(
       'event' => 'getAdminNotifications',
       'resource' => 'User_Plugin_Core',
-    )
+    ),
+    array(
+      'event' => 'onItemCreateAfter',
+      'resource' => 'User_Plugin_Core',
+    ),
+    array(
+      'event' => 'onItemUpdateAfter',
+      'resource' => 'User_Plugin_Core',
+    ),
+     array(
+      'event' => 'onItemDeleteAfter',
+      'resource' => 'User_Plugin_Core',
+    ),
   ),
   // Items ---------------------------------------------------------------------
   'items' => array(
@@ -88,7 +100,10 @@ return array(
     'user_service',
     'user_experience',
     'user_recommendation',
-    'user_sportcategory'
+    'user_sportcategory',
+    'user_library',
+    'user_sportcategory',
+    'user_playercard',
   ),
   // Routes --------------------------------------------------------------------
   'routes' => array(
@@ -125,6 +140,18 @@ return array(
         'action' => 'received'
       ),
     ),
+	'user_library' => array(
+      'route' => 'members/library/:action/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'library',
+        'action' => 'browse'
+      ),
+      'reqs' => array(
+        'action' => '(create-sub-library|edit-library)',
+      )
+    ),
+	
 	/*
     // User - Specific
     'user_profile' => array(

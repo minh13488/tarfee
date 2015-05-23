@@ -83,6 +83,19 @@ return array(
     ),
   ),
   array(
+    'title' => 'Profile My Library',
+    'description' => 'Displays a member\'s library on their profile.',
+    'category' => 'User',
+    'type' => 'widget',
+    'name' => 'user.profile-library',
+    'defaultParams' => array(
+      'title' => 'My Library',
+    ),
+    'requirements' => array(
+      'subject' => 'user',
+    ),
+  ),
+  array(
     'title' => 'Profile Fields',
     'description' => 'Displays a member\'s profile field data on their profile.',
     'category' => 'User',

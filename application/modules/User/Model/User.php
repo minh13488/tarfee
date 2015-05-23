@@ -764,5 +764,23 @@ class User_Model_User extends Core_Model_Item_Abstract
 			}
 		}
 		return false;
+	}	
+	public function getMainLibrary() {
+		$table = Engine_Api::_() -> getItemTable('user_library');
+		$select = $table -> select() -> where('user_id = ?', $this -> getIdentity()) -> limit(1);
+
+		$library = $table -> fetchRow($select);
+
+		if (null === $library)
+		{
+			$library = $table -> createRow();
+			$library -> setFromArray(array(
+				'user_id' => $this -> getIdentity(),
+				'title' => 'Main Library',
+			));
+			$library -> save();
+		}
+
+		return $library;
 	}
 }
