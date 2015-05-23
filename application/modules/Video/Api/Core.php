@@ -18,6 +18,163 @@
  */
 class Video_Api_Core extends Core_Api_Abstract
 {
+	
+  public function uploadVideosChannel()
+  {
+  	// Call set_include_path() as needed to point to your client library.
+	set_time_limit(0);
+	require_once 'Google/autoload.php';
+	require_once 'Google/Client.php';
+	require_once 'Google/Service/YouTube.php';
+	session_start();
+	$htmlBody ="";
+	/*
+	 * You can acquire an OAuth 2.0 client ID and client secret from the
+	 * Google Developers Console <https://console.developers.google.com/>
+	 * For more information about using OAuth 2.0 to access Google APIs, please see:
+	 * <https://developers.google.com/youtube/v3/guides/authentication>
+	 * Please ensure that you have enabled the YouTube Data API for your project.
+	 */
+	$settings = Engine_Api::_()->getApi('settings', 'core');
+	$token = $settings->getSetting('user_youtube_token', "");
+	$OAUTH2_CLIENT_ID = $settings->getSetting('user_youtube_clientid', "");
+	$OAUTH2_CLIENT_SECRET = $settings->getSetting('user_youtube_secret', "");
+	
+	if(empty($token) || empty($token) || empty($token)) {
+		return fasle;
+	}
+	
+	//getting videos
+	$videoTable = Engine_Api::_() -> getItemTable('video');
+  	$select = $videoTable -> select() -> where('file_id <> ?', '0') -> limit(2);
+  	$videos = $videoTable -> fetchAll($select);
+	
+	
+	foreach($videos as $videoLoop) {
+		$client = new Google_Client();
+		$client->setClientId($OAUTH2_CLIENT_ID);
+		$client->setClientSecret($OAUTH2_CLIENT_SECRET);
+		$client->setAccessType('offline');
+		$client->setScopes('https://www.googleapis.com/auth/youtube');
+		$redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
+		    FILTER_SANITIZE_URL);
+		$redirect = str_replace("index.php", "admin/user/youtube/token", $redirect);   
+		$client->setRedirectUri($redirect);
+		$client->setAccessToken($token);
+		
+		/**
+         * Check to see if our access token has expired. If so, get a new one and save it to file for future use.
+         */
+        if($client->isAccessTokenExpired()) {
+            $newToken = json_decode($client->getAccessToken());
+            $client->refreshToken($newToken->refresh_token);
+            $settings->setSetting('user_youtube_token', $client->getAccessToken());
+        }
+		
+		// Check to ensure that the access token was successfully acquired.
+		if ($client->getAccessToken()) {
+		  try{
+		  	
+	        // Define an object that will be used to make all API requests.
+			$youtube = new Google_Service_YouTube($client);
+		  	
+		  	//get info of files
+		  	$file = Engine_Api::_() -> getItem('storage_file', $videoLoop -> file_id);
+		  	if(!file) {
+		  		continue;
+		  	}
+		  	
+		    // REPLACE this value with the path to the file you are uploading.
+		    $videoPath = $file -> storage_path;
+		
+		    // Create a snippet with title, description, tags and category ID
+		    // Create an asset resource and set its snippet metadata and type.
+		    // This example sets the video's title, description, keyword tags, and
+		    // video category.
+		    $snippet = new Google_Service_YouTube_VideoSnippet();
+		    $snippet->setTitle($videoLoop -> getTitle());
+		    $snippet->setDescription($videoLoop -> getDescription());
+		
+		    // Numeric video category. See
+		    // https://developers.google.com/youtube/v3/docs/videoCategories/list 
+		    $snippet->setCategoryId("22");
+		
+		    // Set the video's status to "public". Valid statuses are "public",
+		    // "private" and "unlisted".
+		    $status = new Google_Service_YouTube_VideoStatus();
+		    $status->privacyStatus = "public";
+		
+		    // Associate the snippet and status objects with a new video resource.
+		    $video = new Google_Service_YouTube_Video();
+		    $video->setSnippet($snippet);
+		    $video->setStatus($status);
+		
+		    // Specify the size of each chunk of data, in bytes. Set a higher value for
+		    // reliable connection as fewer chunks lead to faster uploads. Set a lower
+		    // value for better recovery on less reliable connections.
+		    $chunkSizeBytes = 1 * 1024 * 1024;
+		
+		    // Setting the defer flag to true tells the client to return a request which can be called
+		    // with ->execute(); instead of making the API call immediately.
+		    $client->setDefer(true);
+		
+		    // Create a request for the API's videos.insert method to create and upload the video.
+		    $insertRequest = $youtube->videos->insert("status,snippet", $video);
+		
+		    // Create a MediaFileUpload object for resumable uploads.
+		    $media = new Google_Http_MediaFileUpload(
+		        $client,
+		        $insertRequest,
+		        'video/*',
+		        null,
+		        true,
+		        $chunkSizeBytes
+		    );
+		    $media->setFileSize(filesize($videoPath));
+		
+		
+		    // Read the media file and upload it chunk by chunk.
+		    $status = false;
+		    $handle = fopen($videoPath, "rb");
+		    while (!$status && !feof($handle)) {
+		      $chunk = fread($handle, $chunkSizeBytes);
+		      $status = $media->nextChunk($chunk);
+		    }
+		
+		    fclose($handle);
+		
+		    // If you want to make other calls after the file upload, set setDefer back to false
+		    $client->setDefer(false);
+			
+			//update video data
+			$videoLoop -> code = $status['id'];
+			$videoLoop -> file_id = 0;
+			$videoLoop -> type = 1;
+			$videoLoop -> status = 1;
+			$videoLoop -> save();
+			
+			//delete old video
+			$file -> delete();
+						
+		    //$htmlBody .= "<h3>Video Uploaded</h3><ul>";
+		    //$htmlBody .= sprintf('<li>%s (%s)</li>',
+		    //    $status['snippet']['title'],
+		    //    $status['id']);
+		    $htmlBody .= '</ul>';
+		  } catch (Google_Service_Exception $e) {
+		    //$htmlBody .= sprintf('<p>A service error occurred: <code>%s</code></p>',
+		    //    htmlspecialchars($e->getMessage()));
+		    continue;
+		  } catch (Google_Exception $e) {
+		    //$htmlBody .= sprintf('<p>An client error occurred: <code>%s</code></p>',
+		    //    htmlspecialchars($e->getMessage()));
+		    continue;
+		  }
+		}
+	}
+	//echo $htmlBody;
+  }
+  	
   public function getVideosPaginator($params = array())
   {
     $paginator = Zend_Paginator::factory($this->getVideosSelect($params));
