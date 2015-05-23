@@ -252,6 +252,7 @@ return array(
       'no-subject',
     ),
   ),
+  
    array(
     'title' => 'Profile Players',
     'description' => 'Displays my players on their profile.',
@@ -267,4 +268,16 @@ return array(
       'subject' => 'user',
     ),
   ),
+  
+	//HOANGND widget for render profile sections
+  	array(
+        'title' => 'Profile Sections',
+        'description' => 'Displays Sections on User Profile page',
+        'category' => 'User',
+        'type' => 'widget',
+        'name' => 'user.profile-sections',
+        'requirements' => array(
+          'subject' => 'user',
+        ),
+    ),
 ) ?>

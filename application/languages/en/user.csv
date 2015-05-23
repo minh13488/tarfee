@@ -675,3 +675,15 @@ Please login to the admin panel to aprovie this user.
 "It's Complicated";"It's Complicated"
 "In an Open Relationship";"In an Open Relationship"
 "Widowed";"Widowed"
+
+"require_valid";"%s is required!"
+"year_valid";"%s: Invalid year! Year must be between 1900 and the current year."
+"year-before_valid";"Please be sure %s is not after %s."
+"month_diff";"%s month";"%s months"
+"can_not_recommend";"%s doesn't have permission to give recommendations."
+"already_ask";"You've already sent a request to %s for this position."
+"already_recommend";"%s already gave you a recommendation for that position."
+"giver_no_occupations";"%s's resume doesn't have any positions or education listed."
+"require-select_valid";"Plese select a valid value for %s."
+"month-year-before-current_valid";"Please enter a date no later than current date."
+"email_valid";"%s is invalid!

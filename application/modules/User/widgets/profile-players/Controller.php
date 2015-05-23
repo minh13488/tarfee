@@ -20,11 +20,7 @@ class User_Widget_ProfilePlayersController extends Engine_Content_Widget_Abstrac
 
     // Get paginator
     $profile_owner_id = $subject->getIdentity();
-    $this->view->paginator = $paginator = Engine_Api::_()->video()->getVideosPaginator(array(
-      'user_id' => $profile_owner_id,
-      'status' => 1,
-      'search' => 1
-    ));
+    $this->view->paginator = $paginator = Engine_Api::_() -> getDbTable('playercards', 'user') -> getPlayersPaginator($profile_owner_id);
 
     // Set item count per page and current page number
     $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 8));

@@ -96,8 +96,14 @@ return array(
     'user',
     'user_list',
     'user_list_item',
+    'user_offerservice',
+    'user_service',
+    'user_experience',
+    'user_recommendation',
+    'user_sportcategory',
     'user_library',
     'user_sportcategory',
+    'user_playercard',
   ),
   // Routes --------------------------------------------------------------------
   'routes' => array(
@@ -122,10 +128,18 @@ return array(
         'action' => 'browse'
       ),
       'reqs' => array(
-        'action' => '(home|browse)',
+        'action' => '(home|browse|render-section|get-my-location)',
       )
     ),
 	
+	'user_recommendation' => array(
+      'route' => 'members/recommendation/:action/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'recommendation',
+        'action' => 'received'
+      ),
+    ),
 	'user_library' => array(
       'route' => 'members/library/:action/*',
       'defaults' => array(

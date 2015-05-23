@@ -181,4 +181,29 @@ class User_IndexController extends Core_Controller_Action_Standard
 
     return true;
   }
+
+	//HOANGND function for render profile section
+	public function renderSectionAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $id = $this->_getParam('user_id', 0);
+		$user = Engine_Api::_()->user()->getUser($id);
+        
+        if (!$id || !$user) {
+            return $this->_helper->requireSubject()->forward();
+        }
+		$type = $this->_getParam('type');
+        $params = $this->_getParam('params');
+		
+		//TODO check auth
+        echo Engine_Api::_()->user()->renderSection($type, $user, $params);
+    }
+	
+	public function getMyLocationAction() {
+		$latitude = $this -> _getParam('latitude');
+		$longitude = $this -> _getParam('longitude');
+		$values = file_get_contents("http://maps.googleapis.com/maps/api/geocode/json?latlng=$latitude,$longitude&sensor=true");
+		echo $values;
+		die ;
+  	}
 }

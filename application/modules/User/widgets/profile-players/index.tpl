@@ -34,10 +34,13 @@
 
 <div class="tarfee-profile-module-header">
     <!-- Menu Bar -->
+    <?php
+    $max_player_card = Engine_Api::_()->authorization()->getPermission($this -> viewer(), 'player_card', 'max_player_card', 5); 
+	if($this->paginator->getTotalItemCount() < $max_player_card):
+    ?>
     <div class="tarfee-profile-header-right">
         <?php echo $this->htmlLink(array(
-            'route' => 'default',
-            'module' => 'user',
+            'route' => 'user_extended',
             'controller' => 'player-card',
             'action' => 'create',
         ), $this->translate('Add New Player Card'), array(
@@ -45,7 +48,7 @@
         ))
         ?>
     </div>      
-
+	<?php endif;?>
     <div class="tarfee-profile-header-content">
         <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
             <span class="tarfee-numeric"><?php echo $this->paginator->getTotalItemCount(); ?></span>
@@ -59,7 +62,7 @@
     <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
     <ul class="players_browse">  
         <?php foreach ($this->paginator as $player): ?>
-        <li id="player-item-<?php echo $player->player_id ?>">
+        <li id="player-item-<?php echo $player->playercard_id ?>">
             <?php echo $this->htmlLink(
                 $player->getHref(),
                 $this->itemPhoto($player -> getOwner(), 'thumb.icon', $player -> getOwner()->getTitle()),
@@ -78,6 +81,26 @@
 	                <?php echo $player->description ?>
 	                </div>
                 <?php endif; ?>
+            </div>
+            <div class="playercaed_options">
+            	<?php echo $this->htmlLink(array(
+		            'route' => 'user_extended',
+		            'controller' => 'player-card',
+		            'action' => 'edit',
+		            'id' => $player->playercard_id,
+		        ), $this->translate('Edit'), array(
+		            'class' => 'buttonlink'
+		        ));
+        		?>
+        		<?php echo $this->htmlLink(array(
+		            'route' => 'user_extended',
+		            'controller' => 'player-card',
+		            'action' => 'delete',
+		            'id' => $player->playercard_id,
+		        ), $this->translate('Delete'), array(
+		            'class' => 'buttonlink smoothbox'
+		        ));
+        		?>
             </div>
         </li>
         <?php endforeach; ?>             
