@@ -17,6 +17,15 @@ class User_Form_Admin_Youtube_Global extends Engine_Form {
             'value' => $settings->getSetting('user_youtube_secret', ""),
         ));
 		
+		$this->addElement('Radio', 'user_youtube_allow', array(
+	      'label' => 'Allow Videos to YouTube Channel?',
+	      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('user_youtube_allow', 0),
+	      'multiOptions' => array(
+	        '1' => 'Yes, allow videos to be uploaded to specific YouTube channel.',
+	        '0' => 'No, disallow videos to be uploaded to specific YouTube channel.',
+	      ),
+	    ));
+		
         $this->addElement('Button', 'submit_btn', array(
           'label' => 'Save Changes',
           'type' => 'submit',

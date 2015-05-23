@@ -162,6 +162,7 @@ class Video_Form_Video extends Engine_Form
     $video_options = Array();
     $video_options[1] = "YouTube";
     $video_options[2] = "Vimeo";
+    $video_options[5] = "URL Video";
 
     //My Computer
     $allowed_upload = Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('video', $user, 'upload');

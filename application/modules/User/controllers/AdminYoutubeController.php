@@ -6,7 +6,6 @@ class User_AdminYoutubeController extends Core_Controller_Action_Admin
   	// Make form
     $settings = Engine_Api::_()->getApi('settings', 'core');
      $this->view->form = $form = new User_Form_Admin_Youtube_Global();
-    
      if ($this->getRequest()->isPost()&& $form->isValid($this->getRequest()->getPost())) {
         $values = $form->getValues();
         foreach ($values as $key => $value) {
