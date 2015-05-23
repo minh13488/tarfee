@@ -60,3 +60,63 @@ INSERT IGNORE INTO `engine4_user_relations` (`title`) VALUES
 ('I am his brother/sister'),
 ('I am his/her Coach, Agent, Scout'),
 ('I am his/her Friend');
+
+-- HOANGND
+ALTER TABLE `engine4_users` ADD `bio` TEXT NULL ;
+INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
+('core_admin_main_plugins_profilesection', 'user', 'Profile Section Settings', '', '{"route":"admin_default","module":"user","controller":"settings", "action":"general"}', 'core_admin_main_settings', '', 999),
+('profilesection_admin_settings_general', 'user', 'General Settings', '', '{"route":"admin_default","module":"user","controller":"settings", "action":"general"}', 'profilesection_admin_main', '', 1),
+('profilesection_admin_settings_section', 'user', 'Profile Section Settings', '', '{"route":"admin_default","module":"user","controller":"settings", "action":"section"}', 'profilesection_admin_main', '', 2),
+('profilesection_admin_settings_service', 'user', 'Manage Services', '', '{"route":"admin_default","module":"user","controller":"services"}', 'profilesection_admin_main', '', 3);
+
+-- insert default permissions of member level settings
+
+-- for profile sections
+INSERT IGNORE INTO `engine4_authorization_permissions`
+SELECT
+    level_id as `level_id`,
+    'user' as `type`,
+    'bio_max' as `name`,
+    3 as `value`,
+	0 as `params`
+FROM `engine4_authorization_levels` WHERE `type` NOT IN('public');
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `engine4_user_services`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_user_services` (
+`service_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`title` varchar(255) NOT NULL ,
+PRIMARY KEY (`service_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+
+INSERT IGNORE INTO `engine4_user_services` (`title`) VALUES
+('Coach'),
+('Representation'),
+('Scout'),
+('Scout on behalf'),
+('Player Assessment'),
+('Medical'),
+('Admin & Operations'),
+('Sales'),
+('Other')
+;
+
+-- --------------------------------------------------------
+--
+-- Table structure for table `engine4_user_offerservices`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_user_offerservices` (
+`offerservice_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`user_id` int(11) unsigned NOT NULL,
+`service_id` int(11) unsigned NULL,
+`title` varchar(255) NULL,
+`location` text NULL,
+`longitude` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+`latitude` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+PRIMARY KEY (`offerservice_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
