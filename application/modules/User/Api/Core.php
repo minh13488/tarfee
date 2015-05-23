@@ -45,8 +45,11 @@ class User_Api_Core extends Core_Api_Abstract
 
 	//HOANGND sections of profile
 	protected $_sections = array(
+		'contact' => 'Contact Information',
 		'bio' => 'Bio',
-		'offerservice' => 'Service I Offer'
+		'offerservice' => 'Service I Offer',
+		'experience' => 'Work Experience',
+		'recommendation' => 'Recommendations'
     );
 
   // Users
@@ -370,4 +373,13 @@ class User_Api_Core extends Core_Api_Abstract
         }
         return '';
     }
+	
+	//HOANGND check permission of section
+	public function checkSectionEnable($user, $section) {
+		$level_id = 5;
+		if ($user->getIdentity()) {
+			$level_id = $user->level_id;
+		}
+		return Engine_Api::_()->authorization()->getPermission($level_id, 'user', $section);
+	}
 }

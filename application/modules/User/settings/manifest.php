@@ -85,6 +85,9 @@ return array(
     'user_list',
     'user_list_item',
     'user_offerservice',
+    'user_service',
+    'user_experience',
+    'user_recommendation',
     'user_sportcategory'
   ),
   // Routes --------------------------------------------------------------------
@@ -114,6 +117,14 @@ return array(
       )
     ),
 	
+	'user_recommendation' => array(
+      'route' => 'members/recommendation/:action/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'recommendation',
+        'action' => 'received'
+      ),
+    ),
 	/*
     // User - Specific
     'user_profile' => array(

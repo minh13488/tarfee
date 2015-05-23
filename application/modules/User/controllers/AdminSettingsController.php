@@ -309,13 +309,13 @@ class User_AdminSettingsController extends Core_Controller_Action_Admin
   
   	public function generalAction() {
 		$this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
-        ->getNavigation('user_admin_main', array(), 'user_admin_settings_general');
+        ->getNavigation('profilesection_admin_main', array(), 'profilesection_admin_settings_general');
   	}
 	
 	//HOANGND setting for profile sections
 	public function sectionAction() {
 		$this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
-        ->getNavigation('user_admin_main', array(), 'user_admin_settings_section');
+        ->getNavigation('profilesection_admin_main', array(), 'profilesection_admin_settings_section');
 		
 		if (null !== ($id = $this->_getParam('level_id'))) {
             $level = Engine_Api::_()->getItem('authorization_level', $id);

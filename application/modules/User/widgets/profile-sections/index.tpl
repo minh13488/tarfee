@@ -1,5 +1,6 @@
 <?php $this -> headScript() -> appendFile($this -> layout() -> staticBaseUrl . 'externals/tinymce/tinymce.min.js'); ?>
 <?php $this->headScript()->appendFile("//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"); ?>
+<?php $this -> headScript() -> appendFile($this -> layout() -> staticBaseUrl . 'application/modules/User/externals/scripts/validator.js'); ?>
 
 <?php 
     $viewer = $this->viewer;
@@ -25,6 +26,13 @@
 </div>
 
 <script>
+en4.core.language.addData({'email_valid': ' <?php echo $this->translate('email_valid')?>'});
+en4.core.language.addData({'require_valid': ' <?php echo $this->translate('require_valid')?>'});
+en4.core.language.addData({'require-select_valid': ' <?php echo $this->translate('require-select_valid')?>'});
+en4.core.language.addData({'year_valid': ' <?php echo $this->translate('year_valid')?>'});
+en4.core.language.addData({'year-before_valid': ' <?php echo $this->translate('year-before_valid')?>'});
+en4.core.language.addData({'month-year-before_valid': ' <?php echo $this->translate('year-before_valid')?>'});
+en4.core.language.addData({'month-year-before-current_valid': ' <?php echo $this->translate('month-year-before-current_valid')?>'});
 var confirm = false;
 var type = '';
 var item_id = 0;
@@ -51,7 +59,9 @@ function addEventToForm() {
             var type = this.get('rel');
             var params = this.toQueryString().parseQueryString();
             params.save = true;
-            renderSection(type, params);
+            var valid = validForm(type);
+            if (valid)
+                 renderSection(type, params);
         });
     });
     
@@ -112,6 +122,29 @@ function addEventToForm() {
             Smoothbox.open(div);
         });
     });
+    
+    $$('.cancel-btn').each(function(el) {
+        el.removeEvents('click');
+        el.addEvent('click', function(e){
+            var form = this.getParent('.profile-section-form');
+            form.hide();
+        });
+    });
+        
+    $$('.edit-btn').each(function(el) {
+        el.removeEvents('click');
+        el.addEvent('click', function(e){
+            var item = this.getParent('.section-item');
+            var id = item.get('id');
+            var arr = id.split('-');
+            var type = arr[0];
+            var item_id = arr[1];
+            var params = {};
+            params.edit = true;
+            params.item_id = item_id;
+            renderSection(type, params);
+        });
+    });
 }
 
 function renderSection(type, params) {
@@ -161,6 +194,41 @@ function renderSection(type, params) {
             confirm = false;
             type = '';
             item_id = 0;
+        }
+    }
+    
+    function validForm(section) {
+        var args = [];
+        switch (section) {
+        	case 'contact':
+        		args.push(['contact-contact_num', 'require', '<?php echo $this->translate('Contact #')?>']);
+        		args.push(['contact-email1', 'require', '<?php echo $this->translate('Email 1')?>']);
+                args.push(['contact-email1', 'email', '<?php echo $this->translate('Email 1')?>']);
+                args.push(['contact-email2', 'email', '<?php echo $this->translate('Email 2')?>']);
+                break;
+        	case 'bio':
+        	case 'offerservice':
+        		return true;
+        		break;
+            case 'experience':
+                args.push(['experience-title', 'require', '<?php echo $this->translate('Position')?>']);
+                args.push(['experience-company', 'require', '<?php echo $this->translate('Company')?>']);
+                args.push(['experience-start_year', 'require', '<?php echo $this->translate('Start Date')?>']);
+                args.push(['experience-start_year', 'year', '<?php echo $this->translate('Start Date')?>']);
+                if (!$('experience-current').checked) {
+                    args.push(['experience-end_year', 'require', '<?php echo $this->translate('End Date')?>']);
+                    args.push(['experience-end_year', 'year', '<?php echo $this->translate('End Date')?>']);
+                    args.push(['experience-start_year', 'month-year-before', 'experience-start_month', 'experience-end_year', 'experience-end_month', '<?php echo $this->translate('Start Date')?>', '<?php echo $this->translate('End Date')?>']);
+                }
+                break; 
+                 
+        }
+        if ($('profile-section-form-'+section)) {
+            $('profile-section-form-'+section).getElements('.error').each(function(el) {
+                el.empty();    
+            });
+            validator.init(args);
+            return validator.execute();
         }
     }
 </script>

@@ -2,7 +2,7 @@
 class User_AdminServicesController extends Core_Controller_Action_Admin {
 
 	public function indexAction() {
-		$this -> view -> navigation = $navigation = Engine_Api::_() -> getApi('menus', 'core') -> getNavigation('user_admin_main', array(), 'user_admin_settings_service');
+		$this -> view -> navigation = $navigation = Engine_Api::_() -> getApi('menus', 'core') -> getNavigation('profilesection_admin_main', array(), 'profilesection_admin_settings_service');
 		$this -> view -> services = Engine_Api::_() -> getDbtable('services', 'user') -> getAllServices();
 	}
 

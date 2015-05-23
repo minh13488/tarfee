@@ -25,7 +25,7 @@
     
 <div class="profile-section-content">
 <?php if ($create || $edit) : ?>
-    <div id="profile-section-form-bio" class="profile-section-form">
+    <div id="profile-section-form-offerservice" class="profile-section-form">
         <form rel="offerservice" class="section-form">
             <p class="error"></p>
             <?php if ($edit && isset($params['item_id'])) : ?>
@@ -64,7 +64,7 @@
                 <button rel="offerservice" type="button" class="cancel-btn"><?php echo $this->translate('Cancel')?></button>
                 <?php if ($edit && isset($params['item_id'])) : ?>
                 <?php echo $this->translate(' or ')?>
-                <a href="javascript:void(0);" class="remove-btn"><?php echo $this->translate('Remove service')?></a>
+                <a href="javascript:void(0);" class="remove-btn"><?php echo $this->translate('Remove Service')?></a>
                 <?php endif; ?>                
             </div>
             
@@ -142,17 +142,24 @@
         </form>
     </div>
 <?php endif;?>
-<?php if (count($offerServices)) : ?>
 	<div class="profile-section-list">
+		<?php if (count($offerServices)) : ?>
 		<ul id="offerservice-list" class="section-list">
 		<?php foreach ($offerServices as $item) :?>
 			<li class="section-item" id="offerservice-<?php echo $item->getIdentity()?>">
-				<div class="offerservice-service"><?php echo $this->translate($item->getTitle())?></div>
+				<div class="offerservice-service"><?php echo $item->getTitle()?></div>
 				<div class="offerservice-location"><?php echo $this->translate('Location: %s', $item->location)?></div>
+				<?php if ($manage) : ?>
+	            <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
+	            <?php endif; ?>
 			</li>
 		<?php endforeach;?> 
 		</ul>
+		<?php else:?>
+		<div class="tip">
+			<span><?php echo $this->translate('You don\'t have any offer services!')?></span>
+		</div>
+		<?php endif;?>
 	</div>
-<?php endif;?>
 </div>
 <?php endif;?>

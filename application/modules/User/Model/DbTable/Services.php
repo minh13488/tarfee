@@ -1,6 +1,8 @@
 <?php
 
 class User_Model_DbTable_Services extends Engine_Db_Table {
+	protected $_rowClass = 'User_Model_Service';
+	
 	public function getAllServices() {
 		return $this -> fetchAll($this -> select());
 	}
