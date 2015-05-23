@@ -1,4 +1,4 @@
-<div class="ynvideo_thumb_wrapper video_thumb_wrapper">
+<div class="video_thumb_wrapper video_thumb_wrapper">
     <?php if ($this->video->duration): ?>
         <?php echo $this->partial('_video_duration.tpl', 'user', array('video' => $this->video)) ?>
     <?php endif ?>
@@ -16,7 +16,7 @@
 <?php 
     echo $this->htmlLink($this->video->getHref(), 
             $this->string()->truncate($this->video->getTitle(), 30), 
-            array('class' => 'ynvideo_title', 'title' => $this->video->getTitle())) 
+            array('class' => 'video_title', 'title' => $this->video->getTitle())) 
 ?>
 
 <?php if($this -> viewer() -> isSelf($this -> subject())) :?>

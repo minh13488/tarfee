@@ -126,6 +126,18 @@ return array(
       )
     ),
 	
+	'user_library' => array(
+      'route' => 'members/library/:action/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'library',
+        'action' => 'browse'
+      ),
+      'reqs' => array(
+        'action' => '(create-sub-library|edit-library)',
+      )
+    ),
+	
 	/*
     // User - Specific
     'user_profile' => array(

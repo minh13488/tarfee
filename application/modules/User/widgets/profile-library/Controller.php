@@ -16,15 +16,15 @@ class User_Widget_ProfileLibraryController extends Engine_Content_Widget_Abstrac
     // get Main Librady
     $this->view->library = $library = $subject -> getMainLibrary();
    
+    //get Table Mappings
+    
+    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+    $videoTable = Engine_Api::_()->getItemTable('video');
+    
     $params = array();
     $params['owner_type'] = $library -> getType();
 	$params['owner_id'] = $library -> getIdentity();
-    $this->view->paginator = $paginator = Engine_Api::_()->getDbTable('mappings', 'user') -> getVideosPaginator($params);
-		
-	 // Set item count per page and current page number
-    $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 5));
-    $paginator->setCurrentPageNumber($this->_getParam('page', 1));
-
+    $this->view->mainVideos = $mainVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
    
   }
 }
