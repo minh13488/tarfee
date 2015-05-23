@@ -16,7 +16,7 @@
                 <div>
                 	<?php if(is_object($this->category)): $sportcategory_id = $this->category->getIdentity();?>
 			         <?php foreach($this->category->getBreadCrumNode() as $node): ?>
-			        		<?php echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'groupbuy', 'controller' => 'category', 'action' => 'index', 'parent_id' =>$node->sportcategory_id), $this->translate($node->shortTitle()), array()) ?>
+			        		<?php echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'user', 'controller' => 'sport-categories', 'action' => 'index', 'parent_id' =>$node->sportcategory_id), $this->translate($node->getTitle()), array()) ?>
 			        		&raquo;
 			         <?php endforeach; ?>
 			         <strong><?php
@@ -55,21 +55,20 @@
                                         |
                                         <?php
                                         echo $this->htmlLink(
-                                                array('route' => 'admin_default', 'module' => 'user', 'controller' => 'sport-categories', 'action' => 'delete-category', 'id' => $category->sportcategory_id), $this->translate('delete'), array('class' => 'smoothbox',
+                                            array('route' => 'admin_default', 'module' => 'user', 'controller' => 'sport-categories', 'action' => 'delete-category', 'id' => $category->sportcategory_id), $this->translate('delete'), array('class' => 'smoothbox',
                                         ))
                                         ?>
-                                        
+                                        <?php
+                                       if(count($this->category->getBreadCrumNode()) < 2):?>
                                         |
-                                       
-                                       <?php     echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'user', 'controller' => 'sport-categories', 'action' => 'add-category', 'parent_id' => $category->sportcategory_id), $this->translate('add sub-category'), array(
+                                       <?php  echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'user', 'controller' => 'sport-categories', 'action' => 'add-category', 'parent_id' => $category->sportcategory_id), $this->translate('add sub-category'), array(
                                                 'class' => 'smoothbox',
                                             ));
                                             ?>
                                             |
-                                       
-                                        <?php echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'user', 'controller' => 'sport-categories', 'action' => 'categories', 'parent_id' => $category->sportcategory_id), $this->translate('view sub-category'), array(
+                                        <?php echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'user', 'controller' => 'sport-categories', 'action' => 'index', 'parent_id' => $category->sportcategory_id), $this->translate('view sub-category'), array(
                                         )) ?>
-                                       
+                                       <?php endif;?>
                                     </td>
                                 </tr>
 
