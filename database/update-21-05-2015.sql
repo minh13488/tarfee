@@ -5,6 +5,7 @@ CREATE TABLE IF NOT EXISTS `engine4_user_playercards` (
   `last_name` varchar(100) NOT NULL,
   `photo_id` int(11) unsigned default NULL,
   `relation_id` int(11) default NULL,
+  `relation_other` varchar(100) default NULL,
   `description` text NOT NULL,
   `user_id` int(11) NOT NULL,
   `category_id` int(11) unsigned NOT NULL default '0',
