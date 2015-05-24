@@ -1317,14 +1317,12 @@ body#global_page_user-friends-list-all-friends{
 	}
 	.layout_left {
 	  float: left;
-	  width: 200px;
-	  margin-right: 0px;
+	  margin-right: 20px;
 	  padding-right: 0px;
 	  background-color: #8A877E;
 	}
 	.generic_layout_container.layout_user_profile_photo {
 	  margin: 0 auto;
-	  width: 180px;
 	  margin-top: 12px;
 	}
 	#profile_photo .thumb_profile 
@@ -1449,7 +1447,7 @@ body#global_page_user-friends-list-all-friends{
 	.leftmenu ul li {
 	  margin-left: 15px;
 	}
-	.leftmenu ul li a:link, a:visited {
+	.leftmenu ul li a:link, .leftmenu ul li a:visited {
 		color: #fff;
 	}
 }

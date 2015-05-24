@@ -30,7 +30,7 @@
 		</span>
 	</div>
 	<div class="nickname">
-		<span>MINH SANG</span>
+		<span><?php echo $this->subject() -> getTitle()?></span>
 	</div>
 	<div class="user_rating">
 		<span class="rating_star_generic rating_star_big"></span>
