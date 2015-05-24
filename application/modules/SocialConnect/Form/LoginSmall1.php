@@ -149,7 +149,7 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 		// Init forgot password link
 		$this -> addElement('Dummy', 'forgot', array('content' => $content, ));
 		$url = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_signup', true);
-		$request_guest= '<div class="register_guest"><a href="'.$url.'"><span>Register</span></a><span>|</span><a><span>Guest</span></a></div>';
+		$request_guest= '<div class="register_guest"><a href="'.$url.'"><span>Register</span></a><span>|</span><a href="#"><span>Guest</span></a></div>';
 		$this -> addElement('Dummy', 'register_guest', array(
 				'content' => $request_guest,
 			));
