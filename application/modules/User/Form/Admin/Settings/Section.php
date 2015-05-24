@@ -28,9 +28,49 @@ class User_Form_Admin_Settings_Section extends Authorization_Form_Admin_Level_Ab
                 'value' => 0,
             ));
 			
+			$this->addElement('Integer', 'archievement_max', array(
+                'label' => 'Maximum trophies and archievements the user can add',
+                'description' => 'Set 0 is unlimited',
+                'required' =>true,
+                'validators' => array(
+                    new Engine_Validate_AtLeast(0),
+                ),
+                'value' => 0,
+            ));
+			
+			$this->addElement('Integer', 'archievement_descriptionmax', array(
+                'label' => 'Maximum character of trophy/archievement Short description the user can add',
+                'description' => 'Set 0 is unlimited',
+                'required' =>true,
+                'validators' => array(
+                    new Engine_Validate_AtLeast(0),
+                ),
+                'value' => 0,
+            ));
+			
+			$this->addElement('Radio', 'license', array(
+				'label' => 'enable "Licenses & Certificates"?',
+				'description' => 'enable section "Licenses & Certificates" on user Profile',
+				'multiOptions' => array(
+					1 => 'Yes',
+					0 => 'No'
+				),
+				'value' => 1 
+			));
+			
 			$this->addElement('Radio', 'experience', array(
 				'label' => 'enable "Work Experience"?',
 				'description' => 'enable section "Work Experience" on user Profile',
+				'multiOptions' => array(
+					1 => 'Yes',
+					0 => 'No'
+				),
+				'value' => 1 
+			));
+			
+			$this->addElement('Radio', 'education', array(
+				'label' => 'enable "Education"?',
+				'description' => 'enable section "Education" on user Profile',
 				'multiOptions' => array(
 					1 => 'Yes',
 					0 => 'No'
@@ -47,6 +87,7 @@ class User_Form_Admin_Settings_Section extends Authorization_Form_Admin_Level_Ab
 				),
 				'value' => 1 
 			));
+			
         }
         
         $this->addElement('Button', 'submit', array(

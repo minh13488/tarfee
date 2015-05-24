@@ -206,4 +206,53 @@ class User_IndexController extends Core_Controller_Action_Standard
 		echo $values;
 		die ;
   	}
+	
+	public function uploadPhotoAction() {
+        $this->_helper->layout->disableLayout();
+        $this->_helper->viewRenderer->setNoRender(true);
+        $user = Engine_Api::_()->user()->getViewer();
+        if (!$user || !$user->getIdentity()) {
+            $status = false;
+            $error = Zend_Registry::get('Zend_Translate') -> _('Invalid request.');
+            return $this -> getResponse() -> setBody(Zend_Json::encode(array('files' => array(0 => array('status' => $status, 'error'=> $error)))));
+        }
+        if (!$this -> getRequest() -> isPost()) {
+            $status = false;
+            $error = Zend_Registry::get('Zend_Translate') -> _('Invalid request method');
+            return $this -> getResponse() -> setBody(Zend_Json::encode(array('files' => array(0 => array('status' => $status, 'error'=> $error)))));
+        }
+
+        if (empty($_FILES['files'])) {
+            $status = false;
+            $error = Zend_Registry::get('Zend_Translate') -> _('No file');
+            return $this -> getResponse() -> setBody(Zend_Json::encode(array('files' => array(0 => array('status' => $status, 'name'=> $error)))));
+        }
+        $name = $_FILES['files']['name'][0];
+        $type = explode('/', $_FILES['files']['type'][0]);
+        if (!$_FILES['files'] || !is_uploaded_file($_FILES['files']['tmp_name'][0]) || $type[0] != 'image') {
+            $status = false;
+            $error = Zend_Registry::get('Zend_Translate') -> _('Invalid Upload File');
+            return $this -> getResponse() -> setBody(Zend_Json::encode(array('files' => array(0 => array('status' => $status, 'error'=> $error, 'name' => $name)))));
+        }
+        
+        if($_FILES['files']['size'][0] > 1000*1024) {
+            $status = false;
+            $error = Zend_Registry::get('Zend_Translate') -> _('Exceeded filesize limit.');
+            return $this -> getResponse() -> setBody(Zend_Json::encode(array('files' => array(0 => array('status' => $status, 'error'=> $error, 'name' => $name)))));
+        }
+        $temp_file = array(
+            'type' => $_FILES['files']['type'][0],
+            'tmp_name' => $_FILES['files']['tmp_name'][0],
+            'name' => $_FILES['files']['name'][0]
+        );
+        $photo_id = Engine_Api::_() -> user() -> setPhoto($temp_file, array(
+            'parent_type' => 'user',
+            'parent_id' => $user->getIdentity(),
+        ));
+        
+        $status = true;
+        $name = $_FILES['files']['name'][0];
+        
+        return $this -> getResponse() -> setBody(Zend_Json::encode(array('files' => array(0 => array('status' => $status, 'name'=> $name, 'photo_id' => $photo_id)))));
+    }
 }

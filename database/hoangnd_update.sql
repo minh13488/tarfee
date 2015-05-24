@@ -99,3 +99,56 @@ CREATE TABLE IF NOT EXISTS `engine4_user_recommendations` (
 `modified_date` datetime DEFAULT NULL,
 PRIMARY KEY (`recommendation_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8;
+
+-- 5.24.2015
+
+--
+-- Table structure for table `engine4_user_educations`
+--
+CREATE TABLE IF NOT EXISTS `engine4_user_educations` (
+  `education_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `degree` text NOT NULL,
+  `institute` text COLLATE utf8_unicode_ci NOT NULL,
+  `attend_from` YEAR NULL,
+  `attend_to` YEAR NULL,
+  `location` text NULL,
+  `longitude` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `latitude` varchar(64) CHARACTER SET utf8 DEFAULT NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  PRIMARY KEY (`education_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Table structure for table `engine4_user_archievements`
+--
+CREATE TABLE IF NOT EXISTS `engine4_user_archievements` (
+  `archievement_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `type` enum('trophy','archievement') NOT NULL,
+  `photo_id` int(11) NOT NULL DEFAULT '0',
+  `title` text NOT NULL,
+  `year` YEAR NOT NULL,
+  `short_description` text COLLATE utf8_unicode_ci NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  PRIMARY KEY (`archievement_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Table structure for table `engine4_user_licenses`
+--
+CREATE TABLE IF NOT EXISTS `engine4_user_licenses` (
+  `license_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `type` enum('license','certificate') NOT NULL,
+  `photo_id` int(11) NOT NULL DEFAULT '0',
+  `title` text NOT NULL,
+  `number` text NOT NULL,
+  `year` YEAR NOT NULL,
+  `month` int(11) NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  PRIMARY KEY (`license_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
