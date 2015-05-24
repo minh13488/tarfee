@@ -36,6 +36,11 @@ class Video_Api_Core extends Core_Api_Abstract
 	 * Please ensure that you have enabled the YouTube Data API for your project.
 	 */
 	$settings = Engine_Api::_()->getApi('settings', 'core');
+	$user_youtube_allow = $settings->getSetting('user_youtube_allow');
+	if(!$user_youtube_allow)
+	{
+		return false;
+	}
 	$token = $settings->getSetting('user_youtube_token', "");
 	$OAUTH2_CLIENT_ID = $settings->getSetting('user_youtube_clientid', "");
 	$OAUTH2_CLIENT_SECRET = $settings->getSetting('user_youtube_secret', "");
@@ -155,7 +160,9 @@ class Video_Api_Core extends Core_Api_Abstract
 			
 			//delete old video
 			$file -> delete();
-						
+			
+			//echo $status['id'];
+								
 		    //$htmlBody .= "<h3>Video Uploaded</h3><ul>";
 		    //$htmlBody .= sprintf('<li>%s (%s)</li>',
 		    //    $status['snippet']['title'],

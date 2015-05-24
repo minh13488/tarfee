@@ -15,4 +15,8 @@ class User_Model_Library extends Core_Model_Item_Abstract
   	
   }
   
+   function isViewable() {
+        return $this->authorization()->isAllowed(null, 'view'); 
+    }
+  
 }

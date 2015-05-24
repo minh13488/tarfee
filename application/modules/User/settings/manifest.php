@@ -148,10 +148,10 @@ return array(
       'defaults' => array(
         'module' => 'user',
         'controller' => 'library',
-        'action' => 'browse'
+        'action' => 'create-sub-library'
       ),
       'reqs' => array(
-        'action' => '(create-sub-library|edit-library)',
+        'action' => '(create-sub-library|edit|delete)',
       )
     ),
 	

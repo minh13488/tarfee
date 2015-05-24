@@ -60,7 +60,7 @@
         file_element.style.display = "none";
         $('upload-wrapper').style.display = "block";
         return;
-      } else if( video_element.value == 1 || video_element.value == 2 ) {
+      } else if( video_element.value == 1 || video_element.value == 2 || video_element.value == 5 ) {
         // If video source is youtube or vimeo
         $('url').value = "";
         $('code').value = "";
@@ -153,14 +153,25 @@
           if( $type(m) && $type(m[0]) && lastMatch != m[0] ) {
             if (video_element.value == 1){
               video.youtube(body.value);
-            } else {
-              video.vimeo(body.value);
+            } else if(video_element.value == 2) {
+              	video.vimeo(body.value);
+            } else if(video_element.value == 5) {
+            	video.uploadurl(body.value);
             }
           }
           lastBody = body.value;
         }).periodical(250);
       },
-
+	  
+	  uploadurl : function(url) {
+    	var ext = url.substr(url.lastIndexOf('.') + 1);
+        if (ext.toUpperCase() == 'FLV' || ext.toUpperCase() == 'MP4') {
+        	$('upload-wrapper').style.display = "block";
+            $('validation').style.display = "none";
+            $('code').value = url;
+        }
+	  },
+	  
       youtube : function(url) {
         // extract v from url
         var myURI = new URI(url);

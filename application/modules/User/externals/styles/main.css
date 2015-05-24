@@ -1301,3 +1301,282 @@ body#global_page_user-friends-list-all-friends{
 	float: right;
 	padding: 10px;
 }
+#global_page_user-profile-index
+{
+	#global_content{
+		background-image: url(~/application/modules/User/externals/images/background/bg_content.png);
+	  	padding: 0px;
+	}
+	.generic_layout_container.layout_user_profile_photo {
+	  margin: 0 auto;
+	  width: 90%;
+	  margin-top: 12px;
+	}
+	.layout_left {
+	  float: left;
+	  margin-right: 13px;
+	  padding-right: 0px;
+	  background-image: url(~/application/modules/User/externals/images/background/bg_leftmenu.png);
+	  padding-top: 0px;
+	}
+	.generic_layout_container.layout_user_profile_photo {
+	  margin: 0 auto;
+	  margin-top: 12px;
+	}
+	#profile_photo .thumb_profile 
+	{
+		height: 140px;
+		width: 140px;
+		-webkit-border-radius: 70px;
+		border-radius: 70px;
+		margin-top: 2px;
+	}
+	.thumb_profile_stroke {
+	  height: 148px;
+	  width: 148px;
+	  -webkit-border-radius: 74px;
+	  border-radius: 74px;
+	  margin-top: 13px;
+	  background-color: #86A31B;
+	  display: inline-block;
+	}
+	.thumb_profile_innershadow {
+	  background-color: #FBFBFF;
+	  height: 144px;
+	  width: 144px;
+	  -webkit-border-radius: 72px;
+	  border-radius: 72px;
+	  margin-top: 2px;
+	  display: inline-block;
+	}
+	.thumb_profile 
+	{
+	  display: inline-block;
+	  content: "";
+	  background-color: #eaeaea;
+	  background-size: cover;
+	  background-repeat: no-repeat;
+	  background-position: center;
+	}
+	#profile_photo {
+	  -webkit-border-radius: 5px;
+	  border-radius: 5px;
+	  min-height: 220px;
+	  background-color: #fff;
+	}
+	#profile_photo .options{
+		height: 26px;
+	}
+	#profile_photo .options span{
+	  background-image: url(~/application/modules/User/externals/images/tarfee_profile_icon.png);
+	  height: 25px;
+	  width: 25px;
+	  float: right;
+	  margin-right: 5px;
+	  background-position: 36px 2px;
+	}
+	#profile_photo .avatar{
+	  text-align: center;
+	}
+	#profile_photo .nickname {
+	  text-align: center;
+	  margin-top: 3px;
+	  font-weight: bold;
+	  font-size: 22px;
+	}
+	#profile_photo .user_rating .rating_star_generic {
+	  display: inline-block;
+	  width: 20px;
+	  height: 20px;
+	  background-repeat: no-repeat;
+	  font-size: 1px;
+	  cursor: default;
+	  background-size:20px;
+	}
+	#profile_photo .user_rating {
+	  text-align: center;
+	  margin-top: 5px;
+	  margin-bottom: 10px;
+	}
+	#profile_photo .user_rating .rating_star_big {
+	  background-image: url(~/application/modules/User/externals/images/stars/star.png);
+	}
+	#profile_photo .user_rating .rating_star_half {
+	  background-image: url(~/application/modules/User/externals/images/stars/halfstar.png);
+	}
+	#profile_photo .user_rating .rating_star_big_disabled {
+	  background-image: url(~/application/modules/User/externals/images/stars/nonestar.png);
+	}
+	#profile_photo .actions {
+	  height: 28px;
+	  background-color: #B1C957;
+	  border-bottom-left-radius: 5px;
+	  border-bottom-right-radius: 5px;
+	}
+	#profile_photo .actions>div {
+	  width:60%;
+	  margin:0 auto;
+	}
+	#profile_photo .actions .actions_generic {
+	  height: 25px;
+	  width: 25px;
+	  float: left;
+	}
+	#profile_photo .actions:first-child
+	{
+		margin-left: 0;
+	}
+	#profile_photo .actions a
+	{
+		margin-left: 10%;
+		display: inline-block;
+	}
+	#profile_photo span.actions_generic.messaging{
+	  background-image: url(~/application/modules/User/externals/images/tarfee_profile_icon.png);
+	  background-position: -6px -1px;
+	}
+	#profile_photo span.actions_generic.sharing{
+	  background-image: url(~/application/modules/User/externals/images/tarfee_profile_icon.png);
+	  background-position: -54px -1px;
+	}
+	#profile_photo span.actions_generic.like{
+	  background-image: url(~/application/modules/User/externals/images/tarfee_profile_icon.png);
+	  background-position: -98px -1px;
+	}
+	.follow {
+	  text-align: center;
+	  margin-top: 14px;
+	}
+	hr {
+	  margin-top: 20px;
+	  margin-bottom: 20px;
+	  border: 0;
+	  border-top: 1px solid #eee;
+	}
+	.leftmenu ul li {
+	  margin-left: 15px;
+	}
+	.leftmenu ul li a:link, 
+	.leftmenu ul li a:visited,
+	{
+		color: #fff;
+	}
+	.layout_profile_completeness_profile_completeness .ybo_headline h3,
+	.layout_user_profile_options .ybo_headline h3,
+	.layout_profile_completeness_profile_completeness .profile_project_content,
+	.layout_user_profile_options #profile_options
+	{
+		color: white;
+		padding-left: 10px;
+	}
+	.layout_middle
+	{
+		background-color: transparent;
+	}
+	.layout_user_profile_sections #ynresume-manage-sections-content	
+	{
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+	  	background-color: #fff;
+	  	margin-right: 50px;
+	  	#sections-content-items .sections-content-item
+	  	{
+	  		border: 0;
+	  		padding: 15px;
+	  	}
+	}
+	.layout_user_profile_players .player_contents
+	{
+		margin-right: 50px;
+		.tarfee-profile-header-right
+		{
+			padding: 15px;
+		}
+		ul.players_browse
+		{
+			li
+			{
+				width: 33.33%;
+  				float: left;
+  				padding: .5em;
+			}
+		}
+	}
+	.layout_user_profile_library
+	{
+		clear: both;
+	}
+	#global_content .layout_main
+	{
+		  padding-top: 0px;
+	}
+}
+
+
+/* PROFILE STATS WIDGET */
+.layout_profile_completeness_profile_completeness
+{
+  margin-top: 20px;
+  overflow: hidden;
+}
+.layout_profile_completeness_profile_completeness > ul
+{
+  padding: 10px;
+}
+.layout_profile_completeness_profile_completeness > ul > li
+{
+  font-size: .8em;
+}
+.layout_profile_completeness_profile_completeness > ul > li + li
+{
+  margin-top: 5px;
+}
+.layout_profile_completeness_profile_completeness > h3
+{
+  font-size: 0.8em;
+  font-weight: bold;
+  letter-spacing: normal;
+}
+
+.profile_project_content .profile_completed
+{
+	height:24px;
+	background:url(~/application/modules/ProfileCompleteness/externals/images/profile_compleated.jpg) left top repeat-x;
+}
+.profile_project_content.profile_process
+{
+	margin:15px 0;
+	background: left top repeat-x;
+	width:100%;
+}
+.profile_project_content .profile_project_content
+{
+	clear:both;
+	padding-top:5px;
+}
+
+/* Header*/
+.layout_ynresponsiveevent_event_mini_menu .ybo_logo
+{
+	width: 120px;
+	float: left;
+	margin: 0;
+}
+.layout_ynresponsiveevent_event_mini_menu #global_search_form_container
+{
+	float: left;
+	margin: 5px 0;
+  	padding-left: 50px;
+}
+.layout_ynresponsiveevent_event_mini_menu .group-mini-menu
+{
+	margin: 5px 0;
+}
+.layout_ynresponsiveevent_event_mini_menu  .not-login .group-mini-menu
+{
+	margin: 10px 0;
+}
+.layout_ynresponsiveevent_event_mini_menu #global_search_form_container #global_search_field
+{
+	width: 500px;
+}
