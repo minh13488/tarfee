@@ -29,8 +29,8 @@ class User_Form_Admin_Settings_Section extends Authorization_Form_Admin_Level_Ab
             ));
 			
 			$this->addElement('Radio', 'experience', array(
-				'label' => 'enable "Work Experience"?',
-				'description' => 'enable section "Work Experience" on user Profile',
+				'label' => 'Enable "Work Experience"?',
+				'description' => 'Enable section "Work Experience" on user Profile',
 				'multiOptions' => array(
 					1 => 'Yes',
 					0 => 'No'
@@ -39,8 +39,8 @@ class User_Form_Admin_Settings_Section extends Authorization_Form_Admin_Level_Ab
 			));
 			
 			$this->addElement('Radio', 'recommendation', array(
-				'label' => 'enable "Recommendation"?',
-				'description' => 'enable section "Recommendation" on user Profile',
+				'label' => 'Enable "Recommendation"?',
+				'description' => 'Enable section "Recommendation" on user Profile',
 				'multiOptions' => array(
 					1 => 'Yes',
 					0 => 'No'

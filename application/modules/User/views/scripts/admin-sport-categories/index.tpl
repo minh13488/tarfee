@@ -15,16 +15,14 @@
                 <h3> <?php echo $this->translate("Sport Categories") ?> </h3>
                 <div>
                 	<?php if(is_object($this->category)): $sportcategory_id = $this->category->getIdentity();?>
-			         <?php foreach($this->category->getBreadCrumNode() as $node): ?>
+			         <?php
+			         foreach($this->category->getBreadCrumNode() as $node): ?>
 			        		<?php echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'user', 'controller' => 'sport-categories', 'action' => 'index', 'parent_id' =>$node->sportcategory_id), $this->translate($node->getTitle()), array()) ?>
 			        		&raquo;
 			         <?php endforeach; ?>
 			         <strong><?php
-			         if(count($this->category->getBreadCrumNode()) > 0):
 			            echo $this->category;
-			          else:
-			            echo  $this->translate("All Categories");
-			          endif; ?></strong>
+			         ?></strong>
 					<?php else: $sportcategory_id = 0;?>
 						<strong><?php echo $this->category; ?></strong>
 					<?php endif;?>

@@ -1469,7 +1469,7 @@ body#global_page_user-friends-list-all-friends{
 	{
 		background-color: transparent;
 	}
-	.layout_user_profile_sections #ynresume-manage-sections-content
+	.layout_user_profile_sections #ynresume-manage-sections-content	
 	{
 		-webkit-border-radius: 10px;
 		border-radius: 10px;
@@ -1478,7 +1478,33 @@ body#global_page_user-friends-list-all-friends{
 	  	#sections-content-items .sections-content-item
 	  	{
 	  		border: 0;
+	  		padding: 15px;
 	  	}
+	}
+	.layout_user_profile_players .player_contents
+	{
+		margin-right: 50px;
+		.tarfee-profile-header-right
+		{
+			padding: 15px;
+		}
+		ul.players_browse
+		{
+			li
+			{
+				width: 33.33%;
+  				float: left;
+  				padding: .5em;
+			}
+		}
+		.thumb_profile_stroke
+		{
+			margin-top: 13px;
+		}
+	}
+	.layout_user_profile_library
+	{
+		clear: both;
 	}
 }
 

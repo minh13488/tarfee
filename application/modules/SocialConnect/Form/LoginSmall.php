@@ -24,6 +24,7 @@ class SocialConnect_Form_LoginSmall extends Engine_Form
 			'filters' => array('StringTrim', ),
 			'validators' => array('EmailAddress'),
 			'tabindex' => 1,
+			'placeholder' => 'Your Email',
 		));
 		
 		$password = Zend_Registry::get('Zend_Translate') -> _('Password');
@@ -34,6 +35,7 @@ class SocialConnect_Form_LoginSmall extends Engine_Form
 			'allowEmpty' => false,
 			'tabindex' => 2,
 			'filters' => array('StringTrim', ),
+			'placeholder' => 'Your Password',
 		));
 
 		// Init remember me
@@ -41,7 +43,13 @@ class SocialConnect_Form_LoginSmall extends Engine_Form
 			'label' => 'Remember Me',
 			'tabindex' => 4,
 		));
-
+		
+		$content = Zend_Registry::get('Zend_Translate')->_("<span><a href='%s'>Forgot Password?</a></span>");
+    	$content= sprintf($content, Zend_Controller_Front::getInstance()->getRouter()->assemble(array('module' => 'user', 'controller' => 'auth', 'action' => 'forgot'), 'default', true));
+		// Init forgot password link
+	    $this->addElement('Dummy', 'forgot', array(
+	      'content' => $content,
+	    ));
 		$this -> addElement('Hidden', 'return_url', array());
 
 		$settings = Engine_Api::_() -> getApi('settings', 'core');

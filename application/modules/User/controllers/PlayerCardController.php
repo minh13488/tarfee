@@ -62,7 +62,9 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 
 		// Process
 		$values = $form -> getValues();
-		if(Engine_Api::_()->getApi('settings', 'core')->getSetting('uaer.relation_require', 1) && $values['relation_id'] == 0 && empty(trim($values['relation_other'])))
+		if(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.relation_require', 1) 
+		&& $values['relation_id'] == 0 
+		&& empty($values['relation_other']))
 		{
 			$form -> getElement('relation_other') -> addError('Please complete this field - it is required.');
 			return false;
@@ -176,7 +178,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			return;
 		}
 		$values = $form -> getValues();
-		if(Engine_Api::_()->getApi('settings', 'core')->getSetting('uaer.relation_require', 1) && $values['relation_id'] == 0 && empty(trim($values['relation_other'])))
+		if(Engine_Api::_()->getApi('settings', 'core')->getSetting('uaer.relation_require', 1) && $values['relation_id'] == 0 && empty($values['relation_other']))
 		{
 			$form -> getElement('relation_other') -> addError('Please complete this field - it is required.');
 			return false;
