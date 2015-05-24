@@ -21,6 +21,7 @@
 }
 </style>
 
+<h1><img src="application/themes/ynresponsive-event/images/example_only.png" alt="tarfee . Spring 2015" class="brand"></h1>
 
 <?php if( !$this->noForm ): ?>
   <?php echo $this->form->setAttrib('class', 'global_form_box')->render($this) ?>
