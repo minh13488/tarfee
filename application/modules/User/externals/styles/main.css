@@ -1312,14 +1312,15 @@ body#global_page_user-friends-list-all-friends{
 	}
 	.generic_layout_container.layout_user_profile_photo {
 	  margin: 0 auto;
-	  width: 180px;
+	  width: 90%;
 	  margin-top: 12px;
 	}
 	.layout_left {
 	  float: left;
-	  margin-right: 20px;
+	  margin-right: 13px;
 	  padding-right: 0px;
 	  background-color: #8A877E;
+	  padding-top: 0px;
 	}
 	.generic_layout_container.layout_user_profile_photo {
 	  margin: 0 auto;
@@ -1447,7 +1448,79 @@ body#global_page_user-friends-list-all-friends{
 	.leftmenu ul li {
 	  margin-left: 15px;
 	}
-	.leftmenu ul li a:link, .leftmenu ul li a:visited {
+	.leftmenu ul li a:link, 
+	.leftmenu ul li a:visited,
+	.layout_profile_completeness_profile_completeness a:link,
+	.layout_profile_completeness_profile_completeness a:visited,
+	.layout_user_profile_options  a:link,
+	.layout_user_profile_options a:visited
+	{
 		color: #fff;
 	}
+	.layout_profile_completeness_profile_completeness .ybo_headline h3,
+	.layout_user_profile_options .ybo_headline h3,
+	.layout_profile_completeness_profile_completeness .profile_project_content,
+	.layout_user_profile_options
+	{
+		color: white;
+		padding-left: 10px;
+	}
+	.layout_middle
+	{
+		background-color: transparent;
+	}
+	.layout_user_profile_sections #ynresume-manage-sections-content
+	{
+		-webkit-border-radius: 10px;
+		border-radius: 10px;
+	  	background-color: #fff;
+	  	margin-right: 50px;
+	  	#sections-content-items .sections-content-item
+	  	{
+	  		border: 0;
+	  	}
+	}
+}
+
+
+/* PROFILE STATS WIDGET */
+.layout_profile_completeness_profile_completeness
+{
+  margin-top: 20px;
+  overflow: hidden;
+}
+.layout_profile_completeness_profile_completeness > ul
+{
+  padding: 10px;
+}
+.layout_profile_completeness_profile_completeness > ul > li
+{
+  font-size: .8em;
+}
+.layout_profile_completeness_profile_completeness > ul > li + li
+{
+  margin-top: 5px;
+}
+.layout_profile_completeness_profile_completeness > h3
+{
+  font-size: 0.8em;
+  font-weight: bold;
+  letter-spacing: normal;
+}
+
+.profile_project_content .profile_completed
+{
+	height:24px;
+	background:url(~/application/modules/ProfileCompleteness/externals/images/profile_compleated.jpg) left top repeat-x;
+}
+.profile_project_content.profile_process
+{
+	margin:15px 0;
+	background: left top repeat-x;
+	width:100%;
+}
+.profile_project_content .profile_project_content
+{
+	clear:both;
+	padding-top:5px;
 }
