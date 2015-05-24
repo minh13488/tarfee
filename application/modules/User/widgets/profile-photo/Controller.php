@@ -28,9 +28,6 @@ class User_Widget_ProfilePhotoController extends Engine_Content_Widget_Abstract
 
     // Get subject and check auth
     $subject = Engine_Api::_()->core()->getSubject('user');
-    //if( !$subject->authorization()->isAllowed($viewer, 'view') ) {
-    //  return $this->setNoRender();
-    //}
 
     $this->view->user = $subject;
   }

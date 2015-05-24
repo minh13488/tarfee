@@ -31,6 +31,7 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 	      'tabindex' => 1,
 	      'autofocus' => 'autofocus',
 	      'inputType' => 'email',
+	      'placeholder' => 'Your Email',
 	      'class' => 'text',
 	    ));
 		
@@ -43,14 +44,22 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 			'allowEmpty' => false,
 			'tabindex' => 2,
 			'filters' => array('StringTrim', ),
+			'placeholder' => 'Your Password',
 		));
-
+	
 		// Init remember me
 		$this -> addElement('Checkbox', 'remember', array(
 			'label' => 'Remember Me',
 			'tabindex' => 4,
 		));
-
+		
+		$content = Zend_Registry::get('Zend_Translate')->_("<span><a href='%s'>Forgot Password?</a></span>");
+    	$content= sprintf($content, Zend_Controller_Front::getInstance()->getRouter()->assemble(array('module' => 'user', 'controller' => 'auth', 'action' => 'forgot'), 'default', true));
+		// Init forgot password link
+	    $this->addElement('Dummy', 'forgot', array(
+	      'content' => $content,
+	    ));
+	
 		$this -> addElement('Hidden', 'return_url', array());
 
 		$settings = Engine_Api::_() -> getApi('settings', 'core');
@@ -83,7 +92,8 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 
 		$this -> addDisplayGroup(array(
 			'submit',
-			'remember'
+			'remember',
+			'forgot'
 		), 'buttons');
 
 		$table = Engine_Api::_() -> getDbTable('Services', 'SocialConnect');

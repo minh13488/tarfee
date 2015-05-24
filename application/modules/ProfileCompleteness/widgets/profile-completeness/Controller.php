@@ -119,14 +119,6 @@ class ProfileCompleteness_Widget_ProfileCompletenessController extends Engine_Co
 
             if (empty($emptyField) || ($this->view->percent_completed == 100))
             {
-                //send mail thank you !!
-//                try {
-//                    Engine_Api::_()->getApi('mail', 'core')->sendSystem(
-//                            $viewer, 'thank_for_completing_profile', array(
-//                            'host' => $_SERVER['HTTP_HOST']
-//                            )
-//                    );
-//                } catch (Exception $e) {}
                 if ($row->view == 1)
                 {
                     return $this->setNoRender();
