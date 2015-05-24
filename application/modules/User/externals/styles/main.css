@@ -1471,7 +1471,7 @@ body#global_page_user-friends-list-all-friends{
 	{
 		background-color: transparent;
 	}
-	.layout_user_profile_sections #ynresume-manage-sections-content	
+	.layout_user_profile_sections #sections-content-items
 	{
 		-webkit-border-radius: 10px;
 		border-radius: 10px;

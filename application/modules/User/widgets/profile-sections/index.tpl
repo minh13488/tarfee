@@ -31,7 +31,7 @@ $this -> headScript() -> appendFile($staticBaseUrl . 'application/modules/User/e
     </ul>
 </div>
 
-<script>
+<script type="text/javascript">
 en4.core.language.addData({'email_valid': ' <?php echo $this->translate('email_valid')?>'});
 en4.core.language.addData({'require_valid': ' <?php echo $this->translate('require_valid')?>'});
 en4.core.language.addData({'require-select_valid': ' <?php echo $this->translate('require-select_valid')?>'});
