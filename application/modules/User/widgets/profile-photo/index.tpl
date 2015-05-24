@@ -43,8 +43,9 @@
 		</td>
 		<td>
 			<?php echo $this->htmlLink(array(
-	            'route' => 'user_extended',
-	           	'controller' => 'member',
+	            'route' => 'default',
+	            'module' => 'activity',
+	            'controller' => 'index',
 				'action' => 'share',
 				'type' => 'user',
 				'id' => $this->subject() -> getIdentity(),
