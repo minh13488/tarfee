@@ -1383,6 +1383,8 @@ body#global_page_user-friends-list-all-friends{
 	  margin-top: 3px;
 	  font-weight: bold;
 	  font-size: 22px;
+	  text-transform: uppercase;
+  	  color: black;
 	}
 	#profile_photo .user_rating .rating_star_generic {
 	  display: inline-block;
@@ -1441,7 +1443,7 @@ body#global_page_user-friends-list-all-friends{
 	}
 	.follow {
 	  text-align: center;
-	  margin-top: 14px;
+	  margin-top: 20px;
 	}
 	hr {
 	  margin-top: 20px;
@@ -1505,6 +1507,20 @@ body#global_page_user-friends-list-all-friends{
 	#global_content .layout_main
 	{
 		  padding-top: 0px;
+	}
+	.profile_follow,
+	.profile_unfollow
+	{
+		background-image: url(~/application/modules/User/externals/images/follow_bg.png);
+	   	padding: 14px 22px;
+	  	background-repeat: no-repeat;
+	  	text-transform: uppercase;
+	  	font-family: initial;
+	  	font-size: 12pt;
+	}
+	.profile_unfollow
+	{
+		padding: 14px 11px;
 	}
 }
 
