@@ -19,6 +19,7 @@ class User_Model_DbTable_Experiences extends Engine_Db_Table {
         if ($limit) {
             $select->limit($limit);
         }
-        return $this->fetchAll($select);
+        
+		return $this->fetchAll($select);
     }
 }

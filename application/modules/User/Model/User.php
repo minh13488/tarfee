@@ -608,6 +608,22 @@ class User_Model_User extends Core_Model_Item_Abstract
 				}
                 break;
 			
+			case 'archievement':
+                $table = Engine_Api::_()->getDbTable('archievements', 'user');
+				$stripTagKeys = array('title', 'short_description');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
+				}
+                break;
+			
+			case 'license':
+                $table = Engine_Api::_()->getDbTable('licenses', 'user');
+				$stripTagKeys = array('title', 'number');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
+				}
+                break;
+				
 			case 'experience':
                 $table = Engine_Api::_()->getDbTable('experiences', 'user');
                 if (isset($params['current']) && $params['current']) {
@@ -615,6 +631,14 @@ class User_Model_User extends Core_Model_Item_Abstract
                     $params['end_month'] = null;
                 }
 				$stripTagKeys = array('title', 'company', 'description');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
+				}
+                break;
+				
+			case 'education':
+                $table = Engine_Api::_()->getDbTable('educations', 'user');
+				$stripTagKeys = array('degree', 'institute', 'location');
 				foreach ($stripTagKeys as $key) {
 					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
 				}
@@ -653,6 +677,38 @@ class User_Model_User extends Core_Model_Item_Abstract
 				}
                 break;
 			
+			case 'archievement':
+                $item = Engine_Api::_()->getItem('user_archievement', $params['item_id']);
+				$stripTagKeys = array('title', 'short_description');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
+				}
+				if (!empty($params['short_description'])) {
+					$permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
+					$max_character = $permissionsTable->getAllowed('user', $this->level_id, 'archievement_descriptionmax');
+				    if ($max_character == null) {
+				        $row = $permissionsTable->fetchRow($permissionsTable->select()
+				        ->where('level_id = ?', $this->level_id)
+				        ->where('type = ?', 'user')
+				        ->where('name = ?', 'archievement_descriptionmax'));
+				        if ($row) {
+				            $max_character = $row->value;
+				        }
+				    }
+					if ($max_character) {
+						$params['short_description'] = substr($params['short_description'], intval($max_character));
+					}
+				}
+                break;
+			
+			case 'license':
+                $item = Engine_Api::_()->getItem('user_license', $params['item_id']);
+				$stripTagKeys = array('title', 'number');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
+				}
+                break;
+					
 			case 'experience':
                 $item = Engine_Api::_()->getItem('ynresume_experience', $params['item_id']);
                 if (isset($params['current']) && $params['current']) {
@@ -660,6 +716,14 @@ class User_Model_User extends Core_Model_Item_Abstract
                     $params['end_month'] = null;
                 }
 				$stripTagKeys = array('title', 'company', 'description');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
+				}
+                break;
+				
+			case 'education':
+                $table = Engine_Api::_()->getDbTable('educations', 'user');
+				$stripTagKeys = array('degree', 'institute', 'location');
 				foreach ($stripTagKeys as $key) {
 					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
 				}
@@ -696,12 +760,24 @@ class User_Model_User extends Core_Model_Item_Abstract
 				$this -> save();
                 break;
 			
+			case 'archievement':
+                $item = Engine_Api::_()->getItem('user_archievement', $params['item_id']);
+                break;
+				
+			case 'license':
+                $item = Engine_Api::_()->getItem('user_license', $params['item_id']);
+                break;
+				
 			case 'offerservice':
                 $item = Engine_Api::_()->getItem('user_offerservice', $params['item_id']);
                 break;
 				
 			case 'experience':
                 $item = Engine_Api::_()->getItem('user_experience', $params['item_id']);
+                break;
+				
+			case 'education':
+                $item = Engine_Api::_()->getItem('user_education', $params['item_id']);
                 break;
 		}
 		if ($item) {
@@ -714,9 +790,30 @@ class User_Model_User extends Core_Model_Item_Abstract
 		return Engine_Api::_()->getDbTable('offerservices', 'user')->getAllOfferServicesOfUser($this->getIdentity());
 	}
 	
+	public function getAllArchievements() {
+		return Engine_Api::_()->getDbTable('archievements', 'user')->getAllArchievementsOfUser($this->getIdentity(), 'archievement');
+	}
+	
+	public function getAllTrophies() {
+		return Engine_Api::_()->getDbTable('archievements', 'user')->getAllArchievementsOfUser($this->getIdentity(), 'trophy');
+	}
+	
+	public function getAllLicenses() {
+		return Engine_Api::_()->getDbTable('licenses', 'user')->getAllLicensesOfUser($this->getIdentity(), 'license');
+	}
+	
+	public function getAllCertificates() {
+		return Engine_Api::_()->getDbTable('licenses', 'user')->getAllLicensesOfUser($this->getIdentity(), 'certificate');
+	}
+	
 	//HOANGND function for get all experiences of user
 	public function getAllExperiences() {
 		return Engine_Api::_()->getDbTable('experiences', 'user')->getAllExperiencesOfUser($this->getIdentity());
+	}
+	
+	//HOANGND function for get all educations of user
+	public function getAllEducations() {
+		return Engine_Api::_()->getDbTable('educations', 'user')->getAllEducationsOfUser($this->getIdentity());
 	}
 	
 	//HOANGND function for get all receiver recommendations

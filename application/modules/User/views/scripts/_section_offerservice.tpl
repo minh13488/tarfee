@@ -7,8 +7,9 @@
     $create = (isset($params['create'])) ? $params['create'] : false;
 	$edit = (isset($params['edit'])) ? $params['edit'] : false;
 	$offerServices = $user->getAllOfferServices();
+	$services = Engine_Api::_()->getDbTable('services', 'user')->getAllServices();
 ?>
-<?php if ($manage || count($offerServices)) : ?>
+<?php if (($manage || count($offerServices)) && count($services)) : ?>
 <h3 class="section-label"><?php echo $this->translate($label);?></h3>
  
 <div class="profile-section-button">
@@ -37,7 +38,6 @@
                 <label><?php echo $this->translate('Service')?></label>
                 <div class="profile-section-form-input">
                     <select name="service_id" id="offerservice-service_id" value="<?php if ($item) echo $item->service_id?>">
-                        <?php $services = Engine_Api::_()->getDbTable('services', 'user')->getAllServices(); ?>
                         <?php foreach ($services as $service) : ?>
                         <option value="<?php echo $service->service_id?>" <?php if ($item && $item->service_id == $service_id->service_id) echo 'selected';?>><?php echo $this->translate($service->title)?></option>
                         <?php endforeach; ?>

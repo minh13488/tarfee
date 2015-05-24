@@ -8,10 +8,10 @@
 	$bio = $user->bio;
 	
 	$permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
-    $max_character = $permissionsTable->getAllowed('user', $viewer->level_id, 'bio_max');
+    $max_character = $permissionsTable->getAllowed('user', $user->level_id, 'bio_max');
     if ($max_character == null) {
         $row = $permissionsTable->fetchRow($permissionsTable->select()
-        ->where('level_id = ?', $viewer->level_id)
+        ->where('level_id = ?', $user->level_id)
         ->where('type = ?', 'user')
         ->where('name = ?', 'bio_max'));
         if ($row) {

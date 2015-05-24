@@ -98,7 +98,10 @@ return array(
     'user_list_item',
     'user_offerservice',
     'user_service',
+    'user_archievement',
+    'user_license',
     'user_experience',
+    'user_education',
     'user_recommendation',
     'user_sportcategory',
     'user_library',
@@ -128,7 +131,7 @@ return array(
         'action' => 'browse'
       ),
       'reqs' => array(
-        'action' => '(home|browse|render-section|get-my-location)',
+        'action' => '(home|browse|render-section|get-my-location|upload-photo)',
       )
     ),
 	
