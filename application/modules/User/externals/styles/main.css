@@ -1304,7 +1304,7 @@ body#global_page_user-friends-list-all-friends{
 #global_page_user-profile-index
 {
 	#global_content{
-		background-color: #E8E2D4;
+		background-image: url(~/application/modules/User/externals/images/background/bg_content.png);
 	  	padding: 0px;
 	}
 	.generic_layout_container.layout_user_profile_photo {
@@ -1316,7 +1316,7 @@ body#global_page_user-friends-list-all-friends{
 	  float: left;
 	  margin-right: 13px;
 	  padding-right: 0px;
-	  background-color: #8A877E;
+	  background-image: url(~/application/modules/User/externals/images/background/bg_leftmenu.png);
 	  padding-top: 0px;
 	}
 	.generic_layout_container.layout_user_profile_photo {
