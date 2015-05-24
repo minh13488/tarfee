@@ -1,4 +1,19 @@
-<?php echo $this -> library -> getTitle();?>
+<style>
+	
+	.sub-title{
+		background-color: #eaeaea;
+		  margin-bottom: 0;
+		  border: 0;
+		  border-bottom: 1px solid #eaeaea;
+		  -moz-border-radius: 0;
+		  -webkit-border-radius: 0;
+		  border-radius: 0;
+	}
+	
+</style>
+
+<h2><?php echo $this -> library -> getTitle();?></h2>
+
 
 <?php if($this -> viewer() -> isSelf($this -> subject())) :?>
 
@@ -30,8 +45,9 @@
 ?>
 
 <?php endif;?>
-<br/><br/>
-<ul class="videos_browse">
+<br/>
+<?php if(count($this -> mainVideos)) :?>
+<ul style="border-bottom: 5px solid #eaeaea;"  class="videos_browse">
  <?php foreach ($this->mainVideos as $item): ?>
         <?php
         echo $this->partial('_video_listing.tpl', 'user', array(
@@ -41,14 +57,17 @@
         ?>
 <?php endforeach; ?>
 </ul>
+<?php endif;?>
 
-<br/><br/>
+<br/>
 
 <!-- get sub libraries -->
 <?php $subLibraries = $this -> library -> getSubLibrary(); ?>
 <div id="accordion">
 <?php foreach($subLibraries as $subLibrary) :?>
-	<h3 class="toggler atStart"><?php echo $subLibrary -> getTitle();?></h3>
+	<div class="sub-title">
+		<h3 class="toggler atStart"><?php echo $subLibrary -> getTitle();?></h3>
+	</div>
 	<div class="element atStart">
 		
 		<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
@@ -84,8 +103,9 @@
 			$params['owner_id'] = $subLibrary -> getIdentity();
 		    $subVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
 		?>
-		<br/><br/>
-		<ul class="videos_browse">
+		<br/>
+		<?php if(count($subVideos)):?>
+		<ul style="border: 5px solid #eaeaea;" class="videos_browse">
 		 <?php foreach ($subVideos as $item): ?>
 	            <?php
 	            echo $this->partial('_video_listing.tpl', 'user', array(
@@ -95,8 +115,9 @@
 	            ?>
 		<?php endforeach; ?>
 		</ul>
+		<?php endif;?>
 	</div>
-	<br/><br/>
+	<br/>
 <?php endforeach; ?>
 </div>
 
