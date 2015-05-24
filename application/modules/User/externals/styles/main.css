@@ -1447,10 +1447,6 @@ body#global_page_user-friends-list-all-friends{
 	}
 	.leftmenu ul li a:link, 
 	.leftmenu ul li a:visited,
-	.layout_profile_completeness_profile_completeness a:link,
-	.layout_profile_completeness_profile_completeness a:visited,
-	.layout_user_profile_options  a:link,
-	.layout_user_profile_options a:visited
 	{
 		color: #fff;
 	}
