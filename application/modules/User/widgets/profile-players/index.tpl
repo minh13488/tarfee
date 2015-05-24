@@ -81,9 +81,11 @@
 						<span class="rating_star_generic rating_star_big_disabled"></span>
 					</div>
 					<div class="actions">
+						<div>
 						<a href=""><span class="actions_generic messaging"></span></a>
 						<a href=""><span class="actions_generic sharing"></span></a>
 						<a href=""><span class="actions_generic like"></span></a>
+						</div>
 					</div>
 				</div>
 				<!--

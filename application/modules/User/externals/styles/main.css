@@ -1413,15 +1413,26 @@ body#global_page_user-friends-list-all-friends{
 	  border-bottom-left-radius: 5px;
 	  border-bottom-right-radius: 5px;
 	}
+	#profile_photo .actions>div {
+	  width:60%;
+	  margin:0 auto;
+	}
 	#profile_photo .actions .actions_generic {
 	  height: 25px;
 	  width: 25px;
 	  float: left;
-	  margin-left: 15px;
+	}
+	#profile_photo .actions:first-child
+	{
+		margin-left: 0;
+	}
+	#profile_photo .actions a
+	{
+		margin-left: 10%;
+		display: inline-block;
 	}
 	#profile_photo span.actions_generic.messaging{
 	  background-image: url(~/application/modules/User/externals/images/tarfee_profile_icon.png);
-	  margin-left: 44px;
 	  background-position: -6px -1px;
 	}
 	#profile_photo span.actions_generic.sharing{
@@ -1453,7 +1464,7 @@ body#global_page_user-friends-list-all-friends{
 	.layout_profile_completeness_profile_completeness .ybo_headline h3,
 	.layout_user_profile_options .ybo_headline h3,
 	.layout_profile_completeness_profile_completeness .profile_project_content,
-	.layout_user_profile_options
+	.layout_user_profile_options #profile_options
 	{
 		color: white;
 		padding-left: 10px;
