@@ -148,7 +148,7 @@ return array(
         'action' => 'create-sub-library'
       ),
       'reqs' => array(
-        'action' => '(create-sub-library|edit|delete)',
+        'action' => '(create-sub-library|edit|delete|give-ownership)',
       )
     ),
 	

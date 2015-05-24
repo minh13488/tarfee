@@ -14,6 +14,16 @@ class User_Model_DbTable_Mappings extends Engine_Db_Table
         return $paginator;
     }
 	
+	public function getRow($owner_id, $owner_type, $item_id, $item_type) {
+		$select = $this -> select();
+        $select -> where("owner_id = ?", $owner_id);
+        $select -> where("owner_type = ?", $owner_type);
+        $select -> where("item_id = ?", $item_id);
+        $select -> where("item_type = ?", $item_type);
+        $select -> limit(1);
+		return $this->fetchRow($select);
+	}
+	
 	public function getItemsMapping($type, $params = array())
 	{
 		$select = $this -> select();
