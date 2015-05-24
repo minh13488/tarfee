@@ -46,7 +46,7 @@ class User_Api_Core extends Core_Api_Abstract
 	//HOANGND sections of profile
 	protected $_sections = array(
 		'contact' => 'Contact Information',
-		'bio' => 'Bio',
+		'bio' => 'Biography',
 		'offerservice' => 'Service I Offer',
 		'archievement' => 'Trophies & Archievements',
 		'license' => 'Licenses & Certificates',

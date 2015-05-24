@@ -11,15 +11,14 @@
 	$enable = Engine_Api::_()->user()->checkSectionEnable($user, 'license');
 ?>
 <?php if (($manage || count($licenses) || count($certificates)) && $enable) : ?>
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
-
 <div class="profile-section-button">
 <?php if ($manage) :?>
 	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="license" class="create-button"><?php echo $this->translate('Add')?></a>
+		<a href="javascript:void(0)" rel="license" class="create-button"><?php echo '<i class="fa fa-plus-square"></i>';?></a>
 	</span>	
 <?php endif;?>	
 </div>
+<h3 class="section-label"><?php echo $this->translate($label);?></h3>
 
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
@@ -61,7 +60,7 @@
             </div>
             <div id="license-time-wrapper" class="profile-section-form-wrapper">                
                 <label><?php echo $this->translate('*Time')?></label>
-                <div class="profile-section-form-input">
+                <div class="profile-section-form-input form-input-2item">
                     <div>
                         <select name="month" id="license-month" value="<?php if ($item) echo $item->month?>">
                             <?php $month = array('Choose...', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')?>
@@ -76,19 +75,15 @@
             </div>
             <div id="license-icon-wrapper" class="profile-section-form-wrapper">                
                 <label><?php echo $this->translate('Add icon')?></label>
-                <div class="ynresume-form-input">
-                    <div id="file-wrapper">
-                        <div class="form-element">
-                            <input class="section-fileupload" id="license-fileupload" type="file" accept="image/*">
-                            <br />
-                            <div class="upload-loading" style="display: none; text-align: center">
-							    <img src='application/modules/User/externals/images/loading.gif'/>
-							</div>  
-                            <div class="upload-status"></div>
-                            <input type="hidden" id="photo_id" class="upload-photos" name="photo_id" value="<?php if ($item) echo $item->photo_id?>"/>
-                        </div>
-                    </div>
-                    <p class="error"></p>
+                <div class="profile-section-form-input">
+                    <input class="section-fileupload" id="archievement-fileupload" type="file" accept="image/*">
+                    <br />
+                    <span class="upload-loading" style="display: none; text-align: center">
+					    <img src='application/modules/User/externals/images/loading.gif'/>
+					</span>  
+                    <span class="upload-status form-description"></span>
+                    <input type="hidden" id="photo_id" class="upload-photos" name="photo_id" value="<?php if ($item) echo $item->photo_id?>"/>
+                	<p class="error"></p>
                 </div>
             </div>
             <div class="profile-section-form-buttons">
@@ -108,34 +103,35 @@
 	    <ul id="license-list" class="section-list">
 	    <?php foreach ($licenses as $item) :?>
 	    <li class="section-item" id="license-<?php echo $item->getIdentity()?>">
-	    	<div class="license-icon">
-            	<?php echo $this->itemPhoto($item, 'thumb.icon')?>
-            </div>
-            <div class="license-title">
-            	<span class="label"><?php echo $this->translate('Name: ')?></span>
-            	<span><?php echo $item->title?></span>
-            </div>
-            <div class="license-number">
-            	<span class="label"><?php echo $this->translate('Number: ')?></span>
-            	<span><?php echo $item->number?></span>
-            </div>
-            <div class="license-time">
-            	<?php 
-	                $month = ($item->month) ? $item->month : 1;
-	                $time = date_create($item->year.'-'.$month.'-'.'1');
-	                if ($item->month) {
-	                    $time = date_format($time, 'M Y');
-	                }
-	                else {
-	                    $time = date_format($time, 'Y');
-	                }
-	            ?>
-            	<span class="label"><?php echo $this->translate('Time: ')?></span>
-            	<span><?php echo $time?></span>
-            </div>
-	        <?php if ($manage) : ?>
-	        <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
-	        <?php endif; ?>
+	    	<div class="sub-section-item">
+		    	<div class="license-icon icon">
+	            	<?php echo $this->itemPhoto($item, 'thumb.icon')?>
+	            </div>
+	            <div class="content">
+		            <div class="license-title">
+		            	<span class="section-title"><?php echo $item->title?></span>
+		            </div>
+		            <div class="license-number">
+		            	<span><?php echo $item->number?></span>
+		            </div>
+		            <div class="license-time">
+		            	<?php 
+			                $month = ($item->month) ? $item->month : 1;
+			                $time = date_create($item->year.'-'.$month.'-'.'1');
+			                if ($item->month) {
+			                    $time = date_format($time, 'M Y');
+			                }
+			                else {
+			                    $time = date_format($time, 'Y');
+			                }
+			            ?>
+		            	<span class="time"><?php echo $time?></span>
+		            </div>
+			        <?php if ($manage) : ?>
+			        <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
+			        <?php endif; ?>
+		        </div>
+			</div>		      
 	    </li>
 	    <?php endforeach;?>    
 	    </ul>

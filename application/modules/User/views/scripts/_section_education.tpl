@@ -10,15 +10,14 @@
 	$enable = Engine_Api::_()->user()->checkSectionEnable($user, 'education');
 ?>
 <?php if (($manage || count($education)) && $enable) : ?>
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
-
 <div class="profile-section-button">
 <?php if ($manage) :?>
 	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="education" class="create-button"><?php echo $this->translate('Add')?></a>
+		<a href="javascript:void(0)" rel="education" class="create-button"><?php echo '<i class="fa fa-plus-square"></i>'?></a>
 	</span>	
 <?php endif;?>	
 </div>
+<h3 class="section-label"><?php echo $this->translate($label);?></h3>
 
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
@@ -50,7 +49,7 @@
             </div>
             <div id="education-year_attended-wrapper" class="profile-section-form-wrapper">                
                 <label><?php echo $this->translate('Year Attended')?></label>
-                <div class="profile-section-form-input">
+                <div class="profile-section-form-input form-input-2item">
                     <?php $curYear = intval(date("Y"));?>
                     <?php $maxYear = intval(date("Y")) + 10;?>
                     <select name="attend_from" id="education-attend_from" value="<?php if ($item) echo $item->attend_from?>">
@@ -172,17 +171,15 @@
         <?php foreach ($education as $item) :?>
         <li class="section-item" id="education-<?php echo $item->getIdentity()?>">
             <div class="sub-section-item">
-                <div class="education-degree">
-                	<span class="label"><?php echo $this->translate('Degree: ')?></span>
+                <div class="education-degree section-title">
                 	<span><?php echo $item->degree?></span>
                 </div>
                 
                 <div class="education-institute">
-                	<span class="label"><?php echo $this->translate('Institute: ')?></span>
                 	<span><?php echo $item->institute?></span>
                 </div>
                 
-                <div class="education-time">
+                <div class="education-time time">
                     <?php if ($item->attend_from >= 1900) : ?>
                     <span class="from"><?php echo $item->attend_from?></span>
                     <?php endif;?>
@@ -197,8 +194,8 @@
                 </div>
                 
                 <div class="education-location">
-                	<span class="label"><?php echo $this->translate('Location: ')?></span>
-                	<span><?php echo $item->location?></span>
+                	<span class="icon"><i class="fa fa-map-marker"></i></span>
+                	<span class="location"><?php echo $item->location?></span>
                 </div>
             </div>
             

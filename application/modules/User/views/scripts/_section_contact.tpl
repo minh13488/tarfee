@@ -11,16 +11,16 @@
 	$skype = $user->skype;
 ?>
 <?php if ($manage || !empty($contact_num)) : ?>
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
- 
 <div class="profile-section-button">
 <?php if ($manage) :?>
 	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="contact" class="create-button"><?php echo (!empty($contact_num)) ? $this->translate('Edit') : $this->translate('Add')?></a>
+		<a href="javascript:void(0)" rel="contact" class="create-button"><?php echo (!empty($contact_num)) ? '<i class="fa fa-pencil"></i>' : '<i class="fa fa-plus-square"></i>'?></a>
 	</span>	
 <?php endif;?>	
 </div>
 
+<h3 class="section-label"><?php echo $this->translate($label);?></h3>
+ 
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
 </div>
@@ -76,14 +76,27 @@
 	<div class="profile-section-list">
 	<?php if (!empty($contact_num)) : ?>
 		<div id="contact-content">
-			<div id="contact-contact_num"><?php echo $this->translate('Contact #: %s', $contact_num)?></div>
-			<div id="contact-email1"><?php echo $this->translate('Email 1: %s', $email1)?></div>
+			<div id="contact-contact_num" class="width-50">
+				<span class="label"><?php echo $this->translate('Contact #:')?></span>
+				<span><?php echo $contact_num ?></span>
+			</div>
+			<div id="contact-email1" class="width-50">
+				<span class="label"><?php echo $this->translate('Email 1:')?></span>
+				<span><?php echo $email1 ?></span>
+			</div>
 			<?php if (!empty($email2)):?>
-			<div id="contact-email2"><?php echo $this->translate('Email 2: %s', $email2)?></div>
+			<div id="contact-email2" class="width-50">
+				<span class="label"><?php echo $this->translate('Email 2:')?></span>
+				<span><?php echo $email2 ?></span>
+			</div>
 			<?php endif;?>
 			<?php if (!empty($skype)):?>
-			<div id="contact-skype"><?php echo $this->translate('Skype: %s', $skype)?></div>
+			<div id="contact-skype" class="width-50">
+				<span class="label"><?php echo $this->translate('Skype:')?></span>
+				<span><?php echo $skype ?></span>
+			</div>
 			<?php endif;?>
+			
 		</div>
 	<?php else: ?>
 		<div class="tip">

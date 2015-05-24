@@ -3,8 +3,8 @@
   'params' => 
   array (
     'host' => 'localhost',
-    'username' => 'tarfee',
-    'password' => '123456',
+    'username' => 'root',
+    'password' => 'mysql',
     'dbname' => 'tarfee',
     'charset' => 'UTF8',
     'adapterNamespace' => 'Zend_Db_Adapter',
