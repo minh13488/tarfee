@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS `engine4_user_playercards` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
 
 INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
-('core_admin_main_plugins_player', 'user', 'Player Card Settings', '', '{"route":"admin_default","module":"user","controller":"global-settings"}', 'core_admin_main_settings', '', 999),
+('core_admin_main_plugins_player', 'user', 'Player Card Settings', '', '{"route":"admin_default","module":"user","controller":"global-settings"}', 'core_admin_main_settings', '', 999);
 
 INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
 ('player_admin_main_managerelation', 'user', 'Manage Relation', '', '{"route":"admin_default","module":"user","controller":"manage-relation"}', 'player_admin_main', '', 2),
