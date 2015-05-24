@@ -1,5 +1,5 @@
 <?php
-class User_Form_Admin_Youtube_Global extends Engine_Form {
+class User_Form_Admin_Library_Global extends Engine_Form {
     public function init() {
         $this
         ->setTitle('Global Settings');

@@ -1,5 +1,11 @@
+
 INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
-('core_admin_main_youtube_channel', 'user', 'Youtube Channel Settings', '', '{"route":"admin_default","module":"user","controller":"youtube","action":"settings"}', 'core_admin_main_settings', '', 999);
+('core_admin_main_plugins_library', 'user', 'Libraries Settings', '', '{"route":"admin_default","module":"user","controller":"libraries","action":"settings"}', 'core_admin_main_settings', '', 999);
+
+INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
+('libraries_admin_main_levelsettings', 'user', 'Member Level Settings', '', '{"route":"admin_default","module":"user","controller":"libraries","action":"level"}', 'libraries_admin_main', '', 2),
+('libraries_admin_main_globalsettings', 'user', 'Global Settings', '', '{"route":"admin_default","module":"user","controller":"libraries","action":"settings"}', 'libraries_admin_main', '', 1);
+
 
 INSERT IGNORE INTO `engine4_core_tasks` (`title`, `module`, `plugin`, `timeout`, `processes`, `semaphore`, 
 `started_last`, `started_count`, `completed_last`, `completed_count`, `failure_last`, 

@@ -14,6 +14,24 @@ class User_Model_DbTable_Mappings extends Engine_Db_Table
         return $paginator;
     }
 	
+	public function getItemsMapping($type, $params = array())
+	{
+		$select = $this -> select();
+		$select -> where("item_type = ?", $type);
+        if (isset($params['owner_id'])) {
+            $select -> where("owner_id = ?", $params['owner_id']);
+        }
+        if (isset($params['owner_type'])) {
+            $select -> where("owner_type = ?", $params['owner_type']);
+        }
+        if (isset($params['user_id'])) {
+            $select -> where("user_id = ?", $params['user_id']);
+        }
+        $select -> order("creation_date DESC");
+		$mappings = $this->fetchAll($select);
+		return $mappings;
+	}
+	
 	public function getItemIdsMapping($type, $params = array())
 	{
 		$select = $this -> select() -> from($this, new Zend_Db_Expr("`item_id`"));

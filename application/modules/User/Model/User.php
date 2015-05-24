@@ -779,6 +779,18 @@ class User_Model_User extends Core_Model_Item_Abstract
 				'title' => 'Main Library',
 			));
 			$library -> save();
+			
+			 // CREATE AUTH STUFF HERE
+		      $auth = Engine_Api::_()->authorization()->context;
+		      $roles = array('owner', 'owner_member', 'owner_member_member', 'owner_network', 'registered', 'everyone');
+		      if(isset($values['auth_view'])) $auth_view =$values['auth_view'];
+		      else $auth_view = "everyone";
+		      $viewMax = array_search($auth_view, $roles);
+		      foreach( $roles as $i=>$role )
+		      {
+		        $auth->setAllowed($library, $role, 'view', ($i <= $viewMax));
+		      }
+			
 		}
 
 		return $library;

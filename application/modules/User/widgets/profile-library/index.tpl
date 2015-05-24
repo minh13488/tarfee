@@ -65,59 +65,72 @@
 <?php $subLibraries = $this -> library -> getSubLibrary(); ?>
 <div id="accordion">
 <?php foreach($subLibraries as $subLibrary) :?>
-	<div class="sub-title">
-		<h3 class="toggler atStart"><?php echo $subLibrary -> getTitle();?></h3>
-	</div>
-	<div class="element atStart">
-		
-		<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
-		<!-- edit link for sub library -->
-		<?php echo $this->htmlLink(array(
-			'route' => 'user_library',
-			'action' => 'edit',
-			'id' => $subLibrary -> getIdentity(),
-			), '<i class="fa fa-plus-square"></i>'.$this->translate('Edit'), array(
-			'class' => 'smoothbox buttonlink'
-			)) ;
-		?>
-		
-		<!-- create video link for sub library -->
-		
+	<?php if($subLibrary -> isViewable()) :?>
+		<div class="sub-title">
+			<h3 class="toggler atStart"><?php echo $subLibrary -> getTitle();?></h3>
+		</div>
+		<div class="element atStart">
+			
+			<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
+			
+			<!-- delete link for sub library -->
 			<?php echo $this->htmlLink(array(
-					'route' => 'video_general',
-					'action' => 'create',
-					'parent_type' =>'user_library',
-					'subject_id' =>  $subLibrary->getIdentity(),
-				), '<i class="fa fa-plus-square"></i>'.$this->translate('Create New Video'), array(
-				'class' => 'buttonlink'
+				'route' => 'user_library',
+				'action' => 'delete',
+				'id' => $subLibrary -> getIdentity(),
+				), '<i class="fa fa-plus-square"></i>'.$this->translate('Delete'), array(
+				'class' => 'smoothbox buttonlink'
+				)) ;
+			?>	
+				
+			<!-- edit link for sub library -->
+			<?php echo $this->htmlLink(array(
+				'route' => 'user_library',
+				'action' => 'edit',
+				'id' => $subLibrary -> getIdentity(),
+				), '<i class="fa fa-plus-square"></i>'.$this->translate('Edit'), array(
+				'class' => 'smoothbox buttonlink'
 				)) ;
 			?>
-		<?php endif;?>
-		
-		<!-- get videos of sub libraries -->
-		<?php
-		    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
-		    $videoTable = Engine_Api::_()->getItemTable('video');
-		    $params = array();
-		    $params['owner_type'] = $subLibrary -> getType();
-			$params['owner_id'] = $subLibrary -> getIdentity();
-		    $subVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
-		?>
+			
+			<!-- create video link for sub library -->
+			
+				<?php echo $this->htmlLink(array(
+						'route' => 'video_general',
+						'action' => 'create',
+						'parent_type' =>'user_library',
+						'subject_id' =>  $subLibrary->getIdentity(),
+					), '<i class="fa fa-plus-square"></i>'.$this->translate('Create New Video'), array(
+					'class' => 'buttonlink'
+					)) ;
+				?>
+			<?php endif;?>
+			
+			<!-- get videos of sub libraries -->
+			<?php
+			    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+			    $videoTable = Engine_Api::_()->getItemTable('video');
+			    $params = array();
+			    $params['owner_type'] = $subLibrary -> getType();
+				$params['owner_id'] = $subLibrary -> getIdentity();
+			    $subVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
+			?>
+			<br/>
+			<?php if(count($subVideos)):?>
+			<ul style="border: 5px solid #eaeaea;" class="videos_browse">
+			 <?php foreach ($subVideos as $item): ?>
+		            <?php
+		            echo $this->partial('_video_listing.tpl', 'user', array(
+		                'video' => $item,
+		                'library' => $subLibrary,
+		            ));
+		            ?>
+			<?php endforeach; ?>
+			</ul>
+			<?php endif;?>
+		</div>
 		<br/>
-		<?php if(count($subVideos)):?>
-		<ul style="border: 5px solid #eaeaea;" class="videos_browse">
-		 <?php foreach ($subVideos as $item): ?>
-	            <?php
-	            echo $this->partial('_video_listing.tpl', 'user', array(
-	                'video' => $item,
-	                'library' => $subLibrary,
-	            ));
-	            ?>
-		<?php endforeach; ?>
-		</ul>
-		<?php endif;?>
-	</div>
-	<br/>
+	<?php endif;?>
 <?php endforeach; ?>
 </div>
 
