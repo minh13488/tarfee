@@ -1522,6 +1522,46 @@ body#global_page_user-friends-list-all-friends{
 	{
 		padding: 14px 11px;
 	}
+	/*=============================== Side Icon footer menu ================================*/
+	.layout_page_footer .layout_ynresponsiveevent_event_footer_menu .sideicon{
+		width: 44px;
+		position: fixed;
+		z-index: 2;
+		bottom: 60px;
+		right:0;
+	}
+	li.sideicon_generic {
+	  background-image: url(~/application/modules/User/externals/images/sideicon.png);
+	  width: 42px;
+	  height: 42px;
+	  float: left;
+	}
+	li.sideicon_generic.plus {
+	  background-position: 0px 0px;
+	}
+	li.sideicon_generic.calendar {
+	  background-position: 0px 320px;
+	}
+	li.sideicon_generic.addfriend {
+	  background-position: 0px 274px;
+	}
+	li.sideicon_generic.friends {
+	  background-position: 0px 228px;
+	}
+	li.sideicon_generic.noname {
+	  background-position: 0px 182px;
+	}
+	li.sideicon_generic.office {
+	  background-position: 0px 136px;
+	}
+	li.sideicon_generic.news {
+	  background-position: 0px 90px;
+	}
+	li.sideicon_generic.help {
+	  background-position: 0px 44px;
+	}
+	
+/*======================================================================================*/
 }
 
 
@@ -1567,6 +1607,68 @@ body#global_page_user-friends-list-all-friends{
 	padding-top:5px;
 }
 
+.user-library-item-action {
+
+	& > ul {
+		display: none;
+		position: absolute;
+		z-index: 1;
+		border: 2px solid $theme_border_medium_color;
+		background-color: $theme_body_background_color;
+		width: 180px;
+		overflow: hidden;
+
+		li a {
+			line-height: 28px;
+			padding: 0 10px;
+			display: block;
+			text-align: left;
+			text-decoration: none;
+			color: $theme_font_color;
+
+			&:hover {
+				background-color: $theme_link_color;
+				color: $theme_body_background_color;
+
+				i.fa {
+					color: $theme_body_background_color;
+				}
+			}
+
+			i.fa {
+				color: $theme_link_color;
+				min-width: 15px;
+				width: 
+				text-align: center;
+			}
+		}
+	}
+
+	&.open-submenu > ul {
+		display: block;
+	}
+}
+
+.user-library-close-box{
+	right: 0;
+    float: right;
+}
+
+.user-library-video-content {
+	  margin-top: 8px;
+	  -webkit-border-radius: 5px;
+	  border-radius: 5px;
+	  min-height: 160px;;
+	  background-color: #fff;
+}
+
+.user-library-video-actions {
+	  margin-top: 22px;
+	  height: 38px;
+	  background-color: #B1C957;
+	  border-bottom-left-radius: 5px;
+	  border-bottom-right-radius: 5px;
+}
 /* Header*/
 .layout_ynresponsiveevent_event_mini_menu .ybo_logo
 {
@@ -1858,4 +1960,5 @@ body#global_page_user-friends-list-all-friends{
 		display: inline-block;
 		vertical-align: middle;
 	}
+	
 }

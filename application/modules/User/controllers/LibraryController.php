@@ -8,6 +8,65 @@ class User_LibraryController extends Core_Controller_Action_Standard
 			return;
 	}
 	
+	public function giveOwnershipAction(){
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$videoID = $this ->_getParam('id');
+		$libraryID = $this ->_getParam('libid');
+		
+		$mainLibrary = $viewer -> getMainLibrary();	
+		$subLibraries = $mainLibrary -> getSubLibrary();
+		
+		$this -> view -> form = $form = new User_Form_Library_GiveOwnerShip();
+		
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		
+		$posts = $this -> getRequest() -> getPost();
+		if (!$form -> isValid($posts)) {
+			return;
+		}
+		
+		$values = $form -> getValues();
+		$move_to = $values['move_to'];
+		$mappingTable = Engine_Api::_() -> getDbTable('mappings', 'user');
+		$db = $mappingTable -> getAdapter();
+		$db -> beginTransaction();
+
+		try
+		{
+			//save video user_id
+			$video = Engine_Api::_() -> getItem('video', $videoID);
+			if($video) {
+				$video -> owner_id = $move_to;
+				$video -> save();
+			}
+			
+			//get move to user
+			$user = Engine_Api::_() -> getItem('user', $move_to);
+			
+			//get mainlibrary of move to user
+			$mainLibrary = $user -> getMainLibrary();
+			
+			//get Row Mapping and update to move to user
+			$mappingRow = $mappingTable -> getRow($libraryID, 'user_library', $videoID, 'video');
+			if($mappingRow) {
+				$mappingRow -> owner_id = $mainLibrary -> getIdentity();
+				$mappingRow -> save();
+			}
+			$db -> commit();
+		} catch( Exception $e )	{
+			$db -> rollBack();
+			throw $e;
+		}
+		
+		$this -> _forward('success', 'utility', 'core', array(
+				'closeSmoothbox' => true,
+				'parentRefresh' => true,
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _($this -> view -> translate('Give OwnerShip Success...')))
+		));
+	} 
+	
 	public function createSubLibraryAction() 
 	{
 		$this -> view -> form = $form = new User_Form_Library_Create();
