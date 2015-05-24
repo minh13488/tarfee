@@ -92,7 +92,8 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 
 		$this -> addDisplayGroup(array(
 			'submit',
-			'remember'
+			'remember',
+			'forgot'
 		), 'buttons');
 
 		$table = Engine_Api::_() -> getDbTable('Services', 'SocialConnect');
