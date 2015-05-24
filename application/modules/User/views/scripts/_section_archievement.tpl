@@ -32,15 +32,15 @@
     }
 ?>
 <?php if (($manage || count($archievements) || count($trophies)) ) : ?>
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
-
 <div class="profile-section-button">
 <?php if ($manage && ($max == 0 ||  $max > (count($archievements) + count($trophies)))) :?>
 	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="archievement" class="create-button"><?php echo $this->translate('Add')?></a>
+		<a href="javascript:void(0)" rel="archievement" class="create-button"><?php echo '<i class="fa fa-plus-square"></i>'?></a>
 	</span>	
 <?php endif;?>	
 </div>
+
+<h3 class="section-label"><?php echo $this->translate($label);?></h3>
 
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
@@ -91,22 +91,18 @@
                 </div>
             </div>
             <div id="archievement-icon-wrapper" class="profile-section-form-wrapper">                
-                    <label><?php echo $this->translate('Add icon')?></label>
-                    <div class="ynresume-form-input">
-                        <div id="file-wrapper">
-                            <div class="form-element">
-                                <input class="section-fileupload" id="archievement-fileupload" type="file" accept="image/*">
-                                <br />
-                                <div class="upload-loading" style="display: none; text-align: center">
-								    <img src='application/modules/User/externals/images/loading.gif'/>
-								</div>  
-                                <div class="upload-status"></div>
-                                <input type="hidden" id="photo_id" class="upload-photos" name="photo_id" value="<?php if ($item) echo $item->photo_id?>"/>
-                            </div>
-                        </div>
-                        <p class="error"></p>
-                    </div>
+                <label><?php echo $this->translate('Add icon')?></label>
+                <div class="profile-section-form-input">
+                    <input class="section-fileupload" id="archievement-fileupload" type="file" accept="image/*">
+                    <br />
+                    <span class="upload-loading" style="display: none; text-align: center">
+					    <img src='application/modules/User/externals/images/loading.gif'/>
+					</span>  
+                    <span class="upload-status form-description"></span>
+                    <input type="hidden" id="photo_id" class="upload-photos" name="photo_id" value="<?php if ($item) echo $item->photo_id?>"/>
+                	<p class="error"></p>
                 </div>
+            </div>
             <div class="profile-section-form-buttons">
                 <button type="submit" id="submit-btn"><?php echo $this->translate('Save')?></button>
                 <button rel="archievement" type="button" class="cancel-btn"><?php echo $this->translate('Cancel')?></button>
@@ -124,55 +120,57 @@
 	    <ul id="trophies-list" class="section-list">
 	    <?php foreach ($trophies as $item) :?>
 	    <li class="section-item" id="archievement-<?php echo $item->getIdentity()?>">
-	    	<div class="trophy-icon">
-            	<?php echo $this->itemPhoto($item, 'thumb.icon')?>
-            </div>
-            <div class="trophy-title">
-            	<span class="label"><?php echo $this->translate('Title: ')?></span>
-            	<span><?php echo $item->title?></span>
-            </div>
-            <div class="trophy-year">
-            	<span class="label"><?php echo $this->translate('Year: ')?></span>
-            	<span><?php echo $item->year ?></span>
-            </div>
-            <?php if ($item->short_description) :?>
-        	<div class="trophy-short_description">
-            	<span class="label"><?php echo $this->translate('Short description: ')?></span>
-            	<span><?php echo $item->short_description?></span>
-            </div>
-            <?php endif;?>
-	        <?php if ($manage) : ?>
-	        <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
-	        <?php endif; ?>
+	    	<div class="sub-section-item">
+		    	<div class="trophy-icon icon">
+	            	<?php echo $this->itemPhoto($item, 'thumb.icon')?>
+	            </div>
+	            <div class="content">
+		            <div class="trophy-title">
+		            	<span class="section-title"><?php echo $item->title?></span>
+		            </div>
+		            <div class="trophy-year">
+		            	<span><?php echo $item->year ?></span>
+		            </div>
+		            <?php if ($item->short_description) :?>
+		        	<div class="trophy-short_description">
+		            	<span class="section-description"><?php echo $item->short_description?></span>
+		            </div>
+		            <?php endif;?>
+	            </div>
+		        <?php if ($manage) : ?>
+		        <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
+		        <?php endif; ?>
+	        </div>
 	    </li>
 	    <?php endforeach;?>    
 	    </ul>
 	    <?php endif;?>
 	    <?php if (count($archievements) > 0) : ?>
 	    <div class="label-type"><?php echo $this->translate('Archievements')?></div>
-	    <ul id="trophies-list" class="section-list">
+	    <ul id="archievements-list" class="section-list">
 	    <?php foreach ($archievements as $item) :?>
 	    <li class="section-item" id="archievement-<?php echo $item->getIdentity()?>">
-	    	<div class="archievement-icon">
-            	<?php echo $this->itemPhoto($item, 'thumb.icon')?>
-            </div>
-            <div class="archievement-title">
-            	<span class="label"><?php echo $this->translate('Title: ')?></span>
-            	<span><?php echo $item->title?></span>
-            </div>
-            <div class="archievement-year">
-            	<span class="label"><?php echo $this->translate('Year: ')?></span>
-            	<span><?php echo $item->year?></span>
-            </div>
-            <?php if ($item->short_description) :?>
-        	<div class="archievement-short_description">
-            	<span class="label"><?php echo $this->translate('Short description: ')?></span>
-            	<span><?php echo $item->short_description?></span>
-            </div>
-            <?php endif;?>
-	        <?php if ($manage) : ?>
-	        <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
-	        <?php endif; ?>
+	    	<div class="sub-section-item">
+		    	<div class="archievement-icon icon">
+	            	<?php echo $this->itemPhoto($item, 'thumb.icon')?>
+	            </div>
+	            <div class="content">
+		            <div class="archievement-title">
+		            	<span class="section-title"><?php echo $item->title?></span>
+		            </div>
+		            <div class="archievement-year">
+		            	<span><?php echo $item->year ?></span>
+		            </div>
+		            <?php if ($item->short_description) :?>
+		        	<div class="archievement-short_description">
+		            	<span class="section-description"><?php echo $item->short_description?></span>
+		            </div>
+		            <?php endif;?>
+	            </div>
+		        <?php if ($manage) : ?>
+		        <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
+		        <?php endif; ?>
+	        </div>
 	    </li>
 	    <?php endforeach;?>    
 	    </ul>

@@ -13,7 +13,7 @@ $this -> headScript() -> appendFile($staticBaseUrl . 'application/modules/User/e
 	$subject = $this->subject;
 ?>
 
-<div id="ynresume-manage-sections-content">
+<div id="user-profile-sections-content">
     <ul id="sections-content-items">
     <?php 
     $allSections = Engine_Api::_()->user()->getAllSections();
@@ -167,7 +167,7 @@ function addEventToForm() {
                 	var loading = div_parent.getElement('.upload-loading');
             		loading.hide();
                     if(file.status) {
-                        status_div.innerHTML = '<?php echo $this->translate('Upload successfully!')?>';
+                        status_div.innerHTML = '<?php echo $this->translate('Upload successfully!')?> '+file.name;
                         photo_id.value = file.photo_id;
                     }
                     else {
