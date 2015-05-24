@@ -30,20 +30,52 @@
 	</div>
 	<div class="actions">
 		<div>
-		<a href=""><span class="actions_generic messaging"></span></a>
-		<a href=""><span class="actions_generic sharing"></span></a>
-		<a href=""><span class="actions_generic like"></span></a>
+		<table><tr>
+		<td><a href=""><span class="actions_generic messaging"></span></a></td>
+		<td><a href=""><span class="actions_generic sharing"></span></a></td>
+		<td><a href=""><span class="actions_generic like"></span></a></td>
+		</tr></table>
 		</div>
 	</div>
 </div>
 <div class="follow">
 	<a href=""><img src="application/modules/User/externals/images/follow.png"/>
+	<?php 
+	$viewer = Engine_Api::_()->user()->getViewer();
+    $subject = Engine_Api::_()->core()->getSubject();
+	if( null === $subjectRow ) 
+	{
+        // Follow
+        echo $this->htmlLink(array(
+	        'route' => 'user_extended',
+	        'controller' => 'friends',
+	        'action' => 'add',
+	        'user_id' => $subject->getIdentity(),
+	        'rev' => true
+	    ), '<img src="application/modules/User/externals/images/follow.png"/>', array(
+	        'class' => 'smoothbox'
+	    ));
+    }
+	else {
+		// Follow
+        echo $this->htmlLink(array(
+	        'route' => 'user_extended',
+	        'controller' => 'friends',
+	        'action' => 'remove',
+	        'user_id' => $subject->getIdentity(),
+	        'rev' => true
+	    ), '<img src="application/modules/User/externals/images/unfollow.png"/>', array(
+	        'class' => 'smoothbox'
+	    ));
+	} 
+	?>
 </div>
 <div class="leftmenu">
 	<ul>
 		<hr/>
 		<li class="">
 			<a href="">Profile</a>
+			<a href="<?php echo $subject -> getHref();?>"><?php echo $this -> translate('Profile')?></a>
 		</li>
 		<hr/>
 		<li class="">

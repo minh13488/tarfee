@@ -88,7 +88,6 @@
 						</div>
 					</div>
 				</div>
-				<!--
 	            <div class="playercaed_options">
 	            	<?php echo $this->htmlLink(array(
 			            'route' => 'user_extended',
@@ -108,7 +107,7 @@
 			            'class' => 'buttonlink smoothbox'
 			        ));
 	        		?>
-	            </div> -->
+	            </div>
 	        </li>
 	        <?php endforeach; ?>             
 	    </ul>  
