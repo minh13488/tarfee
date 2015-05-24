@@ -91,9 +91,9 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 		));
 
 		$this -> addDisplayGroup(array(
-			'submit',
 			'remember',
-			'forgot'
+			'forgot',
+			'submit'
 		), 'buttons');
 
 		$table = Engine_Api::_() -> getDbTable('Services', 'SocialConnect');
@@ -146,16 +146,13 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 		}
 		$social_connect_html = implode('', $htmls);
 
-		$content = Zend_Registry::get('Zend_Translate') -> _("<span><a href='%s'>Forgot Password?</a></span>");
-		$content = sprintf($content, Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array(
-			'module' => 'user',
-			'controller' => 'auth',
-			'action' => 'forgot'
-		), 'default', true));
-
 		// Init forgot password link
 		$this -> addElement('Dummy', 'forgot', array('content' => $content, ));
-
+		$url = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_signup', true);
+		$request_guest= '<div class="register_guest"><a href="'.$url.'"><span>Register</span></a><span>|</span><a><span>Guest</span></a></div>';
+		$this -> addElement('Dummy', 'register_guest', array(
+				'content' => $request_guest,
+			));
 		// start change code
 		if ($rs -> count())
 		{
