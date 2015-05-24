@@ -30,9 +30,13 @@
 	</div>
 	<div class="actions">
 		<div>
-		<a href=""><span class="actions_generic messaging"></span></a>
-		<a href=""><span class="actions_generic sharing"></span></a>
-		<a href=""><span class="actions_generic like"></span></a>
+			<table>
+				<tr>
+					<td><a href=""><span class="actions_generic messaging"></span></a></td>
+					<td><a href=""><span class="actions_generic sharing"></span></a></td>
+					<td><a href=""><span class="actions_generic like"></span></a></td>
+				</tr>
+			</table>
 		</div>
 	</div>
 </div>
