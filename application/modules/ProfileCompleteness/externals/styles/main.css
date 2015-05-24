@@ -1,0 +1,44 @@
+
+/* PROFILE STATS WIDGET */
+.layout_profile_completeness_profile_completeness
+{
+  margin-top: 20px;
+  overflow: hidden;
+}
+.layout_profile_completeness_profile_completeness > ul
+{
+  +foreground;
+  +rounded;
+  padding: 10px;
+}
+.layout_profile_completeness_profile_completeness > ul > li
+{
+  font-size: .8em;
+}
+.layout_profile_completeness_profile_completeness > ul > li + li
+{
+  margin-top: 5px;
+}
+.layout_profile_completeness_profile_completeness > h3
+{
+  font-size: 0.8em;
+  font-weight: bold;
+  letter-spacing: normal;
+}
+
+.profile_project_content .profile_completed
+{
+	height:24px;
+	background:url(~/application/modules/ProfileCompleteness/externals/images/profile_compleated.jpg) left top repeat-x;
+}
+.profile_project_content.profile_process
+{
+	margin:15px 0;
+	background: left top repeat-x;
+	width:100%;
+}
+.profile_project_content .profile_project_content
+{
+	clear:both;
+	padding-top:5px;
+}
