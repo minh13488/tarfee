@@ -1561,11 +1561,11 @@ body#global_page_user-friends-list-all-friends{
 {
 	margin: 5px 0;
 }
+.layout_ynresponsiveevent_event_mini_menu  .not-login .group-mini-menu
+{
+	margin: 10px 0;
+}
 .layout_ynresponsiveevent_event_mini_menu #global_search_form_container #global_search_field
 {
 	width: 500px;
-}
-.layout_ynresponsiveevent_event_mini_menu
-{
-	background-color: #494949;
 }
