@@ -1580,3 +1580,270 @@ body#global_page_user-friends-list-all-friends{
 {
 	width: 500px;
 }
+
+=user-text-overflow 
+{
+	text-overflow: ellipsis;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+=user-border-radius($radius = 3px) {
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	border-radius: $radius;
+}
+
+=user-box-sizing  
+{
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box; 
+}
+
+.layout_user_profile_sections {
+	#sections-content-items {
+		.sections-content-item {
+			outline: 0;
+			border-bottom: 2px solid $theme_border_color;
+			min-height: 60px;
+			padding: 15px;
+			margin-bottom: 20px;
+			+user-border-radius();
+			+user-box-sizing();
+			position: relative;
+			
+			.profile-section-button {
+				display: inline;
+				
+				i.fa {
+					font-size: 1.5em;
+				}
+			}
+			.section-label {
+				display: inline;
+				text-transform: uppercase;
+			  	font-size: 1.5em;
+				background-color: transparent;
+				color: $theme_font_color_light;
+				padding: 0;
+				margin-top: 0;
+				margin-bottom: 15px;
+				overflow: hidden;
+				+user-text-overflow();
+				+user-border-radius(0);
+		  	}
+		  	
+		  	.profile-section-content {
+		  		margin-top: 10px;
+		  		
+		  		.profile-section-form {
+		  			.section-form {
+		  				padding-bottom: 20px;
+		  				border-bottom: 1px dashed $theme_border_color;
+						input[type=text], input[type=email], input[type=password], input.text {
+							padding: 0.5em;
+							line-height: 1em;
+							+user-box-sizing();
+						}
+		  			}
+		  			
+		  			.profile-section-form-wrapper {
+		  				& > label {
+							width: 200px;
+							float: left;
+						}
+		  				
+		  				input[type=text], input[type=email], input[type=password], input.text, select, textarea {
+							line-height: 1em;
+							padding: 0.5em;
+							width: 100%;
+							+user-box-sizing();
+						}
+						
+						select {
+							max-width: 100%;
+						}
+						
+						textarea {
+							min-height: 125px;
+						}
+						
+		  				.profile-section-form-input {
+		  					overflow: hidden;
+		  					
+		  					&.profile-section-form-input-map {
+								input[type=text], input[type=email], input[type=password], input.text {
+									width: 85%;
+								}			
+							}
+							
+							.profile-section-form-input-checkbox {
+								margin-top: 5px;
+							}
+							
+							&.form-input-2item {
+								input[type=text], input[type=email], input[type=password], input.text {
+									width: 45%;
+								}				
+				
+								textarea,
+								select {
+									width: 45%;
+								}
+							}
+							
+							&.form-input-4item {
+								input[type=text], input[type=email], input[type=password], input.text {
+									width: 20%;
+								}				
+				
+								textarea,
+								select {
+									width: 20%;
+								}
+							}
+		  				}
+		  			}
+		  			
+		  			.error {
+		  				color: red;
+		  				font-style: italic;
+		  				margin: 0 0 10px;
+		  			}
+		  			
+		  			.form-description {
+		  				  margin: 5px 0px 10px;
+						  font-size: 0.9em;
+						  font-style: italic;
+						  color: $theme_font_color_light;
+						  padding: 0;
+		  			}
+		  			
+		  			.profile-section-form-buttons {
+		  				margin-top: 10px;
+		  			}
+		  		}
+		  		
+		  		.profile-section-list {
+		  			.section-list {
+		  				.section-item {
+		  					.sub-section-item {
+								border-left: 3px solid $theme_border_color;
+								padding-left: 15px;	
+								margin-left: 15px;
+								+user-box-sizing();
+								position: relative;
+				
+								& > div + div {
+									margin-top: 3px;
+								}
+								
+								.icon {
+									display: inline-block;
+								}
+								
+								.content {
+									display: inline-block;
+									vertical-align: top;
+									padding-left: 5px;
+								}	
+							}
+							
+							&:hover {
+								.sub-section-item {
+									border-color: $theme_link_color;
+								}
+								
+								.edit-btn { 
+									color: $theme_body_background_color;
+									background-color: $theme_link_color;
+								}
+							}
+							
+							.section-title {
+								font-size: 1.2em;
+								color: $theme_link_color;
+							}
+							
+							.section-description {
+								color: $theme_font_color_light;
+								font-style: italic;
+							}
+							
+							.edit-btn {
+								position: absolute;
+								right: 0px;
+								top: 0px;
+			
+								display: block;
+								background-color: $theme_border_color;
+								color: $theme_font_color_light;
+								width: 28px;
+								text-align: center;
+								height: 28px;
+								line-height: 28px;
+								font-size: 16px;
+								cursor: pointer;
+			
+								+user-border-radius();
+							}
+							
+		  				}
+		  			}
+		  			
+		  			.label {
+						color: $theme_font_color_light;
+						font-weight: bold;
+						text-align: left;
+						font-size: 0.85em;
+						padding: 0;
+						min-width: 90px;
+						display: inline-block;
+					}
+					
+					.icon {
+						color: $theme_font_color_light;
+						font-weight: bold;
+						text-align: left;
+						padding: 0;
+						display: inline-block;
+					}
+					
+					.width-50 {
+						width: 48%;
+						display: inline-block;
+						text-overflow: ellipsis;
+  						overflow: hidden;
+					}
+					
+					.location, .time {
+						color: $theme_font_color_light;
+					}
+					
+					.label-type {
+						display: inline;
+						text-transform: uppercase;
+					  	font-size: 1.5em;
+						background-color: transparent;
+						color: $theme_font_color_light;
+						padding: 0;
+						margin-top: 0;
+						overflow: hidden;
+						+user-text-overflow();
+						+user-border-radius(0);
+					}
+					
+					.section-list {
+						margin: 10px 0px;
+					}
+		  		}
+		  	}
+	  	}
+  	}
+  	
+  	.profile-section_location_icon {
+		display: inline-block;
+		vertical-align: middle;
+	}
+}

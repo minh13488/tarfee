@@ -10,15 +10,15 @@
 	$enable = Engine_Api::_()->user()->checkSectionEnable($user, 'experience');
 ?>
 <?php if (($manage || count($experience)) && $enable) : ?>
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
-
 <div class="profile-section-button">
 <?php if ($manage) :?>
 	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="experience" class="create-button"><?php echo $this->translate('Add')?></a>
+		<a href="javascript:void(0)" rel="experience" class="create-button"><?php echo '<i class="fa fa-plus-square"></i>'?></a>
 	</span>	
 <?php endif;?>	
 </div>
+
+<h3 class="section-label"><?php echo $this->translate($label);?></h3>
 
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
@@ -50,8 +50,8 @@
             </div>
             <div id="experience-time_period-wrapper" class="profile-section-form-wrapper">                
                 <label><?php echo $this->translate('*Time Period')?></label>
-                <div class="profile-section-form-input">
-                    <div class="">
+                <div class="profile-section-form-input form-input-4item">
+                    <div>
                         <select name="start_month" id="experience-start_month" value="<?php if ($item) echo $item->start_month?>">
                             <?php $month = array('Choose...', 'January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December')?>
                             <?php foreach ($month as $key => $value) : ?>
@@ -126,67 +126,69 @@
 	    <ul id="experience-list" class="section-list">
 	    <?php foreach ($experience as $item) :?>
 	    <li class="section-item" id="experience-<?php echo $item->getIdentity()?>">
-            <?php 
-                $start_month = ($item->start_month) ? $item->start_month : 1;
-                $start_date = date_create($item->start_year.'-'.$start_month.'-'.'1');
-                if ($item->start_month) {
-                    $start_time = date_format($start_date, 'M Y');
-                }
-                else {
-                    $start_time = date_format($start_date, 'Y');
-                }
-                if ($item->end_year) {
-                    $end_month = ($item->end_month) ? $item->end_month : 1;
-                    $end_date = date_create($item->end_year.'-'.$end_month.'-'.'1');
-                    if ($item->end_month) {
-                        $end_time = date_format($end_date, 'M Y');
-                    }
-                    else {
-                        $end_time = date_format($end_date, 'Y');
-                    }
-                }
-                else {
-                    $end_date = date_create();
-                    $end_time = $this->translate('Present');
-                }
-                $diff = date_diff($start_date, $end_date);
-
-            ?>
-
-            <div class="experience-time">                
-                <span class="start-time"><?php echo $start_time?></span>
-                <span>-</span>
-                <span class="end-time"><?php echo $end_time?></span>
-                <?php $period = $diff->format('%y')*12 + $diff->format('%m') + 1; ?>
-
-                <?php if ($period > 12) : ?>
-                    <?php $years = intval($period / 12);  $months = $period % 12;?>
-                    <span class="period">
-                        (<?php
-                        echo ($years > 0) ? $this->translate(array('%s year','%s years',$years),$years) . ' '  : '';
-                        echo ($months > 0) ? $this->translate(array('month_diff','%s months',$months),$months). ' ' : '';
-                        ?>)
-                    </span>
-                <?php else: ?>
-                    <span class="period">(<?php echo $this->translate(array('month_diff','%s months',$period),$period)?>)</span>
-                <?php endif; ?>
-            </div>
-
-            <div class="experience-position section-title">
-                <?php echo $item->title?>
-            </div>
-
-            <div class="experience-company section-head-title">
-                <span class="company-name"><i class="fa fa-building"></i> <?php echo $item->company;?></span>
-            </div>
+	    	<div class="sub-section-item">
+	            <?php 
+	                $start_month = ($item->start_month) ? $item->start_month : 1;
+	                $start_date = date_create($item->start_year.'-'.$start_month.'-'.'1');
+	                if ($item->start_month) {
+	                    $start_time = date_format($start_date, 'M Y');
+	                }
+	                else {
+	                    $start_time = date_format($start_date, 'Y');
+	                }
+	                if ($item->end_year) {
+	                    $end_month = ($item->end_month) ? $item->end_month : 1;
+	                    $end_date = date_create($item->end_year.'-'.$end_month.'-'.'1');
+	                    if ($item->end_month) {
+	                        $end_time = date_format($end_date, 'M Y');
+	                    }
+	                    else {
+	                        $end_time = date_format($end_date, 'Y');
+	                    }
+	                }
+	                else {
+	                    $end_date = date_create();
+	                    $end_time = $this->translate('Present');
+	                }
+	                $diff = date_diff($start_date, $end_date);
 	
-	        <?php if ($item->description) : ?>
-            <div class="section-description experience-description"><?php echo $item->description?></div>
-	        <?php endif;?>
+	            ?>
 	
-	        <?php if ($manage) : ?>
-	        <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
-	        <?php endif; ?>
+	            <div class="experience-position section-title">
+	                <?php echo $item->title?>
+	            </div>
+	
+	            <div class="experience-company section-head-title">
+	                <span class="company-name"><i class="fa fa-building"></i> <?php echo $item->company;?></span>
+	            </div>
+				
+				<div class="experience-time">                
+	                <span class="start-time time"><?php echo $start_time?></span>
+	                <span class="time">-</span>
+	                <span class="end-time time"><?php echo $end_time?></span>
+	                <?php $period = $diff->format('%y')*12 + $diff->format('%m') + 1; ?>
+	
+	                <?php if ($period > 12) : ?>
+	                    <?php $years = intval($period / 12);  $months = $period % 12;?>
+	                    <span class="period time">
+	                        (<?php
+	                        echo ($years > 0) ? $this->translate(array('%s year','%s years',$years),$years) . ' '  : '';
+	                        echo ($months > 0) ? $this->translate(array('month_diff','%s months',$months),$months). ' ' : '';
+	                        ?>)
+	                    </span>
+	                <?php else: ?>
+	                    <span class="period time">(<?php echo $this->translate(array('month_diff','%s months',$period),$period)?>)</span>
+	                <?php endif; ?>
+	            </div>
+	            
+		        <?php if ($item->description) : ?>
+	            <div class="section-description experience-description"><?php echo $item->description?></div>
+		        <?php endif;?>
+		
+		        <?php if ($manage) : ?>
+		        <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
+		        <?php endif; ?>
+	        </div>
 	    </li>
 	    <?php endforeach;?>    
 	    </ul>
