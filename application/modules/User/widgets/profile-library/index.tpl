@@ -31,17 +31,16 @@
 
 <?php endif;?>
 <br/><br/>
+<ul class="videos_browse">
  <?php foreach ($this->mainVideos as $item): ?>
-        <li>
-            <?php
-            echo $this->partial('_video_listing.tpl', 'user', array(
-                'video' => $item,
-                'library' => $this->library,
-                'recentCol' => $this->recentCol
-            ));
-            ?>
-        </li>
+        <?php
+        echo $this->partial('_video_listing.tpl', 'user', array(
+            'video' => $item,
+            'library' => $this->library,
+        ));
+        ?>
 <?php endforeach; ?>
+</ul>
 
 <br/><br/>
 
@@ -86,17 +85,16 @@
 		    $subVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
 		?>
 		<br/><br/>
+		<ul class="videos_browse">
 		 <?php foreach ($subVideos as $item): ?>
-	        <li>
 	            <?php
 	            echo $this->partial('_video_listing.tpl', 'user', array(
 	                'video' => $item,
 	                'library' => $subLibrary,
-	                'recentCol' => $this->recentCol
 	            ));
 	            ?>
-	        </li>
 		<?php endforeach; ?>
+		</ul>
 	</div>
 	<br/><br/>
 <?php endforeach; ?>
