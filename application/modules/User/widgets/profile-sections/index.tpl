@@ -1,13 +1,19 @@
 <?php $this -> headScript() -> appendFile($this -> layout() -> staticBaseUrl . 'externals/tinymce/tinymce.min.js'); ?>
 <?php $this->headScript()->appendFile("//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"); ?>
 <?php $this -> headScript() -> appendFile($this -> layout() -> staticBaseUrl . 'application/modules/User/externals/scripts/validator.js'); ?>
-
+<?php 
+$staticBaseUrl = $this->layout()->staticBaseUrl;
+$this -> headScript() -> appendFile($staticBaseUrl . 'application/modules/User/externals/scripts/jquery.min.js')    
+                      -> appendScript('jQuery.noConflict();')
+                      -> appendFile($staticBaseUrl . 'application/modules/User/externals/scripts/js/vendor/jquery.ui.widget.js')  
+                      -> appendFile($staticBaseUrl . 'application/modules/User/externals/scripts/js/jquery.iframe-transport.js')
+                      -> appendFile($staticBaseUrl . 'application/modules/User/externals/scripts/js/jquery.fileupload.js'); ?>
 <?php 
     $viewer = $this->viewer;
 	$subject = $this->subject;
 ?>
 
-<div id="ynresume-manage-sections-content">
+<div id="user-profile-sections-content">
     <ul id="sections-content-items">
     <?php 
     $allSections = Engine_Api::_()->user()->getAllSections();
@@ -145,6 +151,38 @@ function addEventToForm() {
             renderSection(type, params);
         });
     });
+    
+    //for upload photos
+    var url = '<?php echo $this->url(array('action'=>'upload-photo'), 'user_general', true)?>';
+    $$('.section-fileupload').each(function(el) {
+        var div_parent = el.getParent('.profile-section-form-wrapper');
+        var id = el.get('id');
+        jQuery('#'+id).fileupload({
+            url: url,
+            dataType: 'json',
+            done: function (e, data) {
+                var status_div = div_parent.getElement('.upload-status');
+                var photo_id = div_parent.getElement('#photo_id');
+                jQuery.each(data.result.files, function (index, file) {
+                	var loading = div_parent.getElement('.upload-loading');
+            		loading.hide();
+                    if(file.status) {
+                        status_div.innerHTML = '<?php echo $this->translate('Upload successfully!')?> '+file.name;
+                        photo_id.value = file.photo_id;
+                    }
+                    else {
+                    	status_div.innerHTML = '<?php echo $this->translate('Upload fail!')?> '+file.error;
+                    }
+                });
+            },
+            progressall: function (e, data) {
+            	var loading = div_parent.getElement('.upload-loading');
+            	loading.show();
+            	var status_div = div_parent.getElement('.upload-status');
+            	status_div.innerHTML = '';
+          	},
+        }).prop('disabled', !jQuery.support.fileInput).parent().addClass(jQuery.support.fileInput ? undefined : 'disabled');        
+    });
 }
 
 function renderSection(type, params) {
@@ -210,17 +248,38 @@ function renderSection(type, params) {
         	case 'offerservice':
         		return true;
         		break;
+    		case 'archievement':
+                args.push(['archievement-title', 'require', '<?php echo $this->translate('Title')?>']);
+                args.push(['archievement-year', 'require', '<?php echo $this->translate('Year')?>']);
+                args.push(['archievement-year', 'year', '<?php echo $this->translate('Year')?>']);
+                break;
+            case 'license':
+                args.push(['license-title', 'require', '<?php echo $this->translate('Name')?>']);
+                args.push(['license-number', 'require', '<?php echo $this->translate('Number')?>']);
+                args.push(['license-year', 'require', '<?php echo $this->translate('Year')?>']);
+                args.push(['license-year', 'year', '<?php echo $this->translate('Year')?>']);
+                args.push(['license-year', 'month-year-before-current', 'license-month', '<?php echo $this->translate('Time')?>']);
+                break;  
             case 'experience':
                 args.push(['experience-title', 'require', '<?php echo $this->translate('Position')?>']);
                 args.push(['experience-company', 'require', '<?php echo $this->translate('Company')?>']);
-                args.push(['experience-start_year', 'require', '<?php echo $this->translate('Start Date')?>']);
-                args.push(['experience-start_year', 'year', '<?php echo $this->translate('Start Date')?>']);
+                args.push(['experience-start_year', 'require', '<?php echo $this->translate('Start Year')?>']);
+                args.push(['experience-start_year', 'year', '<?php echo $this->translate('Start Year')?>']);
                 if (!$('experience-current').checked) {
                     args.push(['experience-end_year', 'require', '<?php echo $this->translate('End Date')?>']);
                     args.push(['experience-end_year', 'year', '<?php echo $this->translate('End Date')?>']);
                     args.push(['experience-start_year', 'month-year-before', 'experience-start_month', 'experience-end_year', 'experience-end_month', '<?php echo $this->translate('Start Date')?>', '<?php echo $this->translate('End Date')?>']);
                 }
+                else {
+                	args.push(['experience-start_year', 'month-year-before-current', 'experience-start_month', '<?php echo $this->translate('Start Date')?>']);
+                }
                 break; 
+                
+            case 'education':
+                args.push(['education-degree', 'require', '<?php echo $this->translate('Degree')?>']);
+                args.push(['education-institute', 'require', '<?php echo $this->translate('Institute')?>']);
+                args.push(['education-attend_from', 'year-before', 'education-attend_to', '<?php echo $this->translate('Start Year')?>', '<?php echo $this->translate('End Year')?>']);
+                break;
                  
         }
         if ($('profile-section-form-'+section)) {

@@ -103,7 +103,8 @@ var active = <?php echo $this->resume->active?>;
                 args.push(['experience-title', 'require', '<?php echo $this->translate('Position')?>']);
                 args.push(['experience-company', 'require', '<?php echo $this->translate('Company')?>']);
                 args.push(['experience-start_year', 'require', '<?php echo $this->translate('Start Date')?>']);
-                args.push(['experience-start_year', 'year', '<?php echo $this->translate('Start Date')?>']);
+                args.push(['experience-start_year', 'year', '<?php echo $this->translate('Start Year')?>']);
+                args.push(['experience-start_year', 'month-year-before-current', 'experience-start_month', '<?php echo $this->translate('Start Date')?>']);
                 if (!$('experience-current').checked) {
                     args.push(['experience-end_year', 'require', '<?php echo $this->translate('End Date')?>']);
                     args.push(['experience-end_year', 'year', '<?php echo $this->translate('End Date')?>']);

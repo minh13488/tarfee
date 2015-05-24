@@ -33,11 +33,11 @@
 @media (min-width: 1200px) {
     .layout_page_user_index_home .layout_main .layout_middle > div > div {
         margin: 0 auto;
-		max-width: 1140px;
+		max-width: 1033px;
         
         &.row {
             margin: 0 auto;
-            max-width: 1170px;
+            max-width: 1033px;
         }
     }
 }

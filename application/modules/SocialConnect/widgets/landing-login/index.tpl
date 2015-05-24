@@ -25,7 +25,7 @@
 
 <?php if( !$this->noForm ): ?>
   <?php echo $this->form->setAttrib('class', 'global_form_box')->render($this) ?>
-
+	
   <?php if( !empty($this->fbUrl) ): ?>
 
     <script type="text/javascript">

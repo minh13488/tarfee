@@ -46,4 +46,11 @@ class User_Bootstrap extends Engine_Application_Bootstrap_Abstract
     $table = Engine_Api::_()->getDbtable('online', 'user');
     $table->check($viewer);
   }
+  
+  public function _initCss() {
+        $view = Zend_Registry::get('Zend_View');
+        // add font Awesome 4.1.0
+        $url = $view -> baseUrl() . '/application/modules/User/externals/styles/font-awesome.min.css';
+        $view -> headLink() -> appendStylesheet($url);
+    }
 }

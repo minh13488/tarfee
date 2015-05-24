@@ -1,5 +1,30 @@
 <?php $viewer = $this->viewer();?>
 <div class="yntheme-event-container clearfix <?php echo $viewer->getIdentity()?'':' not-login'?>">
+	<div class="ybo_logo">
+		<?php
+		$site_name = Engine_Api::_()->getApi('settings', 'core')->getSetting('core_general_site_title', $this->translate('_SITE_TITLE'));
+		if($this -> site_name)
+		{
+			$site_name = $this -> site_name;
+		}
+		$logo  = $this->logo ? $this->logo: false;
+		$route = $this->viewer()->getIdentity()
+					 ? array('route'=>'user_general', 'action'=>'home')
+					 : array('route'=>'default');
+		echo ($logo)
+			 ? $this->htmlLink(($this -> logo_link)?$this -> logo_link:$route, $this->htmlImage($logo, array('class' => 'navbar-brand')))
+			 : $this->htmlLink(($this -> site_link)?$this -> site_link:$route, $site_name, array('class' => 'navbar-brand'));
+		?>
+	</div>
+	 <?php if ($viewer->getIdentity()): ?>
+            <?php if($this->search_check):?>
+        		<div id="global_search_form_container">
+        			<form id="global_search_form" action="<?php echo $this->url(array('controller' => 'search'), 'default', true) ?>" method="get">
+        			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100' alt='<?php echo $this->translate('Search') ?>' />
+        			</form>
+        		</div>
+        	<?php endif;?>
+        <?php endif; ?>
     <div class="group-mini-menu">
     	<?php
     		// Reverse the navigation order (they're floating right)
@@ -157,16 +182,6 @@
             	</ul>
             <?php endif; ?>            	 
         </div>
-                
-        <?php if ($viewer->getIdentity()): ?>
-            <?php if($this->search_check):?>
-        		<div id="global_search_form_container">
-        			<form id="global_search_form" action="<?php echo $this->url(array('controller' => 'search'), 'default', true) ?>" method="get">
-        			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100' alt='<?php echo $this->translate('Search') ?>' />
-        			</form>
-        		</div>
-        	<?php endif;?>
-        <?php endif; ?>
      </div>
 </div>
 

@@ -7,18 +7,19 @@
     $create = (isset($params['create'])) ? $params['create'] : false;
 	$edit = (isset($params['edit'])) ? $params['edit'] : false;
 	$offerServices = $user->getAllOfferServices();
+	$services = Engine_Api::_()->getDbTable('services', 'user')->getAllServices();
 ?>
-<?php if ($manage || count($offerServices)) : ?>
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
- 
+<?php if (($manage || count($offerServices)) && count($services)) : ?>
 <div class="profile-section-button">
 <?php if ($manage) :?>
 	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="offerservice" class="create-button"><?php echo $this->translate('Add')?></a>
+		<a href="javascript:void(0)" rel="offerservice" class="create-button"><?php echo '<i class="fa fa-plus-square"></i>'?></a>
 	</span>	
 <?php endif;?>	
-</div>
+</div>	
 
+<h3 class="section-label"><?php echo $this->translate($label);?></h3>
+ 
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
 </div>
@@ -37,7 +38,6 @@
                 <label><?php echo $this->translate('Service')?></label>
                 <div class="profile-section-form-input">
                     <select name="service_id" id="offerservice-service_id" value="<?php if ($item) echo $item->service_id?>">
-                        <?php $services = Engine_Api::_()->getDbTable('services', 'user')->getAllServices(); ?>
                         <?php foreach ($services as $service) : ?>
                         <option value="<?php echo $service->service_id?>" <?php if ($item && $item->service_id == $service_id->service_id) echo 'selected';?>><?php echo $this->translate($service->title)?></option>
                         <?php endforeach; ?>
@@ -49,13 +49,13 @@
             <div id="offerservice-location-wrapper" class="profile-section-form-wrapper">
                 <label for="offerservice-location"><?php echo $this->translate('Location')?></label>
                 <div class="profile-section-form-input profile-section-form-input-map">
-                	<p class="error"></p>
                     <input type="text" id="offerservice-location" name="location" value="<?php if ($item) echo $item->location?>"/>
                     <a class='profile-section_location_icon' href="javascript:void(0)" id='offerservice-get-current-location'>
                         <img src="<?php echo $this -> baseUrl();?>/application/modules/User/externals/images/icon-search-advform.png">
                     </a>
                     <input type="hidden" id="offerservice-longitude" name="longitude" value="<?php if ($item) echo $item->longitude?>"/>
                     <input type="hidden" id="offerservice-latitude" name="latitude" value="<?php if ($item) echo $item->latitude?>"/>
+                		
                 </div>
             </div>
             
@@ -147,11 +147,16 @@
 		<ul id="offerservice-list" class="section-list">
 		<?php foreach ($offerServices as $item) :?>
 			<li class="section-item" id="offerservice-<?php echo $item->getIdentity()?>">
-				<div class="offerservice-service"><?php echo $item->getTitle()?></div>
-				<div class="offerservice-location"><?php echo $this->translate('Location: %s', $item->location)?></div>
-				<?php if ($manage) : ?>
-	            <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
-	            <?php endif; ?>
+				<div class="sub-section-item">
+					<div class="offerservice-service section-title"><?php echo $item->getTitle()?></div>
+					<div class="offerservice-location">
+						<span class="icon"><i class="fa fa-map-marker"></i></span>
+						<span class="location"><?php echo $item->location?></span>
+					</div>
+					<?php if ($manage) : ?>
+		            <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
+		            <?php endif; ?>
+	            </div>
 			</li>
 		<?php endforeach;?> 
 		</ul>

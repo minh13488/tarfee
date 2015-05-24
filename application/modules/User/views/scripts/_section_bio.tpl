@@ -8,10 +8,10 @@
 	$bio = $user->bio;
 	
 	$permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
-    $max_character = $permissionsTable->getAllowed('user', $viewer->level_id, 'bio_max');
+    $max_character = $permissionsTable->getAllowed('user', $user->level_id, 'bio_max');
     if ($max_character == null) {
         $row = $permissionsTable->fetchRow($permissionsTable->select()
-        ->where('level_id = ?', $viewer->level_id)
+        ->where('level_id = ?', $user->level_id)
         ->where('type = ?', 'user')
         ->where('name = ?', 'bio_max'));
         if ($row) {
@@ -20,16 +20,15 @@
     }
 ?>
 <?php if ($manage || !empty($bio)) : ?>
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
- 
 <div class="profile-section-button">
 <?php if ($manage) :?>
 	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="bio" class="create-button"><?php echo (!empty($bio)) ? $this->translate('Edit') : $this->translate('Add')?></a>
+		<a href="javascript:void(0)" rel="bio" class="create-button"><?php echo (!empty($bio)) ? '<i class="fa fa-pencil"></i>' : '<i class="fa fa-plus-square"></i>'?></a>
 	</span>	
 <?php endif;?>	
 </div>
-
+<h3 class="section-label"><?php echo $this->translate($label);?></h3>
+ 
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
 </div>
@@ -70,7 +69,7 @@
                 <button rel="bio" type="button" class="reload-cancel-btn"><?php echo $this->translate('Cancel')?></button>
                 <?php if (!empty($bio)) : ?>
                 <?php echo $this->translate(' or ')?>
-                <a rel="bio" href="javascript:void(0);" class="remove-btn"><?php echo $this->translate('remove Bio')?></a>
+                <a rel="bio" href="javascript:void(0);" class="remove-btn"><?php echo $this->translate('remove Biography')?></a>
                 <?php endif; ?>                
             </div>            
         </form>
@@ -81,7 +80,7 @@
 		<div id="bio-content"><?php echo $bio;?></div>
 	<?php else: ?>
 		<div class="tip">
-			<span><?php echo $this->translate('Bio is empty!')?></span>
+			<span><?php echo $this->translate('Biography is empty!')?></span>
 		</div>
 	<?php endif; ?>
 	</div>
