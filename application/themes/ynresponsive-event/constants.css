@@ -17,7 +17,7 @@ DEFAULT STYLES FOR THIS THEME
   /*
   GENERAL MAIN COLORS OF YOUBOOTSTRAP THEME
   */
-  theme_main_color_scheme: #049cdb;
+  theme_main_color_scheme: #b1c957;
   theme_main_color_scheme_hover: #38bff7;
   theme_main_color_scheme_dark: #0176a7;
   theme_notification_color: #ff8305;
@@ -46,7 +46,7 @@ DEFAULT STYLES FOR THIS THEME
   theme_topbar_menu_background_color_hover: transparent;
   theme_topbar_menu_link_color: #999;
   theme_topbar_menu_link_decoration: none;
-  theme_topbar_menu_link_hover_color: #049cdb;
+  theme_topbar_menu_link_hover_color: #b1c957;
   theme_topbar_menu_link_hover_decoration: none;
   theme_topbar_menu_link_size: 15px;
   theme_topbar_menu_link_size_small: 14px;
@@ -62,10 +62,10 @@ DEFAULT STYLES FOR THIS THEME
   theme_topbar_minimenu_link_decoration: none;
   theme_topbar_minimenu_link_transform: uppercase;
   theme_topbar_minimenu_link_hover_background_color: transparent;
-  theme_topbar_border: 1px solid #049cdb;
+  theme_topbar_border: 1px solid #b1c957;
   
   theme_footer_background_color: #2d3c4d;
-  theme_footer_second_background_color: #253342;
+  theme_footer_second_background_color: #494949;
   theme_footer_border_color: #384d63; 
   theme_footer_text_color: #8e9aa7;  
 
@@ -79,7 +79,7 @@ DEFAULT STYLES FOR THIS THEME
   theme_font_color_light: #999;
   theme_text_align: left;
   theme_link_color: #B1C957;
-  theme_link_color_hover: #B1C957;
+  theme_link_color_hover: #b1c957;
   theme_link_decoration: none;
   theme_link_decoration_hover: underline;
   theme_headline_color: #555555;
@@ -112,9 +112,9 @@ DEFAULT STYLES FOR THIS THEME
   theme_input_background_color: #fff;
   theme_input_font_color: #555;
   theme_input_border_colors: #ccc;
-  theme_button_background_color: #049cdb;
-  theme_button_background_color_hover: #38bff7;
-  theme_button_background_color_active: #38bff7;
+  theme_button_background_color: #b1c957;
+  theme_button_background_color_hover: #b1c957;
+  theme_button_background_color_active: #b1c957;
   theme_button_font_color: #fff;
   theme_button_border_color: #38bff7;
   theme_input_border_color_focus: rgba(82, 168, 236, 0.8);
@@ -125,7 +125,7 @@ DEFAULT STYLES FOR THIS THEME
   These colors are applied to the borders drawn around most images and thumbnails.
   */
   theme_photo_border_color: #eee;
-  theme_photo_border_color_hover: #049cdb;
+  theme_photo_border_color_hover: #b1c957;
 
   /* 
   FORMS
@@ -181,22 +181,13 @@ DEFAULT STYLES FOR THIS THEME
   */
   theme_pulldown_background_color: #eee;
   theme_pulldown_background_color_hover: #f2f2f2;
-  theme_pulldown_background_color_active: #049cdb;
+  theme_pulldown_background_color_active: #b1c957;
   theme_pulldown_font_color_active: #fff;
-  theme_pulldown_border_color: #049cdb;
+  theme_pulldown_border_color: #b1c957;
   theme_pulldown_contents_background_color: #fff;
   theme_pulldown_contents_list_background_color_hover: #f2f2f2;
   theme_pulldown_contents_list_background_color_active: #eeeeee;
 }
-
-
-
-
-
-
-
-
-
 
 
 /* Global member photos and icons */
