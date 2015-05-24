@@ -1297,3 +1297,155 @@ body#global_page_user-friends-list-all-friends{
 	float: right;
 	padding: 10px;
 }
+#global_page_user-profile-index
+{
+	#global_content{
+		background-color: #E8E2D4;
+		width: 960px;
+	  margin: 0px auto;
+	  min-height: 500px;
+	  padding: 0px;
+	}
+	.generic_layout_container.layout_user_profile_photo {
+	  margin: 0 auto;
+	  width: 180px;
+	  margin-top: 12px;
+	}
+	.layout_left {
+	  float: left;
+	  width: 200px;
+	  margin-right: 0px;
+	  padding-right: 0px;
+	  background-color: #8A877E;
+	}
+	.generic_layout_container.layout_user_profile_photo {
+	  margin: 0 auto;
+	  width: 180px;
+	  margin-top: 12px;
+	}
+	#profile_photo .thumb_profile 
+	{
+		height: 140px;
+		width: 140px;
+		-webkit-border-radius: 70px;
+		border-radius: 70px;
+		margin-top: 2px;
+	}
+	.thumb_profile_stroke {
+	  height: 148px;
+	  width: 148px;
+	  -webkit-border-radius: 74px;
+	  border-radius: 74px;
+	  margin-top: -10px;
+	  background-color: #86A31B;
+	  display: inline-block;
+	}
+	.thumb_profile_innershadow {
+	  background-color: #FBFBFF;
+	  height: 144px;
+	  width: 144px;
+	  -webkit-border-radius: 72px;
+	  border-radius: 72px;
+	  margin-top: 2px;
+	  display: inline-block;
+	}
+	.thumb_profile 
+	{
+	  display: inline-block;
+	  content: "";
+	  background-color: #eaeaea;
+	  background-size: cover;
+	  background-repeat: no-repeat;
+	  background-position: center;
+	}
+	#profile_photo {
+	  -webkit-border-radius: 5px;
+	  border-radius: 5px;
+	  min-height: 220px;
+	  background-color: #fff;
+	}
+	#profile_photo .options{
+		height: 26px;
+	}
+	#profile_photo .options span{
+	  background-image: url(~/application/modules/User/externals/images/tarfee_profile_icon.png);
+	  height: 25px;
+	  width: 25px;
+	  float: right;
+	  margin-right: 5px;
+	  background-position: 36px 2px;
+	}
+	#profile_photo .avatar{
+	  text-align: center;
+	}
+	#profile_photo .nickname {
+	  text-align: center;
+	  margin-top: 3px;
+	  font-weight: bold;
+	  font-size: 22px;
+	}
+	#profile_photo .user_rating .rating_star_generic {
+	  display: inline-block;
+	  width: 20px;
+	  height: 20px;
+	  background-repeat: no-repeat;
+	  font-size: 1px;
+	  cursor: default;
+	  background-size:20px;
+	}
+	#profile_photo .user_rating {
+	  text-align: center;
+	  margin-top: 5px;
+	  margin-bottom: 10px;
+	}
+	#profile_photo .user_rating .rating_star_big {
+	  background-image: url(~/application/modules/User/externals/images/stars/star.png);
+	}
+	#profile_photo .user_rating .rating_star_half {
+	  background-image: url(~/application/modules/User/externals/images/stars/halfstar.png);
+	}
+	#profile_photo .user_rating .rating_star_big_disabled {
+	  background-image: url(~/application/modules/User/externals/images/stars/nonestar.png);
+	}
+	#profile_photo .actions {
+	  height: 28px;
+	  background-color: #B1C957;
+	  border-bottom-left-radius: 5px;
+	  border-bottom-right-radius: 5px;
+	}
+	#profile_photo .actions .actions_generic {
+	  height: 25px;
+	  width: 25px;
+	  float: left;
+	  margin-left: 15px;
+	}
+	#profile_photo span.actions_generic.messaging{
+	  background-image: url(~/application/modules/User/externals/images/tarfee_profile_icon.png);
+	  margin-left: 44px;
+	  background-position: -6px -1px;
+	}
+	#profile_photo span.actions_generic.sharing{
+	  background-image: url(~/application/modules/User/externals/images/tarfee_profile_icon.png);
+	  background-position: -54px -1px;
+	}
+	#profile_photo span.actions_generic.like{
+	  background-image: url(~/application/modules/User/externals/images/tarfee_profile_icon.png);
+	  background-position: -98px -1px;
+	}
+	.follow {
+	  text-align: center;
+	  margin-top: 14px;
+	}
+	hr {
+	  margin-top: 20px;
+	  margin-bottom: 20px;
+	  border: 0;
+	  border-top: 1px solid #eee;
+	}
+	.leftmenu ul li {
+	  margin-left: 15px;
+	}
+	.leftmenu ul li a:link, a:visited {
+		color: #fff;
+	}
+}
