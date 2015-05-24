@@ -1,10 +1,12 @@
 <div id='profile_photo'>
 	<?php $photoUrl = $this->subject() -> getPhotoUrl('thumb.profile');?>
+	<!--
 	<div class="options">
 		<a href="">
 			<span></span>
 		</a>
 	</div>
+	-->
 	<div class="avatar">
 		<span>
 			<a href="">

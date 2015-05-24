@@ -7,16 +7,7 @@ return array(
     'category' => 'YouNet Responsive Event',
     'type' => 'widget',
     'name' => 'ynresponsiveevent.event-mini-menu',
-    'requirements' => array( 'header-footer'
-    ),
-  ),
-  array(
-    'title' => 'Logo & Main Menu',
-    'description' => 'Shows the site-wide main menu and (main logo or title). You can edit its contents in your menu editor. Images are uploaded via the <a href="admin/files" target="_blank">File Media Manager</a>.',
-    'category' => 'YouNet Responsive Event',
-    'type' => 'widget',
-    'name' => 'ynresponsiveevent.event-main-menu',
-    'adminForm' => 'ynresponsiveevent_Form_Admin_LogoMainMenu',
+    'adminForm' => 'Core_Form_Admin_Widget_Logo',
     'requirements' => array( 'header-footer'
     ),
   ),

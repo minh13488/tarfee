@@ -1305,10 +1305,7 @@ body#global_page_user-friends-list-all-friends{
 {
 	#global_content{
 		background-color: #E8E2D4;
-		width: 960px;
-	  margin: 0px auto;
-	  min-height: 500px;
-	  padding: 0px;
+	  	padding: 0px;
 	}
 	.generic_layout_container.layout_user_profile_photo {
 	  margin: 0 auto;
@@ -1339,7 +1336,7 @@ body#global_page_user-friends-list-all-friends{
 	  width: 148px;
 	  -webkit-border-radius: 74px;
 	  border-radius: 74px;
-	  margin-top: -10px;
+	  margin-top: 13px;
 	  background-color: #86A31B;
 	  display: inline-block;
 	}
@@ -1497,14 +1494,14 @@ body#global_page_user-friends-list-all-friends{
   				padding: .5em;
 			}
 		}
-		.thumb_profile_stroke
-		{
-			margin-top: 13px;
-		}
 	}
 	.layout_user_profile_library
 	{
 		clear: both;
+	}
+	#global_content .layout_main
+	{
+		  padding-top: 0px;
 	}
 }
 
@@ -1549,4 +1546,30 @@ body#global_page_user-friends-list-all-friends{
 {
 	clear:both;
 	padding-top:5px;
+}
+
+/* Header*/
+.layout_ynresponsiveevent_event_mini_menu .ybo_logo
+{
+	width: 120px;
+	float: left;
+	margin: 0;
+}
+.layout_ynresponsiveevent_event_mini_menu #global_search_form_container
+{
+	float: left;
+	margin: 5px 0;
+  	padding-left: 50px;
+}
+.layout_ynresponsiveevent_event_mini_menu .group-mini-menu
+{
+	margin: 5px 0;
+}
+.layout_ynresponsiveevent_event_mini_menu #global_search_form_container #global_search_field
+{
+	width: 500px;
+}
+.layout_ynresponsiveevent_event_mini_menu
+{
+	background-color: #494949;
 }

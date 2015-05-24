@@ -15,6 +15,7 @@ class Ynresponsiveevent_Widget_EventMiniMenuController extends Engine_Content_Wi
 	{
 		return $this -> setNoRender(true);
 	} 
+	$this->view->logo = $this->_getParam('logo');
 	$this->view->viewer = $viewer = Engine_Api::_()->user()->getViewer();
     $this->view->navigation = $navigation = Engine_Api::_()
       ->getApi('menus', 'core')

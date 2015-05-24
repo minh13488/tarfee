@@ -102,7 +102,7 @@
 	.navbar.navbar-default {
 		padding: 0 15px;
 		margin: 0 auto;
-		max-width: 1170px;
+		max-width: 1033px;
 	}
     
     .layout_ynresponsiveevent_event_mini_menu .yntheme-event-container,
@@ -110,11 +110,11 @@
     .layout_page_ynresponsiveevent_index_event .layout_top .layout_middle > div > div,
     .layout_page_core_index_index .layout_main .layout_middle > div > div {
         margin: 0 auto;
-		max-width: 1140px;
+		max-width: 1033px;
         
         &.row {
             margin: 0 auto;
-            max-width: 1170px;
+            max-width: 1033px;
         }
     }
 }
