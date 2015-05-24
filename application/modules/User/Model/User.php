@@ -582,8 +582,190 @@ class User_Model_User extends Core_Model_Item_Abstract
     parent::_readData($spec);
   }
 	
-	public function getMainLibrary()
-	{
+	//HOANGND fuction for add section to user
+	public function addSection($section, $params) {
+        if (!$section || !$params) {
+            return false;
+        }
+        switch ($section) {
+        	case 'contact':
+				$stripTagKeys = array('contact_num', 'email1', 'email2', 'skype');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $this->$key = strip_tags($params[$key]);
+				}
+				$this -> save();
+                break;
+			case 'bio':
+                $this -> bio = $params['bio'];
+				$this -> save();
+                break;
+				
+			case 'offerservice':
+                $table = Engine_Api::_()->getDbTable('offerservices', 'user');
+				$stripTagKeys = array('location');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
+				}
+                break;
+			
+			case 'experience':
+                $table = Engine_Api::_()->getDbTable('experiences', 'user');
+                if (isset($params['current']) && $params['current']) {
+                    $params['end_year'] = null;
+                    $params['end_month'] = null;
+                }
+				$stripTagKeys = array('title', 'company', 'description');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
+				}
+                break;
+        };
+		
+		if ($table) {
+            $db = Engine_Db_Table::getDefaultAdapter();
+            $db->beginTransaction();
+            try {
+                $item = $table->createRow();
+                $item->user_id = Engine_Api::_()->user()->getViewer()->getIdentity();
+                $item->setFromArray($params);
+                $item->save();
+                
+                $db->commit();
+            }
+            catch (Exception $e) {
+                $db->rollBack();
+                throw $e;
+            }
+        }
+    }
+	
+	//HOANGND fuction for edit section of user
+	public function editSection($section, $params) {
+        if (!$section || !$params || !isset($params['item_id'])) {
+            return false;
+        }
+        switch ($section) {
+            case 'offerservice':
+                $item = Engine_Api::_()->getItem('user_offerservice', $params['item_id']);
+				$stripTagKeys = array('location');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
+				}
+                break;
+			
+			case 'experience':
+                $item = Engine_Api::_()->getItem('ynresume_experience', $params['item_id']);
+                if (isset($params['current']) && $params['current']) {
+                    $params['end_year'] = null;
+                    $params['end_month'] = null;
+                }
+				$stripTagKeys = array('title', 'company', 'description');
+				foreach ($stripTagKeys as $key) {
+					if (!empty($params[$key])) $params[$key] = strip_tags($params[$key]);
+				}
+                break;
+        };
+        if ($item) {
+            $db = Engine_Db_Table::getDefaultAdapter();
+            $db->beginTransaction();
+            try {
+                $item->setFromArray($params);
+                $item->save();
+                $db->commit();
+            }
+            catch (Exception $e) {
+                $db->rollBack();
+                throw $e;
+            }
+        }
+    }
+	//HOANGND function for remove section of user
+	public function removeSection($section, $params) {
+        if (!$section || !$params) {
+            return false;
+        }
+        switch ($section) {
+        	case 'contact':
+				$elements = array('contact_num', 'email1', 'email2', 'skype');
+				foreach ($elements as $key) {
+					$this->$key = '';
+				}
+				$this -> save();
+			case 'bio':
+                $this -> bio = "";
+				$this -> save();
+                break;
+			
+			case 'offerservice':
+                $item = Engine_Api::_()->getItem('user_offerservice', $params['item_id']);
+                break;
+				
+			case 'experience':
+                $item = Engine_Api::_()->getItem('user_experience', $params['item_id']);
+                break;
+		}
+		if ($item) {
+            $item->delete();
+        }
+    }
+	
+	//HOANGND function for get all offer services of user
+	public function getAllOfferServices() {
+		return Engine_Api::_()->getDbTable('offerservices', 'user')->getAllOfferServicesOfUser($this->getIdentity());
+	}
+	
+	//HOANGND function for get all experiences of user
+	public function getAllExperiences() {
+		return Engine_Api::_()->getDbTable('experiences', 'user')->getAllExperiencesOfUser($this->getIdentity());
+	}
+	
+	//HOANGND function for get all receiver recommendations
+	public function getReceivedRecommendations() {
+		return Engine_Api::_()->getDbTable('recommendations', 'user')->getReceivedRecommendations($this->getIdentity());
+	} 
+
+	public function getShowRecommendations() {
+		return Engine_Api::_()->getDbTable('recommendations', 'user')->getShowRecommendations($this->getIdentity());
+	} 
+
+	//HOANGND function for check user can ask recommendation
+	public function canAskRecommendation($user_id) {
+		$friendslist = $this->getFriendsList();
+		foreach ($friendslist as $friend) {
+			$recommendation = Engine_Api::_()->getDbTable('recommendations', 'user')->getRecommendation($this->getIdentity(), $friend->getIdentity());
+			if (!$recommendation) return true;
+		}
+		return false;
+	}
+	
+	public function getRequestRecommendations() {
+		return Engine_Api::_()->getDbTable('recommendations', 'user')->getRequestRecommendations($this->getIdentity());
+	}
+	
+	public function getPendingRecommendations() {
+		return Engine_Api::_()->getDbTable('recommendations', 'user')->getPendingRecommendations($this->getIdentity());
+	}
+	
+	public function getFriendsList() {
+		$table = Engine_Api::_()->getItemTable('user');
+		$select = $this->membership()->getMembersObjectSelect();
+		return $table->fetchAll($select);
+	}
+	
+	public function getRecommendation($giver_id) {
+		return Engine_Api::_()->getDbTable('recommendations', 'user')->getRecommendation($this->getIdentity(), $giver_id);
+	}
+
+	public function isFriend($user_id) {
+		$friendslist = $this->getFriendsList();
+		foreach ($friendslist as $friend) {
+			if ($friend->getIdentity() == $user_id) {
+				return true;
+			}
+		}
+		return false;
+	}	
+	public function getMainLibrary() {
 		$table = Engine_Api::_() -> getItemTable('user_library');
 		$select = $table -> select() -> where('user_id = ?', $this -> getIdentity()) -> limit(1);
 

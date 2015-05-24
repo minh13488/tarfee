@@ -12,4 +12,5 @@
   10 => 'Storage',
   11 => 'User',
   12 => 'Video',
+  13 => 'Ynresume',
 ); ?>

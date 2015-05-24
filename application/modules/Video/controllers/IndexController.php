@@ -217,55 +217,66 @@ class Video_IndexController extends Core_Controller_Action_Standard
       $video->setFromArray($values);
       $video->save();
       
-      // Now try to create thumbnail
-      $thumbnail = $this->handleThumbnail($video->type, $video->code);
-      $ext = ltrim(strrchr($thumbnail, '.'), '.');
-      $thumbnail_parsed = @parse_url($thumbnail);
-
-      if( @GetImageSize($thumbnail) ) {
-        $valid_thumb = true;
-      } else {
-        $valid_thumb = false;
-      }
+     if ($values['type'] == Video_Plugin_Factory::getVideoURLType())
+	 {
+		$video -> status = 1;
+		$video -> save();
+		$adapter = Video_Plugin_Factory::getPlugin((int)$values['type']);
+		$adapter -> getVideoImage($video -> getIdentity());
+	 }
+	 else
+	 {
+      
+	      // Now try to create thumbnail
+	      $thumbnail = $this->handleThumbnail($video->type, $video->code);
+	      $ext = ltrim(strrchr($thumbnail, '.'), '.');
+	      $thumbnail_parsed = @parse_url($thumbnail);
+	
+	      if( @GetImageSize($thumbnail) ) {
+	        $valid_thumb = true;
+	      } else {
+	        $valid_thumb = false;
+	      }
 
       if( $valid_thumb && $thumbnail && $ext && $thumbnail_parsed && in_array($ext, array('jpg', 'jpeg', 'gif', 'png')) ) {
-        $tmp_file = APPLICATION_PATH . '/temporary/link_'.md5($thumbnail).'.'.$ext;
-        $thumb_file = APPLICATION_PATH . '/temporary/link_thumb_'.md5($thumbnail).'.'.$ext;
-
-        $src_fh = fopen($thumbnail, 'r');
-        $tmp_fh = fopen($tmp_file, 'w');
-        stream_copy_to_stream($src_fh, $tmp_fh, 1024 * 1024 * 2);
-
-        $image = Engine_Image::factory();
-        $image->open($tmp_file)
-          ->resize(120, 240)
-          ->write($thumb_file)
-          ->destroy();
-
-        try {
-          $thumbFileRow = Engine_Api::_()->storage()->create($thumb_file, array(
-            'parent_type' => $video->getType(),
-            'parent_id' => $video->getIdentity()
-          ));
-
-          // Remove temp file
-          @unlink($thumb_file);
-          @unlink($tmp_file);
-        } catch( Exception $e ) {
-          
-        }
-        $information = $this->handleInformation($video->type, $video->code);
-
-        $video->duration = $information['duration'];
-        if( !$video->description ) {
-          $video->description = $information['description'];
-        }
-        $video->photo_id = $thumbFileRow->file_id;
-        $video->status = 1;
-        $video->save();
-
-         // Insert new action item
-        $insert_action = true;        
+	        $tmp_file = APPLICATION_PATH . '/temporary/link_'.md5($thumbnail).'.'.$ext;
+	        $thumb_file = APPLICATION_PATH . '/temporary/link_thumb_'.md5($thumbnail).'.'.$ext;
+	
+	        $src_fh = fopen($thumbnail, 'r');
+	        $tmp_fh = fopen($tmp_file, 'w');
+	        stream_copy_to_stream($src_fh, $tmp_fh, 1024 * 1024 * 2);
+	
+	        $image = Engine_Image::factory();
+	        $image->open($tmp_file)
+	          ->resize(120, 240)
+	          ->write($thumb_file)
+	          ->destroy();
+	
+	        try {
+	          $thumbFileRow = Engine_Api::_()->storage()->create($thumb_file, array(
+	            'parent_type' => $video->getType(),
+	            'parent_id' => $video->getIdentity()
+	          ));
+	
+	          // Remove temp file
+	          @unlink($thumb_file);
+	          @unlink($tmp_file);
+	        } catch( Exception $e ) {
+	          
+	        }
+	        $information = $this->handleInformation($video->type, $video->code);
+	
+	        $video->duration = $information['duration'];
+	        if( !$video->description ) {
+	          $video->description = $information['description'];
+	        }
+	        $video->photo_id = $thumbFileRow->file_id;
+	        $video->status = 1;
+	        $video->save();
+	
+	         // Insert new action item
+	        $insert_action = true;        
+	      }
       }
 
       if ($values['ignore']==true){

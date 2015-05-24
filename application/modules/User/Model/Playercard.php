@@ -1,5 +1,5 @@
 <?php
-class User_Model_Playercard extends User_Model_Node {
+class User_Model_Playercard extends Core_Model_Item_Abstract {
 	public function setPhoto($photo)
   {
     if( $photo instanceof Zend_Form_Element_File ) {

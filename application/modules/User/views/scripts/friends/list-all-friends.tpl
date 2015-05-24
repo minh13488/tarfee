@@ -56,11 +56,51 @@
 					</div>
 					<div class="item_member_details">
 						<div class="item_member_name">
-							<?php  $title1 = $user_info->getTitle(); ?>
-							<?php  $truncatetitle = Engine_String::strlen($title1) > 20 ? Engine_String::substr($title1, 0, 20) . '..' : $title1?>
-							<?php echo $this->htmlLink($user_info->getHref(), $truncatetitle, array('title' => $user_info->getTitle(), 'target' => '_parent', 'class' => '', 'rel'=> 'user'.' '.$user_info->getIdentity())); ?>
+							<?php echo $this->htmlLink($user_info->getHref(), $this -> string() -> truncate($user_info->getTitle(), 20), array('title' => $user_info->getTitle(), 'target' => '_parent', 'class' => '', 'rel'=> 'user'.' '.$user_info->getIdentity())); ?>
 						</div>
 					</div>	
+				</div>
+				<div class="item_member_options">
+					<?php echo $this->htmlLink(array(
+			            'route' => 'user_extended',
+			            'controller' => 'friends',
+			            'action' => 'remove',
+			            'user_id' => $user_info->getIdentity(),
+			        ), $this->translate('Unfriend'), array(
+			            'class' => 'buttonlink smoothbox'
+			        ));
+	        		?>
+	        		<?php echo $this->htmlLink($user_info->getHref(), $this -> translate('Visit Profile'), array('title' => $this -> translate('Visit Profile'), 'target' => '_parent', 'class' => '')); ?>
+					
+					<?php echo $this->htmlLink(array(
+			            'route' => 'messages_general',
+			            'action' => 'compose',
+			            'to' => $user_info->getIdentity()
+			        ), $this->translate('Send Message'), array(
+			            'class' => 'buttonlink smoothbox'
+			        ));
+	        		?>
+	        		
+					<?php echo $this->htmlLink(array(
+			            'route' => 'user_extended',
+			            'controller' => 'block',
+			            'action' => 'add',
+			            'user_id' => $user_info->getIdentity()
+			        ), $this->translate('Block'), array(
+			            'class' => 'buttonlink smoothbox'
+			        ));
+	        		?>
+	        		
+	        		<?php echo $this->htmlLink(array(
+			            'route' => 'default',
+			            'module' => 'core',
+			            'controller' => 'report',
+			            'action' => 'create',
+			            'subject' => $user_info->getGuid()
+			        ), $this->translate('Report Abuse'), array(
+			            'class' => 'buttonlink smoothbox'
+			        ));
+	        		?>
 				</div>
 				<?php	}
 			 } else { ?>

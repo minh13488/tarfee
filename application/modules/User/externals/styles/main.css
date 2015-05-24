@@ -1265,6 +1265,10 @@ body#global_page_user-friends-list-all-friends{
 	margin-top: 10px;
 	overflow: hidden;
 }
+.item_member
+{
+	clear:both;
+}
 .item_member_name{
 	overflow: hidden;
 	white-space: nowrap;

@@ -187,6 +187,15 @@ endif; ?>
       </video>
     <?php endif ?>
   </div>
+  <?php elseif($this -> video -> type == 5) :?>
+  	<span class="view_html5_player">
+      	<img class = "thumb_video" src ="<?php echo $this-> video -> getPhotoUrl("thumb.large");?>"/>
+	      <video id="my_video" class="video-js vjs-default-skin" controls
+				 preload="auto"  poster="<?php echo $this-> video -> getPhotoUrl("thumb.large");?>"
+				 data-setup="{}">
+	        	<source src="<?php echo $this-> video -> code;?>" type='video/mp4'>
+				</video> 
+			</span>	
   <?php else: ?>
   <div class="video_embed">
     <?php echo $this->videoEmbedded ?>
