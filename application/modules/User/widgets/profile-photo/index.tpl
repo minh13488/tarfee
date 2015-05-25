@@ -108,7 +108,6 @@
 	<ul>
 		<hr/>
 		<li class="">
-			<a href="">Profile</a>
 			<a href="<?php echo $subject -> getHref();?>"><?php echo $this -> translate('Profile')?></a>
 		</li>
 		<hr/>

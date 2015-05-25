@@ -1385,6 +1385,7 @@ body#global_page_user-friends-list-all-friends{
 	  font-size: 22px;
 	  text-transform: uppercase;
   	  color: black;
+  	  font-family: 'Oswald', Helvetica, Tahoma, Arial, Verdana, sans-serif;
 	}
 	#profile_photo .user_rating .rating_star_generic {
 	  display: inline-block;
@@ -1471,7 +1472,7 @@ body#global_page_user-friends-list-all-friends{
 	{
 		background-color: transparent;
 	}
-	.layout_user_profile_sections #ynresume-manage-sections-content	
+	.layout_user_profile_sections #sections-content-items
 	{
 		-webkit-border-radius: 10px;
 		border-radius: 10px;
@@ -1512,101 +1513,20 @@ body#global_page_user-friends-list-all-friends{
 	.profile_unfollow
 	{
 		background-image: url(~/application/modules/User/externals/images/follow_bg.png);
-	   	padding: 14px 22px;
+	   	padding: 8px 25px;
 	  	background-repeat: no-repeat;
 	  	text-transform: uppercase;
-	  	font-family: initial;
-	  	font-size: 12pt;
+	  	font-family: 'Oswald', Helvetica, Tahoma, Arial, Verdana, sans-serif;
+	  	font-size: 15pt;
 	}
 	.profile_unfollow
 	{
-		padding: 14px 11px;
+		padding: 8px 14px;
 	}
-	/*=============================== Side Icon footer menu ================================*/
-	.layout_page_footer .layout_ynresponsiveevent_event_footer_menu .sideicon{
-		width: 44px;
-		position: fixed;
-		z-index: 2;
-		bottom: 60px;
-		right:0;
-	}
-	li.sideicon_generic {
-	  background-image: url(~/application/modules/User/externals/images/sideicon.png);
-	  width: 42px;
-	  height: 42px;
-	  float: left;
-	}
-	li.sideicon_generic.plus {
-	  background-position: 0px 0px;
-	}
-	li.sideicon_generic.calendar {
-	  background-position: 0px 320px;
-	}
-	li.sideicon_generic.addfriend {
-	  background-position: 0px 274px;
-	}
-	li.sideicon_generic.friends {
-	  background-position: 0px 228px;
-	}
-	li.sideicon_generic.noname {
-	  background-position: 0px 182px;
-	}
-	li.sideicon_generic.office {
-	  background-position: 0px 136px;
-	}
-	li.sideicon_generic.news {
-	  background-position: 0px 90px;
-	}
-	li.sideicon_generic.help {
-	  background-position: 0px 44px;
-	}
-	
 /*======================================================================================*/
 }
 
-
-/* PROFILE STATS WIDGET */
-.layout_profile_completeness_profile_completeness
-{
-  margin-top: 20px;
-  overflow: hidden;
-}
-.layout_profile_completeness_profile_completeness > ul
-{
-  padding: 10px;
-}
-.layout_profile_completeness_profile_completeness > ul > li
-{
-  font-size: .8em;
-}
-.layout_profile_completeness_profile_completeness > ul > li + li
-{
-  margin-top: 5px;
-}
-.layout_profile_completeness_profile_completeness > h3
-{
-  font-size: 0.8em;
-  font-weight: bold;
-  letter-spacing: normal;
-}
-
-.profile_project_content .profile_completed
-{
-	height:24px;
-	background:url(~/application/modules/ProfileCompleteness/externals/images/profile_compleated.jpg) left top repeat-x;
-}
-.profile_project_content.profile_process
-{
-	margin:15px 0;
-	background: left top repeat-x;
-	width:100%;
-}
-.profile_project_content .profile_project_content
-{
-	clear:both;
-	padding-top:5px;
-}
-
+/* My Libray Section*/
 .user-library-item-action {
 
 	& > ul {
@@ -1717,12 +1637,16 @@ body#global_page_user-friends-list-all-friends{
 
 .layout_user_profile_sections {
 	#sections-content-items {
+		#sections-content-item_contact
+		{
+			padding-top: 15px;
+		}
 		.sections-content-item {
 			outline: 0;
-			border-bottom: 2px solid $theme_border_color;
+			border: 0;
 			min-height: 60px;
-			padding: 15px;
-			margin-bottom: 20px;
+			padding: 0px 15px 15px 15px;
+			margin-bottom: 0px;
 			+user-border-radius();
 			+user-box-sizing();
 			position: relative;
@@ -1733,6 +1657,11 @@ body#global_page_user-friends-list-all-friends{
 				i.fa {
 					font-size: 1.5em;
 				}
+			}
+			.profile-section
+			{
+				border-bottom: 1px solid $theme_border_color;
+  				padding-bottom: 15px;
 			}
 			.section-label {
 				display: inline;

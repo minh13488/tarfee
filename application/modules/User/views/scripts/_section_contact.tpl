@@ -104,6 +104,6 @@
 		</div>
 	<?php endif; ?>
 	</div>
-</div>
 <?php endif;?>
+</div>
 <?php endif;?>
