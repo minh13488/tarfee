@@ -4,7 +4,7 @@
   array (
     'host' => 'localhost',
     'username' => 'root',
-    'password' => 'mysql',
+    'password' => '',
     'dbname' => 'tarfee',
     'charset' => 'UTF8',
     'adapterNamespace' => 'Zend_Db_Adapter',

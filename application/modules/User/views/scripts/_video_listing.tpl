@@ -80,6 +80,20 @@
 							)) ;
 						?>
 				</li>
+				<?php $subLibraries = $this -> viewer() -> getMainLibrary() -> getSubLibrary();?>
+				<?php if(count($subLibraries) > 1) :?>
+				<li>
+						<?php echo $this->htmlLink(array(
+								'route' => 'user_library',
+								'action' => 'move-to-sub',
+								'id' =>  $this -> video -> video_id,
+								'libid' =>  $this->library->getIdentity(),
+							), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Sub Library '), array(
+							'class' => 'smoothbox buttonlink'
+							)) ;
+						?>
+				</li>
+				<?php endif;?>
 			</ul>
 		</div>
 		<?php endif;?>
