@@ -1317,7 +1317,7 @@ body#global_page_user-friends-list-all-friends{
 	  margin-right: 13px;
 	  padding-right: 0px;
 	  background-image: url(~/application/modules/User/externals/images/background/bg_leftmenu.png);
-	  padding-top: 0px;
+	  padding-top: 0px!important;
 	}
 	.generic_layout_container.layout_user_profile_photo {
 	  margin: 0 auto;

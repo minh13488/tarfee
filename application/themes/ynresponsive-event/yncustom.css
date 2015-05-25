@@ -1021,3 +1021,8 @@ li.sideicon_generic:hover{
 {
 	display: none;
 }
+#global_page_user-index-home > .quicklinks
+{
+  	border: 0;
+	padding: 0;
+}
