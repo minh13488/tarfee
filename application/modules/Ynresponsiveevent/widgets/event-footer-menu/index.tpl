@@ -1,28 +1,28 @@
 <div class="sideicon">
 	<ul>
 		<li class="sideicon_generic plus">
-			<a href="#"><span></span></a>
+			<a href="#"><span class="fa fa-plus"></span></a>
 		</li>
 		<li class="sideicon_generic calendar">
-			<a href="#"><span></span></a>
+			<a href="#"><span class="fa fa-calendar"></span></a>
 		</li>
 		<li class="sideicon_generic addfriend">
-			<a href="#"><span></span></a>
+			<a href="#"><span class="fa fa-user-plus"></span></a>
 		</li>
 		<li class="sideicon_generic friends">
-			<a href="#"><span></span></a>
+			<a href="#"><span class="fa fa-users"></span></a>
 		</li>
 		<li class="sideicon_generic noname">
-			<a href="#"><span></span></a>
+			<a href="#"><span class="fa fa-credit-card"></span></a>
 		</li>
 		<li class="sideicon_generic office">
-			<a href="#"><span></span></a>
+			<a href="#"><span class="fa fa-building"></span></a>
 		</li>
 		<li class="sideicon_generic news">
-			<a href="#"><span></span></a>
+			<a href="#"><span class="fa fa-newspaper-o"></span></a>
 		</li>
 		<li class="sideicon_generic help">
-			<a href="#"><span></span></a>
+			<a href="#"><span class="fa fa-question"></span></a>
 		</li>
 	</ul>
 </div>

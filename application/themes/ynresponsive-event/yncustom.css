@@ -1004,34 +1004,15 @@ iframe.wysihtml5-sandbox {
 	right:20px;
 }
 li.sideicon_generic {
-  background-image: url(~/application/modules/User/externals/images/sideicon.png);
-  width: 42px;
-  height: 42px;
-  float: left;
-}
-li.sideicon_generic.plus {
-  background-position: 0px 0px;
-}
-li.sideicon_generic.calendar {
-  background-position: 0px 320px;
-}
-li.sideicon_generic.addfriend {
-  background-position: 0px 274px;
-}
-li.sideicon_generic.friends {
-  background-position: 0px 228px;
-}
-li.sideicon_generic.noname {
-  background-position: 0px 182px;
-}
-li.sideicon_generic.office {
-  background-position: 0px 136px;
-}
-li.sideicon_generic.news {
-  background-position: 0px 90px;
-}
-li.sideicon_generic.help {
-  background-position: 0px 44px;
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #FAFAFA;
+  box-shadow: 0 0 15px;
+  text-align: center;
+  font-size: 24px;
+  line-height: 40px;
+  margin-top: 5px;
 }
 #global_content > .quicklinks
 {
