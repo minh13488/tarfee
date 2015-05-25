@@ -1014,6 +1014,9 @@ li.sideicon_generic {
   line-height: 40px;
   margin-top: 5px;
 }
+li.sideicon_generic:hover{
+	background-color: $theme_link_color;
+}
 #global_content > .quicklinks
 {
 	display: none;
