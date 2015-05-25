@@ -7,7 +7,6 @@
 }
 .layout_profile_completeness_profile_completeness > ul
 {
-  +foreground;
   +rounded;
   padding: 10px;
 }
