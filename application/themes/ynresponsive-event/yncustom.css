@@ -1033,3 +1033,7 @@ li.sideicon_generic.news {
 li.sideicon_generic.help {
   background-position: 0px 44px;
 }
+#global_content > .quicklinks
+{
+	display: none;
+}
