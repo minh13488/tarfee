@@ -257,14 +257,17 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
     {
     	// check user name or id
 		$controller = $request -> getParam('controller', '');
-		$userTable = Engine_Api::_() -> getItemTable('user');
-		$select = $userTable -> select() -> where("username = '{$controller}' or user_id = '{$controller}'") -> limit(1);
-		if($userTable -> fetchRow($select))
-		{
-			$request -> setModuleName('user');
-			$request -> setControllerName('profile');
-			$request -> setActionName('index');
-			$request -> setParam('id', $controller);
+		if (strpos($controller,'admin') == false && !in_array($controller, array('manage','auth')))
+	  	{
+			$userTable = Engine_Api::_() -> getItemTable('user');
+			$select = $userTable -> select() -> where("username = '{$controller}' or user_id = '{$controller}'") -> limit(1);
+			if($userTable -> fetchRow($select))
+			{
+				$request -> setModuleName('user');
+				$request -> setControllerName('profile');
+				$request -> setActionName('index');
+				$request -> setParam('id', $controller);
+			}
 		}
         foreach ($this->_plugins as $plugin) {
             try {

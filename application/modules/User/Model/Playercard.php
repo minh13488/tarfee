@@ -1,6 +1,11 @@
 <?php
 class User_Model_Playercard extends Core_Model_Item_Abstract {
-	public function setPhoto($photo)
+  
+  public function getTitle()
+  {
+  	return $this -> first_name.' '. $this -> last_name;
+  }	
+  public function setPhoto($photo)
   {
     if( $photo instanceof Zend_Form_Element_File ) {
       $file = $photo->getFileName();

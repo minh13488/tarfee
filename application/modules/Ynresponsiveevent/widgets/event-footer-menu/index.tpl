@@ -1,3 +1,31 @@
+<div class="sideicon">
+	<ul>
+		<li class="sideicon_generic plus">
+			<a href="#"><span class="fa fa-plus"></span></a>
+		</li>
+		<li class="sideicon_generic calendar">
+			<a href="#"><span class="fa fa-calendar"></span></a>
+		</li>
+		<li class="sideicon_generic addfriend">
+			<a href="#"><span class="fa fa-user-plus"></span></a>
+		</li>
+		<li class="sideicon_generic friends">
+			<a href="#"><span class="fa fa-users"></span></a>
+		</li>
+		<li class="sideicon_generic noname">
+			<a href="#"><span class="fa fa-credit-card"></span></a>
+		</li>
+		<li class="sideicon_generic office">
+			<a href="#"><span class="fa fa-building"></span></a>
+		</li>
+		<li class="sideicon_generic news">
+			<a href="#"><span class="fa fa-newspaper-o"></span></a>
+		</li>
+		<li class="sideicon_generic help">
+			<a href="#"><span class="fa fa-question"></span></a>
+		</li>
+	</ul>
+</div>
 <div class="container">
     <span class="ynresponsive_copyright">
     	&copy; <?php echo $this->translate('%s EVENTSITE', date('Y')) ?>

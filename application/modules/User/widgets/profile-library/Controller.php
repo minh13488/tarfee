@@ -25,6 +25,5 @@ class User_Widget_ProfileLibraryController extends Engine_Content_Widget_Abstrac
     $params['owner_type'] = $library -> getType();
 	$params['owner_id'] = $library -> getIdentity();
     $this->view->mainVideos = $mainVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
-   
-  }
+    }
 }

@@ -82,9 +82,32 @@
 					</div>
 					<div class="actions">
 						<div>
-						<a href=""><span class="actions_generic messaging"></span></a>
-						<a href=""><span class="actions_generic sharing"></span></a>
-						<a href=""><span class="actions_generic like"></span></a>
+						<table><tr>
+						<td>
+							<?php echo $this->htmlLink(array(
+					            'route' => 'messages_general',
+					            'action' => 'compose',
+					            'to' => $player -> getOwner() ->getIdentity()
+					        ), '<span class="actions_generic messaging"></span>', array(
+					            'class' => 'smoothbox'
+					        ));
+				    		?>
+						</td>
+						<td>
+							<?php echo $this->htmlLink(array(
+					            'route' => 'default',
+					            'module' => 'activity',
+					            'controller' => 'index',
+								'action' => 'share',
+								'type' => 'user_playercard',
+								'id' => $player -> getIdentity(),
+					        ), '<span class="actions_generic sharing"></span>', array(
+					            'class' => 'smoothbox'
+					        ));
+				    		?>
+						</td>
+						<td><a href=""><span class="actions_generic like"></span></a></td>
+						</tr></table>
 						</div>
 					</div>
 				</div>

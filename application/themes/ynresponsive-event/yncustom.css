@@ -993,3 +993,36 @@ iframe.wysihtml5-sandbox {
 	z-index: 100;
 	position: relative;
 }
+
+
+.layout_page_footer .layout_ynresponsiveevent_event_footer_menu .sideicon
+{
+	width: 44px;
+	position: fixed;
+	z-index: 2;
+	bottom: 60px;
+	right:20px;
+}
+li.sideicon_generic {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+  background-color: #FAFAFA;
+  box-shadow: 0 0 15px;
+  text-align: center;
+  font-size: 24px;
+  line-height: 40px;
+  margin-top: 5px;
+}
+li.sideicon_generic:hover{
+	background-color: $theme_link_color;
+}
+#global_content > .quicklinks
+{
+	display: none;
+}
+#global_page_user-index-home > .quicklinks
+{
+  	border: 0;
+	padding: 0;
+}
