@@ -43,10 +43,9 @@ class Engine_View_Helper_FormDate extends Zend_View_Helper_FormElement
     {
       $parsedValue = array();
       list($parsedValue['year'], $parsedValue['month'], $parsedValue['day']) = @explode('-', $value, 3);
-      //list($parsedValue['day'], $parsedValue['month'], $parsedValue['year']) = @explode('-', $value, 3);
+	  list($parsedValue['day'], $time) = @explode(' ', $parsedValue['day'], 2);
       $value = $parsedValue;
     }
-    
     if( !is_array($value) )
     {
       $value = null;
@@ -96,7 +95,6 @@ class Engine_View_Helper_FormDate extends Zend_View_Helper_FormElement
     $dateLocaleString = preg_replace('/[^mdy]/i', '', $dateLocaleString);
     $dateLocaleString = preg_replace(array('/(m)+/', '/(d)+/', '/(y)+/'), array(' %2$s ', ' %3$s ', ' %1$s '), $dateLocaleString);
     $dateLocaleString = preg_replace('/ +/i', '&nbsp;', trim($dateLocaleString));
-
     return sprintf(
       $dateLocaleString,
       $this->view->formSelect($name.'[year]', $value['year'], $attribs, $options['year']),

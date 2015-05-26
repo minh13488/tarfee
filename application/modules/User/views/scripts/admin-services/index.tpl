@@ -1,4 +1,4 @@
-<h2><?php echo $this->translate("User") ?></h2>
+<h2><?php echo $this->translate("Profile Section Settings") ?></h2>
 
 <?php if( count($this->navigation) ): ?>
   <div class='tabs'>

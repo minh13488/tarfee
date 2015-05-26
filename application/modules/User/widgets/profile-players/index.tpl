@@ -35,19 +35,35 @@
 	<div class="tarfee-profile-module-header">
 	    <!-- Menu Bar -->
 	    <?php
-	    $max_player_card = Engine_Api::_()->authorization()->getPermission($this -> viewer(), 'player_card', 'max_player_card', 5); 
-		if($this->paginator->getTotalItemCount() < $max_player_card):
-	    ?>
-	    <div class="tarfee-profile-header-right">
-	        <?php echo $this->htmlLink(array(
-	            'route' => 'user_extended',
-	            'controller' => 'player-card',
-	            'action' => 'create',
-	        ), $this->translate('Add New Player Card'), array(
-	            'class' => ''
-	        ))
-	        ?>
-	    </div>      
+	    if($this -> viewer() -> getIdentity()):
+			  $max_player_card = Engine_Api::_()->authorization()->getPermission($this -> viewer(), 'user_playercard', 'max_player_card', 5);
+	         if($max_player_card == "")
+	         {
+	            $mtable  = Engine_Api::_()->getDbtable('permissions', 'authorization');
+	             $maselect = $mtable->select()
+	                ->where("type = 'user_playercard'")
+	                ->where("level_id = ?",$this -> viewer() -> level_id)
+	                ->where("name = 'max_player_card'");
+	              $mallow_a = $mtable->fetchRow($maselect);          
+	              if (!empty($mallow_a))
+	                $max_player_card = $mallow_a['value'];
+	              else
+	                 $max_player_card = 5;
+	         }
+		    
+			if($this->paginator->getTotalItemCount() < $max_player_card):
+		    ?>
+		    <div class="tarfee-profile-header-right">
+		        <?php echo $this->htmlLink(array(
+		            'route' => 'user_extended',
+		            'controller' => 'player-card',
+		            'action' => 'create',
+		        ), '<i class="fa fa-plus-square"></i> '.$this->translate('Add New Player Card'), array(
+		            'class' => ''
+		        ))
+		        ?>
+		    </div>    
+		    <?php endif;?>  
 		<?php endif;?>
 	</div>
 	
@@ -71,7 +87,7 @@
 						</span>
 					</div>
 					<div class="nickname">
-						<span><?php echo $player -> first_name.' '.$player -> last_name?></span>
+						<span><a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 15)?></span></a>
 					</div>
 					<div class="user_rating">
 						<span class="rating_star_generic rating_star_big"></span>
@@ -115,9 +131,28 @@
 	            	<?php echo $this->htmlLink(array(
 			            'route' => 'user_extended',
 			            'controller' => 'player-card',
+			            'action' => 'view',
+			            'id' => $player->playercard_id,
+			            'slug' => $player->getSlug(),
+			        ), $this->translate('View'), array(
+			            'class' => 'buttonlink'
+			        ));
+	        		?>
+	            	<?php echo $this->htmlLink(array(
+			            'route' => 'user_extended',
+			            'controller' => 'player-card',
 			            'action' => 'edit',
 			            'id' => $player->playercard_id,
 			        ), $this->translate('Edit'), array(
+			            'class' => 'buttonlink'
+			        ));
+	        		?>
+	        		<?php echo $this->htmlLink(array(
+			            'route' => 'user_extended',
+			            'controller' => 'player-card',
+			            'action' => 'add-video',
+			            'id' => $player->playercard_id,
+			        ), $this->translate('Add Video'), array(
 			            'class' => 'buttonlink'
 			        ));
 	        		?>

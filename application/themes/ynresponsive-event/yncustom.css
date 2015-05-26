@@ -1030,3 +1030,8 @@ li.sideicon_generic:hover{
 {
 	line-height: 28px;;
 }
+#global_page_slprofileverify-verify-deny form h3
+{
+	margin-top: 0;
+	margin-bottom: 0;
+}
