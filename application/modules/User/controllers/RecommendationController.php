@@ -50,7 +50,7 @@ class User_RecommendationController extends Core_Controller_Action_Standard {
 			
 			return $this -> _forward('success', 'utility', 'core', array(
                 'smoothboxClose' => true, 
-                'parentRefresh' => true, 
+                'parentRefresh' => false, 
                 'messages' => $this->view->translate('Ask for recommendations sucessful.')));
     	}
         catch( Exception $e ) {
@@ -117,7 +117,7 @@ class User_RecommendationController extends Core_Controller_Action_Standard {
 			
 			return $this -> _forward('success', 'utility', 'core', array(
                 'smoothboxClose' => true, 
-                'parentRefresh' => true, 
+                'parentRefresh' => false, 
                 'messages' => $this->view->translate('Write recommendation successfully.')));
         }
         catch( Exception $e ) {
