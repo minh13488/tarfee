@@ -42,9 +42,25 @@ en4.core.language.addData({'month-year-before-current_valid': ' <?php echo $this
 var confirm = false;
 var type = '';
 var item_id = 0;
+var reloadRecommendation = false;
+var render = '';
 
 window.addEvent('domready', function() {
     addEventToForm();
+    Smoothbox.Modal.Iframe.prototype.onClose=function() {
+		this.fireEvent('closeafter', this);
+ 		try{
+ 			if (reloadRecommendation == true && render != '') {
+ 				var type = 'recommendation';
+ 				var params = {};
+ 				params.render = render;
+ 				renderSection(type, params);
+ 				reloadRecommendation = false;
+ 				render = '';
+ 			}
+ 		}
+ 		catch(ex){}
+	};
 });
 
 function addEventToForm() {
@@ -152,6 +168,28 @@ function addEventToForm() {
         });
     });
     
+    $$('.manage-section-button.recommendation').each(function(el) {
+        el.removeEvents('click');
+        el.addEvent('click', function(e){
+            var type = 'recommendation';
+            var render = el.get('rel');
+            var params = {};
+            params.render = render;
+            renderSection(type, params);
+        });
+    });
+    
+    $$('.recommendation-popup').each(function(el) {
+    	el.removeEvents('click');
+        el.addEvent('click', function(e){
+        	e.preventDefault();
+        	reloadRecommendation = true;
+            render = el.get('rel');
+            var url = el.get('href');
+            Smoothbox.open(url);
+        });
+    });
+    
     //for upload photos
     var url = '<?php echo $this->url(array('action'=>'upload-photo'), 'user_general', true)?>';
     $$('.section-fileupload').each(function(el) {
@@ -215,6 +253,11 @@ function renderSection(type, params) {
 	                    	addEventToForm();
                         }
                     } 
+                }
+                else {
+                	if ($('sections-content-item_'+type)) {
+                		$('sections-content-item_'+type).destroy();
+                	}
                 }
             }
         });
@@ -280,6 +323,10 @@ function renderSection(type, params) {
                 args.push(['education-institute', 'require', '<?php echo $this->translate('Institute')?>']);
                 args.push(['education-attend_from', 'year-before', 'education-attend_to', '<?php echo $this->translate('Start Year')?>', '<?php echo $this->translate('End Year')?>']);
                 break;
+                
+            case 'recommendation':
+            	return true;
+            	break;
                  
         }
         if ($('profile-section-form-'+section)) {
