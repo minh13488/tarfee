@@ -348,14 +348,51 @@ class User_Api_Core extends Core_Api_Abstract
         $sections = $this->_sections;
         if (array_key_exists($section, $sections)) {
             if (isset($params['save']) && $params['save'] && ($viewer->getIdentity() == $user->getIdentity())) {
-                if (isset($params['item_id']) && $params['item_id']) {
+            	if ($section == 'recommendation') {
+            		$render = (isset($params['render'])) ? $params['render'] : 'show';
+					switch ($render) {
+						case 'received':
+							$show_ids = $params['show_checkbox'];
+							$deleted_ids = $params['delete_checkbox'];
+					        $table = Engine_Api::_()->getDbtable('recommendations', 'user');
+					        $table->showRecommendations($viewer->getIdentity(), $show_ids);
+							if (count($deleted_ids)) {
+					        	$table->deleteRecommendations($viewer->getIdentity(), $deleted_ids);
+					        }
+							break;
+							
+						case 'pending':
+							$approved_ids = $params['approve_checkbox'];
+							$deleted_ids = $params['delete_checkbox'];
+					        $table = Engine_Api::_()->getDbtable('recommendations', 'user');
+					        if (count($approved_ids)) {
+					        	$table->approveRecommendations($viewer->getIdentity(), $approved_ids);
+					        }
+							
+							if (count($deleted_ids)) {
+					        	$table->deleteRecommendations($viewer->getIdentity(), $deleted_ids);
+					        }
+							break;
+									
+						case 'request':
+							$ignore_ids = $params['ignore_checkbox'];
+					        $table = Engine_Api::_()->getDbtable('recommendations', 'user');
+							if (count($ignore_ids)) {
+					        	$table->ignoreRecommendations($viewer->getIdentity(), $ignore_ids);
+					        }
+							break;
+							
+					} 	
+            	}
+				
+				else if (isset($params['item_id']) && $params['item_id']) {
                     $user->editSection($section, $params);
                 }
                 else {
                     $user->addSection($section, $params);
                 }
             }
-            
+			 
             if (isset($params['remove']) && $params['remove'] && ($viewer->getIdentity() == $user->getIdentity())) {
                 $user->removeSection($section, $params);
             }

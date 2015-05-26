@@ -1021,3 +1021,12 @@ li.sideicon_generic:hover{
 {
 	display: none;
 }
+#global_page_user-index-home > .quicklinks
+{
+  	border: 0;
+	padding: 0;
+}
+#global_page_user-index-home li.sideicon_generic
+{
+	line-height: 28px;;
+}
