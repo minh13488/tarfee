@@ -69,6 +69,17 @@
 					     ));
 					?>
 				</li>
+				<li>
+						<?php echo $this->htmlLink(array(
+								'route' => 'user_library',
+								'action' => 'move-to-main',
+								'id' =>  $this -> video -> video_id,
+								'player_id' =>  $this->player->getIdentity(),
+							), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Main Library '), array(
+							'class' => 'smoothbox buttonlink'
+							)) ;
+						?>
+				</li>
 			</ul>
 		</div>
 		<?php endif;?>

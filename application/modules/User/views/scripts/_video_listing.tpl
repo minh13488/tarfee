@@ -1,4 +1,4 @@
-<li stlye="height:auto" class="user-library-video-content">
+<li style="height:auto" class="user-library-video-content">
       <div class="video_thumb_wrapper">
         <?php if ($this -> video->duration):?>
         <span class="video_length">
@@ -93,6 +93,23 @@
 							)) ;
 						?>
 				</li>
+				<?php endif;?>
+				
+				<?php if(isset($this -> main) && $this -> main) :?>
+					<?php $playerTable = Engine_Api::_() -> getItemTable('user_playercard'); ?>
+					<?php if($playerTable -> getTotal($this -> viewer() -> getIdentity())) :?>
+					<li>
+						<?php echo $this->htmlLink(array(
+								'route' => 'user_library',
+								'action' => 'move-to-player',
+								'id' =>  $this -> video -> video_id,
+								'libid' =>  $this->library->getIdentity(),
+							), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Player '), array(
+							'class' => 'smoothbox buttonlink'
+							)) ;
+						?>
+					</li>
+					<?php endif;?>
 				<?php endif;?>
 			</ul>
 		</div>
