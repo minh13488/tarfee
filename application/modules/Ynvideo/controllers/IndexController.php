@@ -55,22 +55,22 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		$this -> view -> categories = $categories = Engine_Api::_() -> getDbTable('categories', 'ynvideo') -> getAllCategoriesAndSortByLevel();
 
 		// set up data needed to check quota
-		$parent_type = $this -> _getParam('parent_type');
-		$parent_id = $this -> _getParam('parent_id', $this -> _getParam('subject_id'));
+		//$parent_type = $this -> _getParam('parent_type');
+		//$parent_id = $this -> _getParam('parent_id', $this -> _getParam('subject_id'));
 
-		if (Engine_Api::_() -> hasItemType($parent_type))
-		{
-			$this -> view -> item = $item = Engine_Api::_() -> getItem($parent_type, $parent_id);
-			if (!$this -> _helper -> requireAuth() -> setAuthParams($item, null, 'video') -> isValid())
-			{
-				return;
-			}
-		}
-		else
-		{
+		//if (Engine_Api::_() -> hasItemType($parent_type))
+		//{
+		//	$this -> view -> item = $item = Engine_Api::_() -> getItem($parent_type, $parent_id);
+		//	if (!$this -> _helper -> requireAuth() -> setAuthParams($item, null, 'video') -> isValid())
+		//	{
+		//		return;
+		//	}
+		//}
+		//else
+		//{
 			$parent_type = 'user';
 			$parent_id = $viewer -> getIdentity();
-		}
+		//}
 
 		$values['user_id'] = $viewer -> getIdentity();
 		$paginator = Engine_Api::_() -> getApi('core', 'ynvideo') -> getVideosPaginator($values);

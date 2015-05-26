@@ -79,7 +79,12 @@
 		  <p>You need to <a href="<?php echo $authUrl;?>">authorize access</a> before proceeding.<p></p>
 		  
 		<?php else :?>
-			<?php echo $token;?>
+			<?php //echo $token;?>
+			<div class="tip">
+				<span>
+				<?php echo $this -> translate('You are connecting to YouTube');?>
+				</span>
+			</div>
 		<?php endif;?>
 <?php endif;?>		
     </div>

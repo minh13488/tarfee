@@ -111,7 +111,7 @@
 						</div>
 					</div>
 				</div>
-	            <div class="playercaed_options">
+	            <div class="playercard_options">
 	            	<?php echo $this->htmlLink(array(
 			            'route' => 'user_extended',
 			            'controller' => 'player-card',
@@ -130,6 +130,39 @@
 			            'class' => 'buttonlink smoothbox'
 			        ));
 	        		?>
+	        		<?php echo $this->htmlLink(array(
+						'route' => 'video_general',
+							'action' => 'create',
+							'parent_type' =>'user_playercard',
+							'subject_id' =>  $player->playercard_id,
+						), '<i class="fa fa-plus-square"></i>'.$this->translate('Create New Video'), array(
+						'class' => 'buttonlink'
+						)) ;
+					?>
+	            </div>
+	            <div class="playercard_videos">
+	            	<!-- get videos of sub libraries -->
+					<?php
+					    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+					    $videoTable = Engine_Api::_()->getItemTable('video');
+					    $params = array();
+					    $params['owner_type'] = $player -> getType();
+						$params['owner_id'] = $player -> getIdentity();
+					    $playercardVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
+					?>
+					<br/>
+					<?php if(count($playercardVideos)):?>
+					<ul style="border: 5px solid #eaeaea;" class="videos_browse">
+					 <?php foreach ($playercardVideos as $item): ?>
+				            <?php
+				            echo $this->partial('_player_video_listing.tpl', 'user', array(
+				                'video' => $item,
+				                'player' => $player,
+				            ));
+				            ?>
+					<?php endforeach; ?>
+					</ul>
+					<?php endif;?>
 	            </div>
 	        </li>
 	        <?php endforeach; ?>             
@@ -159,3 +192,30 @@
 	    <?php endif; ?>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$$('.user-video-item-action').addEvent('outerClick', function(){
+	    	if ( this.hasClass('open-submenu') ) {
+	    		this.removeClass('open-submenu');	
+	    	}
+	    });
+	
+		$$('.user-video-item-action').addEvent('click', function(){
+			if ( this.hasClass('open-submenu') ) {
+	    		this.removeClass('open-submenu');	
+	    	} else {
+	    		$$('.open-submenu').removeClass('open-submenu');
+	    		this.addClass('open-submenu');
+	    	}  
+		});
+		 
+		 $$('. user-video-close-box').addEvent('click', function(){
+		 	var parent = this.getParent().getParent().getParent();
+		 	if ( parent.hasClass('open-submenu') ) {
+	    		parent.removeClass('open-submenu');	
+	    	} else {
+	    		$$('.open-submenu').removeClass('open-submenu');
+	    		parent.addClass('open-submenu');
+	    	} 
+		});
+</script>
