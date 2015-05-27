@@ -1,4 +1,3 @@
-<?php $this -> headScript() -> appendFile($this -> layout() -> staticBaseUrl . 'externals/tinymce/tinymce.min.js'); ?>
 <?php $this->headScript()->appendFile("//maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"); ?>
 <?php $this -> headScript() -> appendFile($this -> layout() -> staticBaseUrl . 'application/modules/User/externals/scripts/validator.js'); ?>
 <?php 

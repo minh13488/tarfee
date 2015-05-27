@@ -214,6 +214,7 @@ class User_Plugin_Signup_Fields extends Core_Plugin_FormSequence_Abstract
     // Form was valid
     if( $this->getForm()->isValid($request->getPost()) )
     {
+      $data = $request->getPost();
       $this->getSession()->data = $this->getForm()->getProcessedValues();
       $this->getSession()->active = false;
       $this->onSubmitIsValid();

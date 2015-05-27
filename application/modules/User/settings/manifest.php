@@ -103,6 +103,7 @@ return array(
     'user_experience',
     'user_education',
     'user_recommendation',
+    'user_location',
     'user_sportcategory',
     'user_library',
     'user_sportcategory',
