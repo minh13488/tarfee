@@ -46,38 +46,6 @@ body.mce-fullscreen #global_content .layout_main {
 	width: auto !important;
 }
 
-/*************************************/
-/*** fix homepage and listing page ***/
-/*************************************/
-#global_page_ynresponsiveevent-index-event, 
-#global_page_core-index-index {
-	#global_content {
-		max-width: 100%;
-		padding: 0;
-		margin: 0;
-	}
-	
-	#ynevent_form_browse_filter.in {
-		display: block;
-	}
-}
-
-#global_page_core-index-index,
-#global_page_ynresponsiveevent-index-event {
-	.layout_left {
-		width: 185px;
-		margin-top: 45px;
-		margin-right: 0;
-	} 
-	
-	.layout_right {
-		width: 280px;
-	}
-	
-	ul.feed .feed_item_attachments .video_info {
-		width: 100%;
-	}
-}
 
 .layout_page_ynresponsiveevent_index_event,
 .layout_ynresponsive1_container2 {
