@@ -1,4 +1,4 @@
-<li style="height:auto" class="user-library-video-content">
+<li style="height: auto" class="user-library-video-content">
       <div class="video_thumb_wrapper">
         <?php if ($this -> video->duration):?>
         <span class="video_length">
@@ -48,8 +48,8 @@
 							'controller' => 'index',
 							'action' => 'edit',
 							'video_id' => $this -> video->video_id,
-							'parent_type' =>'user_library',
-							'subject_id' =>  $this->library->getIdentity(),
+							'parent_type' =>'user_playercard',
+							'subject_id' =>  $this->player->getIdentity(),
 					    ), '<i class="fa fa-pencil-square-o"></i>'.$this->translate('Edit '), array('class' => 'buttonlink'));
 					?>
 			    </li>
@@ -61,8 +61,8 @@
 					         	'controller' => 'index', 
 					         	'action' => 'delete', 
 					         	'video_id' => $this -> video->video_id, 
-					         	'subject_id' =>  $this->library->getIdentity(),
-					        	'parent_type' => 'user_library',
+					         	'subject_id' =>  $this->player->getIdentity(),
+					        	'parent_type' => 'user_playercard',
 					        	'case' => 'video',
 					         	'format' => 'smoothbox'), 
 					         	'<i class="fa fa-trash-o"></i>'.$this->translate('Delete Video'), array('class' => 'buttonlink smoothbox'
@@ -72,45 +72,14 @@
 				<li>
 						<?php echo $this->htmlLink(array(
 								'route' => 'user_library',
-								'action' => 'give-ownership',
+								'action' => 'move-to-main',
 								'id' =>  $this -> video -> video_id,
-								'libid' =>  $this->library->getIdentity(),
-							), '<i class="fa fa-plus-square"></i>'.$this->translate('Give OwnerShip'), array(
+								'player_id' =>  $this->player->getIdentity(),
+							), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Main Library '), array(
 							'class' => 'smoothbox buttonlink'
 							)) ;
 						?>
 				</li>
-				<?php $subLibraries = $this -> viewer() -> getMainLibrary() -> getSubLibrary();?>
-				<?php if(count($subLibraries) > 1) :?>
-				<li>
-						<?php echo $this->htmlLink(array(
-								'route' => 'user_library',
-								'action' => 'move-to-sub',
-								'id' =>  $this -> video -> video_id,
-								'libid' =>  $this->library->getIdentity(),
-							), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Sub Library '), array(
-							'class' => 'smoothbox buttonlink'
-							)) ;
-						?>
-				</li>
-				<?php endif;?>
-				
-				<?php if(isset($this -> main) && $this -> main) :?>
-					<?php $playerTable = Engine_Api::_() -> getItemTable('user_playercard'); ?>
-					<?php if($playerTable -> getTotal($this -> viewer() -> getIdentity())) :?>
-					<li>
-						<?php echo $this->htmlLink(array(
-								'route' => 'user_library',
-								'action' => 'move-to-player',
-								'id' =>  $this -> video -> video_id,
-								'libid' =>  $this->library->getIdentity(),
-							), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Player '), array(
-							'class' => 'smoothbox buttonlink'
-							)) ;
-						?>
-					</li>
-					<?php endif;?>
-				<?php endif;?>
 			</ul>
 		</div>
 		<?php endif;?>

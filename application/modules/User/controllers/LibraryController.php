@@ -8,6 +8,120 @@ class User_LibraryController extends Core_Controller_Action_Standard
 			return;
 	}
 	
+	public function moveToPlayerAction(){
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$videoID = $this ->_getParam('id');
+		$libraryID = $this ->_getParam('libid');
+		
+		$library = Engine_Api::_() -> getItem('user_library', $libraryID);
+		
+		$this -> view -> form = $form = new User_Form_Library_MoveToPlayer();
+		
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		
+		$posts = $this -> getRequest() -> getPost();
+		if (!$form -> isValid($posts)) {
+			return;
+		}
+		
+		$values = $form -> getValues();
+		$move_to = $values['move_to'];
+		$mappingTable = Engine_Api::_() -> getDbTable('mappings', 'user');
+		$db = $mappingTable -> getAdapter();
+		$db -> beginTransaction();
+
+		try
+		{
+			//get playercards
+			$player = Engine_Api::_() -> getItem('user_playercard', $move_to);
+			//get Row Mapping and update to move to user
+			$mappingRow = $mappingTable -> getRow($libraryID, 'user_library', $videoID, 'video');
+			if($mappingRow && $player) {
+				$mappingRow -> owner_id = $move_to;
+				$mappingRow -> owner_type = $player -> getType();
+				$mappingRow -> save();
+				
+				$video = Engine_Api::_() -> getItem('video', $videoID);
+				if($video) {
+					$video -> parent_type = $player -> getType();
+					$video -> parent_id = $move_to;
+					$video -> save();
+				}
+				
+				
+			}
+			$db -> commit();
+		} catch( Exception $e )	{
+			$db -> rollBack();
+			throw $e;
+		}
+		
+		$this -> _forward('success', 'utility', 'core', array(
+				'closeSmoothbox' => true,
+				'parentRefresh' => true,
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _($this -> view -> translate('Move Contents Success...')))
+		));
+	} 
+	
+	public function moveToMainAction() {
+		
+		//move player videos to main library
+		
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$mainLibrary = $viewer -> getMainLibrary();
+		$videoID = $this ->_getParam('id');
+		$playerID = $this ->_getParam('player_id');
+		$type = $this ->_getParam('type');
+		
+		$this -> view -> form = $form = new User_Form_Library_MoveToMain();
+		
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		
+		$posts = $this -> getRequest() -> getPost();
+		if (!$form -> isValid($posts)) {
+			return;
+		}
+		
+		$mappingTable = Engine_Api::_() -> getDbTable('mappings', 'user');
+		$db = $mappingTable -> getAdapter();
+		$db -> beginTransaction();
+
+		try
+		{
+			
+			//get Row Mapping and update to move to user
+			$mappingRow = $mappingTable -> getRow($playerID, 'user_playercard', $videoID, 'video');
+			if($mappingRow) {
+				$mappingRow -> owner_id = $mainLibrary -> getIdentity();
+				$mappingRow -> owner_type = 'user_library';
+				$mappingRow -> save();
+				
+				$video = Engine_Api::_() -> getItem('video', $videoID);
+				if($video) {
+					$video -> parent_type = $mainLibrary -> getType();
+					$video -> parent_id = $mainLibrary -> getIdentity();
+					$video -> save();
+				}
+				
+			}
+			$db -> commit();
+		} catch( Exception $e )	{
+			$db -> rollBack();
+			throw $e;
+		}
+		
+		$this -> _forward('success', 'utility', 'core', array(
+				'closeSmoothbox' => true,
+				'parentRefresh' => true,
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _($this -> view -> translate('Move Contents Success...')))
+		));
+		
+	}
+	
 	public function moveToSubAction(){
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		$videoID = $this ->_getParam('id');

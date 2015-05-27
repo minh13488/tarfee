@@ -63,6 +63,7 @@
         echo $this->partial('_video_listing.tpl', 'user', array(
             'video' => $item,
             'library' => $this->library,
+            'main' => true,
         ));
         ?>
 <?php endforeach; ?>
