@@ -169,15 +169,15 @@ class User_Plugin_Core
 		if (is_object($request))
 		{
 			$view = Zend_Registry::get('Zend_View');
-			$library_id =  $request -> getParam("subject_id", null);
-			$type = $request -> getParam("parent_type", null);
+			$subject_id =  $request -> getParam("subject_id", null);
+			$typeOwner = $request -> getParam("parent_type", null);
 			$case = $request -> getParam("case", null);
             if (is_null($case)) {
                 $case = $payload['type'];
             }
-			if ($type == 'user_library')
+			if ($typeOwner == 'user_library' || $typeOwner == 'user_playercard')
 			{
-				if ($library_id)
+				if ($subject_id)
 				{
 					switch ($case) 
 					{								
@@ -187,8 +187,8 @@ class User_Plugin_Core
 							$viewer = Engine_Api::_() -> user() -> getViewer();
 							
 							Engine_Api::_() -> getDbTable('mappings', 'user') -> deleteItem(array(
-								'owner_type' => "user_library",
-								'owner_id' => $library_id,
+								'owner_type' => $typeOwner,
+								'owner_id' => $subject_id,
 								'item_type' => $payload['type'], 
 								'item_id' => $payload['identity']
 							));
@@ -212,29 +212,28 @@ class User_Plugin_Core
 		if (is_object($request))
 		{
 			$view = Zend_Registry::get('Zend_View');
-			$library_id = $request -> getParam("business_id", $request -> getParam("subject_id", null));
-			$type = $request -> getParam("parent_type", null);
+			$subject_id =  $request -> getParam("subject_id", null);
+			$typeOwner = $request -> getParam("parent_type", null);
 			
-			if ($type == 'user_library')
+			if ($typeOwner == 'user_library' || $typeOwner == 'user_playercard')
 			{
-				if ($library_id)
+				if ($subject_id)
 				{
 					$viewer = Engine_Api::_() -> user() -> getViewer();
 					$type = $payload -> getType();
 					switch ($type) 
 					{
-							
 						case 'video':
                             $table = Engine_Api::_() -> getDbTable('mappings', 'user');
-                            $select = $table -> select() -> where('owner_id = ?', $library_id) -> where('item_id = ?', $payload -> getIdentity()) -> where('item_type = ?', 'video') -> limit(1);
+                            $select = $table -> select() -> where('owner_id = ?', $subject_id) -> where('item_id = ?', $payload -> getIdentity()) -> where('item_type = ?', 'video') -> limit(1);
                             $video_row = $table -> fetchRow($select);
                             if (!$video_row) {
                                 $row -> setFromArray(array(
                                    'user_id' => $viewer -> getIdentity(),
                                    'item_id' => $payload -> getIdentity(),
                                    'item_type' => 'video',
-                                   'owner_id' => $library_id,                     
-                                   'owner_type' => 'user_library',      
+                                   'owner_id' => $subject_id,                     
+                                   'owner_type' => $typeOwner,      
                                    'creation_date' => date('Y-m-d H:i:s'),
                                    'modified_date' => date('Y-m-d H:i:s'),
                                    ));
@@ -279,16 +278,15 @@ class User_Plugin_Core
             { return;}
 		$table = Engine_Api::_() -> getDbTable('mappings', 'user');
 			
-			$library_id =  $request -> getParam("subject_id", null);
-			$type = $request -> getParam("parent_type", null);
+			$subject_id = $library_id =  $request -> getParam("subject_id", null);
+			$typeOwner = $request -> getParam("parent_type", null);
 			
-			if ($type == 'user_library')
+			if ($typeOwner == 'user_library' || $typeOwner == 'user_playercard')
 			{
-				if ($library_id)
+				if ($subject_id)
 				{
 					$type = $payload -> getType();
 					$viewer = Engine_Api::_() -> user() -> getViewer();
-					$library = Engine_Api::_() -> getItem('user_library', $library_id);
 					switch ($type) 
 					{
 						case 'video':
@@ -297,8 +295,8 @@ class User_Plugin_Core
 						       'user_id' => $viewer -> getIdentity(),
 						       'item_id' => $payload -> getIdentity(),
 						       'item_type' => 'video',
-						       'owner_id' => $library_id,				       
-			       			   'owner_type' => 'user_library',		
+						       'owner_id' => $subject_id,				       
+			       			   'owner_type' => $typeOwner,		
 						       'creation_date' => date('Y-m-d H:i:s'),
 						       'modified_date' => date('Y-m-d H:i:s'),
 						       ));
@@ -331,7 +329,5 @@ class User_Plugin_Core
 					}
 				}
 			}
-		
 	}
-  
 }

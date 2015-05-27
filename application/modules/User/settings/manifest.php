@@ -103,6 +103,7 @@ return array(
     'user_experience',
     'user_education',
     'user_recommendation',
+    'user_location',
     'user_sportcategory',
     'user_library',
     'user_sportcategory',
@@ -151,7 +152,7 @@ return array(
         'action' => 'create-sub-library'
       ),
       'reqs' => array(
-        'action' => '(create-sub-library|edit|delete|give-ownership|move-to-sub)',
+        'action' => '(create-sub-library|edit|delete|give-ownership|move-to-sub|move-to-main|move-to-player)',
       )
     ),
 	

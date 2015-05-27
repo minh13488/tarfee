@@ -74,4 +74,45 @@ class User_Model_Playercard extends Core_Model_Item_Abstract {
 
     return $this;
   }
+  
+  public function getOverallRating() {
+	  	$mappingTable = Engine_Api::_() -> getDbTable('mappings', 'user');
+	  	$ratingTable = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
+	  	$params = array(
+	  		'owner_id' => $this -> getIdentity(),
+	  		'owner_type' => $this -> getType(),
+	  	);
+	  	$type = 'video';
+	  	$videoIds = $mappingTable -> getItemIdsMapping($type, $params);
+	  	$totalOverallRating = 0;
+	  	$totalOverallRatingReview = 0;
+	  	foreach($videoIds as $video_id) {
+	  		//loop for each video
+	  		$video = Engine_Api::_() -> getItem('video', $video_id);
+	  		if($video) {
+	  			//get all user add ratings for this video
+	  			$userIds = $ratingTable -> getUserRatingByResource($video_id);
+	  			$totalOverallRatingVideo = 0;
+	  			foreach($userIds as $userId) {
+	  				//loop for each user to get overall ratings for video
+	  				$params = array(
+	  					'resource_id' => $video_id,
+	  					'user_id' => $userId,
+	  				);
+	  				$ratings = $ratingTable -> getRatingsBy($params);
+	  				$ratingTotal = 0;
+	  				foreach($ratings as $rating) {
+	  					$ratingTotal += $rating -> rating;
+	  				}
+	  				$totalOverallRatingVideo += round(($ratingTotal/5), 2);
+	  				$totalOverallRatingReview++;
+	  			}
+	  			$totalOverallRating += $totalOverallRatingVideo;
+	  		}
+	  	}
+		if($totalOverallRatingReview != 0) {
+		  		$total =  round(($totalOverallRating/$totalOverallRatingReview), 2);
+		  		return $total;
+		} else return "0";
+  }
 }

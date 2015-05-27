@@ -19,6 +19,13 @@ class User_Model_DbTable_Playercards extends Engine_Db_Table
 	    return $paginator;
 	}
 	
+	public function getAllPlayerCard($user_id) {
+		$select = $this -> select();
+		$select -> where('user_id = ?', $user_id)
+				-> order('creation_date DESC');
+		return $this -> fetchAll($select);
+	}
+	
 	public function getTotal($user_id = 0)
 	{
     	$select = new Zend_Db_Select($this->getAdapter());

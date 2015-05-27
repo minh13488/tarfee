@@ -152,3 +152,19 @@ CREATE TABLE IF NOT EXISTS `engine4_user_licenses` (
   `modified_date` datetime NOT NULL,
   PRIMARY KEY (`license_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+5.27.2015
+--
+-- Table structure for table `engine4_user_locations`
+--
+CREATE TABLE IF NOT EXISTS `engine4_user_locations` (
+  `location_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `level` int(11) NOT NULL DEFAULT '0',
+  `title` text NOT NULL,
+  `parent_id` int(11) NOT NULL DEFAULT '0',
+  `continent` varchar(128) NOT NULL DEFAULT 'Asia',
+  PRIMARY KEY (`location_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
+('profilesection_admin_settings_location', 'user', 'Manage Locations', '', '{"route":"admin_default","module":"user","controller":"locations"}', 'profilesection_admin_main', '', 4);
