@@ -382,6 +382,42 @@ endif;
                 ));
             ?>
         <?php endif; ?>
+        <!-- add, edit ratings for profession -->
+        <?php if($this -> viewer() -> level_id == 6 && $this -> video -> parent_type == "user_playercard") :?>
+	          &nbsp;|&nbsp;
+	          <?php 
+					$tableReview = Engine_Api::_() -> getItemTable('ynvideo_review');
+					$hasReviewed = $tableReview -> checkHasReviewed($this -> video -> video_id, $this -> viewer() -> getIdentity());
+				?>
+			 <?php if($hasReviewed) :?>
+			 	 <?php
+			 	   $review = $tableReview -> getReviewed($this -> video -> video_id, $this -> viewer() -> getIdentity());
+			 	   if($review){
+		            echo $this->htmlLink(array(
+		                    'route' => 'video_other_route',
+		                    'action' => 'edit-rate-video',
+		                    'id' => $review -> getIdentity(),
+		                    'format' => 'smoothbox'
+		                ), $this->translate('Edit Ratings'),
+		                array(
+		                    'class' => 'smoothbox'
+		                ));
+		            } ?>
+			 <?php else :?>
+		         <?php
+		            echo $this->htmlLink(array(
+		                    'route' => 'video_other_route',
+		                    'action' => 'rate-video',
+		                    'video_id' => $this->video->video_id,
+		                    'format' => 'smoothbox'
+		                ), $this->translate('Add Ratings'),
+		                array(
+		                    'class' => 'smoothbox'
+		                ));
+		            ?>
+	         <?php endif ?>
+	     <?php endif ?>
+	     <!-- END add, edit ratings for profession -->    
     <?php endif ?>
 
     <div class="ynvideo_block" style="display:none">
