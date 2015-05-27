@@ -1,4 +1,4 @@
-<h2><?php echo $this->translate("YouNet Feedback Plugin") ?></h2>
+<h2><?php echo $this->translate("Player Card Settings") ?></h2>
 
 <?php if( count($this->navigation) ): ?>
   <div class='tabs'>

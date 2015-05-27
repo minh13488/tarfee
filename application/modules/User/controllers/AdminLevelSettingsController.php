@@ -30,7 +30,7 @@ class User_AdminLevelSettingsController extends Core_Controller_Action_Admin
 
     // Populate values
     $permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
-    $form->populate($permissionsTable->getAllowed('player_card', $id, array_keys($form->getValues())));
+    $form->populate($permissionsTable->getAllowed('user_playercard', $id, array_keys($form->getValues())));
 
     // Check post
     if( !$this->getRequest()->isPost() ) {

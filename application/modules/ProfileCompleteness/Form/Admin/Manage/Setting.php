@@ -37,6 +37,44 @@ class ProfileCompleteness_Form_Admin_Manage_Setting extends Engine_Form {
                 ),
         ));
         $this->photoweight->getValidator('NotEmpty')->setMessage('Please enter a number, and greater than 0.', 'isEmpty');
+		
+		$this->addElement('Text', 'sportlikeweight', array(
+            'label' => 'Sports I Like Weight',
+            'description' => 'Enter 0 to skip photo checking, by default it\'s included with value 2',
+            'required' => true,
+            'validators' => array(
+                array('NotEmpty', true),
+                array('Int', true),
+                new Engine_Validate_AtLeast(0),
+                ),
+        ));
+        $this->sportlikeweight->getValidator('NotEmpty')->setMessage('Please enter a number, and greater than 0.', 'isEmpty');
+		
+		$this->addElement('Text', 'followclubweight', array(
+            'label' => 'Follow my Club(s) Weight',
+            'description' => 'Enter 0 to skip photo checking, by default it\'s included with value 2',
+            'required' => true,
+            'validators' => array(
+                array('NotEmpty', true),
+                array('Int', true),
+                new Engine_Validate_AtLeast(0),
+                ),
+        ));
+        $this->followclubweight->getValidator('NotEmpty')->setMessage('Please enter a number, and greater than 0.', 'isEmpty');
+		
+		$this->addElement('Text', 'videoweight', array(
+            'label' => 'Upload Video Weight',
+            'description' => 'Enter 0 to skip photo checking, by default it\'s included with value 2',
+            'required' => true,
+            'validators' => array(
+                array('NotEmpty', true),
+                array('Int', true),
+                new Engine_Validate_AtLeast(0),
+                ),
+        ));
+        $this->videoweight->getValidator('NotEmpty')->setMessage('Please enter a number, and greater than 0.', 'isEmpty');
+		
+		
         $this->addElement('Checkbox', 'view', array(
             'label' => 'Do not show widget',
             'description' => 'Do not show the widget when profile is 100% complete',

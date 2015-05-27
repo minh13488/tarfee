@@ -1,12 +1,15 @@
 <div id='profile_photo'>
 	<?php $photoUrl = $this->subject() -> getPhotoUrl('thumb.profile');?>
-	<!--
+	<?php if(Engine_Api::_()->authorization()->isAllowed('user', $this->subject(), 'show_badge')):?>
 	<div class="options">
-		<a href="">
-			<span></span>
-		</a>
+		<?php 
+		$badge = Engine_Api::_()->authorization()->getPermission($this->subject(), 'user', 'badge');
+		if($badge):
+		?>
+		<span style="background-size:cover; background-repeat: no-repeat;background-position:0; background-image: url('./<?php echo $badge?>');"></span>
+		<?php endif;?>
 	</div>
-	-->
+	<?php endif;?>
 	<div class="avatar">
 		<span>
 			<a href="">
