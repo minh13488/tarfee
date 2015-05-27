@@ -29,5 +29,7 @@ class User_Form_Signup_Fields extends Fields_Form_Standard
       ->setIsCreation(true)
       ->setItem(Engine_Api::_()->user()->getUser(null));
     parent::init();
+	
+		
   }
 }

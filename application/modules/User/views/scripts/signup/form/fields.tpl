@@ -20,3 +20,8 @@
 ?>
 
 <?php echo $this->form->render($this) ?>
+
+<script>
+	window.addEvent('domready', function() {
+	});
+</script>
