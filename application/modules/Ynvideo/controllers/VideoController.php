@@ -176,5 +176,185 @@ class Ynvideo_VideoController extends Core_Controller_Action_Standard
 		$data = Zend_Json::encode($data);
 		$this -> getResponse() -> setBody($data);
 	}
-
+	
+	 public function rateVideoAction()
+	  {
+	  	$viewer = Engine_Api::_() -> user() -> getViewer();
+	  	if($viewer -> level_id != 6) {
+	  		return $this->_helper->requireAuth()->forward();
+	  	}
+	  	$video_id = $this->_getParam('video_id');
+		if(empty($video_id))
+		{
+			$this->_helper->requireSubject()->forward();
+		}
+	  	// Viewer can not rate and review
+	  	$video = Engine_Api::_()->getItem('video', $video_id);
+		if(!$video)
+		{
+			return $this->_helper->requireSubject()->forward();
+		}
+		if($video -> parent_type != "user_playercard") {
+			return $this->_helper->requireAuth()->forward();
+		}
+		//check hasReviewed
+		$tableReview = Engine_Api::_() -> getItemTable('ynvideo_review');
+		$HasReviewed = $tableReview -> checkHasReviewed($video_id, $viewer -> getIdentity());
+		
+		if($HasReviewed)
+		{
+			$this->_helper->requireSubject()->forward();
+		}
+		
+		$rating_types = array();
+		$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
+		$rating_types = $tableRatingType -> getAllRatingTypes();
+		
+	  	// Get form
+		$this -> view -> form = $form = new Ynvideo_Form_Rate(array(
+			'video' => $video,
+			'ratingTypes' => $rating_types,
+		));
+		
+		// Check stuff
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
+		
+		
+		$values = $form -> getValues();
+		
+		//check rating empty
+		foreach($rating_types as $item)
+		{
+			$param_rating = 'review_rating_'.$item -> getIdentity();
+			$row_rating = $this->_getParam($param_rating);
+			if(empty($row_rating))
+			{
+				$form -> addError('Please rating all!');
+				return;
+			}
+		}
+		
+		//save general review
+		$review = Engine_Api::_() -> getItemTable('ynvideo_review') -> createRow();
+		$review -> resource_id = $video_id;
+		$review -> user_id = $viewer -> getIdentity();
+		$review -> save();
+		
+		
+		$tableRating = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
+		
+		// Specific Rating
+		foreach($rating_types as $item)
+		{
+			$row = $tableRating -> createRow();
+			$row -> resource_id = $video_id;
+			$row -> user_id = $viewer -> getIdentity();
+			$row -> rating_type = $item -> getIdentity();
+			$param_rating = 'review_rating_'.$item -> getIdentity();
+			$row -> rating = $this->_getParam($param_rating);
+			$row -> review_id = $review -> getIdentity();
+			$row -> save();
+		}
+		
+		return $this -> _forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Add Ratings Successfully.')),
+			'layout' => 'default-simple',
+			'parentRefresh' => true,
+		));
+	  }
+	  
+	  public function editRateVideoAction()
+	  {
+	  	$viewer = Engine_Api::_() -> user() -> getViewer();
+	  	if($viewer -> level_id != 6) {
+	  		return $this->_helper->requireAuth()->forward();
+	  	}
+	  	$viewer = Engine_Api::_() -> user() -> getViewer();
+	  	$id = $this->_getParam('id');
+		$review = Engine_Api::_() -> getItem('ynvideo_review', $id);
+		if(empty($review))
+		{
+			$this->_helper->requireSubject()->forward();
+		}
+		
+	  	$video = Engine_Api::_()->getItem('video', $review -> resource_id);
+		if(!$video)
+		{
+			return  $this->_helper->requireSubject()->forward();
+		}
+		if($video -> parent_type != "user_playercard") {
+			return $this->_helper->requireAuth()->forward();
+		}
+		if($review -> user_id != $viewer -> getIdentity())
+		{
+			return $this->_helper->requireAuth()->forward();
+		}
+		
+		$rating_types = array();
+		$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
+		$rating_types = $tableRatingType -> getAllRatingTypes();
+		
+	  	// Get form
+		$this -> view -> form = $form = new Ynvideo_Form_EditRate(array(
+			'video' => $video,
+			'ratingTypes' => $rating_types,
+			'item' => $review,
+		));
+		$form -> populate($review -> toArray());
+		// Check stuff
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
+		
+		//check rating empty
+		foreach($rating_types as $item)
+		{
+			$param_rating = 'review_rating_'.$item -> getIdentity();
+			$row_rating = $this->_getParam($param_rating);
+			if(empty($row_rating))
+			{
+				$form -> addError('Please rating all!');
+				return;
+			}
+		}
+		
+		$values = $form -> getValues();
+		
+		$tableRating = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
+		// Specific Rating
+		foreach($rating_types as $item)
+		{
+			$row = $tableRating -> getRowRatingThisType($item -> getIdentity(), $video -> getIdentity(), $viewer -> getIdentity(), $review->getIdentity());
+			if(!$row)
+			{
+				$row = $tableRating -> createRow();
+			}
+			$row -> resource_id = $review -> resource_id;
+			$row -> user_id = $viewer -> getIdentity();
+			$row -> rating_type = $item -> getIdentity();
+			$param_rating = 'review_rating_'.$item -> getIdentity();
+			$row -> rating = $this->_getParam($param_rating);
+			$row -> review_id = $review -> getIdentity();
+			$row -> save();
+		}
+		
+		return $this -> _forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Edit Rate Successfully.')),
+			'layout' => 'default-simple',
+			'parentRefresh' => true,
+		));
+	  }
+	
 }

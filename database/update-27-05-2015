@@ -1,0 +1,50 @@
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_ynvideo_ratings`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_ynvideo_reviewratings` (
+  `reviewrating_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `rating_type` int(11) unsigned NOT NULL,
+  `rating` int(11) unsigned NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `review_id` int(11) NOT NULL,
+  PRIMARY KEY (`reviewrating_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_ynvideo_reviews`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_ynvideo_reviews` (
+  `review_id` int(11) NOT NULL AUTO_INCREMENT,
+  `resource_id` int(11) unsigned NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`review_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_ynvideo_ratingtypes`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_ynvideo_ratingtypes` (
+  `ratingtype_id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `title` text COLLATE utf8_unicode_ci,
+  PRIMARY KEY (`ratingtype_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT IGNORE INTO `engine4_ynvideo_ratingtypes` (`title`) VALUES
+('Dribble'),
+('Control'),
+('Accuracy'),
+('Position'),
+('Physical');
+
