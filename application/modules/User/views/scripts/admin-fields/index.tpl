@@ -39,7 +39,7 @@ if( $settings->getSetting('user.support.links', 0) == 1 ) {
 <div class="admin_fields_options">
   <a href="javascript:void(0);" onclick="void(0);" class="buttonlink admin_fields_options_addquestion">Add Question</a>
   <a href="javascript:void(0);" onclick="void(0);" class="buttonlink admin_fields_options_addheading">Add Heading</a>
-  <a href="javascript:void(0);" onclick="void(0);" class="buttonlink admin_fields_options_renametype">Rename Profile Type</a>
+  <a href="javascript:void(0);" onclick="void(0);" class="buttonlink admin_fields_options_renametype">Edit Profile Type</a>
   <?php if( count($this->topLevelOptions) > 1 ): ?>
     <a href="javascript:void(0);" onclick="void(0);" class="buttonlink admin_fields_options_deletetype">Delete Profile Type</a>
   <?php endif; ?>

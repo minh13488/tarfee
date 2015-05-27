@@ -165,7 +165,14 @@ return array(
         'action' => 'index'
       )
     ),*/
-    
+    'user_home' => array(
+      'route' => '/home/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'auth',
+        'action' => 'home'
+      )
+    ),
     'user_login' => array(
       'route' => '/login/*',
       'defaults' => array(

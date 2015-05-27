@@ -87,7 +87,23 @@ class User_Form_Admin_Manage_Edit extends Engine_Form
       'label' => 'Networks',
       'multiOptions' => $networkMultiOptions
     ));
-
+	
+	// Get list of Member Types
+    $db = Engine_Db_Table::getDefaultAdapter();
+    $member_type_result = $db->select('option_id, label')
+            ->from('engine4_user_fields_options')
+			->where('field_id = 1')
+            ->query()
+            ->fetchAll();
+    $member_type_count = count($member_type_result);
+    $member_type_array = array();
+    for( $i = 0; $i < $member_type_count; $i++) {
+      $member_type_array[$member_type_result[$i]['option_id']] = $member_type_result[$i]['label']; 
+    }
+	$this->addElement('Select', 'profile_type', array(
+      'label' => 'Profile Type',
+      'multiOptions' => $member_type_array
+    ));
     // Init approved
     $this->addElement('Checkbox', 'approved', array(
       'label' => 'Approved?',
