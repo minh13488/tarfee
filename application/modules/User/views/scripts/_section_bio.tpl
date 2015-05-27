@@ -40,30 +40,11 @@
             <p class="error"></p>
             <div id="bio-bio-wrapper" class="profile-section-form-wrapper">
             	<p class="error"></p>
-                <textarea maxlength="50" id="bio-bio" name="bio"/><?php if (!empty($bio)) echo $bio?></textarea>
+                <textarea <?php if ($max_character) echo 'maxlength="'.$max_character.'"'?> id="bio-bio" name="bio"/><?php if (!empty($bio)) echo $bio?></textarea>
                 <?php if ($max_character) :?>
                 <p class="form-description"><?php echo $this->translate('The maximum characters is %s', $max_character)?></p>
                 <?php endif; ?>
             </div>
-            <script type="text/javascript">
-            	window.addEvent('domready', function() {
-            		tinymce.init({mode: "exact", elements: "bio-bio", plugins: "table,fullscreen,media,preview,paste,code,image,textcolor", theme: "modern", menubar: false, statusbar: false, toolbar1: "undo,|,redo,|,removeformat,|,pastetext,|,code,|,media,|,image,|,link,|,fullscreen,|,preview", toolbar2: "fontselect,fontsizeselect,bold,italic,underline,strikethrough,forecolor,backcolor,|,alignleft,aligncenter,alignright,alignjustify,|,bullist,numlist,|,outdent,indent,blockquote", toolbar3: "", element_format: "html", height: "225px", convert_urls: false, language: "en", directionality: "ltr",
-            		setup: function(ed) {           
-			            var maxlength = <?php echo $max_character?>;
-			            if (maxlength > 0) {
-				            ed.on('keypress', function(e) {
-								var div = document.createElement("div");
-								div.innerHTML = ed.getContent();
-				            	tinylen = div.innerText.length;
-				                if (tinylen >= maxlength) {
-				                	e.preventDefault();
-        							e.stopPropagation();
-				                }
-				            });
-			           }
-			        }});
-            	});
-            </script>
             <div class="profile-section-form-buttons">
                 <button type="submit" id="submit-btn"><?php echo $this->translate('Save')?></button>
                 <button rel="bio" type="button" class="reload-cancel-btn"><?php echo $this->translate('Cancel')?></button>
