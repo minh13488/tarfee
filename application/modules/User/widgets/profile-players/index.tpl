@@ -101,33 +101,41 @@
 					</div>
 					<div class="actions">
 						<div>
-						<table><tr>
-						<td>
-							<?php echo $this->htmlLink(array(
-					            'route' => 'messages_general',
-					            'action' => 'compose',
-					            'to' => $player -> getOwner() ->getIdentity()
-					        ), '<span class="actions_generic messaging"></span>', array(
-					            'class' => 'smoothbox'
-					        ));
-				    		?>
-						</td>
-						<td>
-							<?php echo $this->htmlLink(array(
-					            'route' => 'default',
-					            'module' => 'activity',
-					            'controller' => 'index',
-								'action' => 'share',
-								'type' => 'user_playercard',
-								'id' => $player -> getIdentity(),
-					        ), '<span class="actions_generic sharing"></span>', array(
-					            'class' => 'smoothbox'
-					        ));
-				    		?>
-						</td>
-						<td><a href=""><span class="actions_generic like"></span></a></td>
+						<table>
+							<tr>
+								<td>
+									<?php if($this -> viewer() -> getIdentity()):?>
+									<?php echo $this->htmlLink(array(
+							            'route' => 'messages_general',
+							            'action' => 'compose',
+							            'to' => $player -> getOwner() ->getIdentity()
+							        ), '<span class="actions_generic messaging"></span>', array(
+							            'class' => 'smoothbox'
+							        ));
+						    		?>
+						    		<?php endif;?>
+								</td>
+								<td>
+									<?php echo $this->htmlLink(array(
+							            'route' => 'default',
+							            'module' => 'activity',
+							            'controller' => 'index',
+										'action' => 'share',
+										'type' => 'user_playercard',
+										'id' => $player -> getIdentity(),
+							        ), '<span class="actions_generic sharing"></span>', array(
+							            'class' => 'smoothbox'
+							        ));
+						    		?>
+								</td>
+								<td>
+									<?php if($this -> viewer() -> getIdentity()):?>
+										<a href=""><span class="actions_generic like"></span></a>
+									<?php endif;?>
+								</td>
 						</tr></table>
 						</div>
+						<?php endif;?>
 					</div>
 				</div>
 	            <div class="playercard_options">
@@ -141,42 +149,44 @@
 			            'class' => 'buttonlink'
 			        ));
 	        		?>
-	            	<?php echo $this->htmlLink(array(
-			            'route' => 'user_extended',
-			            'controller' => 'player-card',
-			            'action' => 'edit',
-			            'id' => $player->playercard_id,
-			        ), $this->translate('Edit'), array(
-			            'class' => 'buttonlink'
-			        ));
-	        		?>
-	        		<?php echo $this->htmlLink(array(
-			            'route' => 'user_extended',
-			            'controller' => 'player-card',
-			            'action' => 'add-video',
-			            'id' => $player->playercard_id,
-			        ), $this->translate('Add Video'), array(
-			            'class' => 'buttonlink'
-			        ));
-	        		?>
-	        		<?php echo $this->htmlLink(array(
-			            'route' => 'user_extended',
-			            'controller' => 'player-card',
-			            'action' => 'delete',
-			            'id' => $player->playercard_id,
-			        ), $this->translate('Delete'), array(
-			            'class' => 'buttonlink smoothbox'
-			        ));
-	        		?>
-	        		<?php echo $this->htmlLink(array(
+	            	<?php 
+	            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> getIdentity() == $this -> viewer() -> getIdentity())
+					{
+		            	echo $this->htmlLink(array(
+				            'route' => 'user_extended',
+				            'controller' => 'player-card',
+				            'action' => 'edit',
+				            'id' => $player->playercard_id,
+				        ), '<i class="fa fa-pencil"></i>'.$this->translate('Edit'), array(
+				            'class' => 'buttonlink'
+				        ));
+		        		echo $this->htmlLink(array(
+				            'route' => 'user_extended',
+				            'controller' => 'player-card',
+				            'action' => 'crop-photo',
+				            'id' => $player->playercard_id,
+				        ), '<i class="fa fa-pencil"></i>'.$this->translate('Crop Photo'), array(
+				            'class' => 'buttonlink smoothbox'
+				        ));
+						
+	        			echo $this->htmlLink(array(
 						'route' => 'video_general',
 							'action' => 'create',
 							'parent_type' =>'user_playercard',
 							'subject_id' =>  $player->playercard_id,
-						), '<i class="fa fa-plus-square"></i>'.$this->translate('Create New Video'), array(
+						), '<i class="fa fa-plus-square"></i>'.$this->translate('Add Video'), array(
 						'class' => 'buttonlink'
 						)) ;
-					?>
+						echo $this->htmlLink(array(
+				            'route' => 'user_extended',
+				            'controller' => 'player-card',
+				            'action' => 'delete',
+				            'id' => $player->playercard_id,
+				        ), '<i class="fa fa-delete"></i>'.$this->translate('Delete'), array(
+				            'class' => 'buttonlink smoothbox'
+				        ));
+				    }
+	        		?>
 	            </div>
 	            	<!-- get videos of sub libraries -->
 	        </li>

@@ -23,8 +23,6 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 	{
 		if (!$this -> _helper -> requireUser -> isValid())
 			return;
-		if (!$this -> _helper -> requireAuth() -> setAuthParams('group', null, 'create') -> isValid())
-			return;
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		// Create form
 		$this -> view -> form = $form = new User_Form_Playercard_Create();
@@ -401,7 +399,6 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		$playerCard = Engine_Api::_() -> core() -> getSubject('user_playercard');
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 
-
 		// Check if edit/delete is allowed
 		$this -> view -> can_edit = $can_edit = $this -> _helper -> requireAuth() -> setAuthParams($playerCard, null, 'edit') -> checkRequire();
 		$this -> view -> can_delete = $can_delete = $this -> _helper -> requireAuth() -> setAuthParams($playerCard, null, 'delete') -> checkRequire();
@@ -410,8 +407,54 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		$this -> view -> playerCard = $playerCard;
 
 		// Render
-		$this -> _helper -> content
-		-> setEnabled();
+		$this -> _helper -> content -> setEnabled();
 	}
+
+	public function cropPhotoAction()
+	{
+		$this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
+
+		// Get form
+		$this -> view -> form = $form = new User_Form_Edit_CropPhoto();
+
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
+
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
+		// Resizing a photo
+		if ($form -> getValue('coordinates') !== '')
+		{
+			$storage = Engine_Api::_() -> storage();
+
+			$iMain = $storage -> get($user -> photo_id, 'thumb.main');
+			$iProfile = $storage -> get($user -> photo_id, 'thumb.profile');
+
+			// Read into tmp file
+			$pName = $iMain -> getStorageService() -> temporary($iMain);
+			$iName = dirname($pName) . '/nis_' . basename($pName);
+
+			list($x, $y, $w, $h) = explode(':', $form -> getValue('coordinates'));
+
+			$image = Engine_Image::factory();
+			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 200, 200) -> write($iName) -> destroy();
+
+			$iProfile -> store($iName);
+
+			// Remove temp files
+			@unlink($iName);
+		}
+		$this->_forward('success', 'utility', 'core', array(
+	      'smoothboxClose' => true,
+	      'parentRefresh' => true,
+	      'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your changes have been saved.'))
+	    ));
+	}
+
 }
 ?>

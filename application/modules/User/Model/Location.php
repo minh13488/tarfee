@@ -21,4 +21,14 @@ class User_Model_Location extends Core_Model_Item_Abstract {
 		unset($params['reset']);
 		return Zend_Controller_Front::getInstance() -> getRouter() -> assemble($params, $route, $reset);
 	}
+	
+	public function getTitle() {
+    	$view = Zend_Registry::get('Zend_View');
+        return $view->translate($this->title);
+    }
+	
+	public function getContinent() {
+		$view = Zend_Registry::get('Zend_View');
+        return $view->translate($this->continent);
+	}
 }

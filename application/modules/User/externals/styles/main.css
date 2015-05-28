@@ -1712,7 +1712,10 @@ body#global_page_user-friends-list-all-friends{
 		  	
 		  	.profile-section-content {
 		  		margin-top: 10px;
-		  		
+		  		#bio-content
+		  		{
+		  			word-wrap: break-word;
+		  		}
 		  		.profile-section-form {
 		  			.section-form {
 		  				padding-bottom: 20px;

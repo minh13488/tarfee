@@ -35,7 +35,6 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 	      'class' => 'text',
 	    ));
 		
-		
 		$password = Zend_Registry::get('Zend_Translate') -> _('Password');
 		// Init password
 		$this -> addElement('Password', 'password', array(

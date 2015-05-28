@@ -255,4 +255,37 @@ class User_IndexController extends Core_Controller_Action_Standard
         
         return $this -> getResponse() -> setBody(Zend_Json::encode(array('files' => array(0 => array('status' => $status, 'name'=> $name, 'photo_id' => $photo_id)))));
     }
+
+	public function sublocationsAction() {
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(TRUE);
+		$id = $this -> getRequest() -> getParam('location_id');
+		if (!$id) {
+			echo '';
+			return;
+		}
+		$subLocations = Engine_Api::_() -> getDbTable('locations', 'user') -> getLocations($id);
+		$html = '';
+		foreach ($subLocations as $subLocation)
+		{
+			$html .= '<option value="' . $subLocation -> getIdentity() . '" label="' . $subLocation -> getTitle() . '" >' . $subLocation -> getTitle() . '</option>';
+		}
+		echo $html;
+		return;
+	}
+	
+	public function getContinentAction() {
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(TRUE);
+		$id = $this -> getRequest() -> getParam('location_id');
+		$location = Engine_Api::_()->getItem('user_location', $id);
+		if (!$location) {
+			echo '';
+			return;
+		}
+		else {
+			echo $location->getContinent();
+			return;
+		}
+	}
 }
