@@ -146,25 +146,16 @@
 			            'controller' => 'player-card',
 			            'action' => 'edit',
 			            'id' => $player->playercard_id,
-			        ), $this->translate('Edit'), array(
+			        ), '<i class="fa fa-pencil"></i>'.$this->translate('Edit'), array(
 			            'class' => 'buttonlink'
 			        ));
 	        		?>
 	        		<?php echo $this->htmlLink(array(
 			            'route' => 'user_extended',
 			            'controller' => 'player-card',
-			            'action' => 'add-video',
+			            'action' => 'crop-photo',
 			            'id' => $player->playercard_id,
-			        ), $this->translate('Add Video'), array(
-			            'class' => 'buttonlink'
-			        ));
-	        		?>
-	        		<?php echo $this->htmlLink(array(
-			            'route' => 'user_extended',
-			            'controller' => 'player-card',
-			            'action' => 'delete',
-			            'id' => $player->playercard_id,
-			        ), $this->translate('Delete'), array(
+			        ), '<i class="fa fa-pencil"></i>'.$this->translate('Crop Photo'), array(
 			            'class' => 'buttonlink smoothbox'
 			        ));
 	        		?>
@@ -173,10 +164,19 @@
 							'action' => 'create',
 							'parent_type' =>'user_playercard',
 							'subject_id' =>  $player->playercard_id,
-						), '<i class="fa fa-plus-square"></i>'.$this->translate('Create New Video'), array(
+						), '<i class="fa fa-plus-square"></i>'.$this->translate('Add Video'), array(
 						'class' => 'buttonlink'
 						)) ;
 					?>
+	        		<?php echo $this->htmlLink(array(
+			            'route' => 'user_extended',
+			            'controller' => 'player-card',
+			            'action' => 'delete',
+			            'id' => $player->playercard_id,
+			        ), '<i class="fa fa-delete"></i>'.$this->translate('Delete'), array(
+			            'class' => 'buttonlink smoothbox'
+			        ));
+	        		?>
 	            </div>
 	            <div class="playercard_videos">
 	            	<!-- get videos of sub libraries -->
