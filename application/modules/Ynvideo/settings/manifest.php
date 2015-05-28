@@ -56,7 +56,6 @@ return array(
         'ynvideo_playlist',
         'ynvideo_playlistassoc',
         'video_category',
-        'ynvideo_review',
 	    'ynvideo_ratingtype',
     ),
     // Compose
@@ -100,7 +99,7 @@ return array(
                 'action' => 'index',
             ),
             'reqs' => array(
-                'action' => '(index|browse|create|list|manage|validation|add-to|edit|delete|rate|compose-upload|add-to-group)',
+                'action' => '(index|browse|create|list|manage|validation|add-to|edit|delete|rate|compose-upload|add-to-group|rating)',
             )
         ),
         'video_admin_general' => array(

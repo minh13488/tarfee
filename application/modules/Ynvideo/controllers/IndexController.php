@@ -854,7 +854,83 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			'messages' => Array($this -> view -> message)
 		));
 	}
+	
+	public function ratingAction()
+	{
+		if (!$this -> _helper -> requireUser() -> isValid())
+		{
+			return;
+		}
+		$video_id = (int)$this -> _getParam('video_id');
+		if ($video_id)
+		{
+			$video = Engine_Api::_() -> getItem('video', $video_id);
+			if ($video)
+			{
+				Engine_Api::_() -> core() -> setSubject($video);
+			}
+		}
+		if (!$this -> _helper -> requireSubject('video') -> isValid())
+		{
+			return;
+		}
 
+		if (!$this -> _helper -> requireAuth() -> setAuthParams($video, null, 'view') -> isValid())
+		{
+			return;
+		}
+
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$user_id = $viewer -> getIdentity();
+
+		$rating = (int)$this -> _getParam('rating');
+		$rating_type = $this ->_getParam('rating_type');
+
+		$tableRating = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
+		$db = $tableRating -> getAdapter();
+		$db -> beginTransaction();
+
+		try
+		{
+			
+			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
+			$rating_types = $tableRatingType -> getAllRatingTypes();
+			// Specific Rating
+			foreach($rating_types as $item)
+			{
+				if($item -> getIdentity() == $rating_type) {
+					$row = $tableRating -> getRowRatingThisType($item -> getIdentity(), $video -> getIdentity(), $viewer -> getIdentity());
+					if(!$row)
+					{
+						$row = $tableRating -> createRow();
+					}
+					$row -> resource_id = $video -> getIdentity();
+					$row -> user_id = $viewer -> getIdentity();
+					$row -> rating_type = $item -> getIdentity();
+					$row -> rating = $rating;
+					$row -> save();
+				}
+			}
+		
+			$db -> commit();
+		}
+		catch (Exception $e)
+		{
+			$db -> rollBack();
+			throw $e;
+		}
+		
+	    $overrallValue = $tableRating -> getRatingOfType($rating_type, $video -> getIdentity());
+
+		$data = array();
+		$data[] = array(
+			'rating' => $overrallValue,
+			'rating_type' => $rating_type,
+		);
+
+		return $this -> _helper -> json($data);
+	}
+	
 	public function rateAction()
 	{
 		if (!$this -> _helper -> requireUser() -> isValid())

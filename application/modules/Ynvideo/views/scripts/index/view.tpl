@@ -73,87 +73,6 @@ endif;
         var total_votes = <?php echo $this->rating_count; ?>;
         var viewer = <?php echo $this->viewer_id; ?>;
 
-        var rating_over = window.rating_over = function(rating) {
-            if( rated == 1 ) {
-                $('rating_text').innerHTML = "<?php echo $this->translate('you already rated'); ?>";
-                //set_rating();
-            } else if( viewer == 0 ) {
-                $('rating_text').innerHTML = "<?php echo $this->translate('please login to rate'); ?>";
-            } else {
-                $('rating_text').innerHTML = "<?php echo $this->translate('click to rate'); ?>";
-                for(var x=1; x<=5; x++) {
-                    if(x <= rating) {
-                        $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
-                    } else {
-                        $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
-                    }
-                }
-            }
-        }
-
-        var rating_out = window.rating_out = function() {
-            //$('rating_text').innerHTML = " <?php echo $this->translate(array('%s rating', '%s ratings', $this->rating_count), $this->locale()->toNumber($this->rating_count)) ?>";
-            $('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
-            
-            if (pre_rate != 0){
-                set_rating();
-            }
-            else {
-                for(var x=1; x<=5; x++) {
-                    $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
-                }
-            }
-        }
-
-        var set_rating = window.set_rating = function() {
-            var rating = pre_rate;
-            $('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
-            //$('rating_text').innerHTML = "<?php echo $this->translate(array('%s rating', '%s ratings', $this->rating_count), $this->locale()->toNumber($this->rating_count)) ?>";
-            for(var x=1; x<=parseInt(rating); x++) {
-                $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
-            }
-
-            for(var x=parseInt(rating)+1; x<=5; x++) {
-                $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
-            }
-
-            var remainder = Math.round(rating)-rating;
-            if (remainder <= 0.5 && remainder !=0){
-                var last = parseInt(rating)+1;
-                $('rate_'+last).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_half');
-            }
-        }
-
-        var rate = window.rate = function(rating) {
-            $('rating_text').innerHTML = "<?php echo $this->translate('Thanks for rating!'); ?>";
-            for(var x=1; x<=5; x++) {
-                $('rate_'+x).set('onclick', '');
-            }
-            (new Request.JSON({
-                'format': 'json',
-                'url' : '<?php echo $this->url(array('action' => 'rate'), 'video_general', true) ?>',
-                'data' : {
-                    'format' : 'json',
-                    'rating' : rating,
-                    'video_id': video_id
-                },
-                'onRequest' : function(){
-                    rated = 1;
-                    total_votes = total_votes+1;
-                    pre_rate = (pre_rate+rating)/total_votes;
-                    set_rating();
-                },
-                'onSuccess' : function(responseJSON, responseText)
-                {
-                	var total = responseJSON[0].total;
-                	total_votes = responseJSON[0].total;
-                	$('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
-                    //$('rating_text').innerHTML = responseJSON[0].total + " <?php $this->translate('ratings')?>";
-                }
-            })).send();
-
-        }
-
         var tagAction = window.tagAction = function(tag){
             $('tag').value = tag;
             $('filter_form').submit();
@@ -229,16 +148,25 @@ endif;
             ?>
         </div>
     <?php endif; ?>
-    <div class="ynvideo_video_view_description ynvideo_video_show_less" id="ynvideo_video">
+    <div class="ynvideo_video_view_description ynvideo_video_show_less" style="height: auto;" id="ynvideo_video">
         <div class="left">
             <div class="video_date">
                 <?php 
                 echo $this->translate('Posted') ?>
                 <?php echo $this->timestamp($this->video->creation_date) ?>
-                    | 
                  <?php echo $this->translate(array('%s favorite', '%s favorites', $this->video->favorite_count), $this->locale()->toNumber($this->video->favorite_count)) ?>
-              
             </div>
+            <?php if($this -> viewer() -> getIdentity() && $this -> viewer() -> level_id == 6 && $this -> video -> parent_type == "user_playercard") :?>
+            <?php 
+    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
+				$rating_types = $tableRatingType -> getAllRatingTypes();
+            	echo $this->partial('_rate_video.tpl', 'ynvideo', array(
+				        'ratingTypes' => $rating_types,
+				        'video_id' => $this->video->getIdentity(),
+			        )); 
+				        
+			?>
+			<?php endif ?>
         </div>
 
         <div class="right">
@@ -374,42 +302,7 @@ endif;
                 ));
             ?>
         <?php endif; ?>
-        <!-- add, edit ratings for profession -->
-        <?php if($this -> viewer() -> level_id == 6 && $this -> video -> parent_type == "user_playercard") :?>
-	          &nbsp;|&nbsp;
-	          <?php 
-					$tableReview = Engine_Api::_() -> getItemTable('ynvideo_review');
-					$hasReviewed = $tableReview -> checkHasReviewed($this -> video -> video_id, $this -> viewer() -> getIdentity());
-				?>
-			 <?php if($hasReviewed) :?>
-			 	 <?php
-			 	   $review = $tableReview -> getReviewed($this -> video -> video_id, $this -> viewer() -> getIdentity());
-			 	   if($review){
-		            echo $this->htmlLink(array(
-		                    'route' => 'video_other_route',
-		                    'action' => 'edit-rate-video',
-		                    'id' => $review -> getIdentity(),
-		                    'format' => 'smoothbox'
-		                ), $this->translate('Edit Ratings'),
-		                array(
-		                    'class' => 'smoothbox'
-		                ));
-		            } ?>
-			 <?php else :?>
-		         <?php
-		            echo $this->htmlLink(array(
-		                    'route' => 'video_other_route',
-		                    'action' => 'rate-video',
-		                    'video_id' => $this->video->video_id,
-		                    'format' => 'smoothbox'
-		                ), $this->translate('Add Ratings'),
-		                array(
-		                    'class' => 'smoothbox'
-		                ));
-		            ?>
-	         <?php endif ?>
-	     <?php endif ?>
-	     <!-- END add, edit ratings for profession -->    
+        
     <?php endif ?>
 
     <div class="ynvideo_block" style="display:none">

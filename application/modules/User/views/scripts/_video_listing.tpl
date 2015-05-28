@@ -36,8 +36,8 @@
       </div>
       
        <div style="text-align: center;" class="video_stats">
-       		<?php if($this -> video->rating > 0):?>
-            	<?php for($x=1; $x<=$this -> video->rating; $x++): ?><span class="rating_star_generic rating_star"></span><?php endfor; ?><?php if((round($this -> video->rating)-$this -> video->rating)>0):?><span class="rating_star_generic rating_star_half"></span><?php endif; ?>
+       		<?php if($this -> video->getRating() > 0):?>
+            	<?php for($x=1; $x<=$this -> video->getRating(); $x++): ?><span class="rating_star_generic rating_star"></span><?php endfor; ?><?php if((round($this -> video->rating)-$this -> video->getRating())>0):?><span class="rating_star_generic rating_star_half"></span><?php endif; ?>
      		<?php else :?>
  				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic rating_star_disabled"></span><?php endfor; ?>
      		<?php endif;?>
