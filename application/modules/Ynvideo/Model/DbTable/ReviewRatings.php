@@ -5,12 +5,11 @@ class Ynvideo_Model_DbTable_ReviewRatings extends Engine_Db_Table
     protected $_rowClass = 'Ynvideo_Model_ReviewRating';
 	protected $_name = 'ynvideo_reviewratings';
 	
-	public function getRowRatingThisType($rating_type, $resource_id, $user_id , $review_id)
+	public function getRowRatingThisType($rating_type, $resource_id, $user_id)
 	{
 		$select = $this -> select() -> where('resource_id = ?', $resource_id) 
 									-> where('user_id = ?', $user_id) 
 									-> where('rating_type = ?', $rating_type)
-									-> where('review_id = ?', $review_id)
 									-> limit(1);
 		$row = $this -> fetchRow($select);
 		if($row)
