@@ -1,5 +1,5 @@
 <?php
-class SocialConnect_Form_LoginSmall extends Engine_Form
+class SocialConnect_Form_LoginSmall extends Engine_Form_Email
 {
 	public function init()
 	{
@@ -17,15 +17,24 @@ class SocialConnect_Form_LoginSmall extends Engine_Form
 
 		$email = Zend_Registry::get('Zend_Translate') -> _('Email Address');
 		// Init email
-		$this -> addElement('Text', 'email', array(
-			'label' => $email,
-			'required' => true,
-			'allowEmpty' => false,
-			'filters' => array('StringTrim', ),
-			'validators' => array('EmailAddress'),
-			'tabindex' => 1,
-			'placeholder' => 'Your Email',
-		));
+		$this->addEmailElement(array(
+	      'label' => $email,
+	      'required' => true,
+	      'allowEmpty' => false,
+	      'filters' => array(
+	        'StringTrim',
+	      ),
+	      'validators' => array(
+	        'EmailAddress'
+	      ),
+	      
+	      // Fancy stuff
+	      'tabindex' => 1,
+	      'autofocus' => 'autofocus',
+	      'inputType' => 'email',
+	      'placeholder' => 'Your Email',
+	      'class' => 'text',
+	    ));
 		
 		$password = Zend_Registry::get('Zend_Translate') -> _('Password');
 		// Init password

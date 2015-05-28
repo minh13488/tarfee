@@ -36,15 +36,7 @@ class SocialConnect_Widget_LoginOrSignupController extends Engine_Content_Widget
 		$form = NULL;
 		if (@class_exists('SocialConnect_Form_LoginSmall'))
 		{
-			$manifest = Zend_Registry::get('Engine_Manifest');
-			if (version_compare($manifest['core']['package']['version'], '4.8.6', '<'))
-			{
-				$form = $this -> view -> form = new SocialConnect_Form_LoginSmall();
-			}
-			else 
-			{
-				$form = $this -> view -> form = new SocialConnect_Form_LoginSmall1();
-			}
+			$form = $this -> view -> form = new SocialConnect_Form_LoginSmall();
 		}
 		else
 		{
