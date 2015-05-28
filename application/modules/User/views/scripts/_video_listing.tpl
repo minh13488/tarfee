@@ -19,7 +19,16 @@
         </div>
       </div>
       <br/>
-      <div style="text-align: center;"><a class="video_title" href='<?php echo $this -> video->getHref();?>'><?php echo $this -> video->getTitle();?></a> </div>
+      <div style="text-align: center;"><a class="video_title" href='<?php echo $this -> video->getHref();?>'>
+      	<?php $title =  $this -> video->getTitle()."..."; 
+      		if(strlen($title) > 16) {
+      			echo substr($title, 0, 16);
+      		} else {
+      			echo $title;
+      		}
+      	?>
+      	
+      </a> </div>
       <div style="text-align: center;"><?php echo $this->translate('By');?> <?php echo $this->htmlLink($this -> video->getOwner()->getHref(), $this -> video->getOwner()->getTitle()) ?></div>
      
       <div style="text-align: center;" class="video_stats">

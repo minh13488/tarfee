@@ -239,14 +239,6 @@ endif;
                  <?php echo $this->translate(array('%s favorite', '%s favorites', $this->video->favorite_count), $this->locale()->toNumber($this->video->favorite_count)) ?>
               
             </div>
-            <div id="video_rating" class="rating" onmouseout="rating_out();">
-                <span id="rate_1" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(1);"<?php endif; ?> onmouseover="rating_over(1);"></span>
-                <span id="rate_2" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(2);"<?php endif; ?> onmouseover="rating_over(2);"></span>
-                <span id="rate_3" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(3);"<?php endif; ?> onmouseover="rating_over(3);"></span>
-                <span id="rate_4" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(4);"<?php endif; ?> onmouseover="rating_over(4);"></span>
-                <span id="rate_5" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(5);"<?php endif; ?> onmouseover="rating_over(5);"></span>
-                <span id="rating_text" class="rating_text ynvideo_rating_text"><?php echo $this->translate('click to rate'); ?></span>
-            </div>
         </div>
 
         <div class="right">
