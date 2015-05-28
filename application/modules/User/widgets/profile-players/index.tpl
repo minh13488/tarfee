@@ -100,11 +100,11 @@
 			     		</span>
 					</div>
 					<div class="actions">
-						<?php if($this -> viewer() -> getIdentity()):?>
 						<div>
 						<table>
 							<tr>
 								<td>
+									<?php if($this -> viewer() -> getIdentity()):?>
 									<?php echo $this->htmlLink(array(
 							            'route' => 'messages_general',
 							            'action' => 'compose',
@@ -113,6 +113,7 @@
 							            'class' => 'smoothbox'
 							        ));
 						    		?>
+						    		<?php endif;?>
 								</td>
 								<td>
 									<?php echo $this->htmlLink(array(
@@ -127,7 +128,11 @@
 							        ));
 						    		?>
 								</td>
-						<td><a href=""><span class="actions_generic like"></span></a></td>
+								<td>
+									<?php if($this -> viewer() -> getIdentity()):?>
+										<a href=""><span class="actions_generic like"></span></a>
+									<?php endif;?>
+								</td>
 						</tr></table>
 						</div>
 						<?php endif;?>

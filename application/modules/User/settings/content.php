@@ -198,6 +198,16 @@ return array(
     ),
   ),
   array(
+    'title' => 'Profile Cover',
+    'description' => 'Displays a member\'s cover on their profile.',
+    'category' => 'User',
+    'type' => 'widget',
+    'name' => 'user.profile-cover',
+    'requirements' => array(
+      'subject' => 'user',
+    ),
+  ),
+  array(
     'title' => 'Profile Status',
     'description' => 'Displays a member\'s name and most recent status on their profile.',
     'category' => 'User',
