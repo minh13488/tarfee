@@ -132,7 +132,7 @@ return array(
         'action' => 'browse'
       ),
       'reqs' => array(
-        'action' => '(home|browse|render-section|get-my-location|upload-photo)',
+        'action' => '(home|browse|render-section|get-my-location|upload-photo|sublocations|get-continent)',
       )
     ),
 	

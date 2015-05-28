@@ -168,3 +168,9 @@ CREATE TABLE IF NOT EXISTS `engine4_user_locations` (
 
 INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
 ('profilesection_admin_settings_location', 'user', 'Manage Locations', '', '{"route":"admin_default","module":"user","controller":"locations"}', 'profilesection_admin_main', '', 4);
+
+5.28.2015
+
+ALTER TABLE `engine4_users` ADD `country_id` INT(11) NOT NULL DEFAULT '0' ;
+ALTER TABLE `engine4_users` ADD `province_id` INT(11) NOT NULL DEFAULT '0' ;
+ALTER TABLE `engine4_users` ADD `city_id` INT(11) NOT NULL DEFAULT '0' ;

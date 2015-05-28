@@ -215,6 +215,7 @@ class User_Plugin_Signup_Fields extends Core_Plugin_FormSequence_Abstract
     if( $this->getForm()->isValid($request->getPost()) )
     {
       $data = $request->getPost();
+	  $this->getSession()->postData = $data;
       $this->getSession()->data = $this->getForm()->getProcessedValues();
       $this->getSession()->active = false;
       $this->onSubmitIsValid();
@@ -282,9 +283,15 @@ class User_Plugin_Signup_Fields extends Core_Plugin_FormSequence_Abstract
     $aliasValues = Engine_Api::_()->fields()->getFieldsValuesByAlias($user);
     $user->setDisplayName($aliasValues);
     $user->save();
+	
+	$postData = $this->getSession()->postData;
+	$user->country_id = $postData['country_id'];
+	$user->province_id = $postData['province_id'];
+	$user->city_id = $postData['city_id'];
+	$user->save();
     
     // Send Welcome E-mail
-    if( isset($this->_registry->mailType) && $this->_registry->mailType ) {
+   	if( isset($this->_registry->mailType) && $this->_registry->mailType ) {
       $mailType   = $this->_registry->mailType;
       $mailParams = $this->_registry->mailParams;
       Engine_Api::_()->getApi('mail', 'core')->sendSystem(
