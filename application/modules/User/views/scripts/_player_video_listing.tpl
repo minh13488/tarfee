@@ -19,7 +19,15 @@
         </div>
       </div>
       <br/>
-      <div style="text-align: center;"><a class="video_title" href='<?php echo $this -> video->getHref();?>'><?php echo $this -> video->getTitle();?></a> </div>
+      <div style="text-align: center;"><a class="video_title" href='<?php echo $this -> video->getHref();?>'>
+      	<?php $title =  $this -> video->getTitle(); 
+      		if(strlen($title) > 16) {
+      			echo substr($title, 0, 16)."...";
+      		} else {
+      			echo $title;
+      		}
+      	?>
+      	</a></div>
       <div style="text-align: center;"><?php echo $this->translate('By');?> <?php echo $this->htmlLink($this -> video->getOwner()->getHref(), $this -> video->getOwner()->getTitle()) ?></div>
      
       <div style="text-align: center;" class="video_stats">
@@ -36,11 +44,11 @@
       
      
 		<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
-		 <div style="text-align: center;" class="user-library-video-actions user-library-item-action">
+		 <div style="text-align: center; " class="user-library-video-actions user-library-item-action">
 	    	<span><i class="fa fa-ellipsis-h"></i> <span> <?php echo $this -> translate('Options');?></span></span>
-	   		<ul>
-	   			<li class="user-library-close-box">X</li>
-	   			<li>
+	   		<ul style="width: initial;">
+	   			<li style ="width: auto;right: 0; float: right;" class="user-library-close-box">X</li>
+	   			<li style="width: 100%;">
 					<?php
 						echo $this->htmlLink(array(
 							'route' => 'default',
@@ -53,7 +61,7 @@
 					    ), '<i class="fa fa-pencil-square-o"></i>'.$this->translate('Edit '), array('class' => 'buttonlink'));
 					?>
 			    </li>
-			    <li>
+			    <li style="width: 100%;">
 					<?php
 						echo $this->htmlLink(array(
 					 	        'route' => 'default', 
@@ -69,7 +77,7 @@
 					     ));
 					?>
 				</li>
-				<li>
+				<li style="width: 100%;">
 						<?php echo $this->htmlLink(array(
 								'route' => 'user_library',
 								'action' => 'move-to-main',

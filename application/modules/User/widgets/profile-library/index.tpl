@@ -185,16 +185,17 @@
 	    		$$('.open-submenu').removeClass('open-submenu');
 	    		this.addClass('open-submenu');
 	    	}  
+			
+			if($('global_footer').getStyle('margin-top') != "0px") {
+				$('global_footer').setStyle('margin-top', '');
+			} else {
+				$('global_footer').setStyle('margin-top', '60px');	
+			}
 		});
 		 
-		 $$('. user-library-close-box').addEvent('click', function(){
+		 $$('.user-library-close-box').addEvent('click', function(){
 		 	var parent = this.getParent().getParent().getParent();
-		 	if ( parent.hasClass('open-submenu') ) {
-	    		parent.removeClass('open-submenu');	
-	    	} else {
-	    		$$('.open-submenu').removeClass('open-submenu');
-	    		parent.addClass('open-submenu');
-	    	} 
+			parent.removeClass('open-submenu');				
 		});
 		
 				

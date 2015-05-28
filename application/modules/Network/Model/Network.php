@@ -241,7 +241,7 @@ class Network_Model_Network extends Core_Model_Item_Abstract
     return $this;
   }
 
-  public function isOwner($owner = null)
+  public function isOwner(Core_Model_Item_Abstract $owner)
   {
     return false;
   }

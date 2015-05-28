@@ -3,6 +3,7 @@ class User_Form_Playercard_Create extends Engine_Form
 {
   public function init()
   {
+  	$user = Engine_Api::_()->user()->getViewer();
     $this
       ->setTitle('Add New Player Card');
 	  
@@ -94,7 +95,7 @@ class User_Form_Playercard_Create extends Engine_Form
 	$gender -> setRequired(true);
     $this->addElement($gender);
 	
-    $birthday = new Engine_Form_Element_Birthdate('birth_date');
+    $birthday = new Fields_Form_Element_Birthdate('birth_date');
     $birthday->setLabel("Date of Birth");
     $birthday->setAllowEmpty(false);
 	$birthday -> setRequired(true);
@@ -110,7 +111,54 @@ class User_Form_Playercard_Create extends Engine_Form
 		'label' => 'Position',
 		'multiOptions' => $positions,
 	));
+	
+	// View
+    $availableLabels = array(
+      'everyone'            => 'Everyone',
+      'registered'          => 'All Registered Members',
+      'owner_network'       => 'Friends and Networks',
+      'owner_member_member' => 'Friends of Friends',
+      'owner_member'        => 'Friends Only',
+      'owner'               => 'Just Me'
+    );
 
+    $viewOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('user_playercard', $user, 'auth_view');
+    $viewOptions = array_intersect_key($availableLabels, array_flip($viewOptions));
+    if( !empty($viewOptions) && count($viewOptions) >= 1 ) {
+      // Make a hidden field
+      if(count($viewOptions) == 1) {
+        $this->addElement('hidden', 'auth_view', array('value' => key($viewOptions)));
+      // Make select box
+      } else {
+        $this->addElement('Select', 'auth_view', array(
+            'label' => 'Privacy',
+            'description' => 'Who may see this player card?',
+            'multiOptions' => $viewOptions,
+            'value' => key($viewOptions),
+        ));
+        $this->auth_view->getDecorator('Description')->setOption('placement', 'append');
+      }
+    }
+
+ 	// Comment
+    $commentOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('user_playercard', $user, 'auth_comment');
+    $commentOptions = array_intersect_key($availableLabels, array_flip($commentOptions));
+
+    if( !empty($commentOptions) && count($commentOptions) >= 1 ) {
+      // Make a hidden field
+      if(count($commentOptions) == 1) {
+        $this->addElement('hidden', 'auth_comment', array('value' => key($commentOptions)));
+      // Make select box
+      } else {
+        $this->addElement('Select', 'auth_comment', array(
+            'label' => 'Comment Privacy',
+            'description' => 'Who may post comments on this player card?',
+            'multiOptions' => $commentOptions,
+            'value' => key($commentOptions),
+        ));
+        $this->auth_comment->getDecorator('Description')->setOption('placement', 'append');
+      }
+	}
     // Buttons
     $this->addElement('Button', 'submit', array(
       'label' => 'Save Changes',

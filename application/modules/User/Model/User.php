@@ -826,7 +826,7 @@ class User_Model_User extends Core_Model_Item_Abstract
 	} 
 
 	//HOANGND function for check user can ask recommendation
-	public function canAskRecommendation($user_id) {
+	public function canAskRecommendation() {
 		$friendslist = $this->getFriendsList();
 		foreach ($friendslist as $friend) {
 			$recommendation = Engine_Api::_()->getDbTable('recommendations', 'user')->getRecommendation($this->getIdentity(), $friend->getIdentity());

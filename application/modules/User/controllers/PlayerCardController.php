@@ -1,11 +1,27 @@
 <?php
 class User_PlayerCardController extends Core_Controller_Action_Standard
 {
+	public function init()
+	{
+		if (!$this -> _helper -> requireAuth() -> setAuthParams('user_playercard', null, 'view') -> isValid())
+			return;
+
+		$id = $this -> _getParam('player_id', $this -> _getParam('id', null));
+		if ($id)
+		{
+			$playerCard = Engine_Api::_() -> getItem('user_playercard', $id);
+			if ($playerCard)
+			{
+				Engine_Api::_() -> core() -> setSubject($playerCard);
+			}
+		}
+		if (!$this -> _helper -> requireAuth() -> setAuthParams('user_playercard', null, 'view') -> isValid())
+			return;
+	}
+
 	public function createAction()
 	{
 		if (!$this -> _helper -> requireUser -> isValid())
-			return;
-		if (!$this -> _helper -> requireAuth() -> setAuthParams('group', null, 'create') -> isValid())
 			return;
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		// Create form
@@ -14,37 +30,39 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		{
 			return;
 		}
-		
+
 		$posts = $this -> getRequest() -> getPost();
-		if($posts['category_id'] == 2)
+		if ($posts['category_id'] == 2)
 		{
 			$this -> view -> showPreferredFoot = true;
 		}
-		else {
+		else
+		{
 			$this -> view -> showPreferredFoot = false;
 		}
-		if($posts['relation_id'] == 0)
+		if ($posts['relation_id'] == 0)
 		{
 			$this -> view -> showOther = true;
 		}
-		else {
+		else
+		{
 			$this -> view -> showOther = false;
 		}
 		$category_id = $posts['category_id'];
 		$sportCattable = Engine_Api::_() -> getDbtable('sportcategories', 'user');
 		$node = $sportCattable -> getNode($category_id);
 		$categories = $node -> getChilren();
-		if(count($categories))
+		if (count($categories))
 		{
 			$position_options = array(0 => '');
-			foreach ($categories as $category) 
+			foreach ($categories as $category)
 			{
 				$position_options[$category -> getIdentity()] = $category -> title;
 				$node = $sportCattable -> getNode($category -> getIdentity());
-				$positons =  $node -> getChilren();
-				foreach($positons as $positon)
+				$positons = $node -> getChilren();
+				foreach ($positons as $positon)
 				{
-					$position_options[$positon -> getIdentity()] = '-- '.$positon -> title;
+					$position_options[$positon -> getIdentity()] = '-- ' . $positon -> title;
 				}
 			}
 			$form -> getElement('position_id') -> setMultiOptions($position_options);
@@ -62,14 +80,12 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 
 		// Process
 		$values = $form -> getValues();
-		if(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.relation_require', 1) 
-		&& $values['relation_id'] == 0 
-		&& empty($values['relation_other']))
+		if (Engine_Api::_() -> getApi('settings', 'core') -> getSetting('user.relation_require', 1) && $values['relation_id'] == 0 && empty($values['relation_other']))
 		{
 			$form -> getElement('relation_other') -> addError('Please complete this field - it is required.');
 			return false;
 		}
-		
+
 		$values['user_id'] = $viewer -> getIdentity();
 
 		$db = Engine_Api::_() -> getDbtable('playercards', 'user') -> getAdapter();
@@ -88,6 +104,43 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			{
 				$player_card -> setPhoto($form -> photo);
 			}
+			// CREATE AUTH STUFF HERE
+			$auth = Engine_Api::_() -> authorization() -> context;
+			$roles = array(
+				'owner',
+				'owner_member',
+				'owner_member_member',
+				'owner_network',
+				'registered',
+				'everyone'
+			);
+			if (isset($values['auth_view']))
+				$auth_view = $values['auth_view'];
+			else
+				$auth_view = "everyone";
+			$viewMax = array_search($auth_view, $roles);
+			foreach ($roles as $i => $role)
+			{
+				$auth -> setAllowed($player_card, $role, 'view', ($i <= $viewMax));
+			}
+
+			$roles = array(
+				'owner',
+				'owner_member',
+				'owner_member_member',
+				'owner_network',
+				'registered',
+				'everyone'
+			);
+			if (isset($values['auth_comment']))
+				$auth_comment = $values['auth_comment'];
+			else
+				$auth_comment = "everyone";
+			$commentMax = array_search($auth_comment, $roles);
+			foreach ($roles as $i => $role)
+			{
+				$auth -> setAllowed($player_card, $role, 'comment', ($i <= $commentMax));
+			}
 
 			$db -> commit();
 
@@ -98,7 +151,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 				$pageURL .= "s";
 			}
 			$pageURL .= "://";
-			return $this -> _helper -> redirector -> gotoUrl($pageURL.$_SERVER['HTTP_HOST'] . $viewer -> getHref());
+			return $this -> _helper -> redirector -> gotoUrl($pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref());
 		}
 		catch( Engine_Image_Exception $e )
 		{
@@ -126,43 +179,46 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		$this -> view -> form = $form = new User_Form_Playercard_Edit();
 		if (!$this -> getRequest() -> isPost())
 		{
-			if($player_card -> relation_id == 0)
+			if ($player_card -> relation_id == 0)
 			{
 				$this -> view -> showOther = true;
 			}
-			$form -> populate($player_card -> toArray());
+			$arr_player = $player_card -> toArray();
+			$form -> populate($arr_player);
 			return;
 		}
 		$posts = $this -> getRequest() -> getPost();
-		if($posts['category_id'] == 2)
+		if ($posts['category_id'] == 2)
 		{
 			$this -> view -> showPreferredFoot = true;
 		}
-		else {
+		else
+		{
 			$this -> view -> showPreferredFoot = false;
 		}
-		if($posts['relation_id'] == 0)
+		if ($posts['relation_id'] == 0)
 		{
 			$this -> view -> showOther = true;
 		}
-		else {
+		else
+		{
 			$this -> view -> showOther = false;
 		}
 		$category_id = $posts['category_id'];
 		$sportCattable = Engine_Api::_() -> getDbtable('sportcategories', 'user');
 		$node = $sportCattable -> getNode($category_id);
 		$categories = $node -> getChilren();
-		if(count($categories))
+		if (count($categories))
 		{
 			$position_options = array(0 => '');
-			foreach ($categories as $category) 
+			foreach ($categories as $category)
 			{
 				$position_options[$category -> getIdentity()] = $category -> title;
 				$node = $sportCattable -> getNode($category -> getIdentity());
-				$positons =  $node -> getChilren();
-				foreach($positons as $positon)
+				$positons = $node -> getChilren();
+				foreach ($positons as $positon)
 				{
-					$position_options[$positon -> getIdentity()] = '-- '.$positon -> title;
+					$position_options[$positon -> getIdentity()] = '-- ' . $positon -> title;
 				}
 			}
 			$form -> getElement('position_id') -> setMultiOptions($position_options);
@@ -172,18 +228,18 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		{
 			$this -> view -> showPosition = false;
 		}
-		
+
 		if (!$form -> isValid($posts))
 		{
 			return;
 		}
 		$values = $form -> getValues();
-		if(Engine_Api::_()->getApi('settings', 'core')->getSetting('uaer.relation_require', 1) && $values['relation_id'] == 0 && empty($values['relation_other']))
+		if (Engine_Api::_() -> getApi('settings', 'core') -> getSetting('uaer.relation_require', 1) && $values['relation_id'] == 0 && empty($values['relation_other']))
 		{
 			$form -> getElement('relation_other') -> addError('Please complete this field - it is required.');
 			return false;
 		}
-		
+
 		// Process
 		$db = Engine_Api::_() -> getItemTable('user_playercard') -> getAdapter();
 		$db -> beginTransaction();
@@ -199,6 +255,50 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 				$player_card -> setPhoto($form -> photo);
 			}
 
+			// CREATE AUTH STUFF HERE
+			$auth = Engine_Api::_() -> authorization() -> context;
+			$roles = array(
+				'owner',
+				'owner_member',
+				'owner_member_member',
+				'owner_network',
+				'registered',
+				'everyone'
+			);
+			if ($values['auth_view'])
+				$auth_view = $values['auth_view'];
+			else
+				$auth_view = "everyone";
+			$viewMax = array_search($auth_view, $roles);
+			foreach ($roles as $i => $role)
+			{
+				$auth -> setAllowed($player_card, $role, 'view', ($i <= $viewMax));
+			}
+
+			$roles = array(
+				'owner',
+				'owner_member',
+				'owner_member_member',
+				'owner_network',
+				'registered',
+				'everyone'
+			);
+			if ($values['auth_comment'])
+				$auth_comment = $values['auth_comment'];
+			else
+				$auth_comment = "everyone";
+			$commentMax = array_search($auth_comment, $roles);
+			foreach ($roles as $i => $role)
+			{
+				$auth -> setAllowed($player_card, $role, 'comment', ($i <= $commentMax));
+			}
+
+			// Rebuild privacy
+			$actionTable = Engine_Api::_() -> getDbtable('actions', 'activity');
+			foreach ($actionTable->getActionsByObject($player_card) as $action)
+			{
+				$actionTable -> resetActivityBindings($action);
+			}
 			// Commit
 			$db -> commit();
 			// Redirect
@@ -208,7 +308,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 				$pageURL .= "s";
 			}
 			$pageURL .= "://";
-			return $this -> _helper -> redirector -> gotoUrl($pageURL.$_SERVER['HTTP_HOST'] . $viewer -> getHref());
+			return $this -> _helper -> redirector -> gotoUrl($pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref());
 		}
 		catch( Engine_Image_Exception $e )
 		{
@@ -267,6 +367,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			'parentRefresh' => true,
 		));
 	}
+
 	public function subcategoriesAction()
 	{
 		$this -> _helper -> layout -> disableLayout();
@@ -278,16 +379,82 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		$html = '';
 		foreach ($categories as $category)
 		{
-			$html .= '<option value="' . $category -> getIdentity() . '" label="' . $category -> title . '" >' .$category -> title . '</option>';
+			$html .= '<option value="' . $category -> getIdentity() . '" label="' . $category -> title . '" >' . $category -> title . '</option>';
 			$node = $sportCattable -> getNode($category -> getIdentity());
 			$positions = $node -> getChilren();
 			foreach ($positions as $position)
 			{
-				$html .= '<option value="' . $position -> getIdentity() . '" label="-- ' . $position -> title . '" >' . '-- ' .$position -> title . '</option>';
+				$html .= '<option value="' . $position -> getIdentity() . '" label="-- ' . $position -> title . '" >' . '-- ' . $position -> title . '</option>';
 			}
 		}
 		echo $html;
 		return;
 	}
+
+	public function viewAction()
+	{
+		if (!$this -> _helper -> requireSubject() -> isValid())
+			return;
+
+		$playerCard = Engine_Api::_() -> core() -> getSubject('user_playercard');
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+
+		// Check if edit/delete is allowed
+		$this -> view -> can_edit = $can_edit = $this -> _helper -> requireAuth() -> setAuthParams($playerCard, null, 'edit') -> checkRequire();
+		$this -> view -> can_delete = $can_delete = $this -> _helper -> requireAuth() -> setAuthParams($playerCard, null, 'delete') -> checkRequire();
+
+		$this -> view -> viewer_id = $viewer -> getIdentity();
+		$this -> view -> playerCard = $playerCard;
+
+		// Render
+		$this -> _helper -> content -> setEnabled();
+	}
+
+	public function cropPhotoAction()
+	{
+		$this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
+
+		// Get form
+		$this -> view -> form = $form = new User_Form_Edit_CropPhoto();
+
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
+
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
+		// Resizing a photo
+		if ($form -> getValue('coordinates') !== '')
+		{
+			$storage = Engine_Api::_() -> storage();
+
+			$iMain = $storage -> get($user -> photo_id, 'thumb.main');
+			$iProfile = $storage -> get($user -> photo_id, 'thumb.profile');
+
+			// Read into tmp file
+			$pName = $iMain -> getStorageService() -> temporary($iMain);
+			$iName = dirname($pName) . '/nis_' . basename($pName);
+
+			list($x, $y, $w, $h) = explode(':', $form -> getValue('coordinates'));
+
+			$image = Engine_Image::factory();
+			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 200, 200) -> write($iName) -> destroy();
+
+			$iProfile -> store($iName);
+
+			// Remove temp files
+			@unlink($iName);
+		}
+		$this->_forward('success', 'utility', 'core', array(
+	      'smoothboxClose' => true,
+	      'parentRefresh' => true,
+	      'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your changes have been saved.'))
+	    ));
+	}
+
 }
 ?>

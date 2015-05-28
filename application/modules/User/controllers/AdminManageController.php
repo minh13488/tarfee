@@ -176,7 +176,20 @@ class User_AdminManageController extends Core_Controller_Action_Admin
     foreach( $networks as $network ) {
       $values['network_id'][] = $oldNetworks[] = $network->getIdentity();
     }
-
+	
+	$table = Engine_Api::_()->getApi('core', 'fields')->getTable('user', 'values');
+    $select = $table->select();
+    $select->where('field_id = ?', 1);
+    $select->where('item_id = ?', $user -> getIdentity());
+    $value_profile = $table->fetchRow($select);
+  	if ($value_profile) {
+     $profile_id = $value_profile->value;
+  	}
+    if ($profile_id == null) {
+         $profile_id = 1;
+    }
+	$values['profile_type'] = $profile_id;
+	
     // Populate form
     $form->populate($values);
     
@@ -249,7 +262,13 @@ class User_AdminManageController extends Core_Controller_Action_Admin
     } else if( $oldValues['enabled'] && !$values['enabled'] ) {
       // @todo ?
     }
-
+	
+	$newProfileType = $values['profile_type'];
+	if($value_profile)
+	{
+		$value_profile -> value = $newProfileType;
+		$value_profile -> save();
+	}
     
     // Forward
     return $this->_forward('success', 'utility', 'core', array(
