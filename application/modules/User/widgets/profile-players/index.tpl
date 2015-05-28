@@ -178,31 +178,29 @@
 			        ));
 	        		?>
 	            </div>
-	            <div class="playercard_videos">
 	            	<!-- get videos of sub libraries -->
-					<?php
-					    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
-					    $videoTable = Engine_Api::_()->getItemTable('video');
-					    $params = array();
-					    $params['owner_type'] = $player -> getType();
-						$params['owner_id'] = $player -> getIdentity();
-					    $playercardVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
-					?>
-					<br/>
-					<?php if(count($playercardVideos)):?>
-					<ul style="border: 5px solid #eaeaea;" class="videos_browse">
-					 <?php foreach ($playercardVideos as $item): ?>
-				            <?php
-				            echo $this->partial('_player_video_listing.tpl', 'user', array(
-				                'video' => $item,
-				                'player' => $player,
-				            ));
-				            ?>
-					<?php endforeach; ?>
-					</ul>
-					<?php endif;?>
-	            </div>
 	        </li>
+	        <?php
+			    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+			    $videoTable = Engine_Api::_()->getItemTable('video');
+			    $params = array();
+			    $params['owner_type'] = $player -> getType();
+				$params['owner_id'] = $player -> getIdentity();
+			    $playercardVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
+			?>
+			<br/>
+			<?php if(count($playercardVideos)):?>
+			<ul style="border: 5px solid #eaeaea;" class="videos_browse">
+			 <?php foreach ($playercardVideos as $item): ?>
+		            <?php
+		            echo $this->partial('_player_video_listing.tpl', 'user', array(
+		                'video' => $item,
+		                'player' => $player,
+		            ));
+		            ?>
+			<?php endforeach; ?>
+			</ul>
+			<?php endif;?>
 	        <?php endforeach; ?>             
 	    </ul>  
 	    
@@ -247,13 +245,8 @@
 	    	}  
 		});
 		 
-		 $$('. user-video-close-box').addEvent('click', function(){
+		 $$('.user-video-close-box').addEvent('click', function(){
 		 	var parent = this.getParent().getParent().getParent();
-		 	if ( parent.hasClass('open-submenu') ) {
-	    		parent.removeClass('open-submenu');	
-	    	} else {
-	    		$$('.open-submenu').removeClass('open-submenu');
-	    		parent.addClass('open-submenu');
-	    	} 
+    		parent.removeClass('open-submenu');	
 		});
 </script>

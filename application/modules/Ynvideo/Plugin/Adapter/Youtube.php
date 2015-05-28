@@ -43,13 +43,15 @@ class Ynvideo_Plugin_Adapter_Youtube extends Ynvideo_Plugin_Adapter_Abstract {
         }
 
         if ($code) {
-            $url = "http://gdata.youtube.com/feeds/api/videos/$code";
+            $api_key = Engine_Api::_()->getApi('settings', 'core')->getSetting('ynvideo.youtube.apikey', 'AIzaSyDpUPT_nafV_MFSAlc-8AH4e1Gy578iK0M');
+            $url = "https://www.googleapis.com/youtube/v3/videos?id=$code&key=$api_key&part=snippet,contentDetails";
             $data = @file_get_contents($url);
-            if ($data == "Video not found") {
+			$data = json_decode($data);
+            if (empty($data->items)) {
                 return false;
             } else {
-                $xmlData = @simplexml_load_string($data);
-                return $xmlData;
+                $jsonData = $data->items[0];
+				return $jsonData;
             }
         }
         return false;
@@ -65,12 +67,15 @@ class Ynvideo_Plugin_Adapter_Youtube extends Ynvideo_Plugin_Adapter_Abstract {
             return false;
         } else {
             $this->_information = array();
-            $this->_information['title'] = sprintf("%s", $data->title);
-            $this->_information['content'] = sprintf("%s", $data->content);
-            $this->_information['duration'] = sprintf("%s", $data->children('http://search.yahoo.com/mrss/')->group->content->attributes()->duration);
-            $this->_information['description'] = sprintf("%s", $data->children('http://search.yahoo.com/mrss/')->group->description);
-            $this->_information['large-thumbnail'] = sprintf("%s", $data->children('http://search.yahoo.com/mrss/')->group->children('http://search.yahoo.com/mrss/')
-                    ->thumbnail[0]->attributes()->url);
+            $this->_information['title'] = sprintf("%s", $data->snippet->title);
+            $this->_information['content'] = sprintf("%s", $data->snippet->description);
+			$start = new DateTime('@0'); // Unix epoch
+		    $start->add(new DateInterval($data->contentDetails->duration));
+		    $duration = $start->format('H')*60*60 + $start->format('i')*60 + $start->format('s');
+            $this->_information['duration'] = sprintf("%s", $duration);
+            $this->_information['description'] = sprintf("%s", $data->snippet->description);
+			$thumbnails = end($data->snippet->thumbnails);
+            $this->_information['large-thumbnail'] = sprintf("%s", $thumbnails->url);
         }
         return true;
     }
@@ -141,27 +146,15 @@ class Ynvideo_Plugin_Adapter_Youtube extends Ynvideo_Plugin_Adapter_Abstract {
         $code = $params['code'];
         $view = $params['view'];
         $mobile = empty($params['mobile'])?false:$params['mobile'];
-
-        //560 x 340
-        //legacy youtube embed code
-        if (!$mobile && !(defined('YNRESPONSIVE')) ) {
-            $embedded = '
-              <object width="' . ($view ? "560" : "425") . '" height="' . ($view ? "340" : "344") . '"">
-              <param name="movie" value="https://www.youtube.com/v/' . $code . '&color1=0xb1b1b1&color2=0xcfcfcf&hl=en_US&feature=player_embedded&fs=1"/>
-              <param name="allowFullScreen" value="true"/>
-              <param name="allowScriptAccess" value="always"/>
-              <embed src="https://www.youtube.com/v/' . $code . '&color1=0xb1b1b1&color2=0xcfcfcf&hl=en_US&feature=player_embedded&fs=1' . ($view ? "" : "&autoplay=1") . '" type="application/x-shockwave-flash" allowfullscreen="true" allowScriptAccess="always" width="' . ($view ? "560" : "425") . '" height="' . ($view ? "340" : "344") . '" wmode="transparent"/>
-              <param name="wmode" value="transparent" />
-              </object>';
-        } else {
-            $autoplay = !$mobile && $view;
-			$videoFrame = $video_id."_".$params['count_video'];
-            $embedded = '
+            
+        $autoplay = !$mobile && $view;
+		$videoFrame = $video_id."_".$params['count_video'];
+        $embedded = '
             <iframe
             title="YouTube video player"
             id="videoFrame' . $videoFrame . '"
             class="youtube_iframe' . ($view ? "_big" : "_small") . '"' .'
-            src="https://www.youtube.com/embed/' . $code . '?wmode=opaque' . ($autoplay ? "&autoplay=1" : "") . '"
+            src="//www.youtube.com/embed/' . $code . '?wmode=opaque' . ($autoplay ? "&autoplay=1" : "") . '"
             frameborder="0"
             allowfullscreen=""
             scrolling="no">
@@ -180,7 +173,6 @@ class Ynvideo_Plugin_Adapter_Youtube extends Ynvideo_Plugin_Adapter_Abstract {
                 doResize();
               });
             </script>';
-        }
 
         return $embedded;
     }
