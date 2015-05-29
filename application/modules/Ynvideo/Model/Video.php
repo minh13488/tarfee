@@ -17,7 +17,7 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 	// protected $_parent_is_owner = true;
 	
 	public function getRating() {
-		$tableRating = Engine_Api::_() -> getDbTable('reviewratings', 'ynvideo');
+		$tableRating = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
 		$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
 		$ratingTypes = $tableRatingType -> getAllRatingTypes();
 		$overrallValueTotal = 0;

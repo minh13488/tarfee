@@ -126,7 +126,7 @@ return array(
             )
         ),
         'video_mobile_view' => array(
-            'route' => 'videos/:user_id/:video_id/:slug/*',
+            'route' => 'videos/mobile/:user_id/:video_id/:slug/*',
             'defaults' => array(
                 'module' => 'ynvideo',
                 'controller' => 'index',
