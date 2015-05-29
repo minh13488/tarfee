@@ -46,7 +46,7 @@ class User_Form_Playercard_Create extends Engine_Form
       'label' => 'Relation',
       'multiOptions' => $relations,
       'onchange' => 'showOther()',
-      'required' => (bool)Engine_Api::_()->getApi('settings', 'core')->getSetting('uaer.relation_require', 1)
+      'required' => (bool)Engine_Api::_()->getApi('settings', 'core')->getSetting('user.relation_require', 1)
     ));
 	$this->addElement('Textarea', 'relation_other', array(
       'label' => 'Relation Other',
