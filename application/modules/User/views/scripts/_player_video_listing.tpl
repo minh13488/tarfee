@@ -54,46 +54,66 @@
 	    	<span><i class="fa fa-ellipsis-h"></i> <span> <?php echo $this -> translate('Options');?></span></span>
 	   		<ul style="width: initial;">
 	   			<li style ="width: auto;right: 0; float: right;" class="user-library-close-box">X</li>
-	   			<li style="width: 100%;">
-					<?php
-						echo $this->htmlLink(array(
-							'route' => 'default',
-							'module' => 'video',
-							'controller' => 'index',
-							'action' => 'edit',
-							'video_id' => $this -> video->video_id,
-							'parent_type' =>'user_playercard',
-							'subject_id' =>  $this->player->getIdentity(),
-					    ), '<i class="fa fa-pencil-square-o"></i>'.$this->translate('Edit '), array('class' => 'buttonlink'));
-					?>
-			    </li>
-			    <li style="width: 100%;">
-					<?php
-						echo $this->htmlLink(array(
-					 	        'route' => 'default', 
-					         	'module' => 'video', 
-					         	'controller' => 'index', 
-					         	'action' => 'delete', 
-					         	'video_id' => $this -> video->video_id, 
-					         	'subject_id' =>  $this->player->getIdentity(),
-					        	'parent_type' => 'user_playercard',
-					        	'case' => 'video',
-					         	'format' => 'smoothbox'), 
-					         	'<i class="fa fa-trash-o"></i>'.$this->translate('Delete Video'), array('class' => 'buttonlink smoothbox'
-					     ));
-					?>
-				</li>
-				<li style="width: 100%;">
+	   			<?php 
+	   				$mappingsTable = Engine_Api::_() -> getDbtable('mappings', 'user');
+	   				$row = $mappingsTable -> getRow($this->player->getIdentity(), $this->player->getType(), $this -> video->video_id, $this -> video->getType());
+	   			?>
+	   			<?php if(isset($row) && $row -> parent_id == 0) :?>
+		   			<li style="width: 100%;">
+						<?php
+							echo $this->htmlLink(array(
+								'route' => 'default',
+								'module' => 'video',
+								'controller' => 'index',
+								'action' => 'edit',
+								'video_id' => $this -> video->video_id,
+								'parent_type' =>'user_playercard',
+								'subject_id' =>  $this->player->getIdentity(),
+						    ), '<i class="fa fa-pencil-square-o"></i>'.$this->translate('Edit '), array('class' => 'buttonlink'));
+						?>
+				    </li>
+				    <li style="width: 100%;">
+						<?php
+							echo $this->htmlLink(array(
+						 	        'route' => 'default', 
+						         	'module' => 'video', 
+						         	'controller' => 'index', 
+						         	'action' => 'delete', 
+						         	'video_id' => $this -> video->video_id, 
+						         	'subject_id' =>  $this->player->getIdentity(),
+						        	'parent_type' => 'user_playercard',
+						        	'case' => 'video',
+						         	'format' => 'smoothbox'), 
+						         	'<i class="fa fa-trash-o"></i>'.$this->translate('Delete Video'), array('class' => 'buttonlink smoothbox'
+						     ));
+						?>
+					</li>
+					<li style="width: 100%;">
+							<?php echo $this->htmlLink(array(
+									'route' => 'user_library',
+									'action' => 'move-to-main',
+									'id' =>  $this -> video -> video_id,
+									'player_id' =>  $this->player->getIdentity(),
+								), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Main Library '), array(
+								'class' => 'smoothbox buttonlink'
+								)) ;
+							?>
+					</li>
+				<?php else :?>
+					<?php if($row -> parent_id != 0):?>
+					<li style="width: 100%;">
 						<?php echo $this->htmlLink(array(
 								'route' => 'user_library',
-								'action' => 'move-to-main',
-								'id' =>  $this -> video -> video_id,
+								'action' => 'remove-link',
+								'id' =>  $row -> mapping_id,
 								'player_id' =>  $this->player->getIdentity(),
-							), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Main Library '), array(
+							), '<i class="fa fa-plus-square"></i>'.$this->translate('Remove Link '), array(
 							'class' => 'smoothbox buttonlink'
 							)) ;
 						?>
-				</li>
+					</li>
+					<?php endif;?>
+				<?php endif;?>
 			</ul>
 		</div>
 		<?php endif;?>

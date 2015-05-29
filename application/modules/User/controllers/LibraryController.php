@@ -8,6 +8,39 @@ class User_LibraryController extends Core_Controller_Action_Standard
 			return;
 	}
 	
+	public function removeLinkAction() {
+		$idMapping = $this ->_getParam('id');
+		$this -> view -> form = $form = new User_Form_Library_RemoveLink();
+		
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		
+		$mappingsTable = Engine_Api::_() -> getDbtable('mappings', 'user');
+		$tableName = $mappingsTable -> info('name');
+		$db = $mappingsTable -> getAdapter();
+		$db -> beginTransaction();
+		
+		try
+		{
+			$db->delete($tableName, array(
+			    'mapping_id = ?' => $idMapping,
+			));
+			$db -> commit();
+			
+		}
+		catch( Exception $e )
+		{
+			$db -> rollBack();
+			return $e;
+		}
+		$this -> _forward('success', 'utility', 'core', array(
+				'closeSmoothbox' => true,
+				'parentRefresh' => true,
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _($this -> view -> translate('Remove Link Success...')))
+		));
+	}
+	
 	public function moveToPlayerAction(){
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		$videoID = $this ->_getParam('id');
@@ -175,8 +208,7 @@ class User_LibraryController extends Core_Controller_Action_Standard
 		$videoID = $this ->_getParam('id');
 		$libraryID = $this ->_getParam('libid');
 		
-		$mainLibrary = $viewer -> getMainLibrary();	
-		$subLibraries = $mainLibrary -> getSubLibrary();
+		$library = Engine_Api::_() -> getItem('user_library', $libraryID);
 		
 		$this -> view -> form = $form = new User_Form_Library_GiveOwnerShip();
 		
@@ -197,24 +229,24 @@ class User_LibraryController extends Core_Controller_Action_Standard
 
 		try
 		{
-			//save video user_id
-			$video = Engine_Api::_() -> getItem('video', $videoID);
-			if($video) {
-				$video -> owner_id = $move_to;
-				$video -> save();
-			}
-			
-			//get move to user
-			$user = Engine_Api::_() -> getItem('user', $move_to);
-			
-			//get mainlibrary of move to user
-			$mainLibrary = $user -> getMainLibrary();
-			
+			//get playercards
+			$player = Engine_Api::_() -> getItem('user_playercard', $move_to);
 			//get Row Mapping and update to move to user
 			$mappingRow = $mappingTable -> getRow($libraryID, 'user_library', $videoID, 'video');
-			if($mappingRow) {
-				$mappingRow -> owner_id = $mainLibrary -> getIdentity();
-				$mappingRow -> save();
+			if($mappingRow && $player) {
+				$mappingRowNew = $mappingTable -> getRow($move_to, $player -> getType(), $videoID, 'video');
+				if(!isset($mappingRowNew) && empty($mappingRowNew)) {
+					$mappingRowNew = $mappingTable -> createRow();
+				}
+				$mappingRowNew -> item_id = $videoID;
+				$mappingRowNew -> item_type = 'video';
+				$mappingRowNew -> owner_id = $move_to;
+				$mappingRowNew -> owner_type = $player -> getType();
+				$mappingRowNew -> creation_date = date('Y-m-d H:i:s');
+                $mappingRowNew -> modified_date = date('Y-m-d H:i:s');
+                $mappingRowNew -> parent_id = $mappingRow -> mapping_id;
+                $mappingRowNew -> user_id = $mappingRow -> user_id;
+				$mappingRowNew -> save();
 			}
 			$db -> commit();
 		} catch( Exception $e )	{
@@ -225,7 +257,7 @@ class User_LibraryController extends Core_Controller_Action_Standard
 		$this -> _forward('success', 'utility', 'core', array(
 				'closeSmoothbox' => true,
 				'parentRefresh' => true,
-				'messages' => array(Zend_Registry::get('Zend_Translate') -> _($this -> view -> translate('Give OwnerShip Success...')))
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _($this -> view -> translate('Give Ownership Success...')))
 		));
 	} 
 	

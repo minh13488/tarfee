@@ -29,30 +29,21 @@ class User_Form_Library_GiveOwnerShip extends Engine_Form
     $this->setDescription('Are you sure that you want to give ownership this video?');
 	
 	
-	//get main Library
 	$arrValue = array();
 	$viewer = Engine_Api::_() -> user() -> getViewer();
-	$select = Engine_Api::_() -> getItemTable('user') 
-						-> select() 
-						-> where('enabled = ?', '1')
-						-> where('verified = ?', '1')
-						-> where('approved = ?', '1');
-	$users = Engine_Api::_() -> getItemTable('user') -> fetchAll($select);
-	foreach($users as $user) {
-		if($user -> isSelf($viewer)) {
-			continue;
-		}
-		$arrValue[$user -> getIdentity()] = $user -> getTitle();
+	$players = Engine_Api::_() -> getItemTable('user_playercard') -> getAllPlayerCard($viewer -> getIdentity());
+	foreach($players as $player) {
+		$arrValue[$player -> getIdentity()] = $player -> getTitle();
 	}
-	
 	 $this->addElement('Select', 'move_to', array(
-      'label' => 'To User',
+	  'required' => true,
+      'label' => 'To Player',
       'multiOptions' => $arrValue,
     ));
 		
     $this->addElement('Button', 'submit_button', array(
       'value' => 'submit_button',
-      'label' => 'Give OwnerShip',
+      'label' => 'Move',
       'onclick' => 'removeSubmit()',
       'type' => 'submit',
       'ignore' => true,

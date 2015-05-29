@@ -58,6 +58,9 @@ class Ynvideo_Model_DbTable_ReviewRatings extends Engine_Db_Table
 			$count++;
 			$total += $row -> rating;
 		}
+		if($total ==0 && $count == 0){
+			return 0;
+		}
 		$rate = round(($total/$count), 1);
 		return $rate;
 	}

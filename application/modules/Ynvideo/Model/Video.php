@@ -32,13 +32,30 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 	
 	public function getHref($params = array())
 	{
-		$params = array_merge(array(
-			'route' => 'video_view',
-			'reset' => true,
-			'user_id' => $this -> owner_id,
-			'video_id' => $this -> video_id,
-			'slug' => $this -> getSlug(),
-		), $params);
+      	$isMobile = false;
+        if(Engine_Api::_() -> hasModuleBootstrap('ynresponsive1')) {
+      		$isMobile = Engine_Api::_()->getApi('mobile','ynresponsive1')->isMobile();
+      	} 
+		
+		if($isMobile){
+			$params = array_merge(array(
+				'route' => 'video_mobile_view',
+				'reset' => true,
+				'user_id' => $this -> owner_id,
+				'video_id' => $this -> video_id,
+				'slug' => $this -> getSlug(),
+			), $params);
+		}
+		else {
+			$params = array_merge(array(
+				'route' => 'video_view',
+				'reset' => true,
+				'user_id' => $this -> owner_id,
+				'video_id' => $this -> video_id,
+				'slug' => $this -> getSlug(),
+			), $params);
+		}
+		
 		$route = $params['route'];
 		$reset = $params['reset'];
 		unset($params['route']);
