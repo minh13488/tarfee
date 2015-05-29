@@ -5,7 +5,7 @@ $this -> headScript()
         -> appendFile($this->baseUrl() . '/application/modules/User/externals/scripts/jquery.form.min.js');
 
 $coverPhotoUrl = "";
-$hasCover = true;
+$hasCover = false;
 if ($this->user->cover_photo) {
 	$coverFile = Engine_Api::_()->getDbtable('files', 'storage')->find($this->user->cover_photo)->current();
 	$coverPhotoUrl = $coverFile->map();
@@ -24,7 +24,6 @@ else {
 
 <script type="text/javascript">
 var cover_top = <?php echo ($hasCover) ? $this->user->cover_top : 0?>;
-
 function repositionCover() {
     jQuery('.reposition-cover').show();
     jQuery('.cover-resize-buttons').show();
@@ -37,7 +36,7 @@ function repositionCover() {
         axis: "y",
         cursor: "s-resize",
         drag: function (event, ui) {
-            y1 = jQuery('.user-profile-cover-picture').height();
+            y1 = jQuery('.tarfee_profile_cover_photo').height();
             y2 = jQuery('.reposition-cover').height();
             
             if (ui.position.top >= 0) {
@@ -90,12 +89,15 @@ function cancelReposition() {
     jQuery('input.cover-position').val(cover_top);
 }
 </script>
-<div class="user-widget-profile-cover">
-    <div class="user-profile-cover-picture">
-	        <div class="cover-reposition">
-	        <span id="edit-cover-btn">
-	        <?php echo $this->htmlLink(array('action'=>'cover', 'route'=>'user_extended', 'controller'=>'edit', 'id'=>$this->user->getIdentity()), $this->translate('Upload New Cover'), array('class'=>'smoothbox'))?>
-	        </span>
+<div class="tarfee_profile_cover_wrapper">
+   <div class="tarfee_profile_cover_photo_wrapper tarfee_profile_cover_has_tabs" id="siteuser_cover_photo">
+      <div class="tarfee_profile_cover_photo cover_photo_wap b_dark">
+      	  <div class="cover-reposition">
+      	  	<?php if($this->user -> isSelf($this -> viewer())):?>
+		        <span id="edit-cover-btn">
+		        <?php echo $this->htmlLink(array('action'=>'cover', 'route'=>'user_extended', 'controller'=>'edit', 'id'=>$this->user->getIdentity()), $this->translate('Upload New Cover'), array('class'=>'smoothbox'))?>
+		        </span>
+		    <?php endif; ?>
 	        <?php if ($hasCover) :?>
 		        <span class="edit-position-buttons"><a href="javascript:void(0)" onclick="repositionCover();"><?php echo $this->translate('Reposition Cover Photo')?></a></span>
 		        <div class="cover-resize-buttons" style="display: none;">
@@ -104,23 +106,12 @@ function cancelReposition() {
 		            <input class="cover-position" name="pos" value="<?php echo ($hasCover) ? $this->user->cover_top : 0?>" type="hidden">
 		        </div>
 		        </div>
-		        <img class="reposition-cover profile-cover-picture-span" src="<?php echo $coverPhotoUrl; ?>" style="display: none; <?php if ($hasCover) echo 'top: '.$this->user->cover_top.'px'?>"></img>
+		        <img class="reposition-cover cover_photo thumb_cover item_photo_album_photo thumb_cover" src="<?php echo $coverPhotoUrl; ?>" style="display: none; <?php if ($hasCover) echo 'top: '.$this->user->cover_top.'px'?>"></img>
 	        <?php else: ?>
 	        	</div>
 	        <?php endif; ?>
-        <img class="view-cover profile-cover-picture-span" src="<?php echo $coverPhotoUrl; ?>" style="<?php if ($hasCover) echo 'top: '.$this->user->cover_top.'px'?>"></img>
-</div>
-
-
-<div class="tarfee_profile_cover_wrapper">
-   <div class="prelative">
-   </div>
-   <div class="tarfee_profile_cover_photo_wrapper tarfee_profile_cover_has_tabs" id="siteuser_cover_photo" style="min-height:200px; height:400px;">
-      <div class="tarfee_profile_cover_photo cover_photo_wap b_dark">
-         <a href="/albums/photo/view/album_id/516/photo_id/5292" onclick="opentarfeeLightBox(&quot;/albums/photo/view/album_id/516/photo_id/5292&quot;);return false;">
-         <img src="http://d39w600kmgi0wz.cloudfront.net/public/album_photo/21/e4/e33d_492d.jpg?c=ea00" alt="" align="left" class="cover_photo thumb_cover item_photo_album_photo  thumb_cover" style="top:0px">				</a>					
+        <img class="cover_photo thumb_cover item_photo_album_photo thumb_cover" src="<?php echo $coverPhotoUrl; ?>" style="<?php if ($hasCover) echo 'top: '.$this->user->cover_top.'px'?>"></img>
       </div>
-      <!--//empty($this->user->user_cover) && !$this->photo &&--> 
       <div class="clr"></div>
    </div>
    <div class="tarfee_profile_cover_head_section b_medium tarfee_profile_cover_has_tabs tarfee_profile_cover_has_tarfee_button " id="siteuser_main_photo">
@@ -131,9 +122,12 @@ function cancelReposition() {
                   <tbody>
                      <tr valign="middle">
                         <td>
-                           <a href="/albums/photo/view/album_id/422/photo_id/5293" onclick="opentarfeeLightBox(&quot;/albums/photo/view/album_id/422/photo_id/5293&quot;);
-                              return false;">
-                           <img src="http://d39w600kmgi0wz.cloudfront.net/public/album_photo/22/e4/e33e_7619.jpg?c=888b" alt="" align="left" id="user_profile_photo" class="thumb_profile item_photo_user  thumb_profile">                  </a>              
+                        	<?php $profileUrl = $this -> user -> getPhotoUrl('thumb.profile');
+                        	if(!$profileUrl)
+                        	{
+                        		$profileUrl = 'application/modules/User/externals/images/nophoto_user_thumb_profile.png';
+                        	}?>
+                           <img src="<?php echo $profileUrl?>" alt="" align="left" id="user_profile_photo" class="thumb_profile item_photo_user thumb_profile">           
                         </td>
                      </tr>
                   </tbody>
@@ -146,8 +140,8 @@ function cancelReposition() {
          </div>
          <div class="tarfee_profile_coverinfo_status">
             <div class="fleft">
-               <a href="/profile/linda">
-                  <h2>Linda Johnson</h2>
+               <a href="<?php echo $this -> user -> getHref();?>">
+                  <h2><?php echo $this -> user -> getTitle()?></h2>
                </a>
             </div>
             <div class="mtop5">
@@ -158,14 +152,85 @@ function cancelReposition() {
             <div>
                <div class="generic_layout_container layout_tarfee_social_button">
                   <ul>
+                  	<?php $viewer = Engine_Api::_()->user()->getViewer();
+					    $subject = Engine_Api::_()->core()->getSubject();
+						if(!$viewer -> isSelf($subject)):
+					 ?>
                      <li>
-                     	<a><span class="profile_follow_button">follow</span></a>
+                 		<?php 
+						$subjectRow = $subject->membership()->getRow($viewer);
+						if( null === $subjectRow ) 
+						{
+					        // Follow
+					        echo $this->htmlLink(array(
+						        'route' => 'user_extended',
+						        'controller' => 'friends',
+						        'action' => 'add',
+						        'user_id' => $subject->getIdentity(),
+						        'rev' => true
+						    ), '<span class="profile_follow_button">'.$this -> translate("Follow").'</span>', array(
+						        'class' => 'smoothbox profile_follow'
+						    ));
+					    }
+						else if( $subjectRow->resource_approved == 0 ) {
+							// Cancel Follow
+					        echo $this->htmlLink(array(
+						        'route' => 'user_extended',
+						        'controller' => 'friends',
+						        'action' => 'cancel',
+						        'user_id' => $subject->getIdentity(),
+						        'rev' => true
+						    ), '<span class="profile_follow_button">'.$this -> translate("Unfollow").'</span>', array(
+						        'class' => 'smoothbox profile_unfollow'
+						    ));
+						}
+						else
+						{
+							// Unfollow
+					        echo $this->htmlLink(array(
+						        'route' => 'user_extended',
+						        'controller' => 'friends',
+						        'action' => 'remove',
+						        'user_id' => $subject->getIdentity(),
+						        'rev' => true
+						    ), '<span class="profile_follow_button">'.$this -> translate("Unfollow").'</span>', array(
+						        'class' => 'smoothbox profile_unfollow'
+						    ));
+						} 
+						?>
                      </li>
                      <li>
-                     	<a><span class="profile_inbox_button">inbox</span></a>
+                     	<?php echo $this->htmlLink(array(
+				            'route' => 'messages_general',
+				            'action' => 'compose',
+				            'to' => $this -> subject() ->getIdentity()
+				        ), '<span class="profile_inbox_button">'.$this -> translate('inbox').'</span>', array(
+				            'class' => 'smoothbox'
+				        ));
+			    		?>
+                     </li>
+                     <?php endif;?>
+                     <li>
+                     	<?php echo $this->htmlLink(array(
+				            'route' => 'default',
+				            'module' => 'activity',
+				            'controller' => 'index',
+							'action' => 'share',
+							'type' => 'user',
+							'id' => $this->subject() -> getIdentity(),
+				        ), '<span class="profile_share_button">'.$this -> translate('share').'</span>', array(
+				            'class' => 'smoothbox'
+				        ));
+			    		?>
                      </li>
                      <li>
-                     	<a><span class="profile_share_button">share</span></a>
+                     	<?php if(Engine_Api::_()->authorization()->isAllowed('user', $this->subject(), 'show_badge')):?>
+							<?php 
+							$badge = Engine_Api::_()->authorization()->getPermission($this->subject(), 'user', 'badge');
+							if($badge && strpos($badge,'public/admin')): ?>
+								<img height="30" src="<?php echo $badge?>" />
+							<?php endif;?>
+						<?php endif;?>
                      </li>
                   </ul>
                </div>
@@ -175,19 +240,51 @@ function cancelReposition() {
       <div class="clr"></div>
      <div class='tabs_alt tabs_parent'>
 	  <ul id='main_tabs'>
-		<li>
-	   <a href="#">
-	      <div><span class="number_tabs">120</span></div>
-	      <div>following</div>
-	   </a>
-		</li>
-		</li>
-		<li>
-		   <a href="#">
-		      <div><span class="number_tabs">1000</span></div>
-		      <div>followers</div>
-		   </a>
-		</li>
+	  	 <?php $direction = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.friends.direction');
+    	if ( $direction == 0 ): ?>
+			<li>
+			   <?php if($this->followingCount):?>
+			      	<a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-following', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
+				      	<div><span class="number_tabs"><?php echo $this->locale()->toNumber($this->followingCount);?></span></div>
+				      	<div><?php echo $this -> translate('following')?></div>
+			        </a>
+		        <?php else:?>
+		        	<a href="javascript:void(0)">
+		        		<div><span class="number_tabs">0</span></div>
+		        	 	<div><?php echo $this -> translate('following')?></div>
+		        	 </a>
+		        <?php endif;?>
+			</li>
+			<li>
+				<?php if($this->user->member_count):?>
+			      	<a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-followers', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
+				      	<div><span class="number_tabs"><?php echo $this->locale()->toNumber($this->user->member_count);?></span></div>
+				      	<div><?php echo $this->translate(array('follower', 'followers', $this->user->member_count),
+				        	$this->locale()->toNumber($this->user->member_count)) ?></div>
+			        </a>
+		        <?php else:?>
+		        	<a href="javascript:void(0)">
+		        		<div><span class="number_tabs">0</span></div>
+		        	 	<div><?php echo $this -> translate('followers')?></div>
+		        	 </a>
+		        <?php endif;?>
+			</li>
+		<?php else:?>
+			<li>
+				<?php if($this->user->member_count):?>
+			      	<a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-friends', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
+				      	<div><span class="number_tabs"><?php echo $this->locale()->toNumber($this->user->member_count);?></span></div>
+				      	<div><?php echo $this->translate(array('friend', 'friends', $this->user->member_count),
+				        	$this->locale()->toNumber($this->user->member_count)) ?></div>
+			        </a>
+		        <?php else:?>
+		        	<a href="javascript:void(0)">
+		        		<div><span class="number_tabs">0</span></div>
+		        	 	<div><?php echo $this -> translate('friends')?></div>
+		        	 </a>
+		        <?php endif;?>
+			</li>
+		<?php endif;?>
 		<li>
 		   <a href="#">
 		      <div><span class="number_tabs">90</span></div>
@@ -220,9 +317,12 @@ function cancelReposition() {
 		</li>
 	  </ul>
 	</div>
-	<div class="tabs_alt tab_identify_account">
-		<div class="user_icon"><i class="fa fa-user"></i></div>
-		<div class="user_type_verify">Professtional individual verified by Tarfee</div>
+		<?php if($this->src_img):?>
+		<div class="tabs_alt tab_identify_account">
+			<div class="user_icon"><img src='<?php echo $this->src_img;?>'></div>
+			<div class="user_type_verify"><?php echo $this -> translate("professtional individual verified by Tarfee");?></div>
+		</div>
+		<?php endif;?>
 	</div>
    </div>
 </div>

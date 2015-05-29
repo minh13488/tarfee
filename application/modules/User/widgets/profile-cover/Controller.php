@@ -31,9 +31,22 @@ class User_Widget_ProfileCoverController extends Engine_Content_Widget_Abstract
 	        }
 	      }
 	    }
-		 // Friend count
-		 $select = $subject->membership()->getMembersSelect();
-    	 $friends = Zend_Paginator::factory($select);
-   		 $this->view->friendCount = $friends->getTotalItemCount();
+	    
+	    // Friend count
+	    $this->view->friendCount = $subject->membership()->getMemberCount($subject);
+		
+		// Following count
+	    $select = $subject->membership()->getMembersOfSelect();
+		$paginator = Zend_Paginator::factory($select);
+		$this -> view -> followingCount = $paginator -> getTotalItemCount();
+		
+		$slverifyTbl = Engine_Api::_()->getItemTable('slprofileverify_slprofileverify');
+	    $verifyRow = $slverifyTbl->getVerifyInfor($subject->getIdentity());
+	    if($verifyRow->approval == 'verified')
+	    {
+	        $settingsCore = Engine_Api::_()->getApi('settings', 'core');
+	        $photo_badge = $settingsCore->getSetting('sl_verify_badge', 0);
+	        $this->view->src_img = $src_img = Engine_Api::_()->slprofileverify()->getPhotoVerificaiton($photo_badge, null, 'pBadge');
+	    }
 	}
 }

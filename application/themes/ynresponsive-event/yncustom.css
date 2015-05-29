@@ -994,10 +994,6 @@ li.sideicon_generic:hover{
   	border: 0;
 	padding: 0;
 }
-#global_page_user-index-home li.sideicon_generic
-{
-	line-height: 28px;;
-}
 #global_page_slprofileverify-verify-deny form h3
 {
 	margin-top: 0;
