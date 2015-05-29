@@ -21,7 +21,7 @@ class Advgroup_Form_EmailToFollowers extends Engine_Form
 		$translate = Zend_Registry::get('Zend_Translate');
 
 		// Init form
-		$this -> setTitle('Email To Friends') -> setDescription('Send message to your followers.') -> setLegend('');
+		$this -> setTitle('Email To Followers') -> setDescription('Send message to your followers.') -> setLegend('');
 		$this -> setAttrib('class', 'global_form_popup');
 		
 		

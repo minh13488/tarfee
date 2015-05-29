@@ -1,11 +1,3 @@
-<?php
-  $this->headScript()
-    ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Observer.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/AutocompleterExtend.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Local.js')
-    ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Request.js');
-?>
-
 <div id="user-preferred-clubs-view">
 	<?php foreach($this -> groupMappings as $groupMapping) :?>
 		<?php 
@@ -18,6 +10,15 @@
 		<?php endif;?>
 	<?php endforeach;?>
 </div>
+
+<?php if($this -> viewer() -> isSelf($this -> viewer() -> subject())) :?>
+<?php
+  $this->headScript()
+    ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Observer.js')
+    ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/AutocompleterExtend.js')
+    ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Local.js')
+    ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Request.js');
+?>
 
 <input type="text" name="group" id="group" value="" autocomplete="off">
 <div id="group_ids-wrapper" class="form-wrapper">
@@ -168,3 +169,4 @@
         
     });
  </script>
+ <?php endif;?>
