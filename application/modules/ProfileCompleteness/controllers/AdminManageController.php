@@ -1,12 +1,4 @@
 <?php
-
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
- 
-
 class ProfileCompleteness_AdminManageController extends Fields_Controller_AdminAbstract {
 
     protected $_fieldType = 'user';
@@ -58,15 +50,6 @@ class ProfileCompleteness_AdminManageController extends Fields_Controller_AdminA
         
         
         $this->view->type = $option_id;
-    }
-
-    public function getPhotoWeight() {
-        $table =  new ProfileCompleteness_Model_DbTable_Weights;
-        $select = $table->select()
-                ->where('type_id = 0')
-                ->where('field_id = 0');
-        $row = $table->fetchRow($select);
-        return $row->weight;
     }
 
     public function editAction() {
