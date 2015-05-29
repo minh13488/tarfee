@@ -480,7 +480,10 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		}
 
 		// Render
-		$this -> _helper -> content -> setEnabled();
+		$smoothbox = $this ->_getParam('smoothbox');
+		if(!isset($smoothbox) && empty($smoothbox)) {
+			$this -> _helper -> content -> setEnabled();
+		}
 	}
 
 	public function validationAction()
