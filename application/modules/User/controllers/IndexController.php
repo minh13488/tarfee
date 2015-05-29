@@ -22,7 +22,92 @@ class User_IndexController extends Core_Controller_Action_Standard
   {
 
   }
+  
+  public function getViewPreferredClubsAction(){
+  		$this -> _helper -> layout -> disableLayout();
+  	    $userGroupMappingTable = Engine_Api::_() -> getDbTable('groupmappings', 'user');
+		$user_id = $this ->_getParam('user_id');
+		$this -> view -> groupMappings = $groupMappings = $userGroupMappingTable -> getGroupByUser($user_id);
+  }
+  				   
+  public function savePreferredClubsAction(){
+  		$this -> _helper -> layout -> disableLayout();
+        $this -> _helper -> viewRenderer -> setNoRender(true);
+		
+		$userGroupMappingTable = Engine_Api::_() -> getDbTable('groupmappings', 'user');
+		
+		$groupIds = $this ->_getParam('ids');
+		$user_id = $this ->_getParam('user_id');
+		
+		//core - buyListing
+		$db = $userGroupMappingTable->getAdapter();
+		$db->beginTransaction();
+		try 
+		{
+			$groupIds = explode(",",$groupIds);
+			//delete all before insert
+			$userGroupMappingTable -> deleteAllRows($user_id);
+			foreach($groupIds as $group_id) {
+				$row = $userGroupMappingTable -> getRow($user_id, $group_id);
+				if(!isset($row) && empty($row)) {
+					$row = $userGroupMappingTable -> createRow();
+					$row -> user_id = $user_id;
+					$row -> group_id = $group_id;
+					$row -> save();
+				}
+			}
+			$status = 'true';
+			$db -> commit();
+			
+		} 
+		catch (Exception $e) {
+	      $db->rollBack();
+		  $status = 'false';
+	    }
+		
+		$data = array();
+		$data[] = array(
+			'status' => $status,
+		);
 
+		return $this -> _helper -> json($data);
+  }
+  
+  public function suggestGroupAction() {
+        $this -> _helper -> layout -> disableLayout();
+        $this -> _helper -> viewRenderer -> setNoRender(true);
+        $table = Engine_Api::_()->getItemTable('group');
+    
+        // Get params
+        $text = $this->_getParam('text', $this->_getParam('search', $this->_getParam('value')));
+        $limit = (int) $this->_getParam('limit', 10);
+    
+        // Generate query
+        $select = Engine_Api::_()->getItemTable('group')->select()->where('search = ?', 1);
+    
+        if( null !== $text ) {
+            $select->where('`'.$table->info('name').'`.`title` LIKE ?', '%'. $text .'%');
+        }
+        $select->limit($limit);
+    
+        // Retv data
+        $data = array();
+        foreach( $select->getTable()->fetchAll($select) as $friend ){
+            $data[] = array(
+                'id' => $friend->getIdentity(),
+                'label' => $friend->getTitle(), // We should recode this to use title instead of label
+                'title' => $friend->getTitle(),
+                'photo' => $this->view->itemPhoto($friend, 'thumb.icon'),
+                'url' => $friend->getHref(),
+                'type' => 'user',
+            );
+        }
+    
+        // send data
+        $data = Zend_Json::encode($data);
+        $this->getResponse()->setBody($data);
+    }
+  
   public function homeAction()
   {
     // check public settings
