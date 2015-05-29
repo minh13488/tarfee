@@ -135,7 +135,6 @@
 								</td>
 						</tr></table>
 						</div>
-						<?php endif;?>
 					</div>
 				</div>
 	            <div class="playercard_options">

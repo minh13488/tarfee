@@ -10,7 +10,7 @@ class User_Widget_ProfileCoverController extends Engine_Content_Widget_Abstract
 	    }
 	
 	    // Get subject and check auth
-	    $this->view->subject = $subject = Engine_Api::_()->core()->getSubject('user');
+	    $this->view->user = $subject = Engine_Api::_()->core()->getSubject('user');
 	    if( !$subject->authorization()->isAllowed($viewer, 'view') ) {
 	      return $this->setNoRender();
 	    }
