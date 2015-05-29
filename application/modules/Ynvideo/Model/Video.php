@@ -15,16 +15,47 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 	protected $_type = 'video';
 
 	// protected $_parent_is_owner = true;
-
+	
+	public function getRating() {
+		$tableRating = Engine_Api::_() -> getDbTable('reviewratings', 'ynvideo');
+		$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
+		$ratingTypes = $tableRatingType -> getAllRatingTypes();
+		$overrallValueTotal = 0;
+		foreach($ratingTypes as $item) {
+			$overrallValue = $tableRating -> getRatingOfType($item -> getIdentity(), $this -> video_id); 
+			$overrallValueTotal += $overrallValue;
+   		}
+   		$rate = round(($overrallValueTotal/5), 1);
+		return $rate;
+	}
+	
+	
 	public function getHref($params = array())
 	{
-		$params = array_merge(array(
-			'route' => 'video_view',
-			'reset' => true,
-			'user_id' => $this -> owner_id,
-			'video_id' => $this -> video_id,
-			'slug' => $this -> getSlug(),
-		), $params);
+      	$isMobile = false;
+        if(Engine_Api::_() -> hasModuleBootstrap('ynresponsive1')) {
+      		$isMobile = Engine_Api::_()->getApi('mobile','ynresponsive1')->isMobile();
+      	} 
+		
+		if($isMobile){
+			$params = array_merge(array(
+				'route' => 'video_mobile_view',
+				'reset' => true,
+				'user_id' => $this -> owner_id,
+				'video_id' => $this -> video_id,
+				'slug' => $this -> getSlug(),
+			), $params);
+		}
+		else {
+			$params = array_merge(array(
+				'route' => 'video_view',
+				'reset' => true,
+				'user_id' => $this -> owner_id,
+				'video_id' => $this -> video_id,
+				'slug' => $this -> getSlug(),
+			), $params);
+		}
+		
 		$route = $params['route'];
 		$reset = $params['reset'];
 		unset($params['route']);

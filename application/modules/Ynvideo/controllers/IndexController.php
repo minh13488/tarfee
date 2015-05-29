@@ -480,7 +480,10 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		}
 
 		// Render
-		$this -> _helper -> content -> setEnabled();
+		$smoothbox = $this ->_getParam('smoothbox');
+		if(!isset($smoothbox) && empty($smoothbox)) {
+			$this -> _helper -> content -> setEnabled();
+		}
 	}
 
 	public function validationAction()
@@ -854,7 +857,83 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			'messages' => Array($this -> view -> message)
 		));
 	}
+	
+	public function ratingAction()
+	{
+		if (!$this -> _helper -> requireUser() -> isValid())
+		{
+			return;
+		}
+		$video_id = (int)$this -> _getParam('video_id');
+		if ($video_id)
+		{
+			$video = Engine_Api::_() -> getItem('video', $video_id);
+			if ($video)
+			{
+				Engine_Api::_() -> core() -> setSubject($video);
+			}
+		}
+		if (!$this -> _helper -> requireSubject('video') -> isValid())
+		{
+			return;
+		}
 
+		if (!$this -> _helper -> requireAuth() -> setAuthParams($video, null, 'view') -> isValid())
+		{
+			return;
+		}
+
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$user_id = $viewer -> getIdentity();
+
+		$rating = (int)$this -> _getParam('rating');
+		$rating_type = $this ->_getParam('rating_type');
+
+		$tableRating = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
+		$db = $tableRating -> getAdapter();
+		$db -> beginTransaction();
+
+		try
+		{
+			
+			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
+			$rating_types = $tableRatingType -> getAllRatingTypes();
+			// Specific Rating
+			foreach($rating_types as $item)
+			{
+				if($item -> getIdentity() == $rating_type) {
+					$row = $tableRating -> getRowRatingThisType($item -> getIdentity(), $video -> getIdentity(), $viewer -> getIdentity());
+					if(!$row)
+					{
+						$row = $tableRating -> createRow();
+					}
+					$row -> resource_id = $video -> getIdentity();
+					$row -> user_id = $viewer -> getIdentity();
+					$row -> rating_type = $item -> getIdentity();
+					$row -> rating = $rating;
+					$row -> save();
+				}
+			}
+		
+			$db -> commit();
+		}
+		catch (Exception $e)
+		{
+			$db -> rollBack();
+			throw $e;
+		}
+		
+	    $overrallValue = $tableRating -> getRatingOfType($rating_type, $video -> getIdentity());
+
+		$data = array();
+		$data[] = array(
+			'rating' => $overrallValue,
+			'rating_type' => $rating_type,
+		);
+
+		return $this -> _helper -> json($data);
+	}
+	
 	public function rateAction()
 	{
 		if (!$this -> _helper -> requireUser() -> isValid())
@@ -1176,6 +1255,160 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 	public function addToGroupAction()
 	{
 		$video = Engine_Api::_() -> core() -> getSubject();
+
+	}
+	
+	public function mobileViewAction()
+	{
+		$video_id = $this -> _getParam('video_id');
+		$video = Engine_Api::_() -> getItem('video', $video_id);
+		if ($video)
+		{
+			Engine_Api::_() -> core() -> setSubject($video);
+		}
+		if (!$this -> _helper -> requireSubject() -> isValid())
+		{
+			return;
+		}
+		$type = $video -> getType();
+
+		$video = Engine_Api::_() -> core() -> getSubject('video');
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+
+		//Get Photo Url
+		$photoUrl = $video -> getPhotoUrl('thumb.normal');
+		$pos = strpos($photoUrl, "http");
+		if ($pos === false)
+		{
+			$photoUrl = rtrim((constant('_ENGINE_SSL') ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'], '/') . $photoUrl;
+		}
+
+		//Get Video Url
+		$videoUrl = $video -> getHref();
+		$pos = strpos($videoUrl, "http");
+		if ($pos === false)
+		{
+			$videoUrl = rtrim((constant('_ENGINE_SSL') ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'], '/') . $videoUrl;
+		}
+
+		//Adding meta tags for sharing
+		$view = Zend_Registry::get('Zend_View');
+		$og = '<meta property="og:image" content="' . $photoUrl . '" />';
+		$og .= '<meta property="og:title" content="' . $video -> getTitle() . '" />';
+		$og .= '<meta property="og:url" content="' . $videoUrl . '" />';
+		$view -> layout() -> headIncludes .= $og;
+
+		$watchLaterTbl = Engine_Api::_() -> getDbTable('watchlaters', 'ynvideo');
+		$watchLaterTbl -> update(array(
+			'watched' => '1',
+			'watched_date' => date('Y-m-d H:i:s')
+		), array(
+			"video_id = {$video->getIdentity()}",
+			"user_id = {$viewer->getIdentity()}"
+		));
+
+		// if this is sending a message id, the user is being directed from a coversation
+		// check if member is part of the conversation
+		$message_id = $this -> getRequest() -> getParam('message');
+		$message_view = false;
+		if ($message_id)
+		{
+			$conversation = Engine_Api::_() -> getItem('messages_conversation', $message_id);
+			if ($conversation -> hasRecipient(Engine_Api::_() -> user() -> getViewer()))
+			{
+				$message_view = true;
+			}
+		}
+		$this -> view -> message_view = $message_view;
+
+		if (!$message_view && !$this -> _helper -> requireAuth() -> setAuthParams($video, null, 'view') -> isValid())
+		{
+			return;
+		}
+
+		$this -> view -> videoTags = $video -> tags() -> getTagMaps();
+
+		// Check if edit/delete is allowed
+		$this -> view -> can_edit = $can_edit = $this -> _helper -> requireAuth() -> setAuthParams($video, null, 'edit') -> checkRequire();
+		$this -> view -> can_delete = $can_delete = $this -> _helper -> requireAuth() -> setAuthParams($video, null, 'delete') -> checkRequire();
+
+		// check if embedding is allowed
+		$can_embed = true;
+		if (!Engine_Api::_() -> getApi('settings', 'core') -> getSetting('video.embeds', 1))
+		{
+			$can_embed = false;
+		}
+		else
+		if (isset($video -> allow_embed) && !$video -> allow_embed)
+		{
+			$can_embed = false;
+		}
+		$this -> view -> can_embed = $can_embed;
+
+		$embedded = "";
+		// increment count
+		if ($video -> status == 1)
+		{
+			if (!$video -> isOwner($viewer))
+			{
+				$video -> view_count++;
+				$video -> save();
+			}
+            $embedded = $video -> getRichContent(true);
+		}
+
+		if ($video -> type == Ynvideo_Plugin_Factory::getUploadedType() && $video -> status == 1)
+		{
+			$session = new Zend_Session_Namespace('mobile');
+			$responsive_mobile = FALSE;
+			if (defined('YNRESPONSIVE'))
+			{
+				$responsive_mobile = Engine_Api::_()-> ynresponsive1() -> isMobile();
+			}
+			if (!empty($video -> file1_id))
+			{
+				$storage_file = Engine_Api::_() -> getItem('storage_file', $video -> file_id);
+				if ($session -> mobile || $responsive_mobile)
+				{
+					$storage_file = Engine_Api::_() -> getItem('storage_file', $video -> file1_id);
+				}
+				if ($storage_file)
+				{
+					$this -> view -> video_location1 = $storage_file -> map();
+					$this -> view -> video_location = '';
+				}
+			}
+			else 
+			{
+				$storage_file = Engine_Api::_() -> getItem('storage_file', $video -> file_id);
+				if ($storage_file)
+				{
+					$this -> view -> video_location = $storage_file -> map();
+					$this -> view -> video_location1 = '';
+				}
+			}
+		}
+		else
+		if ($video -> type == Ynvideo_Plugin_Factory::getVideoURLType())
+		{
+			$this -> view -> video_location = $video -> code;
+		}
+
+		$settings = Engine_Api::_() -> getApi('settings', 'core');
+		$this -> view -> numberOfEmail = $settings -> getSetting('ynvideo.friend.emails', 5);
+		$this -> view -> viewer_id = $viewer -> getIdentity();
+		$this -> view -> rating_count = Engine_Api::_() -> ynvideo() -> ratingCount($video -> getIdentity());
+		$this -> view -> video = $video;
+		$this -> view -> rated = Engine_Api::_() -> ynvideo() -> checkRated($video -> getIdentity(), $viewer -> getIdentity());
+		$this -> view -> videoEmbedded = $embedded;
+
+		if ($video -> category_id)
+		{
+			$this -> view -> categories = $categories = Engine_Api::_() -> getDbTable('categories', 'ynvideo') -> getCategories(array(
+				$video -> category_id,
+				$video -> subcategory_id
+			));
+		}
 
 	}
 

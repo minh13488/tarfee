@@ -56,7 +56,6 @@ return array(
         'ynvideo_playlist',
         'ynvideo_playlistassoc',
         'video_category',
-        'ynvideo_review',
 	    'ynvideo_ratingtype',
     ),
     // Compose
@@ -100,7 +99,7 @@ return array(
                 'action' => 'index',
             ),
             'reqs' => array(
-                'action' => '(index|browse|create|list|manage|validation|add-to|edit|delete|rate|compose-upload|add-to-group)',
+                'action' => '(index|browse|create|list|manage|validation|add-to|edit|delete|rate|compose-upload|add-to-group|rating)',
             )
         ),
         'video_admin_general' => array(
@@ -120,6 +119,18 @@ return array(
                 'module' => 'ynvideo',
                 'controller' => 'index',
                 'action' => 'view',
+                'slug' => '',
+            ),
+            'reqs' => array(
+                'user_id' => '\d+'
+            )
+        ),
+        'video_mobile_view' => array(
+            'route' => 'videos/:user_id/:video_id/:slug/*',
+            'defaults' => array(
+                'module' => 'ynvideo',
+                'controller' => 'index',
+                'action' => 'mobile-view',
                 'slug' => '',
             ),
             'reqs' => array(
