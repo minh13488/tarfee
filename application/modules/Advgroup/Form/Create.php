@@ -76,6 +76,13 @@ class Advgroup_Form_Create extends Engine_Form
       ),
     ));
     
+	 $this->addElement('Select', 'sportcategory_id', array(
+      'label' => 'Sport',
+       'multiOptions' => array(
+        '0' => ' '
+      ),
+    ));
+	
     $this -> addElement('Dummy', 'location_map', array(
             'label' => 'Location',
             'decorators' => array( array(

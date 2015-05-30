@@ -22,6 +22,19 @@ return array(
     ),
   ),
   array(
+    'title' => 'Preferred Sports',
+    'description' => 'Displays a list of preferred sports.',
+    'category' => 'User',
+    'type' => 'widget',
+    'name' => 'user.profile-preferred-sports-search',
+    'requirements' => array(
+      'viewer',
+    ),
+    'defaultParams' => array(
+      'title' => 'User Sports',
+    ),
+  ),
+  array(
     'title' => 'Quick Links',
     'description' => 'Displays a list of quick links.',
     'category' => 'User',

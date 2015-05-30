@@ -77,6 +77,7 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
       $this->view->form = $form = new Advgroup_Form_Create();
      }
     
+	
     if($this->_getParam('parent')){
       $form->removeElement('auth_sub_group');
       $parent_id = $this->_getParam('parent');
@@ -127,7 +128,18 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
     if( count($form->category_id->getMultiOptions()) <= 1 ) {
       $form->removeElement('category_id');
     }
-
+	
+	// Populate sport list.
+	$tableCategory = Engine_Api::_() -> getItemTable('user_sportcategory');
+	$categories = $tableCategory -> getCategoriesLevel1();
+	foreach ($categories as $item) {
+		$form -> sportcategory_id -> addMultiOption($item['sportcategory_id'], $item['title']);
+	}
+	
+	if( count($form->sportcategory_id->getMultiOptions()) <= 1 ) {
+      $form->removeElement('sportcategory_id');
+    }
+	
     // Check method and data validity.
     if( !$this->getRequest()->isPost() ) {
       return;

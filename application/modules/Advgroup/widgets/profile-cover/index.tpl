@@ -433,6 +433,15 @@ if ($this->group->cover_photo)
 					<?php echo $this->group->getCategory(); ?>
 				</div>
 				<?php endif; ?>
+				<?php if($this->group->getCategory()):?>
+				<!-- Category -->
+				<div>
+					<span>
+						<i class="fa fa-futbol-o" title="Sport"></i>
+					</span>
+					<?php echo $this->group->getSportCategory(); ?>
+				</div>
+				<?php endif; ?>
 				<?php if($this->aContactButton):?>
 				<div>
 					<span>

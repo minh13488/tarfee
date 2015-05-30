@@ -96,22 +96,63 @@ class User_SportController extends Core_Controller_Action_Standard {
 		
 		$viewer = Engine_Api::_()->user()->getViewer();
         $sports = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1($params);
-		$userSports = $viewer->getSportsAssoc();
     
         $data = array();
         foreach( $sports as $sport ){
-        	if (!in_array($sport->getIdentity(), array_keys($userSports))) {
-	            $data[] = array(
-	                'id' => $sport->getIdentity(),
-	                'label' => $sport->getTitle(), // We should recode this to use title instead of label
-	                'title' => $sport->getTitle(),
-	                'photo' => $this->view->itemPhoto($sport, 'thumb.icon'),
-	            );
-			}
+            $data[] = array(
+                'id' => $sport->getIdentity(),
+                'label' => $sport->getTitle(), // We should recode this to use title instead of label
+                'title' => $sport->getTitle(),
+                'photo' => $this->view->itemPhoto($sport, 'thumb.icon'),
+                'type' => 'sport'
+            );
         }
     	
         // send data
         $data = Zend_Json::encode($data);
         $this->getResponse()->setBody($data);
     }
+
+	public function savePreferredAction() {
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(true);
+
+		$table = Engine_Api::_() -> getDbTable('sportmaps', 'user');
+
+		$sport_ids = $this -> _getParam('ids');
+		$user_id = $this -> _getParam('user_id');
+
+		$db = $table -> getAdapter();
+		$db -> beginTransaction();
+		try
+		{
+			$sportIds = explode(",", $sport_ids);
+			//delete all before insert
+			$table -> deleteAllRows($user_id);
+			foreach ($sportIds as $sportId)
+			{
+				$row = $table -> getRow($table, $sportId);
+				if (!isset($row) && empty($row))
+				{
+					$row = $table -> createRow();
+					$row -> user_id = $user_id;
+					$row -> sport_id = $sportId;
+					$row -> save();
+				}
+			}
+			$status = 'true';
+			$db -> commit();
+
+		}
+		catch (Exception $e)
+		{
+			$db -> rollBack();
+			$status = 'false';
+		}
+
+		$data = array();
+		$data[] = array('status' => $status, );
+
+		return $this -> _helper -> json($data);
+	}
 }
