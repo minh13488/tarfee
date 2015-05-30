@@ -40,7 +40,8 @@ class Ynvideo_Form_Video extends Engine_Form
 			'filters' => array(
 				new Engine_Filter_Censor(),
 				new Engine_Filter_StringLength( array('max' => '100')),
-			)
+			),
+			'required' => (bool)Engine_Api::_()->getApi('settings', 'core')->getSetting('ynvideo.title_require', 1)
 		));
 
 		// init tag

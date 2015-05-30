@@ -10,6 +10,17 @@
  * @author     John
  */
 return array(
+  
+  array(
+    'title' => 'Preferred Clubs',
+    'description' => 'Displays a list of preferred clubs.',
+    'category' => 'User',
+    'type' => 'widget',
+    'name' => 'user.profile-preferred-clubs-search',
+    'requirements' => array(
+      'viewer',
+    ),
+  ),
   array(
     'title' => 'Quick Links',
     'description' => 'Displays a list of quick links.',

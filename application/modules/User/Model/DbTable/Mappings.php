@@ -37,6 +37,9 @@ class User_Model_DbTable_Mappings extends Engine_Db_Table
         if (isset($params['user_id'])) {
             $select -> where("user_id = ?", $params['user_id']);
         }
+        if (isset($params['parent_id'])) {
+            $select -> where("parent_id = ?", $params['parent_id']);
+        }
         $select -> order("creation_date DESC");
 		$mappings = $this->fetchAll($select);
 		return $mappings;
@@ -90,12 +93,15 @@ class User_Model_DbTable_Mappings extends Engine_Db_Table
 		$db -> beginTransaction();
 		try
 		{
-			$db->delete($tableName, array(
-				'owner_type = ?' => $params['owner_type'],
-				'owner_id = ?' => $params['owner_id'],
-			    'item_type = ?' => $params['item_type'],
-			    'item_id = ?' => $params['item_id']
-			));
+			$row = $this -> getRow($params['owner_id'], $params['owner_type'], $params['item_id'], $params['item_type']);
+			if($row) {
+				//delete item with parent_id
+				$mappings = $this -> getItemsMapping($params['item_type'], array('parent_id' => $row -> mapping_id));
+				foreach($mappings as $mapping) {
+					$mapping -> delete();
+				}
+				$row -> delete();
+			}
 			$db -> commit();
 			
 		}

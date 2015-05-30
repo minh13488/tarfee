@@ -80,6 +80,7 @@ class Invite_Plugin_Signup
     }
 
     // Update invites
+    /*
     if( $invites ) {
       $inviteTable->update(array(
         'new_user_id' => $user->getIdentity(),
@@ -87,7 +88,7 @@ class Invite_Plugin_Signup
         'id IN(?)' => $updateInviteIds,
         'new_user_id = ?' => 0,
       ));
-    }
+    }*/
     
     // Befriend users
     if( $isEligible && !empty($befriendUserIds) ) {

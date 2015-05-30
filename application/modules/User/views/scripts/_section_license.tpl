@@ -10,7 +10,16 @@
 	$certificates = $user->getAllCertificates();
 	$enable = Engine_Api::_()->user()->checkSectionEnable($user, 'license');
 ?>
-<?php if (($manage || count($licenses) || count($certificates)) && $enable) : ?>
+
+<div class="icon_section_profile"><i class="fa fa-bookmark"></i></div>
+<table>
+  <tr>
+  	<th><hr></th>  
+  	<th><h3 class="section-label"><?php echo $this->translate($label);?></h3></th>
+  	<th><hr></th>
+  </tr>
+</table>
+ <?php if (($manage || count($licenses) || count($certificates)) && $enable) : ?>
 <div class="profile-section-button">
 <?php if ($manage) :?>
 	<span class="manage-section-button">
@@ -18,7 +27,6 @@
 	</span>	
 <?php endif;?>	
 </div>
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
 
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
@@ -141,15 +149,15 @@
 	    <ul id="certificate-list" class="section-list">
 	    <?php foreach ($certificates as $item) :?>
 	    <li class="section-item" id="license-<?php echo $item->getIdentity()?>">
-	    	<div class="certificate-icon">
+	    <div class="sub-section-item">
+	    	<div class="certificate-icon icon">
             	<?php echo $this->itemPhoto($item, 'thumb.icon')?>
             </div>
+            <div class="content">
             <div class="certificate-title">
-            	<span class="label"><?php echo $this->translate('Name: ')?></span>
-            	<span><?php echo $item->title?></span>
+            	<span class="section-title"><?php echo $item->title?></span>
             </div>
             <div class="certificate-number">
-            	<span class="label"><?php echo $this->translate('Number: ')?></span>
             	<span><?php echo $item->number?></span>
             </div>
             <div class="certificate-time">
@@ -163,12 +171,12 @@
 	                    $time = date_format($time, 'Y');
 	                }
 	            ?>
-            	<span class="label"><?php echo $this->translate('Time: ')?></span>
-            	<span><?php echo $time?></span>
+            	<span class="time"><?php echo $time?></span>
             </div>
 	        <?php if ($manage) : ?>
 	        <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
 	        <?php endif; ?>
+	  	</div>
 	    </li>
 	    <?php endforeach;?>    
 	    </ul>

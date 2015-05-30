@@ -1,28 +1,19 @@
 <?php
-	if($this->edit)
-	{
-		$tableRating = Engine_Api::_() -> getDbTable('reviewRatings','ynvideo');
-		$viewer  = Engine_Api::_() -> user() -> getViewer();
-	}
+	$tableRating = Engine_Api::_() -> getDbTable('reviewRatings','ynvideo');
+	$viewer  = Engine_Api::_() -> user() -> getViewer();
 ?>
-<div class="form-wrapper form-ynvideo-rate">
 	
-	<?php foreach($this -> ratingTypes as $item) :?>
-		<div class="form-label">
-			<?php echo $this -> translate($item -> title);?>	
-		</div>
-		<div class="form-element">
-				<div id="video_rating_<?php echo $item -> getIdentity();?>" class="rating" onmouseout="set_rating(<?php echo $item -> getIdentity();?>);">
-			        <span id="rate_1_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(1, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(1, <?php echo $item -> getIdentity();?>);"></span>
-			        <span id="rate_2_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(2, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(2, <?php echo $item -> getIdentity();?>);"></span>
-			        <span id="rate_3_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(3, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(3, <?php echo $item -> getIdentity();?>);"></span>
-			        <span id="rate_4_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(4, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(4, <?php echo $item -> getIdentity();?>);"></span>
-			        <span id="rate_5_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(5, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(5, <?php echo $item -> getIdentity();?>);"></span>
-			    </div>
-			    <input type="hidden" id="review_rating_<?php echo $item -> getIdentity();?>" name="review_rating_<?php echo $item -> getIdentity();?>" />
-		</div>
-	<?php endforeach;?>
-</div>
+<?php foreach($this -> ratingTypes as $item) :?>
+	<?php echo $this -> translate($item -> title);?>	
+	<div id="video_rating_<?php echo $item -> getIdentity();?>" class="rating" onmouseout="set_rating(<?php echo $item -> getIdentity();?>);">
+        <span id="rate_1_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(1, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(1, <?php echo $item -> getIdentity();?>);"></span>
+        <span id="rate_2_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(2, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(2, <?php echo $item -> getIdentity();?>);"></span>
+        <span id="rate_3_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(3, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(3, <?php echo $item -> getIdentity();?>);"></span>
+        <span id="rate_4_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(4, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(4, <?php echo $item -> getIdentity();?>);"></span>
+        <span id="rate_5_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(5, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(5, <?php echo $item -> getIdentity();?>);"></span>
+    </div>
+    <input type="hidden" id="review_rating_<?php echo $item -> getIdentity();?>" name="review_rating_<?php echo $item -> getIdentity();?>" />
+<?php endforeach;?>
 <br />
 
 <script type="application/javascript">
@@ -43,12 +34,28 @@
           else
           	var rating = 0;
         }
-        for(var x=1; x<=parseInt(rating); x++) {
-            $('rate_'+x+'_'+id).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
+        var indexStar = 1;
+        if(rating != 0) {
+	        for(var x=1; x<=parseInt(rating); x++) {
+	            $('rate_'+x+'_'+id).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
+	            indexStar = x;
+	        }
+	        
+	    	if((Math.round(rating)-rating)>0) {
+	    		var nextIndex = parseInt(indexStar)+1;
+	    		$('rate_'+nextIndex+'_'+id).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_half');
+	    		indexStar = nextIndex;
+	    	}
+	        
+	        for(var x=parseInt(indexStar)+1; x<=5; x++) {
+	            $('rate_'+x+'_'+id).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	        }
+        } else {
+        	 for(var x=1; x<=5; x++) {
+	            $('rate_'+x+'_'+id).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	        }
         }
-        for(var x=parseInt(rating)+1; x<=5; x++) {
-            $('rate_'+x+'_'+id).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
-        }
+        
         $('review_rating_'+id).set('value', rating);
         is_click = 0;
     }
@@ -57,9 +64,28 @@
         if (!rated) {
             rated = 1;
         }
-        is_click = 1;
-        new_rate = rating;
-        set_rating(id);
+        
+        (new Request.JSON({
+                'format': 'json',
+                'url' : '<?php echo $this->url(array('action' => 'rating'), 'video_general', true) ?>',
+                'data' : {
+                    'format' : 'json',
+                    'rating_type' : id,
+                    'rating' : rating,
+                    'video_id': '<?php echo $this -> video_id;?>',
+                },
+                'onSuccess' : function(responseJSON, responseText)
+                {
+                	console.log(responseJSON.rating);
+                	is_click = 1;
+					new_rate = responseJSON[0].rating;
+					set_rating(responseJSON[0].rating_type);
+					//reset
+			   		new_rate = 0;
+			   		is_click =0;
+                }
+        })).send();
+        
     }
     
     var rating_over = window.rating_over = function(rating,id) {
@@ -73,21 +99,16 @@
     }
     
     <?php foreach($this -> ratingTypes as $item) :?>
-   		<?php if($this->edit):?>
-   			 is_click = 1;
-   			 <?php $row = $tableRating -> getRowRatingThisType($item -> getIdentity(), $this -> video_id, $viewer -> getIdentity(), $this->review->getIdentity());?>
-    		 <?php if($row):?>
-	    		 new_rate = <?php echo $row -> rating; ?>;
-		   		 set_rating(<?php echo $item -> getIdentity()?>);
-	   		 <?php else :?>
-	   		 	 new_rate = 0;
-		   		 set_rating(<?php echo $item -> getIdentity()?>);
-	   		 <?php endif;?>
-	   		 new_rate = 0;
-	   		 is_click =0;
-	   	<?php else:?>	 
-	   		 set_rating(<?php echo $item -> getIdentity()?>);
-	    <?php endif;?>
+		is_click = 1;
+		<?php $overrallValue = $tableRating -> getRatingOfType($item -> getIdentity(), $this -> video_id);?>
+		<?php if(empty($overrallValue)) :?>
+			<?php $overrallValue = 0;?>
+		<?php endif;?>
+		new_rate = <?php echo $overrallValue;?>;
+		set_rating(<?php echo $item -> getIdentity()?>);
+		//reset
+   		new_rate = 0;
+   		is_click =0;
     <?php endforeach;?>
     
 </script>

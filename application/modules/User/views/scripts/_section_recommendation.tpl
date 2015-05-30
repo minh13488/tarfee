@@ -14,6 +14,14 @@
 	$request = ($manage || !$viewer->getIdentity()) ? false : $user->getRecommendation($viewer->getIdentity());
 	$canRecommendation = ($manage) ? false : ($viewer->getIdentity() && (!$request || $request->request) && $viewer->isFriend($user->getIdentity()));
 ?>
+<div class="icon_section_profile"><i class="fa fa-comments-o"></i></div>
+<table>
+  <tr>
+  	<th><hr></th>  
+  	<th><h3 class="section-label"><?php echo $this->translate($label);?></h3></th>
+  	<th><hr></th>
+  </tr>
+</table>
 <?php if (($manage || count($recommendations) || $canRecommendation) && $enable) : ?>
 <div class="profile-section-button">
 <?php if ($canAsk) :?>
@@ -36,7 +44,6 @@
 	<?php endif; ?>
 <?php endif?>	
 </div>
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
 
 <?php if ($canRecommendation) : ?>
 <?php $message = ($request) ? $this->translate('%s is waiting for your recommendation. Recommend now!', $user->getTitle()) : $this->translate('Recommend for %s', $user->getTitle());?>

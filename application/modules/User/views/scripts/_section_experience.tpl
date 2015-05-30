@@ -9,6 +9,16 @@
 	$experience = $user->getAllExperiences();
 	$enable = Engine_Api::_()->user()->checkSectionEnable($user, 'experience');
 ?>
+
+
+<div class="icon_section_profile"><i class="fa fa-suitcase"></i></div>
+<table>
+  <tr>
+  	<th><hr></th>  
+  	<th><h3 class="section-label"><?php echo $this->translate($label);?></h3></th>
+  	<th><hr></th>
+  </tr>
+</table>
 <?php if (($manage || count($experience)) && $enable) : ?>
 <div class="profile-section-button">
 <?php if ($manage) :?>
@@ -17,9 +27,6 @@
 	</span>	
 <?php endif;?>	
 </div>
-
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
-
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
 </div>

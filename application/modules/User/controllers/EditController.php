@@ -17,497 +17,669 @@
  */
 class User_EditController extends Core_Controller_Action_User
 {
-  public function init()
-  {
-    if( !Engine_Api::_()->core()->hasSubject() ) {
-      // Can specifiy custom id
-      $id = $this->_getParam('id', null);
-      $subject = null;
-      if( null === $id ) {
-        $subject = Engine_Api::_()->user()->getViewer();
-        Engine_Api::_()->core()->setSubject($subject);
-      } else {
-        $subject = Engine_Api::_()->getItem('user', $id);
-        Engine_Api::_()->core()->setSubject($subject);
-      }
-    }
+	public function init()
+	{
+		if (!Engine_Api::_() -> core() -> hasSubject())
+		{
+			// Can specifiy custom id
+			$id = $this -> _getParam('id', null);
+			$subject = null;
+			if (null === $id)
+			{
+				$subject = Engine_Api::_() -> user() -> getViewer();
+				Engine_Api::_() -> core() -> setSubject($subject);
+			}
+			else
+			{
+				$subject = Engine_Api::_() -> getItem('user', $id);
+				Engine_Api::_() -> core() -> setSubject($subject);
+			}
+		}
 
-    if( !empty($id) ) {
-      $params = array('id' => $id);
-    } else {
-      $params = array();
-    }
-    // Set up navigation
-    $this->view->navigation = $navigation = Engine_Api::_()
-      ->getApi('menus', 'core')
-      ->getNavigation('user_edit', array('params' => $params));
+		if (!empty($id))
+		{
+			$params = array('id' => $id);
+		}
+		else
+		{
+			$params = array();
+		}
+		// Set up navigation
+		$this -> view -> navigation = $navigation = Engine_Api::_() -> getApi('menus', 'core') -> getNavigation('user_edit', array('params' => $params));
 
-    // Set up require's
-    $this->_helper->requireUser();
-    $this->_helper->requireSubject('user');
-    $this->_helper->requireAuth()->setAuthParams(
-      null,
-      null,
-      'edit'
-    );
-  }
-  
-  public function profileAction()
-  {
-    $this->view->user = $user = Engine_Api::_()->core()->getSubject();
-    $this->view->viewer = $viewer = Engine_Api::_()->user()->getViewer();
-
-    
-    // General form w/o profile type
-    $aliasedFields = $user->fields()->getFieldsObjectsByAlias();
-    $this->view->topLevelId = $topLevelId = 0;
-    $this->view->topLevelValue = $topLevelValue = null;
-    if( isset($aliasedFields['profile_type']) ) {
-      $aliasedFieldValue = $aliasedFields['profile_type']->getValue($user);
-      $topLevelId = $aliasedFields['profile_type']->field_id;
-      $topLevelValue = ( is_object($aliasedFieldValue) ? $aliasedFieldValue->value : null );
-      if( !$topLevelId || !$topLevelValue ) {
-        $topLevelId = null;
-        $topLevelValue = null;
-      }
-      $this->view->topLevelId = $topLevelId;
-      $this->view->topLevelValue = $topLevelValue;
-    }
-    
-    // Get form
-    $form = $this->view->form = new Fields_Form_Standard(array(
-      'item' => Engine_Api::_()->core()->getSubject(),
-      'topLevelId' => $topLevelId,
-      'topLevelValue' => $topLevelValue,
-      'hasPrivacy' => true,
-      'privacyValues' => $this->getRequest()->getParam('privacy'),
-    ));
-    //$form->generate();
-    
-	$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
-	$countriesAssoc = array('0'=>'') + $countriesAssoc;
-	
-	$provincesAssoc = array();
-	$country_id = $this->_getParam('country_id', $user->country_id);
-	if ($country_id) {
-		$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
-		$provincesAssoc = array('0'=>'') + $provincesAssoc;
+		// Set up require's
+		$this -> _helper -> requireUser();
+		$this -> _helper -> requireSubject('user');
+		$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'edit');
 	}
+
+	public function profileAction() {
+		$this->view->user = $user = Engine_Api::_()->core()->getSubject();
+    	$this->view->viewer = $viewer = Engine_Api::_()->user()->getViewer();
+
+    
+    	// General form w/o profile type
+    	$aliasedFields = $user->fields()->getFieldsObjectsByAlias();
+    	$this->view->topLevelId = $topLevelId = 0;
+    	$this->view->topLevelValue = $topLevelValue = null;
+    	if( isset($aliasedFields['profile_type']) ) {
+      		$aliasedFieldValue = $aliasedFields['profile_type']->getValue($user);
+      		$topLevelId = $aliasedFields['profile_type']->field_id;
+      		$topLevelValue = ( is_object($aliasedFieldValue) ? $aliasedFieldValue->value : null );
+      		if( !$topLevelId || !$topLevelValue ) {
+        		$topLevelId = null;
+        		$topLevelValue = null;
+      		}
+      		$this->view->topLevelId = $topLevelId;
+      		$this->view->topLevelValue = $topLevelValue;
+    	}
+    
+    	// Get form
+    	$form = $this->view->form = new Fields_Form_Standard(array(
+      		'item' => Engine_Api::_()->core()->getSubject(),
+      		'topLevelId' => $topLevelId,
+      		'topLevelValue' => $topLevelValue,
+      		'hasPrivacy' => true,
+      		'privacyValues' => $this->getRequest()->getParam('privacy'),
+    	));
+    	//$form->generate();
+    
+		$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
+		$countriesAssoc = array('0'=>'') + $countriesAssoc;
 	
-	$form->addElement('Select', 'country_id', array(
-		'label' => 'Country',
-		'multiOptions' => $countriesAssoc,
-		'value' => $country_id
-	));
+		$provincesAssoc = array();
+		$country_id = $this->_getParam('country_id', $user->country_id);
+		if ($country_id) {
+			$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
+			$provincesAssoc = array('0'=>'') + $provincesAssoc;
+		}
 	
-	$citiesAssoc = array();
-	$province_id = $this->_getParam('province_id', $user->province_id);
-	if ($province_id) {
-		$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
-		$citiesAssoc = array('0'=>'') + $citiesAssoc;
-	}
+		$form->addElement('Select', 'country_id', array(
+			'label' => 'Country',
+			'multiOptions' => $countriesAssoc,
+			'value' => $country_id
+		));
 	
-	$form->addElement('Select', 'province_id', array(
-		'label' => 'Province/State',
-		'multiOptions' => $provincesAssoc,
-		'value' => $province_id
-	));
+		$citiesAssoc = array();
+		$province_id = $this->_getParam('province_id', $user->province_id);
+		if ($province_id) {
+			$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
+			$citiesAssoc = array('0'=>'') + $citiesAssoc;
+		}
 	
-	$city_id = $this->_getParam('city_id', $user->city_id);
-	$form->addElement('Select', 'city_id', array(
-		'label' => 'City',
-		'multiOptions' => $citiesAssoc,
-		'value' => $city_id
-	));
+		$form->addElement('Select', 'province_id', array(
+			'label' => 'Province/State',
+			'multiOptions' => $provincesAssoc,
+			'value' => $province_id
+		));
 	
-	$continent = '';
-	$country = Engine_Api::_()->getItem('user_location', $country_id);
-	if ($country) $continent = $country->getContinent();
-	$form->addElement('Text', 'continent', array(
-		'label' => 'Continent',
-		'value' => $continent,
-		'disabled' => true
-	));
+		$city_id = $this->_getParam('city_id', $user->city_id);
+		$form->addElement('Select', 'city_id', array(
+			'label' => 'City',
+			'multiOptions' => $citiesAssoc,
+			'value' => $city_id
+		));
 		
-    if( $this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost()) ) {
-      $form->saveValues();
+		$continent = '';
+		$country = Engine_Api::_()->getItem('user_location', $country_id);
+		if ($country) $continent = $country->getContinent();
+		$form->addElement('Text', 'continent', array(
+			'label' => 'Continent',
+			'value' => $continent,
+			'disabled' => true
+		));
+		
+    	if( $this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost()) ) {
+      		$form->saveValues();
 	
-	  $values = $this->getRequest()->getPost();
-	  $user->country_id = $values['country_id'];
-	  $user->province_id = $values['province_id'];
-	  $user->city_id = $values['city_id'];
+	  		$values = $this->getRequest()->getPost();
+	  		$user->country_id = $values['country_id'];
+	  		$user->province_id = $values['province_id'];
+	  		$user->city_id = $values['city_id'];
 	  
-      // Update display name
-      $aliasValues = Engine_Api::_()->fields()->getFieldsValuesByAlias($user);
-      $user->setDisplayName($aliasValues);
-      //$user->modified_date = date('Y-m-d H:i:s');
-      $user->save();
+      		// Update display name
+      		$aliasValues = Engine_Api::_()->fields()->getFieldsValuesByAlias($user);
+     	 	$user->setDisplayName($aliasValues);
+      		//$user->modified_date = date('Y-m-d H:i:s');
+      		$user->save();
 
-      // update networks
-      Engine_Api::_()->network()->recalculate($user);
+      		// update networks
+      		Engine_Api::_()->network()->recalculate($user);
       
-      $form->addNotice(Zend_Registry::get('Zend_Translate')->_('Your changes have been saved.'));
-    }
-  }
+      		$form->addNotice(Zend_Registry::get('Zend_Translate')->_('Your changes have been saved.'));
+    	}
+	}
 
+	public function photoAction()
+	{
+		$this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
 
-  public function photoAction()
-  {
-    $this->view->user = $user = Engine_Api::_()->core()->getSubject();
-    $this->view->viewer = $viewer = Engine_Api::_()->user()->getViewer();
+		// Get form
+		$this -> view -> form = $form = new User_Form_Edit_Photo();
 
-    // Get form
-    $this->view->form = $form = new User_Form_Edit_Photo();
+		if (empty($user -> photo_id))
+		{
+			$form -> removeElement('remove');
+		}
 
-    if( empty($user->photo_id) ) {
-      $form->removeElement('remove');
-    }
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
 
-    if( !$this->getRequest()->isPost() ) {
-      return;
-    }
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
 
-    if( !$form->isValid($this->getRequest()->getPost()) ) {
-      return;
-    }
+		// Uploading a new photo
+		if ($form -> Filedata -> getValue() !== null)
+		{
+			$db = $user -> getTable() -> getAdapter();
+			$db -> beginTransaction();
 
-    // Uploading a new photo
-    if( $form->Filedata->getValue() !== null ) {
-      $db = $user->getTable()->getAdapter();
-      $db->beginTransaction();
-      
-      try {
-        $fileElement = $form->Filedata;
+			try
+			{
+				$fileElement = $form -> Filedata;
 
-        $user->setPhoto($fileElement);
-        
-        $iMain = Engine_Api::_()->getItem('storage_file', $user->photo_id);
-        
-        // Insert activity
-        $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($user, $user, 'profile_photo_update',
-          '{item:$subject} added a new profile photo.');
+				$user -> setPhoto($fileElement);
 
-        // Hooks to enable albums to work
-        if( $action ) {
-          $event = Engine_Hooks_Dispatcher::_()
-            ->callEvent('onUserProfilePhotoUpload', array(
-                'user' => $user,
-                'file' => $iMain,
-              ));
+				$iMain = Engine_Api::_() -> getItem('storage_file', $user -> photo_id);
 
-          $attachment = $event->getResponse();
-          if( !$attachment ) $attachment = $iMain;
+				// Insert activity
+				$action = Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($user, $user, 'profile_photo_update', '{item:$subject} added a new profile photo.');
 
-          // We have to attach the user himself w/o album plugin
-          Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $attachment);
-        }
-        
-        $db->commit();
-      }
+				// Hooks to enable albums to work
+				if ($action)
+				{
+					$event = Engine_Hooks_Dispatcher::_() -> callEvent('onUserProfilePhotoUpload', array(
+						'user' => $user,
+						'file' => $iMain,
+					));
 
-      // If an exception occurred within the image adapter, it's probably an invalid image
-      catch( Engine_Image_Adapter_Exception $e )
-      {
-        $db->rollBack();
-        $form->addError(Zend_Registry::get('Zend_Translate')->_('The uploaded file is not supported or is corrupt.'));
-      }
+					$attachment = $event -> getResponse();
+					if (!$attachment)
+						$attachment = $iMain;
 
-      // Otherwise it's probably a problem with the database or the storage system (just throw it)
-      catch( Exception $e )
-      {
-        $db->rollBack();
-        throw $e;
-      }
-    }
+					// We have to attach the user himself w/o album plugin
+					Engine_Api::_() -> getDbtable('actions', 'activity') -> attachActivity($action, $attachment);
+				}
 
-    // Resizing a photo
-    else if( $form->getValue('coordinates') !== '' ) {
-      $storage = Engine_Api::_()->storage();
+				$db -> commit();
+			}
 
-      $iProfile = $storage->get($user->photo_id, 'thumb.profile');
-      $iSquare = $storage->get($user->photo_id, 'thumb.icon');
+			// If an exception occurred within the image adapter, it's probably an invalid
+			// image
+			catch( Engine_Image_Adapter_Exception $e )
+			{
+				$db -> rollBack();
+				$form -> addError(Zend_Registry::get('Zend_Translate') -> _('The uploaded file is not supported or is corrupt.'));
+			}
 
-      // Read into tmp file
-      $pName = $iProfile->getStorageService()->temporary($iProfile);
-      $iName = dirname($pName) . '/nis_' . basename($pName);
+			// Otherwise it's probably a problem with the database or the storage system
+			// (just throw it)
+			catch( Exception $e )
+			{
+				$db -> rollBack();
+				throw $e;
+			}
+		}
 
-      list($x, $y, $w, $h) = explode(':', $form->getValue('coordinates'));
+		// Resizing a photo
+		else
+		if ($form -> getValue('coordinates') !== '')
+		{
+			$storage = Engine_Api::_() -> storage();
 
-      $image = Engine_Image::factory();
-      $image->open($pName)
-        ->resample($x+.1, $y+.1, $w-.1, $h-.1, 48, 48)
-        ->write($iName)
-        ->destroy();
+			$iProfile = $storage -> get($user -> photo_id, 'thumb.profile');
+			$iSquare = $storage -> get($user -> photo_id, 'thumb.icon');
 
-      $iSquare->store($iName);
+			// Read into tmp file
+			$pName = $iProfile -> getStorageService() -> temporary($iProfile);
+			$iName = dirname($pName) . '/nis_' . basename($pName);
 
-      // Remove temp files
-      @unlink($iName);
-    }
-  }
+			list($x, $y, $w, $h) = explode(':', $form -> getValue('coordinates'));
 
-  public function removePhotoAction()
-  {
-    // Get form
-    $this->view->form = $form = new User_Form_Edit_RemovePhoto();
+			$image = Engine_Image::factory();
+			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 48, 48) -> write($iName) -> destroy();
 
-    if( !$this->getRequest()->isPost() || !$form->isValid($this->getRequest()->getPost()) )
-    {
-      return;
-    }
-    
+			$iSquare -> store($iName);
 
-    $user = Engine_Api::_()->core()->getSubject();
-    $user->photo_id = 0;
-    $user->save();
-    
-    $this->view->status = true;
-    $this->view->message = Zend_Registry::get('Zend_Translate')->_('Your photo has been removed.');
+			// Remove temp files
+			@unlink($iName);
+		}
+	}
 
-    $this->_forward('success', 'utility', 'core', array(
-      'smoothboxClose' => true,
-      'parentRefresh' => true,
-      'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your photo has been removed.'))
-    ));
-  }
+	public function removePhotoAction()
+	{
+		// Get form
+		$this -> view -> form = $form = new User_Form_Edit_RemovePhoto();
 
-  public function styleAction()
-  {
-    $this->view->user = $user = Engine_Api::_()->core()->getSubject();
-    $this->view->viewer = $viewer = Engine_Api::_()->user()->getViewer();
-    if( !$this->_helper->requireAuth()->setAuthParams('user', null, 'style')->isValid()) return;
+		if (!$this -> getRequest() -> isPost() || !$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
 
+		$user = Engine_Api::_() -> core() -> getSubject();
+		$user -> photo_id = 0;
+		$user -> save();
 
-    // Get form
-    $this->view->form = $form = new User_Form_Edit_Style();
+		$this -> view -> status = true;
+		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Your photo has been removed.');
 
-    // Get current row
-    $table = Engine_Api::_()->getDbtable('styles', 'core');
-    $select = $table->select()
-      ->where('type = ?', $user->getType())
-      ->where('id = ?', $user->getIdentity())
-      ->limit();
+		$this -> _forward('success', 'utility', 'core', array(
+			'smoothboxClose' => true,
+			'parentRefresh' => true,
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Your photo has been removed.'))
+		));
+	}
 
-    $row = $table->fetchRow($select);
+	public function styleAction()
+	{
+		$this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
+		if (!$this -> _helper -> requireAuth() -> setAuthParams('user', null, 'style') -> isValid())
+			return;
 
-    // Not posting, populate
-    if( !$this->getRequest()->isPost() )
-    {
-      $form->populate(array(
-        'style' => ( null === $row ? '' : $row->style )
-      ));
-      return;
-    }
+		// Get form
+		$this -> view -> form = $form = new User_Form_Edit_Style();
 
-    // Whoops, form was not valid
-    if( !$form->isValid($this->getRequest()->getPost()) )
-    {
-      return;
-    }
+		// Get current row
+		$table = Engine_Api::_() -> getDbtable('styles', 'core');
+		$select = $table -> select() -> where('type = ?', $user -> getType()) -> where('id = ?', $user -> getIdentity()) -> limit();
 
+		$row = $table -> fetchRow($select);
 
-    // Cool! Process
-    $style = $form->getValue('style');
+		// Not posting, populate
+		if (!$this -> getRequest() -> isPost())
+		{
+			$form -> populate(array('style' => (null === $row ? '' : $row -> style)));
+			return;
+		}
 
-    // Process
-    $style = strip_tags($style);
+		// Whoops, form was not valid
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
 
-    $forbiddenStuff = array(
-      '-moz-binding',
-      'expression',
-      'javascript:',
-      'behaviour:',
-      'vbscript:',
-      'mocha:',
-      'livescript:',
-    );
+		// Cool! Process
+		$style = $form -> getValue('style');
 
-    $style = str_replace($forbiddenStuff, '', $style);
+		// Process
+		$style = strip_tags($style);
 
-    // Save
-    if( null == $row )
-    {
-      $row = $table->createRow();
-      $row->type = $user->getType();
-      $row->id = $user->getIdentity();
-    }
+		$forbiddenStuff = array(
+			'-moz-binding',
+			'expression',
+			'javascript:',
+			'behaviour:',
+			'vbscript:',
+			'mocha:',
+			'livescript:',
+		);
 
-    $row->style = $style;
-    $row->save();
+		$style = str_replace($forbiddenStuff, '', $style);
 
-    $form->addNotice(Zend_Registry::get('Zend_Translate')->_('Your changes have been saved.'));
-  }
+		// Save
+		if (null == $row)
+		{
+			$row = $table -> createRow();
+			$row -> type = $user -> getType();
+			$row -> id = $user -> getIdentity();
+		}
 
-  public function externalPhotoAction()
-  {
-    if( !$this->_helper->requireSubject()->isValid() ) return;
-    $user = Engine_Api::_()->core()->getSubject();
-    
-    // Get photo
-    $photo = Engine_Api::_()->getItemByGuid($this->_getParam('photo'));
-    if( !$photo || !($photo instanceof Core_Model_Item_Abstract) || empty($photo->photo_id) ) {
-      $this->_forward('requiresubject', 'error', 'core');
-      return;
-    }
+		$row -> style = $style;
+		$row -> save();
 
-    if( !$photo->authorization()->isAllowed(null, 'view') ) {
-      $this->_forward('requireauth', 'error', 'core');
-      return;
-    }
+		$form -> addNotice(Zend_Registry::get('Zend_Translate') -> _('Your changes have been saved.'));
+	}
 
-    
-    // Make form
-    $this->view->form = $form = new User_Form_Edit_ExternalPhoto();
-    $this->view->photo = $photo;
+	public function externalPhotoAction()
+	{
+		if (!$this -> _helper -> requireSubject() -> isValid())
+			return;
+		$user = Engine_Api::_() -> core() -> getSubject();
 
-    if( !$this->getRequest()->isPost() ) {
-      return;
-    }
+		// Get photo
+		$photo = Engine_Api::_() -> getItemByGuid($this -> _getParam('photo'));
+		if (!$photo || !($photo instanceof Core_Model_Item_Abstract) || empty($photo -> photo_id))
+		{
+			$this -> _forward('requiresubject', 'error', 'core');
+			return;
+		}
 
-    if( !$form->isValid($this->getRequest()->getPost()) ) {
-      return;
-    }
+		if (!$photo -> authorization() -> isAllowed(null, 'view'))
+		{
+			$this -> _forward('requireauth', 'error', 'core');
+			return;
+		}
 
-    // Process
-    $db = $user->getTable()->getAdapter();
-    $db->beginTransaction();
-    
-    try {
-      // Get the owner of the photo
-      $photoOwnerId = null;
-      if( isset($photo->user_id) ) {
-        $photoOwnerId = $photo->user_id;
-      } else if( isset($photo->owner_id) && (!isset($photo->owner_type) || $photo->owner_type == 'user') ) {
-        $photoOwnerId = $photo->owner_id;
-      }
+		// Make form
+		$this -> view -> form = $form = new User_Form_Edit_ExternalPhoto();
+		$this -> view -> photo = $photo;
 
-      // if it is from your own profile album do not make copies of the image
-      if( $photo instanceof Album_Model_Photo &&
-          ($photoParent = $photo->getParent()) instanceof Album_Model_Album &&
-          $photoParent->owner_id == $photoOwnerId &&
-          $photoParent->type == 'profile' ) {
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
 
-        // ensure thumb.icon and thumb.profile exist
-        $newStorageFile = Engine_Api::_()->getItem('storage_file', $photo->file_id);
-        $filesTable = Engine_Api::_()->getDbtable('files', 'storage');
-        if( $photo->file_id == $filesTable->lookupFile($photo->file_id, 'thumb.profile') ) {
-          try {
-            $tmpFile = $newStorageFile->temporary();
-            $image = Engine_Image::factory();
-            $image->open($tmpFile)
-              ->resize(200, 400)
-              ->write($tmpFile)
-              ->destroy();
-            $iProfile = $filesTable->createFile($tmpFile, array(
-              'parent_type' => $user->getType(),
-              'parent_id' => $user->getIdentity(),
-              'user_id' => $user->getIdentity(),
-              'name' => basename($tmpFile),
-            ));
-            $newStorageFile->bridge($iProfile, 'thumb.profile');
-            @unlink($tmpFile);
-          } catch( Exception $e ) { echo $e; die(); }
-        }
-        if( $photo->file_id == $filesTable->lookupFile($photo->file_id, 'thumb.icon') ) {
-          try {
-            $tmpFile = $newStorageFile->temporary();
-            $image = Engine_Image::factory();
-            $image->open($tmpFile);
-            $size = min($image->height, $image->width);
-            $x = ($image->width - $size) / 2;
-            $y = ($image->height - $size) / 2;
-            $image->resample($x, $y, $size, $size, 48, 48)
-              ->write($tmpFile)
-              ->destroy();
-            $iSquare = $filesTable->createFile($tmpFile, array(
-              'parent_type' => $user->getType(),
-              'parent_id' => $user->getIdentity(),
-              'user_id' => $user->getIdentity(),
-              'name' => basename($tmpFile),
-            ));
-            $newStorageFile->bridge($iSquare, 'thumb.icon');
-            @unlink($tmpFile);
-          } catch( Exception $e ) { echo $e; die(); }
-        }
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
 
-        // Set it
-        $user->photo_id = $photo->file_id;
-        $user->save();
-        
-        // Insert activity
-        // @todo maybe it should read "changed their profile photo" ?
-        $action = Engine_Api::_()->getDbtable('actions', 'activity')
-            ->addActivity($user, $user, 'profile_photo_update',
-                '{item:$subject} changed their profile photo.');
-        if( $action ) {
-          // We have to attach the user himself w/o album plugin
-          Engine_Api::_()->getDbtable('actions', 'activity')
-              ->attachActivity($action, $photo);
-        }
-      }
+		// Process
+		$db = $user -> getTable() -> getAdapter();
+		$db -> beginTransaction();
 
-      // Otherwise copy to the profile album
-      else {
-        $user->setPhoto($photo);
+		try
+		{
+			// Get the owner of the photo
+			$photoOwnerId = null;
+			if (isset($photo -> user_id))
+			{
+				$photoOwnerId = $photo -> user_id;
+			}
+			else
+			if (isset($photo -> owner_id) && (!isset($photo -> owner_type) || $photo -> owner_type == 'user'))
+			{
+				$photoOwnerId = $photo -> owner_id;
+			}
 
-        // Insert activity
-        $action = Engine_Api::_()->getDbtable('actions', 'activity')
-            ->addActivity($user, $user, 'profile_photo_update',
-                '{item:$subject} added a new profile photo.');
-        
-        // Hooks to enable albums to work
-        $newStorageFile = Engine_Api::_()->getItem('storage_file', $user->photo_id);
-        $event = Engine_Hooks_Dispatcher::_()
-          ->callEvent('onUserProfilePhotoUpload', array(
-              'user' => $user,
-              'file' => $newStorageFile,
-            ));
+			// if it is from your own profile album do not make copies of the image
+			if ($photo instanceof Album_Model_Photo && ($photoParent = $photo -> getParent()) instanceof Album_Model_Album && $photoParent -> owner_id == $photoOwnerId && $photoParent -> type == 'profile')
+			{
 
-        $attachment = $event->getResponse();
-        if( !$attachment ) {
-          $attachment = $newStorageFile;
-        }
-        
-        if( $action  ) {
-          // We have to attach the user himself w/o album plugin
-          Engine_Api::_()->getDbtable('actions', 'activity')
-              ->attachActivity($action, $attachment);
-        }
-      }
+				// ensure thumb.icon and thumb.profile exist
+				$newStorageFile = Engine_Api::_() -> getItem('storage_file', $photo -> file_id);
+				$filesTable = Engine_Api::_() -> getDbtable('files', 'storage');
+				if ($photo -> file_id == $filesTable -> lookupFile($photo -> file_id, 'thumb.profile'))
+				{
+					try
+					{
+						$tmpFile = $newStorageFile -> temporary();
+						$image = Engine_Image::factory();
+						$image -> open($tmpFile) -> resize(200, 400) -> write($tmpFile) -> destroy();
+						$iProfile = $filesTable -> createFile($tmpFile, array(
+							'parent_type' => $user -> getType(),
+							'parent_id' => $user -> getIdentity(),
+							'user_id' => $user -> getIdentity(),
+							'name' => basename($tmpFile),
+						));
+						$newStorageFile -> bridge($iProfile, 'thumb.profile');
+						@unlink($tmpFile);
+					}
+					catch( Exception $e )
+					{
+						echo $e;
+						die();
+					}
+				}
+				if ($photo -> file_id == $filesTable -> lookupFile($photo -> file_id, 'thumb.icon'))
+				{
+					try
+					{
+						$tmpFile = $newStorageFile -> temporary();
+						$image = Engine_Image::factory();
+						$image -> open($tmpFile);
+						$size = min($image -> height, $image -> width);
+						$x = ($image -> width - $size) / 2;
+						$y = ($image -> height - $size) / 2;
+						$image -> resample($x, $y, $size, $size, 48, 48) -> write($tmpFile) -> destroy();
+						$iSquare = $filesTable -> createFile($tmpFile, array(
+							'parent_type' => $user -> getType(),
+							'parent_id' => $user -> getIdentity(),
+							'user_id' => $user -> getIdentity(),
+							'name' => basename($tmpFile),
+						));
+						$newStorageFile -> bridge($iSquare, 'thumb.icon');
+						@unlink($tmpFile);
+					}
+					catch( Exception $e )
+					{
+						echo $e;
+						die();
+					}
+				}
 
-      $db->commit();
-    }
+				// Set it
+				$user -> photo_id = $photo -> file_id;
+				$user -> save();
 
-    // Otherwise it's probably a problem with the database or the storage system (just throw it)
-    catch( Exception $e )
-    {
-      $db->rollBack();
-      throw $e;
-    }
-    
-    return $this->_forward('success', 'utility', 'core', array(
-      'messages' => array(Zend_Registry::get('Zend_Translate')->_('Set as profile photo')),
-      'smoothboxClose' => true,
-    ));
-  }
+				// Insert activity
+				// @todo maybe it should read "changed their profile photo" ?
+				$action = Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($user, $user, 'profile_photo_update', '{item:$subject} changed their profile photo.');
+				if ($action)
+				{
+					// We have to attach the user himself w/o album plugin
+					Engine_Api::_() -> getDbtable('actions', 'activity') -> attachActivity($action, $photo);
+				}
+			}
 
-  public function clearStatusAction()
-  {
-    $this->view->status = false;
-    
-    if( $this->getRequest()->isPost() ) {
-      $viewer = Engine_Api::_()->user()->getViewer();
-      $viewer->status = '';
-      $viewer->status_date = '00-00-0000';
-      // twitter-style handling
-      // $lastStatus = $viewer->status()->getLastStatus();
-      // if( $lastStatus ) {
-      //   $viewer->status = $lastStatus->body;
-      //   $viewer->status_date = $lastStatus->creation_date;
-      // }
-      $viewer->save();
-      
-      $this->view->status = true;
-    } 
-  }
+			// Otherwise copy to the profile album
+			else
+			{
+				$user -> setPhoto($photo);
+
+				// Insert activity
+				$action = Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($user, $user, 'profile_photo_update', '{item:$subject} added a new profile photo.');
+
+				// Hooks to enable albums to work
+				$newStorageFile = Engine_Api::_() -> getItem('storage_file', $user -> photo_id);
+				$event = Engine_Hooks_Dispatcher::_() -> callEvent('onUserProfilePhotoUpload', array(
+					'user' => $user,
+					'file' => $newStorageFile,
+				));
+
+				$attachment = $event -> getResponse();
+				if (!$attachment)
+				{
+					$attachment = $newStorageFile;
+				}
+
+				if ($action)
+				{
+					// We have to attach the user himself w/o album plugin
+					Engine_Api::_() -> getDbtable('actions', 'activity') -> attachActivity($action, $attachment);
+				}
+			}
+
+			$db -> commit();
+		}
+
+		// Otherwise it's probably a problem with the database or the storage system
+		// (just throw it)
+		catch( Exception $e )
+		{
+			$db -> rollBack();
+			throw $e;
+		}
+
+		return $this -> _forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Set as profile photo')),
+			'smoothboxClose' => true,
+		));
+	}
+
+	public function clearStatusAction()
+	{
+		$this -> view -> status = false;
+
+		if ($this -> getRequest() -> isPost())
+		{
+			$viewer = Engine_Api::_() -> user() -> getViewer();
+			$viewer -> status = '';
+			$viewer -> status_date = '00-00-0000';
+			$viewer -> save();
+
+			$this -> view -> status = true;
+		}
+	}
+
+	// MinhNC add Cover photo
+	public function coverAction()
+	{
+		// In smoothbox
+		$this -> _helper -> layout -> setLayout('default-simple');
+		$user = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> user = $user;
+		$this -> view -> form = $form = new User_Form_Edit_Cover();
+
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
+
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
+
+		$values = $form -> getValues();
+		// Set photo
+		if (!empty($values['photo']))
+		{
+			$user -> setCoverPhoto($form -> photo);
+			$user -> cover_top = 0;
+			$user -> save();
+		}
+
+		return $this -> _forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Upload new cover photo successful!')),
+			'format' => 'smoothbox',
+			'smoothboxClose' => true,
+			'parentRefresh' => true,
+		));
+	}
+
+	public function repositionAction()
+	{
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(true);
+		$this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
+		$position = $this -> _getParam('position', null);
+		if (is_null($position))
+		{
+			echo Zend_Json::encode(array(
+				'status' => false,
+				'message' => Zend_Registry::get('Zend_Translate') -> _('The request is invalid.')
+			));
+		}
+
+		$user -> cover_top = $position;
+		$user -> save();
+		echo Zend_Json::encode(array('status' => true));
+	}
+
+	public function photoPopupAction()
+	{
+		// In smoothbox
+		$this -> _helper -> layout -> setLayout('default-simple');
+		$this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
+
+		// Get form
+		$this -> view -> form = $form = new User_Form_Edit_PhotoPopup();
+
+		if (empty($user -> photo_id))
+		{
+			$form -> removeElement('remove');
+		}
+
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
+
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
+
+		// Uploading a new photo
+		if ($form -> Filedata -> getValue() !== null)
+		{
+			$db = $user -> getTable() -> getAdapter();
+			$db -> beginTransaction();
+
+			try
+			{
+				$fileElement = $form -> Filedata;
+
+				$user -> setPhoto($fileElement);
+
+				$iMain = Engine_Api::_() -> getItem('storage_file', $user -> photo_id);
+
+				// Insert activity
+				$action = Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($user, $user, 'profile_photo_update', '{item:$subject} added a new profile photo.');
+
+				// Hooks to enable albums to work
+				if ($action)
+				{
+					$event = Engine_Hooks_Dispatcher::_() -> callEvent('onUserProfilePhotoUpload', array(
+						'user' => $user,
+						'file' => $iMain,
+					));
+
+					$attachment = $event -> getResponse();
+					if (!$attachment)
+						$attachment = $iMain;
+
+					// We have to attach the user himself w/o album plugin
+					Engine_Api::_() -> getDbtable('actions', 'activity') -> attachActivity($action, $attachment);
+				}
+
+				$db -> commit();
+			}
+
+			// If an exception occurred within the image adapter, it's probably an invalid
+			// image
+			catch( Engine_Image_Adapter_Exception $e )
+			{
+				$db -> rollBack();
+				$form -> addError(Zend_Registry::get('Zend_Translate') -> _('The uploaded file is not supported or is corrupt.'));
+			}
+
+			// Otherwise it's probably a problem with the database or the storage system
+			// (just throw it)
+			catch( Exception $e )
+			{
+				$db -> rollBack();
+				throw $e;
+			}
+		}
+
+		// Resizing a photo
+		else
+		if ($form -> getValue('coordinates') !== '')
+		{
+			$storage = Engine_Api::_() -> storage();
+
+			$iProfile = $storage -> get($user -> photo_id, 'thumb.profile');
+			$iSquare = $storage -> get($user -> photo_id, 'thumb.icon');
+
+			// Read into tmp file
+			$pName = $iProfile -> getStorageService() -> temporary($iProfile);
+			$iName = dirname($pName) . '/nis_' . basename($pName);
+
+			list($x, $y, $w, $h) = explode(':', $form -> getValue('coordinates'));
+
+			$image = Engine_Image::factory();
+			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 48, 48) -> write($iName) -> destroy();
+
+			$iSquare -> store($iName);
+
+			// Remove temp files
+			@unlink($iName);
+		}
+		return $this -> _forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Upload new photo successful!')),
+			'format' => 'smoothbox',
+			'smoothboxClose' => true,
+			'parentRefresh' => true,
+		));
+	}
+
 }

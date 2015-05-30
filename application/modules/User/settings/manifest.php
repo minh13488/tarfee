@@ -131,7 +131,7 @@ return array(
         'action' => 'browse'
       ),
       'reqs' => array(
-        'action' => '(home|browse|render-section|get-my-location|upload-photo|sublocations|get-continent)',
+        'action' => '(home|browse|render-section|get-my-location|upload-photo|sublocations|get-continent|suggest-group|save-preferred-clubs|get-view-preferred-clubs)',
       )
     ),
 	
@@ -151,11 +151,10 @@ return array(
         'action' => 'create-sub-library'
       ),
       'reqs' => array(
-        'action' => '(create-sub-library|edit|delete|give-ownership|move-to-sub|move-to-main|move-to-player)',
+        'action' => '(create-sub-library|edit|delete|give-ownership|move-to-sub|move-to-main|move-to-player|remove-link)',
       )
     ),
 	
-	/*
     // User - Specific
     'user_profile' => array(
       'route' => 'profile/:id/*',
@@ -164,7 +163,7 @@ return array(
         'controller' => 'profile',
         'action' => 'index'
       )
-    ),*/
+    ),
     'user_home' => array(
       'route' => '/home/*',
       'defaults' => array(

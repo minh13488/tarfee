@@ -75,11 +75,6 @@ class User_Form_Signup_Account extends Engine_Form_Email
       $emailElement->setValue($inviteSession->invite_email);
     }
 
-    //if( $settings->getSetting('user.signup.verifyemail', 0) > 0 && $settings->getSetting('user.signup.checkemail', 0) == 1 ) {
-    //  $this->email->addValidator('Identical', true, array($inviteSession->invite_email));
-    //  $this->email->getValidator('Identical')->setMessage('Your email address must match the address that was invited.', 'notSame');
-    //}
-    
     // Element: code
     if( $settings->getSetting('user.signup.inviteonly') > 0 ) {
       $codeValidator = new Engine_Validate_Callback(array($this, 'checkInviteCode'), $emailElement);

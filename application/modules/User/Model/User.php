@@ -905,4 +905,76 @@ class User_Model_User extends Core_Model_Item_Abstract
 		}
 		return $arr;
 	}
+	
+	public function setCoverPhoto($photo)
+	{
+		if ($photo instanceof Zend_Form_Element_File)
+		{
+			$file = $photo -> getFileName();
+		}
+		else
+		if (is_array($photo) && !empty($photo['tmp_name']))
+		{
+			$file = $photo['tmp_name'];
+		}
+		else
+		if (is_string($photo) && file_exists($photo))
+		{
+			$file = $photo;
+		}
+		else
+		{
+			throw new Event_Model_Exception('invalid argument passed to setPhoto');
+		}
+
+		$name = basename($file);
+		$path = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'temporary';
+		$params = array(
+			'parent_id' => $this -> getIdentity(),
+			'parent_type' => 'user'
+		);
+
+		// Save
+		$storage = Engine_Api::_() -> storage();
+		$angle = 0;
+		if (function_exists('exif_read_data')) 
+		{
+			$exif = exif_read_data($file);
+			
+			if (!empty($exif['Orientation']))
+			{
+				switch($exif['Orientation'])
+				{
+					case 8 :
+						$angle = 90;
+						break;
+					case 3 :
+						$angle = 180;
+						break;
+					case 6 :
+						$angle = -90;
+						break;
+				}
+			}
+		}
+		// Resize image (main)
+		$image = Engine_Image::factory();
+		$image -> open($file) ;
+		if ($angle != 0)
+			$image -> rotate($angle);
+		$image -> resize(1200, 1200) -> write($path . '/m_' . $name) -> destroy();
+
+		$iMain = $storage -> create($path . '/m_' . $name, $params);
+		
+		// Remove temp files
+		@unlink($path . '/m_' . $name);
+
+		// Update row
+		$this -> modified_date = date('Y-m-d H:i:s');
+		$this -> cover_photo = $iMain -> file_id;
+		
+		$this -> save();
+
+		return $this;
+	}
 }

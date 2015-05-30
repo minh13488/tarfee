@@ -10,7 +10,7 @@ class User_Widget_ProfileCoverController extends Engine_Content_Widget_Abstract
 	    }
 	
 	    // Get subject and check auth
-	    $this->view->subject = $subject = Engine_Api::_()->core()->getSubject('user');
+	    $this->view->user = $subject = Engine_Api::_()->core()->getSubject('user');
 	    if( !$subject->authorization()->isAllowed($viewer, 'view') ) {
 	      return $this->setNoRender();
 	    }
@@ -31,9 +31,37 @@ class User_Widget_ProfileCoverController extends Engine_Content_Widget_Abstract
 	        }
 	      }
 	    }
-		 // Friend count
-		 $select = $subject->membership()->getMembersSelect();
-    	 $friends = Zend_Paginator::factory($select);
-   		 $this->view->friendCount = $friends->getTotalItemCount();
+	    
+	    // Friend count
+	    $this->view->friendCount = $subject->membership()->getMemberCount($subject);
+		
+		// Following count
+	    $select = $subject->membership()->getMembersOfSelect();
+		$paginator = Zend_Paginator::factory($select);
+		$this -> view -> followingCount = $paginator -> getTotalItemCount();
+		
+		// Get professional user verified
+		$slverifyTbl = Engine_Api::_()->getItemTable('slprofileverify_slprofileverify');
+	    $verifyRow = $slverifyTbl->getVerifyInfor($subject->getIdentity());
+	    if($verifyRow->approval == 'verified')
+	    {
+	        $settingsCore = Engine_Api::_()->getApi('settings', 'core');
+	        $photo_badge = $settingsCore->getSetting('sl_verify_badge', 0);
+	        $this->view->src_img = $src_img = Engine_Api::_()->slprofileverify()->getPhotoVerificaiton($photo_badge, null, 'pBadge');
+	    }
+
+		// get preferred clubs
+		$userGroupMappingTable = Engine_Api::_() -> getDbTable('groupmappings', 'user');
+		$groupMappings = $userGroupMappingTable -> getGroupByUser($subject -> getIdentity(), 2);
+		
+		$groups = array();
+		foreach($groupMappings as $groupMapping){
+				$group_id = $groupMapping -> group_id;
+				$group = Engine_Api::_() -> getItem('group', $group_id);
+				if($group) {
+					$groups[] = $group;
+				}
+		 }
+		$this -> view -> clubs = $groups;
 	}
 }

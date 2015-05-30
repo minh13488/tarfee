@@ -53,7 +53,8 @@ class SocialConnect_Form_SignUp extends Engine_Form
 		if ($settings -> getSetting('user.signup.username', 1) > 0)
 		{
 			$description = Zend_Registry::get('Zend_Translate') -> _('This will be the end of your profile link, for example: <br /> ' . '<span id="profile_address">http://%s</span>');
-			$description = sprintf($description, $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('id' => 'yourname'), 'user_profile'));
+			$description = sprintf($description, $_SERVER['HTTP_HOST']
+          . Zend_Controller_Front::getInstance()->getBaseUrl().'/yourname');
 
 			$this -> addElement('Text', 'username', array(
 				'label' => 'Profile Address',
@@ -171,7 +172,7 @@ class SocialConnect_Form_SignUp extends Engine_Form
 		$this -> email -> getValidator('Db_NoRecordExists') -> setMessage('Someone has already registered this email address, please use another one.', 'recordFound');
 
 		$description = Zend_Registry::get('Zend_Translate') -> _('This will be the end of your profile link, for example: <br /> <span id="profile_address">http://%s</span>');
-		$description = sprintf($description, $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('id' => Zend_Registry::get('Zend_Translate') -> _('yourname')), 'user_profile'));
+		$description = sprintf($description, $_SERVER['HTTP_HOST'] . Zend_Controller_Front::getInstance()->getBaseUrl().'/yourname');
 
 		// Init profile_type
 		if ($settings -> getSetting('user.signup.terms', 1) == 1)
