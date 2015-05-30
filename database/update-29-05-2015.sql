@@ -25,3 +25,37 @@ http://[host][object_link]
 
 [footer]"
 
+
+-- --------------------------------------------------------
+--
+-- Dumping data for table `engine4_core_mailtemplates`
+--
+
+INSERT IGNORE INTO `engine4_core_mailtemplates` (`type`, `module`, `vars`) VALUES
+('advgroup_email_to_friends', 'advgroup', '[host],[email],[date],[sender_title],[sender_link],[sender_photo],[object_title],[message],[object_link],[object_photo],[object_description]');
+
+# advgroup_email_to_friends
+"_EMAIL_ADVGROUP_EMAIL_TO_FRIENDS_TITLE";"Followers Notification"
+"_EMAIL_ADVGROUP_EMAIL_TO_FRIENDS_DESCRIPTION";"This is the email that gets sent when user wants to send message to followers."
+"_EMAIL_ADVGROUP_EMAIL_TO_FRIENDS_SUBJECT";"You have received an notification of the following club [object_title]!"
+"_EMAIL_ADVGROUP_EMAIL_TO_FRIENDS_BODY";"[header]
+
+[message]
+
+Check out this club
+<img src='http://[host][object_photo]' />[object_description]
+http://[host][object_link]
+
+[footer]"
+
+
+-- --------------------------------------------------------
+
+-- Table structure for table `engine4_user_groupmappings`
+--
+CREATE TABLE IF NOT EXISTS `engine4_user_groupmappings` (
+`groupmapping_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`user_id` int(11) unsigned NOT NULL,
+`group_id` int(11) unsigned NOT NULL,
+PRIMARY KEY (`groupmapping_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8;

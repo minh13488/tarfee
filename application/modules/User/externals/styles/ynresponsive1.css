@@ -665,7 +665,7 @@ ul.tarfee_profile_options_pulldown li a:hover, .tarfee_profile_cover_has_tabs .t
     border-radius: 4px;
     box-shadow: 0 0 10px;
 }
-.tabs_alt.tabs_parent
+.layout_user_profile_cover .tabs_alt.tabs_parent
 {
     clear: both;
     background: none !important;
@@ -1042,10 +1042,11 @@ ul.tarfee_profile_options_pulldown li a:hover, .tarfee_profile_cover_has_tabs .t
 {
 	height: 355px;
 	min-height:200px;
-    .cover-reposition 
+    .cover-reposition
     {
 	    z-index: 10;
-	    position: absolute;span a 
+	    position: absolute;
+	    span a 
 	    {
 		    display: block;
 		    border-top: 1px solid #fff;
@@ -1055,3 +1056,19 @@ ul.tarfee_profile_options_pulldown li a:hover, .tarfee_profile_cover_has_tabs .t
 		}
 	}
 }
+.tarfee_profile_main_photo #edit-photo-btn
+{
+	position: absolute;
+  	z-index: 10;
+  	width: 100%;
+  	text-align: center;
+  	bottom:0;
+  	a
+  	{
+  		display: block;
+	  	background-color: rgba(0, 0, 0, 0.6);
+	  	color: #fff;
+	  	padding: 5px 10px;
+  	}
+}
+
