@@ -1,3 +1,6 @@
+ALTER TABLE `engine4_group_groups` ADD `sportcategory_id` INT(11) UNSIGNED NOT NULL DEFAULT '0' AFTER `category_id`;
+
+
 CREATE TABLE IF NOT EXISTS `engine4_group_follow` (
   `resource_id` int(11) unsigned NOT NULL,
   `user_id` int(11) unsigned NOT NULL, 

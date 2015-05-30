@@ -260,6 +260,11 @@ class Advgroup_Model_Group extends Core_Model_Item_Abstract
 		return Engine_Api::_() -> getDbtable('categories', 'advgroup') -> find($this -> category_id) -> current();
 	}
 
+	public function getSportCategory()
+	{
+		return Engine_Api::_() -> getDbtable('sportcategories', 'user') -> find($this -> sportcategory_id) -> current();
+	}
+
 	public function setPhoto($photo)
 	{
 		if ($photo instanceof Zend_Form_Element_File)

@@ -22,4 +22,5 @@ class User_Model_DbTable_Sportcategories extends User_Model_DbTable_Nodes {
 		} 
 		return $this->fetchAll($select);
 	}
+	
 }
