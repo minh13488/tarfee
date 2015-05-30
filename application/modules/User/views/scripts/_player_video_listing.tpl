@@ -1,4 +1,4 @@
-<li style="height: auto" class="user-library-video-content">
+<li style="height: auto; width: 100%" class="user-library-video-content">
       <div class="video_thumb_wrapper">
         <?php if ($this -> video->duration):?>
         <span class="video_length">

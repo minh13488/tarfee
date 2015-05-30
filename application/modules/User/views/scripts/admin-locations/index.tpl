@@ -21,6 +21,17 @@ if ($this->location) $level = intval($this->location->level) + 1;
       <div>
         <h3> <?php echo $this->translate("Manage Locations") ?> </h3>
         
+        <br />
+        <?php if ($this->location) :?>
+        <div class="breadcrumb">
+    	<?php foreach($this->location->getParents() as $node): ?>
+    		<?php echo $node; ?>
+    		&raquo;
+         <?php endforeach; ?>
+         <?php echo $this->location?>
+         </div>
+         <?php endif;?>
+        <br />
         <?php if ($this->location) :?>
         <div class="location-title"><?php echo $this->translate('%s: %s', $item[$level], $this->location)?></div>
         <br />
@@ -51,13 +62,21 @@ if ($this->location) $level = intval($this->location->level) + 1;
 					  <?php echo count($childs)?>                      
                       </td>
                       <td>
+                      	<?php if ($level < 2) :?>
+                      	<?php echo $this->htmlLink($location->getHref(), $this->translate("view %s", $child_items[$level + 1]), array()) ?>
+                        |
+                      	<?php echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'user', 'controller' => 'locations', 'action' => 'add', 'id' =>$location->getIdentity()), $this->translate("add %s", strtolower($child_item[$level + 1])), array(
+                          'class' => 'smoothbox',
+                        )) ?>
+                      	|
+                      	<?php endif;?>
                         <?php echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'user', 'controller' => 'locations', 'action' => 'edit', 'id' =>$location->getIdentity()), $this->translate("edit"), array(
                           'class' => 'smoothbox',
                         )) ?>
                         |
                         <?php echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'user', 'controller' => 'locations', 'action' => 'delete', 'id' =>$location->getIdentity()), $this->translate("delete"), array(
                           'class' => 'smoothbox',
-                        )) ?>
+                        )) ?>               
 
                       </td>
                     </tr>                  
