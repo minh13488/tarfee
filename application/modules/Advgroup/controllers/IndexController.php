@@ -16,6 +16,35 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
     }
   }
   
+  public function followAction() 
+  {
+  		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(true);
+		
+        $group = Engine_Api::_() -> getItem('group', $this ->_getParam('group_id'));
+        $viewer = Engine_Api::_()->user()->getViewer();
+        $followTable = Engine_Api::_()->getDbTable('follow', 'advgroup');
+        $row = $followTable->getFollowGroup($group->getIdentity(), $viewer->getIdentity());
+        $this->view->viewer_id = $viewer->getIdentity();
+        if ($row) 
+        {
+            $this->view->follow = $row->follow;
+        } 
+        else if($this->getRequest()->isPost())
+		{
+			$row = $followTable->createRow();
+		    $row->resource_id = $group->getIdentity();
+		    $row->user_id = $viewer->getIdentity();
+		}
+		else
+        {
+            return $this->_helper->viewRenderer->setNoRender(true);
+        }
+        $option_id = $this->getRequest()->getParam('option_id');
+        $row->follow = $option_id;
+        $row->save();
+  }
+  
   public function browseAction()
   {
     // Setting to use landing page.

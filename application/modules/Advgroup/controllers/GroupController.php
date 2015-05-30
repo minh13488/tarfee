@@ -131,7 +131,7 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
             }
             $form -> populate(array('tags' => $tagStr, ));
             $this -> view -> tagNamePrepared = $tagStr;
-
+			
             return;
         }
 
@@ -333,7 +333,10 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
             $db -> rollBack();
             throw $e;
         }
-
+		
+		//send notification to follower
+		Engine_Api::_() -> advgroup() -> sendFollowNotify($group, 'advgroup_follow_edit');
+		
         // Redirect
         if ($this -> _getParam('ref') === 'profile')
         {
@@ -389,6 +392,7 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
                 {
                     $sub_group -> delete();
                 }
+                
                 //Delete parent group
                 $group -> delete();
                 $db -> commit();

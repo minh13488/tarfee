@@ -396,6 +396,21 @@ return array(
     ),
   ),
   array(
+    'title' => 'Group Profile Followers',
+    'description' => 'Displays a group\'s followers on its profile.',
+    'category' => 'Advanced Groups',
+    'type' => 'widget',
+    'name' => 'advgroup.profile-followers',
+    'isPaginated' => true,
+    'defaultParams' => array(
+      'title' => 'Followers',
+      'titleCount' => true,
+    ),
+    'requirements' => array(
+      'subject' => 'group',
+    ),
+  ),
+  array(
     'title' => 'Group Profile Options',
     'description' => 'Displays a menu of actions (edit, report, join, invite, etc) that can be performed on a group on its profile.',
     'category' => 'Advanced Groups',

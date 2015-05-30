@@ -63,7 +63,9 @@ class Advgroup_AdminManageController extends Core_Controller_Action_Admin
           $ids_array = explode(",", $ids);
           foreach( $ids_array as $id ){
             $group = Engine_Api::_()->getItem('group', $id);
-            if( $group ) $group->delete();
+            if( $group ) {
+            	$group->delete();
+            }
           }
           $db->commit();
       }

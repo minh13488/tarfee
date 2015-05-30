@@ -9,6 +9,23 @@ class Advgroup_Api_Core extends Core_Api_Abstract {
 			return Engine_Api::_ ()->loadClass ( $class );
 		}
 	}
+	
+	public function sendFollowNotify($group, $type) {
+		//send notify for users following this group
+		$followTable = Engine_Api::_() -> getDbtable('follow', 'advgroup');
+		$follows = $followTable -> getUserFollow($group -> group_id);
+		if (count($follows) > 0) {
+			$friends = array();
+			foreach ($follows as $follow) {
+				$friends[] = Engine_Api::_() -> getItem('user', $follow -> user_id);
+			}
+			$notifyApi = Engine_Api::_() -> getDbtable('notifications', 'activity');
+			foreach ($friends as $friend) {
+				$notifyApi -> addNotification($friend, $group, $group, $type, null);
+			}
+		}
+	}
+	
 	public function countGroupFolder($group){
 		
 		$table = Engine_Api::_() -> getDbTable('folders', 'ynfilesharing');

@@ -151,7 +151,7 @@
 								'action' => 'browse',
 						),
 						'reqs' => array(
-								'action' => '(browse|create|listing|manage|post|get-my-location|display-map-view)',
+								'action' => '(browse|create|listing|manage|post|get-my-location|display-map-view|follow)',
 						)
 				),
 				'group_specific' => array(

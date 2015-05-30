@@ -23,6 +23,14 @@ class Advgroup_Widget_ProfileCoverController extends Engine_Content_Widget_Abstr
           		$category = Engine_Api::_()->getItem('advgroup_category', $group->category_id);
           }
            
+          $followTable = Engine_Api::_()->getDbTable('follow','advgroup');
+          $row = $followTable->getFollowGroup($group->getIdentity(),$viewer->getIdentity());
+          if($row) {
+          	$this->view->follow = $row->follow;
+          } else {
+          	$this->view->follow = false;
+          }
+           
           $this->view->category = $category;
           $this->view->user = $user = $group->getOwner();
           $this->view->canComment = $canComment = $group->authorization()->isAllowed($viewer, 'comment');
@@ -40,8 +48,6 @@ class Advgroup_Widget_ProfileCoverController extends Engine_Content_Widget_Abstr
 		  $aReportButton = $menu->onMenuInitialize_AdvgroupProfileReport();
           $this->view->aReportButton = $aReportButton; 
 		 
-		
-		  
           $aEditButton = $menu->onMenuInitialize_AdvgroupProfileEdit();
           $this->view->aEditButton = $aEditButton;
           

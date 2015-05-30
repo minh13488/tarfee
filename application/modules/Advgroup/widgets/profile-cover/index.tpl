@@ -168,6 +168,10 @@ if ($this->group->cover_photo)
 		          <div class="">
 						<a href="javascript:void(0);" onclick="checkOpenPopup('<?php echo $url?>')"><i class="ynicon-shared" title="<?php echo $this -> translate("Share this group")?>"></i></a>
 				  </div>
+				<?php if ($this->viewer()->getIdentity()): ?>
+                	<div id="advgroup_cover_follow" class="" title="<?php echo ($this->follow) ? $this -> translate("Followed") : $this -> translate("Follow")?>" onclick="<?php echo ($this->follow) ? "setFollow(0);" : "setFollow(1);"; ?>"><?php echo ($this->follow) ? '<i class="fa fa-eye"></i>' : '<i class="fa fa-eye-slash"></i>';?></div>
+                <?php endif;?>
+				  
                 <?php endif;?>
               
                 <?php if ($this->viewer()->getIdentity()): ?>
@@ -444,6 +448,38 @@ if ($this->group->cover_photo)
 		</div>
 	</div>     
 </div>
+
+<script type="text/javascript">
+
+function setFollow(option_id)
+{
+	new Request.JSON({
+        url: '<?php echo $this->url(array('action' => 'follow'), 'group_general', true); ?>',
+        method: 'post',
+        data : {
+        	format: 'json',
+            'group_id': <?php echo $this->subject()->group_id ?>,
+            'option_id' : option_id
+        },
+        onComplete: function(responseJSON, responseText) {
+            if (option_id == '0')
+            {
+            	$("advgroup_cover_follow").set("html", '<i class="fa fa-eye-slash"></i>');
+            	$("advgroup_cover_follow").set("onclick", "setFollow(1)");
+            	$("advgroup_cover_follow").set("title", "Follow");
+            }
+            else if (option_id == '1')
+            {
+            	$("advgroup_cover_follow").set("html", '<i class="fa fa-eye"></i>');
+            	$("advgroup_cover_follow").set("onclick", "setFollow(0)");
+            	$("advgroup_cover_follow").set("title", "Followed");
+            }
+            
+        }
+    }).send();
+}
+</script>
+
 <script type="text/javascript">
 	jQuery.noConflict();
 	(function($){
