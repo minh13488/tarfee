@@ -1,5 +1,4 @@
 <style>
-	
 	.sub-title{
 		background-color: #eaeaea;
 		  margin-bottom: 0;
@@ -9,14 +8,10 @@
 		  -webkit-border-radius: 0;
 		  border-radius: 0;
 	}
-	
 </style>
 
 <h2><?php echo $this -> library -> getTitle();?></h2>
-
-
 <?php if($this -> viewer() -> isSelf($this -> subject())) :?>
-
 <div class="user-library-item-action">
     <span><i class="fa fa-ellipsis-h"></i> <span> <?php echo $this -> translate('Options');?></span></span>
     <ul>
@@ -53,12 +48,12 @@
 		</li>
 	</ul>
 </div>
-
 <?php endif;?>
+
 <br/>
 <?php if(count($this -> mainVideos)) :?>
-<ul style="border-bottom: 5px solid #eaeaea;"  class="videos_browse">
- <?php foreach ($this->mainVideos as $item): ?>
+	<ul style="border-bottom: 5px solid #eaeaea;"  class="videos_browse">
+ 	<?php foreach ($this->mainVideos as $item): ?>
         <?php
         echo $this->partial('_video_listing.tpl', 'user', array(
             'video' => $item,
@@ -66,12 +61,11 @@
             'main' => true,
         ));
         ?>
-<?php endforeach; ?>
-</ul>
+	<?php endforeach; ?>
+	</ul>
 <?php endif;?>
 
 <br/>
-
 <!-- get sub libraries -->
 <?php $subLibraries = $this -> library -> getSubLibrary(); ?>
 <div id="accordion">
@@ -79,38 +73,35 @@
 	<?php if($subLibrary -> isViewable()) :?>
 		<div class="sub-title">
 			<h3 style="font-size: large;" class="toggler atStart">---> <?php echo $subLibrary -> getTitle();?></h3>
-			
 			<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
-			
 			<div class="user-library-item-action">
 			    <span><i class="fa fa-ellipsis-h"></i> <span> <?php echo $this -> translate('Options');?></span></span>
-				    <ul>
-					<li class="user-library-close-box">X</li>
-					<li>
-					<!-- delete link for sub library -->
-					<?php echo $this->htmlLink(array(
-						'route' => 'user_library',
-						'action' => 'delete',
-						'id' => $subLibrary -> getIdentity(),
-						), '<i class="fa fa-plus-square"></i>'.$this->translate('Delete'), array(
-						'class' => 'smoothbox buttonlink'
-						)) ;
-					?>
-					</li>	
-					<li>	
-					<!-- edit link for sub library -->
-					<?php echo $this->htmlLink(array(
-						'route' => 'user_library',
-						'action' => 'edit',
-						'id' => $subLibrary -> getIdentity(),
-						), '<i class="fa fa-plus-square"></i>'.$this->translate('Edit'), array(
-						'class' => 'smoothbox buttonlink'
-						)) ;
-					?>
-					</li>
-					<li>
+			    <ul>
+				<li class="user-library-close-box">X</li>
+				<li>
+				<!-- delete link for sub library -->
+				<?php echo $this->htmlLink(array(
+					'route' => 'user_library',
+					'action' => 'delete',
+					'id' => $subLibrary -> getIdentity(),
+					), '<i class="fa fa-plus-square"></i>'.$this->translate('Delete'), array(
+					'class' => 'smoothbox buttonlink'
+					)) ;
+				?>
+				</li>	
+				<li>	
+				<!-- edit link for sub library -->
+				<?php echo $this->htmlLink(array(
+					'route' => 'user_library',
+					'action' => 'edit',
+					'id' => $subLibrary -> getIdentity(),
+					), '<i class="fa fa-plus-square"></i>'.$this->translate('Edit'), array(
+					'class' => 'smoothbox buttonlink'
+					)) ;
+				?>
+				</li>
+				<li>
 					<!-- create video link for sub library -->
-					
 						<?php echo $this->htmlLink(array(
 								'route' => 'video_general',
 								'action' => 'create',
@@ -121,13 +112,11 @@
 							)) ;
 						?>
 					</li>	
-					<?php endif;?>
-					</ul>
+				</ul>
 			</div>
-			
+			<?php endif;?>
 		</div>
 		<div class="element atStart">
-			
 			<!-- get videos of sub libraries -->
 			<?php
 			    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
@@ -139,16 +128,16 @@
 			?>
 			<br/>
 			<?php if(count($subVideos)):?>
-			<ul style="border: 5px solid #eaeaea;" class="videos_browse">
-			 <?php foreach ($subVideos as $item): ?>
-		            <?php
-		            echo $this->partial('_video_listing.tpl', 'user', array(
-		                'video' => $item,
-		                'library' => $subLibrary,
-		            ));
-		            ?>
-			<?php endforeach; ?>
-			</ul>
+				<ul style="border: 5px solid #eaeaea;" class="videos_browse">
+				 <?php foreach ($subVideos as $item): ?>
+			            <?php
+			            echo $this->partial('_video_listing.tpl', 'user', array(
+			                'video' => $item,
+			                'library' => $subLibrary,
+			            ));
+			            ?>
+				<?php endforeach; ?>
+				</ul>
 			<?php endif;?>
 		</div>
 		<br/>
@@ -156,10 +145,8 @@
 <?php endforeach; ?>
 </div>
 
-<script>
+<script type="text/javascript">
 	window.addEvent('domready', function(){
-		
-		
 		var accordion = new Accordion('h3.atStart', 'div.atStart', {
 			opacity: false,
 			onActive: function(toggler, element){

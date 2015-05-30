@@ -72,12 +72,12 @@
 	    <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
 	    <ul class="players_browse">  
 	        <?php foreach ($this->paginator as $player): ?>
-	        <li id="player-item-<?php echo $player->playercard_id ?>">
+	        <li id="player-item-<?php echo $player->playercard_id ?>" style ="clear: both">
 	           <div id='profile_photo'>
 					<?php $photoUrl = $player -> getPhotoUrl('thumb.profile');?>
 					<div class="avatar">
 						<span>
-							<a href="">
+							<a href="<?php echo $player -> getHref()?>">
 								<span alt="" class="thumb_profile_stroke" style="">
 									<span alt="" class="thumb_profile_innershadow" style="">
 										<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
@@ -189,29 +189,28 @@
 				    }
 	        		?>
 	            </div>
-	            	<!-- get videos of sub libraries -->
+	            <div>
+	            	 <?php
+				    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+				    $videoTable = Engine_Api::_()->getItemTable('video');
+				    $params = array();
+				    $params['owner_type'] = $player -> getType();
+					$params['owner_id'] = $player -> getIdentity();
+				    $playercardVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
+					?>
+					<?php if(count($playercardVideos)):?>
+						<ul style="border: 5px solid #eaeaea;" class="videos_browse">
+							 <?php foreach ($playercardVideos as $item): ?>
+						            <?php
+						            echo $this->partial('_player_video_listing.tpl', 'user', array(
+						                'video' => $item,
+						                'player' => $player,
+						            ));
+						            ?>
+							<?php endforeach; ?>
+						</ul>
+					<?php endif;?>
 	        </li>
-	        <?php
-			    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
-			    $videoTable = Engine_Api::_()->getItemTable('video');
-			    $params = array();
-			    $params['owner_type'] = $player -> getType();
-				$params['owner_id'] = $player -> getIdentity();
-			    $playercardVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
-			?>
-			<br/>
-			<?php if(count($playercardVideos)):?>
-			<ul style="border: 5px solid #eaeaea;" class="videos_browse">
-			 <?php foreach ($playercardVideos as $item): ?>
-		            <?php
-		            echo $this->partial('_player_video_listing.tpl', 'user', array(
-		                'video' => $item,
-		                'player' => $player,
-		            ));
-		            ?>
-			<?php endforeach; ?>
-			</ul>
-			<?php endif;?>
 	        <?php endforeach; ?>             
 	    </ul>  
 	    
