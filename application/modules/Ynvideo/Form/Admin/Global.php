@@ -17,7 +17,16 @@ class Ynvideo_Form_Admin_Global extends Engine_Form {
             'description' => 'Please enter the full path to your FFMPEG installation. (Environment variables are not present)',
             'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('ynvideo.ffmpeg.path', ''),
         ));
-
+		
+		$this->addElement('Radio', 'ynvideo_title_require', array(
+	      'label' => 'Video Title',
+	      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('ynvideo.title_require', 1),
+	      'multiOptions' => array(
+	        '1' => 'Mandatory.',
+	        '0' => 'Optional.',
+	      ),
+	    ));
+		
         $this->addElement('Text', 'ynvideo_jobs', array(
             'label' => 'Encoding Jobs',
             'description' => 'How many jobs do you want to allow to run at the same time?',
