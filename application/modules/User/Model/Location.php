@@ -31,4 +31,19 @@ class User_Model_Location extends Core_Model_Item_Abstract {
 		$view = Zend_Registry::get('Zend_View');
         return $view->translate($this->continent);
 	}
+	
+	public function getParent() {
+		return Engine_Api::_()->getItem('user_location', $this->parent_id);
+	}
+	public function getParents() {
+		$parents = array();
+		$node = $this;
+		while ($node->parent_id) {
+			$parent = $node->getParent();
+			$parents[] = $parent;
+			$node = $parent;
+		}
+		$parents = array_reverse($parents);
+		return $parents;
+	}
 }
