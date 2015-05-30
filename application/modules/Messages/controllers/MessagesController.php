@@ -6,7 +6,7 @@
  * @package    Messages
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.com/license/
- * @version    $Id: MessagesController.php 10246 2014-05-30 21:34:20Z andres $
+ * @version    $Id: MessagesController.php 10009 2013-03-26 23:25:57Z jung $
  * @author     John
  */
 
@@ -264,9 +264,8 @@ class Messages_MessagesController extends Core_Controller_Action_User
       $item = Engine_Api::_()->getItem($multi, $to);
       // Potential point of failure if primary key column is something other
       // than $multi . '_id'
-      $item_id = $multi . '_id';
       if( $item instanceof Core_Model_Item_Abstract &&
-          isset($item->$item_id) && (
+          	$item->getIdentity() && (
             $item->isOwner($viewer) ||
             $item->authorization()->isAllowed($viewer, 'edit')
           )) {
@@ -303,14 +302,12 @@ class Messages_MessagesController extends Core_Controller_Action_User
       }
       foreach( $data['composer'] as $type => $config ) {
         // is the current user has "create" privileges for the current plugin
-        if ( isset($config['auth'], $config['auth'][0], $config['auth'][1]) ) {
-          $isAllowed = Engine_Api::_()
+        $isAllowed = Engine_Api::_()
             ->authorization()
             ->isAllowed($config['auth'][0], null, $config['auth'][1]);
-
-          if ( !empty($config['auth']) && !$isAllowed ) {
-            continue;
-          }
+            
+        if( !empty($config['auth']) && !$isAllowed ) {
+          continue;
         }
         $composePartials[] = $config['script'];
       }
@@ -526,14 +523,14 @@ class Messages_MessagesController extends Core_Controller_Action_User
     
     $viewer = Engine_Api::_()->user()->getViewer();
     
-    $table = Engine_Api::_()->getDbtable('messages', 'messages');
+    $table = Engine_Api::_()->getDbtable('conversations', 'messages');
     $query = $table->select()
-        ->from('engine4_messages_messages')
-        ->joinRight('engine4_messages_recipients', 'engine4_messages_recipients.conversation_id = engine4_messages_messages.conversation_id', null)
-        //->joinRight('engine4_messages_messages', 'engine4_messages_messages.conversation_id=engine4_messages_recipients.conversation_id', null)
+        ->from('engine4_messages_conversations')
+        ->joinRight('engine4_messages_recipients', 'engine4_messages_recipients.conversation_id = engine4_messages_conversations.conversation_id', null)
+        ->joinRight('engine4_messages_messages', 'engine4_messages_messages.conversation_id=engine4_messages_recipients.conversation_id', null)
         ->where('engine4_messages_recipients.user_id = ?', $viewer->user_id)
         ->where('(engine4_messages_messages.title LIKE ? || engine4_messages_messages.body LIKE ?)', '%' . $queryStr . '%')
-        ->order('engine4_messages_messages.message_id DESC')
+        ->order('inbox_updated DESC')
         ;
         
     $paginatorAdapter = new Zend_Paginator_Adapter_DbTableSelect($query);
@@ -546,96 +543,5 @@ class Messages_MessagesController extends Core_Controller_Action_User
         //->setNoRender()
         ->setEnabled()
         ;
-  }
-
-  public function uploadPhotoAction()
-  {
-    $viewer = Engine_Api::_()->user()->getViewer();
-
-    $this->_helper->layout->disableLayout();
-
-    if( !Engine_Api::_()->authorization()->isAllowed('album', $viewer, 'create') ) {
-      return false;
-    }
-
-    if( !$this->_helper->requireAuth()->setAuthParams('album', null, 'create')->isValid() ) return;
-
-    if( !$this->_helper->requireUser()->checkRequire() )
-    {
-      $this->view->status = false;
-      $this->view->error = Zend_Registry::get('Zend_Translate')->_('Max file size limit exceeded (probably).');
-      return;
-    }
-
-    if( !$this->getRequest()->isPost() )
-    {
-      $this->view->status = false;
-      $this->view->error = Zend_Registry::get('Zend_Translate')->_('Invalid request method');
-      return;
-    }
-    if( !isset($_FILES['userfile']) || !is_uploaded_file($_FILES['userfile']['tmp_name']) )
-    {
-      $this->view->status = false;
-      $this->view->error = Zend_Registry::get('Zend_Translate')->_('Invalid Upload');
-      return;
-    }
-
-    $db = Engine_Api::_()->getDbtable('photos', 'album')->getAdapter();
-    $db->beginTransaction();
-
-    try
-    {
-      $viewer = Engine_Api::_()->user()->getViewer();
-
-      $photoTable = Engine_Api::_()->getDbtable('photos', 'album');
-      $photo = $photoTable->createRow();
-      $photo->setFromArray(array(
-        'owner_type' => 'user',
-        'owner_id' => $viewer->getIdentity()
-      ));
-      $photo->save();
-
-      $photo->setPhoto($_FILES['userfile']);
-
-      $this->view->status = true;
-      $this->view->name = $_FILES['userfile']['name'];
-      $this->view->photo_id = $photo->photo_id;
-      $this->view->photo_url = $photo->getPhotoUrl();
-
-      $table = Engine_Api::_()->getDbtable('albums', 'album');
-      $album = $table->getSpecialAlbum($viewer, 'message');
-
-      $photo->album_id = $album->album_id;
-      $photo->save();
-
-      if( !$album->photo_id )
-      {
-        $album->photo_id = $photo->getIdentity();
-        $album->save();
-      }
-
-      $auth      = Engine_Api::_()->authorization()->context;
-      $auth->setAllowed($photo, 'everyone', 'view',    true);
-      $auth->setAllowed($photo, 'everyone', 'comment', true);
-      $auth->setAllowed($album, 'everyone', 'view',    true);
-      $auth->setAllowed($album, 'everyone', 'comment', true);
-
-
-      $db->commit();
-
-    } catch( Album_Model_Exception $e ) {
-      $db->rollBack();
-      $this->view->status = false;
-      $this->view->error = $this->view->translate($e->getMessage());
-      throw $e;
-      return;
-
-    } catch( Exception $e ) {
-      $db->rollBack();
-      $this->view->status = false;
-      $this->view->error = Zend_Registry::get('Zend_Translate')->_('An error occurred.');
-      throw $e;
-      return;
-    }
   }
 }
