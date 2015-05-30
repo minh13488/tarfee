@@ -1446,12 +1446,7 @@ body#global_page_user-friends-list-all-friends{
 	  text-align: center;
 	  margin-top: 20px;
 	}
-	hr {
-	  margin-top: 20px;
-	  margin-bottom: 20px;
-	  border: 0;
-	  border-top: 1px solid #eee;
-	}
+	
 	.leftmenu ul li {
 	  margin-left: 15px;
 	}
@@ -1477,12 +1472,14 @@ body#global_page_user-friends-list-all-friends{
 		-webkit-border-radius: 10px;
 		border-radius: 10px;
 	  	background-color: #fff;
-	  	margin-right: 50px;
+	  	margin-right: 10px;
+	  	margin-left: 10px;
 	  	#sections-content-items .sections-content-item
 	  	{
 	  		border: 0;
 	  		padding: 15px;
 	  	}
+	  	
 	}
 	.layout_user_profile_players .player_contents
 	{
@@ -1698,7 +1695,6 @@ body#global_page_user-friends-list-all-friends{
 
 			.section-label {
 				display: inline;
-				text-transform: uppercase;
 			  	font-size: 1.5em;
 				background-color: transparent;
 				color: $theme_font_color_light;
@@ -1706,10 +1702,29 @@ body#global_page_user-friends-list-all-friends{
 				margin-top: 0;
 				margin-bottom: 15px;
 				overflow: hidden;
+				font-weight: bold;
 				+user-text-overflow();
 				+user-border-radius(0);
 		  	}
-		  	
+		  	.profile-section table tr th {
+			  text-align: center !important;
+			  width: 33%;
+			 
+			}
+			 .profile-section table tr th h3 {
+			  float: none !important;
+			 }
+			 .profile-section table tr th hr {
+			  border-top: 1px solid #948B8B;
+			 }
+			.profile-section table {
+			  width: 100%;
+			}
+			.profile-section div.icon_section_profile {
+			  text-align: center;
+			  font-size: 30px;
+			  color: $theme_font_color_light;
+			}
 		  	.profile-section-content {
 		  		margin-top: 10px;
 		  		#bio-content
@@ -1879,7 +1894,7 @@ body#global_page_user-friends-list-all-friends{
 						text-align: left;
 						font-size: 0.85em;
 						padding: 0;
-						min-width: 90px;
+						min-width: 100px;
 						display: inline-block;
 					}
 					
@@ -1892,8 +1907,6 @@ body#global_page_user-friends-list-all-friends{
 					}
 					
 					.width-50 {
-						width: 48%;
-						display: inline-block;
 						text-overflow: ellipsis;
   						overflow: hidden;
 					}

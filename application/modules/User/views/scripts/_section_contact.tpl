@@ -18,8 +18,14 @@
 	</span>	
 <?php endif;?>	
 </div>
-
-<h3 class="section-label"><?php echo $this->translate($label);?></h3>
+<div class="icon_section_profile"><i class="fa fa-user"></i></div>
+<table>
+  <tr>
+  	<th><hr></th>  
+  	<th><h3 class="section-label"><?php echo $this->translate($label);?></h3></th>
+  	<th><hr></th>
+  </tr>
+</table>
  
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
@@ -80,15 +86,18 @@
 				<span class="label"><?php echo $this->translate('Contact #:')?></span>
 				<span><?php echo $contact_num ?></span>
 			</div>
+			<hr>
 			<div id="contact-email1" class="width-50">
 				<span class="label"><?php echo $this->translate('Email 1:')?></span>
 				<span><?php echo $email1 ?></span>
 			</div>
+			<hr>
 			<?php if (!empty($email2)):?>
 			<div id="contact-email2" class="width-50">
 				<span class="label"><?php echo $this->translate('Email 2:')?></span>
 				<span><?php echo $email2 ?></span>
 			</div>
+			<hr>
 			<?php endif;?>
 			<?php if (!empty($skype)):?>
 			<div id="contact-skype" class="width-50">
