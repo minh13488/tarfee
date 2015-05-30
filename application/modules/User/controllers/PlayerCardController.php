@@ -176,7 +176,24 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		{
 			return $this -> _forward('requireauth', 'error', 'core');
 		}
+
 		$this -> view -> form = $form = new User_Form_Playercard_Edit();
+		
+		// authorization
+	    $auth = Engine_Api::_()->authorization()->context;
+	    $roles = array('owner', 'owner_member', 'owner_member_member', 'owner_network', 'registered', 'everyone');
+	    foreach( $roles as $role )
+	    {
+	      if( 1 === $auth->isAllowed($player_card, $role, 'view') )
+	      {
+	        $form->auth_view->setValue($role);
+	      }
+		   if( 1 === $auth->isAllowed($player_card, $role, 'comment') )
+	      {
+	        $form->auth_comment->setValue($role);
+	      }
+	    }
+		
 		if (!$this -> getRequest() -> isPost())
 		{
 			if ($player_card -> relation_id == 0)
@@ -228,7 +245,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		{
 			$this -> view -> showPosition = false;
 		}
-
+		
 		if (!$form -> isValid($posts))
 		{
 			return;
@@ -398,7 +415,12 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 
 		$playerCard = Engine_Api::_() -> core() -> getSubject('user_playercard');
 		$viewer = Engine_Api::_() -> user() -> getViewer();
-
+		
+		//check view auth
+		if(!$playerCard -> isViewable()) {
+			return $this -> _helper -> requireAuth() -> forward();
+		}
+		
 		// Check if edit/delete is allowed
 		$this -> view -> can_edit = $can_edit = $this -> _helper -> requireAuth() -> setAuthParams($playerCard, null, 'edit') -> checkRequire();
 		$this -> view -> can_delete = $can_delete = $this -> _helper -> requireAuth() -> setAuthParams($playerCard, null, 'delete') -> checkRequire();
@@ -407,7 +429,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		$this -> view -> playerCard = $playerCard;
 
 		// Render
-		$this -> _helper -> content -> setEnabled();
+		//$this -> _helper -> content -> setEnabled();
 	}
 
 	public function cropPhotoAction()

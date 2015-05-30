@@ -72,6 +72,7 @@
 	    <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
 	    <ul class="players_browse">  
 	        <?php foreach ($this->paginator as $player): ?>
+	        <?php if($player -> isViewable()) :?>
 	        <li id="player-item-<?php echo $player->playercard_id ?>">
 	           <div id='profile_photo'>
 					<?php $photoUrl = $player -> getPhotoUrl('thumb.profile');?>
@@ -191,6 +192,7 @@
 	            </div>
 	            	<!-- get videos of sub libraries -->
 	        </li>
+	       
 	        <?php
 			    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
 			    $videoTable = Engine_Api::_()->getItemTable('video');
@@ -201,18 +203,19 @@
 			?>
 			<br/>
 			<?php if(count($playercardVideos)):?>
-			<ul style="border: 5px solid #eaeaea;" class="videos_browse">
-			 <?php foreach ($playercardVideos as $item): ?>
-		            <?php
-		            echo $this->partial('_player_video_listing.tpl', 'user', array(
-		                'video' => $item,
-		                'player' => $player,
-		            ));
-		            ?>
-			<?php endforeach; ?>
-			</ul>
+				<ul style="border: 5px solid #eaeaea;" class="videos_browse">
+				 <?php foreach ($playercardVideos as $item): ?>
+			            <?php
+			            echo $this->partial('_player_video_listing.tpl', 'user', array(
+			                'video' => $item,
+			                'player' => $player,
+			            ));
+			            ?>
+				<?php endforeach; ?>
+				</ul>
 			<?php endif;?>
-	        <?php endforeach; ?>             
+			<?php endif;?>
+        <?php endforeach; ?>             
 	    </ul>  
 	    
 	    <div class="players-paginator">
