@@ -429,7 +429,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		$this -> view -> playerCard = $playerCard;
 
 		// Render
-		//$this -> _helper -> content -> setEnabled();
+		$this -> _helper -> content -> setEnabled();
 	}
 
 	public function cropPhotoAction()

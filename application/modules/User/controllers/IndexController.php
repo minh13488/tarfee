@@ -406,7 +406,7 @@ class User_IndexController extends Core_Controller_Action_Standard
 		//query with sport type
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		$sportMapsTable = Engine_Api::_() -> getDbTable('sportmaps', 'user');
-		$sportMaps = $sportMapsTable -> getSportsOfUser($viewer -> getIdentity());
+		$sportMaps = $sportMapsTable -> getSportsOfUser($viewer -> getIdentity(), 0);
 		$sportIds = array();
 		foreach($sportMaps as $sport) {
 			$sportIds[] = $sport -> getIdentity();
