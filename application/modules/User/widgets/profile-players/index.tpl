@@ -89,16 +89,18 @@
 					<div class="nickname">
 						<span><a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 15)?></span></a>
 					</div>
-					<div class="user_rating">
-						<?php $overRallRating = $player -> getOverallRating();?>
-						<span title="<?php echo $overRallRating;?>">
-						<?php if($overRallRating > 0):?>
-			            	<?php for($x=1; $x<=$overRallRating; $x++): ?><span class="rating_star_generic rating_star"></span><?php endfor; ?><?php if((round($overRallRating)-$overRallRating)>0):?><span class="rating_star_generic rating_star_half"></span><?php endif; ?>
-			     		<?php else :?>
-			 				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic rating_star_disabled"></span><?php endfor; ?>
-			     		<?php endif;?>
-			     		</span>
-					</div>
+		         	<?php if(!$this -> viewer() -> isAdmin()) :?> 
+						<div class="user_rating">
+							<?php $overRallRating = $player -> getOverallRating();?>
+							<span title="<?php echo $overRallRating;?>">
+							<?php if($overRallRating > 0):?>
+				            	<?php for($x=1; $x<=$overRallRating; $x++): ?><span class="rating_star_generic rating_star"></span><?php endfor; ?><?php if((round($overRallRating)-$overRallRating)>0):?><span class="rating_star_generic rating_star_half"></span><?php endif; ?>
+				     		<?php else :?>
+				 				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic rating_star_disabled"></span><?php endfor; ?>
+				     		<?php endif;?>
+				     		</span>
+						</div>
+					<?php endif;?>
 					<div class="actions">
 						<div>
 						<table>

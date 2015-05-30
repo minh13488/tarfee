@@ -156,17 +156,33 @@ endif;
                 <?php echo $this->timestamp($this->video->creation_date) ?>
                  <?php echo $this->translate(array('%s favorite', '%s favorites', $this->video->favorite_count), $this->locale()->toNumber($this->video->favorite_count)) ?>
             </div>
-            <?php if($this -> viewer() -> getIdentity() && $this -> viewer() -> level_id == 6 && $this -> video -> parent_type == "user_playercard") :?>
-            <?php 
-    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
-				$rating_types = $tableRatingType -> getAllRatingTypes();
-            	echo $this->partial('_rate_video.tpl', 'ynvideo', array(
-				        'ratingTypes' => $rating_types,
-				        'video_id' => $this->video->getIdentity(),
-			        )); 
-				        
-			?>
+            <!-- if viewer type professional or club -> can rate -->
+            <?php if($this -> viewer() -> getIdentity() 
+            		&& in_array($this -> viewer() -> level_id, array('6','7')) 
+            		&& $this -> video -> parent_type == "user_playercard") :?>
+	            <?php 
+	    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
+					$rating_types = $tableRatingType -> getAllRatingTypes();
+	            	echo $this->partial('_rate_video.tpl', 'ynvideo', array(
+					        'ratingTypes' => $rating_types,
+					        'video_id' => $this->video->getIdentity(),
+				        )); 
+					        
+				?>
 			<?php endif ?>
+			<!-- if not admin could see ratings of video -->
+			<?php if(!$this -> viewer() -> isAdmin() && $this -> video -> parent_type == "user_playercard"):?>
+				<?php 
+	    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
+					$rating_types = $tableRatingType -> getAllRatingTypes();
+	            	echo $this->partial('_view_rate_video.tpl', 'ynvideo', array(
+					        'ratingTypes' => $rating_types,
+					        'video_id' => $this->video->getIdentity(),
+				        )); 
+				        
+				?>
+			<?php endif;?> 
+			
         </div>
 
         <div class="right">
