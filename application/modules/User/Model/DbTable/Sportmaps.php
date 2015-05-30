@@ -21,4 +21,31 @@ class User_Model_DbTable_Sportmaps extends Engine_Db_Table {
 		}
 		return $sportTbl->fetchAll($select);
 	}
+	
+	public function getRow($user_id, $sport_id){
+		$select = $this -> select() 
+						-> where('user_id = ?', $user_id)
+						-> where('sport_id = ?', $sport_id)
+						-> limit(1);
+		return $this -> fetchRow($select);
+	}
+	
+	public function deleteAllRows($user_id) {
+		$tableName = $this -> info('name');
+		$db = $this -> getAdapter();
+		$db -> beginTransaction();
+		try
+		{
+			$db->delete($tableName, array(
+			    'user_id = ?' => $user_id
+			));
+			$db -> commit();
+			
+		}
+		catch( Exception $e )
+		{
+			$db -> rollBack();
+			return $e;
+		}
+	}
 }

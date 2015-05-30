@@ -456,6 +456,11 @@ var Autocompleter2 = new Class({
 				myElement.innerHTML = "<a target='_blank' href="+url+">"+token.photo+name+"</a>"+" <a href='javascript:void(0);' onclick='this.parentNode.destroy();removeFromToValue(\""+toID+"\", \""+hideLoc+"\", \""+this.element.get('id')+"\");'>x</a>";
 				break;
 				
+			case 'sport':
+				myElement.addClass("sport_tag");
+				myElement.innerHTML = token.photo+name+" <a href='javascript:void(0);' onclick='this.parentNode.destroy();removeFromToValue(\""+toID+"\", \""+hideLoc+"\", \""+this.element.get('id')+"\");'>x</a>";
+				break;
+				
 			case 'ynmultilisting_listing':
 				var html = '';
 				html += '<a class="listing-link" target="_blank" href="'+url+'">'+name+'</a>';
