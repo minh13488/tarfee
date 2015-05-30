@@ -12,5 +12,9 @@ class Socialbridge_Plugin_Core extends Core_Model_Abstract
 	{
 		unset($_SESSION['socialbridge_session']);
 	}
+	if(!empty($_SESSION['skip_registration']) ) 
+	{
+		unset($_SESSION['skip_registration']);
+	}
   }
 }
