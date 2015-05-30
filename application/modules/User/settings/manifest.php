@@ -156,7 +156,6 @@ return array(
       )
     ),
 	
-	/*
     // User - Specific
     'user_profile' => array(
       'route' => 'profile/:id/*',
@@ -165,7 +164,7 @@ return array(
         'controller' => 'profile',
         'action' => 'index'
       )
-    ),*/
+    ),
     'user_home' => array(
       'route' => '/home/*',
       'defaults' => array(

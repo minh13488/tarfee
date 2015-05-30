@@ -59,20 +59,46 @@ class ProfileCompleteness_Widget_ProfileCompletenessController extends Engine_Co
             $emptyField = array();
             $filledField = array();
 
-            $table = Engine_Api::_()->getDbtable('search', 'core');
-            $db = $table->getAdapter();
-            $select = $table->select()->setIntegrityCheck(false);
-            $select->from(array('w' => 'engine4_profilecompleteness_weights'))
-                    ->where('w.type_id = 0 AND w.field_id = 0');
-            $row = $table->fetchRow($select);
+            $table = Engine_Api::_()->getDbtable('weights', 'profileCompleteness');
+			// check profile photo
             if ($viewer->photo_id != 0)
             {
-                $filledField['photo'] = $row->weight;
+                $filledField['photo'] = $table -> getGlobalWeight(0);
             }
             else
             {
-                $emptyField['photo'] = $row->weight;
+                $emptyField['photo'] = $table -> getGlobalWeight(0);
             }
+			
+			// check sport like/follow
+			if($table -> isSportLikeOrFollow())
+			{
+				$filledField['sportlike'] = $table -> getGlobalWeight(-1);
+			}
+			else
+			{
+				$emptyField['sportlike'] = $table -> getGlobalWeight(-1);
+			}
+			
+			// check club follow
+			if($table -> isClubFollow())
+			{
+				$filledField['clubfollow'] = $table -> getGlobalWeight(-2);
+			}
+			else
+			{
+				$emptyField['clubfollow'] = $table -> getGlobalWeight(-2);
+			}
+			
+			// check video uplaod
+			if($table -> isVideoUpload())
+			{
+				$filledField['videoupload'] = $table -> getGlobalWeight(-2);
+			}
+			else
+			{
+				$emptyField['videoupload'] = $table -> getGlobalWeight(-2);
+			}
 
             $select = $table->select()->setIntegrityCheck(false);
             $select->from(array('v' => 'engine4_user_fields_values'))
@@ -100,7 +126,6 @@ class ProfileCompleteness_Widget_ProfileCompletenessController extends Engine_Co
                         ->where('map.child_id = meta.field_id');
                 $r1 = $table->fetchRow($select);
 
-                //if (is_object($r))
 				if (is_object($r) && $r->value != '')
                 {
                     $filledField[$r1->label] = $row->weight;
