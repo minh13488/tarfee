@@ -216,6 +216,62 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 				$this -> view -> showOther = true;
 			}
 			$arr_player = $player_card -> toArray();
+			
+			if ($arr_player['category_id'] == 2)
+			{
+				$this -> view -> showPreferredFoot = true;
+			}
+			else
+			{
+				$this -> view -> showPreferredFoot = false;
+			}
+			$category_id = $arr_player['category_id'];
+			$sportCattable = Engine_Api::_() -> getDbtable('sportcategories', 'user');
+			$node = $sportCattable -> getNode($category_id);
+			$categories = $node -> getChilren();
+			if (count($categories))
+			{
+				$position_options = array(0 => '');
+				foreach ($categories as $category)
+				{
+					$position_options[$category -> getIdentity()] = $category -> title;
+					$node = $sportCattable -> getNode($category -> getIdentity());
+					$positons = $node -> getChilren();
+					foreach ($positons as $positon)
+					{
+						$position_options[$positon -> getIdentity()] = '-- ' . $positon -> title;
+					}
+				}
+				$form -> getElement('position_id') -> setMultiOptions($position_options);
+				$this -> view -> showPosition = true;
+			}
+			else
+			{
+				$this -> view -> showPosition = false;
+			}
+			
+			if (isset($arr_player['country_id']))
+			{
+				$provincesAssoc = array();
+				$country_id = $arr_player['country_id'];
+				if ($country_id) 
+				{
+					$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
+					$provincesAssoc = array('0'=>'') + $provincesAssoc;
+				}
+				$form -> getElement('province_id') -> setMultiOptions($provincesAssoc);
+			}
+			
+			if (isset($arr_player['province_id']))
+			{
+				$citiesAssoc = array();
+				$province_id = $arr_player['province_id'];
+				if ($province_id) {
+					$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
+					$citiesAssoc = array('0'=>'') + $citiesAssoc;
+				}
+				$form -> getElement('city_id') -> setMultiOptions($citiesAssoc);
+			}
 			$form -> populate($arr_player);
 			return;
 		}
@@ -261,23 +317,10 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			$this -> view -> showPosition = false;
 		}
 		
+		$provincesAssoc = array();
 		$country_id = $posts['country_id'];
-		if ($country_id) {
-			$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
-			$provincesAssoc = array('0'=>'') + $provincesAssoc;
-		}
-		$form -> getElement('province_id') -> setMultiOptions($provincesAssoc);
-		
-		$citiesAssoc = array();
-		$province_id = $posts['province_id'];
-		if ($province_id) {
-			$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
-			$citiesAssoc = array('0'=>'') + $citiesAssoc;
-		}
-		$form -> getElement('city_id') -> setMultiOptions($citiesAssoc);
-		
-		$country_id = $posts['country_id'];
-		if ($country_id) {
+		if ($country_id) 
+		{
 			$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
 			$provincesAssoc = array('0'=>'') + $provincesAssoc;
 		}

@@ -101,6 +101,22 @@ class User_Form_Playercard_Create extends Engine_Form
 	$birthday -> setRequired(true);
     $this->addElement($birthday);
 	
+	$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
+	$countriesAssoc = array('0'=>'') + $countriesAssoc;
+
+	$this->addElement('Select', 'country_id', array(
+		'label' => 'Country',
+		'multiOptions' => $countriesAssoc,
+	));
+
+	$this->addElement('Select', 'province_id', array(
+		'label' => 'Province/State',
+	));
+
+	$this->addElement('Select', 'city_id', array(
+		'label' => 'City',
+	));
+	
 	$this -> addElement('Select', 'referred_foot', array(
 		'label' => 'Preferred Foot',
 		'multiOptions' => array('1' => 'Left', '2' => 'Right', '0' => 'Both'),
