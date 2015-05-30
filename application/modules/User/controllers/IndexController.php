@@ -408,8 +408,8 @@ class User_IndexController extends Core_Controller_Action_Standard
 		$sportMapsTable = Engine_Api::_() -> getDbTable('sportmaps', 'user');
 		$sportMaps = $sportMapsTable -> getSportsOfUser($viewer -> getIdentity());
 		$sportIds = array();
-		foreach($sportMaps as $sportMap) {
-			$sportIds[] = $sportMap -> sport_id;
+		foreach($sportMaps as $sport) {
+			$sportIds[] = $sport -> getIdentity();
 		}
 		if(count($sportIds)) {
 			$select -> where('sportcategory_id IN (?)', $sportIds);
