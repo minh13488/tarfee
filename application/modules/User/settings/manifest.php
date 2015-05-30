@@ -104,7 +104,6 @@ return array(
     'user_education',
     'user_recommendation',
     'user_location',
-    'user_sportcategory',
     'user_library',
     'user_sportcategory',
     'user_playercard',
@@ -196,6 +195,15 @@ return array(
         'module' => 'user',
         'controller' => 'signup',
         'action' => 'index'
+      )
+    ),
+    
+	'user_sport' => array(
+      'route' => '/user/sport/:action/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'sport',
+        'action' => 'manage'
       )
     ),
   )

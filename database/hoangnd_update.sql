@@ -174,3 +174,16 @@ INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`
 ALTER TABLE `engine4_users` ADD `country_id` INT(11) NOT NULL DEFAULT '0' ;
 ALTER TABLE `engine4_users` ADD `province_id` INT(11) NOT NULL DEFAULT '0' ;
 ALTER TABLE `engine4_users` ADD `city_id` INT(11) NOT NULL DEFAULT '0' ;
+
+5.30.2015
+--
+-- Table structure for table `engine4_user_sportmaps`
+--
+CREATE TABLE IF NOT EXISTS `engine4_user_sportmaps` (
+  `map_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `sport_id` int(11) unsigned NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  PRIMARY KEY (`map_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

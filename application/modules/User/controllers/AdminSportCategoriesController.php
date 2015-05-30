@@ -16,7 +16,12 @@ class User_AdminSportCategoriesController extends Core_Controller_Action_Admin
   public function addCategoryAction() {
 		// In smoothbox
 		$this -> _helper -> layout -> setLayout('admin-simple');
-
+		
+		$parentId = $this -> _getParam('parent_id', 0);
+		if ($parentId != '1') {
+			$form -> removeElement('photo');
+		}
+		
 		// Generate and assign form
 		$form = $this -> view -> form = new User_Form_Admin_Player_Category();
 		$form -> setAction($this -> getFrontController() -> getRouter() -> assemble( array()));
@@ -26,10 +31,12 @@ class User_AdminSportCategoriesController extends Core_Controller_Action_Admin
 			// we will add the category
 			$values = $form -> getValues();
 			$table = Engine_Api::_() -> getDbtable('sportcategories', 'user');
-			$parentId = $this -> _getParam('parent_id', 0);
 			$node = $table -> getNode($parentId);
 			$user = Engine_Api::_() -> user() -> getViewer();
 			$data = array('user_id' => $user -> getIdentity(), 'title' => $values["label"]);
+			if (!empty($values['photo'])) {
+				$data['photo'] = $form -> photo;
+			}
 			$table -> addChild($node, $data);
 			$this -> _forward('success', 'utility', 'core', array('smoothboxClose' => 10, 'parentRefresh' => 10, 'messages' => array('')));
 		}
