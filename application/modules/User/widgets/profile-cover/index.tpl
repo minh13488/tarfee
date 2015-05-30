@@ -231,7 +231,7 @@ function cancelReposition() {
                      	<?php if(Engine_Api::_()->authorization()->isAllowed('user', $this->subject(), 'show_badge')):?>
 							<?php 
 							$badge = Engine_Api::_()->authorization()->getPermission($this->subject(), 'user', 'badge');
-							if($badge && strpos($badge,'public/admin')): ?>
+							if($badge && strpos($badge,'public/admin') !== false): ?>
 								<img height="30" src="<?php echo $badge?>" />
 							<?php endif;?>
 						<?php endif;?>
