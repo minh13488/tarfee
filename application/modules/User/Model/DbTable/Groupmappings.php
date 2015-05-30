@@ -11,9 +11,13 @@ class User_Model_DbTable_GroupMappings extends Engine_Db_Table
 		return $this -> fetchRow($select);
 	}
 	
-	public function getGroupByUser($user_id) {
+	public function getGroupByUser($user_id, $limit = 0) {
 		$select = $this -> select() 
 						-> where('user_id = ?', $user_id);
+		if($limit)
+		{
+			$select -> limit($limit);
+		}
 		return $this -> fetchALl($select);
 	}
 	

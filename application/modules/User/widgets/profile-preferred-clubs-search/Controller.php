@@ -17,7 +17,7 @@ class User_Widget_ProfilePreferredClubsSearchController extends Engine_Content_W
     }
 	
     $userGroupMappingTable = Engine_Api::_() -> getDbTable('groupmappings', 'user');
-	$this -> view -> groupMappings = $groupMappings = $userGroupMappingTable -> getGroupByUser($subject -> getIdentity());
+	$groupMappings = $userGroupMappingTable -> getGroupByUser($subject -> getIdentity());
 	
 	$groups = array();
 	foreach($groupMappings as $groupMapping){

@@ -307,18 +307,18 @@ function cancelReposition() {
 		      <div>basketball</div>
 		   </a>
 		</li>
+		<?php foreach($this -> clubs as $club):?>
 		<li>
-		   <a href="#">
-		      <div><span class="number_icons"><i class="fa fa-users"></i></span></div>
-		      <div>club name 1</div>
+		   <a href="<?php echo $club -> getHref();?>">
+		      <div>
+		      	<span class="number_icons">
+		      		<?php echo $this -> itemPhoto($club, 'thumb.icon');?>
+				</span>
+			  </div>
+		      <div><?php echo $this -> string() -> truncate($club -> getTitle(), 10)?></div>
 		   </a>
 		</li>
-		<li>
-		   <a href="#">
-		      <div><span class="number_icons"><i class="fa fa-users"></i></span></div>
-		      <div>club name 1</div>
-		   </a>
-		</li>
+		<?php endforeach;?>
 	  </ul>
 	</div>
 		<?php if($this->src_img):?>
@@ -328,5 +328,4 @@ function cancelReposition() {
 		</div>
 		<?php endif;?>
 	</div>
-   </div>
 </div>
