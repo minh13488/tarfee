@@ -162,7 +162,7 @@
 								'action' => 'index',
 						),
 						'reqs' => array(
-								'action' => '(edit|delete|join|leave|cancel|accept|invite|style|transfer)',
+								'action' => '(edit|delete|join|leave|cancel|accept|invite|style|transfer|email-to-followers)',
 								'group_id' => '\d+',
 						)
 				),

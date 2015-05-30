@@ -12,6 +12,42 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
         $this -> _helper -> requireSubject('group');
     }
     
+	public function emailToFollowersAction() {
+        if (!$this -> _helper -> requireUser() -> isValid())
+            return;
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+       
+        $group = Engine_Api::_() -> core() -> getSubject();
+		
+        $this->view->form = $form = new Advgroup_Form_EmailToFollowers(array('group' => $group));
+        
+        if (!$this -> getRequest() -> isPost()) {
+            return;
+        }
+        
+        if (!$form -> isValid($this -> getRequest() -> getPost())) {
+            return;
+        }
+        $values = $form -> getValues();
+		$followerIds = $values['followers'];
+		$recipients = array();
+		foreach($followerIds as $user_id) {
+			$user = Engine_Api::_() -> getItem('user', $user_id);
+			if($user) {
+				$recipients[] = $user -> email;
+			}
+		}
+		if(!empty($recipients)) {
+        	$sentEmails = $group -> sendEmailToFollowers($recipients, @$values['message']);
+		}
+		
+        $message = Zend_Registry::get('Zend_Translate') -> _("$sentEmails email(s) have been sent.");
+        return $this -> _forward('success', 'utility', 'core', array(
+            'parentRefresh' => false,
+            'smoothboxClose' => true,
+            'messages' => $message
+        ));
+    }
     
     public function editAction()
     {
