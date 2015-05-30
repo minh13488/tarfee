@@ -665,7 +665,7 @@ ul.tarfee_profile_options_pulldown li a:hover, .tarfee_profile_cover_has_tabs .t
     border-radius: 4px;
     box-shadow: 0 0 10px;
 }
-.tabs_alt.tabs_parent
+.layout_user_profile_cover .tabs_alt.tabs_parent
 {
     clear: both;
     background: none !important;
@@ -1071,3 +1071,4 @@ ul.tarfee_profile_options_pulldown li a:hover, .tarfee_profile_cover_has_tabs .t
 	  	padding: 5px 10px;
   	}
 }
+
