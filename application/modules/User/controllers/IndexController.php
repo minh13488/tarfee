@@ -402,6 +402,21 @@ class User_IndexController extends Core_Controller_Action_Standard
 		{
 			$select -> where('`' . $table -> info('name') . '`.`title` LIKE ?', '%' . $text . '%');
 		}
+		
+		//query with sport type
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$sportMapsTable = Engine_Api::_() -> getDbTable('sportmaps', 'user');
+		$sportMaps = $sportMapsTable -> getSportsOfUser($viewer -> getIdentity());
+		$sportIds = array();
+		foreach($sportMaps as $sportMap) {
+			$sportIds[] = $sportMap -> sport_id;
+		}
+		if(count($sportIds)) {
+			$select -> where('sportcategory_id IN (?)', $sportIds);
+		} else {
+			$select -> where("1 = 0");
+		}
+		
 		$select -> limit($limit);
 
 		// Retv data

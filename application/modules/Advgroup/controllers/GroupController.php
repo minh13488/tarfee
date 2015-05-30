@@ -100,7 +100,18 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
         {
             $form -> removeElement('category_id');
         }
-
+		
+		// Populate sport list.
+		$tableCategory = Engine_Api::_() -> getItemTable('user_sportcategory');
+		$categories = $tableCategory -> getCategoriesLevel1();
+		foreach ($categories as $item) {
+			$form -> sportcategory_id -> addMultiOption($item['sportcategory_id'], $item['title']);
+		}
+		
+		if( count($form->sportcategory_id->getMultiOptions()) <= 1 ) {
+	      $form->removeElement('sportcategory_id');
+	    }
+		
         if (!$this -> getRequest() -> isPost())
         {
             // Populate auth
