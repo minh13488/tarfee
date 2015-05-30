@@ -73,7 +73,6 @@ function saveReposition() {
                     jQuery('.view-cover').show();
                 }
                 else {
-                    alert(responseJSON.message);
                 }            
             }
         }).send();
@@ -95,7 +94,7 @@ function cancelReposition() {
       	  <div class="cover-reposition">
       	  	<?php if($this->user -> isSelf($this -> viewer())):?>
 		        <span id="edit-cover-btn">
-		        <?php echo $this->htmlLink(array('action'=>'cover', 'route'=>'user_extended', 'controller'=>'edit', 'id'=>$this->user->getIdentity()), $this->translate('Upload New Cover'), array('class'=>'smoothbox'))?>
+		        <?php echo $this->htmlLink(array('action'=>'cover', 'route'=>'user_extended', 'controller'=>'edit', 'id'=>$this->user->getIdentity()), $this->translate('Update Cover Photo'), array('class'=>'smoothbox'))?>
 		        </span>
 		    <?php endif; ?>
 	        <?php if ($hasCover) :?>
@@ -106,17 +105,22 @@ function cancelReposition() {
 		            <input class="cover-position" name="pos" value="<?php echo ($hasCover) ? $this->user->cover_top : 0?>" type="hidden">
 		        </div>
 		        </div>
-		        <img class="reposition-cover cover_photo thumb_cover item_photo_album_photo thumb_cover" src="<?php echo $coverPhotoUrl; ?>" style="display: none; <?php if ($hasCover) echo 'top: '.$this->user->cover_top.'px'?>"></img>
+		        <img class="reposition-cover profile-cover-picture-span cover_photo thumb_cover item_photo_album_photo thumb_cover" src="<?php echo $coverPhotoUrl; ?>" style="display: none; <?php if ($hasCover) echo 'top: '.$this->user->cover_top.'px'?>"></img>
 	        <?php else: ?>
 	        	</div>
 	        <?php endif; ?>
-        <img class="cover_photo thumb_cover item_photo_album_photo thumb_cover" src="<?php echo $coverPhotoUrl; ?>" style="<?php if ($hasCover) echo 'top: '.$this->user->cover_top.'px'?>"></img>
+        <img class="cover_photo thumb_cover profile-cover-picture-span item_photo_album_photo thumb_cover" src="<?php echo $coverPhotoUrl; ?>" style="<?php if ($hasCover) echo 'top: '.$this->user->cover_top.'px'?>"></img>
       </div>
       <div class="clr"></div>
    </div>
    <div class="tarfee_profile_cover_head_section b_medium tarfee_profile_cover_has_tabs tarfee_profile_cover_has_tarfee_button " id="siteuser_main_photo">
       <div class="tarfee_profile_main_photo_wrapper">
          <div class="tarfee_profile_main_photo b_dark">
+         	<?php if($this->user -> isSelf($this -> viewer())):?>
+		        <span id="edit-photo-btn">
+		        	<?php echo $this->htmlLink(array('action'=>'photo-popup', 'route'=>'user_extended', 'controller'=>'edit', 'id'=>$this->user->getIdentity()), $this->translate('Update Profile Photo'), array('class'=>'smoothbox'))?>
+		        </span>
+		    <?php endif; ?>
             <div class="item_photo ">
                <table class="siteuser_main_thumb_photo">
                   <tbody>

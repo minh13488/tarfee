@@ -470,50 +470,169 @@ class User_EditController extends Core_Controller_Action_User
 			$this -> view -> status = true;
 		}
 	}
-	
+
 	// MinhNC add Cover photo
 	public function coverAction()
 	{
 		// In smoothbox
-        $this->_helper->layout->setLayout('default-simple');
-        $user = Engine_Api::_() -> core() -> getSubject();
-        $this->view->user = $user;
-        $this -> view -> form = $form = new User_Form_Edit_Cover();
-        
-        if (!$this->getRequest()->isPost()) {
-            return;
-        }
-        
-        if (!$form -> isValid($this->getRequest()->getPost())) {
-            return;
-        }
-        
-        $values = $form->getValues();
-        // Set photo
-        if( !empty($values['photo']) ) {
-            $user->setCoverPhoto($form -> photo);
-            $user->cover_top = 0;
-            $user->save();
-        }
-        
-        return $this -> _forward('success', 'utility', 'core', array(
-            'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Upload new cover photo successful!')),
-            'format' => 'smoothbox',
-            'smoothboxClose' => true,
-            'parentRefresh' => true,
-        ));
+		$this -> _helper -> layout -> setLayout('default-simple');
+		$user = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> user = $user;
+		$this -> view -> form = $form = new User_Form_Edit_Cover();
+
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
+
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
+
+		$values = $form -> getValues();
+		// Set photo
+		if (!empty($values['photo']))
+		{
+			$user -> setCoverPhoto($form -> photo);
+			$user -> cover_top = 0;
+			$user -> save();
+		}
+
+		return $this -> _forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Upload new cover photo successful!')),
+			'format' => 'smoothbox',
+			'smoothboxClose' => true,
+			'parentRefresh' => true,
+		));
 	}
-	 public function repositionAction() {
-        $this -> _helper -> layout -> disableLayout();
-        $this -> _helper -> viewRenderer -> setNoRender(true);
-        $this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
-        $position = $this->_getParam('position', null);
-        if (is_null($position)) {
-            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The request is invalid.')));
-        }
-        
-        $user->cover_top = $position;
-        $user->save();
-        echo Zend_Json::encode(array('status' => true));
-    }
+
+	public function repositionAction()
+	{
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(true);
+		$this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
+		$position = $this -> _getParam('position', null);
+		if (is_null($position))
+		{
+			echo Zend_Json::encode(array(
+				'status' => false,
+				'message' => Zend_Registry::get('Zend_Translate') -> _('The request is invalid.')
+			));
+		}
+
+		$user -> cover_top = $position;
+		$user -> save();
+		echo Zend_Json::encode(array('status' => true));
+	}
+
+	public function photoPopupAction()
+	{
+		// In smoothbox
+		$this -> _helper -> layout -> setLayout('default-simple');
+		$this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
+
+		// Get form
+		$this -> view -> form = $form = new User_Form_Edit_PhotoPopup();
+
+		if (empty($user -> photo_id))
+		{
+			$form -> removeElement('remove');
+		}
+
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
+
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
+
+		// Uploading a new photo
+		if ($form -> Filedata -> getValue() !== null)
+		{
+			$db = $user -> getTable() -> getAdapter();
+			$db -> beginTransaction();
+
+			try
+			{
+				$fileElement = $form -> Filedata;
+
+				$user -> setPhoto($fileElement);
+
+				$iMain = Engine_Api::_() -> getItem('storage_file', $user -> photo_id);
+
+				// Insert activity
+				$action = Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($user, $user, 'profile_photo_update', '{item:$subject} added a new profile photo.');
+
+				// Hooks to enable albums to work
+				if ($action)
+				{
+					$event = Engine_Hooks_Dispatcher::_() -> callEvent('onUserProfilePhotoUpload', array(
+						'user' => $user,
+						'file' => $iMain,
+					));
+
+					$attachment = $event -> getResponse();
+					if (!$attachment)
+						$attachment = $iMain;
+
+					// We have to attach the user himself w/o album plugin
+					Engine_Api::_() -> getDbtable('actions', 'activity') -> attachActivity($action, $attachment);
+				}
+
+				$db -> commit();
+			}
+
+			// If an exception occurred within the image adapter, it's probably an invalid
+			// image
+			catch( Engine_Image_Adapter_Exception $e )
+			{
+				$db -> rollBack();
+				$form -> addError(Zend_Registry::get('Zend_Translate') -> _('The uploaded file is not supported or is corrupt.'));
+			}
+
+			// Otherwise it's probably a problem with the database or the storage system
+			// (just throw it)
+			catch( Exception $e )
+			{
+				$db -> rollBack();
+				throw $e;
+			}
+		}
+
+		// Resizing a photo
+		else
+		if ($form -> getValue('coordinates') !== '')
+		{
+			$storage = Engine_Api::_() -> storage();
+
+			$iProfile = $storage -> get($user -> photo_id, 'thumb.profile');
+			$iSquare = $storage -> get($user -> photo_id, 'thumb.icon');
+
+			// Read into tmp file
+			$pName = $iProfile -> getStorageService() -> temporary($iProfile);
+			$iName = dirname($pName) . '/nis_' . basename($pName);
+
+			list($x, $y, $w, $h) = explode(':', $form -> getValue('coordinates'));
+
+			$image = Engine_Image::factory();
+			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 48, 48) -> write($iName) -> destroy();
+
+			$iSquare -> store($iName);
+
+			// Remove temp files
+			@unlink($iName);
+		}
+		return $this -> _forward('success', 'utility', 'core', array(
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Upload new photo successful!')),
+			'format' => 'smoothbox',
+			'smoothboxClose' => true,
+			'parentRefresh' => true,
+		));
+	}
+
 }
