@@ -1,3 +1,5 @@
+<?php if($this -> viewer() -> isSelf($this -> group -> getOwner())):?>
+
  <?php echo $this->htmlLink(
         array(
             'route' => 'group_specific',
@@ -10,6 +12,8 @@
         )
     )
 ?>
+
+<?php endif;?>
 
 <ul class='group_members'>
 	<?php foreach( $this->followers as $follower ): ?>
