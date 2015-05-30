@@ -892,4 +892,17 @@ class User_Model_User extends Core_Model_Item_Abstract
 
 		return $library;
 	}
+	
+	public function getSports() {
+		return Engine_Api::_()->getDbTable('sportmaps', 'user')->getSportsOfUser($this->getIdentity());
+	}
+	
+	public function getSportsAssoc() {
+		$arr = array();
+		$sports = $this->getSports();
+		foreach ($sports as $sport) {
+			$arr[$sport->getIdentity()] = $sport->getTitle();
+		}
+		return $arr;
+	}
 }

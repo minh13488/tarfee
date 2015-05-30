@@ -91,6 +91,10 @@ class User_Model_DbTable_Nodes extends Engine_Db_Table {
 			$db -> update($tableName, array('pright' => new Zend_Db_Expr('pright+2'), ), array('pright > ?' => $anchor));
 			$db -> update($tableName, array('pleft' => new Zend_Db_Expr('pleft+2'), ), array('pleft > ?' => $anchor));
 			$newNode -> save();
+			if(!empty($data['photo'])) {
+				$newNode -> setPhoto($data['photo']);
+			}
+			$this -> updateTree();
 			$this -> updateTree();
 			$db -> commit();
 		} catch(Exception $e) {
@@ -166,6 +170,9 @@ class User_Model_DbTable_Nodes extends Engine_Db_Table {
 			$db -> update($tableName, array('pright' => new Zend_Db_Expr('pright+2'), ), array('pright > ?' => $anchor));
 			$db -> update($tableName, array('pleft' => new Zend_Db_Expr('pleft+2'), ), array('pleft > ?' => $anchor));
 			$newNode -> save();
+			if(!empty($data['photo'])) {
+				$newNode -> setPhoto($data['photo']);
+			}
 			$this -> updateTree();
 			$db -> commit();
 		} catch(Exception $e) {

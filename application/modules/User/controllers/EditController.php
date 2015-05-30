@@ -84,9 +84,59 @@ class User_EditController extends Core_Controller_Action_User
     ));
     //$form->generate();
     
+	$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
+	$countriesAssoc = array('0'=>'') + $countriesAssoc;
+	
+	$provincesAssoc = array();
+	$country_id = $this->_getParam('country_id', $user->country_id);
+	if ($country_id) {
+		$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
+		$provincesAssoc = array('0'=>'') + $provincesAssoc;
+	}
+	
+	$form->addElement('Select', 'country_id', array(
+		'label' => 'Country',
+		'multiOptions' => $countriesAssoc,
+		'value' => $country_id
+	));
+	
+	$citiesAssoc = array();
+	$province_id = $this->_getParam('province_id', $user->province_id);
+	if ($province_id) {
+		$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
+		$citiesAssoc = array('0'=>'') + $citiesAssoc;
+	}
+	
+	$form->addElement('Select', 'province_id', array(
+		'label' => 'Province/State',
+		'multiOptions' => $provincesAssoc,
+		'value' => $province_id
+	));
+	
+	$city_id = $this->_getParam('city_id', $user->city_id);
+	$form->addElement('Select', 'city_id', array(
+		'label' => 'City',
+		'multiOptions' => $citiesAssoc,
+		'value' => $city_id
+	));
+	
+	$continent = '';
+	$country = Engine_Api::_()->getItem('user_location', $country_id);
+	if ($country) $continent = $country->getContinent();
+	$form->addElement('Text', 'continent', array(
+		'label' => 'Continent',
+		'value' => $continent,
+		'disabled' => true
+	));
+		
     if( $this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost()) ) {
       $form->saveValues();
-
+	
+	  $values = $this->getRequest()->getPost();
+	  $user->country_id = $values['country_id'];
+	  $user->province_id = $values['province_id'];
+	  $user->city_id = $values['city_id'];
+	  
       // Update display name
       $aliasValues = Engine_Api::_()->fields()->getFieldsValuesByAlias($user);
       $user->setDisplayName($aliasValues);

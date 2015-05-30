@@ -512,4 +512,22 @@ class User_Plugin_Menus
   }
   }
   
+  	public function onMenuInitialize_UserProfileMySport($row) {
+	    $viewer = Engine_Api::_()->user()->getViewer();
+	    $subject = Engine_Api::_()->core()->getSubject();
+		if ($viewer->getIdentity() == $subject->getIdentity()) {
+			return array(
+		        'label' => 'My Sport',
+		        'icon' => 'application/modules/User/externals/images/edit.png',
+		        'class' => 'smoothbox',
+		        'route' => 'user_sport',
+		        'action' => 'add',
+		        'params' => array(
+		          	'user_id' => $subject->getIdentity(),
+		          	'format' => 'smoothbox',
+		        ),
+	      	);
+		}
+		return false;
+  	}
 }
