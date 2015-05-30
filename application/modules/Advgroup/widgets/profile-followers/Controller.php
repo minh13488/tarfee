@@ -7,8 +7,8 @@ class Advgroup_Widget_ProfileFollowersController extends Engine_Content_Widget_A
 		//get viewer
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		
-		//don not render if viewer is not admin
-		if(!$viewer -> isAdmin()){
+		//don not render if viewer is admin
+		if($viewer -> isAdmin()){
 			return $this -> setNoRender();
 		}
 		
@@ -22,7 +22,6 @@ class Advgroup_Widget_ProfileFollowersController extends Engine_Content_Widget_A
 		$this -> view -> group = $group = Engine_Api::_() -> core() -> getSubject('group');
 		$tableFollow = Engine_Api::_() -> getDbTable('follow', 'advgroup');
 		$this -> view -> followers = $followers = $tableFollow -> getUserFollow($group -> getIdentity());
-		
 		$count = count($followers);
 		if($count == 0) {
 			return $this -> setNoRender();
