@@ -12,7 +12,7 @@ class User_Widget_ProfilePreferredClubsSearchController extends Engine_Content_W
 
     // Get subject and check auth
     $this->view->subject = $subject = Engine_Api::_()->core()->getSubject('user');
-    if( !$subject->authorization()->isAllowed($viewer, 'view') ) {
+    if( !$subject->authorization()->isAllowed($viewer, 'view') || !$viewer -> isSelf($subject) ) {
       return $this->setNoRender();
     }
 	
@@ -28,6 +28,5 @@ class User_Widget_ProfilePreferredClubsSearchController extends Engine_Content_W
 			}
 	 }
 	$this -> view -> groups = $groups;
-	
   }
 }

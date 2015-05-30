@@ -1072,3 +1072,39 @@ ul.tarfee_profile_options_pulldown li a:hover, .tarfee_profile_cover_has_tabs .t
   	}
 }
 
+.layout_page_user_profile_index
+{
+	.layout_right
+	{
+		width: 330px;
+	}
+}
+
+.layout_user_profile_preferred_clubs_search
+{
+	#group_ids-wrapper
+	{
+		margin-top: 10px;
+	}
+	.user_tag
+	{
+		a
+		{
+			font-weight: bold;
+			img
+			{
+				margin-right: 10px;
+			}
+		}
+		a + a
+		{
+			  margin-left: 10px;
+			  color: red;
+			  font-size: 14pt;
+		}
+	}
+	#preferred-clubs-save-btn
+	{
+		margin-top: 10px;
+	}
+}
