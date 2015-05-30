@@ -5,13 +5,13 @@
 			$group = Engine_Api::_() -> getItem('group', $group_id);
 		?>
 		<?php if($group) :?>
-			<?php echo $group -> getTitle();?>
+			<?php echo $group?>
 			<?php echo $this -> itemPhoto($group, 'thumb.icon');?>
 		<?php endif;?>
 	<?php endforeach;?>
 </div>
 
-<?php if($this -> viewer() -> isSelf($this -> viewer() -> subject())) :?>
+<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
 <?php
   $this->headScript()
     ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Observer.js')
