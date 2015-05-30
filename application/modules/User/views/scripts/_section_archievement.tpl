@@ -31,14 +31,6 @@
         }
     }
 ?>
-<?php if (($manage || count($archievements) || count($trophies)) ) : ?>
-<div class="profile-section-button">
-<?php if ($manage && ($max == 0 ||  $max > (count($archievements) + count($trophies)))) :?>
-	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="archievement" class="create-button"><?php echo '<i class="fa fa-plus-square"></i>'?></a>
-	</span>	
-<?php endif;?>	
-</div>
 
 <div class="icon_section_profile"><i class="fa fa-trophy"></i><i class="fa fa-flag-checkered"></i></div>
 <table>
@@ -48,6 +40,14 @@
   	<th><hr></th>
   </tr>
 </table>
+<?php if (($manage || count($archievements) || count($trophies)) ) : ?>
+<div class="profile-section-button">
+<?php if ($manage && ($max == 0 ||  $max > (count($archievements) + count($trophies)))) :?>
+	<span class="manage-section-button">
+		<a href="javascript:void(0)" rel="archievement" class="create-button"><?php echo '<i class="fa fa-plus-square"></i>'?></a>
+	</span>	
+<?php endif;?>	
+</div>
 
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
