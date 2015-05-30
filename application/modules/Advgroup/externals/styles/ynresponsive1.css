@@ -828,4 +828,9 @@ body[id^=global_page_advgroup] .ynvideo_addTo_frame
 #advgroup_cover_follow
 {
 	cursor: pointer;
+	i
+	{
+		font-size: 13pt;
+	}
+	
 }
