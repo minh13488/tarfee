@@ -8,4 +8,18 @@ class User_Model_DbTable_Sportcategories extends User_Model_DbTable_Nodes {
 		parent::deleteNode($node);
 	}
 	
+	public function getCategoriesLevel1($params = array()) {
+		$select = $this->select();
+		$select -> order('title ASC');
+		$select -> where('level = ?', 1);
+		
+		if (!empty($params['title'])) {
+			$select->where('title LIKE ?', '%'.$params['title'].'%');
+		}
+		
+		if (!empty($params['limit'])) {
+			$select->limit($params['limit']);
+		} 
+		return $this->fetchAll($select);
+	}
 }

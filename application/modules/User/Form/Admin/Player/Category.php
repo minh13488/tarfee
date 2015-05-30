@@ -14,7 +14,10 @@ class User_Form_Admin_Player_Category extends Engine_Form
       'required'  => true,
       'allowEmpty'=> false,
     ));
-
+	
+	$this -> addElement('File', 'photo', array('label' => 'Icon'));
+	$this -> photo -> addValidator('Extension', false, 'jpg,png,gif,jpeg');
+	
     // Buttons
     $this->addElement('Button', 'submit', array(
       'label' => 'Add Category',

@@ -40,6 +40,7 @@ class User_Widget_ProfileCoverController extends Engine_Content_Widget_Abstract
 		$paginator = Zend_Paginator::factory($select);
 		$this -> view -> followingCount = $paginator -> getTotalItemCount();
 		
+		// Get professional user verified
 		$slverifyTbl = Engine_Api::_()->getItemTable('slprofileverify_slprofileverify');
 	    $verifyRow = $slverifyTbl->getVerifyInfor($subject->getIdentity());
 	    if($verifyRow->approval == 'verified')
@@ -48,5 +49,19 @@ class User_Widget_ProfileCoverController extends Engine_Content_Widget_Abstract
 	        $photo_badge = $settingsCore->getSetting('sl_verify_badge', 0);
 	        $this->view->src_img = $src_img = Engine_Api::_()->slprofileverify()->getPhotoVerificaiton($photo_badge, null, 'pBadge');
 	    }
+
+		// get preferred clubs
+		$userGroupMappingTable = Engine_Api::_() -> getDbTable('groupmappings', 'user');
+		$groupMappings = $userGroupMappingTable -> getGroupByUser($subject -> getIdentity(), 2);
+		
+		$groups = array();
+		foreach($groupMappings as $groupMapping){
+				$group_id = $groupMapping -> group_id;
+				$group = Engine_Api::_() -> getItem('group', $group_id);
+				if($group) {
+					$groups[] = $group;
+				}
+		 }
+		$this -> view -> clubs = $groups;
 	}
 }

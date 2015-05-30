@@ -38,7 +38,10 @@ class ProfileCompleteness_Model_DbTable_Weights extends Engine_Db_Table
 	}
 	public function isClubFollow()
 	{
-		return FALSE;
+		$table = Engine_Api::_()->getDbTable('follow', 'advgroup');
+		$viewer = Engine_Api::_()->user()->getViewer();
+		$select = $table -> select() -> where("user_id = ?", $viewer -> getIdentity()) ->where("follow=?", 1) -> limit(1);
+		return $table -> fetchRow($select);
 	}
 	public function isVideoUpload()
 	{

@@ -23,11 +23,11 @@
 
 <script>
 	window.addEvent('domready', function() {
-		if ($$('#province_id option').length <= 0) {
+		if ($$('#province_id option').length <= 1) {
 			$('province_id-wrapper').hide();
 		}
 		
-		if ($$('#city_id option').length <= 0) {
+		if ($$('#city_id option').length <= 1) {
 			$('city_id-wrapper').hide();
 		}
 		

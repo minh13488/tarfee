@@ -1688,6 +1688,10 @@ body#global_page_user-friends-list-all-friends{
 			  width: 33%;
 			 
 			}
+			.profile-section table tr th:nth-child(2) {
+			  width: 10%;
+			 
+			}
 			 .profile-section table tr th h3 {
 			  float: none !important;
 			 }
@@ -1696,6 +1700,7 @@ body#global_page_user-friends-list-all-friends{
 			 }
 			.profile-section table {
 			  width: 100%;
+			  table-layout:auto;
 			}
 			.profile-section div.icon_section_profile {
 			  text-align: center;

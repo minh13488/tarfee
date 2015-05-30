@@ -19,14 +19,7 @@
         }
     }
 ?>
-<?php if ($manage || !empty($bio)) : ?>
-<div class="profile-section-button">
-<?php if ($manage) :?>
-	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="bio" class="create-button"><?php echo (!empty($bio)) ? '<i class="fa fa-pencil"></i>' : '<i class="fa fa-plus-square"></i>'?></a>
-	</span>	
-<?php endif;?>	
-</div>
+
 <div class="icon_section_profile"><i class="fa fa-newspaper-o"></i></div>
 <table>
   <tr>
@@ -35,7 +28,14 @@
   	<th><hr></th>
   </tr>
 </table>
- 
+ <?php if ($manage || !empty($bio)) : ?>
+<div class="profile-section-button">
+<?php if ($manage) :?>
+	<span class="manage-section-button">
+		<a href="javascript:void(0)" rel="bio" class="create-button"><?php echo (!empty($bio)) ? '<i class="fa fa-pencil"></i>' : '<i class="fa fa-plus-square"></i>'?></a>
+	</span>	
+<?php endif;?>	
+</div>
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
 </div>

@@ -73,7 +73,7 @@ class User_Form_Signup_Fields extends Fields_Form_Standard
 	if ($country) $continent = $country->getContinent();
 	$this->addElement('Text', 'continent', array(
 		'label' => 'Continent',
-		'value' => '',
+		'value' => $continent,
 		'disabled' => true
 	));	
   }

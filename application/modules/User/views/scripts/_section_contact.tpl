@@ -10,14 +10,8 @@
 	$email2 = $user->email2;
 	$skype = $user->skype;
 ?>
-<?php if ($manage || !empty($contact_num)) : ?>
-<div class="profile-section-button">
-<?php if ($manage) :?>
-	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="contact" class="create-button"><?php echo (!empty($contact_num)) ? '<i class="fa fa-pencil"></i>' : '<i class="fa fa-plus-square"></i>'?></a>
-	</span>	
-<?php endif;?>	
-</div>
+
+
 <div class="icon_section_profile"><i class="fa fa-user"></i></div>
 <table>
   <tr>
@@ -26,7 +20,14 @@
   	<th><hr></th>
   </tr>
 </table>
- 
+<?php if ($manage || !empty($contact_num)) : ?>
+ <div class="profile-section-button">
+<?php if ($manage) :?>
+	<span class="manage-section-button">
+		<a href="javascript:void(0)" rel="contact" class="create-button"><?php echo (!empty($contact_num)) ? '<i class="fa fa-pencil"></i>' : '<i class="fa fa-plus-square"></i>'?></a>
+	</span>	
+<?php endif;?>	
+</div>
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
 </div>

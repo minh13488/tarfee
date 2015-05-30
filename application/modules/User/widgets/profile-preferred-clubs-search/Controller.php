@@ -12,12 +12,12 @@ class User_Widget_ProfilePreferredClubsSearchController extends Engine_Content_W
 
     // Get subject and check auth
     $this->view->subject = $subject = Engine_Api::_()->core()->getSubject('user');
-    if( !$subject->authorization()->isAllowed($viewer, 'view') ) {
+    if( !$subject->authorization()->isAllowed($viewer, 'view') || !$viewer -> isSelf($subject) ) {
       return $this->setNoRender();
     }
 	
     $userGroupMappingTable = Engine_Api::_() -> getDbTable('groupmappings', 'user');
-	$this -> view -> groupMappings = $groupMappings = $userGroupMappingTable -> getGroupByUser($subject -> getIdentity());
+	$groupMappings = $userGroupMappingTable -> getGroupByUser($subject -> getIdentity());
 	
 	$groups = array();
 	foreach($groupMappings as $groupMapping){
@@ -28,6 +28,5 @@ class User_Widget_ProfilePreferredClubsSearchController extends Engine_Content_W
 			}
 	 }
 	$this -> view -> groups = $groups;
-	
   }
 }

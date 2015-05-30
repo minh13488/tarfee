@@ -53,54 +53,101 @@ class User_EditController extends Core_Controller_Action_User
 		$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'edit');
 	}
 
-	public function profileAction()
-	{
-		$this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
-		$this -> view -> viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
+	public function profileAction() {
+		$this->view->user = $user = Engine_Api::_()->core()->getSubject();
+    	$this->view->viewer = $viewer = Engine_Api::_()->user()->getViewer();
 
-		// General form w/o profile type
-		$aliasedFields = $user -> fields() -> getFieldsObjectsByAlias();
-		$this -> view -> topLevelId = $topLevelId = 0;
-		$this -> view -> topLevelValue = $topLevelValue = null;
-		if (isset($aliasedFields['profile_type']))
-		{
-			$aliasedFieldValue = $aliasedFields['profile_type'] -> getValue($user);
-			$topLevelId = $aliasedFields['profile_type'] -> field_id;
-			$topLevelValue = (is_object($aliasedFieldValue) ? $aliasedFieldValue -> value : null);
-			if (!$topLevelId || !$topLevelValue)
-			{
-				$topLevelId = null;
-				$topLevelValue = null;
-			}
-			$this -> view -> topLevelId = $topLevelId;
-			$this -> view -> topLevelValue = $topLevelValue;
+    
+    	// General form w/o profile type
+    	$aliasedFields = $user->fields()->getFieldsObjectsByAlias();
+    	$this->view->topLevelId = $topLevelId = 0;
+    	$this->view->topLevelValue = $topLevelValue = null;
+    	if( isset($aliasedFields['profile_type']) ) {
+      		$aliasedFieldValue = $aliasedFields['profile_type']->getValue($user);
+      		$topLevelId = $aliasedFields['profile_type']->field_id;
+      		$topLevelValue = ( is_object($aliasedFieldValue) ? $aliasedFieldValue->value : null );
+      		if( !$topLevelId || !$topLevelValue ) {
+        		$topLevelId = null;
+        		$topLevelValue = null;
+      		}
+      		$this->view->topLevelId = $topLevelId;
+      		$this->view->topLevelValue = $topLevelValue;
+    	}
+    
+    	// Get form
+    	$form = $this->view->form = new Fields_Form_Standard(array(
+      		'item' => Engine_Api::_()->core()->getSubject(),
+      		'topLevelId' => $topLevelId,
+      		'topLevelValue' => $topLevelValue,
+      		'hasPrivacy' => true,
+      		'privacyValues' => $this->getRequest()->getParam('privacy'),
+    	));
+    	//$form->generate();
+    
+		$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
+		$countriesAssoc = array('0'=>'') + $countriesAssoc;
+	
+		$provincesAssoc = array();
+		$country_id = $this->_getParam('country_id', $user->country_id);
+		if ($country_id) {
+			$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
+			$provincesAssoc = array('0'=>'') + $provincesAssoc;
 		}
-
-		// Get form
-		$form = $this -> view -> form = new Fields_Form_Standard( array(
-			'item' => Engine_Api::_() -> core() -> getSubject(),
-			'topLevelId' => $topLevelId,
-			'topLevelValue' => $topLevelValue,
-			'hasPrivacy' => true,
-			'privacyValues' => $this -> getRequest() -> getParam('privacy'),
+	
+		$form->addElement('Select', 'country_id', array(
+			'label' => 'Country',
+			'multiOptions' => $countriesAssoc,
+			'value' => $country_id
 		));
-		//$form->generate();
-
-		if ($this -> getRequest() -> isPost() && $form -> isValid($this -> getRequest() -> getPost()))
-		{
-			$form -> saveValues();
-
-			// Update display name
-			$aliasValues = Engine_Api::_() -> fields() -> getFieldsValuesByAlias($user);
-			$user -> setDisplayName($aliasValues);
-			//$user->modified_date = date('Y-m-d H:i:s');
-			$user -> save();
-
-			// update networks
-			Engine_Api::_() -> network() -> recalculate($user);
-
-			$form -> addNotice(Zend_Registry::get('Zend_Translate') -> _('Your changes have been saved.'));
+	
+		$citiesAssoc = array();
+		$province_id = $this->_getParam('province_id', $user->province_id);
+		if ($province_id) {
+			$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
+			$citiesAssoc = array('0'=>'') + $citiesAssoc;
 		}
+	
+		$form->addElement('Select', 'province_id', array(
+			'label' => 'Province/State',
+			'multiOptions' => $provincesAssoc,
+			'value' => $province_id
+		));
+	
+		$city_id = $this->_getParam('city_id', $user->city_id);
+		$form->addElement('Select', 'city_id', array(
+			'label' => 'City',
+			'multiOptions' => $citiesAssoc,
+			'value' => $city_id
+		));
+		
+		$continent = '';
+		$country = Engine_Api::_()->getItem('user_location', $country_id);
+		if ($country) $continent = $country->getContinent();
+		$form->addElement('Text', 'continent', array(
+			'label' => 'Continent',
+			'value' => $continent,
+			'disabled' => true
+		));
+		
+    	if( $this->getRequest()->isPost() && $form->isValid($this->getRequest()->getPost()) ) {
+      		$form->saveValues();
+	
+	  		$values = $this->getRequest()->getPost();
+	  		$user->country_id = $values['country_id'];
+	  		$user->province_id = $values['province_id'];
+	  		$user->city_id = $values['city_id'];
+	  
+      		// Update display name
+      		$aliasValues = Engine_Api::_()->fields()->getFieldsValuesByAlias($user);
+     	 	$user->setDisplayName($aliasValues);
+      		//$user->modified_date = date('Y-m-d H:i:s');
+      		$user->save();
+
+      		// update networks
+      		Engine_Api::_()->network()->recalculate($user);
+      
+      		$form->addNotice(Zend_Registry::get('Zend_Translate')->_('Your changes have been saved.'));
+    	}
 	}
 
 	public function photoAction()

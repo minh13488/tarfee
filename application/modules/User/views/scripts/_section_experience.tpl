@@ -9,14 +9,7 @@
 	$experience = $user->getAllExperiences();
 	$enable = Engine_Api::_()->user()->checkSectionEnable($user, 'experience');
 ?>
-<?php if (($manage || count($experience)) && $enable) : ?>
-<div class="profile-section-button">
-<?php if ($manage) :?>
-	<span class="manage-section-button">
-		<a href="javascript:void(0)" rel="experience" class="create-button"><?php echo '<i class="fa fa-plus-square"></i>'?></a>
-	</span>	
-<?php endif;?>	
-</div>
+
 
 <div class="icon_section_profile"><i class="fa fa-suitcase"></i></div>
 <table>
@@ -26,7 +19,14 @@
   	<th><hr></th>
   </tr>
 </table>
-
+<?php if (($manage || count($experience)) && $enable) : ?>
+<div class="profile-section-button">
+<?php if ($manage) :?>
+	<span class="manage-section-button">
+		<a href="javascript:void(0)" rel="experience" class="create-button"><?php echo '<i class="fa fa-plus-square"></i>'?></a>
+	</span>	
+<?php endif;?>	
+</div>
 <div class="profile-section-loading" style="display: none; text-align: center">
     <img src='application/modules/User/externals/images/loading.gif'/>
 </div>
@@ -206,4 +206,3 @@
 		<?php endif; ?>
 	</div>
 <?php endif; ?>
-</div>
