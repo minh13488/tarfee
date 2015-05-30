@@ -825,3 +825,7 @@ body[id^=global_page_advgroup] .ynvideo_addTo_frame
     height: auto;
     padding-bottom: 8px;
 }
+#advgroup_cover_follow
+{
+	cursor: pointer;
+}

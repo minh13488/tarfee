@@ -30,7 +30,7 @@
 	                    'route' => 'default',
 	                    'module' => 'user',
 	                    'controller' => 'edit',
-	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_($key) . ' (+' . round(($emptyf*100)/$this->sum) . '%)'
+	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_($key) . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
 	                );
                 } 
 				else if($key == 'sportlike')
@@ -40,21 +40,21 @@
 	                    'route' => 'default',
 	                    'module' => 'user',
 	                    'controller' => 'edit',
-	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_('like sport') . ' (+' . round(($emptyf*100)/$this->sum) . '%)'
+	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_('like sport') . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
 	                );
 				}
 				else if($key == 'clubfollow')
 				{
 					 echo $this->htmlLink(array(
 	                    'route' => 'group_general',
-	                    'action' => 'browse'), '+ ' . Zend_Registry::get('Zend_Translate')->_('follow clubs') . ' (+' . round(($emptyf*100)/$this->sum) . '%)'
+	                    'action' => 'browse'), '+ ' . Zend_Registry::get('Zend_Translate')->_('follow clubs') . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
 	                );
 				}
 				else if($key == 'videoupload')
 				{
 					echo $this->htmlLink(array(
 	                    'route' => 'video_general',
-	                    'action' => 'create'), '+ ' . Zend_Registry::get('Zend_Translate')->_('upload video') . ' (+' . round(($emptyf*100)/$this->sum) . '%)'
+	                    'action' => 'create'), '+ ' . Zend_Registry::get('Zend_Translate')->_('upload video') . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
 	                );
 				}
                 else 
@@ -64,7 +64,7 @@
 	                    'route' => 'default',
 	                    'module' => 'user',
 	                    'controller' => 'edit',
-	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_($key) . ' (+' . round(($emptyf*100)/$this->sum) . '%)'
+	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_($key) . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
 	                );
                 }
                 break;
