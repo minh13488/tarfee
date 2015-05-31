@@ -433,7 +433,7 @@ if ($this->group->cover_photo)
 					<?php echo $this->group->getCategory(); ?>
 				</div>
 				<?php endif; ?>
-				<?php if($this->group->getCategory()):?>
+				<?php if($this->group->getSportCategory()):?>
 				<!-- Category -->
 				<div>
 					<span>
