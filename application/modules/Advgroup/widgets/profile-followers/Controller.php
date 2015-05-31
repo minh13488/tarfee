@@ -7,11 +7,6 @@ class Advgroup_Widget_ProfileFollowersController extends Engine_Content_Widget_A
 		//get viewer
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		
-		//don not render if viewer is admin
-		if($viewer -> isAdmin()){
-			return $this -> setNoRender();
-		}
-		
 		// Don't render this if not authorized
 		$this->view->viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
 		if (!Engine_Api::_() -> core() -> hasSubject()) {
