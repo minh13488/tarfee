@@ -95,6 +95,29 @@
             echo $this->translate(array('yn_total_comment', '%s Comments & Replies',
             $this->commentsCount), $this->locale()->toNumber($this->commentsCount))?>
           </span>
+          
+          <?php if ($this->comments->getTotalItemCount() > 0): ?>
+	          <div class="yncomment_replies_filter fright" id="yncomment_replies_filter">
+	            <div class="mright5" id="filter_<?php echo $this->nested_comment_id; ?>" style="display:none;"></div>
+	            <div class="yncomment_replies_pulldown yncomment_pulldown">
+	              <div class="yncomment_dropdown_menu_wrapper" id="filter_dropdown_menu" style="display:none;">
+	              	<div class="yncomment_dropdown_menu">
+	                  <ul>
+	                    <li  class="<?php if ($this->filter == 'public'): ?> active <?php endif;?>" ><a href="javascript:void(0);" onclick="filterComments('public', '<?php echo $this->subject->getType(); ?>', '<?php echo $this->subject->getIdentity(); ?>', '<?php echo $this->parent_comment_id ?>', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"><?php echo $this->translate("Public"); ?></a></li>
+	                    <li class="<?php if ($this->filter == 'professional'): ?> active <?php endif;?>"><a href="javascript:void(0);" onclick="filterComments('professional', '<?php echo $this->subject->getType(); ?>', '<?php echo $this->subject->getIdentity(); ?>', '<?php echo $this->parent_comment_id ?>', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"><?php echo $this->translate("Professional"); ?></a></li>
+	                  </ul>
+	                </div>
+	              </div>
+	              <?php if ($this->filter == 'public'): ?>
+	              	<a href="javascript:void(0);" onclick="showFilterComments();"><?php echo $this->translate("Filter by Public"); ?>&nbsp;
+	                <i class="fa fa-caret-down ynfontawesome"></i></a>
+	              <?php elseif($this->filter == 'professional'):?>
+	              	<a href="javascript:void(0);" onclick="showFilterComments();"><?php echo $this->translate("Filter by Professional"); ?>&nbsp;
+	                <i class="fa fa-caret-down ynfontawesome"></i></a>
+	              <?php endif;?>
+	            </div>
+	          </div> 
+          <?php endif;?>
           <?php if ($this->comments->getTotalItemCount() > 1): // REPLIES ------- ?>
               <div class="yncomment_replies_sorting fright" id="yncomment_replies_sorting">
                 <div class="mright5" id="sort_<?php echo $this->nested_comment_id; ?>" style="display:none;"></div>
@@ -485,6 +508,10 @@
   function showSortComments() 
   {
 		 $('sorting_dropdown_menu').toggle();
+  }
+  function showFilterComments() 
+  {
+		 $('filter_dropdown_menu').toggle();
   }
   
   function yncomemntDeleteComment(type, id, comment_id, order, parent_comment_id, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies) 

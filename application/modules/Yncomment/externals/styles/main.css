@@ -67,7 +67,9 @@ br{
 }
 
 /*Sorting in yncomment Comemnt*/
-.yncomment_replies .yncomment_replies_sorting > div{
+.yncomment_replies .yncomment_replies_sorting > div,
+.yncomment_replies .yncomment_replies_filter > div
+{
 	padding-top: 3px;
 }
 .yncomment_pulldown .ynfontawesome {
@@ -76,7 +78,9 @@ br{
 .yncomment_comment_tips .ynfontawesome {
 	color: $theme_font_color_light;
 }
-.layout_yncomment_comments .yncomment_replies .yncomment_replies_sorting {
+.layout_yncomment_comments .yncomment_replies .yncomment_replies_sorting,
+.layout_yncomment_comments .yncomment_replies .yncomment_replies_filter
+{
 	font-size: $theme_font_size;
 }
 .yncomment_dropdown_menu > ul {

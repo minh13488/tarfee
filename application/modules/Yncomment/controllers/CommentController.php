@@ -68,12 +68,22 @@ class Yncomment_CommentController extends Core_Controller_Action_Standard {
         } else {
             $this -> view -> order = $order = $this -> _getParam('order', 'ASC');
         }
+		
+		// Add filter comments
+		$this -> view -> filter = $filter = $this -> _getParam('filter', 'public');
+		$userIds = Engine_Api::_() -> user() -> getProfessionalUsers();
+		 
         if (empty($parent_comment_id)) {
             $commentCountSelect = Engine_Api::_() -> getDbtable('comments', 'yncomment') -> comments($subject) -> getCommentSelect($order);
 
             if (!$showAsNested) {
                 $commentCountSelect -> where('parent_comment_id =?', 0);
             }
+			
+			if($filter == 'professional')
+			{
+				$commentCountSelect -> where("poster_id IN (?)", $userIds);
+			}
             $this -> view -> commentsCount = $commentsCount = Zend_Paginator::factory($commentCountSelect) -> getTotalItemCount();
         }
 
@@ -95,6 +105,11 @@ class Yncomment_CommentController extends Core_Controller_Action_Standard {
             } else {
                 $commentSelect -> order("$order DESC");
             }
+			
+			if($filter == 'professional')
+			{
+				$commentSelect -> where("poster_id IN (?)", $userIds);
+			}
 
             $comments = Zend_Paginator::factory($commentSelect);
             $comments -> setCurrentPageNumber($page + 1);
@@ -113,6 +128,10 @@ class Yncomment_CommentController extends Core_Controller_Action_Standard {
             } else {
                 $commentSelect -> order("$order DESC");
             }
+            if($filter == 'professional')
+			{
+				$commentSelect -> where("poster_id IN (?)", $userIds);
+			}
             $comments = Zend_Paginator::factory($commentSelect);
             $comments -> setCurrentPageNumber(1);
             $comments -> setItemCountPerPage($comment_per_page);
