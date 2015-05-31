@@ -63,5 +63,7 @@ class User_Widget_ProfileCoverController extends Engine_Content_Widget_Abstract
 				}
 		 }
 		$this -> view -> clubs = $groups;
+		
+		$this -> view -> sports = $subject->getSports();
 	}
 }
