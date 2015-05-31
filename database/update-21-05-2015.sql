@@ -12,6 +12,7 @@ CREATE TABLE IF NOT EXISTS `engine4_user_playercards` (
   `gender` tinyint(1) NOT NULL,
   `referred_foot` tinyint(1) NOT NULL,
   `birth_date` datetime NOT NULL,
+  `country_id` int(11) unsigned NOT NULL default '0',
   `province_id` int(11) unsigned NOT NULL default '0',
   `city_id` int(11) unsigned NOT NULL default '0',
   `position_id` int(11) unsigned NOT NULL default '0',

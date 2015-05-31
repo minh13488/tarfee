@@ -634,3 +634,7 @@ INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`
 ('profilecompleteness_admin_main_setting', 'profile-completeness', 'Global Settings', '', '{"route":"admin_default","module":"profile-completeness","controller":"setting"}', 'profilecompleteness_admin_main', '', 2);
 
 INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('profile-completeness', 'Profile Completeness', 'displays percent your profile completed', '4.01p2', 1, 'extra') ;
+
+
+-- 30/05/2015
+ALTER TABLE `engine4_user_playercards` ADD `country_id` INT(11) NOT NULL DEFAULT '0' ;
