@@ -204,10 +204,6 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 	      {
 	        $form->auth_view->setValue($role);
 	      }
-		   if( 1 === $auth->isAllowed($player_card, $role, 'comment') )
-	      {
-	        $form->auth_comment->setValue($role);
-	      }
 	    }
 		
 		//view for specific users

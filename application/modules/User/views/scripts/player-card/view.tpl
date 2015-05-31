@@ -8,14 +8,32 @@ $totalComment = Engine_Api::_() -> getDbtable('comments', 'yncomment') -> commen
 $totalLike = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($player) -> getLikeCount(); 
 $totalDislike = Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> getDislikeCount($player);
 $totalUnsure = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> getUnsureCount($player);
+$countryName = '';
+$provinceName = '';
+$cityName = '';
+if($player ->country_id && $country = Engine_Api::_() -> getItem('user_location', $player ->country_id))
+{
+	$countryName = $country -> getTitle();
+}
+if($player ->province_id && $province = Engine_Api::_() -> getItem('user_location', $player ->province_id))
+{
+	$provinceName = $province -> getTitle();
+}
+if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $player ->city_id))
+{
+	$cityName = $city -> getTitle();
+}
 ?>
 <div style="margin-bottom: 15px; overflow: hidden">
 	<div style="width: 285px; float: left">
 		<div>
 			<?php echo $this -> itemPhoto($player, 'thumb.profile');?>
 		</div>
-		<div>
-			<a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 15)?>
+		<div style="font-weight: bold">
+			<a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 50)?>
+		</div>
+		<div class="location" style="font-weight: bold">
+			<?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?>
 		</div>
 		<div class="playercard_statistics">
 			<ul>
@@ -46,13 +64,13 @@ $totalUnsure = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> getUnsur
 	 		<?php endif;?>
 	 		</span>
 		</div>
-		<div>
+		<div style="font-weight: bold">
 			<?php if($this -> viewer() -> getIdentity()):?>
 			<?php echo $this->htmlLink(array(
 	            'route' => 'messages_general',
 	            'action' => 'compose',
 	            'to' => $player -> getOwner() ->getIdentity()
-	        ), $this -> translate('Message'), array(
+	        ), '<i class="fa fa-envelope-o"></i>'. $this -> translate('Message'), array(
 	            'class' => 'smoothbox'
 	        ));
 			?>
@@ -64,7 +82,7 @@ $totalUnsure = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> getUnsur
 				'action' => 'share',
 				'type' => 'user_playercard',
 				'id' => $player -> getIdentity(),
-	        ), $this -> translate('Share'), array(
+	        ), '<i class="fa fa-share-square-o"></i>'. $this -> translate('Share'), array(
 	            'class' => 'smoothbox'
 	        ));
 			?>
