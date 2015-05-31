@@ -112,4 +112,18 @@ class User_Model_DbTable_Mappings extends Engine_Db_Table
 		}
 		return "true";
 	}
+	public function getTotalVideo($params = array())
+	{
+	    $select = new Zend_Db_Select($this->getAdapter());
+	    $select->from($this->info('name'), 'COUNT(*) AS count');
+			
+		$select -> where("item_type = ?", 'video');
+        if (isset($params['owner_id'])) {
+            $select -> where("owner_id = ?", $params['owner_id']);
+        }
+        if (isset($params['owner_type'])) {
+            $select -> where("owner_type = ?", $params['owner_type']);
+        }
+	    return $select->query()->fetchColumn(0);
+	}
 }

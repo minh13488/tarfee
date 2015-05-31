@@ -206,5 +206,13 @@ return array(
         'action' => 'manage'
       )
     ),
+     'playercard_profile' => array(
+      'route' => 'player/:id/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'player-card',
+        'action' => 'view'
+      )
+    ),
   )
 ); ?>
