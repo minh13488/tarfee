@@ -242,7 +242,7 @@ function cancelReposition() {
          </div>
       </div>
       <div class="clr"></div>
-     <div class='status_alt status_parent'>
+     <div class='tabs_alt tabs_parent'>
 	  <ul id='main_tabs'>
 	  	 <?php $direction = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.friends.direction');
     	if ( $direction == 0 ): ?>
@@ -295,18 +295,19 @@ function cancelReposition() {
 		      <div>eye on</div>
 		   </a>
 		</li>
+		<?php foreach($this -> sports as $sport):?>
 		<li>
-		   <a href="#">
-		      <div><span class="number_icons"><i class="fa fa-futbol-o"></i></span></div>
-		      <div>football</div>
-		   </a>
+			<a>
+	      <div>
+	      	<span class="number_icons">
+	      		<?php echo $this -> itemPhoto($sport, 'thumb.icon');?>
+			</span>
+		  </div>
+	      <div><?php echo $this -> string() -> truncate($sport -> getTitle(), 10)?></div>
+	      </a>
 		</li>
-		<li>
-		   <a href="#">
-		      <div><span class="number_icons"><i class="fa fa-futbol-o"></i></span></div>
-		      <div>basketball</div>
-		   </a>
-		</li>
+		<?php endforeach;?>
+		
 		<?php foreach($this -> clubs as $club):?>
 		<li>
 		   <a href="<?php echo $club -> getHref();?>">
@@ -321,6 +322,11 @@ function cancelReposition() {
 		<?php endforeach;?>
 	  </ul>
 	</div>
-
+		<?php if($this->src_img):?>
+		<div class="tabs_alt tab_identify_account">
+			<div class="user_icon"><img src='<?php echo $this->src_img;?>'></div>
+			<div class="user_type_verify"><?php echo $this -> translate("professtional individual verified by Tarfee");?></div>
+		</div>
+		<?php endif;?>
 	</div>
 </div>

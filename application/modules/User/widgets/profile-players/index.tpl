@@ -89,7 +89,6 @@
 	           	<div id='profile_photo'>
 					<?php $photoUrl = $player -> getPhotoUrl('thumb.profile');?>
 					<div class="avatar">
-<<<<<<< HEAD
 						<a href="">
 							<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
 						</a>
@@ -100,17 +99,6 @@
 							<li class="third"><i class="icon-time"></i> Timeline</li>
 							<li class="fourth"><i class="icon-heart"></i> Favorites</li>
 						</ul>
-=======
-						<span>
-							<a href="<?php echo $player -> getHref()?>">
-								<span alt="" class="thumb_profile_stroke" style="">
-									<span alt="" class="thumb_profile_innershadow" style="">
-										<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
-									</span>
-								</span>
-							</a>
-						</span>
->>>>>>> fcecaf284bb22448867873be8e2d3fcf10bdb403
 					</div>
 					<div class="user_rating">
 						<span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
@@ -121,7 +109,6 @@
 					</div>
 					<hr>
 					<div class="nickname">
-						
 						<div><span><a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 15)?></span></a></div>
 						<span>Man United, England</span>				
 					</div>
@@ -135,19 +122,6 @@
 			     		<?php endif;?>
 			     		</span>
 					</div>
-<<<<<<< HEAD
-=======
-					<div class="user_rating">
-						<?php $overRallRating = $player -> getOverallRating();?>
-						<span title="<?php echo $overRallRating;?>">
-						<?php if($overRallRating > 0):?>
-			            	<?php for($x=1; $x<=$overRallRating; $x++): ?><span class="rating_star_generic rating_star"></span><?php endfor; ?><?php if((round($overRallRating)-$overRallRating)>0):?><span class="rating_star_generic rating_star_half"></span><?php endif; ?>
-			     		<?php else :?>
-			 				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic rating_star_disabled"></span><?php endfor; ?>
-			     		<?php endif;?>
-			     		</span>
-					</div>
->>>>>>> fcecaf284bb22448867873be8e2d3fcf10bdb403
 					<div class="actions">
 					<ul>
 						<li><a class="actions_generic" href=""><span><i class="fa fa-eye"></i></span></a></li>
