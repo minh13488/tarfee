@@ -71,7 +71,19 @@
 	    <!-- Content -->
 	    <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
 	    <ul class="players_browse">  
-	        <?php foreach ($this->paginator as $player): ?>
+	        <?php foreach ($this->paginator as $player): 
+		    $videoTable = Engine_Api::_()->getItemTable('video');
+		    $params = array();
+		    $params['owner_type'] = $player -> getType();
+			$params['owner_id'] = $player -> getIdentity();
+			
+			$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+	        $totalVideo = $mappingTable -> getTotalVideo($params);
+	        $totalComment = Engine_Api::_() -> getDbtable('comments', 'yncomment') -> comments($player) -> getCommentCount();
+	        $totalLike = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($player) -> getLikeCount(); 
+	        $totalDislike = Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> getDislikeCount($player);
+			$totalUnsure = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> getUnsureCount($player);
+	        ?>
 	        <?php if($player -> isViewable()) :?>
 	        	<li id="player-item-<?php echo $player->playercard_id ?>" style ="clear: both">
 	           	<div id='profile_photo'>
@@ -198,11 +210,6 @@
 	        		?>
 	            </div>
 	            	 <?php
-				    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
-				    $videoTable = Engine_Api::_()->getItemTable('video');
-				    $params = array();
-				    $params['owner_type'] = $player -> getType();
-					$params['owner_id'] = $player -> getIdentity();
 				    $playercardVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
 					?>
 					<?php if(count($playercardVideos)):?>
