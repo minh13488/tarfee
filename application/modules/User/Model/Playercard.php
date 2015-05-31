@@ -130,6 +130,18 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 	}
 	
 	function isViewable() {
+		//get viewer
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		
+		//view for specific users
+		$tableUserItemView = Engine_Api::_() -> getDbTable('userItemView', 'user');
+		$userViewRows = $tableUserItemView -> getUserByItem($this);
+		foreach($userViewRows as $userViewRow) {
+			$user = Engine_Api::_() -> getItem('user', $userViewRow -> user_id);
+			if($user -> getIdentity() && $viewer -> isSelf($user)) {
+				return true;
+			}
+		}
         return $this->authorization()->isAllowed(null, 'view'); 
     }
 	

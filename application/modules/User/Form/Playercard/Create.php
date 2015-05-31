@@ -128,6 +128,19 @@ class User_Form_Playercard_Create extends Engine_Form
 		'multiOptions' => $positions,
 	));
 	
+	// View for specific users
+    $this -> addElement('Text', 'user', array(
+        'label' => 'Allow view for',
+        'autocomplete' => 'off',
+        'order' => '12'
+    ));
+    
+    $this -> addElement('Hidden', 'user_ids', array(
+        'filters' => array('HtmlEntities'),
+        'order' => '13'
+    ));
+    Engine_Form::addDefaultDecorators($this -> user_ids);
+	
 	// View
     $availableLabels = array(
       'everyone'            => 'Everyone',

@@ -119,6 +119,18 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			{
 				$player_card -> setPhoto($form -> photo);
 			}
+			
+			//set allow view for specific users
+			$user_ids = explode(",", $values['user_ids']);
+			$userItemViewTable = Engine_Api::_() -> getDbTable('userItemView', 'user');
+			foreach($user_ids as $user_id) {
+				$row = $userItemViewTable -> createRow();
+				$row -> user_id = $user_id;
+				$row -> item_id = $player_card -> getIdentity();
+				$row -> item_type = $player_card -> getType();
+				$row -> save();
+			}
+			
 			// CREATE AUTH STUFF HERE
 			$auth = Engine_Api::_() -> authorization() -> context;
 			$roles = array(
@@ -208,6 +220,11 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 	        $form->auth_comment->setValue($role);
 	      }
 	    }
+		
+		//view for specific users
+		$tableUserItemView = Engine_Api::_() -> getDbTable('userItemView', 'user');
+		$this -> view -> userViewRows = $userViewRows = $tableUserItemView -> getUserByItem($player_card);
+	
 		
 		if (!$this -> getRequest() -> isPost())
 		{
@@ -336,6 +353,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		
 		if (!$form -> isValid($posts))
 		{
+			$this -> view -> error = true;
 			return;
 		}
 		$values = $form -> getValues();
@@ -359,7 +377,20 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			{
 				$player_card -> setPhoto($form -> photo);
 			}
-
+			
+			//set allow view for specific users
+			$user_ids = explode(",", $values['user_ids']);
+			$userItemViewTable = Engine_Api::_() -> getDbTable('userItemView', 'user');
+			//delete all before inserting
+			$userItemViewTable -> deleteAllRows($player_card);
+			foreach($user_ids as $user_id) {
+				$row = $userItemViewTable -> createRow();
+				$row -> user_id = $user_id;
+				$row -> item_id = $player_card -> getIdentity();
+				$row -> item_type = $player_card -> getType();
+				$row -> save();
+			}
+			
 			// CREATE AUTH STUFF HERE
 			$auth = Engine_Api::_() -> authorization() -> context;
 			$roles = array(
