@@ -93,12 +93,6 @@
 							<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
 						</a>
 						<span><i class="fa fa-cog"></i></span>
-						<ul class="profile-list">
-							<li class="first"><i class="icon-user"></i> Profile</li>
-							<li class="second"><i class="icon-list-alt"></i> Activity</li>
-							<li class="third"><i class="icon-time"></i> Timeline</li>
-							<li class="fourth"><i class="icon-heart"></i> Favorites</li>
-						</ul>
 					</div>
 					<div class="user_rating">
 						<span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
