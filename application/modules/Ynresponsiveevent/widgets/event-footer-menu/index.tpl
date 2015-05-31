@@ -7,10 +7,10 @@
 			<a href="#"><span class="fa fa-calendar"></span></a>
 		</li>
 		<li class="sideicon_generic addfriend">
-			<a href="#"><span class="fa fa-user-plus"></span></a>
+			<a href="<?php echo $this -> url(array(), 'user_general')?>"><span class="fa fa-user-plus"></span></a>
 		</li>
 		<li class="sideicon_generic friends">
-			<a href="#"><span class="fa fa-users"></span></a>
+			<a href="<?php echo $this -> url(array(), 'group_extended')?>"><span class="fa fa-users"></span></a>
 		</li>
 		<li class="sideicon_generic noname">
 			<a href="#"><span class="fa fa-credit-card"></span></a>
