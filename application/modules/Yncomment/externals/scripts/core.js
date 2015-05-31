@@ -600,6 +600,38 @@ en4.yncomment.yncomments = {
 			'element' : $('comments' + '_' + type + '_' + id + '_' + parent_comment_id)
 		});
 	},
+	loadcommentsfilterby : function(type, id, filter, parent_comment_id, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies) {
+		if ($('filter' + '_' + type + '_' + id + '_' + parent_comment_id)) {
+			$('filter' + '_' + type + '_' + id + '_' + parent_comment_id).style.display = 'inline-block';
+			$('filter' + '_' + type + '_' + id + '_' + parent_comment_id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+		}
+		en4.core.request.send(new Request.HTML({
+			url : en4.core.baseUrl + 'yncomment/comment/list',
+			data : {
+				format : 'html',
+				type : type,
+				id : id,
+				filter : filter,
+				parent_div : 1,
+				parent_comment_id : parent_comment_id,
+				taggingContent : taggingContent,
+				showComposerOptions : showComposerOptions,
+				showAsNested : showAsNested,
+				showAsLike : showAsLike,
+				showDislikeUsers : showDislikeUsers,
+				showLikeWithoutIcon : showLikeWithoutIcon,
+				showLikeWithoutIconInReplies : showLikeWithoutIconInReplies,
+				showSmilies : showSmilies,
+				photoLightboxComment : photoLightboxComment,
+				commentsorder : commentsorder
+			},
+			onComplete : function(e) {
+				$(document.body).addLiveEvent('click', 'span.yncomment_comment_dropbox', openCommentOptions);
+			}
+		}), {
+			'element' : $('comments' + '_' + type + '_' + id + '_' + parent_comment_id)
+		});
+	},
 	like : function(type, id, comment_id, order, parent_comment_id, option, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies, page) {
 		if (tempLike == 0) {
 			tempUnlike = tempLike = 1;
@@ -920,6 +952,10 @@ function showReplyData(option, id, type, subject, hide) {
 
 function sortComments(order, type, id, parent_comment_id, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies) {
 	en4.yncomment.yncomments.loadcommentssortby(type, id, order, parent_comment_id, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies);
+}
+
+function filterComments(filter, type, id, parent_comment_id, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies) {
+	en4.yncomment.yncomments.loadcommentsfilterby(type, id, filter, parent_comment_id, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies);
 }
 
 function showReplyForm(type, id, comment_id) {

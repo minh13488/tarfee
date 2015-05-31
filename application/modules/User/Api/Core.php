@@ -522,4 +522,15 @@ class User_Api_Core extends Core_Api_Abstract
         // Update row
         return $iMain -> getIdentity();
     }
+	public function getProfessionalUsers()
+	{
+		$table = Engine_Api::_() -> getItemTable('user');
+		$select = $table -> select() -> where('level_id = 6');
+		$rows = $table -> fetchAll($select);
+		$ids = array();
+		foreach ($rows as $row) {
+			$ids[] = $row -> getIdentity();
+		}
+		return $ids;
+	}
 }

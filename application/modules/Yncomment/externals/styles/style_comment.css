@@ -144,13 +144,15 @@ html[dir="rtl"] .yncomment_replies .yncomment_replies_date > li {
 }
 .yncomment_replies .yncomment_replies_likes,
 .yncomment_replies .yncomment_replies_viewall,
-.yncomment_replies .yncomment_replies_sorting {
+.yncomment_replies .yncomment_replies_sorting,
+.yncomment_replies .yncomment_replies_filter {
 	font-size: 14px;
 	text-transform: uppercase;
 	text-align: center;
 }
 .yncomment_replies .yncomment_replies_likes,
-.yncomment_replies .yncomment_replies_sorting {
+.yncomment_replies .yncomment_replies_sorting,
+.yncomment_replies .yncomment_replies_filter {
 	margin-bottom: 5px;
 }
 .yncomment_replies .yncomment_r
@@ -170,11 +172,20 @@ eplies_likes a,
 	position: relative;
 	bottom: 1px;
 }
-.yncomment_replies .yncomment_replies_sorting > div {
+.yncomment_replies .yncomment_replies_sorting > div,
+.yncomment_replies .yncomment_replies_filter > div {
 	vertical-align: sub;
 	text-transform: capitalize;
 	font-size: 12px;
 	position: relative;
+}
+.layout_yncomment_comments .yncomment_replies .yncomment_replies_filter
+{
+	display: inline;
+}
+.layout_yncomment_comments .yncomment_replies .yncomment_replies_filter > div
+{
+	margin-left: 15px;
 }
 
 /*Comment Form*/
