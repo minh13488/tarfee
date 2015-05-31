@@ -148,7 +148,6 @@
 		display: -moz-box;
         display: -webkit-box;
         display: box;		
-		width: 100%;
 	}
 
 	div.tabs_alt > ul > li {

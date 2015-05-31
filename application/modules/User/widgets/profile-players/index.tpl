@@ -77,6 +77,18 @@
 	           	<div id='profile_photo'>
 					<?php $photoUrl = $player -> getPhotoUrl('thumb.profile');?>
 					<div class="avatar">
+<<<<<<< HEAD
+						<a href="">
+							<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
+						</a>
+						<span><i class="fa fa-cog"></i></span>
+						<ul class="profile-list">
+							<li class="first"><i class="icon-user"></i> Profile</li>
+							<li class="second"><i class="icon-list-alt"></i> Activity</li>
+							<li class="third"><i class="icon-time"></i> Timeline</li>
+							<li class="fourth"><i class="icon-heart"></i> Favorites</li>
+						</ul>
+=======
 						<span>
 							<a href="<?php echo $player -> getHref()?>">
 								<span alt="" class="thumb_profile_stroke" style="">
@@ -86,9 +98,20 @@
 								</span>
 							</a>
 						</span>
+>>>>>>> fcecaf284bb22448867873be8e2d3fcf10bdb403
 					</div>
+					<div class="user_rating">
+						<span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
+						<span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
+						<span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
+						<span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;
+						<span class="rating_star_generic"><i class="fa fa-star-o"></i></span>
+					</div>
+					<hr>
 					<div class="nickname">
-						<span><a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 15)?></span></a>
+						
+						<div><span><a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 15)?></span></a></div>
+						<span>Man United, England</span>				
 					</div>
 					<div class="user_rating">
 						<?php $overRallRating = $player -> getOverallRating();?>
@@ -100,42 +123,28 @@
 			     		<?php endif;?>
 			     		</span>
 					</div>
+<<<<<<< HEAD
+=======
+					<div class="user_rating">
+						<?php $overRallRating = $player -> getOverallRating();?>
+						<span title="<?php echo $overRallRating;?>">
+						<?php if($overRallRating > 0):?>
+			            	<?php for($x=1; $x<=$overRallRating; $x++): ?><span class="rating_star_generic rating_star"></span><?php endfor; ?><?php if((round($overRallRating)-$overRallRating)>0):?><span class="rating_star_generic rating_star_half"></span><?php endif; ?>
+			     		<?php else :?>
+			 				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic rating_star_disabled"></span><?php endfor; ?>
+			     		<?php endif;?>
+			     		</span>
+					</div>
+>>>>>>> fcecaf284bb22448867873be8e2d3fcf10bdb403
 					<div class="actions">
-						<div>
-						<table>
-							<tr>
-								<td>
-									<?php if($this -> viewer() -> getIdentity()):?>
-									<?php echo $this->htmlLink(array(
-							            'route' => 'messages_general',
-							            'action' => 'compose',
-							            'to' => $player -> getOwner() ->getIdentity()
-							        ), '<span class="actions_generic messaging"></span>', array(
-							            'class' => 'smoothbox'
-							        ));
-						    		?>
-						    		<?php endif;?>
-								</td>
-								<td>
-									<?php echo $this->htmlLink(array(
-							            'route' => 'default',
-							            'module' => 'activity',
-							            'controller' => 'index',
-										'action' => 'share',
-										'type' => 'user_playercard',
-										'id' => $player -> getIdentity(),
-							        ), '<span class="actions_generic sharing"></span>', array(
-							            'class' => 'smoothbox'
-							        ));
-						    		?>
-								</td>
-								<td>
-									<?php if($this -> viewer() -> getIdentity()):?>
-										<a href=""><span class="actions_generic like"></span></a>
-									<?php endif;?>
-								</td>
-						</tr></table>
-						</div>
+					<ul>
+						<li><a class="actions_generic" href=""><span><i class="fa fa-eye"></i></span></a></li>
+						<span></span>
+						<li><a class="actions_generic" href=""><span><i class="fa fa-plus"></i></span></a></li>
+						<span></span>
+						<li><a class="actions_generic" href=""><span><i class="fa fa-comment"></i></span></a></li>
+						<span></span>
+						<li><a class="actions_generic" href=""><span><i class="fa fa-flag"></i></span></a></li>
 					</div>
 				</div>
 	            <div class="playercard_options">
@@ -146,7 +155,7 @@
 			            'id' => $player->playercard_id,
 			            'slug' => $player->getSlug(),
 			        ), $this->translate('View'), array(
-			            'class' => 'buttonlink'
+			            'class' => ''
 			        ));
 	        		?>
 	            	<?php 
@@ -158,7 +167,7 @@
 				            'action' => 'edit',
 				            'id' => $player->playercard_id,
 				        ), '<i class="fa fa-pencil"></i>'.$this->translate('Edit'), array(
-				            'class' => 'buttonlink'
+				            'class' => ''
 				        ));
 		        		echo $this->htmlLink(array(
 				            'route' => 'user_extended',
@@ -166,7 +175,7 @@
 				            'action' => 'crop-photo',
 				            'id' => $player->playercard_id,
 				        ), '<i class="fa fa-pencil"></i>'.$this->translate('Crop Photo'), array(
-				            'class' => 'buttonlink smoothbox'
+				            'class' => ''
 				        ));
 						
 	        			echo $this->htmlLink(array(
@@ -175,7 +184,7 @@
 							'parent_type' =>'user_playercard',
 							'subject_id' =>  $player->playercard_id,
 						), '<i class="fa fa-plus-square"></i>'.$this->translate('Add Video'), array(
-						'class' => 'buttonlink'
+						'class' => ''
 						)) ;
 						echo $this->htmlLink(array(
 				            'route' => 'user_extended',
@@ -183,7 +192,7 @@
 				            'action' => 'delete',
 				            'id' => $player->playercard_id,
 				        ), '<i class="fa fa-delete"></i>'.$this->translate('Delete'), array(
-				            'class' => 'buttonlink smoothbox'
+				            'class' => ''
 				        ));
 				    }
 	        		?>

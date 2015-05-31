@@ -242,7 +242,7 @@ function cancelReposition() {
          </div>
       </div>
       <div class="clr"></div>
-     <div class='tabs_alt tabs_parent'>
+     <div class='status_alt status_parent'>
 	  <ul id='main_tabs'>
 	  	 <?php $direction = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.friends.direction');
     	if ( $direction == 0 ): ?>
@@ -321,11 +321,6 @@ function cancelReposition() {
 		<?php endforeach;?>
 	  </ul>
 	</div>
-		<?php if($this->src_img):?>
-		<div class="tabs_alt tab_identify_account">
-			<div class="user_icon"><img src='<?php echo $this->src_img;?>'></div>
-			<div class="user_type_verify"><?php echo $this -> translate("professtional individual verified by Tarfee");?></div>
-		</div>
-		<?php endif;?>
+
 	</div>
 </div>
