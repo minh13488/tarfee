@@ -139,18 +139,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 				$auth -> setAllowed($player_card, $role, 'view', ($i <= $viewMax));
 			}
 
-			$roles = array(
-				'owner',
-				'owner_member',
-				'owner_member_member',
-				'owner_network',
-				'registered',
-				'everyone'
-			);
-			if (isset($values['auth_comment']))
-				$auth_comment = $values['auth_comment'];
-			else
-				$auth_comment = "everyone";
+			$auth_comment = "everyone";
 			$commentMax = array_search($auth_comment, $roles);
 			foreach ($roles as $i => $role)
 			{
@@ -379,19 +368,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			{
 				$auth -> setAllowed($player_card, $role, 'view', ($i <= $viewMax));
 			}
-
-			$roles = array(
-				'owner',
-				'owner_member',
-				'owner_member_member',
-				'owner_network',
-				'registered',
-				'everyone'
-			);
-			if ($values['auth_comment'])
-				$auth_comment = $values['auth_comment'];
-			else
-				$auth_comment = "everyone";
+			$auth_comment = "everyone";
 			$commentMax = array_search($auth_comment, $roles);
 			foreach ($roles as $i => $role)
 			{

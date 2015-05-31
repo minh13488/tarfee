@@ -673,6 +673,129 @@ en4.yncomment.yncomments = {
 			});
 		}
 	},
+	undolike : function(type, id, comment_id, order, parent_comment_id, option, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies, page) {
+		if (tempLike == 0) {
+			tempLike = tempUnlike = 1;
+			if ($('like_comments_' + comment_id) && (option == 'child')) {
+				$('like_comments_' + comment_id).style.display = 'inline-block';
+				$('like_comments_' + comment_id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			}
+			if ($('like_comments_' + type + '_' + id) && (option == 'parent')) {
+				$('like_comments_' + type + '_' + id).style.display = 'inline-block';
+				$('like_comments_' + type + '_' + id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			}
+			en4.core.request.send(new Request.JSON({
+				url : en4.core.baseUrl + 'yncomment/comment/undolike',
+				data : {
+					format : 'json',
+					type : type,
+					id : id,
+					comment_id : comment_id,
+					order : order,
+					parent_comment_id : parent_comment_id,
+					taggingContent : taggingContent,
+					showComposerOptions : showComposerOptions,
+					showAsNested : showAsNested,
+					showAsLike : showAsLike,
+					showDislikeUsers : showDislikeUsers,
+					showLikeWithoutIcon : showLikeWithoutIcon,
+					showLikeWithoutIconInReplies : showLikeWithoutIconInReplies,
+					page : page,
+					showSmilies : showSmilies,
+					photoLightboxComment : photoLightboxComment,
+					commentsorder : commentsorder
+				},
+				onComplete : function(e) {
+					tempLike = tempUnlike = 0;
+					$(document.body).addLiveEvent('click', 'span.yncomment_comment_dropbox', openCommentOptions);
+				}
+			}), {
+				'element' : $('comments' + '_' + type + '_' + id + '_' + parent_comment_id)
+			});
+		}
+	},
+	unsure : function(type, id, comment_id, order, parent_comment_id, option, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies, page) {
+		if (tempLike == 0) {
+			tempUnlike = tempLike = 1;
+			if ($('unsure_comments_' + comment_id) && (option == 'child')) {
+				$('unsure_comments_' + comment_id).style.display = 'inline-block';
+				$('unsure_comments_' + comment_id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			}
+			if ($('unsure_comments_' + type + '_' + id) && (option == 'parent')) {
+				$('unsure_comments_' + type + '_' + id).style.display = 'inline-block';
+				$('unsure_comments_' + type + '_' + id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			}
+			en4.core.request.send(new Request.JSON({
+				url : en4.core.baseUrl + 'yncomment/comment/unsure',
+				data : {
+					format : 'json',
+					type : type,
+					id : id,
+					comment_id : comment_id,
+					order : order,
+					parent_comment_id : parent_comment_id,
+					taggingContent : taggingContent,
+					showComposerOptions : showComposerOptions,
+					showAsNested : showAsNested,
+					showAsLike : showAsLike,
+					showDislikeUsers : showDislikeUsers,
+					showLikeWithoutIcon : showLikeWithoutIcon,
+					showLikeWithoutIconInReplies : showLikeWithoutIconInReplies,
+					page : page,
+					showSmilies : showSmilies,
+					photoLightboxComment : photoLightboxComment,
+					commentsorder : commentsorder
+				},
+				onComplete : function(e) {
+					tempUnlike = tempLike = 0;
+					$(document.body).addLiveEvent('click', 'span.yncomment_comment_dropbox', openCommentOptions);
+				}
+			}), {
+				'element' : $('comments' + '_' + type + '_' + id + '_' + parent_comment_id)
+			});
+		}
+	},
+	undounsure : function(type, id, comment_id, order, parent_comment_id, option, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies, page) {
+		if (tempLike == 0) {
+			tempLike = tempUnlike = 1;
+			if ($('unsure_comments_' + comment_id) && (option == 'child')) {
+				$('unsure_comments_' + comment_id).style.display = 'inline-block';
+				$('unsure_comments_' + comment_id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			}
+			if ($('unsure_comments_' + type + '_' + id) && (option == 'parent')) {
+				$('unsure_comments_' + type + '_' + id).style.display = 'inline-block';
+				$('unsure_comments_' + type + '_' + id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			}
+			en4.core.request.send(new Request.JSON({
+				url : en4.core.baseUrl + 'yncomment/comment/undounsure',
+				data : {
+					format : 'json',
+					type : type,
+					id : id,
+					comment_id : comment_id,
+					order : order,
+					parent_comment_id : parent_comment_id,
+					taggingContent : taggingContent,
+					showComposerOptions : showComposerOptions,
+					showAsNested : showAsNested,
+					showAsLike : showAsLike,
+					showDislikeUsers : showDislikeUsers,
+					showLikeWithoutIcon : showLikeWithoutIcon,
+					showLikeWithoutIconInReplies : showLikeWithoutIconInReplies,
+					page : page,
+					showSmilies : showSmilies,
+					photoLightboxComment : photoLightboxComment,
+					commentsorder : commentsorder
+				},
+				onComplete : function(e) {
+					tempLike = tempUnlike = 0;
+					$(document.body).addLiveEvent('click', 'span.yncomment_comment_dropbox', openCommentOptions);
+				}
+			}), {
+				'element' : $('comments' + '_' + type + '_' + id + '_' + parent_comment_id)
+			});
+		}
+	},
 	unlike : function(type, id, comment_id, order, parent_comment_id, option, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies, page) {
 		if (tempUnlike == 0) {
 			tempLike = tempUnlike = 1;
@@ -686,6 +809,47 @@ en4.yncomment.yncomments = {
 			}
 			en4.core.request.send(new Request.JSON({
 				url : en4.core.baseUrl + 'yncomment/comment/unlike',
+				data : {
+					format : 'json',
+					type : type,
+					id : id,
+					comment_id : comment_id,
+					order : order,
+					parent_comment_id : parent_comment_id,
+					taggingContent : taggingContent,
+					showComposerOptions : showComposerOptions,
+					showAsNested : showAsNested,
+					showAsLike : showAsLike,
+					showDislikeUsers : showDislikeUsers,
+					showLikeWithoutIcon : showLikeWithoutIcon,
+					showLikeWithoutIconInReplies : showLikeWithoutIconInReplies,
+					page : page,
+					showSmilies : showSmilies,
+					photoLightboxComment : photoLightboxComment,
+					commentsorder : commentsorder
+				},
+				onComplete : function(e) {
+					tempLike = tempUnlike = 0;
+					$(document.body).addLiveEvent('click', 'span.yncomment_comment_dropbox', openCommentOptions);
+				}
+			}), {
+				'element' : $('comments' + '_' + type + '_' + id + '_' + parent_comment_id)
+			});
+		}
+	},
+	undounlike : function(type, id, comment_id, order, parent_comment_id, option, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies, page) {
+		if (tempUnlike == 0) {
+			tempLike = tempUnlike = 1;
+			if ($('unlike_comments_' + comment_id) && (option == 'child')) {
+				$('unlike_comments_' + comment_id).style.display = 'inline-block';
+				$('unlike_comments_' + comment_id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			}
+			if ($('unlike_comments_' + type + '_' + id) && (option == 'parent')) {
+				$('unlike_comments_' + type + '_' + id).style.display = 'inline-block';
+				$('unlike_comments_' + type + '_' + id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			}
+			en4.core.request.send(new Request.JSON({
+				url : en4.core.baseUrl + 'yncomment/comment/undounlike',
 				data : {
 					format : 'json',
 					type : type,
