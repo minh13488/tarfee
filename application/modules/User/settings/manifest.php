@@ -131,7 +131,7 @@ return array(
         'action' => 'browse'
       ),
       'reqs' => array(
-        'action' => '(home|browse|render-section|get-my-location|upload-photo|sublocations|get-continent|suggest-group|save-preferred-clubs|get-view-preferred-clubs)',
+        'action' => '(home|browse|render-section|get-my-location|upload-photo|sublocations|get-continent|suggest-group|save-preferred-clubs|get-view-preferred-clubs|suggest-user)',
       )
     ),
 	
