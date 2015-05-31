@@ -170,9 +170,8 @@ endif;
 					        
 				?>
 			<?php endif ?>
-			<!-- if not admin could see ratings of video -->
-			<?php if(!$this -> viewer() -> isAdmin() 
-					&& $this -> video -> parent_type == "user_playercard"):?>
+			<!-- if player video -->
+			<?php if( $this -> video -> parent_type == "user_playercard"):?>
 				<!-- view ratings for user not in professional and club-->
 				<?php if($this -> viewer() -> getIdentity() && !in_array($this -> viewer() -> level_id, array('6','7'))) :?>
 				<?php 
