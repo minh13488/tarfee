@@ -86,6 +86,9 @@ class User_AdminSportCategoriesController extends Core_Controller_Action_Admin
 				// Transaction
 				$row = Engine_Api::_() -> getItem('user_sportcategory', $values["id"]);
 				$row -> title = $values["label"];
+				if (!empty($values['photo'])) {
+					$row -> setPhoto($form -> photo);
+				}
 				$row -> save();
 				$db -> commit();
 			} catch( Exception $e ) {

@@ -474,4 +474,107 @@ class User_IndexController extends Core_Controller_Action_Standard
         $this->getResponse()->setBody($data);
     }
 	
+	public function saveBasicAction() {
+		$this -> _helper -> layout -> disableLayout();
+        $this -> _helper -> viewRenderer -> setNoRender(true);
+		$user = Engine_Api::_()->user()->getViewer();
+		
+		$aliasedFields = $user->fields()->getFieldsObjectsByAlias();
+    	$topLevelId = 0;
+    	$topLevelValue = null;
+    	if( isset($aliasedFields['profile_type']) ) {
+      		$aliasedFieldValue = $aliasedFields['profile_type']->getValue($user);
+      		$topLevelId = $aliasedFields['profile_type']->field_id;
+      		$topLevelValue = ( is_object($aliasedFieldValue) ? $aliasedFieldValue->value : null );
+      		if( !$topLevelId || !$topLevelValue ) {
+        		$topLevelId = null;
+        		$topLevelValue = null;
+      		}
+    	}
+    
+    	// Get form
+    	$form = $this->view->form = new Fields_Form_Standard(array(
+      		'item' => $user,
+      		'topLevelId' => $topLevelId,
+      		'topLevelValue' => $topLevelValue,
+    	));
+    	//$form->generate();
+    
+		$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
+		$countriesAssoc = array('0'=>'') + $countriesAssoc;
+	
+		$provincesAssoc = array();
+		$country_id = $this->_getParam('country_id', 0);
+		if ($country_id) {
+			$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
+			$provincesAssoc = array('0'=>'') + $provincesAssoc;
+		}
+	
+		$form->addElement('Select', 'country_id', array(
+			'label' => 'Country',
+			'multiOptions' => $countriesAssoc,
+			'value' => $country_id
+		));
+	
+		$citiesAssoc = array();
+		$province_id = $this->_getParam('province_id', 0);
+		if ($province_id) {
+			$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
+			$citiesAssoc = array('0'=>'') + $citiesAssoc;
+		}
+	
+		$form->addElement('Select', 'province_id', array(
+			'label' => 'Province/State',
+			'multiOptions' => $provincesAssoc,
+			'value' => $province_id
+		));
+	
+		$city_id = $this->_getParam('city_id', 0);
+		$form->addElement('Select', 'city_id', array(
+			'label' => 'City',
+			'multiOptions' => $citiesAssoc,
+			'value' => $city_id
+		));
+		
+		$continent = '';
+		$country = Engine_Api::_()->getItem('user_location', $country_id);
+		if ($country) $continent = $country->getContinent();
+		$form->addElement('Text', 'continent', array(
+			'label' => 'Continent',
+			'value' => $continent,
+			'disabled' => true
+		));
+		
+		$form->setAttrib('id', 'basic_section-form');
+		
+		$data = array();
+    	if($form->isValid($this->_getAllParams()) ) {
+      		$form->saveValues();
+	
+	  		$values = $this->getRequest()->getPost();
+	  		$user->country_id = $values['country_id'];
+	  		$user->province_id = $values['province_id'];
+	  		$user->city_id = $values['city_id'];
+	  
+      		// Update display name
+      		$aliasValues = Engine_Api::_()->fields()->getFieldsValuesByAlias($user);
+     	 	$user->setDisplayName($aliasValues);
+      		//$user->modified_date = date('Y-m-d H:i:s');
+      		$user->save();
+
+      		// update networks
+      		Engine_Api::_()->network()->recalculate($user);
+			$data = array('status' => true);
+			
+  		}
+		else {
+			$data = array(
+				'status' => false,
+				'html' => $form->render($this->view)
+			);
+		}
+		
+		$data = Zend_Json::encode($data);
+        $this->getResponse()->setBody($data);
+	}
 }

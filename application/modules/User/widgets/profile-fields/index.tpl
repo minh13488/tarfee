@@ -12,3 +12,19 @@
 ?>
 
 <?php echo $this->fieldValueLoop($this->subject(), $this->fieldStructure) ?>
+
+<?php $location = $this->subject()->getLocation(); ?>
+<?php if (!empty($location)) :?>
+<div class="profile_fields">
+	<ul>
+		<li>
+			<span>
+			<?php echo $this->translate('Location')?>		
+			</span>
+			<span>
+			<?php echo implode(', ', $location)?>	
+			</span>
+		</li>
+	</ul>
+</div>
+<?php endif;?>

@@ -88,6 +88,25 @@ class User_Form_Admin_Settings_Section extends Authorization_Form_Admin_Level_Ab
 				'value' => 1 
 			));
 			
+			$this->addElement('Integer', 'max_sport', array(
+                'label' => 'Maximum sports the user can add to their profile',
+                'description' => 'Set 0 is unlimited',
+                'required' =>true,
+                'validators' => array(
+                    new Engine_Validate_AtLeast(0),
+                ),
+                'value' => 0,
+            ));
+			
+			$this->addElement('Integer', 'max_club', array(
+                'label' => 'Maximum club the user can add to their profile',
+                'description' => 'Set 0 is unlimited',
+                'required' =>true,
+                'validators' => array(
+                    new Engine_Validate_AtLeast(0),
+                ),
+                'value' => 0,
+            ));
         }
         
         $this->addElement('Button', 'submit', array(
