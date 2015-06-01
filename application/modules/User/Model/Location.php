@@ -32,7 +32,7 @@ class User_Model_Location extends Core_Model_Item_Abstract {
         return $view->translate($this->continent);
 	}
 	
-	public function getParent() {
+	public function getParent($recurseType = null) {
 		return Engine_Api::_()->getItem('user_location', $this->parent_id);
 	}
 	public function getParents() {

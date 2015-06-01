@@ -570,5 +570,57 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 	    ));
 	}
 
+	public function addEyeOnAction() {
+        $this -> _helper -> layout -> disableLayout();
+        $this -> _helper -> viewRenderer -> setNoRender(true);
+        $id = $this->_getParam('id', 0);
+        $player = Engine_Api::_()->getItem('user_playercard', $id);
+        if (!$player) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card can not be found.')));
+        }
+        
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if (!$viewer->getIdentity()) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('You do not have permission to do this.')));
+        }
+        
+        if ($player->isEyeOn()) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card already in your eye on list.')));
+        }
+        
+        $table = Engine_Api::_()->getDbTable('eyeons', 'user');
+        $eyeon = $table->createRow();
+        $eyeon->setFromArray(array('user_id' => $viewer->getIdentity(), 'player_id'=>$id));
+        $eyeon->save();
+        echo Zend_Json::encode(array('status' => true));
+    }
+	
+	public function removeEyeOnAction() {
+        $this -> _helper -> layout -> disableLayout();
+        $this -> _helper -> viewRenderer -> setNoRender(true);
+        $id = $this->_getParam('id', 0);
+        $player = Engine_Api::_()->getItem('user_playercard', $id);
+        if (!$player) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card can not be found.')));
+        }
+        
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if (!$viewer->getIdentity()) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('You do not have permission to do this.')));
+        }
+        
+        if (!$player->isEyeOn()) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card not in your eye on list.')));
+        }
+        
+        $table = Engine_Api::_()->getDbTable('eyeons', 'user');
+        $where = array(
+            $table->getAdapter()->quoteInto('user_id = ?', $viewer->getIdentity()),
+            $table->getAdapter()->quoteInto('player_id = ?', $id)
+        );
+        $table->delete($where);
+        
+        echo Zend_Json::encode(array('status' => true));
+    }
 }
 ?>
