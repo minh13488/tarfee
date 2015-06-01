@@ -147,6 +147,20 @@ function cancelReposition() {
                <a href="<?php echo $this -> user -> getHref();?>">
                   <h2><?php echo $this -> user -> getTitle()?></h2>
                </a>
+               <?php
+                $about_me = "";
+                $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($this -> user);
+                foreach( $fieldStructure as $map ) {
+             		$field = $map->getChild();
+             		$value = $field->getValue($user);
+                 	if($field->type == 'about_me') {
+                      	$about_me = $value['value'];
+                 	}
+                }
+         		?>
+         		<?php if ($about_me != "") :?>
+         			<h4><?php echo $about_me?></h4>
+         		<?php endif;?>
             </div>
             <div class="mtop5">
                <div></div>
