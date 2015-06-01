@@ -88,14 +88,14 @@
 	           	<div id='profile_photo'>
 					<?php $photoUrl = $player -> getPhotoUrl('thumb.profile');?>
 					<div class="avatar">
-						<a href="">
+						<a href="<?php echo $player -> getHref()?>">
 							<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
 						</a>
-						<span class="setting"><i class="fa fa-cog"></i></span>
-			            	<?php 
-			            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())):
-							?>
-							<ul class="setting-list">
+						<?php 
+		            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())):
+						?>
+						<span class="setting" onclick="showOptions(<?php echo $player->playercard_id?>, this)"><i class="fa fa-cog"></i>
+							<ul class="setting-list" style="display: none" id="setting-list_<?php echo $player->playercard_id?>">
 								<li class="first">
 									<?php
 						            	echo $this->htmlLink(array(
@@ -145,22 +145,23 @@
 								?>
 								</li>
 							</ul>
+						</span>
+						
 						    <?php endif;?>
 					</div>
+					<?php $overRallRating = $player -> getOverallRating();?>
 					<div class="user_rating" title="<?php echo $overRallRating;?>">
-						<?php $overRallRating = $player -> getOverallRating();?>
-						<?php if($overRallRating > 0):?>
-							<?php for($x=1; $x<=$overRallRating; $x++): ?>
-								<span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
-							<?php endfor; ?>
-							<?php if((round($overRallRating)-$overRallRating)>0):?>
-								<span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;
-							<?php endif; ?>
-						<?php else:?>
-							<?php for($x=1; $x<=5; $x++): ?>
-								<span class="rating_star_generic"><i class="fa fa-star-o"></i></span>&nbsp;
-							<?php endfor; ?>
-						<?php endif;?>
+						<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
+					        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
+					    <?php endfor; ?>
+					    <?php if ((round($overRallRating) - $overRallRating) > 0): $x ++; ?>
+					        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;>
+					    <?php endif; ?>
+					    <?php if ($x <= 5) :?>
+					        <?php for (; $x <= 5; $x++ ) : ?>
+					            <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>&nbsp;
+					        <?php endfor; ?>
+					    <?php endif; ?>
 					</div>
 					<hr>
 					<div class="nickname">
@@ -276,5 +277,27 @@ function removeEyeOn(itemId){
             }            
         }
     }).send();
+}
+function showOptions(itemId, obj)
+{
+	$$('.setting-list').each(function(e)
+	{
+		if(e != $('setting-list_' + itemId))
+			e.style.display = 'none';
+	});
+	$$('.setting').each(function(e)
+	{
+		e.removeClass('active');
+	});
+	if($('setting-list_' + itemId).style.display == '')
+	{
+		$('setting-list_' + itemId).style.display = 'none';
+		obj.removeClass('active');
+	}
+	else
+	{
+		$('setting-list_' + itemId).style.display = ''
+		obj.addClass('active');
+	}
 }
 </script>
