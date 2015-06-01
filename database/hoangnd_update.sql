@@ -187,3 +187,22 @@ CREATE TABLE IF NOT EXISTS `engine4_user_sportmaps` (
   `modified_date` datetime NOT NULL,
   PRIMARY KEY (`map_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- 6.1.2015
+INSERT IGNORE INTO `engine4_authorization_permissions`
+  SELECT
+    level_id as `level_id`,
+    'user' as `type`,
+    'max_sport' as `name`,
+    3 as `value`,
+    '0' as `params`
+  FROM `engine4_authorization_levels` WHERE `type` NOT IN('public');
+  
+INSERT IGNORE INTO `engine4_authorization_permissions`
+  SELECT
+    level_id as `level_id`,
+    'user' as `type`,
+    'max_club' as `name`,
+    3 as `value`,
+    '0' as `params`
+  FROM `engine4_authorization_levels` WHERE `type` NOT IN('public');

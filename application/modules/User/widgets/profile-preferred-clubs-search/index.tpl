@@ -54,7 +54,7 @@
     }
     
     // Populate data
-    var maxRecipients = 0;
+    var maxRecipients = <?php echo $this->max_club?>;
     var to = {
         id : false,
         type : false,
@@ -138,5 +138,8 @@
         document.getElementById('group_ids-wrapper').style.height = 'auto';
         <?php endforeach; ?>
         
+        <?php if ($this->max_club > 0 && count($this->groups) >= $this->max_club) :?>
+        document.getElementById('sport').style.display = 'none';
+        <?php endif; ?>
     });
  </script>

@@ -28,5 +28,19 @@ class User_Widget_ProfilePreferredClubsSearchController extends Engine_Content_W
 			}
 	 }
 	$this -> view -> groups = $groups;
+	
+	$permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
+    $max_club = $permissionsTable->getAllowed('user', $subject->level_id, 'max_club');
+    if ($max_club == null) {
+        $row = $permissionsTable->fetchRow($permissionsTable->select()
+        ->where('level_id = ?', $subject->level_id)
+        ->where('type = ?', 'user')
+        ->where('name = ?', 'max_club'));
+        if ($row) {
+            $max_club = $row->value;
+        }
+    }
+	
+	$this->view->max_club = $max_club;
   }
 }

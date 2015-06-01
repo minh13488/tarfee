@@ -131,14 +131,14 @@ class User_SportController extends Core_Controller_Action_Standard {
 			$table -> deleteAllRows($user_id);
 			foreach ($sportIds as $sportId)
 			{
-				$row = $table -> getRow($table, $sportId);
+				$row = $table -> getRow($user_id, $sportId);
 				if (!isset($row) && empty($row))
 				{
 					$row = $table -> createRow();
-					$row -> user_id = $user_id;
-					$row -> sport_id = $sportId;
-					$row -> save();
 				}
+				$row -> user_id = $user_id;
+				$row -> sport_id = $sportId;
+				$row -> save();
 			}
 			$status = 'true';
 			$db -> commit();
