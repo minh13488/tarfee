@@ -108,14 +108,18 @@
 		$form->addElement('Button', 'cancel', array(
 	      'label' => 'Cancel',
 	      'order' => 10001,
-	      'type' => 'button',
 	      'class' => 'basic-cancel-btn',
 	      'decorators' => array(
 	        'ViewHelper'
 	      )
 	    ));
 		
-	    $form->addDisplayGroup(array('submit', 'cancel'), 'buttons');
+	    $form->addDisplayGroup(array('submit', 'cancel'), 'buttons', array(
+      'decorators' => array(
+        'FormElements',
+        'DivDivDivWrapper',
+      ),
+    ));
 	?>
 	
 	<?php

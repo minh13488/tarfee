@@ -207,14 +207,6 @@ return array(
       )
     ),
     
-     'playercard_profile' => array(
-      'route' => 'player/:id/*',
-      'defaults' => array(
-        'module' => 'user',
-        'controller' => 'player-card',
-        'action' => 'view'
-      )
-    ),
     'user_playercard' => array(
       'route' => '/player/:action/*',
       'defaults' => array(
@@ -222,6 +214,17 @@ return array(
         'controller' => 'player-card',
         'action' => 'create'
       )
+    ),
+    'playercard_profile' => array(
+      'route' => 'player/:id/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'player-card',
+        'action' => 'view'
+      ),
+      'reqs' => array(
+					'id' => '\d+',
+			)
     ),
   )
 ); ?>
