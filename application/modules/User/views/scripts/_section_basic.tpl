@@ -102,6 +102,20 @@
 		));
 		
 		$form->setAttrib('id', 'basic_section-form');
+		
+		$form->submit->addDecorator('ViewHelper');
+		
+		$form->addElement('Button', 'cancel', array(
+	      'label' => 'Cancel',
+	      'order' => 10001,
+	      'type' => 'button',
+	      'class' => 'basic-cancel-btn',
+	      'decorators' => array(
+	        'ViewHelper'
+	      )
+	    ));
+		
+	    $form->addDisplayGroup(array('submit', 'cancel'), 'buttons');
 	?>
 	
 	<?php
@@ -128,6 +142,11 @@
 			if ($('continent-wrapper') && $('continent').value == '') {
 				$('continent-wrapper').hide();
 			}
+			
+			$$('.basic-cancel-btn').removeEvents('click');
+			$$('.basic-cancel-btn').addEvent('click', function() {
+				renderSection('basic', {});
+			});
 			
 			if ($('country_id')) {
 				$('country_id').addEvent('change', function() {
