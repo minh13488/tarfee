@@ -102,7 +102,6 @@
 		));
 		
 		$form->setAttrib('id', 'basic_section-form');
-		
 	?>
 	
 	<?php

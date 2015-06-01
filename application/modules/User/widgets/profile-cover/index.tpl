@@ -152,7 +152,7 @@ function cancelReposition() {
                 $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($this -> user);
                 foreach( $fieldStructure as $map ) {
              		$field = $map->getChild();
-             		$value = $field->getValue($user);
+             		$value = $field->getValue($this -> user);
                  	if($field->type == 'about_me') {
                       	$about_me = $value['value'];
                  	}
