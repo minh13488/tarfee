@@ -12,7 +12,7 @@
 ?>
 
 
-<div class="icon_section_profile"><i class="fa fa-user"></i></div>
+<div class="icon_section_profile"><i class="fa fa-phone"></i></div>
 <table>
   <tr>
   	<th><hr></th>  

@@ -144,8 +144,6 @@
 					</ul>
 				    <?php endif;?>
 					
-					
-					
 						</span>
 					</div>
 					<div class="user_rating">
@@ -173,57 +171,19 @@
 					<div class="actions">
 					<ul>
 						<?php if ($this -> viewer() -> getIdentity()):?>
-						<li id="user_eyeon">
-                    		<?php if($player->isEyeOn()): ?>              
-                        	<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')"><span><i class="fa fa-eye"></span></a>
-                    		<?php else: ?>
-                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')"><span><i class="fa fa-eye"></span></a>
-                    		<?php endif; ?>
-                		</li>
-                		<script type="text/javascript">
-		                    function addEyeOn(itemId) {
-		                        $('user_eyeon').set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
-		                        new Request.JSON({
-		                            'url': '<?php echo $this->url(array('action'=>'add-'),'user_playercard', true)?>',
-		                            'method': 'post',
-		                            'data' : {
-		                                'id' : itemId
-		                            },
-		                            'onSuccess': function(responseJSON, responseText) {
-		                                if (responseJSON.status == true) {
-		                                    html = '<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
-		                                    $("user_eyeon").set('html', html);
-		                                }
-		                                else {
-		                                    alert(responseJSON.message);
-		                                }            
-		                            }
-		                        }).send();
-		                    }
-		                    
-		                    function removeEyeOn(itemId){
-		                    	$('user_eyeon').set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
-		                        new Request.JSON({
-		                            'url': '<?php echo $this->url(array('action'=>'remove-eye-on'),'user_playercard', true)?>',
-		                            'method': 'post',
-		                            'data' : {
-		                                'id' : itemId
-		                            },
-		                            'onSuccess': function(responseJSON, responseText) {
-		                                if (responseJSON.status == true) {
-		                                    html = '<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
-		                                    $("user_eyeon").set('html', html);
-		                                }
-		                                else {
-		                                    alert(responseJSON.message);
-		                                }            
-		                            }
-		                        }).send();
-		                    }
-		                </script>
+							<li id="user_eyeon">
+	                    		<?php if($player->isEyeOn()): ?>              
+	                        	<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
+	                        		<span><i class="fa fa-eye"></i></span>
+                        		</a>
+	                    		<?php else: ?>
+	                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
+	                        		<span><i class="fa fa-eye"></i></span>
+	                        	</a>
+	                    		<?php endif; ?>
+	                		</li>
+                			<span></span>
                 		<?php endif;?>
-						<li><a class="actions_generic" href=""><span><i class="fa fa-eye"></i></span></a></li>
-						<span></span>
 						<li><a class="actions_generic" href=""><span><i class="fa fa-plus"></i></span></a></li>
 						<span></span>
 						<li><a class="actions_generic" href=""><span><i class="fa fa-comment"></i></span></a></li>
@@ -231,21 +191,6 @@
 						<li><a class="actions_generic" href=""><span><i class="fa fa-flag"></i></span></a></li>
 					</div>
 				</div>
-	            	 <?php
-				    $playercardVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
-					?>
-					<?php if(count($playercardVideos)):?>
-						<ul style="border: 5px solid #eaeaea;" class="videos_browse">
-							 <?php foreach ($playercardVideos as $item): ?>
-						            <?php
-						            echo $this->partial('_player_video_listing.tpl', 'user', array(
-						                'video' => $item,
-						                'player' => $player,
-						            ));
-						            ?>
-							<?php endforeach; ?>
-						</ul>
-					<?php endif;?>
 	        </li>
 			<?php endif;?>
         	<?php endforeach; ?>             
@@ -275,25 +220,45 @@
 	    <?php endif; ?>
 	</div>
 </div>
-
 <script type="text/javascript">
-	$$('.user-video-item-action').addEvent('outerClick', function(){
-	    	if ( this.hasClass('open-submenu') ) {
-	    		this.removeClass('open-submenu');	
-	    	}
-	    });
-	
-		$$('.user-video-item-action').addEvent('click', function(){
-			if ( this.hasClass('open-submenu') ) {
-	    		this.removeClass('open-submenu');	
-	    	} else {
-	    		$$('.open-submenu').removeClass('open-submenu');
-	    		this.addClass('open-submenu');
-	    	}  
-		});
-		 
-		 $$('.user-video-close-box').addEvent('click', function(){
-		 	var parent = this.getParent().getParent().getParent();
-    		parent.removeClass('open-submenu');	
-		});
+function addEyeOn(itemId) 
+{
+    $('user_eyeon').set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
+    new Request.JSON({
+        'url': '<?php echo $this->url(array('action'=>'add-eye-on'),'user_playercard', true)?>',
+        'method': 'post',
+        'data' : {
+            'id' : itemId
+        },
+        'onSuccess': function(responseJSON, responseText) {
+            if (responseJSON.status == true) {
+                html = '<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
+                $("user_eyeon").set('html', html);
+            }
+            else {
+                alert(responseJSON.message);
+            }            
+        }
+    }).send();
+}
+
+function removeEyeOn(itemId){
+	$('user_eyeon').set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
+    new Request.JSON({
+        'url': '<?php echo $this->url(array('action'=>'remove-eye-on'),'user_playercard', true)?>',
+        'method': 'post',
+        'data' : {
+            'id' : itemId
+        },
+        'onSuccess': function(responseJSON, responseText) {
+            if (responseJSON.status == true) {
+                html = '<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
+                $("user_eyeon").set('html', html);
+            }
+            else {
+                alert(responseJSON.message);
+            }            
+        }
+    }).send();
+}
 </script>

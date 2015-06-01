@@ -8,6 +8,6 @@ class User_Model_DbTable_Eyeons extends Engine_Db_Table {
 	
 	public function getUserEyeOns($user_id) {
         $select = $this->select()->where('user_id = ?', $user_id);
-        return $this->fetAll($select);
+        return $this->fetchAll($select);
     }
 }

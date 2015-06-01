@@ -304,9 +304,9 @@ function cancelReposition() {
 			</li>
 		<?php endif;?>
 		<li>
-		   <a href="#">
+		   <a>
 		      <div><span class="number_tabs"><?php echo count($this->user->getEyeOns())?></span></div>
-		      <div>eye on</div>
+		      <div><?php echo $this -> translate("eye on")?></div>
 		   </a>
 		</li>
 		<?php foreach($this -> sports as $sport):?>

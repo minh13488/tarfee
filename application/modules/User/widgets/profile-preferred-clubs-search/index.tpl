@@ -54,7 +54,7 @@
     }
     
     // Populate data
-    var maxRecipients = <?php echo $this->max_club?>;
+    var maxRecipients = <?php echo $this->max_club?$this->max_club:0?>;
     var to = {
         id : false,
         type : false,
