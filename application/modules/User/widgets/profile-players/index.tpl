@@ -91,7 +91,7 @@
 						<a href="">
 							<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
 						</a>
-						<span class="setting"><i class="fa fa-cog"></i>
+						<span class="setting"><i class="fa fa-cog"></i></span>
 			            	<?php 
 			            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())):
 							?>
@@ -146,7 +146,6 @@
 								</li>
 							</ul>
 						    <?php endif;?>
-						</span>
 					</div>
 					<div class="user_rating" title="<?php echo $overRallRating;?>">
 						<?php $overRallRating = $player -> getOverallRating();?>
@@ -191,11 +190,11 @@
 							<li title="<?php echo $this -> translate("eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
 	                    		<?php if($player->isEyeOn()): ?>              
 	                        	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
-	                        		<span><i class="fa fa-eye"></i></span>
+	                        		<span><i class="fa fa-eye-slash"></i></span>
                         		</a>
 	                    		<?php else: ?>
 	                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
-	                        		<span><i class="fa fa-eye-slash"></i></span>
+	                        		<span><i class="fa fa-eye"></i></span>
 	                        	</a>
 	                    		<?php endif; ?>
 	                		</li>
@@ -249,7 +248,7 @@ function addEyeOn(itemId)
         },
         'onSuccess': function(responseJSON, responseText) {
             if (responseJSON.status == true) {
-                html = '<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
+                html = '<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('+itemId+')"><span><i class="fa fa-eye-slash"></i></span></a>';
                 $('user_eyeon_'+itemId).set('html', html);
             }
             else {
@@ -269,7 +268,7 @@ function removeEyeOn(itemId){
         },
         'onSuccess': function(responseJSON, responseText) {
             if (responseJSON.status == true) {
-                html = '<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('+itemId+')"><span><i class="fa fa-eye-slash"></i></span></a>';
+                html = '<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
                 $('user_eyeon_'+itemId).set('html', html);
             }
             else {
