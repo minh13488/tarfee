@@ -547,6 +547,20 @@ class User_IndexController extends Core_Controller_Action_Standard
 		
 		$form->setAttrib('id', 'basic_section-form');
 		
+		$form->submit->addDecorator('ViewHelper');
+		
+		$form->addElement('Button', 'cancel', array(
+	      'label' => 'Cancel',
+	      'order' => 10001,
+	      'type' => 'button',
+	      'class' => 'basic-cancel-btn',
+	      'decorators' => array(
+	        'ViewHelper'
+	      )
+	    ));
+		
+	    $form->addDisplayGroup(array('submit', 'cancel'), 'buttons');
+		
 		$data = array();
     	if($form->isValid($this->_getAllParams()) ) {
       		$form->saveValues();
