@@ -13,48 +13,118 @@
 <?php endif; ?>
 <?php if (empty($this->parent_comment_id)): ?>
     <div class='yncomment_replies_options yncomment_txt_light'>
-    <?php if ($this->viewer()->getIdentity() && $this->canComment): ?>
-        <div class="yncomment_float_left">
-		<!--WITHOUT ICON-->
-		<?php if($this->showLikeWithoutIcon):?>
-			<?php if(!Engine_Api::_()->getDbtable('likes', 'core')->isLike($this->subject,$this->viewer())):?>
-				<a id="like_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?> onclick="en4.yncomment.yncomments.like('<?php echo
-				$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>','', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');" <?php endif;?>>
+	<?php if ($this->viewer()->getIdentity()): ?>
+    	<?php if ($this->canComment): ?>
+	        <div class="yncomment_float_left">
+			<!--WITHOUT ICON-->
+			<?php if($this->showLikeWithoutIcon):?>
+				<?php if(!Engine_Api::_()->getDbtable('likes', 'core')->isLike($this->subject,$this->viewer())):?>
+					<a id="like_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?> onclick="en4.yncomment.yncomments.like('<?php echo
+					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>','', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');" <?php endif;?>>
+	                <b class="yn_like_dislike"><?php echo  $this->translate('Like') ?></b>
+					</a>
+				<?php else:?>
+					<a id="like_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block; color: #2A6496" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?> onclick="en4.yncomment.yncomments.undolike('<?php echo
+					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>','', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');" <?php endif;?>>
+	                <b class="yn_like_dislike"><?php echo  $this->translate('Like') ?></b>
+				<?php endif;?>
+			<?php else:?>
+				<?php if(!Engine_Api::_()->getDbtable('likes', 'core')->isLike($this->subject,$this->viewer())):?>
+					<a id="like_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.like('<?php echo
+					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>','', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');" <?php endif;?>" >
+						<i class="fa fa-thumbs-up ynfontawesome"></i> <?php echo $this->translate('Like') ?>
+					</a>
+				<?php else:?>
+						<a id="like_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block; color: #2A6496" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.undolike('<?php echo
+						$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>','', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');" <?php endif;?>" >
+							<i class="fa fa-thumbs-up ynfontawesome"></i> <?php echo $this->translate('Like') ?>
+						</a>
+				<?php endif;?>
+			<?php endif;?>
+			<!-- unsure-->
+			&nbsp;&middot;&nbsp; 
+	    		<!--WITHOUT ICON-->
+	    		<?php if($this->showLikeWithoutIcon):?>
+	    			<?php if(Engine_Api::_()->getDbtable('unsures', 'yncomment')->getUnsure($this->subject, $this->viewer())):?>
+	    				<a id="unsure_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;color: #2A6496" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.undounsure('<?php echo
+	    					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>', '', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"<?php endif;?>><?php echo $this->translate('Unsure') ?>
+	    					</a>
+	    			<?php else :?>
+	    					<a id="unsure_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.unsure('<?php echo
+	    					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>', '', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"<?php endif;?>><?php echo $this->translate('Unsure') ?>
+	    					</a>
+	    			<?php endif;?>
+	    		<?php else:?>
+	    			<?php if(Engine_Api::_()->getDbtable('unsures', 'yncomment')->getUnsure($this->subject, $this->viewer())):?>
+	    				<a id="unsure_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;color: #2A6496" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.undounsure('<?php echo
+	    					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>', '', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"<?php endif;?>><i class="fa fa-meh-o ynfontawesome"></i> <?php echo $this->translate('Unsure') ?>
+	    					</a>
+	    			<?php else :?>
+	    					<a id="unsure_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.unsure('<?php echo
+	    					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>', '', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"<?php endif;?>><i class="fa fa-meh-o ynfontawesome"></i> <?php echo $this->translate('Unsure') ?>
+	    					</a>
+	    			<?php endif;?>
+	    		<?php endif; ?>
+	           &nbsp;&middot;&nbsp; 
+	    		<!--WITHOUT ICON-->
+	    		<?php if($this->showLikeWithoutIcon):?>
+	    			<?php if(Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislike($this->subject, $this->viewer())):?>
+	    				<a id="unlike_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block; color: #2A6496" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.undounlike('<?php echo
+	    					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>', '', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"<?php endif;?>><?php echo $this->translate('Dislike') ?>
+	    					</a>
+	    			<?php else :?>
+	    					<a id="unlike_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.unlike('<?php echo
+	    					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>', '', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"<?php endif;?>><?php echo $this->translate('Dislike') ?>
+	    					</a>
+	    			<?php endif;?>
+	    		<?php else:?>
+	    			<?php if(Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislike($this->subject, $this->viewer())):?>
+	    				<a id="unlike_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block; color: #2A6496" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.undounlike('<?php echo
+	    					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>', '', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"<?php endif;?>><i class="fa fa-thumbs-down ynfontawesome"></i> <?php echo $this->translate('Dislike') ?>
+	    					</a>
+	    			<?php else :?>
+	    					<a id="unlike_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.unlike('<?php echo
+	    					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>', '', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"<?php endif;?>><i class="fa fa-thumbs-down ynfontawesome"></i> <?php echo $this->translate('Dislike') ?>
+	    					</a>
+	    			<?php endif;?>
+	    		<?php endif; ?>
+	            </div><!--floatleft-->
+	        <?php endif; ?>
+	    <?php else:?>
+	    	<div class="yncomment_float_left">
+			<!--WITHOUT ICON-->
+			<?php if($this->showLikeWithoutIcon):?>
+				<a id="like_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>">
                 <b class="yn_like_dislike"><?php echo  $this->translate('Like') ?></b>
-				</a>
 			<?php else:?>
-				<b class="yn_like_dislike"><?php echo $this->translate('Like') ?></b>
-			<?php endif;?>
-		<?php else:?>
-			<?php if(!Engine_Api::_()->getDbtable('likes', 'core')->isLike($this->subject,$this->viewer())):?>
-				<a id="like_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.like('<?php echo
-				$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>','', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');" <?php endif;?>" >
+				<a id="like_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>">
 					<i class="fa fa-thumbs-up ynfontawesome"></i> <?php echo $this->translate('Like') ?>
 				</a>
-			<?php else:?>
-					<i class="fa fa-thumbs-up ynfontawesome"></i> <?php echo $this->translate('Like') ?>
 			<?php endif;?>
-		<?php endif;?>
-           &nbsp;&middot;&nbsp; 
-    		<!--WITHOUT ICON-->
-    		<?php if($this->showLikeWithoutIcon):?>
-    			<?php if(Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislike($this->subject, $this->viewer())):?>
-    				<?php echo $this->translate('Dislike') ?>
-    			<?php else :?>
-    					<a id="unlike_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.unlike('<?php echo
-    					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>', '', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"<?php endif;?>><?php echo $this->translate('Dislike') ?>
-    					</a>
-    			<?php endif;?>
-    		<?php else:?>
-    			<?php if(Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislike($this->subject, $this->viewer())):?>
-    				<i class="fa fa-thumbs-down ynfontawesome"></i> <?php echo $this->translate('Dislike') ?>
-    			<?php else :?>
-    					<a id="unlike_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.unlike('<?php echo
-    					$this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>', '', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');"<?php endif;?>><i class="fa fa-thumbs-down ynfontawesome"></i> <?php echo $this->translate('Dislike') ?>
-    					</a>
-    			<?php endif;?>
-    		<?php endif; ?>
-            </div><!--floatleft-->
+			<!-- unsure-->
+			&nbsp;&middot;&nbsp; 
+	    		<!--WITHOUT ICON-->
+	    		<?php if($this->showLikeWithoutIcon):?>
+					<a id="unsure_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>">
+						<?php echo $this->translate('Unsure') ?>
+					</a>
+	    		<?php else:?>
+					<a id="unsure_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>">
+						<i class="fa fa-meh-o ynfontawesome"></i> <?php echo $this->translate('Unsure') ?>
+					</a>
+	    		<?php endif; ?>
+	           &nbsp;&middot;&nbsp; 
+	    		<!--WITHOUT ICON-->
+	    		<?php if($this->showLikeWithoutIcon):?>
+					<a id="unlike_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>>
+						<?php echo $this->translate('Dislike') ?>
+					</a>
+	    		<?php else:?>
+					<a id="unlike_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>">
+						<i class="fa fa-thumbs-down ynfontawesome"></i> <?php echo $this->translate('Dislike') ?>
+					</a>
+	    		<?php endif; ?>
+	            </div><!--floatleft-->
         <?php endif; ?>
         <div class="yncomment_float_right">
         <?php if($this->likes->getTotalItemCount() > 0): ?>
@@ -160,7 +230,7 @@
 	          </div> 
           <?php endif;?>
          <?php if($this->dislikes->getTotalItemCount() > 0
-            ||  $this->likes->getTotalItemCount() > 0):?>
+            ||  $this->likes->getTotalItemCount() > 0 || $this->comments->getTotalItemCount()  > 0):?>
           <?php if ($this->comments->getTotalItemCount() > 1): // REPLIES ------- ?>
               <div class="yncomment_replies_sorting fright" id="yncomment_replies_sorting">
                 <div class="mright5" id="sort_<?php echo $this->nested_comment_id; ?>" style="display:none;"></div>
@@ -663,6 +733,10 @@
   function showSortComments() 
   {
     $('sorting_dropdown_menu').toggle();
+  }
+  function showFilterComments() 
+  {
+		 $('filter_dropdown_menu').toggle();
   }
   function yncomemntDeleteComment(type, id, comment_id, order, parent_comment_id, taggingContent, showComposerOptions, showAsNested, showAsLike, showDislikeUsers, showLikeWithoutIcon, showLikeWithoutIconInReplies) 
   {     

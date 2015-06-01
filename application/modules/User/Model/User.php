@@ -977,4 +977,28 @@ class User_Model_User extends Core_Model_Item_Abstract
 
 		return $this;
 	}
+
+	public function getCountry() {
+		return Engine_Api::_()->getItem('user_location', $this->country_id);
+	}
+	
+	public function getProvince() {
+		return Engine_Api::_()->getItem('user_location', $this->province_id);
+	}
+	
+	public function getCity() {
+		return Engine_Api::_()->getItem('user_location', $this->city_id);
+	}
+	
+	public function getLocation() {;
+		$location = array();
+		if ($this->getCity()) $location[] = $this->getCity()->getTitle();
+		if ($this->getProvince()) $location[] = $this->getProvince()->getTitle();
+		if ($this->getCountry()) $location[] = $this->getCountry()->getTitle();
+		return $location;
+	}
+	
+	public function getEyeOns() {
+		return Engine_Api::_()->getDbTable('eyeons', 'user')->getUserEyeOns($this->getIdentity());
+	}
 }

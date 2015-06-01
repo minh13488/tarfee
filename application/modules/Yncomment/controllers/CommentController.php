@@ -637,6 +637,244 @@ class Yncomment_CommentController extends Core_Controller_Action_Standard {
         $this -> _helper -> contextSwitch -> initContext();
     }
 
+	public function undolikeAction() {
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $subject = $this -> getSubjectItem();
+        $comment_id = $this -> _getParam('comment_id');
+        $parent_comment_id = $this -> _getParam('parent_comment_id');
+        if (!$this -> getRequest() -> isPost()) {
+            $this -> view -> status = false;
+            $this -> view -> error = Zend_Registry::get('Zend_Translate') -> _('Invalid request method');
+            return;
+        }
+
+        if ($comment_id) {
+            $commentedItem = Engine_Api::_() -> getDbtable('comments', 'yncomment') -> comments($subject) -> getComment($comment_id);
+        } else {
+            $commentedItem = $subject;
+        }
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($commentedItem) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+
+            if (Engine_Api::_() -> getDbtable('likes', 'core') -> isLike($commentedItem, $viewer))
+                Engine_Api::_() -> getDbtable('likes', 'core') -> removeLike($commentedItem, $viewer);
+
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+
+        // For comments, render the resource
+        if ($subject -> getType() == 'core_comment') {
+            $type = $subject -> resource_type;
+            $id = $subject -> resource_id;
+            Engine_Api::_() -> core() -> clearSubject();
+        } else {
+            $type = $subject -> getType();
+            $id = $subject -> getIdentity();
+        }
+
+        $this -> view -> status = true;
+        $this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Like removed');
+        $this -> view -> taggingContent = $taggingContent = $this -> _getParam('taggingContent');
+        $this -> view -> showComposerOptions = $showComposerOptions = $this -> _getParam('showComposerOptions');
+        $this -> view -> showAsNested = $showAsNested = $this -> _getParam('showAsNested');
+        $this -> view -> showAsLike = $showAsLike = $this -> _getParam('showAsLike', 1);
+        $this -> view -> showDislikeUsers = $showDislikeUsers = $this -> _getParam('showDislikeUsers', 1);
+        $this -> view -> showLikeWithoutIcon = $showLikeWithoutIcon = $this -> _getParam('showLikeWithoutIcon', 1);
+        $this -> view -> showLikeWithoutIconInReplies = $showLikeWithoutIconInReplies = $this -> _getParam('showLikeWithoutIconInReplies', 1);
+        $this -> view -> page = $this -> _getParam('page', 0);
+        $this -> view -> showSmilies = $showSmilies = $this -> _getParam('showSmilies');
+        $this -> view -> photoLightboxComment = $photoLightboxComment = 0;//$this -> _getParam('photoLightboxComment');
+        $this -> view -> commentsorder = $commentsorder = $this -> _getParam('commentsorder');
+        $this -> view -> body = $this -> view -> action('list', 'comment', 'yncomment', array('type' => $type, 'id' => $id, 'format' => 'html', 'parent_comment_id' => $parent_comment_id, 'page' => $this -> view -> page, 'parent_div' => 1, 'taggingContent' => $taggingContent, 'showComposerOptions' => $showComposerOptions, 'showAsNested' => $showAsNested, 'showAsLike' => $showAsLike, 'showDislikeUsers' => $showDislikeUsers, 'showLikeWithoutIcon' => $showLikeWithoutIcon, 'showLikeWithoutIconInReplies' => $showLikeWithoutIconInReplies, 'showSmilies' => $showSmilies, 'photoLightboxComment' => $photoLightboxComment, 'commentsorder' => $commentsorder));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
+
+	public function unsureAction() {
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $subject = $this -> getSubjectItem();
+        $comment_id = $this -> _getParam('comment_id');
+        $parent_comment_id = $this -> _getParam('parent_comment_id');
+        if (!$this -> getRequest() -> isPost()) {
+            $this -> view -> status = false;
+            $this -> view -> error = Zend_Registry::get('Zend_Translate') -> _('Invalid request method');
+            return;
+        }
+
+        if ($comment_id) {
+            $commentedItem = Engine_Api::_() -> getDbtable('comments', 'yncomment') -> comments($subject) -> getComment($comment_id);
+        } else {
+            $commentedItem = $subject;
+        }
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> unsures($commentedItem) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+
+            if (!Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> isUnsure($commentedItem, $viewer))
+                Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> addUnsure($commentedItem, $viewer);
+
+            // Add notification
+            $owner = $commentedItem -> getOwner();
+            $this -> view -> owner = $owner -> getGuid();
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+
+        // For comments, render the resource
+        if ($subject -> getType() == 'core_comment') {
+            $type = $subject -> resource_type;
+            $id = $subject -> resource_id;
+            Engine_Api::_() -> core() -> clearSubject();
+        } else {
+            $type = $subject -> getType();
+            $id = $subject -> getIdentity();
+        }
+
+        $this -> view -> status = true;
+        $this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Like added');
+        $this -> view -> taggingContent = $this -> _getParam('taggingContent');
+        $this -> view -> showComposerOptions = $this -> _getParam('showComposerOptions');
+        $this -> view -> showAsNested = $this -> _getParam('showAsNested');
+        $this -> view -> page = $this -> _getParam('page', 0);
+        $this -> view -> showAsLike = $showAsLike = $this -> _getParam('showAsLike', 1);
+        $this -> view -> showDislikeUsers = $showDislikeUsers = $this -> _getParam('showDislikeUsers', 1);
+        $this -> view -> showLikeWithoutIcon = $showLikeWithoutIcon = $this -> _getParam('showLikeWithoutIcon', 1);
+        $this -> view -> showLikeWithoutIconInReplies = $showLikeWithoutIconInReplies = $this -> _getParam('showLikeWithoutIconInReplies', 1);
+        $this -> view -> showSmilies = $showSmilies = $this -> _getParam('showSmilies');
+        $this -> view -> photoLightboxComment = $photoLightboxComment = 0;//$this -> _getParam('photoLightboxComment');
+        $this -> view -> commentsorder = $commentsorder = $this -> _getParam('commentsorder');
+
+        $this -> view -> body = $this -> view -> action('list', 'comment', 'yncomment', 
+                array('type' => $type, 
+                    'id' => $id, 
+                    'format' => 'html', 
+                    'parent_comment_id' => $parent_comment_id, 
+                    'page' => $this -> view -> page, 
+                    'parent_div' => 1, 
+                    'taggingContent' => $this -> _getParam('taggingContent'), 
+                    'showComposerOptions' => $this -> _getParam('showComposerOptions'), 
+                    'showAsNested' => $this -> _getParam('showAsNested'), 
+                    'showAsLike' => $this -> _getParam('showAsLike'), 
+                    'showDislikeUsers' => $this -> _getParam('showDislikeUsers'), 
+                    'showLikeWithoutIcon' => $this -> _getParam('showLikeWithoutIcon'), 
+                    'showLikeWithoutIconInReplies' => $this -> _getParam('showLikeWithoutIconInReplies'), 
+                    'showSmilies' => $showSmilies, 
+                    'photoLightboxComment' => $photoLightboxComment, 
+                    'commentsorder' => $commentsorder));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
+
+	public function undounsureAction() {
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $subject = $this -> getSubjectItem();
+        $comment_id = $this -> _getParam('comment_id');
+        $parent_comment_id = $this -> _getParam('parent_comment_id');
+        if (!$this -> getRequest() -> isPost()) {
+            $this -> view -> status = false;
+            $this -> view -> error = Zend_Registry::get('Zend_Translate') -> _('Invalid request method');
+            return;
+        }
+
+        if ($comment_id) {
+            $commentedItem = Engine_Api::_() -> getDbtable('comments', 'yncomment') -> comments($subject) -> getComment($comment_id);
+        } else {
+            $commentedItem = $subject;
+        }
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> unsures($commentedItem) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+
+            if (Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> isUnsure($commentedItem, $viewer))
+                Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> removeUnsure($commentedItem, $viewer);
+
+            // Add notification
+            $owner = $commentedItem -> getOwner();
+            $this -> view -> owner = $owner -> getGuid();
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+
+        // For comments, render the resource
+        if ($subject -> getType() == 'core_comment') {
+            $type = $subject -> resource_type;
+            $id = $subject -> resource_id;
+            Engine_Api::_() -> core() -> clearSubject();
+        } else {
+            $type = $subject -> getType();
+            $id = $subject -> getIdentity();
+        }
+
+        $this -> view -> status = true;
+        $this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Like added');
+        $this -> view -> taggingContent = $this -> _getParam('taggingContent');
+        $this -> view -> showComposerOptions = $this -> _getParam('showComposerOptions');
+        $this -> view -> showAsNested = $this -> _getParam('showAsNested');
+        $this -> view -> page = $this -> _getParam('page', 0);
+        $this -> view -> showAsLike = $showAsLike = $this -> _getParam('showAsLike', 1);
+        $this -> view -> showDislikeUsers = $showDislikeUsers = $this -> _getParam('showDislikeUsers', 1);
+        $this -> view -> showLikeWithoutIcon = $showLikeWithoutIcon = $this -> _getParam('showLikeWithoutIcon', 1);
+        $this -> view -> showLikeWithoutIconInReplies = $showLikeWithoutIconInReplies = $this -> _getParam('showLikeWithoutIconInReplies', 1);
+        $this -> view -> showSmilies = $showSmilies = $this -> _getParam('showSmilies');
+        $this -> view -> photoLightboxComment = $photoLightboxComment = 0;//$this -> _getParam('photoLightboxComment');
+        $this -> view -> commentsorder = $commentsorder = $this -> _getParam('commentsorder');
+
+        $this -> view -> body = $this -> view -> action('list', 'comment', 'yncomment', 
+                array('type' => $type, 
+                    'id' => $id, 
+                    'format' => 'html', 
+                    'parent_comment_id' => $parent_comment_id, 
+                    'page' => $this -> view -> page, 
+                    'parent_div' => 1, 
+                    'taggingContent' => $this -> _getParam('taggingContent'), 
+                    'showComposerOptions' => $this -> _getParam('showComposerOptions'), 
+                    'showAsNested' => $this -> _getParam('showAsNested'), 
+                    'showAsLike' => $this -> _getParam('showAsLike'), 
+                    'showDislikeUsers' => $this -> _getParam('showDislikeUsers'), 
+                    'showLikeWithoutIcon' => $this -> _getParam('showLikeWithoutIcon'), 
+                    'showLikeWithoutIconInReplies' => $this -> _getParam('showLikeWithoutIconInReplies'), 
+                    'showSmilies' => $showSmilies, 
+                    'photoLightboxComment' => $photoLightboxComment, 
+                    'commentsorder' => $commentsorder));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
+
     public function unlikeAction() {
         if (!$this -> _helper -> requireUser() -> isValid()) {
             return;
@@ -703,6 +941,92 @@ class Yncomment_CommentController extends Core_Controller_Action_Standard {
         $this -> view -> photoLightboxComment = $photoLightboxComment = 0;//$this -> _getParam('photoLightboxComment');
         $this -> view -> commentsorder = $commentsorder = $this -> _getParam('commentsorder');
         $this -> view -> body = $this -> view -> action('list', 'comment', 'yncomment', array('type' => $type, 'id' => $id, 'format' => 'html', 'parent_comment_id' => $parent_comment_id, 'page' => $this -> view -> page, 'parent_div' => 1, 'taggingContent' => $taggingContent, 'showComposerOptions' => $showComposerOptions, 'showAsNested' => $showAsNested, 'showAsLike' => $showAsLike, 'showDislikeUsers' => $showDislikeUsers, 'showLikeWithoutIcon' => $showLikeWithoutIcon, 'showLikeWithoutIconInReplies' => $showLikeWithoutIconInReplies, 'showSmilies' => $showSmilies, 'photoLightboxComment' => $photoLightboxComment, 'commentsorder' => $commentsorder));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
+	public function undounlikeAction() {
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $subject = $this -> getSubjectItem();
+        $comment_id = $this -> _getParam('comment_id');
+        $parent_comment_id = $this -> _getParam('parent_comment_id');
+        if (!$this -> getRequest() -> isPost()) {
+            $this -> view -> status = false;
+            $this -> view -> error = Zend_Registry::get('Zend_Translate') -> _('Invalid request method');
+            return;
+        }
+
+        if ($comment_id) {
+            $commentedItem = Engine_Api::_() -> getDbtable('comments', 'yncomment') -> comments($subject) -> getComment($comment_id);
+        } else {
+            $commentedItem = $subject;
+        }
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($commentedItem) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+
+            if (Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> isDislike($commentedItem, $viewer))
+                Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> removeDislike($commentedItem, $viewer);
+
+            // Add notification
+            $owner = $commentedItem -> getOwner();
+            $this -> view -> owner = $owner -> getGuid();
+
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+
+        // For comments, render the resource
+        if ($subject -> getType() == 'core_comment') {
+            $type = $subject -> resource_type;
+            $id = $subject -> resource_id;
+            Engine_Api::_() -> core() -> clearSubject();
+        } else {
+            $type = $subject -> getType();
+            $id = $subject -> getIdentity();
+        }
+
+        $this -> view -> status = true;
+        $this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Like added');
+        $this -> view -> taggingContent = $this -> _getParam('taggingContent');
+        $this -> view -> showComposerOptions = $this -> _getParam('showComposerOptions');
+        $this -> view -> showAsNested = $this -> _getParam('showAsNested');
+        $this -> view -> page = $this -> _getParam('page', 0);
+        $this -> view -> showAsLike = $showAsLike = $this -> _getParam('showAsLike', 1);
+        $this -> view -> showDislikeUsers = $showDislikeUsers = $this -> _getParam('showDislikeUsers', 1);
+        $this -> view -> showLikeWithoutIcon = $showLikeWithoutIcon = $this -> _getParam('showLikeWithoutIcon', 1);
+        $this -> view -> showLikeWithoutIconInReplies = $showLikeWithoutIconInReplies = $this -> _getParam('showLikeWithoutIconInReplies', 1);
+        $this -> view -> showSmilies = $showSmilies = $this -> _getParam('showSmilies');
+        $this -> view -> photoLightboxComment = $photoLightboxComment = 0;//$this -> _getParam('photoLightboxComment');
+        $this -> view -> commentsorder = $commentsorder = $this -> _getParam('commentsorder');
+
+        $this -> view -> body = $this -> view -> action('list', 'comment', 'yncomment', 
+                array('type' => $type, 
+                    'id' => $id, 
+                    'format' => 'html', 
+                    'parent_comment_id' => $parent_comment_id, 
+                    'page' => $this -> view -> page, 
+                    'parent_div' => 1, 
+                    'taggingContent' => $this -> _getParam('taggingContent'), 
+                    'showComposerOptions' => $this -> _getParam('showComposerOptions'), 
+                    'showAsNested' => $this -> _getParam('showAsNested'), 
+                    'showAsLike' => $this -> _getParam('showAsLike'), 
+                    'showDislikeUsers' => $this -> _getParam('showDislikeUsers'), 
+                    'showLikeWithoutIcon' => $this -> _getParam('showLikeWithoutIcon'), 
+                    'showLikeWithoutIconInReplies' => $this -> _getParam('showLikeWithoutIconInReplies'), 
+                    'showSmilies' => $showSmilies, 
+                    'photoLightboxComment' => $photoLightboxComment, 
+                    'commentsorder' => $commentsorder));
         $this -> _helper -> contextSwitch -> initContext();
     }
 

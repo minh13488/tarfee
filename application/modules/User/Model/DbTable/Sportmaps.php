@@ -9,9 +9,6 @@ class User_Model_DbTable_Sportmaps extends Engine_Db_Table {
 		$select = $sportTbl->select()->setIntegrityCheck(false);
 		$select -> from("$sportTblName as sport", "sport.*");
 		$select -> joinLeft("$tblName as map", "map.sport_id = sport.sportcategory_id", "");
-		if(!isset($limit) && empty($limit)) {
-			$limit = 2;
-		}
 		$select 
 			-> where("sport.parent_id = ?", '1')
 			-> where("map.user_id = ?", $user_id)

@@ -122,7 +122,7 @@
 				),
 				
 				'group_extended' => array(
-						'route' => 'groups/:controller/:action/*',
+						'route' => 'clubs/:controller/:action/*',
 						'defaults' => array(
 								'module' => 'advgroup',
 								'controller' => 'index',
@@ -135,7 +135,7 @@
 				),
 				'group_viewsubfolder' => array(
 							
-						'route' => 'groups/:controller/:action/slug/:slug/folder_id/:folder_id/parent_type/:parent_type/parent_id/:parent_id/*',
+						'route' => 'clubs/:controller/:action/slug/:slug/folder_id/:folder_id/parent_type/:parent_type/parent_id/:parent_id/*',
 						'defaults' => array(
 								'module' => 'advgroup',
 								'controller' => 'file',
@@ -144,7 +144,7 @@
 						
 				),
 				'group_general' => array(
-						'route' => 'groups/:action/*',
+						'route' => 'clubs/:action/*',
 						'defaults' => array(
 								'module' => 'advgroup',
 								'controller' => 'index',
@@ -155,7 +155,7 @@
 						)
 				),
 				'group_specific' => array(
-						'route' => 'groups/:action/:group_id/*',
+						'route' => 'clubs/:action/:group_id/*',
 						'defaults' => array(
 								'module' => 'advgroup',
 								'controller' => 'group',
@@ -167,7 +167,7 @@
 						)
 				),
 				'group_post' => array(
-						'route' => 'groups/post/control/:action/*',
+						'route' => 'clubs/post/control/:action/*',
 						'defaults' => array(
 								'module' => 'advgroup',
 								'controller' => 'post',
@@ -178,7 +178,7 @@
 						)
 				),
 				'group_profile' => array(
-						'route' => 'group/:id/:slug/*',
+						'route' => 'club/:id/:slug/*',
 						'defaults' => array(
 								'module' => 'advgroup',
 								'controller' => 'profile',
@@ -198,7 +198,7 @@
 						)
 				),
 				'group_link' =>array(
-						'route' => 'groups/link/:action/*',
+						'route' => 'clubs/link/:action/*',
 						'defaults' =>array(
 								'module' => 'advgroup',
 								'controller' => 'link',
@@ -209,7 +209,7 @@
 						)
 				),
 				'group_report' => array(
-						'route' => 'group/report/:group_id/*',
+						'route' => 'club/report/:group_id/*',
 						'defaults' => array(
 								'module' => 'advgroup',
 								'controller' => 'report',
@@ -219,7 +219,7 @@
 						'group_id' => '\d+',
 				),
 				'group_activity' => array(
-						'route' => 'group/:action/*',
+						'route' => 'club/:action/*',
 						'defaults' => array(
 								'module' => 'advgroup',
 								'controller' => 'activity',

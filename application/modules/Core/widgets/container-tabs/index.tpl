@@ -49,7 +49,15 @@
         $class = join(' ', $class);
       ?>
       <?php if( $key < $this->max ): ?>
-        <li class="<?php echo $class ?>"><a href="javascript:void(0);" onclick="tabContainerSwitch($(this), '<?php echo $tab['containerClass'] ?>');"><?php echo $this->translate($tab['title']) ?><?php if( !empty($tab['childCount']) ): ?><span>(<?php echo $tab['childCount'] ?>)</span><?php endif; ?></a></li>
+        <li class="<?php echo $class ?>">
+	        <a href="javascript:void(0);" onclick="tabContainerSwitch($(this), '<?php echo $tab['containerClass'] ?>');">
+	        	<span class="icon_tab_switch"></span>
+	        	<?php echo $this->translate($tab['title']) ?>
+	        	<?php if( !empty($tab['childCount']) ): ?>
+	        		<span>(<?php echo $tab['childCount'] ?>)</span>
+	        	<?php endif; ?>
+        	</a>
+        </li>
       <?php endif;?>
     <?php endforeach; ?>
     <?php if (count($this->tabs) > $this->max):?>

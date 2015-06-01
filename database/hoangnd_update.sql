@@ -169,13 +169,13 @@ CREATE TABLE IF NOT EXISTS `engine4_user_locations` (
 INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
 ('profilesection_admin_settings_location', 'user', 'Manage Locations', '', '{"route":"admin_default","module":"user","controller":"locations"}', 'profilesection_admin_main', '', 4);
 
-5.28.2015
+-- 5.28.2015
 
 ALTER TABLE `engine4_users` ADD `country_id` INT(11) NOT NULL DEFAULT '0' ;
 ALTER TABLE `engine4_users` ADD `province_id` INT(11) NOT NULL DEFAULT '0' ;
 ALTER TABLE `engine4_users` ADD `city_id` INT(11) NOT NULL DEFAULT '0' ;
 
-5.30.2015
+-- 5.30.2015
 --
 -- Table structure for table `engine4_user_sportmaps`
 --
@@ -187,3 +187,35 @@ CREATE TABLE IF NOT EXISTS `engine4_user_sportmaps` (
   `modified_date` datetime NOT NULL,
   PRIMARY KEY (`map_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- 5.31.2015
+--
+-- Table structure for table `engine4_user_eyeons`
+--
+CREATE TABLE IF NOT EXISTS `engine4_user_eyeons` (
+  `eyeon_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) unsigned NOT NULL,
+  `player_id` int(11) unsigned NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  PRIMARY KEY (`eyeon_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- 6.1.2015
+INSERT IGNORE INTO `engine4_authorization_permissions`
+  SELECT
+    level_id as `level_id`,
+    'user' as `type`,
+    'max_sport' as `name`,
+    3 as `value`,
+    '0' as `params`
+  FROM `engine4_authorization_levels` WHERE `type` NOT IN('public');
+  
+INSERT IGNORE INTO `engine4_authorization_permissions`
+  SELECT
+    level_id as `level_id`,
+    'user' as `type`,
+    'max_club' as `name`,
+    3 as `value`,
+    '0' as `params`
+  FROM `engine4_authorization_levels` WHERE `type` NOT IN('public');

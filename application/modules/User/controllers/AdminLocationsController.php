@@ -2,7 +2,6 @@
 class User_AdminLocationsController extends Core_Controller_Action_Admin {
 
 	public function indexAction() {
-		$this -> view -> navigation = $navigation = Engine_Api::_() -> getApi('menus', 'core') -> getNavigation('profilesection_admin_main', array(), 'profilesection_admin_settings_location');
 		$this->view->id = $id = $this->_getParam('id', 0);
 		$this->view->location = $location = Engine_Api::_()->getItem('user_location', $id);
 		$this->view->locations = $locations = Engine_Api::_()->getItemTable('user_location')->getLocations($id);

@@ -169,25 +169,6 @@ class User_Form_Playercard_Create extends Engine_Form
       }
     }
 
- 	// Comment
-    $commentOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('user_playercard', $user, 'auth_comment');
-    $commentOptions = array_intersect_key($availableLabels, array_flip($commentOptions));
-
-    if( !empty($commentOptions) && count($commentOptions) >= 1 ) {
-      // Make a hidden field
-      if(count($commentOptions) == 1) {
-        $this->addElement('hidden', 'auth_comment', array('value' => key($commentOptions)));
-      // Make select box
-      } else {
-        $this->addElement('Select', 'auth_comment', array(
-            'label' => 'Comment Privacy',
-            'description' => 'Who may post comments on this player card?',
-            'multiOptions' => $commentOptions,
-            'value' => key($commentOptions),
-        ));
-        $this->auth_comment->getDecorator('Description')->setOption('placement', 'append');
-      }
-	}
     // Buttons
     $this->addElement('Button', 'submit', array(
       'label' => 'Save Changes',

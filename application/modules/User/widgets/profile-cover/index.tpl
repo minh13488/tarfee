@@ -147,6 +147,20 @@ function cancelReposition() {
                <a href="<?php echo $this -> user -> getHref();?>">
                   <h2><?php echo $this -> user -> getTitle()?></h2>
                </a>
+               <?php
+                $about_me = "";
+                $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($this -> user);
+                foreach( $fieldStructure as $map ) {
+             		$field = $map->getChild();
+             		$value = $field->getValue($this -> user);
+                 	if($field->type == 'about_me') {
+                      	$about_me = $value['value'];
+                 	}
+                }
+         		?>
+         		<?php if ($about_me != "") :?>
+         			<h4><?php echo $about_me?></h4>
+         		<?php endif;?>
             </div>
             <div class="mtop5">
                <div></div>
@@ -242,7 +256,7 @@ function cancelReposition() {
          </div>
       </div>
       <div class="clr"></div>
-     <div class='tabs_alt tabs_parent'>
+     <div class='status_alt status_parent'>
 	  <ul id='main_tabs'>
 	  	 <?php $direction = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.friends.direction');
     	if ( $direction == 0 ): ?>
@@ -290,23 +304,24 @@ function cancelReposition() {
 			</li>
 		<?php endif;?>
 		<li>
-		   <a href="#">
-		      <div><span class="number_tabs">90</span></div>
-		      <div>eye on</div>
+		   <a>
+		      <div><span class="number_tabs"><?php echo count($this->user->getEyeOns())?></span></div>
+		      <div><?php echo $this -> translate("eye on")?></div>
 		   </a>
 		</li>
+		<?php foreach($this -> sports as $sport):?>
 		<li>
-		   <a href="#">
-		      <div><span class="number_icons"><i class="fa fa-futbol-o"></i></span></div>
-		      <div>football</div>
-		   </a>
+			<a>
+	      <div>
+	      	<span class="number_icons">
+	      		<?php echo $this -> itemPhoto($sport, 'thumb.icon');?>
+			</span>
+		  </div>
+	      <div><?php echo $this -> string() -> truncate($sport -> getTitle(), 10)?></div>
+	      </a>
 		</li>
-		<li>
-		   <a href="#">
-		      <div><span class="number_icons"><i class="fa fa-futbol-o"></i></span></div>
-		      <div>basketball</div>
-		   </a>
-		</li>
+		<?php endforeach;?>
+		
 		<?php foreach($this -> clubs as $club):?>
 		<li>
 		   <a href="<?php echo $club -> getHref();?>">
@@ -322,7 +337,7 @@ function cancelReposition() {
 	  </ul>
 	</div>
 		<?php if($this->src_img):?>
-		<div class="tabs_alt tab_identify_account">
+		<div class="status_alt tab_identify_account">
 			<div class="user_icon"><img src='<?php echo $this->src_img;?>'></div>
 			<div class="user_type_verify"><?php echo $this -> translate("professtional individual verified by Tarfee");?></div>
 		</div>

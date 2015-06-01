@@ -91,12 +91,12 @@ class Ynvideo_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_A
 
             // Element: comment
             $this->addElement('Radio', 'video_comment', array(
-                'label' => 'Allow Commenting on Videos?',
+                'label' => 'Allow Comment/Like/Usure/Dislike on Videos?',
                 'description' => 'Do you want to let members of this level comment on videos?',
                 'multiOptions' => array(
-                    2 => 'Yes, allow members to comment on all videos, including private ones.',
-                    1 => 'Yes, allow members to comment on videos.',
-                    0 => 'No, do not allow members to comment on videos.',
+                    2 => 'Yes, allow members to comment/like/unsure/dislike on all videos, including private ones.',
+                    1 => 'Yes, allow members to comment/like/unsure/dislike on videos.',
+                    0 => 'No, do not allow members to comment/like/unsure/dislike on videos.',
                 ),
                 'value' => ( $this->isModerator() ? 2 : 1 ),
             ));

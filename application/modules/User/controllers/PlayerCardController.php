@@ -151,18 +151,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 				$auth -> setAllowed($player_card, $role, 'view', ($i <= $viewMax));
 			}
 
-			$roles = array(
-				'owner',
-				'owner_member',
-				'owner_member_member',
-				'owner_network',
-				'registered',
-				'everyone'
-			);
-			if (isset($values['auth_comment']))
-				$auth_comment = $values['auth_comment'];
-			else
-				$auth_comment = "everyone";
+			$auth_comment = "everyone";
 			$commentMax = array_search($auth_comment, $roles);
 			foreach ($roles as $i => $role)
 			{
@@ -214,10 +203,6 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 	      if( 1 === $auth->isAllowed($player_card, $role, 'view') )
 	      {
 	        $form->auth_view->setValue($role);
-	      }
-		   if( 1 === $auth->isAllowed($player_card, $role, 'comment') )
-	      {
-	        $form->auth_comment->setValue($role);
 	      }
 	    }
 		
@@ -410,19 +395,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			{
 				$auth -> setAllowed($player_card, $role, 'view', ($i <= $viewMax));
 			}
-
-			$roles = array(
-				'owner',
-				'owner_member',
-				'owner_member_member',
-				'owner_network',
-				'registered',
-				'everyone'
-			);
-			if ($values['auth_comment'])
-				$auth_comment = $values['auth_comment'];
-			else
-				$auth_comment = "everyone";
+			$auth_comment = "everyone";
 			$commentMax = array_search($auth_comment, $roles);
 			foreach ($roles as $i => $role)
 			{
@@ -597,5 +570,57 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 	    ));
 	}
 
+	public function addEyeOnAction() {
+        $this -> _helper -> layout -> disableLayout();
+        $this -> _helper -> viewRenderer -> setNoRender(true);
+        $id = $this->_getParam('id', 0);
+        $player = Engine_Api::_()->getItem('user_playercard', $id);
+        if (!$player) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card can not be found.')));
+        }
+        
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if (!$viewer->getIdentity()) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('You do not have permission to do this.')));
+        }
+        
+        if ($player->isEyeOn()) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card already in your eye on list.')));
+        }
+        
+        $table = Engine_Api::_()->getDbTable('eyeons', 'user');
+        $eyeon = $table->createRow();
+        $eyeon->setFromArray(array('user_id' => $viewer->getIdentity(), 'player_id'=>$id));
+        $eyeon->save();
+        echo Zend_Json::encode(array('status' => true));
+    }
+	
+	public function removeEyeOnAction() {
+        $this -> _helper -> layout -> disableLayout();
+        $this -> _helper -> viewRenderer -> setNoRender(true);
+        $id = $this->_getParam('id', 0);
+        $player = Engine_Api::_()->getItem('user_playercard', $id);
+        if (!$player) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card can not be found.')));
+        }
+        
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if (!$viewer->getIdentity()) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('You do not have permission to do this.')));
+        }
+        
+        if (!$player->isEyeOn()) {
+            echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card not in your eye on list.')));
+        }
+        
+        $table = Engine_Api::_()->getDbTable('eyeons', 'user');
+        $where = array(
+            $table->getAdapter()->quoteInto('user_id = ?', $viewer->getIdentity()),
+            $table->getAdapter()->quoteInto('player_id = ?', $id)
+        );
+        $table->delete($where);
+        
+        echo Zend_Json::encode(array('status' => true));
+    }
 }
 ?>

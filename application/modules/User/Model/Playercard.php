@@ -10,9 +10,7 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 	public function getHref($params = array())
 	{
 		$params = array_merge(array(
-			'route' => 'user_extended',
-			'controller' => 'player-card',
-			'action' => 'view',
+			'route' => 'playercard_profile',
 			'reset' => true,
 			'id' => $this -> getIdentity(),
 			'slug' => $this -> getSlug(),
@@ -145,4 +143,10 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
         return $this->authorization()->isAllowed(null, 'view'); 
     }
 	
+	function isEyeOn($user_id = null) {
+		if (!$user_id) {
+            $user_id = Engine_Api::_()->user()->getViewer()->getIdentity();
+        }
+        return Engine_Api::_()->getDbTable('eyeons', 'user')->isEyeOn($user_id, $this->getIdentity());
+	}
 }

@@ -54,7 +54,7 @@
     }
     
     // Populate data
-    var maxRecipients = 2;
+    var maxRecipients = <?php echo $this->max_sport?$this->max_sport:0?>;
     var to = {
         id : false,
         type : false,
@@ -138,7 +138,7 @@
         document.getElementById('sport_ids-wrapper').style.height = 'auto';
         <?php endforeach; ?>
         
-        <?php if (count($this->sports) >= 2) :?>
+        <?php if ($this->max_sport > 0 && count($this->sports) >= $this->max_sport) :?>
         document.getElementById('sport').style.display = 'none';
         <?php endif; ?>
     });

@@ -4,7 +4,6 @@
     border: none !important;
     padding: 0 !important;
     clear: both;
-    margin-bottom: 15px;
     padding: 0 !important;
 	.prelative
 	{
@@ -664,79 +663,268 @@
 	    border-radius: 4px;
 	    box-shadow: 0 0 10px;
 	}
-	.tabs_alt.tabs_parent
-	{
-	    clear: both;
-	    background: none !important;
-	    box-shadow: none !Important;
-	    border: none !important;
-	    border-radius: 0;
-	    padding: 0;
-	    margin: 0px 0 0 192px;
-	    position: relative;
-	    overflow: inherit;
-	    z-index: 9;
-	}
+	.layout_user_profile_cover .status_alt.status_parent
+{
+    clear: both;
+    background: none !important;
+    box-shadow: none !Important;
+    border: none !important;
+    border-radius: 0;
+    padding: 0;
+    margin: 0px 0 0 192px;
+    position: relative;
+    overflow: inherit;
+    z-index: 9;
+}
 	
-	/*----------------------------------------PLUGIN RESPONSIVENESS WORK START
-	 * HERE----------------------------------------------*/
-	@media only screen and (max-width: 900px)
+	/*=================================================Tab
+	 * Container=============================================*/
+	
+	/*Profile Tabs*/
+.
+.tarfee_profile_cover_head_section div.status_alt
+{
+    background: none !important;
+    box-shadow: none !Important;
+    border: none !important;
+    border-radius: 0;
+    padding: 0;
+    margin: -56px 0 0 210px;
+    position: absolute;
+    overflow: inherit;
+    z-index: 9;
+}
+[dir="rtl"] .
+.tarfee_profile_cover_head_section div.status_alt
+{
+    margin: -58px 210px 0 0;
+}
+.tarfee_profile_cover_head_section div.status_alt > ul
+{
+    background: none;
+    border: none;
+    margin: 0;
+    padding: 0;
+    display: block;
+}
+.tarfee_profile_cover_head_section div.status_alt > ul > li
+{
+    border-width: 0 0px;
+    float: left;
+    margin: -3px 5px 0px 2px;
+    padding: 0;
+    width: auto;
+}
+[dir="rtl"] .tarfee_profile_cover_head_section div.status_alt > ul > li
+{
+    float: right;
+}
+.tarfee_profile_cover_head_section div.status_alt > ul > li + li
+{
+    border-left-width: 0px;
+}
+[dir="rtl"].tarfee_profile_cover_head_section div.status_alt > ul > li + li
+{
+    border-left-width: 1px;
+    border-right-width: 0px;
+}
+.tarfee_profile_cover_head_section div.status_alt > ul > li.active
+{
+}
+.tarfee_profile_cover_head_section div.status_alt > ul > li a, .tarfee_profile_cover_head_sectiondiv.status_alt > ul > li a:hover, .tarfee_profile_cover_head_sectiondiv.status_alt > ul > li.active > a, .tarfee_profile_cover_head_section div.status_alt > ul > li.tab_open > a
+{
+    border: none !important;
+    border-radius: 0;
+    float: left;
+    font-size: 13px;
+    margin: 0;
+    padding: 12px 12px 2px 12px;
+    top: 0;
+}
+[dir="rtl"].tarfee_profile_cover_head_section div.status_alt > ul > li a, [dir="rtl"].tarfee_profile_cover_head_section div.status_alt > ul > li a:hover, [dir="rtl"].tarfee_profile_cover_head_section div.status_alt > ul > li.active > a, [dir="rtl"].tarfee_profile_cover_head_section div.status_alt > ul > li.tab_open > a
+{
+    float: right;
+}
+.tarfee_profile_cover_head_section div.status_alt > ul > li a:hover
+{
+    background-color: rgba(204, 204, 204, 0.1);
+}
+.tarfee_profile_cover_head_section div.status_alt > ul > li.active > a, .tarfee_profile_cover_head_section div.status_alt > ul > li.active > a:hover, .tarfee_profile_cover_head_section div.status_alt > ul > li.tab_open > a
+{
+    background-color: rgba(204, 204, 204, 0.1);
+    top: 0;
+    position: static;
+}
+.tarfee_profile_cover_head_section div.status_alt > ul > li.active > a, .tarfee_profile_cover_head_section div.status_alt > ul > li.active > a:hover
+{
+    background-color: transparent;
+}
+.tab_pulldown_contents_wrapper
+{
+    margin-top: 40px;
+}
+.
+.tarfee_profile_cover_head_section.tarfee_profile_cover_has_tabs
+{
+    clear: both;
+}
+.
+.tarfee_profile_cover_head_section.tarfee_profile_cover_has_tabs .status_alt + div
+{
+    clear: both;
+    margin: 0;
+}
+/*If there is no profile*/
+.tarfee_profile_cover_no_profile_photo div.status_alt
+{
+    margin: -56px 0 0 0px;
+    z-index: 11;
+}
+/*More Pulldown*/
+.tab_pulldown_contents_wrapper
+{
+    border-radius: 0;
+    padding: 0;
+}
+.tab_pulldown_contents, .tab_pulldown_contents ul
+{
+    background: none;
+    padding: 0;
+    margin: 0;
+}
+.status_alt.tab_identify_account
+{
+    background-color: #A0B74F;
+    float: right;
+    min-height: 60px;
+    padding-left: 20px;
+    padding-right: 20px;
+    word-wrap: break-word;
+    max-width: 220px;
+}
+.status_alt.tab_identify_account > div
+{
+    color: #FFF;
+    padding-top: 10px;
+}
+.status_alt.tab_identify_account div.user_icon
+{
+    float: left;
+    font-size: 30px;
+    line-height: 40px;
+}
+.status_alt.tab_identify_account div.user_type_verify
+{
+    margin-left: 40px;
+}
+.status_alt.status_parent ul li a div span
+{
+	    font-size: 20px;
+	    font-weight: bold;
+	    img
+	    {
+	    	width: 20px;
+	    	height: 20px;
+	    }
+}
+
+
+	.tarfee_profile_cover_photo_wrapper
 	{
-	    /*---------USER COVER PHOTO CSS END HERE----------------*/
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_cover_head_section_inner
+		height: 355px;
+		min-height:200px;
+	    .cover-reposition
 	    {
-	        margin-left: 0;
-	        position: static;
-	        margin-top: 20px;
-	    }
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_buttons
-	    {
-	        position: inherit;
-	    }
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_cover_tarfee_button
-	    {
-	        position: inherit;
-	        margin-top: 5px;
-	    }
-	    .tarfee_profile_cover_head_section_inner
-	    {
-	        margin-left: 0;
-	        clear: both;
-	    }
-	    [dir="rtl"] .tarfee_profile_cover_head_section_inner
-	    {
-	        margin-right: 0x;
-	    }
-	    .tarfee_profile_cover_photo img
-	    {
-	        top: 0 !important;
-	    }
-	    .tarfee_profile_main_photo_wrapper
-	    {
-	        margin-left: 0;
-	        margin-bottom: 50px;
-	    }
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status h2
-	    {
-	        font-size: 20px;
-	        text-shadow: none;
-	        color: #333 !important;
-	    }
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_stats, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_stats a, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_statistics, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_statistics div, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status a, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status div
-	    {
-	        color: #333 !important;
-	        text-shadow: none;
-	    }
-	    html .tarfee_profile_coverinfo_status *, html .tarfee_profile_coverinfo_status a:link
-	    {
-	        color: #333 !important;
-	    }
+		    z-index: 10;
+		    position: absolute;
+		    span a 
+		    {
+			    display: block;
+			    border-top: 1px solid #fff;
+			    background-color: rgba(0, 0, 0, 0.6);
+			    color: #fff;
+			    padding: 5px 10px;
+			}
+		}
 	}
-	@media only screen and (max-width: 600px)
+	.tarfee_profile_main_photo #edit-photo-btn
 	{
+		position: absolute;
+	  	z-index: 10;
+	  	width: 100%;
+	  	text-align: center;
+	  	bottom:0;
+	  	a
+	  	{
+	  		display: block;
+		  	background-color: rgba(0, 0, 0, 0.6);
+		  	color: #fff;
+		  	padding: 5px 10px;
+	  	}
+	}
+}
+/*--------------------PLUGIN RESPONSIVENESS WORK START HERE------------------------------------*/
+
+
+@media only screen and (max-width: 900px)
+{
+	/*---------USER COVER PHOTO CSS END HERE----------------*/
+.generic_layout_container.layout_user_profile_cover{
+	.tarfee_profile_cover_has_tabs .tarfee_profile_cover_head_section_inner
+	{
+		margin-left: 0;
+		position: static;
+		margin-top: 20px;
+	}
+	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_buttons
+	{
+		position: inherit;
+	}
+	.tarfee_profile_cover_has_tabs .tarfee_profile_cover_tarfee_button
+	{
+		position: inherit;
+		margin-top: 5px;
+	}
+	.tarfee_profile_cover_head_section_inner
+	{
+		margin-left: 0;
+		clear: both;
+	}
+	[dir="rtl"] .tarfee_profile_cover_head_section_inner
+	{
+		margin-right: 0x;
+	}
+	.tarfee_profile_cover_photo img
+	{
+		top: 0 !important;
+	}
+	.tarfee_profile_main_photo_wrapper
+	{
+		margin-left: 0;
+		margin-bottom: 50px;
+	}
+	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status h2
+	{
+		font-size: 20px;
+		text-shadow: none;
+		color: #333 !important;
+	}
+	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_stats, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_stats a, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_statistics, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_statistics div, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status a, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status div
+	{
+		color: #333 !important;
+		text-shadow: none;
+	}
+	html .tarfee_profile_coverinfo_status *, html .tarfee_profile_coverinfo_status a:link
+	{
+		color: #333 !important;
+	}
+	}
+}
+@media only screen and (max-width: 600px){
 	    /*USER COVER PHOTO CSS END HERE*/
 	    /*Profile Cover Photo Start Here*/
 	    /*Cover Information Starts Here*/
+.generic_layout_container.layout_user_profile_cover{
 	    .tarfee_profile_main_photo_wrapper
 	    {
 	        margin-left: 0;
@@ -853,229 +1041,49 @@
 	    }
 	    /*Cover Photo Upload Photo Popup end Here*/
 	}
-	
-	/*=================================================Tab
-	 * Container=============================================*/
-	
-	/*Profile Tabs*/
-	.
-	.tarfee_profile_cover_head_section div.tabs_alt
-	{
-	    background: none !important;
-	    box-shadow: none !Important;
-	    border: none !important;
-	    border-radius: 0;
-	    padding: 0;
-	    margin: -56px 0 0 210px;
-	    position: absolute;
-	    overflow: inherit;
-	    z-index: 9;
-	}
-	[dir="rtl"] .
-	.tarfee_profile_cover_head_section div.tabs_alt
-	{
-	    margin: -58px 210px 0 0;
-	}
-	.tarfee_profile_cover_head_section div.tabs_alt > ul
-	{
-	    background: none;
-	    border: none;
-	    margin: 0;
-	    padding: 0;
-	    display: block;
-	}
-	.tarfee_profile_cover_head_section div.tabs_alt > ul > li
-	{
-	    border-width: 0 0px;
-	    float: left;
-	    margin: -3px 5px 0px 2px;
-	    padding: 0;
-	    width: auto;
-	}
-	[dir="rtl"] .tarfee_profile_cover_head_section div.tabs_alt > ul > li
-	{
-	    float: right;
-	}
-	.tarfee_profile_cover_head_section div.tabs_alt > ul > li + li
-	{
-	    border-left-width: 0px;
-	}
-	[dir="rtl"].tarfee_profile_cover_head_section div.tabs_alt > ul > li + li
-	{
-	    border-left-width: 1px;
-	    border-right-width: 0px;
-	}
-	.tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li.active
-	{
-	}
-	.tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li a, .tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li a:hover, .tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li.active > a, .tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li.tab_open > a
-	{
-	    border: none !important;
-	    border-radius: 0;
-	    float: left;
-	    font-size: 13px;
-	    margin: 0;
-	    padding: 12px;
-	    top: 0;
-	}
-	[dir="rtl"].tarfee_profile_cover_head_section div.tabs_alt > ul > li a, [dir="rtl"].tarfee_profile_cover_head_section div.tabs_alt > ul > li a:hover, [dir="rtl"].tarfee_profile_cover_head_section div.tabs_alt > ul > li.active > a, [dir="rtl"].tarfee_profile_cover_head_section div.tabs_alt > ul > li.tab_open > a
-	{
-	    float: right;
-	}
-	.tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li a:hover
-	{
-	    background-color: rgba(204, 204, 204, 0.1);
-	}
-	.tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li.active > a, .tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li.active > a:hover, .tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li.tab_open > a
-	{
-	    background-color: rgba(204, 204, 204, 0.1);
-	    top: 0;
-	    position: static;
-	}
-	.tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li.active > a, .tarfee_profile_cover_head_sectiondiv.tabs_alt > ul > li.active > a:hover
-	{
-	    background-color: transparent;
-	}
-	.tab_pulldown_contents_wrapper
-	{
-	    margin-top: 40px;
-	}
-	.
-	.tarfee_profile_cover_head_section.tarfee_profile_cover_has_tabs
-	{
-	    clear: both;
-	}
-	.
-	.tarfee_profile_cover_head_section.tarfee_profile_cover_has_tabs .tabs_alt + div
-	{
-	    clear: both;
-	    margin: 0;
-	}
-	/*If there is no profile*/
-	.tarfee_profile_cover_no_profile_photo div.tabs_alt
-	{
-	    margin: -56px 0 0 0px;
-	    z-index: 11;
-	}
-	/*More Pulldown*/
-	.tab_pulldown_contents_wrapper
-	{
-	    border-radius: 0;
-	    padding: 0;
-	}
-	.tab_pulldown_contents, .tab_pulldown_contents ul
-	{
-	    background: none;
-	    padding: 0;
-	    margin: 0;
-	}
-	.tabs_alt.tab_identify_account
-	{
-	    background-color: #A0B74F;
-	    float: right;
-	    min-height: 60px;
-	    margin-top: -2px;
-	    padding-left: 20px;
-	    padding-right: 20px;
-	    word-wrap: break-word;
-	    max-width: 220px;
-	}
-	.tabs_alt.tab_identify_account > div
-	{
-	    color: #FFF;
-	    padding-top: 10px;
-	}
-	.tabs_alt.tab_identify_account div.user_icon
-	{
-	    float: left;
-	    font-size: 30px;
-	    line-height: 40px;
-	}
-	.tabs_alt.tab_identify_account div.user_type_verify
-	{
-	    margin-left: 40px;
-	}
-	.tabs_alt.tabs_parent ul li a div span
-	{
-	    font-size: 20px;
-	    font-weight: bold;
-	    img
-	    {
-	    	width: 20px;
-	    	height: 20px;
-	    }
-	}
-	@media only screen and (max-width: 900px)
-	{
-	    .tarfee_profile_cover_head_section div.tabs_alt
-	    {
-	        margin: 10px 0 !important;
-	        position: relative !important
-	    }
-	    .layout_middle
-	    {
-	        width: 100%;
-	    }
-	    .tabs_alt.tabs_parent
-	    {
-	        min-height: 65px;
-	    }
-	
-	}
-	@media only screen and (max-width: 600px)
-	{
-	    .layout_middle
-	    {
-	        width: 100%;
-	    }
-	    .tabs_alt.tabs_parent
-	    {
-	        min-height: 60px;
-	    }
-	}
-	@media only screen and (max-width: 1000px)
-	{
-	    .tabs_alt.tab_identify_account
-	    {
-	        clear: both;
-	        float: left;
-	        margin-top: 10px;
-	    }
-	}
-	.tarfee_profile_cover_photo_wrapper
-	{
-		height: 355px;
-		min-height:200px;
-	    .cover-reposition
-	    {
-		    z-index: 10;
-		    position: absolute;
-		    span a 
-		    {
-			    display: block;
-			    border-top: 1px solid #fff;
-			    background-color: rgba(0, 0, 0, 0.6);
-			    color: #fff;
-			    padding: 5px 10px;
-			}
-		}
-	}
-	.tarfee_profile_main_photo #edit-photo-btn
-	{
-		position: absolute;
-	  	z-index: 10;
-	  	width: 100%;
-	  	text-align: center;
-	  	bottom:0;
-	  	a
-	  	{
-	  		display: block;
-		  	background-color: rgba(0, 0, 0, 0.6);
-		  	color: #fff;
-		  	padding: 5px 10px;
-	  	}
-	}
 }
+@media only screen and (max-width: 900px)
+{
+.generic_layout_container.layout_user_profile_cover{
+    .tarfee_profile_cover_head_section div.status_alt
+    {
+		clear: both;
+        margin: 10px 0 !important;
+        position: relative !important
+    }
+    .layout_middle{
+        width: 100%;
+    }
+    .status_alt.status_parent{
+        min-height: 65px;
+    }
+  }
+}	
+@media only screen and (max-width: 600px)
+{
+.generic_layout_container.layout_user_profile_cover{
+    .layout_middle
+    {
+        width: 100%;
+    }
+    .status_alt.status_parent
+	{
+        min-height: 60px;
+    }
+  }
+}
+@media only screen and (max-width: 1000px)
+{
+.generic_layout_container.layout_user_profile_cover{
+    .status_alt.tab_identify_account
+    {
+        clear: both;
+        float: left;
+        margin-top: 10px;
+    }
+  }
+}
+
 .layout_page_user_profile_index
 {
 	.layout_right
@@ -1142,3 +1150,70 @@
 	}
 }
 
+
+/* Tab Profile section and Players*/
+.layout_page_user_profile_index
+{
+	.layout_right
+	{
+		width: 330px;
+	}
+	.layout_middle .layout_core_container_tabs{
+		.tabs_alt.tabs_parent ul {
+			  background-color: #FFF;
+			  border-bottom-left-radius: 5px;
+			  border-bottom-right-radius: 5px;
+			  margin-left: 10px;
+			  margin-right: 10px;
+			  display: -webkit-box;
+			  display: box;
+			  li.tab_layout_user_profile_sections a>span {
+					background-image: url(~/application/modules/User/externals/images/about_tab.png);
+				}
+			  li.tab_layout_user_profile_sections.active a span{
+					background-image: url(~/application/modules/User/externals/images/about_tab_active.png);
+				}
+				li.tab_layout_user_profile_players a span.icon_tab_switch {
+					background-image: url(~/application/modules/User/externals/images/player_tab.png);
+				}
+				li.tab_layout_user_profile_players.active a span.icon_tab_switch{
+					background-image: url(~/application/modules/User/externals/images/player_tab_active.png);
+				}
+			}
+		.tabs_alt.tabs_parent ul li{
+			  width: 100%;
+			  max-width: 100%;
+			  text-align: center;
+			  border-right: 0;
+			  -webkit-box-flex: 1;
+			  -moz-box-flex: 1;
+			  -ms-flex: 1;
+			  box-flex: 1;
+			  border-right: 1px solid #E6E6E6;
+			  display: block;
+			  
+		}
+		
+		.tabs_alt.tabs_parent ul li.active::after {
+		  content: "\\f0d8";
+		  display: inline-block;
+		  font: normal normal normal 14px/1 FontAwesome;
+		  font-size: inherit;
+		  text-rendering: auto;
+		  -webkit-font-smoothing: antialiased;
+		  -moz-osx-font-smoothing: grayscale;
+		  transform: translate(0, 0);
+		  font-size: 30px;
+		  color: #E7E1D3;
+		  position: absolute;
+		  margin: -20px 0px 0 -10px;
+		}
+		.tabs_alt.tabs_parent ul li a span.icon_tab_switch {
+		  width: 18px;
+		  height: 18px;
+		  display: -webkit-inline-box;
+		  background-size: 18px;
+		  vertical-align: middle;
+		}
+	}
+}
