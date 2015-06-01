@@ -208,7 +208,7 @@ return array(
     ),
     
 	'user_playercard' => array(
-      'route' => '/player/:action/*',
+      'route' => '/user/player/:action/*',
       'defaults' => array(
         'module' => 'user',
         'controller' => 'player-card',
