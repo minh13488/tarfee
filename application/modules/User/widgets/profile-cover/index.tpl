@@ -305,7 +305,7 @@ function cancelReposition() {
 		<?php endif;?>
 		<li>
 		   <a href="#">
-		      <div><span class="number_tabs">90</span></div>
+		      <div><span class="number_tabs"><?php echo count($this->user->getEyeOns())?></span></div>
 		      <div>eye on</div>
 		   </a>
 		</li>

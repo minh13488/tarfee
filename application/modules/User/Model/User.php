@@ -997,4 +997,8 @@ class User_Model_User extends Core_Model_Item_Abstract
 		if ($this->getCountry()) $location[] = $this->getCountry()->getTitle();
 		return $location;
 	}
+	
+	public function getEyeOns() {
+		return Engine_Api::_()->getDbTable('eyeons', 'user')->getUserEyeOns($this->getIdentity());
+	}
 }
