@@ -1,6 +1,22 @@
 INSERT IGNORE INTO `engine4_core_modules` (`name`, `title`, `description`, `version`, `enabled`, `type`) VALUES  ('ynsocialads', 'Social Ads', 'The plugin functions similarly to popular social ads platform nowadays, such as Facebook Ads where all business logic, workflow, terminology are simulated well.', '4.01', 1, 'extra');
 
 --
+-- Table structure for table `engine4_ynsocialads_photos`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_ynsocialads_photos` (
+`photo_id` int(11) unsigned NOT NULL auto_increment,
+`ad_id` int(11) unsigned NOT NULL,
+`user_id` int(11) unsigned NOT NULL,
+`file_id` int(11) unsigned NOT NULL,
+`collection_id` int(11) unsigned NOT NULL,
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+PRIMARY KEY (`photo_id`),
+KEY (`ad_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci ;
+
+--
 -- Table structure for table `engine4_ynsocialads_campaigns`
 --
 

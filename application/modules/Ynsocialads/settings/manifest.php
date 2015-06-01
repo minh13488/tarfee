@@ -48,6 +48,7 @@ return array(
 	
 	'items' => array(
 		'ynsocialads_faq',
+		'ynsocialads_photo',
 		'ynsocialads_campaign',
 		'ynsocialads_transaction',
 		'ynsocialads_ad',

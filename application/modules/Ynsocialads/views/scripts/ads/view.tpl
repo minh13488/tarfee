@@ -56,8 +56,19 @@
         <td><?php echo $this->translate($this->ad->ad_type) ?></td>
       
         <td>
+    	<?php if ($this->ad->isEditable()) : ?>
+        	<!-- add more photos -->
+	        <?php echo $this->htmlLink(array(
+	            'route' => 'ynsocialads_extended',
+	            'controller' => 'photo',
+	            'action' => 'upload',
+	            'ad_id' => $this->ad->ad_id,
+	          ), $this->translate('upload photos'), array(
+	        )) ?>
+		   <?php endif;?>
             <!-- delete --> 
           <?php if($this->ad->status != "deleted" && $this->ad->isDeletable()):?>  
+          	|
           <?php echo $this->htmlLink(
                 array('route' => 'ynsocialads_ads', 'module' => 'ynsocialads', 'controller' => 'ads', 'action' => 'update-status', 'status' => 'Delete', 'id' => $this->ad->ad_id),
                 $this->translate("delete"),
@@ -69,8 +80,6 @@
           <?php if(!$this->ad->isPayLater()) :?>            
           |     
           <?php echo $this->htmlLink(
-                //TODO
-                //add edit link
                 array('route' => 'ynsocialads_ads', 'module' => 'ynsocialads', 'controller' => 'ads', 'action' => 'edit', 'id' => $this->ad->ad_id),
                 $this->translate("edit"),
                 array()) ?>
@@ -110,6 +119,7 @@
   </tbody>
 </table>
 </div>
+
 <div id="ad_statistics" class='ynsocial_table'>
     <?php
         if (count($this->data) > 0) { ?>
@@ -268,6 +278,7 @@
 <div id="placement">
     
 </div>
+
 <?php if ($this->viewer->getIdentity() == $this->ad->user_id) : ?>
 <div id="create_similar_ad" class="add_link">
     <?php echo $this->htmlLink(
@@ -276,6 +287,45 @@
         array('class' => 'smoothbox buttonlink create_ad_icon')) ?> 
 </div>
 <?php endif; ?>
+
+<?php if ($this->ad->isEditable()) : ?>
+	<br/>
+	<?php 
+		$photoTable = Engine_Api::_() -> getItemTable('ynsocialads_photo');
+		$photos = $photoTable -> getPhotosAd($this -> ad -> getIdentity());
+	?>
+	<?php if(!empty($photos)) :?>
+		<table class="admin_table frontend_table ynsocial_table">
+		  <thead>
+		    <tr>
+		      <th><?php echo $this->translate('Image') ?></th>
+		      <th><?php echo $this->translate('Options') ?></th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  	<?php foreach($photos as $photo) :?>
+		      <tr>
+		      	<td><?php echo $this -> itemPhoto($photo);?></td>
+		        <td>
+		        	<!-- add more photos -->
+			        <?php echo $this->htmlLink(array(
+			            'route' => 'ynsocialads_extended',
+			            'controller' => 'photo',
+			            'action' => 'delete',
+			            'photo_id' => $photo -> getIdentity(),
+			          ), $this->translate('delete'), array(
+			          'class' => 'smoothbox',
+			        )) ?>
+		        </td>
+		        <?php endforeach;?>
+		      </tr>
+		  </tbody>
+		</table>
+		<br/>
+	<?php endif;?>
+<?php endif;?>
+
+
 <div class="yn_filter">
     <?php echo $this->formStatistic->render($this) ?>
 </div>
