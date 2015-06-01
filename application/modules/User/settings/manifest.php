@@ -207,21 +207,20 @@ return array(
       )
     ),
     
-	'user_playercard' => array(
-      'route' => '/player/:action/*',
-      'defaults' => array(
-        'module' => 'user',
-        'controller' => 'player-card',
-        'action' => 'manage'
-      )
-    ),
-    
      'playercard_profile' => array(
       'route' => 'player/:id/*',
       'defaults' => array(
         'module' => 'user',
         'controller' => 'player-card',
         'action' => 'view'
+      )
+    ),
+    'user_playercard' => array(
+      'route' => '/player/:action/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'player-card',
+        'action' => 'create'
       )
     ),
   )
