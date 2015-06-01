@@ -1319,6 +1319,10 @@ body#global_page_user-friends-list-all-friends{
 		  border-radius: 5px;
 		  background-color: #F63;
 		  margin: 0px 10px 10px 10px;
+		  a
+		  {
+		  	color: #FFF;
+		  }
 		}
 		 #profile_photo {
 		   -webkit-border-radius: 5px;
@@ -1556,19 +1560,6 @@ body#global_page_user-friends-list-all-friends{
  {
   background-color: transparent;
  }
- .layout_user_profile_sections #sections-content-items
- {
-  -webkit-border-radius: 5px;
-  border-radius: 5px;
-    background-color: #fff;
-    margin-right: 10px;
-    margin-left: 10px;
-    #sections-content-items .sections-content-item
-    {
-     border: 0;
-     padding: 15px;
-    }
- }
  .layout_user_profile_players .player_contents
  {
   .tarfee-profile-header-right
@@ -1710,11 +1701,13 @@ body#global_page_user-friends-list-all-friends{
 }
 
 .layout_user_profile_sections {
-	#sections-content-items {
-		#sections-content-item_contact
-		{
-			padding-top: 15px;
-		}
+	#sections-content-items 
+	{
+	  	-webkit-border-radius: 5px;
+	  	border-radius: 5px;
+    	background-color: #fff;
+    	margin-right: 10px;
+    	margin-left: 10px;
 		.sections-content-item {
 			outline: 0;
 			border: 0;
@@ -1774,7 +1767,7 @@ body#global_page_user-friends-list-all-friends{
 				display: inline;
 			  	font-size: 1.5em;
 				background-color: transparent;
-				color: $theme_font_color_light;
+				color: $theme_font_color;
 				padding: 0;
 				margin-top: 0;
 				margin-bottom: 15px;
@@ -1805,7 +1798,7 @@ body#global_page_user-friends-list-all-friends{
 			.profile-section div.icon_section_profile {
 			  text-align: center;
 			  font-size: 30px;
-			  color: $theme_font_color_light;
+			  color: $theme_font_color;
 			}
 		  	.profile-section-content {
 		  		margin-top: 10px;
@@ -1826,7 +1819,7 @@ body#global_page_user-friends-list-all-friends{
 		  			
 		  			.profile-section-form-wrapper {
 		  				& > label {
-							width: 200px;
+							width: 150px;
 							float: left;
 						}
 		  				
@@ -2076,6 +2069,68 @@ body#global_page_user-friends-list-all-friends{
 		  		}
 		  	}
 	  	}
+	  	#sections-content-item_basic
+	  	{
+	  		padding-top: 15px;
+	  		.profile_fields
+	  		{
+	  			h4
+	  			{
+	  				display: none;
+	  			}
+	  			ul 
+	  			{
+	  				padding: 0;
+		  			li
+		  			{
+		  				border-bottom: 1px solid #eee;
+	  					padding-bottom: 10px;
+		  			}
+		  			li + li
+		  			{
+		  				margin-top: 10px;
+		  			}
+		  			li > span:first-child
+		  			{
+		  				width: 150px;
+		  				color: #999;
+  						font-weight: bold;
+  						font-size: 0.85em;
+		  			}
+		  		}
+	  		}
+	  		.profile_fields + .profile_fields
+	  		{
+	  			li
+	  			{
+	  				border: 0;
+	  			}
+	  		}
+	  		#basic-section_form_div
+	  		{
+	  			.global_form > div
+	  			{
+	  				border: 0;
+	  				padding: 0;
+	  			}
+	  			.global_form div.form-wrapper-heading
+	  			{
+	  				display: none;
+	  			}
+	  		}
+	  	}
+	  	#sections-content-item_contact
+		{
+			#contact-content hr:last-child
+			{
+				border: 0;
+			}
+			#contact-content div > span
+			{
+				width: 150px;
+				margin-right: 15px;
+			}
+		}
   	}
   	
   	.profile-section_location_icon {

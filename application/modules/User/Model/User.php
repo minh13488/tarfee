@@ -992,10 +992,9 @@ class User_Model_User extends Core_Model_Item_Abstract
 	
 	public function getLocation() {;
 		$location = array();
-		if ($this->getCountry()) $location[] = $this->getCountry()->getTitle();
-		if ($this->getProvince()) $location[] = $this->getProvince()->getTitle();
 		if ($this->getCity()) $location[] = $this->getCity()->getTitle();
-		
+		if ($this->getProvince()) $location[] = $this->getProvince()->getTitle();
+		if ($this->getCountry()) $location[] = $this->getCountry()->getTitle();
 		return $location;
 	}
 	
