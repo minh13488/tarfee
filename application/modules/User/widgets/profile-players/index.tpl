@@ -85,14 +85,68 @@
 			$totalUnsure = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> getUnsureCount($player);
 	        ?>
 	        <?php if($player -> isViewable()) :?>
-	        	<li id="player-item-<?php echo $player->playercard_id ?>" style ="clear: both">
+	        	<li id="player-item-<?php echo $player->playercard_id ?>">
 	           	<div id='profile_photo'>
 					<?php $photoUrl = $player -> getPhotoUrl('thumb.profile');?>
 					<div class="avatar">
 						<a href="">
 							<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
 						</a>
-						<span><i class="fa fa-cog"></i></span>
+						<span class="setting"><i class="fa fa-cog"></i>
+				
+	            	<?php 
+	            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())):
+					
+					?><ul class="setting-list">
+						<li class="first">
+					<?php
+		            	echo $this->htmlLink(array(
+				            'route' => 'user_extended',
+				            'controller' => 'player-card',
+				            'action' => 'edit',
+				            'id' => $player->playercard_id,
+				        ), '<i class="fa fa-pencil"></i>&nbsp;'.$this->translate('Edit'), array(
+				            'class' => ''
+				        ));
+					?>
+					</li><li class="second">
+					<?php
+		        		echo $this->htmlLink(array(
+				            'route' => 'user_extended',
+				            'controller' => 'player-card',
+				            'action' => 'crop-photo',
+				            'id' => $player->playercard_id,
+				        ), '<i class="fa fa-crop"></i>&nbsp;'.$this->translate('Crop Photo'), array(
+				            'class' => ''
+				        ));
+					?></li><li class="third">	
+					<?php
+	        			echo $this->htmlLink(array(
+						'route' => 'video_general',
+							'action' => 'create',
+							'parent_type' =>'user_playercard',
+							'subject_id' =>  $player->playercard_id,
+						), '<i class="fa fa-plus-square"></i>&nbsp;'.$this->translate('Add Video'), array(
+						'class' => ''
+						)) ;
+					?></li><li class="fourth">
+					<?php
+						echo $this->htmlLink(array(
+				            'route' => 'user_extended',
+				            'controller' => 'player-card',
+				            'action' => 'delete',
+				            'id' => $player->playercard_id,
+				        ), '<i class="fa fa-times"></i>&nbsp;'.$this->translate('Delete'), array(
+				            'class' => ''
+				        ));
+					?>
+					</li>
+					</ul>
+				    <?php endif;?>
+					
+					
+					
+						</span>
 					</div>
 					<div class="user_rating">
 						<span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
@@ -127,56 +181,6 @@
 						<li><a class="actions_generic" href=""><span><i class="fa fa-flag"></i></span></a></li>
 					</div>
 				</div>
-	            <div class="playercard_options">
-	            	<?php echo $this->htmlLink(array(
-			            'route' => 'user_extended',
-			            'controller' => 'player-card',
-			            'action' => 'view',
-			            'id' => $player->playercard_id,
-			            'slug' => $player->getSlug(),
-			        ), $this->translate('View'), array(
-			            'class' => ''
-			        ));
-	        		?>
-	            	<?php 
-	            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer()))
-					{
-		            	echo $this->htmlLink(array(
-				            'route' => 'user_extended',
-				            'controller' => 'player-card',
-				            'action' => 'edit',
-				            'id' => $player->playercard_id,
-				        ), '<i class="fa fa-pencil"></i>'.$this->translate('Edit'), array(
-				            'class' => ''
-				        ));
-		        		echo $this->htmlLink(array(
-				            'route' => 'user_extended',
-				            'controller' => 'player-card',
-				            'action' => 'crop-photo',
-				            'id' => $player->playercard_id,
-				        ), '<i class="fa fa-pencil"></i>'.$this->translate('Crop Photo'), array(
-				            'class' => ''
-				        ));
-						
-	        			echo $this->htmlLink(array(
-						'route' => 'video_general',
-							'action' => 'create',
-							'parent_type' =>'user_playercard',
-							'subject_id' =>  $player->playercard_id,
-						), '<i class="fa fa-plus-square"></i>'.$this->translate('Add Video'), array(
-						'class' => ''
-						)) ;
-						echo $this->htmlLink(array(
-				            'route' => 'user_extended',
-				            'controller' => 'player-card',
-				            'action' => 'delete',
-				            'id' => $player->playercard_id,
-				        ), '<i class="fa fa-delete"></i>'.$this->translate('Delete'), array(
-				            'class' => ''
-				        ));
-				    }
-	        		?>
-	            </div>
 	            	 <?php
 				    $playercardVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
 					?>

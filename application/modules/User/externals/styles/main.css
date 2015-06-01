@@ -1310,15 +1310,24 @@ body#global_page_user-friends-list-all-friends{
 	 }
 	 .layout_user_profile_players
 	 {
+		 .tarfee_list
+		 {
+			margin-right: 5px;
+			margin-left: 5px;
+		 }
+		 .tarfee-profile-module-header {
+		  border-radius: 5px;
+		  background-color: #F63;
+		  margin: 0px 10px 10px 10px;
+		}
 		 #profile_photo {
 		   -webkit-border-radius: 5px;
 		   border-radius: 5px;
-		   min-height: 220px;
 		   background-color: #fff;
 		   .thumb_profile 
 			 {
-			  height: 230px;
-			  width: 230px;
+			  height: 210px;
+			  width: 100%;
 			  border-top-left-radius: 5px;
 			  border-top-right-radius: 5px;
 			  display: inline-block;
@@ -1405,6 +1414,115 @@ body#global_page_user-friends-list-all-friends{
 			 	  font-size: 22px;
   				  color: #000;
 			 }
+			 
+			 /*--------------------------------------*/
+			 .setting-list {
+				  position: absolute;
+				  width: 120px;
+				  float: left;
+				  font-size: 12px;
+				  text-align: left;
+				  z-index: 100;
+				  margin-left: -80px;
+				  margin-top: -4px;
+				}
+
+
+			.setting:hover {
+			    background: #3096e8;
+			}
+
+			.setting:active>i {
+			    background: #2085d6;
+			  color:#000;
+			}
+			
+			
+			
+			.setting-list li {
+			    cursor: pointer;
+			    background: #ffffff;
+			    border-top: 1px solid #e5e6e6;
+			    padding: 15px 10px;
+			}
+			
+			.setting-list li:last-child {  
+			    border-radius: 0 0 3px 3px;;
+			    -o-border-radius: 0 0 3px 3px;
+			    -ms-border-radius: 0 0 3px 3px;
+			    -moz-border-radius: 0 0 3px 3px;
+			    -webkit-border-radius: 0 0 3px 3px;
+			}
+			
+			.setting-list li [class^="icon-"] {
+			    margin: 0 3px 0 0;
+			}
+			
+			
+			
+			
+			.setting-list li {
+			    -webkit-transform-origin: 50% 0%;
+			    -o-transform-origin: 50% 0%;
+			    transform-origin: 50% 0%;
+			    -webkit-transform: perspective(250px) rotateX(-90deg);
+			    -o-transform: perspective(250px) rotateX(-90deg);
+			    transform: perspective(250px) rotateX(-90deg);
+			    -moz-box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
+			}
+			
+			.setting-list .first {
+			    -webkit-transition: 0.2s linear 0.8s;
+			    -o-transition: 0.2s linear 0.8s;
+			    transition: 0.2s linear 0.8s;
+			}
+			
+			.setting-list .second {
+			    -webkit-transition: 0.2s linear 0.6s;
+			    -o-transition: 0.2s linear 0.6s;
+			    transition: 0.2s linear 0.6s;
+			}
+			
+			.setting-list .third {
+			    -webkit-transition: 0.2s linear 0.4s;
+			    -o-transition: 0.2s linear 0.4s;
+			    transition: 0.2s linear 0.4s;
+			}
+			
+			.setting-list .fourth {
+			    -webkit-transition: 0.2s linear 0.2s;
+			    -o-transition: 0.2s linear 0.2s;
+			    transition: 0.2s linear 0.2s;
+			}
+			
+			.setting:hover .setting-list li {
+			    -webkit-transform: perspective(350px) rotateX(0deg);
+			    -o-transform: perspective(350px) rotateX(0deg);
+			    transform: perspective(350px) rotateX(0deg);
+			    -webkit-transition: 0.2s linear 0s;
+			    -o-transition: 0.2s linear 0s;
+			    transition: 0.2s linear 0s;
+			}
+			
+			.setting:hover .setting-list .second {
+			    -webkit-transition-delay: 0.2s;
+			    -o-transition-delay: 0.2s;
+			    transition-delay: 0.2s;
+			}
+			
+			.setting:hover .setting-list .third {
+			    -webkit-transition-delay: 0.4s;
+			    -o-transition-delay: 0.4s;
+			    transition-delay: 0.4s;
+			}
+			
+			.setting:hover .setting-list  .fourth {
+			    transition-delay: 0.6s;
+			    -o-transition-delay: 0.6s;
+			    transition-delay: 0.6s;
+			} 
+			 
+			 /*--------------------------------------*/
 		 }
 		 
 	 .follow {
@@ -1453,16 +1571,23 @@ body#global_page_user-friends-list-all-friends{
  }
  .layout_user_profile_players .player_contents
  {
-  margin-right: 50px;
   .tarfee-profile-header-right
   {
-   padding: 15px;
+   padding: 12px;
+   text-align:center;
   }
   ul.players_browse > li{
       float: left;
-      width:230px;
-      margin-left: 10px;
+      width:33.3%;
+      max-width: 300px;
+	  min-width: 200px;
+	  background-color: rgba(255, 255, 255, 0);
+	  margin-bottom: 10px;
      }
+	 ul.players_browse > li #profile_photo {
+	   margin-right: 5px;
+	   margin-left: 5px;
+	}
  }
  .layout_user_profile_library
  {
