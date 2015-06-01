@@ -577,16 +577,19 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
         $player = Engine_Api::_()->getItem('user_playercard', $id);
         if (!$player) {
             echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card can not be found.')));
-        }
+        	return;
+		}
         
         $viewer = Engine_Api::_()->user()->getViewer();
         if (!$viewer->getIdentity()) {
             echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('You do not have permission to do this.')));
-        }
+        	return;
+		}
         
         if ($player->isEyeOn()) {
             echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card already in your eye on list.')));
-        }
+        	return;
+		}
         
         $table = Engine_Api::_()->getDbTable('eyeons', 'user');
         $eyeon = $table->createRow();
@@ -602,16 +605,19 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
         $player = Engine_Api::_()->getItem('user_playercard', $id);
         if (!$player) {
             echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card can not be found.')));
-        }
+        	return;
+		}
         
         $viewer = Engine_Api::_()->user()->getViewer();
         if (!$viewer->getIdentity()) {
             echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('You do not have permission to do this.')));
-        }
+        	return;
+		}
         
         if (!$player->isEyeOn()) {
             echo Zend_Json::encode(array('status' => false, 'message' => Zend_Registry::get('Zend_Translate') -> _('The player card not in your eye on list.')));
-        }
+        	return;
+		}
         
         $table = Engine_Api::_()->getDbTable('eyeons', 'user');
         $where = array(
