@@ -8,7 +8,7 @@
 		  <li>
 		    <div class="blogger_item">
 		      <a class="blogger_photo" href="blogs/<?php echo $item->owner_id;?>" >
-		            <?php echo  $this->itemPhoto($item, 'thumb.icon'); ?>
+		            <?php echo  $this->itemPhoto($item -> getOwner(), 'thumb.icon'); ?>
 		      </a>
 		      <br/>
 		      <a class="blogger_name" title="<?php echo $item->getOwner()->getTitle();?>" href="blogs/<?php echo $item->owner_id;?>">

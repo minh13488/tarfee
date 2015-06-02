@@ -116,7 +116,7 @@
 							            'action' => 'crop-photo',
 							            'id' => $player->playercard_id,
 							        ), '<i class="fa fa-crop"></i>&nbsp;'.$this->translate('Crop Photo'), array(
-							            'class' => ''
+							            'class' => 'smoothbox'
 							        ));
 								?>
 								</li>
@@ -140,7 +140,7 @@
 							            'action' => 'delete',
 							            'id' => $player->playercard_id,
 							        ), '<i class="fa fa-times"></i>&nbsp;'.$this->translate('Delete'), array(
-							            'class' => ''
+							            'class' => 'smoothbox'
 							        ));
 								?>
 								</li>
@@ -205,7 +205,8 @@
 						<span></span>
 						<li title="<?php echo $this -> translate('comment')?>"><a class="actions_generic" href="<?php echo $player -> getHref()?>"><span><i class="fa fa-comment"></i></span></a></li>
 						<span></span>
-						<li><a class="actions_generic" href=""><span><i class="fa fa-flag"></i></span></a></li>
+						<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+						<li><a class="actions_generic smoothbox" href="<?php echo $url?>"><span><i class="fa fa-flag"></i></span></a></li>
 					</div>
 				</div>
 	        </li>

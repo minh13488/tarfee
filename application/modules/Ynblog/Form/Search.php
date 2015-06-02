@@ -15,7 +15,7 @@ class Ynblog_Form_Search extends Engine_Form
       ;
     //Text filter element
     $this->addElement('Text', 'search', array(
-      'label' => 'Search Blogs',
+      'label' => 'Search Talks',
       'onchange' => 'this.form.submit();',
     ));
 
@@ -47,8 +47,8 @@ class Ynblog_Form_Search extends Engine_Form
     $this->addElement('Select', 'show', array(
       'label' => 'Show',
       'multiOptions' => array(
-        '1' => 'Everyone\'s Blogs',
-        '2' => 'Only My Friends\' Blogs',
+        '1' => 'Everyone\'s Talks',
+        '2' => 'Only My Friends\' Talks',
       ),
       'onchange' => 'this.form.submit();',
     ));
