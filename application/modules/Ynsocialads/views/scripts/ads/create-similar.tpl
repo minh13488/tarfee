@@ -1,3 +1,11 @@
+<?php if(!empty($this -> error_message)) :?>
+	<form method="post" class="global_form_popup">
+	<div class="tip">
+		<span><?php echo $this -> error_message;?></span>
+	</div>
+	</form>
+<?php else :?>
+
   <form method="post" class="global_form_popup">
     <div>
       <h3><?php echo $this->translate('Create similar ad') ?></h3>
@@ -20,3 +28,4 @@
   TB_close();
 </script>
 <?php endif; ?>
+<?php endif;?>

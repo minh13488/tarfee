@@ -40,15 +40,6 @@ function enable(obj, event, id) {
     }).send();
 }
 
-function ajax(id) {
-    var url = en4.core.baseUrl+'admin/ynsocialads/ad-blocks/ajax/id/'+id;
-    new Request.JSON({
-        url: url,
-        data: {},
-        onSuccess: function() {
-        }
-    }).send();
-}
 
 function deleteSelected(){
     var checkboxes = $$('td input.checkbox[type=checkbox]');
@@ -105,8 +96,6 @@ array('class' => 'buttonlink add_adblock')) ?>
       <th><?php echo $this->translate("Page") ?></th>
       <th><?php echo $this->translate("Placement Name") ?></th>
       <th><?php echo $this->translate("Creation Date") ?></th>
-      <th><?php echo $this->translate("Limit") ?></th>
-      <th><?php echo $this->translate("Ajax Based") ?></th>
       <th><?php echo $this->translate("Deleted") ?></th>
       <th><?php echo $this->translate("Options") ?></th>
     </tr>
@@ -120,8 +109,6 @@ array('class' => 'buttonlink add_adblock')) ?>
         <td><?php echo $this->translate($item->getPageName()) ?></td>
         <td><?php echo $this->placementMap[$item->placement] ?></td>
         <td><?php echo $this->locale()->toDate($item->creation_date) ?></td>
-        <td><?php echo $item->ads_limit ?></td>
-        <td><input type='checkbox' class='ajax_checkbox' onclick="javascript:ajax(<?php echo $item->getIdentity() ?>)"<?php if($item->ajax) echo 'checked';?> <?php if($item->deleted) echo 'disabled';?>/></td>
         <td><?php echo ($item->deleted) ? $this->translate('true') : $this->translate('false') ?></td>
         <td>
               <?php if (!$item -> deleted) : ?>

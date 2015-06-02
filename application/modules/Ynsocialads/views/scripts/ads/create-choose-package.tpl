@@ -1,3 +1,9 @@
+<?php if(!empty($this -> error_message)) :?>
+	<div class="tip">
+		<span><?php echo $this -> error_message;?></span>
+	</div>
+<?php else :?>
+
 <script type="text/javascript">
 	function toStepOne(obj) {
 		var value = obj.value;
@@ -75,3 +81,4 @@
 <script type="text/javascript">
 	$$('.core_main_ynsocialads').getParent().addClass('active');
 </script>
+<?php endif;?>

@@ -276,8 +276,10 @@ class Ynsocialads_AdminAdBlocksController extends Core_Controller_Action_Admin
 				$contentRow -> save();
 				
 				$values['content_id'] = $contentRow -> content_id;
+				$values['ads_limit'] = 1;
+				$values['ajax'] = 0;
+				
 				$adblock = $table -> createRow();
-                    
 				$adblock -> setFromArray($values);
 				$adblock -> save();
 
