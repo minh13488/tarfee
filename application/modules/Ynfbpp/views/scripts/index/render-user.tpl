@@ -58,6 +58,19 @@ $allow = $this->subject->authorization()->isAllowed($this->viewer, 'view');
 				<?php echo $action?>
 			</li>
 			<?php endforeach; ?>
+			
+			<li class="uiYnfbppListItem">
+				<?php echo $this->htmlLink(array(
+					'module' => 'core',
+					'controller' => 'report',
+					'action' => 'create',
+					'subject' => $this->subject->getGuid(),
+					'route' => 'default',
+				), $this->translate('Report'), array(
+					'class' => 'smoothbox buttonlink',
+					'onclick' => "ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;"
+				))?>
+			</li>
 		</ul>
 		<?php endif; ?> <div class="clearfix"></div>
 		<div class="clearfix"></div>
