@@ -35,7 +35,8 @@ DEFAULT STYLES FOR THIS THEME
   theme_content_width: 1033px;
   theme_content_columns_left_width: 250px;
   theme_content_columns_right_width: 220px;
-  theme_body_background_color: #fff;
+  theme_body_background_color: #FFFFFF;
+  theme_profile_body_background_color: #DEDEDE;
 
   /* 
   HEADER AND FOOTER COLORS
