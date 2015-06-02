@@ -980,6 +980,26 @@ class Ynsocialads_AdsController extends Core_Controller_Action_Standard
         //check create permissions
         if (!$this -> _helper -> requireAuth() -> setAuthParams('ynsocialads_ad', null, 'create') -> isValid())
             return;
+		
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$max_ad = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'ynsocialads_ad', 'max_ad');
+        if ($max_ad == null) {
+            $row = $permissionsTable->fetchRow($permissionsTable->select()
+            ->where('level_id = ?', $viewer->level_id)
+            ->where('type = ?', 'ynsocialads_ad')
+            ->where('name = ?', 'max_ad'));
+            if ($row) {
+                $max_ad = $row->value;
+            }
+        }
+		$adTable = Engine_Api::_() -> getItemTable('ynsocialads_ad');
+		$count = $adTable -> countAdsByUser($viewer);
+		if($count >=  $max_ad) {
+			$this -> view -> error_message = $this -> view -> translate('You have reached the Ad Create Limitation.');
+			return;
+		}
+		
+		
         $this -> _helper -> layout -> setLayout('admin-simple');
         if (!$this -> _hasParam('id')) {
             $this -> _helper -> content -> setNoRender();
@@ -1283,7 +1303,27 @@ class Ynsocialads_AdsController extends Core_Controller_Action_Standard
         //check create permissions
         if (!$this -> _helper -> requireAuth() -> setAuthParams('ynsocialads_ad', null, 'create') -> isValid())
             return;
-
+		$this -> _helper -> content
+        -> setEnabled();
+		
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$max_ad = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'ynsocialads_ad', 'max_ad');
+        if ($max_ad == null) {
+            $row = $permissionsTable->fetchRow($permissionsTable->select()
+            ->where('level_id = ?', $viewer->level_id)
+            ->where('type = ?', 'ynsocialads_ad')
+            ->where('name = ?', 'max_ad'));
+            if ($row) {
+                $max_ad = $row->value;
+            }
+        }
+		$adTable = Engine_Api::_() -> getItemTable('ynsocialads_ad');
+		$count = $adTable -> countAdsByUser($viewer);
+		if($count >=  $max_ad) {
+			$this -> view -> error_message = $this -> view -> translate('You have reached the Ad Create Limitation.');
+			return;
+		}
+		
         $this -> view -> level = $viewer_level = Engine_Api::_() -> user() -> getViewer() -> level_id;
         $table = Engine_Api::_() -> getItemTable('ynsocialads_package');
         $select = $table->select()->where('`show` = 1')->where('`deleted` = 0')->order('order ASC');
@@ -1301,7 +1341,25 @@ class Ynsocialads_AdsController extends Core_Controller_Action_Standard
         -> setEnabled();
         if (!$this -> _helper -> requireAuth() -> setAuthParams('ynsocialads_ad', null, 'create') -> isValid())
             return;
-
+		
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$max_ad = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'ynsocialads_ad', 'max_ad');
+        if ($max_ad == null) {
+            $row = $permissionsTable->fetchRow($permissionsTable->select()
+            ->where('level_id = ?', $viewer->level_id)
+            ->where('type = ?', 'ynsocialads_ad')
+            ->where('name = ?', 'max_ad'));
+            if ($row) {
+                $max_ad = $row->value;
+            }
+        }
+		$adTable = Engine_Api::_() -> getItemTable('ynsocialads_ad');
+		$count = $adTable -> countAdsByUser($viewer);
+		if($count >=  $max_ad) {
+			$this -> view -> error_message = $this -> view -> translate('You have reached the Ad Create Limitation.');
+			return;
+		}
+		
         $this -> view -> level = $viewer_level = Engine_Api::_() -> user() -> getViewer() -> level_id;
         
         if (null == ($package_id = $this->_getParam('package_id'))) {

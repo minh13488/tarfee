@@ -2,7 +2,14 @@
 class Ynsocialads_Model_DbTable_Ads extends Engine_Db_Table
 {
 	protected $_rowClass = 'Ynsocialads_Model_Ad';
-
+	
+	public function countAdsByUser($user) {
+		$select = $this -> select();
+		$select -> where('user_id = ?', $user -> getIdentity());
+		$select -> where('status <> ?', 'deleted');
+		return count($this -> fetchAll($select));
+	}
+	
 	public function getAdsSelect($params = array())
 	{
 		$tableAdsTable = Engine_Api::_() -> getItemTable('ynsocialads_ad');

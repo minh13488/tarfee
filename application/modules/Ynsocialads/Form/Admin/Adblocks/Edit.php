@@ -8,7 +8,7 @@ class Ynsocialads_Form_Admin_Adblocks_Edit extends Ynsocialads_Form_Admin_Packag
         
         $this
           ->setTitle('Edit Ad Block')
-          ->setDescription('You can edit the Ad Block Name and number of ads display in this Ad Block.');
+          ->setDescription('You can edit the Ad Block Name.');
           
         $this->addElement('Text', 'title', array(
             'label' => 'Ad Block Name',
@@ -16,14 +16,6 @@ class Ynsocialads_Form_Admin_Adblocks_Edit extends Ynsocialads_Form_Admin_Packag
             'filters' => array(
                 'StripTags'
             )
-        ));
-        
-        $this->addElement('Integer', 'ads_limit', array(
-            'label' => 'Ads Limit',
-            'required' => true,
-            'validators' => array(
-                new Engine_Validate_AtLeast(0),
-            ),
         ));
         
         $this->addElement('Button', 'submit', array(
