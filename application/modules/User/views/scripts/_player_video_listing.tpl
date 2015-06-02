@@ -49,7 +49,7 @@
 		</div>
       
      
-		<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
+		<?php if($this -> viewer() -> isSelf($this -> video -> getOwner())) :?>
 		 <div style="text-align: center; " class="user-library-video-actions user-library-item-action">
 	    	<span><i class="fa fa-ellipsis-h"></i> <span> <?php echo $this -> translate('Options');?></span></span>
 	   		<ul style="width: initial;">

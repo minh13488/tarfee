@@ -151,3 +151,36 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 		<?php endif;?>
 	</div>
 </div>
+
+
+<script type="text/javascript">
+	window.addEvent('domready', function(){
+		$$('.user-library-item-action').addEvent('outerClick', function(){
+	    	if ( this.hasClass('open-submenu') ) {
+	    		this.removeClass('open-submenu');	
+	    	}
+	    });
+	
+		$$('.user-library-item-action').addEvent('click', function(){
+			if ( this.hasClass('open-submenu') ) {
+	    		this.removeClass('open-submenu');	
+	    	} else {
+	    		$$('.open-submenu').removeClass('open-submenu');
+	    		this.addClass('open-submenu');
+	    	}  
+			
+			if($('global_footer').getStyle('margin-top') != "0px") {
+				$('global_footer').setStyle('margin-top', '');
+			} else {
+				$('global_footer').setStyle('margin-top', '60px');	
+			}
+		});
+		 
+		 $$('.user-library-close-box').addEvent('click', function(){
+		 	var parent = this.getParent().getParent().getParent();
+			parent.removeClass('open-submenu');				
+		});
+		
+				
+  	});	
+</script>
