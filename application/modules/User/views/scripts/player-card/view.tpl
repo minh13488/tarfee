@@ -56,13 +56,19 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 		</div>
 		<div class="user_rating">
 			<?php $overRallRating = $player -> getOverallRating();?>
-			<span title="<?php echo $overRallRating;?>">
-			<?php if($overRallRating > 0):?>
-	        	<?php for($x=1; $x<=$overRallRating; $x++): ?><span class="rating_star_generic rating_star"></span><?php endfor; ?><?php if((round($overRallRating)-$overRallRating)>0):?><span class="rating_star_generic rating_star_half"></span><?php endif; ?>
-	 		<?php else :?>
-				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic rating_star_disabled"></span><?php endfor; ?>
-	 		<?php endif;?>
-	 		</span>
+			<div class="user_rating" title="<?php echo $overRallRating;?>">
+				<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
+			        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
+			    <?php endfor; ?>
+			    <?php if ((round($overRallRating) - $overRallRating) > 0): $x ++; ?>
+			        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;>
+			    <?php endif; ?>
+			    <?php if ($x <= 5) :?>
+			        <?php for (; $x <= 5; $x++ ) : ?>
+			            <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>&nbsp;
+			        <?php endfor; ?>
+			    <?php endif; ?>
+			</div>
 		</div>
 		<div style="font-weight: bold">
 			<?php if($this -> viewer() -> getIdentity()):?>

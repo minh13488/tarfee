@@ -1303,11 +1303,6 @@ body#global_page_user-friends-list-all-friends{
 }
 #global_page_user-profile-index
 {
-	#global_content
-	{
-	  background-image: url(~/application/modules/User/externals/images/background/bg_content.png);
-	    padding: 0px;
-	 }
 	 .layout_user_profile_players
 	 {
 		 .tarfee_list
@@ -1368,18 +1363,15 @@ body#global_page_user-friends-list-all-friends{
 			  text-align: center;
 			  font-family: 'Oswald', Helvetica, Tahoma, Arial, Verdana, sans-serif;
 			  margin-bottom: 15px;
+			  min-height: 36px;
 			  div {
 				  text-align: center;
+				  span > a
+				  {
+				  	color: $theme_font_color;
+				  	font-weight: bold;
+				  }
 				}
-			 }
-			 .user_rating .rating_star_generic {
-			     font-size: 25px;
-				  display: inline;
-				  color: #F63;
-			 }
-			 .user_rating {
-			   text-align: center;
-			   margin-top: -4px;
 			 }
 			 hr{
 			 	  margin-top: 4px;
@@ -1427,170 +1419,110 @@ body#global_page_user-friends-list-all-friends{
 				  font-size: 12px;
 				  text-align: left;
 				  z-index: 100;
-				  margin-left: -80px;
-				  margin-top: -4px;
+				  margin-left: -78px;
+				  margin-top: 2px;
 				}
-
-
-			.setting:hover {
-			    background: #3096e8;
-			}
-
-			.setting:active>i {
-			    background: #2085d6;
-			  color:#000;
-			}
+				.setting:hover, 
+				.active
+				{
+				    background: #3096e8;
+				    color:#000!important;
+				    cursor: pointer;
+				}
+				.setting-list li {
+				    cursor: pointer;
+				    background: #ffffff;
+				    border-top: 1px solid #e5e6e6;
+				    padding: 15px 10px;
+				}
+				.setting-list li:hover {
+					background: #ddd;
+				}
+				.setting-list li:last-child {  
+				    border-radius: 0 0 3px 3px;;
+				    -o-border-radius: 0 0 3px 3px;
+				    -ms-border-radius: 0 0 3px 3px;
+				    -moz-border-radius: 0 0 3px 3px;
+				    -webkit-border-radius: 0 0 3px 3px;
+				}
 			
-			
-			
-			.setting-list li {
-			    cursor: pointer;
-			    background: #ffffff;
-			    border-top: 1px solid #e5e6e6;
-			    padding: 15px 10px;
-			}
-			
-			.setting-list li:last-child {  
-			    border-radius: 0 0 3px 3px;;
-			    -o-border-radius: 0 0 3px 3px;
-			    -ms-border-radius: 0 0 3px 3px;
-			    -moz-border-radius: 0 0 3px 3px;
-			    -webkit-border-radius: 0 0 3px 3px;
-			}
-			
-			.setting-list li [class^="icon-"] {
-			    margin: 0 3px 0 0;
-			}
-			
-			
-			
-			
-			.setting-list li {
-			    -webkit-transform-origin: 50% 0%;
-			    -o-transform-origin: 50% 0%;
-			    transform-origin: 50% 0%;
-			    -webkit-transform: perspective(250px) rotateX(-90deg);
-			    -o-transform: perspective(250px) rotateX(-90deg);
-			    transform: perspective(250px) rotateX(-90deg);
-			    -moz-box-shadow: 0px 2px 10px rgba(0,0,0,0.05);
-			}
-			
-			.setting-list .first {
-			    -webkit-transition: 0.2s linear 0.8s;
-			    -o-transition: 0.2s linear 0.8s;
-			    transition: 0.2s linear 0.8s;
-			}
-			
-			.setting-list .second {
-			    -webkit-transition: 0.2s linear 0.6s;
-			    -o-transition: 0.2s linear 0.6s;
-			    transition: 0.2s linear 0.6s;
-			}
-			
-			.setting-list .third {
-			    -webkit-transition: 0.2s linear 0.4s;
-			    -o-transition: 0.2s linear 0.4s;
-			    transition: 0.2s linear 0.4s;
-			}
-			
-			.setting-list .fourth {
-			    -webkit-transition: 0.2s linear 0.2s;
-			    -o-transition: 0.2s linear 0.2s;
-			    transition: 0.2s linear 0.2s;
-			}
-			
-			.setting:hover .setting-list li {
-			    -webkit-transform: perspective(350px) rotateX(0deg);
-			    -o-transform: perspective(350px) rotateX(0deg);
-			    transform: perspective(350px) rotateX(0deg);
-			    -webkit-transition: 0.2s linear 0s;
-			    -o-transition: 0.2s linear 0s;
-			    transition: 0.2s linear 0s;
-			}
-			
-			.setting:hover .setting-list .second {
-			    -webkit-transition-delay: 0.2s;
-			    -o-transition-delay: 0.2s;
-			    transition-delay: 0.2s;
-			}
-			
-			.setting:hover .setting-list .third {
-			    -webkit-transition-delay: 0.4s;
-			    -o-transition-delay: 0.4s;
-			    transition-delay: 0.4s;
-			}
-			
-			.setting:hover .setting-list  .fourth {
-			    transition-delay: 0.6s;
-			    -o-transition-delay: 0.6s;
-			    transition-delay: 0.6s;
-			} 
-			 
+				.setting-list li [class^="icon-"] {
+				    margin: 0 3px 0 0;
+				}
 			 /*--------------------------------------*/
 		 }
 		 
-	 .follow {
-	   text-align: center;
-	   margin-top: 20px;
+		 .follow {
+		   text-align: center;
+		   margin-top: 20px;
+		 }
+		 hr {
+		   margin-top: 20px;
+		   margin-bottom: 20px;
+		   border: 0;
+		   border-top: 1px solid #eee;
+		 }
+		 .leftmenu ul li {
+		   margin-left: 15px;
+		 }
+		 .leftmenu ul li a:link, 
+		 .leftmenu ul li a:visited,
+		 {
+		  color: #fff;
+		 }
 	 }
-	 hr {
-	   margin-top: 20px;
-	   margin-bottom: 20px;
-	   border: 0;
-	   border-top: 1px solid #eee;
-	 }
-	 .leftmenu ul li {
-	   margin-left: 15px;
-	 }
-	 .leftmenu ul li a:link, 
-	 .leftmenu ul li a:visited,
+	 .layout_profile_completeness_profile_completeness .ybo_headline h3,
+	 .layout_user_profile_options .ybo_headline h3,
+	 .layout_profile_completeness_profile_completeness .profile_project_content,
+	 .layout_user_profile_options #profile_options
 	 {
-	  color: #fff;
+		  color: white;
+		  padding-left: 10px;
+ 	}
+ 	.layout_middle
+	 {
+	  background-color: transparent;
 	 }
+	 .layout_user_profile_players .player_contents
+	 {
+	  .tarfee-profile-header-right
+	  {
+	   padding: 12px;
+	   text-align:center;
+	  }
+	  ul.players_browse > li{
+	      float: left;
+	      width:33.3%;
+	      max-width: 300px;
+		  min-width: 200px;
+		  background-color: rgba(255, 255, 255, 0);
+		  margin-bottom: 10px;
+	     }
+		 ul.players_browse > li #profile_photo {
+		   margin-right: 5px;
+		   margin-left: 5px;
+		}
+ 	}
+	 .layout_user_profile_library
+	 {
+	  clear: both;
 	 }
- .layout_profile_completeness_profile_completeness .ybo_headline h3,
- .layout_user_profile_options .ybo_headline h3,
- .layout_profile_completeness_profile_completeness .profile_project_content,
- .layout_user_profile_options #profile_options
- {
-  color: white;
-  padding-left: 10px;
- }
- .layout_middle
- {
-  background-color: transparent;
- }
- .layout_user_profile_players .player_contents
- {
-  .tarfee-profile-header-right
-  {
-   padding: 12px;
-   text-align:center;
-  }
-  ul.players_browse > li{
-      float: left;
-      width:33.3%;
-      max-width: 300px;
-	  min-width: 200px;
-	  background-color: rgba(255, 255, 255, 0);
-	  margin-bottom: 10px;
-     }
-	 ul.players_browse > li #profile_photo {
-	   margin-right: 5px;
-	   margin-left: 5px;
-	}
- }
- .layout_user_profile_library
- {
-  clear: both;
- }
- #global_content .layout_main
- {
- 	clear: both;
-    padding-top: 0px;
- }
+	 #global_content .layout_main
+	 {
+	 	clear: both;
+	    padding-top: 0px;
+	 }
 }
-
+.user_rating .rating_star_generic 
+{
+    font-size: 25px;
+  	display: inline;
+	color: #F63;
+}
+ .user_rating {
+   text-align: center;
+   margin-top: -4px;
+ }
 /* My Libray Section*/
 .user-library-item-action {
 
@@ -1701,6 +1633,7 @@ body#global_page_user-friends-list-all-friends{
 }
 
 .layout_user_profile_sections {
+	margin-bottom: 15px;
 	#sections-content-items 
 	{
 	  	-webkit-border-radius: 5px;
@@ -1805,6 +1738,31 @@ body#global_page_user-friends-list-all-friends{
 		  		#bio-content
 		  		{
 		  			word-wrap: break-word;
+		  		}
+		  		#basic_section-form
+		  		{
+		  			padding-bottom: 20px;
+	  				border-bottom: 1px dashed $theme_border_color;
+					input[type=text], input[type=email], input[type=password], input.text {
+					padding: 0.5em;
+					line-height: 1em;
+					+user-box-sizing();
+					}
+					#buttons-wrapper
+					{
+						#submit-wrapper
+						{
+							float: left;
+							#submit-label
+							{
+								display: none;
+							}
+							#submit-element
+							{
+								min-width: 0;
+							}
+						}
+					}
 		  		}
 		  		.profile-section-form {
 		  			.section-form {

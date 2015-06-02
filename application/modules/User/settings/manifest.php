@@ -207,22 +207,24 @@ return array(
       )
     ),
     
-	'user_playercard' => array(
-      'route' => '/user/player/:action/*',
+    'user_playercard' => array(
+      'route' => '/player/:action/*',
       'defaults' => array(
         'module' => 'user',
         'controller' => 'player-card',
-        'action' => 'manage'
+        'action' => 'create'
       )
     ),
-    
-     'playercard_profile' => array(
+    'playercard_profile' => array(
       'route' => 'player/:id/*',
       'defaults' => array(
         'module' => 'user',
         'controller' => 'player-card',
         'action' => 'view'
-      )
+      ),
+      'reqs' => array(
+					'id' => '\d+',
+			)
     ),
   )
 ); ?>

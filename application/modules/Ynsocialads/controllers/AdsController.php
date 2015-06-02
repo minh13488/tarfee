@@ -9,7 +9,8 @@ class Ynsocialads_AdsController extends Core_Controller_Action_Standard
     );
     protected $_allPeriods = array(Zend_Date::SECOND, Zend_Date::MINUTE, Zend_Date::HOUR, Zend_Date::DAY, Zend_Date::WEEK, Zend_Date::MONTH, Zend_Date::YEAR, );
     protected $_periodMap = array(Zend_Date::DAY => array(Zend_Date::SECOND => 0, Zend_Date::MINUTE => 0, Zend_Date::HOUR => 0, ), Zend_Date::WEEK => array(Zend_Date::SECOND => 0, Zend_Date::MINUTE => 0, Zend_Date::HOUR => 0, Zend_Date::WEEKDAY_8601 => 1, ), Zend_Date::MONTH => array(Zend_Date::SECOND => 0, Zend_Date::MINUTE => 0, Zend_Date::HOUR => 0, Zend_Date::DAY => 1, ), Zend_Date::YEAR => array(Zend_Date::SECOND => 0, Zend_Date::MINUTE => 0, Zend_Date::HOUR => 0, Zend_Date::DAY => 1, Zend_Date::MONTH => 1, ), );
-
+	
+	
     public function indexAction() {
         if (!$this -> _helper -> requireUser() -> isValid())
             return;
@@ -1378,7 +1379,6 @@ class Ynsocialads_AdsController extends Core_Controller_Action_Standard
             try {
                 $table = Engine_Api::_()->getItemTable('ynsocialads_ad');
                 $ad = $table->createRow();
-                
                 if ($values['campaign_id'] == '0' && $values['campaign_name'] != null) {
                     $values['campaign_id'] = $ad->createCampaign($values['campaign_name']);
                 }
@@ -1401,6 +1401,28 @@ class Ynsocialads_AdsController extends Core_Controller_Action_Standard
                 $ad->setFromArray($values);
                 $ad->save();
                 
+				//save images if have
+				if(!empty($values['html5uploadfileids'])) {
+					// get file_id list
+					$file_ids = array();
+					foreach (explode(' ', $values['html5uploadfileids']) as $file_id)
+					{
+						$file_id = trim($file_id);
+						if (!empty($file_id))
+							$file_ids[] = $file_id;
+					}
+					$photoTable = Engine_Api::_() -> getItemTable('ynsocialads_photo');
+					if (!empty($file_ids))
+					{
+						foreach($file_ids as $file_id) {
+							$photo = $photoTable -> createRow();
+							$photo -> file_id = $file_id;
+							$photo -> ad_id = $ad -> getIdentity();
+							$photo -> save();
+						}
+					}
+				}
+				
                 if ($package->price == 0 && $values['draft'] == '0') {
                     $ad->status = 'pending';
                     if(!$this -> _helper -> requireAuth() -> setAuthParams('ynsocialads_ad', null, 'approve') -> checkRequire())

@@ -72,7 +72,6 @@
 	    <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
 	    <ul class="players_browse">  
 	        <?php foreach ($this->paginator as $player): 
-		    $videoTable = Engine_Api::_()->getItemTable('video');
 		    $params = array();
 		    $params['owner_type'] = $player -> getType();
 			$params['owner_id'] = $player -> getIdentity();
@@ -89,92 +88,110 @@
 	           	<div id='profile_photo'>
 					<?php $photoUrl = $player -> getPhotoUrl('thumb.profile');?>
 					<div class="avatar">
-						<a href="">
+						<a href="<?php echo $player -> getHref()?>">
 							<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
 						</a>
-						<span class="setting"><i class="fa fa-cog"></i>
-				
-	            	<?php 
-	            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())):
-					
-					?><ul class="setting-list">
-						<li class="first">
-					<?php
-		            	echo $this->htmlLink(array(
-				            'route' => 'user_extended',
-				            'controller' => 'player-card',
-				            'action' => 'edit',
-				            'id' => $player->playercard_id,
-				        ), '<i class="fa fa-pencil"></i>&nbsp;'.$this->translate('Edit'), array(
-				            'class' => ''
-				        ));
-					?>
-					</li><li class="second">
-					<?php
-		        		echo $this->htmlLink(array(
-				            'route' => 'user_extended',
-				            'controller' => 'player-card',
-				            'action' => 'crop-photo',
-				            'id' => $player->playercard_id,
-				        ), '<i class="fa fa-crop"></i>&nbsp;'.$this->translate('Crop Photo'), array(
-				            'class' => ''
-				        ));
-					?></li><li class="third">	
-					<?php
-	        			echo $this->htmlLink(array(
-						'route' => 'video_general',
-							'action' => 'create',
-							'parent_type' =>'user_playercard',
-							'subject_id' =>  $player->playercard_id,
-						), '<i class="fa fa-plus-square"></i>&nbsp;'.$this->translate('Add Video'), array(
-						'class' => ''
-						)) ;
-					?></li><li class="fourth">
-					<?php
-						echo $this->htmlLink(array(
-				            'route' => 'user_extended',
-				            'controller' => 'player-card',
-				            'action' => 'delete',
-				            'id' => $player->playercard_id,
-				        ), '<i class="fa fa-times"></i>&nbsp;'.$this->translate('Delete'), array(
-				            'class' => ''
-				        ));
-					?>
-					</li>
-					</ul>
-				    <?php endif;?>
-					
+						<?php 
+		            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())):
+						?>
+						<span class="setting" onclick="showOptions(<?php echo $player->playercard_id?>, this)"><i class="fa fa-cog"></i>
+							<ul class="setting-list" style="display: none" id="setting-list_<?php echo $player->playercard_id?>">
+								<li class="first">
+									<?php
+						            	echo $this->htmlLink(array(
+								            'route' => 'user_extended',
+								            'controller' => 'player-card',
+								            'action' => 'edit',
+								            'id' => $player->playercard_id,
+								        ), '<i class="fa fa-pencil"></i>&nbsp;'.$this->translate('Edit'), array(
+								            'class' => ''
+								        ));
+									?>
+								</li>
+								<li class="second">
+								<?php
+					        		echo $this->htmlLink(array(
+							            'route' => 'user_extended',
+							            'controller' => 'player-card',
+							            'action' => 'crop-photo',
+							            'id' => $player->playercard_id,
+							        ), '<i class="fa fa-crop"></i>&nbsp;'.$this->translate('Crop Photo'), array(
+							            'class' => ''
+							        ));
+								?>
+								</li>
+								<li class="third">	
+								<?php
+				        			echo $this->htmlLink(array(
+									'route' => 'video_general',
+										'action' => 'create',
+										'parent_type' =>'user_playercard',
+										'subject_id' =>  $player->playercard_id,
+									), '<i class="fa fa-plus-square"></i>&nbsp;'.$this->translate('Add Video'), array(
+									'class' => ''
+									)) ;
+								?>
+								</li>
+								<li class="fourth">
+								<?php
+									echo $this->htmlLink(array(
+							            'route' => 'user_extended',
+							            'controller' => 'player-card',
+							            'action' => 'delete',
+							            'id' => $player->playercard_id,
+							        ), '<i class="fa fa-times"></i>&nbsp;'.$this->translate('Delete'), array(
+							            'class' => ''
+							        ));
+								?>
+								</li>
+							</ul>
 						</span>
+						
+						    <?php endif;?>
 					</div>
-					<div class="user_rating">
-						<span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
-						<span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
-						<span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
-						<span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;
-						<span class="rating_star_generic"><i class="fa fa-star-o"></i></span>
+					<?php $overRallRating = $player -> getOverallRating();?>
+					<div class="user_rating" title="<?php echo $overRallRating;?>">
+						<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
+					        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
+					    <?php endfor; ?>
+					    <?php if ((round($overRallRating) - $overRallRating) > 0): $x ++; ?>
+					        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;>
+					    <?php endif; ?>
+					    <?php if ($x <= 5) :?>
+					        <?php for (; $x <= 5; $x++ ) : ?>
+					            <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>&nbsp;
+					        <?php endfor; ?>
+					    <?php endif; ?>
 					</div>
 					<hr>
 					<div class="nickname">
 						<div><span><a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 15)?></span></a></div>
-						<span>Man United, England</span>				
-					</div>
-					<div class="user_rating">
-						<?php $overRallRating = $player -> getOverallRating();?>
-						<span title="<?php echo $overRallRating;?>">
-						<?php if($overRallRating > 0):?>
-			            	<?php for($x=1; $x<=$overRallRating; $x++): ?><span class="rating_star_generic rating_star"></span><?php endfor; ?><?php if((round($overRallRating)-$overRallRating)>0):?><span class="rating_star_generic rating_star_half"></span><?php endif; ?>
-			     		<?php else :?>
-			 				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic rating_star_disabled"></span><?php endfor; ?>
-			     		<?php endif;?>
-			     		</span>
+						<?php
+						$countryName = '';
+						$provinceName = '';
+						$cityName = '';
+						if($player ->country_id && $country = Engine_Api::_() -> getItem('user_location', $player ->country_id))
+						{
+							$countryName = $country -> getTitle();
+						}
+						if($player ->province_id && $province = Engine_Api::_() -> getItem('user_location', $player ->province_id))
+						{
+							$provinceName = $province -> getTitle();
+						}
+						if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $player ->city_id))
+						{
+							$cityName = $city -> getTitle();
+						}
+						?>
+						<span><?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?></span>				
 					</div>
 					<div class="actions">
 					<ul>
 						<?php if ($this -> viewer() -> getIdentity()):?>
-							<li id="user_eyeon">
+							<li title="<?php echo $this -> translate("eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
 	                    		<?php if($player->isEyeOn()): ?>              
-	                        	<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
-	                        		<span><i class="fa fa-eye"></i></span>
+	                        	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
+	                        		<span><i class="fa fa-eye-slash"></i></span>
                         		</a>
 	                    		<?php else: ?>
 	                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
@@ -186,7 +203,7 @@
                 		<?php endif;?>
 						<li><a class="actions_generic" href=""><span><i class="fa fa-plus"></i></span></a></li>
 						<span></span>
-						<li><a class="actions_generic" href=""><span><i class="fa fa-comment"></i></span></a></li>
+						<li title="<?php echo $this -> translate('comment')?>"><a class="actions_generic" href="<?php echo $player -> getHref()?>"><span><i class="fa fa-comment"></i></span></a></li>
 						<span></span>
 						<li><a class="actions_generic" href=""><span><i class="fa fa-flag"></i></span></a></li>
 					</div>
@@ -223,7 +240,7 @@
 <script type="text/javascript">
 function addEyeOn(itemId) 
 {
-    $('user_eyeon').set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
+    $('user_eyeon_'+itemId).set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
     new Request.JSON({
         'url': '<?php echo $this->url(array('action'=>'add-eye-on'),'user_playercard', true)?>',
         'method': 'post',
@@ -232,8 +249,8 @@ function addEyeOn(itemId)
         },
         'onSuccess': function(responseJSON, responseText) {
             if (responseJSON.status == true) {
-                html = '<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
-                $("user_eyeon").set('html', html);
+                html = '<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('+itemId+')"><span><i class="fa fa-eye-slash"></i></span></a>';
+                $('user_eyeon_'+itemId).set('html', html);
             }
             else {
                 alert(responseJSON.message);
@@ -243,7 +260,7 @@ function addEyeOn(itemId)
 }
 
 function removeEyeOn(itemId){
-	$('user_eyeon').set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
+	$('user_eyeon_'+itemId).set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
     new Request.JSON({
         'url': '<?php echo $this->url(array('action'=>'remove-eye-on'),'user_playercard', true)?>',
         'method': 'post',
@@ -253,12 +270,34 @@ function removeEyeOn(itemId){
         'onSuccess': function(responseJSON, responseText) {
             if (responseJSON.status == true) {
                 html = '<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
-                $("user_eyeon").set('html', html);
+                $('user_eyeon_'+itemId).set('html', html);
             }
             else {
                 alert(responseJSON.message);
             }            
         }
     }).send();
+}
+function showOptions(itemId, obj)
+{
+	$$('.setting-list').each(function(e)
+	{
+		if(e != $('setting-list_' + itemId))
+			e.style.display = 'none';
+	});
+	$$('.setting').each(function(e)
+	{
+		e.removeClass('active');
+	});
+	if($('setting-list_' + itemId).style.display == '')
+	{
+		$('setting-list_' + itemId).style.display = 'none';
+		obj.removeClass('active');
+	}
+	else
+	{
+		$('setting-list_' + itemId).style.display = ''
+		obj.addClass('active');
+	}
 }
 </script>
