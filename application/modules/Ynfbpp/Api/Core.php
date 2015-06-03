@@ -263,6 +263,7 @@ class Ynfbpp_Api_Core
             ), $this -> view -> translate('Send Message'), array(
                 'style' => "background-image: url('application/modules/Messages/externals/images/send.png')",
                 'class' => 'buttonlink icon_message_send',
+                'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;',
                 'title' => $this -> view -> translate('Send Message')
             ));
         }
