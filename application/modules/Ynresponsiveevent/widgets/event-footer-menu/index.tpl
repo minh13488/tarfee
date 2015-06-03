@@ -4,7 +4,7 @@
 			<a href="#"><span class="fa fa-plus"></span></a>
 		</li>
 		<li class="sideicon_generic calendar">
-			<a href="#"><span class="fa fa-calendar"></span></a>
+			<a href="<?php echo $this -> url(array(), 'event_general')?>"><span class="fa fa-calendar"></span></a>
 		</li>
 		<li class="sideicon_generic addfriend">
 			<a href="<?php echo $this -> url(array(), 'user_general')?>"><span class="fa fa-user-plus"></span></a>

@@ -628,5 +628,13 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
         
         echo Zend_Json::encode(array('status' => true));
     }
+
+	public function viewEyeOnAction() {
+		$this -> _helper -> layout -> setLayout('default-simple');
+		$this->view->player = $player = Engine_Api::_() -> core() -> getSubject('user_playercard');
+		if (!$player) {
+			return $this -> _helper -> requireSubject() -> forward();
+		}
+	}
 }
 ?>

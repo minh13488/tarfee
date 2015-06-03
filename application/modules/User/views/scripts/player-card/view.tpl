@@ -8,6 +8,7 @@ $totalComment = Engine_Api::_() -> getDbtable('comments', 'yncomment') -> commen
 $totalLike = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($player) -> getLikeCount(); 
 $totalDislike = Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> getDislikeCount($player);
 $totalUnsure = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> getUnsureCount($player);
+$eyeons = $player->getEyeOns();
 $countryName = '';
 $provinceName = '';
 $cityName = '';
@@ -30,7 +31,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 			<?php echo $this -> itemPhoto($player, 'thumb.profile');?>
 		</div>
 		<div style="font-weight: bold">
-			<a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 50)?>
+			<a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 50)?></a>
 		</div>
 		<div class="location" style="font-weight: bold">
 			<?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?>
@@ -51,6 +52,10 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 			      </li>
 			       <li>
 			        <span><?php echo $this->translate(array('%s unsure', '%s unsures', $totalUnsure), $totalUnsure) ?></span>
+			      </li>
+			      <li>
+			      	<?php $url = $this->url(array('action'=>'view-eye-on', 'player_id'=>$player->getIdentity()), 'user_playercard' , true)?>
+			        <span><a href="<?php echo $url?>" class="smoothbox"><?php echo $this->translate('%s eye on', count($eyeons)) ?></a></span>
 			      </li>
 			</ul>
 		</div>
