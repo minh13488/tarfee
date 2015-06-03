@@ -14,16 +14,16 @@ class Ynblog_Widget_BlogsSearchController extends Engine_Content_Widget_Abstract
     if(Engine_Api::_()->core()->hasSubject('user')){
        $user = Engine_Api::_()->core()->getSubject('user');
       $form->removeElement('show');
-      $form->setAction($this->view->url(array(),'default') . "blogs/".$user->getIdentity());
+      $form->setAction($this->view->url(array(),'default') . "talks/".$user->getIdentity());
     }
     else if( Engine_Api::_()->core()->hasSubject('blog') ) {
       $blog = Engine_Api::_()->core()->getSubject('blog');
       $user = $blog->getOwner();
-      $form->setAction($this->view->url(array(),'default')."blogs/".$user->getIdentity());
+      $form->setAction($this->view->url(array(),'default')."talks/".$user->getIdentity());
       $form->removeElement('show');
      }
      else{
-        $form->setAction($this->view->url(array(),'default'). "blogs/listing");
+        $form->setAction($this->view->url(array(),'default'). "talks/listing");
       }
       
     $form->removeElement('mode');

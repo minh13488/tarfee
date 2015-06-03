@@ -180,7 +180,7 @@
     ),
     'event_profile' => 
     array (
-      'route' => 'event/:id/*',
+      'route' => 'event/:id/:slug/*',
       'defaults' => 
       array (
         'module' => 'ynevent',

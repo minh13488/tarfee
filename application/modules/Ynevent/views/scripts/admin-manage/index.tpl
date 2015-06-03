@@ -214,7 +214,7 @@
 	                            ?>
                             </td>
                             <td>
-                                <a href="<?php echo $this->url(array('id' => $item->event_id), 'event_profile') ?>">
+                                <a href="<?php echo $item -> getHref() ?>">
                                     <?php echo "view" ?>
                                 </a>
                                 |

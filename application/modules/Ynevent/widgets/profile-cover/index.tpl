@@ -289,7 +289,8 @@ if ($this->event->cover_photo)
                 	</a>
                 </div>
                 <?php endif;?>
-                
+                <?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this -> event ->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+				<div class=""><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
                 <?php if($this->aInviteButton):?>
                 <div class="">
                 	<a href="<?php echo $this->url($this->aInviteButton['params'], $this->aInviteButton['route'], array());?>" class="<?php echo $this->aInviteButton['class'];?>">

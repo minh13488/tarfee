@@ -28,7 +28,7 @@
   <?php if(count($this->blogs) == $this->limit): ?>
        <li>
           <div class="more" style="float:right;margin-left:15px;margin-bottom: 10px;">
-              <a href="<?php echo $this->url(array(),'default'); ?>blogs/listing/sort/recent" >
+              <a href="<?php echo $this->url(array(),'default'); ?>talks/listing/sort/recent" >
                 <?php echo $this->translate('View all');?>
               </a>
           </div>

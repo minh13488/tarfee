@@ -88,7 +88,7 @@ white-space: normal;
             'onComplete':function(responseObject)
             {  
                 obj = document.getElementById('favourite_id');
-                obj.innerHTML = '<a href="javascript:;" onclick="unfavourite_blog()">' + '<i class="fa fa-heart"></i> <?php echo $this->translate("Unfavorite")?>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;" onclick="unfavourite_blog()">' + '<i class="fa fa-heart"></i> <?php echo $this->translate("Unfavourite")?>' + '</a>';
             }
         });
         request.send();  
@@ -105,7 +105,7 @@ white-space: normal;
             'onComplete':function(responseObject)
             {  
                 obj = document.getElementById('favourite_id');
-                obj.innerHTML = '<a href="javascript:;" onclick="favourite_blog()">' + '<i class="fa fa-heart-o"></i> <?php echo $this->translate("Favorite")?>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;" onclick="favourite_blog()">' + '<i class="fa fa-heart-o"></i> <?php echo $this->translate("Favourite")?>' + '</a>';
             }
         });
         request.send();  
