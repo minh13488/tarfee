@@ -38,14 +38,14 @@ class Ynevent_Form_Create extends Engine_Form
   	
     $user = Engine_Api::_()->user()->getViewer();
 
-    $this->setTitle('Create New Event')
+    $this->setTitle('Create New Tryout/Event')
       ->setAttrib('id', 'ynevent_create_form')
       ->setMethod("POST")
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()));
       
     // Title
     $this->addElement('Text', 'title', array(
-      'label' => 'Event Name',
+      'label' => 'Title',
       'allowEmpty' => false,
       'required' => true,
       'validators' => array(
@@ -60,6 +60,14 @@ class Ynevent_Form_Create extends Engine_Form
 	
 	$this -> title -> setAttrib('required', true);
     $title = $this->getElement('title');
+	
+	$this -> addElement('Select', 'type_id', array(
+		'label' => 'Type',
+		'multiOptions' => array(
+		0 => "Event",
+		1 => 'Tryout'
+		)
+	));
 
     // Brief Description
     $this->addElement('Textarea', 'brief_description', array(
@@ -78,7 +86,7 @@ class Ynevent_Form_Create extends Engine_Form
 	
     // Description
     $this->addElement('Textarea', 'description', array(
-      'label' => 'Event Description',
+      'label' => 'Description',
       'maxlength' => '10000',
       'filters' => array(
         'StripTags',
@@ -111,8 +119,8 @@ class Ynevent_Form_Create extends Engine_Form
 	$this -> addElement('Radio', 'repeat_type', array(
             'label' => 'Please Select',
             'multiOptions' => array(
-                '0' => 'One Time Event',
-                '1' => 'Repeating Event'
+                '0' => 'One Time',
+                '1' => 'Repeating'
             ),
             'value' => 0,     
             'onclick'=>'isrepeat(this)',      
@@ -188,7 +196,7 @@ class Ynevent_Form_Create extends Engine_Form
 	
     // Capacity
     $this->addElement('Text', 'capacity', array(
-      'label' => 'Event Capacity',
+      'label' => 'Capacity',
       'description' => 'Set 0 for unlimited participants',
       'allowEmpty' => false,
       'required' => true,
@@ -214,19 +222,9 @@ class Ynevent_Form_Create extends Engine_Form
     ));
     $this->price->getDecorator('Description')->setOption('placement', 'append');
 	
-	$this -> addElement('Select', 'online', array(
-			'id' => 'online',
-			'label' => 'Event Type',		
-			'multiOptions' => array(
-                '1' => 'Online Event',
-                '0' => 'Offline Event',                		
-            ),
-            'value' => 0
-	));
-    
     // Location
 	$this -> addElement('Text', 'location', array(
-		'label' => 'Venue',
+		'label' => 'Location',
 		'required' => false,
 		'filters' => array(new Engine_Filter_Censor())
 	));
@@ -277,7 +275,7 @@ class Ynevent_Form_Create extends Engine_Form
 
     // Category
     $this->addElement('MultiLevel2', 'category_id', array(
-      'label' => 'Event Category',
+      'label' => 'Category',
          'multiOptions' => (array)Engine_Api::_()->getDbTable('categories','ynevent')->getMultiOptions(),
          'model'=>'Ynevent_Model_DbTable_Categories',
          'isSearch'=> 0,
