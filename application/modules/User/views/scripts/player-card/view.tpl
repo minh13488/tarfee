@@ -31,7 +31,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 			<?php echo $this -> itemPhoto($player, 'thumb.profile');?>
 		</div>
 		<div style="font-weight: bold">
-			<a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 50)?>
+			<a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 50)?></a>
 		</div>
 		<div class="location" style="font-weight: bold">
 			<?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?>
