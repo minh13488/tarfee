@@ -333,28 +333,28 @@ return array(
         ),
     ),
     array(
-        'title' => 'Other Videos From Member',
-        'description' => 'Displays a list of other videos that the member that uploaded this video uploaded.',
+        'title' => 'Similar/Suggested Videos',
+        'description' => 'Displays a list of other videos that the member/player that uploaded this video uploaded.',
         'category' => 'Advanced Videos',
         'type' => 'widget',
         'name' => 'ynvideo.show-same-poster',
         'isPaginated' => true,
         'defaultParams' => array(
-            'title' => 'From the same Member',
+            'title' => 'Similar/Suggested Videos',
         ),
         'requirements' => array(
             'subject' => array('video','user')
         ),
     ),
     array(
-        'title' => 'Similar Videos',
+        'title' => 'Similar Videos (tags)',
         'description' => 'Displays a list of other videos that are similar to the current video, based on tags.',
         'category' => 'Advanced Videos',
         'type' => 'widget',
         'name' => 'ynvideo.show-same-tags',
         'isPaginated' => true,
         'defaultParams' => array(
-            'title' => 'Similar Videos',
+            'title' => 'Similar Videos (tags)',
         ),
         'requirements' => array(
             'subject' => 'video',

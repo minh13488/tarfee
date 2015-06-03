@@ -25,14 +25,24 @@ class Ynvideo_Widget_ShowSamePosterController extends Engine_Content_Widget_Abst
 
         // Get tags for this video
         $itemTable = Engine_Api::_()->getItemTable($subject->getType());
-
+		
+		$owner_id = $subject->owner_id;
+		$parent_type = $subject->parent_type;
         $select = $itemTable->select()
                 ->from($itemTable)
-                ->where('owner_id = ?', $subject->owner_id)
                 ->where('video_id != ?', $subject->getIdentity())
                 ->where('search = ?', true) // ?
+                ->order('rating DESC')
+				->order('video_id DESC')
         ;
-
+		
+		if ($parent_type == 'user_playercard') {
+			$parent_id = $subject->parent_id;
+			$select->where("owner_id = $owner_id OR (parent_type = 'user_playercard' AND parent_id = $parent_id )");
+		}
+		else {
+			$select->where("owner_id = ?", $owner_id);
+		}
         // Get paginator
         $this->view->paginator = $paginator = Zend_Paginator::factory($select);
 
