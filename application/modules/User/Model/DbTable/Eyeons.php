@@ -10,4 +10,12 @@ class User_Model_DbTable_Eyeons extends Engine_Db_Table {
         $select = $this->select()->where('user_id = ?', $user_id);
         return $this->fetchAll($select);
     }
+	
+	public function getPlayerEyeOns($player_id) {
+		$select = $this->select()->from($this->info('name'), 'user_id');
+		$select -> where('player_id = ?', $player_id);
+		$userIds = $select->query()->fetchAll(FETCH_ASSOC, 0);
+		if (empty($userIds)) return array();
+		return Engine_Api::_()->user()->getUserMulti($userIds);
+	}
 }

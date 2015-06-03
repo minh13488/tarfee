@@ -149,4 +149,8 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
         }
         return Engine_Api::_()->getDbTable('eyeons', 'user')->isEyeOn($user_id, $this->getIdentity());
 	}
+	
+	function getEyeOns() {
+		return Engine_Api::_()->getDbTable('eyeons', 'user')->getPlayerEyeOns($this->getIdentity());
+	}
 }
