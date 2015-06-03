@@ -4,7 +4,7 @@
 <ul class="user-list user-items">
 	<?php foreach ($users as $user):?>
 	<li class="user-item">
-		<div class="user-photo"><?php echo $this->photoItem($user, 'thumb.icon')?></div>
+		<div class="user-photo"><?php echo $this->itemPhoto($user, 'thumb.icon')?></div>
 		<div class="user-title"><?php echo $user?></div>
 	</li>
 	<?php endforeach;?>
