@@ -54,7 +54,8 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 			        <span><?php echo $this->translate(array('%s unsure', '%s unsures', $totalUnsure), $totalUnsure) ?></span>
 			      </li>
 			      <li>
-			        <span><a><?php echo $this->translate('%s eye on', count($eyeons)) ?></a></span>
+			      	<?php $url = $this->url(array('action'=>'view-eye-on', 'player_id'=>$player->getIdentity()), 'user_playercard' , true)?>
+			        <span><a href="<?php echo $url?>" class="smoothbox"><?php echo $this->translate('%s eye on', count($eyeons)) ?></a></span>
 			      </li>
 			</ul>
 		</div>
