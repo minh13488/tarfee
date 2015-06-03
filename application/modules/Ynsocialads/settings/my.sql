@@ -695,6 +695,30 @@ SELECT
     100 as `params`
 FROM `engine4_authorization_levels` WHERE `type` IN('user');
 
+-- set permissions for max ad
+
+-- ADMIN - MODERATOR
+
+INSERT IGNORE INTO `engine4_authorization_permissions`
+SELECT
+    level_id as `level_id`,
+    'ynsocialads_ad' as `type`,
+    'max_ad' as `name`,
+    3 as `value`,
+    20 as `params`
+FROM `engine4_authorization_levels` WHERE `type` IN('moderator', 'admin');
+
+-- USER
+
+INSERT IGNORE INTO `engine4_authorization_permissions`
+SELECT
+    level_id as `level_id`,
+    'ynsocialads_ad' as `type`,
+    'max_ad' as `name`,
+    3 as `value`,
+    20 as `params`
+FROM `engine4_authorization_levels` WHERE `type` IN('user');
+
 INSERT IGNORE INTO `engine4_core_settings` VALUES
 ('ynsocialads.noadsshown', 3),
 ('ynsocialads.posfeedads', 0),

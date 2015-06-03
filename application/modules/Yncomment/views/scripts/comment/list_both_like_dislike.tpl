@@ -124,6 +124,17 @@
 						<i class="fa fa-thumbs-down ynfontawesome"></i> <?php echo $this->translate('Dislike') ?>
 					</a>
 	    		<?php endif; ?>
+	    		&nbsp;&middot;&nbsp; 
+	    		<!--WITHOUT ICON-->
+	    		<?php if($this->showLikeWithoutIcon):?>
+					<a id="writecomments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>>
+						<?php echo $this->translate('Comment') ?>
+					</a>
+	    		<?php else:?>
+					<a id="writecomments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>">
+						<i class="fa fa-comments ynfontawesome"></i> <?php echo $this->translate('Comment') ?>
+					</a>
+	    		<?php endif; ?>
 	            </div><!--floatleft-->
         <?php endif; ?>
         <div class="yncomment_float_right">

@@ -1,25 +1,63 @@
-<?php if ($this->is_ajax): ?>
-<?php $strRand = rand(1,100).rand(1,100);?>
-<div id="ynsocialads_ajax_<?php echo $strRand?>"></div>
-<script type="text/javascript">
- window.addEvent('domready', function()
- {
-    var l = document.getElementById('ynsocialads_ajax_<?php echo $strRand?>');
-    l.innerHTML = '<img src="./application/modules/Ynsocialads/externals/images/loading.gif"/>';
-    var content_id = <?php echo $this->content_id?>;
-     var makeRequest = new Request(
-            {
-                url: "ynsocialads/ads/ajax-render-ads/content_id/"+ content_id+"/ajax/"+<?php echo $strRand;?>,
-                onComplete: function (respone){
-                 l.innerHTML = respone;
-                }
-            }
-    )
-    makeRequest.send();
- });
-</script>
+<style>
+	.toc {
+	  position: absolute;
+	  left: 0;
+	  bottom: 40px;
+	  z-index: 2;
+	  display: block;
+	  width: 20px;
+	  background: #6D84B4;
+	  color: #fff;
+	  text-align: center;
+	  padding: 3px;
+	  text-decoration: none;
+   }
+  
+  .slideshow-ad  {
+	  height: 384px;
+	  position: relative;
+  }
+  
+  .slideshow-ad img {
+	  height: 384px;
+	  display: block;
+	  position: absolute;
+	  top: 0;
+	  left: 0;
+	  z-index: 1;
+  }
+  
+  .next{
+  	  position: absolute;
+	  bottom: 40px;
+	  right: 20px;
+	  z-index: 2;
+	  display: block;
+	  width: 20px;
+	  background: #6D84B4;
+	  color: #fff;
+	  text-align: center;
+	  padding: 3px;
+	  text-decoration: none;
+  }
+  
+  .prev{
+  	  position: absolute;
+	  bottom: 40px;
+	  right: 60px;
+	  z-index: 2;
+	  display: block;
+	  width: 20px;
+	  background: #6D84B4;
+	  color: #fff;
+	  text-align: center;
+	  padding: 3px;
+	  text-decoration: none;
+  }
+  
+</style>
 
-<?php else :?>
+
 <?php if(count($this->ads) > 0) :?>
 <div class="ynsocial_ads" >
 	<div class="ynsocial_ads_title">
@@ -46,18 +84,23 @@
 			<a ad_id='<?php echo $ad->getIdentity(); ?>' onclick="preventClick(this,event);" class="prevent_click_<?php echo $ad->getIdentity(); ?> ynsocial_ads_cont_title" href="<?php echo $ad->getLinkUpdateStats()?>">
 				<?php echo $this->translate($ad->name);?>
 			</a>
-			<a ad_id='<?php echo $ad->getIdentity(); ?>' onclick="preventClick(this,event);" class="prevent_click_<?php echo $ad->getIdentity(); ?> ynsocial_ads_cont_image" href="<?php echo $ad->getLinkUpdateStats()?>">
-				<img src="<?php echo $ad -> getPhotoUrl('thumb.normal') ?>"/>
-			</a>
+			
 			<?php 
 				$photoTable = Engine_Api::_() -> getItemTable('ynsocialads_photo');
 				$photos = $photoTable -> getPhotosAd($ad -> getIdentity());
 			?>
-			<?php if(!empty($photos)) :?>
-				<?php foreach($photos as $photo) :?>
-					<?php echo $this -> itemPhoto($photo);?>
-				<?php endforeach;?>
-			<?php endif;?>
+			<div class="slideshow-ad" id="slideshow-container-<?php echo $ad->getIdentity();?>">
+				<a ad_id='<?php echo $ad->getIdentity(); ?>' onclick="preventClick(this,event);" class="prevent_click_<?php echo $ad->getIdentity(); ?> ynsocial_ads_cont_image" href="<?php echo $ad->getLinkUpdateStats()?>">
+					<img src="<?php echo $ad -> getPhotoUrl('thumb.normal') ?>"/>
+				</a>	
+				<?php if(!empty($photos)) :?>
+					<?php foreach($photos as $photo) :?>
+						<a ad_id='<?php echo $ad->getIdentity(); ?>' onclick="preventClick(this,event);" class="prevent_click_<?php echo $ad->getIdentity(); ?> ynsocial_ads_cont_image" href="<?php echo $ad->getLinkUpdateStats()?>">
+						<?php echo $this -> itemPhoto($photo);?>
+						</a>
+					<?php endforeach;?>
+				<?php endif;?>
+			</div>	
 			
 			<div class="ynsocial_ads_cont"><?php echo $this->translate($ad->description)?></div>
 			
@@ -148,7 +191,6 @@
 		<?php endforeach;?>
 	</div>
 </div>
-<?php endif; ?>	
 <?php endif; ?>	
 
 <script type="text/javascript">
@@ -264,4 +306,88 @@ var preventClick = function(obj,event){
 		$$(prevent_click).addClass('click_disabled');
 }
 </script>
-
+<script type="text/javascript">
+window.addEvent('domready',function() {
+	<?php foreach($this->ads as $ad) :?>
+	
+	/* settings */
+	var showDuration = 3000;
+	var container = $('slideshow-container-<?php echo $ad -> getIdentity()?>');
+	var images = container.getElements('img');
+	var currentIndex = 0;
+	var interval;
+	var toc = [];
+	var tocWidth = 20;
+	var tocActive = 'toc-active';
+	
+	/* new: starts the show */
+	var start = function() { interval = show.periodical(showDuration); };
+	var stop = function() { $clear(interval); };
+	/* worker */
+	var show = function(to) {
+		images[currentIndex].fade('out');
+		toc[currentIndex].removeClass(tocActive);
+		images[currentIndex = ($defined(to) ? to : (currentIndex < images.length - 1 ? currentIndex+1 : 0))].fade('in');
+		toc[currentIndex].addClass(tocActive);
+	};
+	
+	/* new: control: table of contents */
+	images.each(function(img,i){
+		toc.push(new Element('a',{
+			text: i+1,
+			href: '#',
+			'class': 'toc' + (i == 0 ? ' ' + tocActive : ''),
+			events: {
+				click: function(e) {
+					if(e) e.stop();
+					stop();
+					show(i);
+				}
+			},
+			styles: {
+				left: ((i + 1) * (tocWidth + 10))
+			}
+		}).inject(container));
+		if(i > 0) { img.set('opacity',0); }
+	});
+	
+	/* new: control: next and previous */
+	var next = new Element('a',{
+		href: '#',
+		id: 'next-<?php echo $ad -> getIdentity()?>',
+		class: 'next',
+		text: '>>',
+		events: {
+			click: function(e) {
+				if(e) e.stop();
+				stop(); show();
+			}
+		}
+	}).inject(container);
+	var previous = new Element('a',{
+		href: '#',
+		id: 'previous-<?php echo $ad -> getIdentity()?>',
+		class: 'prev',
+		text: '<<',
+		events: {
+			click: function(e) {
+				if(e) e.stop();
+				stop(); show(currentIndex != 0 ? currentIndex -1 : images.length-1);
+			}
+		}
+	}).inject(container);
+	
+	/* new: control: start/stop on mouseover/mouseout */
+	container.addEvents({
+		mouseenter: function() { stop(); },
+		mouseleave: function() { start(); }
+	});
+	
+	/* start once the page is finished loading */
+	window.addEvent('load',function(){
+		start();
+	});
+	
+	<?php endforeach;?>
+});
+</script>

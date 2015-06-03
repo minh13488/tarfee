@@ -65,7 +65,16 @@ class Ynsocialads_AdminSettingsController extends Core_Controller_Action_Admin
                 $form->max_amount->setValue($row->value);
             }
         }
-        
+         if ($permissionsTable->getAllowed('ynsocialads_ad', $id, 'max_ad') == null) {
+            $row = $permissionsTable->fetchRow($permissionsTable->select()
+            ->where('level_id = ?', $id)
+            ->where('type = ?', 'ynsocialads_ad')
+            ->where('name = ?', 'max_ad'));
+            if ($row) {
+                $form->max_amount->setValue($row->value);
+            }
+        }
+		
         $credit = array();
         
         if (Engine_Api::_()->hasModuleBootstrap("yncredit")) {
@@ -157,8 +166,8 @@ class Ynsocialads_AdminSettingsController extends Core_Controller_Action_Admin
             //credit
             if (Engine_Api::_() -> hasModuleBootstrap('yncredit')) {
                 $moneyValues = array_slice($values, 0, 2);
-                $permissionValues = array_slice($values, 2, 9);
-                $creditValues = array_slice($values, 9);
+                $permissionValues = array_slice($values, 2, 10);
+                $creditValues = array_slice($values, 10);
                 $credit->level_id = $id;
                 $credit->type_id = $type -> type_id;
                 $credit->setFromArray($creditValues);
@@ -171,7 +180,6 @@ class Ynsocialads_AdminSettingsController extends Core_Controller_Action_Admin
             // Set permissions
             //TODO
             //update if add more options
-            
             $permissionsTable->setAllowed('ynsocialads_money', $id, $moneyValues);
             $permissionsTable->setAllowed('ynsocialads_ad', $id, $permissionValues);
              // Commit

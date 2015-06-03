@@ -1224,3 +1224,10 @@
 		}
 	}
 }
+#global_page_user-player-card-crop-photo
+{
+	.global_form div.form-element
+	{
+		max-width: none!important;
+	}
+}

@@ -17,6 +17,7 @@ class Ynsocialads_Form_Admin_Settings_Level extends Authorization_Form_Admin_Lev
             'ignore' => true
         ));
         
+		
         $this->addElement('Integer', 'min_amount', array(
             'label' => 'Minimum amount of money request',
             'required' =>true,
@@ -35,6 +36,15 @@ class Ynsocialads_Form_Admin_Settings_Level extends Authorization_Form_Admin_Lev
             'value' => 100,
         ));
         
+		 $this->addElement('Integer', 'max_ad', array(
+            'label' => 'Maximum Ads can create',
+            'required' =>true,
+            'validators' => array(
+                new Engine_Validate_AtLeast(0),
+            ),
+            'value' => 20,
+        ));
+		
         $this->addElement('Radio', 'create', array(
             'label' => 'Allow Create of Ad?',
             'multiOptions' => array(

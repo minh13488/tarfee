@@ -44,24 +44,6 @@ class Ynsocialads_Form_Admin_Adblocks_Create extends Engine_Form
         )
     ));
     
-    $this->addElement('Integer', 'ads_limit', array(
-		'label' => 'Ads Limit',
-		'description' => 'YNSOCIALADS_FORM_ADMIN_ADBLOCKS_CREATE_ADSLIMIT_DESCRIPTION',
-		'required' => true,
-		'validators' => array(
-		new Engine_Validate_AtLeast(0),
-		),
-    ));
-    
-    $this->addElement('Radio', 'ajax', array(
-      'label' => 'Ajax Based Display',
-      'multiOptions' => array(
-        1 => 'Yes',
-        0 => 'No',
-      ),
-      'value' => 0
-    ));
-    
     $this->addElement('Hidden', 'enable', array(
       'value' => 1
     ));

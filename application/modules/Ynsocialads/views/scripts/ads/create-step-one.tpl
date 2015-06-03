@@ -1,3 +1,9 @@
+<?php if(!empty($this -> error_message)) :?>
+	<div class="tip">
+		<span><?php echo $this -> error_message;?></span>
+	</div>
+<?php else :?>
+
 <script src="<?php $this->baseURL()?>application/modules/Ynsocialads/externals/scripts/picker/Locale.en-US.DatePicker.js" type="text/javascript"></script> 
 <script src="<?php $this->baseURL()?>application/modules/Ynsocialads/externals/scripts/picker/Picker.js" type="text/javascript"></script> 
 <script src="<?php $this->baseURL()?>application/modules/Ynsocialads/externals/scripts/picker/Picker.Attach.js" type="text/javascript"></script> 
@@ -784,3 +790,5 @@ updateItem();
 updateCountAudiences();
 onload();
 </script>
+
+<?php endif;?>

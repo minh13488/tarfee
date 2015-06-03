@@ -19,7 +19,7 @@
 			<a href="#"><span class="fa fa-building"></span></a>
 		</li>
 		<li class="sideicon_generic news">
-			<a href="#"><span class="fa fa-newspaper-o"></span></a>
+			<a href="<?php echo $this -> url(array(), 'blog_general')?>"><span class="fa fa-newspaper-o"></span></a>
 		</li>
 		<li class="sideicon_generic help">
 			<a href="#"><span class="fa fa-question"></span></a>
