@@ -18,10 +18,6 @@ class Ynvideo_Widget_ShowSamePosterController extends Engine_Content_Widget_Abst
 
         // Set stitle
         $viewer = $subject->getOwner();
-        $viewerTextLink = '<a href="' . $viewer->getHref() . '" title="' . $viewer->getTitle() . '">' 
-            . $this->view->string()->truncate($viewer->getTitle(), 15) . '</a>';
-                
-        $this->getElement()->setTitle($viewerTextLink . Zend_Registry::get('Zend_Translate')->_("'s Other Videos"));
 
         // Get tags for this video
         $itemTable = Engine_Api::_()->getItemTable($subject->getType());
