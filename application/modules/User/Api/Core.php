@@ -53,7 +53,7 @@ class User_Api_Core extends Core_Api_Abstract
 		'license' => 'Licenses & Certificates',
 		'experience' => 'Work Experience',
 		'education' => 'Education',
-		'recommendation' => 'Recommendations'
+	//	'recommendation' => 'Recommendations'
     );
 
   // Users
