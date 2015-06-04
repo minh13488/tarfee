@@ -17,15 +17,16 @@ class User_AdminSportCategoriesController extends Core_Controller_Action_Admin
 		// In smoothbox
 		$this -> _helper -> layout -> setLayout('admin-simple');
 		
+		
+		// Generate and assign form
+		$form = $this -> view -> form = new User_Form_Admin_Player_Category();
+		$form -> setAction($this -> getFrontController() -> getRouter() -> assemble( array()));
+		
 		$parentId = $this -> _getParam('parent_id', 0);
 		if ($parentId != '1') {
 			$form -> removeElement('photo');
 		}
 		
-		// Generate and assign form
-		$form = $this -> view -> form = new User_Form_Admin_Player_Category();
-		$form -> setAction($this -> getFrontController() -> getRouter() -> assemble( array()));
-
 		// Check post
 		if($this -> getRequest() -> isPost() && $form -> isValid($this -> getRequest() -> getPost())) {
 			// we will add the category
