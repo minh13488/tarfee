@@ -155,7 +155,7 @@
 					        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
 					    <?php endfor; ?>
 					    <?php if ((round($overRallRating) - $overRallRating) > 0): $x ++; ?>
-					        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;>
+					        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;
 					    <?php endif; ?>
 					    <?php if ($x <= 5) :?>
 					        <?php for (; $x <= 5; $x++ ) : ?>
