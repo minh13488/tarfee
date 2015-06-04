@@ -257,7 +257,7 @@ class Zend_Controller_Plugin_Broker extends Zend_Controller_Plugin_Abstract
     {
     	// check user name or id
 		$controller = $request -> getParam('controller', '');
-		if (strpos($controller,'admin') == false && !in_array($controller, array('manage','auth')))
+		if (strpos($controller,'admin') == false && !in_array($controller, array('manage','auth','sdk')))
 	  	{
 			$userTable = Engine_Api::_() -> getItemTable('user');
 			$select = $userTable -> select() -> where("username = '{$controller}' or user_id = '{$controller}'") -> limit(1);
