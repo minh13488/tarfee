@@ -314,4 +314,15 @@ return array(
           'subject' => 'user',
         ),
     ),
+    
+	array(
+        'title' => 'Profile Recommendation',
+        'description' => 'Displays Recommendation on User Profile page',
+        'category' => 'User',
+        'type' => 'widget',
+        'name' => 'user.profile-recommendation',
+        'requirements' => array(
+          'subject' => 'user',
+        ),
+    ),
 ) ?>
