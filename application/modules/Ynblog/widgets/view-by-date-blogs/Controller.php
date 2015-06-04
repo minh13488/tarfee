@@ -5,15 +5,15 @@ class Ynblog_Widget_ViewByDateBlogsController extends Engine_Content_Widget_Abst
   {
       if(Engine_Api::_()->core()->hasSubject('user')){
         $user = Engine_Api::_()->core()->getSubject('user');
-        $url_string = "blogs/".$user->getIdentity();
+        $url_string = "talks/".$user->getIdentity();
       }
       else if( Engine_Api::_()->core()->hasSubject('blog') ) {
         $blog = Engine_Api::_()->core()->getSubject('blog');
         $user = $blog->getOwner();
-        $url_string = "blogs/".$user->getIdentity();
+        $url_string = "talks/".$user->getIdentity();
      }
      else{
-       $url_string = "blogs/listing";
+       $url_string = "talks/listing";
       }
       $this->view->url_string = $url_string;
   }

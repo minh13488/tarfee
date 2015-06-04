@@ -17,7 +17,7 @@ class Ynevent_Widget_ProfileMembersController extends Engine_Content_Widget_Abst
           if (!$subject->authorization()->isAllowed($viewer, 'view')) {
                return $this->setNoRender();
           }
-
+		  $this -> getElement() -> removeDecorator('Title');
           // Get params
           $this->view->page = $page = $this->_getParam('page', 1);
           $this->view->search = $search = $this->_getParam('search');

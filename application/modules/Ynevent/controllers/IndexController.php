@@ -26,6 +26,13 @@ class Ynevent_IndexController extends Core_Controller_Action_Standard
 		$this->_helper->content->setNoRender ()->setEnabled ();
 	}
 	
+	// New events page
+	public function newAction()
+	{
+		// Landing page mode
+		$this->_helper->content->setNoRender ()->setEnabled ();
+	}
+	
 	// Past events page
 	public function pastAction()
 	{
@@ -183,6 +190,58 @@ class Ynevent_IndexController extends Core_Controller_Action_Standard
 		$search = $this->_getParam('is_search');
 		$selected_day =  $this->_getParam('selected_day');
 		$tag =  $this->_getParam('tag');
+	}
+
+	public function followingAction()
+	{
+		// Create form
+		if (!$this -> _helper -> requireAuth() -> setAuthParams('event', null, 'edit') -> isValid())
+			return;
+
+		// Get navigation
+		$this -> view -> navigation = $navigation = Engine_Api::_() -> getApi('menus', 'core') -> getNavigation('ynevent_main',  array(), 'ynevent_main_manage');
+
+		// Render
+		$this -> _helper -> content
+		-> setEnabled();
+
+		// Get quick navigation
+		$this -> view -> quickNavigation = $quickNavigation = Engine_Api::_() -> getApi('menus', 'core') -> getNavigation('ynevent_quick');
+
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$table = Engine_Api::_() -> getDbtable('events', 'ynevent');
+		$tableName = $table -> info('name');
+		$values = $this ->_getAllParams();
+		
+		// Only mine
+		if (@$values['view'] == 2)
+		{
+			$select = $table -> select() -> where('user_id = ?', $viewer -> getIdentity());
+		}
+		// All membership
+		else
+		{
+			$membership = Engine_Api::_() -> getDbtable('membership', 'ynevent');
+			$select = $membership -> getMembershipsOfSelect($viewer);
+		}
+
+		if (!empty($values['text']))
+		{
+			$select -> where("`{$tableName}`.title LIKE ?", '%' . $values['text'] . '%');
+		}
+		$select -> order('creation_date DESC');
+		$select -> group('repeat_group');
+		
+		$this -> view -> paginator = $paginator = Zend_Paginator::factory($select);
+		$this -> view -> text = $values['text'];
+
+		$this -> view -> view = $values['view'];
+
+		$paginator -> setItemCountPerPage(20);
+		$paginator -> setCurrentPageNumber($this -> _getParam('page'));
+
+		// Check create
+		$this -> view -> canCreate = $canCreate = Engine_Api::_() -> authorization() -> isAllowed('event', null, 'create');
 	}
 
 	public function manageAction()

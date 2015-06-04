@@ -121,6 +121,7 @@ class Ynevent_Widget_ListMostTimeController extends Engine_Content_Widget_Abstra
 			-> where("endtime > FROM_UNIXTIME(?)", $time)
 			-> order("starttime ASC")
 			-> limit($itemCount);
+		
         $this->view->events_upcoming = $events_upcoming = $table->fetchAll($select);
 		// today
        	$select = $table->select()     

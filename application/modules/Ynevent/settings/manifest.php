@@ -180,7 +180,7 @@
     ),
     'event_profile' => 
     array (
-      'route' => 'event/:id/*',
+      'route' => 'event/:id/:slug/*',
       'defaults' => 
       array (
         'module' => 'ynevent',
@@ -217,6 +217,18 @@
         'filter' => 'future',
       ),
     ),
+    'event_new' => 
+    array (
+      'route' => 'events/new/*',
+      'defaults' => 
+      array (
+        'module' => 'ynevent',
+        'controller' => 'index',
+        'action' => 'new',
+        'filter' => 'recent',
+      ),
+    ),
+    
     'event_past' => 
     array (
       'route' => 'events/past/*',
@@ -236,6 +248,16 @@
         'module' => 'ynevent',
         'controller' => 'index',
         'action' => 'listing',
+      ),
+    ),
+    'event_following' => 
+    array (
+      'route' => 'events/following/*',
+      'defaults' => 
+      array (
+        'module' => 'ynevent',
+        'controller' => 'index',
+        'action' => 'following',
       ),
     ),
     'ynevent_admin_default' => 

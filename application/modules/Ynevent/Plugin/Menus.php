@@ -44,6 +44,18 @@ class Ynevent_Plugin_Menus
 
 		return true;
 	}
+	
+	public function onMenuInitialize_YneventMainFollowing()
+	{
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+
+		if (!$viewer -> getIdentity())
+		{
+			return false;
+		}
+
+		return true;
+	}
 
 	public function onMenuInitialize_YneventMainCreate()
 	{

@@ -254,6 +254,7 @@ class Ynevent_Model_Event extends Core_Model_Item_Abstract
 			'route' => 'event_profile',
 			'reset' => true,
 			'id' => $this -> getIdentity(),
+			'slug' => $this->getSlug(),
 		), $params);
 		$route = $params['route'];
 		$reset = $params['reset'];
