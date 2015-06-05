@@ -195,6 +195,12 @@ class User_LibraryController extends Core_Controller_Action_Standard
 		$library->setFromArray($values);
 		$library->save();
 		
+		// Set photo
+		if (!empty($values['photo']))
+		{
+			$library -> setPhoto($form -> photo);
+		}
+		
 		// CREATE AUTH STUFF HERE
 	      $auth = Engine_Api::_()->authorization()->context;
 	      $roles = array('owner', 'owner_member', 'owner_member_member', 'owner_network', 'registered', 'everyone');
@@ -249,6 +255,12 @@ class User_LibraryController extends Core_Controller_Action_Standard
 		$values = $form -> getValues();
 		$library->setFromArray($values);
 		$library->save();
+		
+		// Set photo
+		if (!empty($values['photo']))
+		{
+			$library -> setPhoto($form -> photo);
+		}
 		
 		// CREATE AUTH STUFF HERE
 	      $auth = Engine_Api::_()->authorization()->context;
