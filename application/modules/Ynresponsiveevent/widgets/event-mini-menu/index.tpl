@@ -21,8 +21,17 @@
         		<div id="global_search_form_container">
         			<form id="global_search_form" action="<?php echo $this->url(array('controller' => 'search'), 'default', true) ?>" method="get">
         			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100' alt='<?php echo $this->translate('Search') ?>' />
+                  <span class="global_search_form_icon">btn-search</span>
         			</form>
         		</div>
+            <!-- Add html filter and advanced -->
+            <span class="global_search_form_filter_advanced">
+               filter <i class="fa fa-angle-down"></i>
+            </span>
+            
+            <span class="global_search_form_filter_advanced">
+               advanced <i class="fa fa-angle-down"></i>
+            </span>
         	<?php endif;?>
         <?php endif; ?>
     <div class="group-mini-menu">
@@ -135,14 +144,15 @@
         	<?php
         	if($this->viewer->getIdentity()) : 
             	{
-            		$img = $this->itemPhoto($this->viewer(), 'thumb.icon');
+            		$img = $this->itemPhoto($this->viewer(), 'thumb.profile');
             		if($this->viewer()->getTitle() == 'admin')
             		{
             			echo "<div data-toggle='collapse' data-target='.user-profile-submenu' id='user-profile-info' class='user-profile-info collapsed'>" .$img. "<span>".$this->translate('Admin') . "</span><i class='ynicon-setting-w'></i></div>";
             		}
             		else
             		{				
-            		  	echo "<div data-toggle='collapse' data-target='.user-profile-submenu' id='user-profile-info' class='user-profile-info collapsed'>" .$img. "<span>".strip_tags($this->string()->truncate($this->viewer()->getTitle(), 20))."</span><i class='ynicon-setting-w'></i></div>";				 
+            		  	echo "<div data-toggle='collapse' data-target='.user-profile-submenu' id='user-profile-info' class='user-profile-info collapsed'>" .$img. "<span>".strip_tags($this->string()->truncate($this->viewer()->getTitle(), 20))."</span>
+                     <i class='fa fa-caret-down'></i></div>";				 
             		}
             	}
             	?>
