@@ -151,7 +151,7 @@ return array(
         'action' => 'create-sub-library'
       ),
       'reqs' => array(
-        'action' => '(create-sub-library|edit|delete|give-ownership|move-to-sub|move-to-main|move-to-player|remove-link)',
+        'action' => '(create-sub-library|edit|delete|move-to-sub|move-to-main|move-to-player)',
       )
     ),
 	

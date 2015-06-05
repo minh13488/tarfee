@@ -95,11 +95,6 @@ class User_Model_DbTable_Mappings extends Engine_Db_Table
 		{
 			$row = $this -> getRow($params['owner_id'], $params['owner_type'], $params['item_id'], $params['item_type']);
 			if($row) {
-				//delete item with parent_id
-				$mappings = $this -> getItemsMapping($params['item_type'], array('parent_id' => $row -> mapping_id));
-				foreach($mappings as $mapping) {
-					$mapping -> delete();
-				}
 				$row -> delete();
 			}
 			$db -> commit();

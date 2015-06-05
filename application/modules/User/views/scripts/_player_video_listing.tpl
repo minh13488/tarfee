@@ -58,7 +58,7 @@
 	   				$mappingsTable = Engine_Api::_() -> getDbtable('mappings', 'user');
 	   				$row = $mappingsTable -> getRow($this->player->getIdentity(), $this->player->getType(), $this -> video->video_id, $this -> video->getType());
 	   			?>
-	   			<?php if(isset($row) && $row -> parent_id == 0) :?>
+	   			<?php if($row) :?>
 		   			<li style="width: 100%;">
 						<?php
 							echo $this->htmlLink(array(
@@ -99,21 +99,6 @@
 								)) ;
 							?>
 					</li>
-				<?php else :?>
-					<?php if($row -> parent_id != 0):?>
-					<li style="width: 100%;">
-						<?php echo $this->htmlLink(array(
-								'route' => 'user_library',
-								'action' => 'remove-link',
-								'id' =>  $row -> mapping_id,
-								'player_id' =>  $this->player->getIdentity(),
-							), '<i class="fa fa-plus-square"></i>'.$this->translate('Remove Link '), array(
-							'class' => 'smoothbox buttonlink'
-							)) ;
-						?>
-					</li>
-					<?php endif;?>
-				<?php endif;?>
 			</ul>
 		</div>
 		<?php endif;?>
