@@ -17,11 +17,12 @@ class Ynevent_Widget_BrowseSearchController extends Engine_Content_Widget_Abstra
 		
 		$action = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'event_listing', true);
 		
+		/*
 		if(YNRESPONSIVE_ACTIVE == 'ynresponsive-event')
 		{
 			$action = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'ynresponsive_event_listtng', true);
 		}
-		
+		*/
         $formFilter->setAction($action);
         
         $defaultValues = $formFilter->getValues();

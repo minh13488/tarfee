@@ -40,7 +40,17 @@ $allow = $this->subject->authorization()->isAllowed($this->viewer, 'view');
 						<li class="uiYnfbppRow">
 							<div>
 								<?php echo $this->translate('Host') ?>:
-							</div><span><?php echo $this->string()->truncate($this->string()->stripTags($this->subject->host), 20) ?></span>
+							</div><span><?php 
+							if(strpos($this->subject->host,'younetco_event_key_') !== FALSE)
+							{
+								$user_id = substr($this->subject->host, 19, strlen($this->subject->host));
+								$user = Engine_Api::_() -> getItem('user', $user_id);
+								echo $this->htmlLink($user->getHref(), $user->getTitle());	
+							}
+							else {
+								echo $this->string()->truncate($this->string()->stripTags($this->subject->host), 20) ;
+							}	
+							?></span>
 						</li>
 						<?php endif; ?>
 						<?php if($allow && $settings->getSetting('ynfbpp.event.location',1) && !empty($this->subject->location)): ?>
