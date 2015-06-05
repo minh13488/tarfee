@@ -166,7 +166,7 @@ class Ynevent_Widget_ListMostItemsController extends Engine_Content_Widget_Abstr
                 -> order("$tableEventName.rating DESC");
         $this->view->events_rated = $events_rated = Zend_Paginator::factory($select);
 
-		$eventIds = array();
+		$eventIdsPopular = $eventIdsAttending = $eventIdsLiked = $eventIdsRated = array();
 		foreach ($events_popular as $e){
 			$eventIdsPopular[] = $e -> getIdentity();
 		}

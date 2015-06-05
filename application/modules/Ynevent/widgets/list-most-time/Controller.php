@@ -148,7 +148,7 @@ class Ynevent_Widget_ListMostTimeController extends Engine_Content_Widget_Abstra
 			->limit($itemCount);
         $this->view->events_month = $events_month = $table->fetchAll($select);
         
-        $eventIds = array();
+        $eventIdsUpcoming = $eventIdsToday = $eventIdsWeek = $eventIdsMonth = array();
 		foreach ($events_upcoming as $e){
 			$eventIdsUpcoming[] = $e -> getIdentity();
 		}
