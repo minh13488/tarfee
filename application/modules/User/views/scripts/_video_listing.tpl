@@ -102,7 +102,7 @@
 							'action' => 'move-to-player',
 							'id' =>  $this -> video -> video_id,
 							'libid' =>  $this->library->getIdentity(),
-						), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Player '), array(
+						), '<i class="fa fa-plus-square"></i>'.$this->translate('Assign to Player '), array(
 						'class' => 'smoothbox buttonlink'
 						)) ;
 					?>

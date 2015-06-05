@@ -94,7 +94,7 @@
 									'action' => 'move-to-main',
 									'id' =>  $this -> video -> video_id,
 									'player_id' =>  $this->player->getIdentity(),
-								), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Main Library '), array(
+								), '<i class="fa fa-plus-square"></i>'.$this->translate('Assign to Main Library '), array(
 								'class' => 'smoothbox buttonlink'
 								)) ;
 							?>
