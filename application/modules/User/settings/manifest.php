@@ -107,6 +107,7 @@ return array(
     'user_library',
     'user_sportcategory',
     'user_playercard',
+    'user_photo',
   ),
   // Routes --------------------------------------------------------------------
   'routes' => array(
@@ -152,6 +153,17 @@ return array(
       ),
       'reqs' => array(
         'action' => '(create-sub-library|edit|delete|move-to-sub|move-to-main|move-to-player)',
+      )
+    ),
+	'user_photo' => array(
+      'route' => 'members/photo/:action/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'photo',
+        'action' => 'upload'
+      ),
+      'reqs' => array(
+        'action' => '(upload|upload-photo)',
       )
     ),
 	

@@ -135,6 +135,18 @@
 								<li class="fourth">
 								<?php
 									echo $this->htmlLink(array(
+							            'route' => 'user_photo',
+							            'controller' => 'upload',
+							            'id' => $player->playercard_id,
+							            'type' => $player->getType(),
+							        ), '<i class="fa fa-plus-square"></i>&nbsp;'.$this->translate('Add Photos'), array(
+							            'class' => 'smoothbox'
+							        ));
+								?>
+								</li>
+								<li class="fifth">
+								<?php
+									echo $this->htmlLink(array(
 							            'route' => 'user_extended',
 							            'controller' => 'player-card',
 							            'action' => 'delete',
