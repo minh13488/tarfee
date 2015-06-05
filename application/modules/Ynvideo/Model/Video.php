@@ -17,16 +17,21 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 	// protected $_parent_is_owner = true;
 	
 	public function getRating() {
-		$tableRating = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
-		$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
-		$ratingTypes = $tableRatingType -> getAllRatingTypes();
-		$overrallValueTotal = 0;
-		foreach($ratingTypes as $item) {
-			$overrallValue = $tableRating -> getRatingOfType($item -> getIdentity(), $this -> video_id); 
-			$overrallValueTotal += $overrallValue;
-   		}
-   		$rate = round(($overrallValueTotal/5), 1);
-		return $rate;
+		if($this -> parent_type == "user_playercard") {
+			$tableRating = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
+			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
+			$ratingTypes = $tableRatingType -> getAllRatingTypes();
+			$overrallValueTotal = 0;
+			foreach($ratingTypes as $item) {
+				$overrallValue = $tableRating -> getRatingOfType($item -> getIdentity(), $this -> video_id); 
+				$overrallValueTotal += $overrallValue;
+	   		}
+	   		$rate = round(($overrallValueTotal/5), 1);
+			return $rate;
+		} 
+		else {
+			return $this -> rating;
+		}
 	}
 	
 	

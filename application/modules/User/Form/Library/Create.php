@@ -22,11 +22,18 @@ class User_Form_Library_Create extends Engine_Form
         new Engine_Filter_Censor(),
       ),
     ));
+	$this -> title -> setAttrib('required', true);
 	
 	//Description
     $this->addElement('Textarea', 'description', array(
       'label' => 'Description',
     ));
+	
+	$this->addElement('File', 'photo', array(
+      'label' => 'Library Photo'
+    ));
+    $this->photo->addValidator('Extension', false, 'jpg,png,gif,jpeg');
+	$this -> photo -> setAttrib('accept', 'image/*');
 	
 	// View
     $availableLabels = array(
@@ -61,7 +68,6 @@ class User_Form_Library_Create extends Engine_Form
     $this->addElement('Button', 'submit_button', array(
       'value' => 'submit_button',
       'label' => 'Create',
-      'onclick' => 'removeSubmit()',
       'type' => 'submit',
       'ignore' => true,
       'decorators' => array(

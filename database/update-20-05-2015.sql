@@ -6,6 +6,7 @@
 
 CREATE TABLE IF NOT EXISTS `engine4_user_libraries` (
   `library_id` int(11) unsigned NOT NULL auto_increment,
+  `photo_id` INT(11) NOT NULL DEFAULT '0',
   `title` varchar(100) NOT NULL,
   `description` text NOT NULL,
   `parent_id` int(11) unsigned DEFAULT NULL,
@@ -25,7 +26,6 @@ CREATE TABLE IF NOT EXISTS `engine4_user_libraries` (
 CREATE TABLE IF NOT EXISTS `engine4_user_mappings` (
 `mapping_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
 `user_id` int(11) unsigned NOT NULL,
-`parent_id` int(11) unsigned NOT NULL DEFAULT '0',
 `owner_id` int(11) unsigned NOT NULL,
 `owner_type` varchar(128) COLLATE utf8_unicode_ci NOT NULL,
 `item_id` int(11) unsigned NOT NULL,

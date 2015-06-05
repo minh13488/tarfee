@@ -148,9 +148,10 @@ ul.thumbs.thumbs_album>li {
 } /* hover only desktop site */
 
 .ybo_logo img {
-	max-height: 50px;
+	max-height: 65px;
 	max-width: 300px;
 }
+
 
 .navbar-default .navbar-brand,
 .navbar-default .navbar-brand:hover {
@@ -960,6 +961,8 @@ iframe.wysihtml5-sandbox {
 .layout_ynresponsiveevent_event_mini_menu {
 	z-index: 100;
 	position: relative;
+	min-height: 90px;
+  	box-shadow: 1px -4px 7px 3px #333;
 }
 
 

@@ -40,7 +40,7 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 		}
 		else
 		{
-			throw new Group_Model_Exception('invalid argument passed to setPhoto');
+			throw new User_Model_Exception('invalid argument passed to setPhoto');
 		}
 
 		$name = basename($file);

@@ -11,6 +11,60 @@ ALTER TABLE `engine4_activity_actiontypes` CHANGE  `type`  `type` VARCHAR( 64 ) 
 ALTER TABLE `engine4_activity_actions` CHANGE  `type`  `type` VARCHAR( 64 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL ;
 ALTER TABLE `engine4_activity_stream` CHANGE  `type`  `type` VARCHAR( 64 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL ;
 
+-- --------------------------------------------------------
+
+CREATE TABLE IF NOT EXISTS `engine4_user_playercards` (
+  `playercard_id` int(11) unsigned NOT NULL auto_increment,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `photo_id` int(11) unsigned default NULL,
+  `relation_id` int(11) default NULL,
+  `relation_other` varchar(100) default NULL,
+  `description` text NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `category_id` int(11) unsigned NOT NULL default '0',
+  `country_id` INT(11) NOT NULL DEFAULT '0'
+  `gender` tinyint(1) NOT NULL,
+  `referred_foot` tinyint(1) NOT NULL,
+  `birth_date` datetime NOT NULL,
+  `country_id` int(11) unsigned NOT NULL default '0',
+  `province_id` int(11) unsigned NOT NULL default '0',
+  `city_id` int(11) unsigned NOT NULL default '0',
+  `position_id` int(11) unsigned NOT NULL default '0',
+  `creation_date` datetime NOT NULL,
+  `modified_date` datetime NOT NULL,
+  PRIMARY KEY  (`playercard_id`),
+  KEY `creation_date` (`creation_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_tfcampaign_campaigns`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_tfcampaign_campaigns` (
+`campaign_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`user_id` int(11) NOT NULL,
+`title` text COLLATE utf8_unicode_ci NOT NULL,
+`description` text COLLATE utf8_unicode_ci NOT NULL,
+`creation_date` datetime NOT NULL,
+`modified_date` datetime NOT NULL,
+`start_date` datetime NOT NULL,
+`end_date` datetime NOT NULL,
+
+`from_age` varchar(16) NULL,
+`to_age` varchar(16) NULL,
+`gender` varchar(16) NULL,
+`sport_type_id` int(11) unsigned NOT NULL default '0',
+`sport_preference_id` int(11) unsigned  NULL default '0',
+`language` text NULL,
+`country_id` int(11) unsigned NOT NULL default '0',
+`photo_required` tinyint(1) NOT NULL default '0',
+`video_required` tinyint(1) NOT NULL default '0',
+
+PRIMARY KEY (`campaign_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
