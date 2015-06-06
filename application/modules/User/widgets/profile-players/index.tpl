@@ -218,6 +218,17 @@
 						echo $this->translate(array('video','videos', $totalVideo));
 						?>
 					</span>
+					<span>
+						<?php
+						$params = array();
+						$params['owner_type'] = $player -> getType();
+						$params['owner_id'] = $player -> getIdentity();
+						$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+						$totalVideo = $mappingTable -> getTotalVideo($params);
+						echo $totalVideo;
+						echo $this->translate(array('video','videos', $totalVideo));
+						?>
+					</span>
 					<hr>
 					<div class="nickname">
 							<?php echo $this->htmlLink($player -> getOwner()->getHref(), $this->itemPhoto($player -> getOwner(), 'thumb.icon', $player -> getOwner()->getTitle(), array('style' => 'width: auto')), array('class' => 'members_thumb')) ?>
