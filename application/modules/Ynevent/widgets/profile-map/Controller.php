@@ -7,16 +7,48 @@ class Ynevent_Widget_ProfileMapController extends Engine_Content_Widget_Abstract
 		// Prepare data
 		$this -> view -> event = $event = Engine_Api::_() -> core() -> getSubject();
 		$this -> view -> fullAddress = $event -> getFullAddress();
-		
-		// Convert the dates for the viewer
-		$tz = date_default_timezone_get();
-		$viewer = Engine_Api::_() -> user() -> getViewer();
-		$startDateObject = new Zend_Date(strtotime($event->starttime));
-		if( $viewer->getIdentity() ) {
-			$tz = $viewer->timezone;
+		if(!$this -> view -> fullAddress)
+		{
+			$countryName = '';
+			$provinceName = '';
+			$cityName = '';
+			if($event ->country_id && $country = Engine_Api::_() -> getItem('user_location', $event ->country_id))
+			{
+				$countryName = $country -> getTitle();
+			}
+			if($event ->province_id && $province = Engine_Api::_() -> getItem('user_location', $event ->province_id))
+			{
+				$provinceName = $province -> getTitle();
+			}
+			if($event ->city_id && $city = Engine_Api::_() -> getItem('user_location', $event ->city_id))
+			{
+				$cityName = $city -> getTitle();
+			}
+			$fullAddress = '';
+			if($cityName)
+			{
+				$fullAddress .= $cityName;
+			}
+			
+			if($provinceName && $fullAddress)
+			{
+				$fullAddress .= ', '.$provinceName;
+			}
+			else if($provinceName)
+			{
+				$fullAddress .= $provinceName;
+			}
+			
+			if($countryName && $fullAddress)
+			{
+				$fullAddress .= ', '.$countryName;
+			}
+			else if($countryName)
+			{
+				$fullAddress .= $countryName;
+			}
+			$this -> view -> fullAddress = $fullAddress;
 		}
-		$startDateObject->setTimezone($tz);
-		$this->view->startDateObject = $startDateObject;
 	}
 
 }
