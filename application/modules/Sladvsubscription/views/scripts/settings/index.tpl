@@ -63,7 +63,7 @@
   <div>
     <div>
       <h3>
-        <?php echo $this->translate('Subscription') ?>
+        <?php echo $this->translate('Membership') ?>
       </h3>
       <?php if( $this->currentPackage && $this->currentSubscription ): ?>
         <p class="form-description">

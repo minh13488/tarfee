@@ -26,7 +26,7 @@ class Sladvsubscription_Form_Admin_Signup_Subscription extends Engine_Form
 
 
     // Custom
-    $this->setTitle($this->getView()->translate('%1$s: Choose Adv Subscription', $stepString));
+    $this->setTitle($this->getView()->translate('%1$s: Choose Advanced Membership', $stepString));
 
 
     // Element: enable

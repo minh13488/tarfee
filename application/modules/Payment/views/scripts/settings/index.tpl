@@ -54,12 +54,12 @@
         </p>
         <p style="padding-top: 15px; padding-bottom: 15px;">
           <?php echo $this->translate('If you would like to change your ' .
-              'subscription, please select an option below.') ?>
+              'membership, please select an option below.') ?>
         </p>
       <?php else: ?>
         <p class="form-description">
           <?php echo $this->translate('You have not yet selected a ' .
-              'subscription plan. Please choose one now below.') ?>
+              'membership plan. Please choose one now below.') ?>
         </p>
       <?php endif; ?>
       <div class="form-elements">

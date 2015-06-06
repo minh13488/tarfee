@@ -10,7 +10,7 @@
 ?>
 
 <h2>
-  <?php echo $this->translate('Advsubscription Plugin') ?>
+  <?php echo $this->translate('Advanced Membership Plugin') ?>
 </h2>
 
 <?php if( count($this->navigation) ): ?>

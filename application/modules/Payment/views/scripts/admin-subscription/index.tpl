@@ -66,7 +66,7 @@
 <div class='admin_results'>
   <div>
     <?php $count = $this->paginator->getTotalItemCount() ?>
-    <?php echo $this->translate(array("%s membership found", "%s subscriptions found", $count), $count) ?>
+    <?php echo $this->translate(array("%s membership found", "%s memberships found", $count), $count) ?>
   </div>
   <div>
     <?php echo $this->paginationControl($this->paginator, null, null, array(

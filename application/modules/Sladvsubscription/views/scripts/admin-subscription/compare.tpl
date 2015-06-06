@@ -9,7 +9,7 @@
  */
 ?>
 <h2>
-  <?php echo $this->translate('Compare Subscription Packages') ?>
+  <?php echo $this->translate('Compare Membership Packages') ?>
 </h2>
 <?php
 	if (!count($this->levels)):
