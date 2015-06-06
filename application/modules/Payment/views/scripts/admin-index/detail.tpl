@@ -150,7 +150,7 @@
         'action' => 'detail',
         'subscription_id' => $this->order->source_id,
         'transaction_id' => null,
-      ), $this->translate('Related Subscription'), array(
+      ), $this->translate('Related Membership'), array(
         'target' => '_parent'
       )) ?>
     <?php endif; ?>

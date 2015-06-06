@@ -21,7 +21,7 @@ class Payment_Form_Admin_Package_Create extends Engine_Form
   public function init()
   {
     $this
-      ->setTitle('Create Subscription Plan')
+      ->setTitle('Create Membership Plan')
       ->setDescription('Please note that payment parameters (Price, ' .
           'Recurrence, Duration, Trial Duration) cannot be edited after ' .
           'creation. If you wish to change these, you will have to create a ' .
@@ -60,7 +60,7 @@ class Payment_Form_Admin_Package_Create extends Engine_Form
       //'allowEmpty' => false,
       'description' => 'The member will be placed into this level upon ' .
           'subscribing to this plan. If left empty, the default level at the ' .
-          'time a subscription is chosen will be used.',
+          'time a membership is chosen will be used.',
       'multiOptions' => $multiOptions,
     ));
 

@@ -29,7 +29,7 @@
 <?php if( $this->isAdmin ): ?>
   <div class="tip">
     <span>
-      <?php echo $this->translate('Subscriptions are not required for ' .
+      <?php echo $this->translate('Membership are not required for ' .
           'administrators and moderators.') ?>
     </span>
   </div>
@@ -40,7 +40,7 @@
   <div>
     <div>
       <h3>
-        <?php echo $this->translate('Subscription') ?>
+        <?php echo $this->translate('Membership') ?>
       </h3>
       <?php if( $this->currentPackage && $this->currentSubscription ): ?>
         <p class="form-description">

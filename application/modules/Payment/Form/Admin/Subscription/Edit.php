@@ -21,7 +21,7 @@ class Payment_Form_Admin_Subscription_Edit extends Engine_Form
   public function init()
   {
     $this
-      ->setTitle('Edit Subscription')
+      ->setTitle('Edit Membership')
       ;
 
     $this->setAttrib('class', 'global_form_popup');
@@ -33,8 +33,8 @@ class Payment_Form_Admin_Subscription_Edit extends Engine_Form
           'changing this to "cancelled" will not refund any transactions or ' .
           'cancel any recurring payment profiles, however if it was ' .
           'previously "active," the member will have to create a new ' .
-          'subscription. Please use the details link on ' .
-          'Manage Subscriptions page to perform these actions.',
+          'membership. Please use the details link on ' .
+          'Manage membership page to perform these actions.',
       'multiOptions' => array(
         'initial' => 'Initializing',
         'trial' => 'Trial',
@@ -49,8 +49,8 @@ class Payment_Form_Admin_Subscription_Edit extends Engine_Form
 
     $this->addElement('Select', 'active', array(
       'label' => 'Active',
-      'description' => 'Is this the current, most relevant subscription for ' .
-          'this member? Non-active subscriptions have no effect and ' .
+      'description' => 'Is this the current, most relevant membership for ' .
+          'this member? Non-active memberships have no effect and ' .
           'are stored for record-keeping purposes.',
       'multiOptions' => array(
         '1' => 'Yes',

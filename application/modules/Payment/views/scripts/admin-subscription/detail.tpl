@@ -12,12 +12,12 @@
 ?>
 
 <h2 class="payment_transaction_detail_headline">
-  <?php echo $this->translate('Subscription Details') ?>
+  <?php echo $this->translate('Membership Details') ?>
 </h2>
 
 <dl class="payment_transaction_details">
   <dd>
-    <?php echo $this->translate('Subscription ID') ?>
+    <?php echo $this->translate('Membership ID') ?>
   </dd>
   <dt>
     <?php echo $this->subscription->subscription_id ?>
@@ -72,7 +72,7 @@
   </dt>
 
   <dd>
-    <?php echo $this->translate('Subscription State') ?>
+    <?php echo $this->translate('Membership State') ?>
   </dd>
   <dt>
     <?php echo $this->translate(ucfirst($this->subscription->status)) ?>
@@ -102,7 +102,7 @@
   </dd>
   <dt>
     <a href='<?php echo $this->url(array('module' => 'payment', 'controller' => 'subscription', 'action' => 'index'), null, true) ?>?user_id=<?php echo $this->subscription->user_id ?>'>
-      <?php echo $this->translate('Member Subscription History') ?>
+      <?php echo $this->translate('Member Membership History') ?>
     </a>
     |
     <a href='<?php echo $this->url(array('module' => 'payment', 'controller' => 'index', 'action' => 'index'), null, true) ?>?user_id=<?php echo $this->subscription->user_id ?>'>
@@ -110,11 +110,11 @@
     </a>
     <br />
     <a href='<?php echo $this->url(array('module' => 'payment', 'controller' => 'subscription', 'action' => 'cancel'), null, true) ?>?subscription_id=<?php echo $this->subscription->subscription_id ?>' class="smoothbox">
-      <?php echo $this->translate('Cancel Subscription') ?>
+      <?php echo $this->translate('Cancel Membership') ?>
     </a>
     |
     <a class="smoothbox" href='<?php echo $this->url(array('module' => 'payment', 'controller' => 'subscription', 'action' => 'edit'), null, true) ?>?subscription_id=<?php echo $this->subscription->subscription_id ?>'>
-      <?php echo $this->translate('Edit Subscription') ?>
+      <?php echo $this->translate('Edit Membership') ?>
     </a>
   </dt>
 </dl>
