@@ -17,6 +17,11 @@ class Tfcampaign_Form_Admin_Settings_Global extends Engine_Form {
             'value' => $settings->getSetting('tfcampaign_max_description', "300"),
         ));
 		
+		$this->addElement('Text', 'tfcampaign_max_period', array(
+            'label' => 'Maximum Period (days) Allowed To Have A Campaign',
+            'value' => $settings->getSetting('tfcampaign_max_period', "20"),
+        ));
+		
 		$this->addElement('Radio', 'tfcampaign_private_allow', array(
 	      'label' => 'Allow private campaigns?',
 	      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('tfcampaign_private_allow', 1),
