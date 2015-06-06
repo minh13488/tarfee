@@ -153,4 +153,22 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 	function getEyeOns() {
 		return Engine_Api::_()->getDbTable('eyeons', 'user')->getPlayerEyeOns($this->getIdentity());
 	}
+	
+	public function getPhotosTotal() {
+		$photoTable = Engine_Api::_() -> getItemTable('user_photo');
+		$select = $photoTable -> select();
+    	$select -> from($photoTable->info('name'), 'COUNT(*) AS count')
+				-> where('item_id = ?', $this -> getIdentity())
+				-> where('item_type = ?', $this -> getType());
+    	return $select->query()->fetchColumn(0);
+	}
+	public function getSport()
+	{
+		return Engine_Api::_() -> getItem('user_sportcategory', $this -> category_id);
+	}
+	
+	public function getPosition()
+	{
+		return Engine_Api::_() -> getItem('user_sportcategory', $this -> position_id);
+	}
 }
