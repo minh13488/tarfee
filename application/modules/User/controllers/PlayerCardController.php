@@ -72,7 +72,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		{
 			$this -> view -> showPosition = false;
 		}
-		
+		$provincesAssoc = array();
 		$country_id = $posts['country_id'];
 		if ($country_id) {
 			$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);

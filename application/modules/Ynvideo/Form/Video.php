@@ -43,7 +43,7 @@ class Ynvideo_Form_Video extends Engine_Form
 			),
 			'required' => (bool)Engine_Api::_()->getApi('settings', 'core')->getSetting('ynvideo.title_require', 1)
 		));
-		$this -> title -> setAttrib('required', true);
+		$this -> title -> setAttrib('required', (bool)Engine_Api::_()->getApi('settings', 'core')->getSetting('ynvideo.title_require', 1));
 		
 		// init tag
 		$this -> addElement('Text', 'tags', array(

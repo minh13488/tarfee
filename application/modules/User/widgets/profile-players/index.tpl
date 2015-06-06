@@ -161,6 +161,7 @@
 						
 						    <?php endif;?>
 					</div>
+					<div><span><a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 15)?></span></a></div>
 					<?php $overRallRating = $player -> getOverallRating();?>
 					<div class="user_rating" title="<?php echo $overRallRating;?>">
 						<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
@@ -175,28 +176,50 @@
 					        <?php endfor; ?>
 					    <?php endif; ?>
 					</div>
-					<hr>
-					<div class="nickname">
-						<div><span><a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 15)?></span></a></div>
-						<?php
+					<?php
 						$countryName = '';
-						$provinceName = '';
-						$cityName = '';
 						if($player ->country_id && $country = Engine_Api::_() -> getItem('user_location', $player ->country_id))
 						{
 							$countryName = $country -> getTitle();
 						}
-						if($player ->province_id && $province = Engine_Api::_() -> getItem('user_location', $player ->province_id))
-						{
-							$provinceName = $province -> getTitle();
-						}
-						if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $player ->city_id))
-						{
-							$cityName = $city -> getTitle();
-						}
 						?>
-						<span><?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?></span>
 						<div>
+					<?php echo  $this->locale()->toDate($player -> birth_date);?> 
+					<?php if($countryName)
+							echo ' | '.$countryName?>
+					<br/>
+					<?php 
+					$laguages = $player -> languages;
+					$arr_lang = explode(',', $laguages);
+					$arr_tmp = array();
+					foreach ($arr_lang as $lang) 
+					{
+						$arr_tmp[] = $lang;
+					}
+					echo implode(' | ', $arr_tmp);
+					?>
+					<hr>
+					<span><?php 
+						$eyeons = $player->getEyeOns();
+						echo count($eyeons);
+						echo $this->translate('eye on'); ?>
+					</span>
+					<span>
+						
+					</span>
+					<span>
+						<?php
+						$params = array();
+						$params['owner_type'] = $player -> getType();
+						$params['owner_id'] = $player -> getIdentity();
+						$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+						$totalVideo = $mappingTable -> getTotalVideo($params);
+						echo $totalVideo;
+						echo $this->translate(array('video','videos', $totalVideo));
+						?>
+					</span>
+					<hr>
+					<div class="nickname">
 							<?php echo $this->htmlLink($player -> getOwner()->getHref(), $this->itemPhoto($player -> getOwner(), 'thumb.icon', $player -> getOwner()->getTitle(), array('style' => 'width: auto')), array('class' => 'members_thumb')) ?>
 							<div class='members_info'>
 						        <div class='members_name'>
