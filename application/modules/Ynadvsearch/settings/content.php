@@ -294,6 +294,13 @@ return array(
     'name' => 'ynadvsearch.search-results',
   ),
   array(
+    'title' => 'Search Results 2',
+    'description' => 'Search Results 2.',
+    'category' => 'YouNet Advanced Search',
+    'type' => 'widget',
+    'name' => 'ynadvsearch.search-results2',
+  ),
+  array(
     'title' => 'Search Mini',
     'description' => 'Search Field Mini.',
     'category' => 'YouNet Advanced Search',

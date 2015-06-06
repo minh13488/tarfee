@@ -267,9 +267,33 @@ $.TokenList = function (input, url_or_data, settings) {
                         setTimeout(function(){do_search();}, 5);
                     }
                     break;
-
+				
+				case KEY.ENTER:
+					if(selected_dropdown_item) {
+	                    add_token($(selected_dropdown_item).data("tokeninput"));
+	                    hidden_input.change();
+	                    return false;
+                  	}
+                  	else {
+						var form = $(this).closest('#global_search_form');
+						var query = form.find('#global_search_field');
+						query.val($(this).val());
+						var values = query.tokenInput('get');
+						var arr = [];
+						for (var i = 0; i < values.length; i++) {
+							arr.push(values[i].id);
+						}
+						var token = $('<input />', {
+							'type' : 'hidden',
+							'name' : 'token',
+							'value' : arr.join() 
+						});
+						form.append(token);
+						form.submit();
+					}
+					break;
+				
                 case KEY.TAB:
-                case KEY.ENTER:
                 case KEY.NUMPAD_ENTER:
                 case KEY.COMMA:
                   if(selected_dropdown_item) {

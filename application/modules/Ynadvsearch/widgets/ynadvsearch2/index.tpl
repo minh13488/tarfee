@@ -13,8 +13,11 @@ jQuery.noConflict();
             , hintText: ''
             , allowFreeTagging: true
             , animateDropdown: false
+            , prePopulate : <?php echo json_encode($this->tokens)?>
         };
 		$('#global_search_field').tokenInput('<?php echo $this->url(array('action'=>'suggest-keywords'), 'ynadvsearch_suggest', true)?>', options);
-		});
+	
+		var form = $('');
+	});
 })(jQuery);
 </script>
