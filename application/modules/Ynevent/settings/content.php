@@ -126,11 +126,34 @@ return array(
 				'name' => 'ynevent.profile-events',
 				'isPaginated' => true,
 				'defaultParams' => array(
-						'title' => 'Advanced Events',
-						'titleCount' => true,
+						'title' => 'Events',
+						'type' => 0
 				),
 				'requirements' => array(
 						'subject' => 'user',
+				),
+				'adminForm' => array(
+					'elements' => array(
+						array(
+							'Text',
+							'title',
+							array(
+									'label' => 'Title'
+							)
+						),
+						array(
+							'Radio',
+							'type',
+							array(
+									'label' => 'Type',
+									'multiOptions' => array(
+											0 => 'Event',
+											1 => 'Tryout',
+									),
+									'value' => 0,
+							)
+						),
+					)
 				),
 		),
 		array(

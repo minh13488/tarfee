@@ -1,54 +1,19 @@
+<div class = 'tarfee_total_items'><?php echo  $this->paginator -> getTotalItemCount()?></div>
 <?php
-/**
- * SocialEngine
- *
- * @category   Application_Extensions
- * @package    Event
- * @copyright  Copyright 2006-2010 Webligo Developments
- * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 8028 2010-12-10 19:11:19Z char $
- * @access	   John
- */
+ $title = $this->translate('View All Events');
+ $createTitle = $this -> translate("add more event");
+ if($this -> type == 1)
+ {
+ 	$title = $this->translate('View All Tryouts'); 
+	$createTitle = $this -> translate("add more tryout");
+ }
 ?>
-
-<script type="text/javascript">
-  en4.core.runonce.add(function(){
-
-    <?php if( !$this->renderOne ): ?>
-    var anchor = $('profile_events').getParent();
-    $('profile_events_previous').style.display = '<?php echo ( $this->paginator->getCurrentPageNumber() == 1 ? 'none' : '' ) ?>';
-    $('profile_events_next').style.display = '<?php echo ( $this->paginator->count() == $this->paginator->getCurrentPageNumber() ? 'none' : '' ) ?>';
-
-    $('profile_events_previous').removeEvents('click').addEvent('click', function(){
-      en4.core.request.send(new Request.HTML({
-        url : en4.core.baseUrl + 'widget/index/content_id/' + <?php echo sprintf('%d', $this->identity) ?>,
-        data : {
-          format : 'html',
-          subject : en4.core.subject.guid,
-          page : <?php echo sprintf('%d', $this->paginator->getCurrentPageNumber() - 1) ?>
-        }
-      }), {
-        'element' : anchor
-      })
-    });
-
-    $('profile_events_next').removeEvents('click').addEvent('click', function(){
-      en4.core.request.send(new Request.HTML({
-        url : en4.core.baseUrl + 'widget/index/content_id/' + <?php echo sprintf('%d', $this->identity) ?>,
-        data : {
-          format : 'html',
-          subject : en4.core.subject.guid,
-          page : <?php echo sprintf('%d', $this->paginator->getCurrentPageNumber() + 1) ?>
-        }
-      }), {
-        'element' : anchor
-      })
-    });
-    <?php endif; ?>
-  });
-</script>
-
-<ul id="profile_events" class="ynevents_profile_tab">
+<?php if(Engine_Api::_() -> authorization() -> isAllowed('event', null, 'create')):?>
+	<div class="tarfee_create_item">
+		<a href="<?php echo $this->url(array('action' => 'create'), 'event_general')?>"><?php echo $createTitle;?></a>
+	</div>
+<?php endif;?>
+<ul id="profile_events_<?php echo $this->identity?>" class="ynevents_profile_tab">
   <?php foreach( $this->paginator as $event ): ?>
     <li>
       <div class="ynevents_profile_tab_photo">
@@ -71,18 +36,6 @@
     </li>
   <?php endforeach; ?>
 </ul>
-
-<div>
-  <div id="profile_events_previous" class="paginator_previous">
-    <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Previous'), array(
-      'onclick' => '',
-      'class' => 'buttonlink icon_previous'
-    )); ?>
-  </div>
-  <div id="profile_events_next" class="paginator_next">
-    <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Next'), array(
-      'onclick' => '',
-      'class' => 'buttonlink_right icon_next'
-    )); ?>
-  </div>
-</div>
+<?php if($this->paginator->getTotalItemCount() > $this->items_per_page):?>
+  <?php echo $this->htmlLink($this->url(array(), 'event_general'), $title, array('class' => 'icon_event_viewall')) ?>
+<?php endif;?>

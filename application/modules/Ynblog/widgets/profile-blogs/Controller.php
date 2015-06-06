@@ -26,26 +26,13 @@ class Ynblog_Widget_ProfileBlogsController extends Engine_Content_Widget_Abstrac
                                       'visible' => '1',
                                       'user_id' =>  $subject->getIdentity(),
                                 ));
-    //$this->view->paginator->setItemCountPerPage(10);
     $paginator->setCurrentPageNumber(1);
+	$this -> view -> items_per_page = $this->_getParam('itemCountPerPage', 5);
 
     // Don't render layout if no blog gotten
     if( $paginator->getTotalItemCount() <= 0 ) {
       return $this->setNoRender();
     }
-
-    // Add count to title if configured
-    if( $this->_getParam('titleCount', false) && $paginator->getTotalItemCount() > 0 ) {
-
-    	$this->_childCount = $paginator->getTotalItemCount();
-    }
-
-    $settings = Engine_Api::_()->getApi('settings', 'core');
-    $this->view->items_per_page = $settings->getSetting('blog_page', 10);
   }
 
-  public function getChildCount()
-  {
-    return $this->_childCount;
-  }
 }

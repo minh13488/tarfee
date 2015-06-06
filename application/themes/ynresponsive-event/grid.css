@@ -17,7 +17,7 @@
 .layout_page_ynresponsiveevent_index_event .layout_main,
 .layout_page_ynresponsiveevent_index_event .layout_top .layout_middle > div > div,
 .layout_page_core_index_index .layout_main .layout_middle > div > div,
-.layout_ynresponsiveevent_event_mini_menu .yntheme-event-container,
+ .yntheme-event-container,
 #global_content,
 #core_menu_mini_menu > ul,
 .navbar.navbar-default {
@@ -47,7 +47,7 @@
 		max-width: 750px;
 	}
     
-    .layout_ynresponsiveevent_event_mini_menu .yntheme-event-container,
+    .yntheme-event-container,
     .layout_page_ynresponsiveevent_index_event .layout_main,
     .layout_page_ynresponsiveevent_index_event .layout_top .layout_middle > div > div,
     .layout_page_core_index_index .layout_main .layout_middle > div > div {
@@ -76,7 +76,7 @@
 		max-width: 970px;
 	}
     
-    .layout_ynresponsiveevent_event_mini_menu .yntheme-event-container,
+     .yntheme-event-container,
     .layout_page_ynresponsiveevent_index_event .layout_main,
     .layout_page_ynresponsiveevent_index_event .layout_top .layout_middle > div > div,
     .layout_page_core_index_index .layout_main .layout_middle > div > div {
@@ -97,24 +97,33 @@
 /*****************************/
 @media (min-width: 1200px) {
 
-	#global_content,
+    #global_content{
+        width: 100%;
+        margin: 0;
+    }
 	#core_menu_mini_menu > ul,
 	.navbar.navbar-default {
 		padding: 0 15px;
 		margin: 0 auto;
-		max-width: 1033px;
+		max-width: 1170px;
 	}
     
-    .layout_ynresponsiveevent_event_mini_menu .yntheme-event-container,
+    /*Set width header full width 100%*/
+    .layout_ynresponsiveevent_event_mini_menu{
+        max-width: 100%;
+        padding: 0 15px;
+    }
+    
+    .yntheme-event-container,
     .layout_page_ynresponsiveevent_index_event .layout_main,
     .layout_page_ynresponsiveevent_index_event .layout_top .layout_middle > div > div,
     .layout_page_core_index_index .layout_main .layout_middle > div > div {
         margin: 0 auto;
-		max-width: 1033px;
+/*		max-width: 1170px;*/
         
         &.row {
             margin: 0 auto;
-            max-width: 1033px;
+/*            max-width: 1170px;*/
         }
     }
 }
