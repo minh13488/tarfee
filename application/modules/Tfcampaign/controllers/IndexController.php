@@ -69,7 +69,12 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 			$campaign = $table -> createRow();
 			$campaign -> setFromArray($values);
 			$campaign -> save();
-
+		
+			// Set photo
+			if (!empty($values['photo']))
+			{
+				$campaign -> setPhoto($form -> photo);
+			}
 
 			//set allow view for specific users
 			$user_ids = explode(",", $values['user_ids']);

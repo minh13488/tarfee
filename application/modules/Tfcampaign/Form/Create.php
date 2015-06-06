@@ -73,6 +73,13 @@ class Tfcampaign_Form_Create extends Engine_Form
     $end->setAllowEmpty(false);
     $this->addElement($end);
 
+	$this->addElement('File', 'photo', array(
+      'label' => 'Campaign Photo'
+    ));
+	$this -> photo -> setAllowEmpty(true);
+    $this -> photo -> addValidator('Extension', false, 'jpg,png,gif,jpeg');
+	$this -> photo -> setAttrib('accept', 'image/*');
+	
 	
 	$arrAge = array();
 	$arrAge[] = "";
