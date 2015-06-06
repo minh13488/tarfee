@@ -18,9 +18,32 @@
         document.getElementById('demo-upload').style.display = 'block';
       }
     }
-
+	
     function uploadFile() 
     {
+      var file_type = "";
+      var file = document.getElementById('fileToUpload').files[0];
+	  if (file) {
+	        var file_type = file.type;
+	  } else {
+	  	return;
+	  }
+      if(file_type.indexOf("video") < 0) {
+      	if(!$('error-type-video')) 
+      	{
+      		var div = new Element('div', {
+		       'html': '<?php echo $this -> translate('Invalid File Video Type');?>',
+		       'id': 'error-type-video',
+		        styles: {
+			        'color': 'red',
+			        'font-weight': 'bold',
+			    },
+		    });
+	      	$$('.select_file').grab(div,'before');
+      	}
+      	return;
+      }	
+      	
       var fd = new FormData();
       fd.append('fileToUpload', document.getElementById('fileToUpload').files[0]);
       var xhr = new XMLHttpRequest();
@@ -91,7 +114,7 @@
     <div id="demo-status">
       <div style="padding-bottom: 15px"><?php echo $this->translate('Click "Add Video" to select a video from your computer. After you have selected video, the video will be uploaded. Please wait while your video is being uploaded. When your upload is finished, your video will be processed - you will be notified when it is ready to be viewed.'); ?></div>
       <div class="select_file">
-      		<input type="file" accept="video/*"  name="fileToUpload" id="fileToUpload" onchange="fileSelected();"/>
+      		<input class="files-contain" type="file" accept="video/*"  name="fileToUpload" id="fileToUpload" onchange="fileSelected();">
       </div>
     </div>
     <div class="file_info" id="file_info">
