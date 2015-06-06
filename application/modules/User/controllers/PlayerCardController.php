@@ -72,6 +72,8 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		{
 			$this -> view -> showPosition = false;
 		}
+		
+		// Location
 		$provincesAssoc = array();
 		$country_id = $posts['country_id'];
 		if ($country_id) {

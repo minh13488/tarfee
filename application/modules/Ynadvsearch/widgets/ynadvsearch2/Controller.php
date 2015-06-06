@@ -113,5 +113,7 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 		
 		$tokens = Engine_Api::_()->getDbTable('keywords', 'ynadvsearch')->getKeywordsAssoc(array('ids' => $tokens));
 		$this->view->tokens = $tokens;
+		
+		$this->view->type = Zend_Controller_Front::getInstance ()->getRequest ()->getParam('type',array_keys(Engine_Api::_()->ynadvsearch()->getAllowSearchTypes()));
 	}
 }

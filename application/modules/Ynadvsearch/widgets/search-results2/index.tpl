@@ -3,7 +3,6 @@
 		font-weight: bold;
 	}
 </style>
-
 <div id="ynadvsearch_loading" class="ynadvsearch_loading" style="display: none">
     <img src='application/modules/Ynadvsearch/externals/images/loading.gif'/>
 </div>

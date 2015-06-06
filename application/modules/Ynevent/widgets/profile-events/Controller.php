@@ -32,10 +32,5 @@ class Ynevent_Widget_ProfileEventsController extends Engine_Content_Widget_Abstr
     $paginator->setCurrentPageNumber($this->_getParam('page', 1));
 	$this -> view -> itemCountPerPage = $this->_getParam('itemCountPerPage', 5);
 	$this -> view -> type = $type;
-
-    // Do not render if nothing to show
-    if( $paginator->getTotalItemCount() <= 0 ) {
-      return $this->setNoRender();
-    }
   }
 }

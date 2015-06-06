@@ -25,3 +25,4 @@ CREATE TABLE IF NOT EXISTS `engine4_user_photos` (
 	PRIMARY KEY (`photo_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE utf8_unicode_ci ;
 
+ALTER TABLE `engine4_user_playercards` ADD `languages` VARCHAR(128)  NULL COLLATE 'utf8_unicode_ci';
