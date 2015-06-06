@@ -32,7 +32,7 @@
 					'action' => 'create',
 					'parent_type' =>'user_library',
 					'subject_id' =>  $this->library->getIdentity(),
-				), '<i class="fa fa-plus-square"></i>'.$this->translate('Create New Video'), array(
+				), '<i class="fa fa-plus-square"></i>'.$this->translate('Add Video'), array(
 				'class' => 'buttonlink'
 				)) ;
 			?>
@@ -46,6 +46,7 @@
 				)) ;
 			?>
 		</li>
+		
 	</ul>
 </div>
 <?php endif;?>
@@ -107,7 +108,7 @@
 								'action' => 'create',
 								'parent_type' =>'user_library',
 								'subject_id' =>  $subLibrary->getIdentity(),
-							), '<i class="fa fa-plus-square"></i>'.$this->translate('Create New Video'), array(
+							), '<i class="fa fa-plus-square"></i>'.$this->translate('Add Video'), array(
 							'class' => 'buttonlink'
 							)) ;
 						?>
