@@ -1,7 +1,6 @@
 <?php
 class Tfcampaign_Widget_UserProfileCampaignController extends Engine_Content_Widget_Abstract
 {
-	protected $_childCount;
 	public function indexAction()
 	{
 		// Don't render this if not authorized
@@ -11,6 +10,8 @@ class Tfcampaign_Widget_UserProfileCampaignController extends Engine_Content_Wid
 			return $this -> setNoRender();
 		}
 
+		$params = $this ->_getAllParams();
+		
 		// Get subject
 		$this -> view -> subject = $subject = Engine_Api::_() -> core() -> getSubject('user');
 
@@ -20,15 +21,7 @@ class Tfcampaign_Widget_UserProfileCampaignController extends Engine_Content_Wid
 		}
 
 		$campaignTable = Engine_Api::_() -> getItemTable('tfcampaign_campaign');
-		$this -> view -> campaigns = $campaigns = $campaignTable -> getCampaignsByUser($subject);
-      	if (count($campaigns) > 0)
-		{
-      		$this->_childCount = count($campaigns);
-		}
-	}
-
-	public function getChildCount()
-	{
-		return $this -> _childCount;
+		$this -> view -> total = $campaignTable -> getCampaignsTotal($subject);
+		$this -> view -> campaigns = $campaigns = $campaignTable -> getCampaignsByUser($subject, $params['itemCountPerPage']);
 	}
 }

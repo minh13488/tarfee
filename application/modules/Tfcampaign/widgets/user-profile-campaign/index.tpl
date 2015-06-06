@@ -1,3 +1,4 @@
+<span><?php echo $this -> total;?></span>
 
 <?php if($this -> viewer() -> isSelf($this -> subject())) :?>
 	<a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>">
@@ -17,8 +18,9 @@
 <?php endforeach;?>
 </ul>
 
+<?php if($this -> total > count($this -> campaigns)) :?>
 <!-- view more filter based on user subject --> 
 <a href="<?php echo $this -> url(array('action' => 'browse', 'user_id' => $this -> subject() -> getIdentity()), 'tfcampaign_general', true);?>">
 		<button><?php echo $this -> translate('view more');?></button>
 </a>
-
+<?php endif;?>
