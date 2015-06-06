@@ -179,6 +179,9 @@ html[dir="ltf"] .uiYnfbppHovercardInfo li {
 .icon_user_online{
 	background-image: url('~/application/modules/Ynfbpp/externals/images/online.png');
 }
+.icon_report_user{
+	background-image: url('~/application/modules/Core/externals/images/report.png');
+}
 .uiYnfbppHovercardExtraInfo{
 	margin-top:6px;
 }
