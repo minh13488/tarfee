@@ -101,6 +101,7 @@ class User_Form_Playercard_Create extends Engine_Form
 	$birthday -> setRequired(true);
     $this->addElement($birthday);
 	$birthday -> setAttrib('required', true);
+	
 	$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
 	$countriesAssoc = array('0'=>'') + $countriesAssoc;
 
