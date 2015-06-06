@@ -219,3 +219,6 @@ INSERT IGNORE INTO `engine4_authorization_permissions`
     3 as `value`,
     '0' as `params`
   FROM `engine4_authorization_levels` WHERE `type` NOT IN('public');
+  
+  -- 6.6.2015
+  ALTER TABLE `engine4_ynadvsearch_keywords` CHANGE `count` `count` INT(11) NOT NULL DEFAULT '0';

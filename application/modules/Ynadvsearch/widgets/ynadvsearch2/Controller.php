@@ -102,5 +102,16 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 		// trunglt
 		$headLink = new Zend_View_Helper_HeadLink();
         $headLink->prependStylesheet('application/modules/Ynadvsearch/externals/styles/main.css');
+		$tokens = Zend_Controller_Front::getInstance ()->getRequest ()-> getParam('token', '');
+		$tokens = explode(',', $tokens);
+		
+		$query = Zend_Controller_Front::getInstance ()->getRequest ()-> getParam('query', '');
+		if (!empty($query)) {
+			$id = Engine_Api::_()->getDbTable('keywords', 'ynadvsearch')->addKeyword($query);
+			if ($id) $tokens[] = $id;
+		}
+		
+		$tokens = Engine_Api::_()->getDbTable('keywords', 'ynadvsearch')->getKeywordsAssoc(array('ids' => $tokens));
+		$this->view->tokens = $tokens;
 	}
 }

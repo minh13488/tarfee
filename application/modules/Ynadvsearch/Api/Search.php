@@ -54,10 +54,43 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
         return $select;
        
     }
+	
+	public function getSelect2($text = array(), $types = array(), $from = null, $limit = null)
+    {
+        $table = Engine_Api::_ ()->getDbtable ( 'search', 'core' );
+        $table_name = $table->info ( 'name' );
+        $db = $table->getAdapter ();
+        $select = $table->select ();
+        $select->where ( "$table_name.type IN (?)",  $types );
+		foreach ($text as $str) {
+			$search = '%' . preg_replace ( '/\s+/', '%', $str ) . '%';
+			$select->where ( "$table_name.title like '$search' OR $table_name.description like '$search'" );
+		}
+        
+        // for search result page
+        if ($limit && $from != null) {
+            $select->limit ( $limit + 1, $from );
+        }
+        
+        else if ($limit) {
+            $select->limit ( $limit );
+        }
+		
+        return $select;
+       
+    }
 
     public function getResults($text, $types = array(), $from, $limit = null) {
         $table = Engine_Api::_ ()->getDbtable ( 'search', 'core' );
         $select = $this->getSelect($text, $types, $from, $limit);
+        $results = $table->fetchAll ( $select );
+    //    $results = $this->_checkPermission($results);
+        return $results;
+    }
+	
+	public function getResults2($text = array(), $types = array(), $from, $limit = null) {
+        $table = Engine_Api::_ ()->getDbtable ( 'search', 'core' );
+        $select = $this->getSelect2($text, $types, $from, $limit);
         $results = $table->fetchAll ( $select );
     //    $results = $this->_checkPermission($results);
         return $results;
