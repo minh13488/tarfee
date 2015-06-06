@@ -4425,7 +4425,10 @@ Shows the mini menu and search widget
         margin-left: 10px;
     }  
     
-
+    div.box-search_form_filter,
+    .box-search_form_advanced{
+        display: inline-block;
+    }
 	span.global_search_form_filter_advanced{
 		margin-left: 20px;
 		font-size: 1.154em;
@@ -4443,18 +4446,6 @@ Shows the mini menu and search widget
     	display: inline-block;
     	margin-left: 30px;
 
-    	span.global_search_form_icon{
-    		width: 21px;
-    		height: 21px;
-    		display: block;
-    		right: 10px;
-    		top: 10px;
-    		cursor: pointer;
-    		text-indent: -999999px;
-    		position: absolute;
-			background: url(~/application/themes/ynresponsive-event/images/icon_search.png) no-repeat center;
-    	}
-
         #global_search_field
         {
         	width: 450px;
@@ -4466,6 +4457,10 @@ Shows the mini menu and search widget
             height: 40px;
             background-color: transparent;
             border-radius: 5px;
+            background-image: url(~/application/themes/ynresponsive-event/images/icon_search.png);
+            background-repeat: no-repeat;
+            background-position: 98%;
+            padding-right: 35px !important;
         }
         
         .overTxtLabel
