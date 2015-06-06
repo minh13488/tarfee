@@ -72,16 +72,6 @@
 	    <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
 	    <ul class="players_browse">  
 	        <?php foreach ($this->paginator as $player): 
-		    $params = array();
-		    $params['owner_type'] = $player -> getType();
-			$params['owner_id'] = $player -> getIdentity();
-			
-			$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
-	        $totalVideo = $mappingTable -> getTotalVideo($params);
-	        $totalComment = Engine_Api::_() -> getDbtable('comments', 'yncomment') -> comments($player) -> getCommentCount();
-	        $totalLike = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($player) -> getLikeCount(); 
-	        $totalDislike = Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> getDislikeCount($player);
-			$totalUnsure = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> getUnsureCount($player);
 			$totalPhoto = $player -> getPhotosTotal();
 	        ?>
 	        <?php if($player -> isViewable()) :?>
@@ -92,6 +82,13 @@
 						<a href="<?php echo $player -> getHref()?>">
 							<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
 						</a>
+						<?php if($player -> getSport()):?>
+							<?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?>
+							<?php echo $player -> getSport() -> getTitle();?>
+						<?php endif;?>
+						<?php if($player -> getPosition()):?>
+							<?php echo $player -> getPosition() -> getTitle();?>
+						<?php endif;?>
 						<?php 
 		            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())):
 						?>

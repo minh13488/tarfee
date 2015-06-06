@@ -162,4 +162,13 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 				-> where('item_type = ?', $this -> getType());
     	return $select->query()->fetchColumn(0);
 	}
+	public function getSport()
+	{
+		return Engine_Api::_() -> getItem('user_sportcategory', $this -> category_id);
+	}
+	
+	public function getPosition()
+	{
+		return Engine_Api::_() -> getItem('user_sportcategory', $this -> position_id);
+	}
 }
