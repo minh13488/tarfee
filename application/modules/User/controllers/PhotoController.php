@@ -15,6 +15,11 @@ class User_PhotoController extends Core_Controller_Action_Standard
 		if(!$item) {
 			return $this -> _helper -> requireAuth() -> forward();
 		}
+		
+		if(!$item -> getOwner() -> isSelf($viewer)) {
+			return $this -> _helper -> requireAuth() -> forward();
+		}
+		
 		$this -> view -> form = $form = new User_Form_Photo_Upload();
 		if (!$this -> getRequest() -> isPost())
 		{

@@ -2,6 +2,95 @@
 /* $Id: main.css 10039 2013-04-11 22:08:32Z john $ */
 
 
+/* Upload photo HTML5*/
+#global_page_user-photo-upload #form-upload > div {
+    width: 100%;
+}
+#global_page_user-photo-upload .files-contain {
+    background-color: #f5f7f8;
+    border: 2px dashed $theme_border_color;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 10px 20px 260px 20px;
+    margin-top: 25px;
+    background-image: url(~/application/modules/User/externals/images/dragdrop.png);
+    background-repeat: no-repeat;
+    background-position: center 80px;
+}
+#global_page_user-photo-upload .files-contain.success {
+    padding-bottom: 100px;
+    background-image: url(~/application/modules/User/externals/images/dragdrop_noimage.png);
+    background-repeat: no-repeat;
+    background-position: center bottom 35px;
+}
+#global_page_user-photo-upload #files {
+    display: none;
+    list-style: none;
+    margin-top: 15px;
+    max-height: 193px;
+    overflow-y: auto;
+    border: 1px solid #ccc;
+}
+#global_page_user-photo-upload #files > li {
+    padding: 8px 8px 8px 28px;
+    font-size: .8em;
+    font-weight: normal;
+    background: #fff;
+    font-weight: bold;
+    background-repeat: no-repeat;
+    background-position: 6px 7px;
+    background-image: url(~/externals/fancyupload/assets/waiting.png);
+    background-repeat: no-repeat;
+}
+#global_page_user-photo-upload #files > li + li {
+    border-top: 1px solid #ccc;
+}
+#global_page_user-photo-upload #files li.file-success {
+    background-image: url(~/externals/fancyupload/assets/finished.png);
+    background-repeat: no-repeat;
+}
+#global_page_user-photo-upload #files li .file-remove {
+    clear: right;
+    float: right;
+    font-weight: bold;
+    overflow: hidden;
+}
+#global_page_user-photo-upload #files li .file-info {
+    display: block;
+    clear: both;
+    overflow: hidden;
+    font-weight: normal;
+}
+.progress-bar-success {
+    background-color: $theme_button_background_color !important;
+}
+button {
+    color: $theme_button_font_color !important;
+}
+.btn-success {
+    background-color: $theme_button_background_color !important;
+    border-color: $theme_input_border_colors !important;
+    color: $theme_button_font_color !important;
+}
+.btn-success:hover, .btn-success:focus, .btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+    background-color: $theme_button_background_color_hover !important;
+    border-color: $theme_input_border_colors !important;
+    color: $theme_button_font_color !important;
+}
+.btn-success:active, .btn-success.active, .open .dropdown-toggle.btn-success {
+    background-image: none !important;
+}
+.rotate_photo {
+    float: right;
+    padding-right: 10px;
+}
+.photo_options {
+    padding-top: 5px;
+    text-align: left;
+    float: none;
+    height: 25px;
+}
 
 /*
 SIGN IN OR JOIN WIDGET

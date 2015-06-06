@@ -21,17 +21,26 @@
         		<div id="global_search_form_container">
         			<form id="global_search_form" action="<?php echo $this->url(array('controller' => 'search'), 'default', true) ?>" method="get">
         			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100' alt='<?php echo $this->translate('Search') ?>' />
-                  <span class="global_search_form_icon">btn-search</span>
+                    
+                        <!-- Add html filter and advanced -->
+                        <div class="box-search_form_filter">
+                            <span class="global_search_form_filter_advanced">
+                           <?php echo $this->translate('filter'); ?> <i class="fa fa-angle-down"></i>
+                        </span>
+                            <!-- .... -->
+                        </div>
+                        
+                        <div class="box-search_form_advanced">
+                            <span class="global_search_form_filter_advanced">
+                               <?php echo $this->translate('advanced'); ?> <i class="fa fa-angle-down"></i>
+                            </span>
+                        
+                            <!--- ... -->
+                        </div>
+                        
         			</form>
         		</div>
-            <!-- Add html filter and advanced -->
-            <span class="global_search_form_filter_advanced">
-               filter <i class="fa fa-angle-down"></i>
-            </span>
-            
-            <span class="global_search_form_filter_advanced">
-               advanced <i class="fa fa-angle-down"></i>
-            </span>
+
         	<?php endif;?>
         <?php endif; ?>
     <div class="group-mini-menu">
@@ -158,6 +167,7 @@
             	?>
             
                 <ul id="user-profile-submenu" class="user-profile-submenu collapse"> 
+                    <li class="user-profile-submenu-title"><?php echo $this->translate('Account & Settings  ').'<i class="fa fa-caret-right"></i>'; ?></li>
             		<?php if ($viewer->getIdentity()): ?>
                         <?php if($this->search_check):?>
                     		<li class="global_search_form_second">

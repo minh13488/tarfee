@@ -20,28 +20,22 @@ class Ynevent_Widget_ProfileEventsController extends Engine_Content_Widget_Abstr
     if( !($subject instanceof User_Model_User) ) {
       return $this->setNoRender();
     }
+	
+	$type = $this -> _getParam('type', 0);
 
     // Get paginator
     $membership = Engine_Api::_()->getDbtable('membership', 'ynevent');
-    $this->view->paginator = $paginator = Zend_Paginator::factory($membership->getMembershipsOfSelect($subject)->order('starttime DESC'));
+    $this->view->paginator = $paginator = Zend_Paginator::factory($membership->getMembershipsOfSelect($subject) -> where('type_id = ?', $type) ->order('starttime DESC'));
 
     // Set item count per page and current page number
     $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 5));
     $paginator->setCurrentPageNumber($this->_getParam('page', 1));
+	$this -> view -> itemCountPerPage = $this->_getParam('itemCountPerPage', 5);
+	$this -> view -> type = $type;
 
     // Do not render if nothing to show
     if( $paginator->getTotalItemCount() <= 0 ) {
       return $this->setNoRender();
     }
-
-    // Add count to title if configured
-    if( $this->_getParam('titleCount', false) && $paginator->getTotalItemCount() > 0 ) {
-      $this->_childCount = $paginator->getTotalItemCount();
-    }
-  }
-
-  public function getChildCount()
-  {
-    return $this->_childCount;
   }
 }

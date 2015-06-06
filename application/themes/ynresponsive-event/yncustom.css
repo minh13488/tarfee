@@ -372,6 +372,9 @@ ul.networks {
 
 #global_content .layout_main {
 	padding-top: 15px;
+    width: 1170px;
+    margin: auto;
+    padding: 15px;
 }
 
 #global_content .layout_page_core_index_index .layout_main {

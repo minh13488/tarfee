@@ -35,8 +35,9 @@ DEFAULT STYLES FOR THIS THEME
   theme_content_width: 1033px;
   theme_content_columns_left_width: 250px;
   theme_content_columns_right_width: 220px;
-  theme_body_background_color: #FFFFFF;
+  theme_body_background_color: #FFF;
   theme_profile_body_background_color: #DEDEDE;
+
 
   /* 
   HEADER AND FOOTER COLORS
@@ -74,12 +75,12 @@ DEFAULT STYLES FOR THIS THEME
   TEXT & LINKS
   These values affect the size and colors of your text and links throughout your layout.
   */
-  theme_font_family: Helvetica, Tahoma, Arial, Verdana, sans-serif;
-  theme_font_size: 13px;
+  theme_font_family: Arial, Verdana, sans-serif;
+  theme_font_size: 15px;
   theme_font_color: #555;
   theme_font_color_light: #999;
   theme_text_align: left;
-  theme_link_color: #B1C957;
+  theme_link_color: #ff6633;
   theme_link_color_hover: #b1c957;
   theme_link_decoration: none;
   theme_link_decoration_hover: underline;
