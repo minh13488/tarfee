@@ -183,7 +183,18 @@
 							$cityName = $city -> getTitle();
 						}
 						?>
-						<span><?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?></span>				
+						<span><?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?></span>
+						<div>
+							<?php echo $this->htmlLink($player -> getOwner()->getHref(), $this->itemPhoto($player -> getOwner(), 'thumb.icon', $player -> getOwner()->getTitle(), array('style' => 'width: auto')), array('class' => 'members_thumb')) ?>
+							<div class='members_info'>
+						        <div class='members_name'>
+							          <?php echo $this->htmlLink($player -> getOwner()->getHref(), $player -> getOwner() ->getTitle()) ?>
+						        </div>
+						        <div class='members_date'>
+						          <?php echo $this->timestamp($player -> getOwner() -> creation_date) ?>
+						        </div>
+					      	</div>
+					     </div>
 					</div>
 					<div class="actions">
 					<ul>

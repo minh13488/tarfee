@@ -101,6 +101,7 @@ class Ynevent_Widget_ListMostTimeController extends Engine_Content_Widget_Abstra
 		
 		$itemCount = $this->_getParam('itemCountPerPage', 6);
         $table = Engine_Api::_()->getItemTable('event');
+		$tableName = $table -> info('name');
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		$oldTz = date_default_timezone_get();
 		if($viewer -> getIdentity())
@@ -116,13 +117,32 @@ class Ynevent_Widget_ListMostTimeController extends Engine_Content_Widget_Abstra
 			$itemCount = 6;
 		}
 		$this->view->itemCount = $itemCount;
-		//upcoming event
-		$select = $table->select() 
-			-> where("endtime > FROM_UNIXTIME(?)", $time)
-			-> order("starttime ASC")
-			-> limit($itemCount);
 		
-        $this->view->events_upcoming = $events_upcoming = $table->fetchAll($select);
+		//upcoming event
+		// membership
+		$membershipTb = Engine_Api::_() -> getDbtable('membership', 'ynevent');
+		$membershipName = $membershipTb -> info('name');
+		$select = $membershipTb -> getMembershipsOfSelect($viewer);
+		$select -> where("$tableName.endtime > FROM_UNIXTIME(?)", $time)
+				-> order("$membershipName.rsvp DESC")
+				-> order("$tableName.starttime ASC")
+				-> limit($itemCount);
+		$events_upcoming = $table -> fetchAll($select);
+		if(count($events_upcoming) < $itemCount)
+		{
+			$select = $table -> select();
+			$select -> where("$tableName.endtime > FROM_UNIXTIME(?)", $time)
+					-> order("$tableName.starttime ASC")
+					-> limit($itemCount - count($events_upcoming));
+			$otherEvents = $table -> fetchAll($select);
+			foreach($otherEvents as $otherEvent)
+			{
+				$events_upcoming[] = $otherEvent;
+			}
+		}
+		
+        $this->view->events_upcoming = $events_upcoming;
+		
 		// today
        	$select = $table->select()     
 			->where("YEAR(FROM_UNIXTIME(UNIX_TIMESTAMP(starttime) + {$sub})) = YEAR('{$date}')")
