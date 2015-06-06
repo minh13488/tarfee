@@ -5,7 +5,7 @@
     'host' => 'localhost',
     'username' => 'root',
     'password' => '',
-    'dbname' => 'tarfee',
+    'dbname' => 'hoangnd',
     'charset' => 'UTF8',
     'adapterNamespace' => 'Zend_Db_Adapter',
   ),

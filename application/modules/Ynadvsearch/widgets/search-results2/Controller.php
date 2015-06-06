@@ -17,7 +17,7 @@ class Ynadvsearch_Widget_SearchResults2Controller extends Engine_Content_Widget_
 		
 		$from = null;		
 		
-		$type = array_keys(Engine_Api::_()->ynadvsearch()->getAllowSearchTypes());
+		$type = $request->getParam('type',array_keys(Engine_Api::_()->ynadvsearch()->getAllowSearchTypes()));
 		$limit = 10;
 		$this->view->limit = $limit;
 		$results = Engine_Api::_()->getApi('search', 'ynadvsearch')->getResults2( $text, $type, $from, $limit );
