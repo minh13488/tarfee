@@ -1,3 +1,9 @@
+<div class = 'tarfee_total_items'><?php echo  $this->paginator -> getTotalItemCount()?></div>
+<?php if(Engine_Api::_() -> authorization() -> isAllowed('blog', null, 'create')):?>
+	<div class="tarfee_create_item">
+		<a href="<?php echo $this->url(array('action' => 'create'), 'blog_general')?>"><?php echo $this -> translate("add more talk");?></a>
+	</div>
+<?php endif;?>
 <ul class="blogs_browse">
   <?php foreach ($this->paginator as $item): ?>
     <li>
@@ -16,6 +22,6 @@
   <?php endforeach; ?>
 </ul>
 
-<?php if($this->paginator->getTotalItemCount() > $this->items_per_page):?>
+<?php if($this->paginator->getTotalItemCount() > $this -> items_per_page):?>
   <?php echo $this->htmlLink($this->url(array('user_id' => Engine_Api::_()->core()->getSubject()->getIdentity()), 'blog_view'), $this->translate('View All Entries'), array('class' => 'buttonlink icon_blog_viewall')) ?>
 <?php endif;?>
