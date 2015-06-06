@@ -1,3 +1,16 @@
+#global_page_ynvideo-index-create .files-contain {
+	background-color: #f5f7f8;
+    border: 2px dashed $theme_border_color;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    padding: 10px 20px 260px 20px;
+    margin-top: 25px;
+    background-image: url(~/application/modules/Ynvideo/externals/images/dragdrop.png);
+    background-repeat: no-repeat;
+    background-position: center 80px;
+}
+
 .ynvideo_rating_star_generic
 {
   float: left;
