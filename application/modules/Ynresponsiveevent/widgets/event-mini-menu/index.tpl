@@ -158,6 +158,7 @@
             	?>
             
                 <ul id="user-profile-submenu" class="user-profile-submenu collapse"> 
+                    <li class="user-profile-submenu-title"><?php echo $this->translate('Account & Settings  ').'<i class="fa fa-caret-right"></i>'; ?></li>
             		<?php if ($viewer->getIdentity()): ?>
                         <?php if($this->search_check):?>
                     		<li class="global_search_form_second">
