@@ -82,6 +82,7 @@
 	        $totalLike = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($player) -> getLikeCount(); 
 	        $totalDislike = Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> getDislikeCount($player);
 			$totalUnsure = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> getUnsureCount($player);
+			$totalPhoto = $player -> getPhotosTotal();
 	        ?>
 	        <?php if($player -> isViewable()) :?>
 	        	<li id="player-item-<?php echo $player->playercard_id ?>">
@@ -220,13 +221,8 @@
 					</span>
 					<span>
 						<?php
-						$params = array();
-						$params['owner_type'] = $player -> getType();
-						$params['owner_id'] = $player -> getIdentity();
-						$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
-						$totalVideo = $mappingTable -> getTotalVideo($params);
-						echo $totalVideo;
-						echo $this->translate(array('video','videos', $totalVideo));
+						echo $totalPhoto;
+						echo $this->translate(array('photo','photos', $totalPhoto));
 						?>
 					</span>
 					<hr>
