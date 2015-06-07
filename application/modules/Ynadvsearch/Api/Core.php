@@ -1,6 +1,20 @@
 <?php
 class Ynadvsearch_Api_Core extends  Core_Api_Abstract {
+	
+	protected $_allowSearchType = array(
+		'user' => 'Member',
+		'user_playercard' => 'Player',
+		'group' => 'Club',
+		'tfcampaign_campaign' => 'Campaign',
+		'video' => 'Video',
+		'event' => 'Tryout/Event'
+	); 
     
+	
+	public function getAllowSearchTypes() {
+		return $this->_allowSearchType;
+	}
+	
     public function countItemByItemType($item_type)
     {
         $table = Engine_Api::_() -> getItemTable($item_type);

@@ -100,6 +100,7 @@ class User_Form_Playercard_Create extends Engine_Form
     $birthday->setAllowEmpty(false);
 	$birthday -> setRequired(true);
     $this->addElement($birthday);
+	$birthday -> setAttrib('required', true);
 	
 	$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
 	$countriesAssoc = array('0'=>'') + $countriesAssoc;
@@ -116,6 +117,18 @@ class User_Form_Playercard_Create extends Engine_Form
 	$this->addElement('Select', 'city_id', array(
 		'label' => 'City',
 	));
+	
+	$languages = Engine_Api::_()->getDbTable('languages', 'user')->getLanguagesArray();
+	$this->addElement('MultiCheckbox', 'languages', array(
+      'label' => 'Languages',
+      'allowEmpty' => false,
+      'multiOptions' => $languages,
+      'filters' => array(
+        'StripTags',
+        new Engine_Filter_Censor(),
+      ),
+    ));
+	$this->languages->getDecorator("Description")->setOption("placement", "append");
 	
 	$this -> addElement('Select', 'referred_foot', array(
 		'label' => 'Preferred Foot',

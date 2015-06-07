@@ -21,9 +21,9 @@ class Payment_Form_Admin_Subscription_Cancel extends Engine_Form
   public function init()
   {
     $this
-      ->setTitle('Cancel Subscription')
+      ->setTitle('Cancel Membership')
       ->setDescription('Note: this will attempt to cancel the ' .
-          'recurring payment regardless of current subscription status.')
+          'recurring payment regardless of current membership status.')
       ->setAttrib('class', 'global_form_popup')
       ;
 
@@ -32,7 +32,7 @@ class Payment_Form_Admin_Subscription_Cancel extends Engine_Form
 
     // Buttons
     $this->addElement('Button', 'submit', array(
-      'label' => 'Cancel Subscription',
+      'label' => 'Cancel Membership',
       'type' => 'submit',
       'ignore' => true,
       'decorators' => array('ViewHelper')

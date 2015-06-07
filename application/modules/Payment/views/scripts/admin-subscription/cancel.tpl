@@ -18,10 +18,10 @@
   <div style="padding: 10px;">
 
     <?php if( $this->status ): ?>
-      <?php echo $this->translate('The subscription has been cancelled.') ?>
+      <?php echo $this->translate('The membership has been cancelled.') ?>
     <?php else: ?>
       <?php echo $this->translate('There was a problem cancelling the ' .
-          'subscription. The message was:') ?>
+          'membership. The message was:') ?>
       <?php echo $this->error ?>
     <?php endif; ?>
 

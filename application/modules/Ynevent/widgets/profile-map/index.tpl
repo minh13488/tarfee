@@ -1,5 +1,5 @@
 
-<?php if ( !( $this->event->latitude) ) : ?>
+<?php if ( !$this->event->latitude && !$this->fullAddress) : ?>
 	<div class="tip"><span><?php echo $this->translate('No location was set'); ?></span></div>
 <?php else :?>
 	<?php if($this->fullAddress) : ?>

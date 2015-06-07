@@ -56,13 +56,13 @@ class Payment_Form_Admin_Settings_Global extends Engine_Form
 
     // Element: benefit
     $this->addElement('Radio', 'benefit', array(
-      'label' => 'Initial Subscription Status',
-      'description' => 'Do you want to enable subscriptions immedately after '
+      'label' => 'Initial Membership Status',
+      'description' => 'Do you want to enable membership immedately after '
           . 'payment, before the payment passes the gateways\' fraud checks? '
           . 'This may take anywhere from 20 minutes to 4 days, depending on '
           . 'the circumstances and the gateway.',
       'multiOptions' => array(
-        'all' => 'Enable subscriptions immediately.',
+        'all' => 'Enable membership immediately.',
         'some' => 'Enable if member has an existing successful transaction, wait if this is their first.',
         'none' => 'Wait until the gateway signals that the payment has completed successfully.',
       ),

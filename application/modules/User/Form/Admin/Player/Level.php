@@ -20,7 +20,6 @@ class User_Form_Admin_Player_Level extends Authorization_Form_Admin_Level_Abstra
           array('Int', true),
           new Engine_Validate_AtLeast(0),
         ),
-        'value' => 5,
       ));
 	  
 	// Element: auth_view

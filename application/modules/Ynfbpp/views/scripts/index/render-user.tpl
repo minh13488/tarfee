@@ -67,7 +67,7 @@ $allow = $this->subject->authorization()->isAllowed($this->viewer, 'view');
 					'subject' => $this->subject->getGuid(),
 					'route' => 'default',
 				), $this->translate('Report'), array(
-					'class' => 'smoothbox buttonlink',
+					'class' => 'smoothbox buttonlink icon_report_user',
 					'onclick' => "ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;"
 				))?>
 			</li>

@@ -90,32 +90,22 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 		$videoIds = $mappingTable -> getItemIdsMapping($type, $params);
 		$totalOverallRating = 0;
 		$totalOverallRatingReview = 0;
+		
+		//get all videos of player
 		foreach ($videoIds as $video_id)
 		{
 			//loop for each video
 			$video = Engine_Api::_() -> getItem('video', $video_id);
+			//check video exist
 			if ($video)
 			{
 				//get all user add ratings for this video
 				$userIds = $ratingTable -> getUserRatingByResource($video_id);
-				$totalOverallRatingVideo = 0;
-				foreach ($userIds as $userId)
-				{
-					//loop for each user to get overall ratings for video
-					$params = array(
-						'resource_id' => $video_id,
-						'user_id' => $userId,
-					);
-					$ratings = $ratingTable -> getRatingsBy($params);
-					$ratingTotal = 0;
-					foreach ($ratings as $rating)
-					{
-						$ratingTotal += $rating -> rating;
-					}
-					$totalOverallRatingVideo += round(($ratingTotal / 5), 2);
-					$totalOverallRatingReview++;
+				$videoOverrallRating = $video -> getRating(true);
+				if($videoOverrallRating != 0){
+					$totalOverallRating += $videoOverrallRating;
+					$totalOverallRatingReview += count($userIds);
 				}
-				$totalOverallRating += $totalOverallRatingVideo;
 			}
 		}
 		if ($totalOverallRatingReview != 0)
@@ -152,5 +142,23 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 	
 	function getEyeOns() {
 		return Engine_Api::_()->getDbTable('eyeons', 'user')->getPlayerEyeOns($this->getIdentity());
+	}
+	
+	public function getPhotosTotal() {
+		$photoTable = Engine_Api::_() -> getItemTable('user_photo');
+		$select = $photoTable -> select();
+    	$select -> from($photoTable->info('name'), 'COUNT(*) AS count')
+				-> where('item_id = ?', $this -> getIdentity())
+				-> where('item_type = ?', $this -> getType());
+    	return $select->query()->fetchColumn(0);
+	}
+	public function getSport()
+	{
+		return Engine_Api::_() -> getItem('user_sportcategory', $this -> category_id);
+	}
+	
+	public function getPosition()
+	{
+		return Engine_Api::_() -> getItem('user_sportcategory', $this -> position_id);
 	}
 }

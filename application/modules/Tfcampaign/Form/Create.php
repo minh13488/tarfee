@@ -50,16 +50,12 @@ class Tfcampaign_Form_Create extends Engine_Form
 	{
 		$sport_categories[$category->getIdentity()] = $category -> getTitle();
 	}
-    $this->addElement('Select', 'sport_type_id', array(
-      'label' => 'Sport Type',
+    $this->addElement('Select', 'category_id', array(
+      'label' => 'Sport Category',
       'multiOptions' => $sport_categories,
       'onchange' => 'subCategories()',
     ));
 	
-	$this -> addElement('Select', 'sport_preference_id', array(
-		'label' => 'Sport Preference',
-		'multiOptions' => array("0" => ""),
-	));
 	
 	 // Start time
     $start = new Engine_Form_Element_CalendarDateTime('start_date');
@@ -73,6 +69,13 @@ class Tfcampaign_Form_Create extends Engine_Form
     $end->setAllowEmpty(false);
     $this->addElement($end);
 
+	$this->addElement('File', 'photo', array(
+      'label' => 'Campaign Photo'
+    ));
+	$this -> photo -> setAllowEmpty(true);
+    $this -> photo -> addValidator('Extension', false, 'jpg,png,gif,jpeg');
+	$this -> photo -> setAttrib('accept', 'image/*');
+	
 	
 	$arrAge = array();
 	$arrAge[] = "";
@@ -104,41 +107,43 @@ class Tfcampaign_Form_Create extends Engine_Form
 	$countriesAssoc = array('0'=>'') + $countriesAssoc;
 
 	$this->addElement('Select', 'country_id', array(
-		'label' => 'Location',
+		'label' => 'Country',
 		'multiOptions' => $countriesAssoc,
 	));
+
+	$this->addElement('Select', 'province_id', array(
+		'label' => 'Province/State',
+	));
+
+	$this->addElement('Select', 'city_id', array(
+		'label' => 'City',
+	));
 	
-	// Init default locale
-    $localeObject = Zend_Registry::get('Locale');
-
-    $languages = Zend_Locale::getTranslationList('language', $localeObject);
-    $territories = Zend_Locale::getTranslationList('territory', $localeObject);
-
-    $localeMultiOptions = array();
-    foreach( array_keys(Zend_Locale::getLocaleList()) as $key ) {
-      $languageName = null;
-      if( !empty($languages[$key]) ) {
-        $languageName = $languages[$key];
-      } else {
-        $tmpLocale = new Zend_Locale($key);
-        $region = $tmpLocale->getRegion();
-        $language = $tmpLocale->getLanguage();
-        if( !empty($languages[$language]) && !empty($territories[$region]) ) {
-          $languageName =  $languages[$language] . ' (' . $territories[$region] . ')';
-        }
-      }
-
-      if( $languageName ) {
-        $localeMultiOptions[$languageName] = $languageName;
-      }
-    }
-    
-    $this->addElement('Select', 'language', array(
-      'label' => 'Language',
-      'multiOptions' => $localeMultiOptions,
-      'value' => 'auto',
-      'disableTranslator'=> true
+   $this->addElement('Text', 'languages', array(
+      'label' => 'Languages',
+      'description' => 'Separate tags with commas. Ex: German, English',
+      'allowEmpty' => false,
+      'validators' => array(
+        array('NotEmpty', true),
+        array('StringLength', false, array(1, 128)),
+      ),
+      'filters' => array(
+        'StripTags',
+        new Engine_Filter_Censor(),
+      ),
     ));
+	$this->languages->getDecorator("Description")->setOption("placement", "append");
+	
+	$this -> addElement('Select', 'referred_foot', array(
+		'label' => 'Preferred Foot',
+		'multiOptions' => array('1' => 'Left', '2' => 'Right', '0' => 'Both'),
+	));
+	
+	$positions = $sportCattable -> getMultiOptions('--', '', FALSE);
+	$this -> addElement('Select', 'position_id', array(
+		'label' => 'Position',
+		'multiOptions' => $positions,
+	));
 	
 	
 	$this -> addElement('Checkbox', 'photo_required', array(
@@ -201,6 +206,7 @@ class Tfcampaign_Form_Create extends Engine_Form
       'label' => 'Create',
       'type' => 'submit',
       'ignore' => true,
+      'onClick' => 'return checkValid();',
       'decorators' => array(
         'ViewHelper',
       ),

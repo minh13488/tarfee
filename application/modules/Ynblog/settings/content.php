@@ -9,9 +9,12 @@ return array(
     'category' => 'Advanced Blogs',
     'type' => 'widget',
     'name' => 'ynblog.profile-blogs',
+    'isPaginated' => true,
+    'requirements' => array(
+						'subject' => 'user',
+				),
     'defaultParams' => array(
         'title' => 'Blogs',
-        'titleCount' => true,
     ),
   ),
 
