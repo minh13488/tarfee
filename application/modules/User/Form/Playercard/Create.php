@@ -118,14 +118,11 @@ class User_Form_Playercard_Create extends Engine_Form
 		'label' => 'City',
 	));
 	
-	$this->addElement('Text', 'languages', array(
+	$languages = Engine_Api::_()->getDbTable('languages', 'user')->getLanguagesArray();
+	$this->addElement('MultiCheckbox', 'languages', array(
       'label' => 'Languages',
-      'description' => 'Separate tags with commas. Ex: German, English',
       'allowEmpty' => false,
-      'validators' => array(
-        array('NotEmpty', true),
-        array('StringLength', false, array(1, 128)),
-      ),
+      'multiOptions' => $languages,
       'filters' => array(
         'StripTags',
         new Engine_Filter_Censor(),

@@ -31,7 +31,21 @@ class User_AdminLevelSettingsController extends Core_Controller_Action_Admin
     // Populate values
     $permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
     $form->populate($permissionsTable->getAllowed('user_playercard', $id, array_keys($form->getValues())));
-
+	// get max allow
+    $mtable  = Engine_Api::_()->getDbtable('permissions', 'authorization');
+    $msselect = $mtable->select()
+                ->where("type = 'user_playercard'")
+                ->where("level_id = ?",$id)
+                ->where("name = 'max_player_card'");
+    $mallow = $mtable->fetchRow($msselect);
+    if (!empty($mallow))
+        $max_player_card = $mallow['value'];
+    if($id < 5)
+    {
+        $max_get = $form->max_player_card->getValue();
+        if ($max_get < 1)
+        	$form->max_player_card->setValue($max_player_card);
+    }
     // Check post
     if( !$this->getRequest()->isPost() ) {
       return;
@@ -52,7 +66,7 @@ class User_AdminLevelSettingsController extends Core_Controller_Action_Admin
     try
     {
       // Set permissions
-      $permissionsTable->setAllowed('player_card', $id, $values);
+      $permissionsTable->setAllowed('user_playercard', $id, $values);
 
       // Commit
       $db->commit();

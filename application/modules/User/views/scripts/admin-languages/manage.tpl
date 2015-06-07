@@ -1,10 +1,8 @@
-
-
+  <h2> <?php echo $this->translate("Manage Languages") ?> </h2>
   <div class='clear'>
     <div class='settings'>
     <form class="global_form">
       <div>
-        <h3> <?php echo $this->translate("Manage Languages") ?> </h3>
        <i class="fa fa-plus"></i><?php echo $this->htmlLink(array('route' => 'admin_default', 'module' => 'user', 'controller' => 'languages', 'action' => 'add'), $this->translate('Add New Language'), array(
       'class' => 'smoothbox buttonlink',
       'style' => 'padding-left: 10px;'
