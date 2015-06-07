@@ -346,7 +346,7 @@ else {
                 <?php endif;?>
          </div>
 
-
+            
          <div class="tarfee_profile_club_item">
              <ul>
                  <li>
@@ -370,7 +370,7 @@ else {
                      </a>
                  </li>
              </ul>
-         </div>
+         </div><!-- tafee profile club item -->
 
      
 
