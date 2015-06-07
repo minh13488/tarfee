@@ -171,27 +171,6 @@ else {
                           <div><?php echo $this -> translate("eye on")?></div>
                        </a>
                     </li>
-                    <?php foreach($this -> sports as $sport):?>
-                    <li>
-                    	<a>
-                      	<span class="number_icons">
-                      		<?php echo $this -> itemPhoto($sport, 'thumb.icon');?>
-                    	</span>
-                      <div><?php echo $this -> string() -> truncate($sport -> getTitle(), 10)?></div>
-                      </a>
-                    </li>
-                    <?php endforeach;?>
-
-                    <?php foreach($this -> clubs as $club):?>
-                    <li>
-                       <a href="<?php echo $club -> getHref();?>">
-                          	<span class="number_icons">
-                          		<?php echo $this -> itemPhoto($club, 'thumb.icon');?>
-                    		</span>
-                          <div><?php echo $this -> string() -> truncate($club -> getTitle(), 10)?></div>
-                       </a>
-                    </li>
-                <?php endforeach;?>
             </ul>
     	</div>
     </div>
@@ -299,18 +278,9 @@ else {
 
                <div class="founder_member">
                     <img src="application/modules/User/externals/images/icon_founder_memeber.png" alt="">
-                   founder member
+                    <?php echo $this->translate('founder member'); ?>
                </div>
 
-                <span style="display: none">
-                    <?php if(Engine_Api::_()->authorization()->isAllowed('user', $this->subject(), 'show_badge')):?>
-                        <?php 
-                        $badge = Engine_Api::_()->authorization()->getPermission($this->subject(), 'user', 'badge');
-                        if($badge && strpos($badge,'public/admin') !== false): ?>
-                            <img height="30" src="<?php echo $badge?>" />
-                        <?php endif;?>
-                    <?php endif;?>
-                </span>
              
                <?php
                 $about_me = "";
@@ -327,48 +297,64 @@ else {
          			<p style="display: none" ><?php echo $about_me?></p>
          		<?php endif;?>
 
-                <div class="account_type">
-                    <i class="fa fa-briefcase"></i> &nbsp;
-                    professional account
-                </div>
+                <div class="account_type">                  
 
-                <div class="verified_account">
-                    <i class="fa fa-check"></i> &nbsp;
-                    <?php echo $this -> translate("verified account");?>
+                    <?php if(Engine_Api::_()->authorization()->isAllowed('user', $this->subject(), 'show_badge')):?>
+                        <?php 
+                            $badge = Engine_Api::_()->authorization()->getPermission($this->subject(), 'user', 'badge');
+                            if($badge && strpos($badge,'public/admin') !== false): ?>
+                                <img height="30" src="<?php echo $badge?>" />
+                        <?php endif;?>
+                    <?php endif;?>
+
+                    <?php echo $this->translate('professional account'); ?>
+
                 </div>
                 
 
                 <?php if($this->src_img):?>
-                    <span class="status_alt tab_identify_account" style="display: none;">
-                        <div class="user_icon"><img src='<?php echo $this->src_img;?>'></div>
-                        <div class="user_type_verify"><?php echo $this -> translate("professtional individual verified by Tarfee");?></div>
-                    </span>
+                    <div class="verified_account">
+                        <img height="30"> src='<?php echo $this->src_img;?>'>
+                        <?php echo $this -> translate("professtional individual verified by Tarfee");?>
+                    </div>
                 <?php endif;?>
          </div>
 
             
          <div class="tarfee_profile_club_item">
-             <ul>
+
+
+
+
+
+
+
+
+
+
+             <ul>               
+                <?php foreach($this -> sports as $sport):?>
                  <li>
-                     <a href="#">
-                         <i class="fa fa-futbol-o"></i>
-                         football
+                    <a href="<?php echo $club -> getHref();?>">
+                        <?php echo $this -> itemPhoto($sport, 'thumb.icon');?>
+                        <?php echo $this -> string() -> truncate($sport -> getTitle(), 10)?>
                      </a>
                  </li>
+                 <?php endforeach;?>
 
+                
+                <?php foreach($this -> clubs as $club):?>
                 <li>
-                     <a href="#">
-                         <i class="fa fa-futbol-o"></i>
-                         football
-                     </a>
-                 </li>
+                   <a href="<?php echo $club -> getHref();?>">
+                        <?php echo $this -> itemPhoto($club, 'thumb.icon');?>
+                        <?php echo $this -> string() -> truncate($club -> getTitle(), 10)?>
+                   </a>
+                </li>
+                <?php endforeach;?>
 
-                <li>
-                     <a href="#">
-                         <i class="fa fa-futbol-o"></i>
-                         football
-                     </a>
-                 </li>
+
+
+
              </ul>
          </div><!-- tafee profile club item -->
 

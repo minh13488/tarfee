@@ -178,7 +178,7 @@
 				.verified_account{
 					color: #fff;
 					margin-bottom: 5px;
-					padding-left: 11px;
+					padding-left: 5px;
 					i.fa{
 						font-size: 20px;
 					}
@@ -187,7 +187,7 @@
 				.account_type{
 					color: #fff;
 					margin-bottom: 5px;
-					padding-left: 11px;
+					padding-left: 5px;
 
 					i.fa{
 						font-size: 20px;
@@ -239,11 +239,11 @@
 
 						a{
 							color: $theme_font_color;
-							i.fa{
-							  	display: block;
-								font-size: 26px;
-								margin-bottom: 5px;
-							}/*font-icon*/
+							
+							img{
+								height: 32px;
+								display: block;
+							}
 						}
 					}
 				}
