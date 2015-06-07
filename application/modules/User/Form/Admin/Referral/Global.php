@@ -30,7 +30,7 @@ class User_Form_Admin_Referral_Global extends Engine_Form
 	    ));	
 		
 	$this->addElement('Text', 'referral_trial',array(
-	      'label'=>'Trial period of referral codes',
+	      'label'=>'Trial period of referral codes (day)',
 	      'description' => '0 is unlimited',
 	      'filters' => array(
 	        new Engine_Filter_Censor(),
