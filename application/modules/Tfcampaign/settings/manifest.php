@@ -56,7 +56,7 @@
 				'action' => 'browse',
 			),
 			'reqs' => array(
-	            'action' => '(browse|create|manage)',
+	            'action' => '(browse|create|manage|edit)',
 	        )
 		),
 		'tfcampaign_specific' => array(
@@ -68,7 +68,7 @@
 	        ),
 	        'reqs' => array(
 	            'action' => '(edit|delete)',
-	            'listing_id' => '\d+',
+	            'campaign_id' => '\d+',
 	        )
 	    ),
 	    'tfcampaign_profile' => array(

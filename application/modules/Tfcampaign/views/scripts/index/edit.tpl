@@ -15,112 +15,6 @@
 	 	//clear error before check agin
 	 	$$('.create-campaign-error').destroy();
 	 	
-	 	//check empty start time & end time
-	 	var startDate = $('start_date-date').get('value');
-	 	var endDate = $('end_date-date').get('value');
-	 	if(startDate == "") {
-	 		var message = "<?php echo $this -> translate('start date is required');?>";
-	 		var div = new Element('div', {
-		       'html': message,
-		       'class': 'create-campaign-error',
-		        styles: {
-			        'color': 'red',
-			        'font-weight': 'bold',
-			    },
-		    });
-	 		$('start_date-wrapper').grab(div,'before');
-	 		return false;
-	 	}
-	 	if(endDate == "") {
-	 		var message = "<?php echo $this -> translate('end date is required');?>";
-	 		var div = new Element('div', {
-		       'html': message,
-		       'class': 'create-campaign-error',
-		        styles: {
-			        'color': 'red',
-			        'font-weight': 'bold',
-			    },
-		    });
-	 		$('end_date-wrapper').grab(div,'before');
-	 		return false;
-	 	}
-	 	if((startDate != "") && (endDate!= "")) {
-	 		var startDateObject  = new Date(startDate);
-	 		var endDateObject  = new Date(endDate);
-	 		var todayObject = new Date();
-	 		//check startDate greater than now
-	 		if(todayObject.getTime() > startDateObject.getTime())
-			{
-		 		var message = "<?php echo $this -> translate('start date must greater than today');?>";
-		 		var div = new Element('div', {
-			       'html': message,
-			       'class': 'create-campaign-error',
-			        styles: {
-				        'color': 'red',
-				        'font-weight': 'bold',
-				    },
-			    });
-		 		$('start_date-wrapper').grab(div,'before');
-		 		return false;
-		 	} 
-	 		
-		 	//miniseconds
-		 	var period = Math.abs(endDateObject - startDateObject); 
-		 	//seconds per hour*hours per day*milisecond
-		 	var period_day = (period/(3600*24*1000));
-		 	if(period_day > 14 || period_day <= 0) {
-		 		var message = "<?php echo $this -> translate('end date must greater than is start date (maximum 2 weeks)');?>";
-		 		var div = new Element('div', {
-			       'html': message,
-			       'class': 'create-campaign-error',
-			        styles: {
-				        'color': 'red',
-				        'font-weight': 'bold',
-				    },
-			    });
-		 		$('end_date-wrapper').grab(div,'before');
-		 		return false;
-		 	} 
-	 	}
-	 	
-	 	//check period from admin
-	 	<?php 
-	 		$campaignTable = Engine_Api::_() -> getItemTable('tfcampaign_campaign');
-			$campaign = $campaignTable -> getLastestCampaign($this -> viewer());
-			$settings = Engine_Api::_()->getApi('settings', 'core');
-			$period = $settings->getSetting('tfcampaign_max_period', "20");
-	 	?>
-	 	<?php if($campaign) :?>
-	 		//if has campaign then check valid period
-	 		<?php
-	 			$end_date = strtotime($campaign->end_date);
-	 		?>
-		 	var prevCampaignEndDate = '<?php print date("m/d/Y", $end_date); ?>';
-		 	var prevCampaignEndDateObject  = new Date(prevCampaignEndDate);
-		 	var startDate = $('start_date-date').get('value');
-		 	var startDateObject  = new Date(startDate);
-		 	//miniseconds
-		 	var period = Math.abs(startDateObject - prevCampaignEndDateObject); 
-		 	//seconds per hour*hours per day*milisecond
-		 	var period_day = (period/(3600*24*1000)); 
-		 	//get max period in admin
-		 	var max_period = "<?php echo $period;?>";
-		 	if(period_day < max_period) {
-				prevCampaignEndDateObject.setTime(prevCampaignEndDateObject.getTime() + max_period * 86400000);
-		 		var message = "<?php echo $this -> translate('start date must be greater than ');?>" + prevCampaignEndDateObject.toDateString();
-		 		var div = new Element('div', {
-			       'html': message,
-			       'class': 'create-campaign-error',
-			        styles: {
-				        'color': 'red',
-				        'font-weight': 'bold',
-				    },
-			    });
-		 		$('start_date-wrapper').grab(div,'before');
-		 		return false;
-		 	}
-	 	<?php endif;?>
-	 	
 	 	//check age
 	 	var from_age = $('from_age').get('value');
 	 	var to_age = $('to_age').get('value');
@@ -226,6 +120,34 @@
                 }
             }
         });
+        
+        <?php if($this  -> error) :?>
+        	$('user_ids').set('value', "");
+        <?php endif;?>
+        <?php foreach ($this->userViewRows as $userViewRow) : ?>
+        	<?php 
+        		$user_id = $userViewRow -> user_id;
+				$user = Engine_Api::_() -> getItem('user', $user_id);
+        	?>
+        	<?php if($user -> getIdentity()) :?>
+		        var value = $('user_ids').get('value');
+		        if(value.trim() == ""){
+		        	value += '<?php echo $user->getIdentity()?>';
+		        } else {
+		        	value += ','+'<?php echo $user->getIdentity()?>';
+		        }
+		        $('user_ids').set('value', value);
+		        
+		        var myElement = new Element("span", {
+		            'id' : 'user_ids_tospan_' + '<?php echo $user->getIdentity()?>',
+		            'class': 'user_tag',
+		            'html' :  "<a target='_blank' href='<?php echo $user->getHref()?>'>" + '<?php echo $this->itemPhoto($user, 'thumb.icon')?><?php echo $user->getTitle()?>' + "</a> <a class = 'club_preferred_remove' href='javascript:void(0);' onclick='this.parentNode.destroy();removeFromToValue(\"<?php echo $user->getIdentity()?>\", \"user_ids\",\"user\");'>x</a>"
+		        });
+		        document.getElementById('user_ids-element').appendChild(myElement);
+		        document.getElementById('user_ids-wrapper').show();
+		        document.getElementById('user_ids-wrapper').style.height = 'auto';
+	        <?php endif;?>
+        <?php endforeach; ?>
         
     });
  </script>
