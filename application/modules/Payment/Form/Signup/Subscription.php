@@ -30,8 +30,8 @@ class Payment_Form_Signup_Subscription extends Engine_Form
   public function init()
   {
     $this
-      ->setTitle('Subscription Plan')
-      ->setDescription('Please select a subscription plan from the list below.')
+      ->setTitle('Membership Plan')
+      ->setDescription('Please select a membership plan from the list below.')
       ;
 
     // Get available subscriptions

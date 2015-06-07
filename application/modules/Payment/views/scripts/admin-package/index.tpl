@@ -12,7 +12,7 @@
 ?>
 
 <h2>
-  <?php echo $this->translate("Manage Subscription Plans") ?>
+  <?php echo $this->translate("Manage Membership Plans") ?>
 </h2>
 
 <p>

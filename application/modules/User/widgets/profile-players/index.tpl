@@ -187,12 +187,14 @@
 							echo ' | '.$countryName?>
 					<br/>
 					<?php 
-					$laguages = $player -> languages;
-					$arr_lang = explode(',', $laguages);
+					$laguages = json_decode($player -> languages);
 					$arr_tmp = array();
-					foreach ($arr_lang as $lang) 
+					foreach ($laguages as $lang_id) 
 					{
-						$arr_tmp[] = $lang;
+						$langTb =  Engine_Api::_() -> getDbTable('languages', 'user');
+						$lang = $langTb -> fetchRow($langTb ->select()->where('language_id = ?', $lang_id));
+						if($lang)
+							$arr_tmp[] = $lang -> title;
 					}
 					echo implode(' | ', $arr_tmp);
 					?>

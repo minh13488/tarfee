@@ -21,8 +21,8 @@ class Payment_Form_Admin_Package_Delete extends Engine_Form
   public function init()
   {
     $this
-      ->setTitle('Delete Subscription Plan')
-      ->setDescription('Are you sure you want to delete this subscription plan?')
+      ->setTitle('Delete Membership Plan')
+      ->setDescription('Are you sure you want to delete this membership plan?')
       ->setAttrib('class', 'global_form_popup')
       ;
     

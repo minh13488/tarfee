@@ -7,7 +7,7 @@ class User_Form_Admin_Player_Global extends Engine_Form
       ->setTitle('Global Settings')
       ->setDescription('These settings affect all members in your community.');
 
-    $this->addElement('Radio', 'relation_require', array(
+    $this->addElement('Radio', 'user_relation_require', array(
       'label' => 'Player Card - Relation',
       'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('user.relation_require', 1),
       'multiOptions' => array(

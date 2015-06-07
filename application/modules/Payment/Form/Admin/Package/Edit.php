@@ -23,7 +23,7 @@ class Payment_Form_Admin_Package_Edit extends Payment_Form_Admin_Package_Create
     parent::init();
     
     $this
-      ->setTitle('Edit Subscription Plan')
+      ->setTitle('Edit Membership Plan')
       ->setDescription('Please note that payment parameters (Price, ' .
           'Recurrence, Duration, Trial Duration) cannot be edited after ' .
           'creation. If you wish to change these, you will have to create a ' .

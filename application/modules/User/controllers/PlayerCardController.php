@@ -110,11 +110,22 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 
 		try
 		{
-			// Create group
+			// Create player
+			$values['languages'] = json_encode($values['languages']);
 			$table = Engine_Api::_() -> getDbtable('playercards', 'user');
 			$player_card = $table -> createRow();
 			$player_card -> setFromArray($values);
 			$player_card -> save();
+			
+			if(!empty($values['languages']))
+			{
+				foreach(json_decode($values['languages']) as $langId)
+				{
+					 // save language map
+					 $mappingTable = Engine_Api::_() -> getDbtable('languagemappings', 'user');
+					 $mappingTable -> save($langId, $player_card);
+				}
+			}
 
 			// Set photo
 			if (!empty($values['photo']))
@@ -211,7 +222,6 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		//view for specific users
 		$tableUserItemView = Engine_Api::_() -> getDbTable('userItemView', 'user');
 		$this -> view -> userViewRows = $userViewRows = $tableUserItemView -> getUserByItem($player_card);
-	
 		
 		if (!$this -> getRequest() -> isPost())
 		{
@@ -276,6 +286,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 				}
 				$form -> getElement('city_id') -> setMultiOptions($citiesAssoc);
 			}
+			$arr_player['languages'] = json_decode($arr_player['languages']);
 			$form -> populate($arr_player);
 			return;
 		}
@@ -356,9 +367,20 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 
 		try
 		{
-			// Set group info
+			// Set player info
+			$values['languages'] = json_encode($values['languages']);
 			$player_card -> setFromArray($values);
 			$player_card -> save();
+			
+			if(!empty($values['languages']))
+			{
+				foreach(json_decode($values['languages']) as $langId)
+				{
+					 // save language map
+					 $mappingTable = Engine_Api::_() -> getDbtable('languagemappings', 'user');
+					 $mappingTable -> save($langId, $player_card);
+				}
+			}
 
 			if (!empty($values['photo']))
 			{

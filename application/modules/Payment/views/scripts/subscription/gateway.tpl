@@ -12,7 +12,7 @@
 ?>
 
 <?php if( $this->status == 'pending' ): // Check for pending status ?>
-  Your subscription is pending payment. You will receive an email when the
+  Your membership is pending payment. You will receive an email when the
   payment completes.
 <?php else: ?>
 
@@ -26,15 +26,15 @@
         <?php if( $this->package->recurrence ): ?>
         <p class="form-description">
           <?php echo $this->translate('You have selected an account type that requires ' .
-            'recurring subscription payments. You will be taken to a secure ' .
-            'checkout area where you can setup your subscription. Remember to ' .
+            'recurring membership payments. You will be taken to a secure ' .
+            'checkout area where you can setup your membership. Remember to ' .
             'continue back to our site after your purchase to sign in to your ' .
             'account.') ?>
         </p>
         <?php endif; ?>
         <p style="font-weight: bold; padding-top: 15px; padding-bottom: 15px;">
           <?php if( $this->package->recurrence ): ?>
-            <?php echo $this->translate('Please setup your subscription to continue:') ?>
+            <?php echo $this->translate('Please setup your membership to continue:') ?>
           <?php else: ?>
             <?php echo $this->translate('Please pay a one-time fee to continue:') ?>
           <?php endif; ?>

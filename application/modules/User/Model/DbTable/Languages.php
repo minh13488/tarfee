@@ -12,7 +12,7 @@ class User_Model_DbTable_Languages extends Engine_Db_Table {
 		$types = $this -> fetchAll($select);
 		foreach($types as $type)
 		{
-			$typeArray[$type -> reason_id] = $type -> title;  
+			$typeArray[$type -> language_id] = $type -> title;  
 		}
 		return $typeArray;
 	}
