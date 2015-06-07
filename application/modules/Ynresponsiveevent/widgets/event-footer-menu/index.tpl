@@ -1,4 +1,4 @@
-<div class="sideicon">
+<div class="sideicon" style="display: none">
 	<ul>
 		<li class="sideicon_generic plus">
 			<a href="#"><span class="fa fa-plus"></span></a>
