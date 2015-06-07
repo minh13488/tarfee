@@ -90,32 +90,20 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 		$videoIds = $mappingTable -> getItemIdsMapping($type, $params);
 		$totalOverallRating = 0;
 		$totalOverallRatingReview = 0;
+		
+		//get all videos of player
 		foreach ($videoIds as $video_id)
 		{
 			//loop for each video
 			$video = Engine_Api::_() -> getItem('video', $video_id);
+			//check video exist
 			if ($video)
 			{
 				//get all user add ratings for this video
 				$userIds = $ratingTable -> getUserRatingByResource($video_id);
-				$totalOverallRatingVideo = 0;
-				foreach ($userIds as $userId)
-				{
-					//loop for each user to get overall ratings for video
-					$params = array(
-						'resource_id' => $video_id,
-						'user_id' => $userId,
-					);
-					$ratings = $ratingTable -> getRatingsBy($params);
-					$ratingTotal = 0;
-					foreach ($ratings as $rating)
-					{
-						$ratingTotal += $rating -> rating;
-					}
-					$totalOverallRatingVideo += round(($ratingTotal / 5), 2);
-					$totalOverallRatingReview++;
-				}
-				$totalOverallRating += $totalOverallRatingVideo;
+				$videoOverrallRating = $video -> getRating(true);
+				$totalOverallRating += $videoOverrallRating;
+				$totalOverallRatingReview += count($userIds);
 			}
 		}
 		if ($totalOverallRatingReview != 0)
