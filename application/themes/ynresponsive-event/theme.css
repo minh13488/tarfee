@@ -19,7 +19,6 @@ body
 	background-color: #DEDEDE;
 	font-family: Helvetica, Arial, sans-serif;
 	background-color: $theme_body_background_color;
-    text-transform: lowercase;
 }
 body#global_page_user-profile-index
 {
