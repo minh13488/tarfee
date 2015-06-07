@@ -102,8 +102,10 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 				//get all user add ratings for this video
 				$userIds = $ratingTable -> getUserRatingByResource($video_id);
 				$videoOverrallRating = $video -> getRating(true);
-				$totalOverallRating += $videoOverrallRating;
-				$totalOverallRatingReview += count($userIds);
+				if($videoOverrallRating != 0){
+					$totalOverallRating += $videoOverrallRating;
+					$totalOverallRatingReview += count($userIds);
+				}
 			}
 		}
 		if ($totalOverallRatingReview != 0)
