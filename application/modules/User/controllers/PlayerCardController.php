@@ -231,7 +231,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			}
 			$arr_player = $player_card -> toArray();
 			
-			if ($arr_player['category_id'] == 2)
+			if ($arr_player['category_id'] == 18)
 			{
 				$this -> view -> showPreferredFoot = true;
 			}

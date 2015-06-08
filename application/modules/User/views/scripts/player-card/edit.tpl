@@ -138,7 +138,7 @@
 	}
 	function subCategories()
 	{
-		if ($('category_id').value == 2)
+		if ($('category_id').value == 18)
 		{
 			$('referred_foot-wrapper').show();
 		}

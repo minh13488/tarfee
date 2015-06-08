@@ -145,12 +145,12 @@ class User_Form_Playercard_Create extends Engine_Form
     $this -> addElement('Text', 'user', array(
         'label' => 'Allow view for',
         'autocomplete' => 'off',
-        'order' => '12'
+        'order' => '16'
     ));
     
     $this -> addElement('Hidden', 'user_ids', array(
         'filters' => array('HtmlEntities'),
-        'order' => '13'
+        'order' => '17'
     ));
     Engine_Form::addDefaultDecorators($this -> user_ids);
 	
