@@ -171,4 +171,8 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 	{
 		return Engine_Api::_() -> getItem('user_sportcategory', $this -> position_id);
 	}
+	
+	public function getSportId() {
+		return $this->category_id;
+	}
 }
