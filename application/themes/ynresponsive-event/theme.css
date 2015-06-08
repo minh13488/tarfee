@@ -17,7 +17,7 @@ html
 body
 {
 	background-color: #DEDEDE;
-	font-family: Helvetica, Arial, sans-serif;
+	font-family: Arial, sans-serif;
 	background-color: $theme_body_background_color;
 }
 body#global_page_user-profile-index
@@ -1470,7 +1470,6 @@ TABS (TAB STYLE, NON-DEFAULT)
 	padding: 0px;
 	-moz-user-select: none;
 	-webkit-user-select: none;
-    font-family: "Oswald", $theme_font_family;
 }
 
 .layout_core_container_tabs .tabs_alt {
@@ -3378,18 +3377,8 @@ a.btn-join:hover
 	color: $theme_font_color;	
 	padding-right: 10px;
 	display: inline-block;
-    font-family: "Oswald", $theme_font_family;
     margin-bottom: -2px;
     
-	/* border-bottom: 2px solid $theme_main_color_scheme;*/
-    &:after {
-        content: "";
-        display: block;
-        width: 50px;
-        height: 2px;
-        margin-top: 5px;
-        background-color: $theme_main_color_scheme;
-    }
 }
 .layout_page_core_index_index .ybo_headline h3, 
 .layout_page_core_index_index .ybo_headline h4
@@ -3851,7 +3840,6 @@ ul.feed .feed_item_date > ul > li {
             }
             
             .hot-event-title {
-                font-family: "Oswald", $theme_font_family;
                 font-size: 18px;
                 color: $theme_font_color;
                 
@@ -3899,7 +3887,6 @@ ul.feed .feed_item_date > ul > li {
             margin-bottom: 20px;
             
             .popular-event-title {
-                font-family: "Oswald", $theme_font_family;
                 font-size: 18px;
                 color: $theme_link_color;
 				display: block;
@@ -4097,7 +4084,6 @@ ul.feed .feed_item_date > ul > li {
         position: relative;
         
         .event-listing-main-title {
-            font-family: "Oswald", $theme_font_family;
             font-size: $theme_headline_size;
             padding: 5px 15px;
         }
@@ -4140,7 +4126,6 @@ ul.feed .feed_item_date > ul > li {
             margin-bottom: 20px;
             
             .event-listing-title {
-                font-family: "Oswald", $theme_font_family;
                 font-size: 18px;
                 color: $theme_link_color;
                 display: inline-block;
@@ -4207,7 +4192,6 @@ ul.feed .feed_item_date > ul > li {
                 padding-right: 130px;
                 
                 .event-listing-title {
-                    font-family: "Oswald", $theme_font_family;
                     font-size: 18px;
                     color: $theme_link_color;
                     +string_limit();
@@ -4364,10 +4348,6 @@ ul.feed .feed_item_date > ul > li {
     margin: 0;
     max-width: 100%;
     
-    .caption {
-        font-family: "Oswald", $theme_font_family;
-    }
-    
     .tp-bannertimer {
         bottom: -5px;
     }
@@ -4378,7 +4358,6 @@ ul.feed .feed_item_date > ul > li {
         display: none;
         
         .carousel-caption {
-            font-family: "Oswald", $theme_font_family;
             color: $theme_footer_text_color;    
         }
         
@@ -5312,7 +5291,6 @@ div.feed_viewmore {
 
 /*** tab navigation ***/
 .headline .navigation {
-    font-family: "Oswald", $theme_font_family;
         
     li > a { font-size: 15px; }
     .active > a {
@@ -5330,7 +5308,6 @@ div.feed_viewmore {
 .ynevent_grid-view .ynevent-tabs-content li .info .title,
 ul.ynevent_slideshow_pagination li a .ynevent_album_title,
 .ynevent_list-view .ynevent-tabs-content li .info .title {
-    font-family: "Oswald", $theme_font_family;
     font-size: 16px;
     line-height: 1.4;
     font-weight: normal;
