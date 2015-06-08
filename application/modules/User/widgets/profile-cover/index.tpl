@@ -318,17 +318,17 @@ else {
              <ul>               
                 <?php foreach($this -> sports as $sport):?>
                  <li>
-                    <a href="<?php echo $sport -> getHref();?>">
+                    <a title="<?php echo $sport -> getTitle()?>" href="<?php echo $sport -> getHref();?>">
                         <?php echo $this -> itemPhoto($sport, 'thumb.icon');?>
-                        <?php echo $this -> string() -> truncate($sport -> getTitle(), 10)?>
+                       <!-- <?php echo $this -> string() -> truncate($sport -> getTitle(), 10)?>-->
                      </a>
                  </li>
                  <?php endforeach;?>
                 <?php foreach($this -> clubs as $club):?>
                 <li>
-                   <a href="<?php echo $club -> getHref();?>">
+                   <a title="<?php echo $club -> getTitle()?>" href="<?php echo $club -> getHref();?>">
                         <?php echo $this -> itemPhoto($club, 'thumb.icon');?>
-                        <?php echo $this -> string() -> truncate($club -> getTitle(), 10)?>
+                        <!--<?php echo $this -> string() -> truncate($club -> getTitle(), 10)?>-->
                    </a>
                 </li>
                 <?php endforeach;?>
