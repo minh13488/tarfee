@@ -61,14 +61,6 @@ class User_Form_Settings_Privacy extends Engine_Form
       'uncheckedValue' => 1,
     ));
 
-    // Init showprofileviews
-    /*
-    $this->addElement('Checkbox', 'show_profileviewers', array(
-      'label' => 'Yes, display users who viewed my profile.',
-      //'description' => 'Show Profile Views',
-    ));
-    */
-    
     $availableLabels = array(
       'owner'       => 'Only Me',
       'member'      => 'Only My Friends',
@@ -115,6 +107,31 @@ class User_Form_Settings_Privacy extends Engine_Form
         $this->comment->setValue($role);
       }
     }
+
+	$availableLabels = array(
+	      'owner'       => 'Only Me',
+	      'member'      => 'Only My Friends',
+	      'network'     => 'Friends & Networks',
+	      'registered'  => 'All Registered Members',
+	);
+	// Init profile view
+	$get_notification_options = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('ynmember_user', $user, 'auth_get_notification');
+	$get_notification_options = array_intersect_key($availableLabels, array_flip($get_notification_options));
+
+	$this->addElement('Radio', 'get_notification_privacy', array(
+      'label' => 'Get Notification Privacy',
+      'description' => 'Who can get notification for some of my action? Actions: Create new items. 
+                        Join/attend Group/Event. 
+                        All actions on members (add friend/rate member, etc...). 
+                        Like/comment an item.',
+      'multiOptions' => $get_notification_options,
+	));
+
+	foreach( $this->_roles as $role ) {
+		if( 1 === $auth->isAllowed($user, $role, 'get_notification') ) {
+			$this->get_notification_privacy->setValue($role);
+		}
+	}
 
     // Init publishtypes
     if( Engine_Api::_()->getApi('settings', 'core')->getSetting('activity.publish', true) ) {
@@ -167,5 +184,23 @@ class User_Form_Settings_Privacy extends Engine_Form
     $comment_max_role = array_search($comment_value, $this->_roles);
     foreach( $this->_roles as $i => $role )
       $auth->setAllowed($user, $role, 'comment', ($i <= $comment_max_role) );
+	
+	// Process member profile getting notification privacy
+	$notification_privacy_value = $this->getValue('get_notification_privacy');
+	if( empty($notification_privacy_value) ) 
+	{
+		$privacy_setting = end(Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('user', $user, 'auth_get_notification'));
+		// If admin did not choose any options, make it everyone.
+		// If not, use the one option they have set since the only option may not aways be set to 'everyone'.
+		$notification_privacy_value = empty($privacy_setting)
+			? 'everyone'
+			: $privacy_setting;
+	}
+
+	$privacy_max_role = array_search($notification_privacy_value, $this->_roles);
+	foreach( $this->_roles as $i => $role )
+	{
+		$auth->setAllowed($user, $role, 'get_notification', ($i <= $privacy_max_role) );
+	}
   }
 } // end public function save()
