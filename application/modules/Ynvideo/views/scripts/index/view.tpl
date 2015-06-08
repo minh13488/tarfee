@@ -176,6 +176,14 @@ endif;
                 echo $this->htmlLink($poster, $poster->getTitle());
             }
             ?>
+            <?php 
+            $parent = $this->video->getParent();
+            if ($parent) 
+            {
+            	echo $this->translate('in '); 
+                echo $this->htmlLink($parent, $parent->getTitle());
+            }
+           ?>
         </div>
     </div>
 		<!-- AddThis Smart Layers BEGIN -->
