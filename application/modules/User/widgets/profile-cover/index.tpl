@@ -280,8 +280,6 @@ else {
                     <img src="application/modules/User/externals/images/icon_founder_memeber.png" alt="">
                     <?php echo $this->translate('founder member'); ?>
                </div>
-
-             
                <?php
                 $about_me = "";
                 $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($this -> user);
@@ -298,69 +296,43 @@ else {
          		<?php endif;?>
 
                 <div class="account_type">                  
-
                     <?php if(Engine_Api::_()->authorization()->isAllowed('user', $this->subject(), 'show_badge')):?>
                         <?php 
                             $badge = Engine_Api::_()->authorization()->getPermission($this->subject(), 'user', 'badge');
                             if($badge && strpos($badge,'public/admin') !== false): ?>
-                                <img height="30" src="<?php echo $badge?>" />
-                        <?php endif;?>
-                    <?php endif;?>
-
+                                <img height="26" src="<?php echo $badge?>" />
+                        	<?php endif;?>
+                    	<?php endif;?>
                     <?php echo $this->translate('professional account'); ?>
 
                 </div>
-                
 
                 <?php if($this->src_img):?>
                     <div class="verified_account">
-                        <img height="30"> src='<?php echo $this->src_img;?>'>
-                        <?php echo $this -> translate("professtional individual verified by Tarfee");?>
+                        <img height="26" src='<?php echo $this->src_img;?>'>
+                        <?php echo $this -> translate("verified account");?>
                     </div>
                 <?php endif;?>
          </div>
-
-            
          <div class="tarfee_profile_club_item">
-
-
-
-
-
-
-
-
-
-
              <ul>               
                 <?php foreach($this -> sports as $sport):?>
                  <li>
-                    <a href="<?php echo $club -> getHref();?>">
+                    <a title="<?php echo $sport -> getTitle()?>" href="<?php echo $sport -> getHref();?>">
                         <?php echo $this -> itemPhoto($sport, 'thumb.icon');?>
-                        <?php echo $this -> string() -> truncate($sport -> getTitle(), 10)?>
+                       <!-- <?php echo $this -> string() -> truncate($sport -> getTitle(), 10)?>-->
                      </a>
                  </li>
                  <?php endforeach;?>
-
-                
                 <?php foreach($this -> clubs as $club):?>
                 <li>
-                   <a href="<?php echo $club -> getHref();?>">
+                   <a title="<?php echo $club -> getTitle()?>" href="<?php echo $club -> getHref();?>">
                         <?php echo $this -> itemPhoto($club, 'thumb.icon');?>
-                        <?php echo $this -> string() -> truncate($club -> getTitle(), 10)?>
+                        <!--<?php echo $this -> string() -> truncate($club -> getTitle(), 10)?>-->
                    </a>
                 </li>
                 <?php endforeach;?>
-
-
-
-
              </ul>
          </div><!-- tafee profile club item -->
-
-     
-
     </div><!-- tarfee profile cover has tabs -->
-</div>
-
 </div>
