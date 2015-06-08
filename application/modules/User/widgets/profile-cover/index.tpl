@@ -318,7 +318,7 @@ else {
              <ul>               
                 <?php foreach($this -> sports as $sport):?>
                  <li>
-                    <a href="<?php echo $club -> getHref();?>">
+                    <a href="<?php echo $sport -> getHref();?>">
                         <?php echo $this -> itemPhoto($sport, 'thumb.icon');?>
                         <?php echo $this -> string() -> truncate($sport -> getTitle(), 10)?>
                      </a>
