@@ -312,7 +312,7 @@
 					          <?php echo $this->timestamp($player -> getOwner() -> creation_date) ?>
 					        </div>
 				      	</div>
-			     	</div>
+			     	</div><!-- nickname-->
 
 				</div>
 	        </li>

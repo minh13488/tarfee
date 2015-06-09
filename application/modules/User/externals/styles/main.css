@@ -1145,6 +1145,7 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
 
                 #profile_photo {
                     background: #fff;
+
                     .thumb_profile {
                         height: 240px;
                         width: 100%;
@@ -1216,7 +1217,7 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                                 }
                             }
                         }
-                    }
+                    }/*thumb_profile*/
 
                     .tarfee_gender_player_name{
                         background: #a0b74f;
