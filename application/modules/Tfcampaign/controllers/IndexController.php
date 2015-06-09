@@ -2,12 +2,8 @@
 
 class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 {
-	public function browseAction()
-	{
-		$this -> view -> someVar = 'someVal';
-	}
 	
-	public function manageAction() {
+	public function browseAction() {
 		$this -> _helper -> content	-> setEnabled();
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		if (!$this -> _helper -> requireUser -> isValid())
@@ -17,7 +13,7 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 		unset($params['controller']);
 		unset($params['action']);
 		unset($params['rewrite']);
-		$params['user_id'] = $viewer -> getIdentity();
+		$params['user_id'] = $this ->_getParam('user_id', $viewer -> getIdentity());
         $params['direction'] = 'DESC';
 		$this -> view -> paginator = $paginator = Engine_Api::_() -> getItemTable('tfcampaign_campaign') -> getCampaignsPaginator($params);
 		$paginator -> setCurrentPageNumber($this -> _getParam('page', 1));
@@ -188,10 +184,7 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 
 			// Redirect
 			return $this -> _forward('success', 'utility', 'core', array(
-				'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array(
-					'id' => $campaign -> getIdentity(),
-					'slug' => $campaign -> getSlug(),
-				), 'tfcampaign_profile', true),
+				'parentRedirect' => $viewer -> getHref(),
 				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Please wait...'))
 			));
 		}

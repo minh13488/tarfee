@@ -2,6 +2,13 @@
 
 class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 	
+	public function getSubmissionPlayers() {
+		$submissionTable =Engine_Api::_() -> getItemTable('tfcampaign_submission');
+		$select = $submissionTable -> select();
+		$select -> where('campaign_id = ?', $this -> getIdentity());
+		return $submissionTable -> fetchAll($select);
+	}
+	
 	public function setPhoto($photo)
 	{
 		if ($photo instanceof Zend_Form_Element_File)

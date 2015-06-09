@@ -268,6 +268,13 @@ class Ynblog_Model_Blog extends Core_Model_Item_Abstract
             return false;
         }
     }
-
+	
+	public function getSportId() {
+		$owner = $this->getOwner();
+		if ($owner && method_exists($owner, 'getSportId')) {
+			return $owner->getSportId();
+		}
+		return null;
+	}
 }
 ?>

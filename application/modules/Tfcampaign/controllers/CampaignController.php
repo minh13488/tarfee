@@ -7,7 +7,56 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		{
 			Engine_Api::_() -> core() -> setSubject($campaign);
 		}
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
 		$this -> _helper -> requireSubject('tfcampaign_campaign');
+	}
+	
+	public function submitAction() {
+		$campaign = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> form = $form = new Tfcampaign_Form_Submit(array('campaign' => $campaign));
+		
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		$posts = $this -> getRequest() -> getPost();
+		//check valid form
+		if (!$form -> isValid($posts)) {
+			return;
+		}
+		
+		$values = $form -> getValues();
+		$db = $campaign -> getTable() -> getAdapter();
+		$db -> beginTransaction();
+		try
+		{
+			$values['user_id'] = Engine_Api::_() -> user() -> getViewer() -> getIdentity();
+			$values['campaign_id'] = $campaign -> getIdentity();
+			$submissionTable = Engine_Api::_() -> getItemTable('tfcampaign_submission');
+			$submission =  $submissionTable -> createRow();
+			$submission -> setFromArray($values);
+			$submission -> save();
+			
+			// Set photo
+			if (!empty($values['photo']))
+			{
+				$submission -> setPhoto($form -> photo);
+			}
+			
+			$db -> commit();
+		}
+		catch (Exception $e)
+		{
+			$db -> rollBack();
+			throw $e;
+		}
+		
+		// Redirect
+		return $this -> _forward('success', 'utility', 'core', array(
+			'parentRefresh' => true,
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Please wait...'))
+		));
 	}
 	
 	public function deleteAction() {
