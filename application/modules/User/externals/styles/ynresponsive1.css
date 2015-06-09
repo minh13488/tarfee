@@ -1,493 +1,265 @@
 /*Profile Cover Photo Start Here*/
-.generic_layout_container.layout_user_profile_cover
-{
+.layout_user_profile_cover{
     border: none !important;
     padding: 0 !important;
     clear: both;
     padding: 0 !important;
-	.prelative
-	{
-	    position: relative;
-	}
-	.tarfee_profile_cover_wrapper
-	{
+
+	.tarfee_profile_cover_wrapper{
 	    margin: 0;
-	}
-	.tarfee_profile_cover_photo_wrapper
-	{
-	    position: relative;
-	    clear: both;
-	    padding: 0px;
-	}
-	.tarfee_profile_cover_photo
-	{
-	    overflow: hidden;
-	    position: relative;
-	    height: 100%;
-	    width: 100%;
-	}
-	.tarfee_profile_cover_photo img
-	{
-	    width: 100%;
-	    min-height: 100%;
-	    border: none;
-	    position: relative;
-	}
-	.tarfee_profile_cover_photo_empty
-	{
-	    border: none;
-	    height: 100%;
-	    background-color: #fff;
-	    background-image: -webkit-gradient(linear, left top, left bottom, from( rgba(226, 226, 226, .5)), to( rgba(0, 0, 0, .5)));
-	    */* Saf4+, Chrome */
-	    background-image: -webkit-linear-gradient(  rgba(226, 226, 226, .5), rgba(0, 0, 0, .5));
-	    */* Chrome 10+, Saf5.1+ */
-	    background-image: -moz-linear-gradient( rgba(226, 226, 226, .5), rgba(0, 0, 0, .5));
-	    */* FF3.6 */
-	    background-image: -ms-linear-gradient( rgba(226, 226, 226, .5), rgba(0, 0, 0, .5));
-	    */* IE10 */
-	    background-image: -o-linear-gradient( rgba(226, 226, 226, .5), rgba(0, 0, 0, .5));
-	    */* Opera 11.10+ */
-	    background-image: linear-gradient( rgba(226, 226, 226, .5), rgba(0, 0, 0, .5));
-	}
-	.tarfee_profile_cover_photo_wrapper .draggable
-	{
-	    opacity: 0.5;
-	    cursor: move;
-	}
-	.tarfee_profile_cover_gradient
-	{
-	    background-image: -webkit-gradient(linear, left top, left bottom, from( rgba(22, 24, 27, 0)), to( rgba(22, 24, 27, 0.8)));
-	    */* Saf4+, Chrome */
-	    background-image: -webkit-linear-gradient( rgba(22, 24, 27, 0), rgba(22, 24, 27, 0.8));
-	    */* Chrome 10+, Saf5.1+ */
-	    background-image: -moz-linear-gradient( rgba(22, 24, 27, 0), rgba(22, 24, 27, 0.8));
-	    */* FF3.6 */
-	    background-image: -ms-linear-gradient( rgba(22, 24, 27, 0), rgba(22, 24, 27, 0.8));
-	    */* IE10 */
-	    background-image: -o-linear-gradient( rgba(22, 24, 27, 0), rgba(22, 24, 27, 0.8));
-	    */* Opera 11.10+ */
-	    background-image: linear-gradient( rgba(22, 24, 27, 0), rgba(22, 24, 27, 0.8));
-	    bottom: 0;
-	    height: 100px;
-	    position: absolute;
-	    width: 100%;
-	}
-	/*Profile Cover Photo Endst Here*/
-	/*Cover Information Starts Here*/
-	.tarfee_profile_cover_head_section
-	{
-	
-	}
-	.tarfee_profile_main_photo_wrapper
-	{
-	    width: 165px;
-	    float: left;
-	    margin-left: 20px;
-	    position: relative;
-	    height: 2px;
-	    overflow: visible;
-	}
-	[dir="rtl"] .tarfee_profile_main_photo_wrapper
-	{
-	    float: right;
-	    margin-right: 20px;
-	    margin-left: 0;
-	}
-	.tarfee_profile_main_photo
-	{
-	    overflow: hidden;
-	    position: absolute;
-	    border-radius: 6px;
-	}
-	.tarfee_profile_main_photo .item_photo
-	{
-	    min-height: 100px;
-	    max-height: 200px;
-	    overflow: hidden;
-	    width: 160px;
-	}
-	.tarfee_profile_main_photo .show_photo_box
-	{
-	    height: 160px;
-	}
-	.tarfee_profile_main_photo .item_photo table
-	{
-	    height: 100%;
-	    width: 100%;
-	}
-	.tarfee_profile_main_photo .item_photo table td
-	{
-	    text-align: center;
-	}
-	[dir="rtl"] .tarfee_profile_main_photo .item_photo table td
-	{
-	    text-align: center;
-	}
-	.tarfee_profile_main_photo .item_photo table td img
-	{
-	    border: 0 none !important;
-	    border-radius: 0 !important;
-	    max-height: 200px;
-	    max-width: 160px;
-	    min-height: 100px;
-	    padding: 0;
-	    width: 100%;
-	}
-	.tarfee_profile_cover_head_section_inner
-	{
-	    margin-left: 195px;
-	}
-	[dir="rtl"] .tarfee_profile_cover_head_section_inner
-	{
-	    margin-left: 0px;
-	    margin-right: 195px;
-	}
-	.tarfee_profile_coverinfo_status
-	{
-	    overflow: hidden;
-	}
-	/*.tarfee_profile_coverinfo_status a{
-	 color:#fff;
-	 text-shadow:0 0 3px rgba(0, 0, 0, 0.3);
-	 }*/
-	.tarfee_profile_coverinfo_status h2
-	{
-	    margin-bottom: 5px;
-	    font-size: 20px;
-	    font-weight: bold;
-	    letter-spacing: normal;
-	}
-	.tarfee_profile_coverinfo_stats
-	{
-	    font-size: 11px;
-	    margin-top: 3px;
-	}
-	.tarfee_profile_coverinfo_buttons
-	{
-	    float: right;
-	}
-	[dir="rtl"] .tarfee_profile_coverinfo_buttons
-	{
-	    float: left;
-	}
-	.tarfee_profile_coverinfo_buttons > div
-	{
-	    float: left;
-	    margin-left: 5px;
-	    height: 30px;
-	}
-	[dir="rtl"] .tarfee_profile_coverinfo_buttons > div
-	{
-	    float: right;
-	    margin-left: 0px;
-	    margin-right: 5px;
-	}
-	.tarfee_profile_coverinfo_buttons > div .layout_tarfee_like_button, .tarfee_profile_coverinfo_buttons > div .layout_sitelike_commoncover_like_button
-	{
-	    margin: 0;
-	}
-	.tarfee_profile_coverinfo_buttons .tarfee_follower_count
-	{
-	    display: none;
-	}
-	/*Cover Information Ends Here*/
-	/*If main tabs comes in top information widget then below css work*/
-	.tarfee_profile_cover_has_tabs
-	{
-	    min-height: 60px;
-	    background-color: #fff;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_main_photo
-	{
-	    bottom: -40px;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_main_photo_wrapper .tarfee_profile_cover_options .edit-button
-	{
-	    top: -90px;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_cover_options .save-button
-	{
-	    bottom: 24px;
-	    right: 20px;
-	}
-	[dir="rtl"] .tarfee_profile_cover_has_tabs .tarfee_profile_cover_options .save-button
-	{
-	    left: 20px;
-	    right: auto;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_cover_head_section_inner
-	{
-	    margin-left: 195px;
-	    position: relative;
-	}
-	[dir="rtl"] .tarfee_profile_cover_has_tabs .tarfee_profile_cover_head_section_inner
-	{
-	    margin-left: 0;
-	    margin-right: 195px;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_buttons
-	{
-	    bottom: 75px;
-	    position: absolute;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status
-	{
-	    overflow: inherit;
-	    max-width: 55%;
-	}
-	.tarfee_profile_cover_info
-	{
-	    max-width: 250px;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_cover_tarfee_button
-	{
-	    bottom: 25px;
-	    position: absolute;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status h2
-	{
-	    background: none;
-	    color: #FFFFFF;
-	    font-size: 24px;
-	    margin: 0;
-	    text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_stats, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_stats a
-	{
-	    color: #FFFFFF;
-	    text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_buttons
-	{
-	    right: 0;
-	    z-index: 10;
-	}
-	[dir="rtl"] .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_buttons
-	{
-	    left: 0;
-	    right: auto;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status .siteevent_listings_stats i, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status .siteevent_listings_stats img
-	{
-	    display: none;
-	}
-	/*Icons*/
-	.tarfee_profile_cover_icon_photo_add
-	{
-	}
-	.tarfee_profile_cover_icon_photo_edit
-	{
-	}
-	.tarfee_profile_cover_icon_photo_upload
-	{
-	}
-	.tarfee_profile_cover_icon_photo_view
-	{
-	}
-	.tarfee_profile_cover_icon_move
-	{
-	}
-	.tarfee_profile_cover_icon_photo_delete
-	{
-	}
-	.tarfee_profile_cover_icon_camera
-	{
-	
-	}
-	.tarfee_profile_cover_icon_photo_color
-	{
-	}
-	/*Cover Photo Add Edit Options Starts Here*/
-	.tarfee_profile_cover_btn
-	{
-	    cursor: pointer;
-	    background-color: #fff;
-	    background-image: -webkit-gradient(linear, left top, left bottom, from( #ffffff), to( #f1f1f2));
-	    */* Saf4+, Chrome */
-	    background-image: -webkit-linear-gradient( #ffffff, #f1f1f2); /* Chrome 10+,
-	     * Saf5.1+ */
-	    background-image: -moz-linear-gradient( #ffffff, #f1f1f2); /* FF3.6 */
-	    background-image: -ms-linear-gradient( #ffffff, #f1f1f2); /* IE10 */
-	    background-image: -o-linear-gradient( #ffffff, #f1f1f2); /* Opera 11.10+ */
-	    background-image: linear-gradient( #ffffff, #f1f1f2);
-	    border-radius: 3px;
-	    border: 1px solid #616162;
-	    display: block;
-	    -moz-box-shadow: 0px 0px 3px rgba(0, 0, 0, .6);
-	    -webkit-box-shadow: 0px 0px 3px rgba(0, 0, 0, .6);
-	    box-shadow: 0px 0px 3px rgba(0, 0, 0, .6);
-	}
-	.tarfee_profile_cover_btn:hover
-	{
-	    cursor: pointer;
-	    background-color: #fff;
-	    background-image: -webkit-gradient(linear, left top, left bottom, from( #ffffff), to( #dfdfdf));
-	    */* Saf4+, Chrome */
-	    background-image: -webkit-linear-gradient( #ffffff, #dfdfdf); /* Chrome 10+,
-	     * Saf5.1+ */
-	    background-image: -moz-linear-gradient( #ffffff, #dfdfdf); /* FF3.6 */
-	    background-image: -ms-linear-gradient( #ffffff, #dfdfdf); /* IE10 */
-	    background-image: -o-linear-gradient( #ffffff, #dfdfdf); /* Opera 11.10+ */
-	    background-image: linear-gradient( #ffffff, #dfdfdf);
-	}
-	.tarfee_profile_cover_btn i
-	{
-	    font-style: normal;
-	    background-repeat: no-repeat;
-	    background-position: 5px center;
-	    display: block;
-	    font-size: 11px;
-	    font-weight: bold;
-	    color: #333;
-	    padding: 5px 10px 5px 25px;
-	}
-	[dir="rtl"] .tarfee_profile_cover_btn i
-	{
-	    padding: 5px 20px 5px 10px;
-	    background-position: 99% center;
-	}
-	.tarfee_profile_cover_options
-	{
-	    display: none;
-	}
-	.tarfee_profile_cover_options .edit-button
-	{
-	    position: absolute;
-	    top: 10px;
-	    right: 70px;
-	}
-	[dir="rtl"] .tarfee_profile_cover_options .edit-button
-	{
-	    left: 70px;
-	    right: auto;
-	}
-	.tarfee_profile_main_photo_wrapper .tarfee_profile_cover_options .edit-button
-	{
-	    right: 12px;
-	    top: 5px;
-	}
-	[dir="rtl"] .tarfee_profile_main_photo_wrapper .tarfee_profile_cover_options .edit-button
-	{
-	    left: 12px;
-	    right: auto;
-	}
-	.tarfee_profile_cover_photo_wrapper:hover .tarfee_profile_cover_options, .tarfee_profile_main_photo_wrapper:hover .tarfee_profile_cover_options
-	{
-	    display: block;
-	}
-	.tarfee_profile_cover_options > ul
-	{
-	    margin: 0;
-	    padding: 0;
-	    list-style: none;
-	    border-radius: 3px;
-	}
-	.tarfee_profile_options_pulldown, .tarfee_profile_cover_has_tabs .tab_pulldown_contents_wrapper
-	{
-	    background-color: #fff;
-	    border: 1px solid #999;
-	    float: left;
-	    position: absolute;
-	    z-index: 99;
-	}
-	[dir="rtl"] .tarfee_profile_options_pulldown, [dir="rtl"] .tarfee_profile_cover_has_tabs .tab_pulldown_contents_wrapper
-	{
-	    float: right;
-	}
-	.tarfee_profile_settings_btn .tarfee_profile_options_pulldown, .tarfee_profile_option_btn .tarfee_profile_options_pulldown
-	{
-	    top: 30px;
-	}
-	ul.tarfee_profile_options_pulldown
-	{
-	    display: none;
-	}
-	ul.tarfee_profile_options_pulldown li + li, .tarfee_profile_cover_has_tabs .tab_pulldown_contents_wrapper ul li + li
-	{
-	    border-top: 1px solid #999;
-	}
-	.tarfee_profile_options_pulldown li a, .tarfee_profile_cover_has_tabs .tab_pulldown_contents_wrapper ul li
-	{
-	    font-style: normal;
-	    font-weight: normal;
-	    background-repeat: no-repeat;
-	    background-position: 5px center;
-	    display: block;
-	    font-size: 11px;
-	    color: #333;
-	    font-weight: normal;
-	    line-height: normal;
-	    padding: 5px 20px 5px 25px;
-	    text-decoration: none;
-	    white-space: nowrap;
-	}
-	[dir="rtl"] .tarfee_profile_options_pulldown li a, [dir="rtl"] .tarfee_profile_cover_has_tabs .tab_pulldown_contents_wrapper ul li
-	{
-	    padding: 5px 25px 5px 20px;
-	    background-position: 98% center;
-	}
-	ul.tarfee_profile_options_pulldown li a:hover, .tarfee_profile_cover_has_tabs .tab_pulldown_contents_wrapper ul li:hover, .tarfee_profile_cover_has_tabs .tab_pulldown_contents_wrapper ul li.active
-	{
-	    background-color: #CCC;
-	}
-	.tarfee_profile_settings_btn ul li a, .tarfee_profile_option_btn ul li a, .tarfee_profile_cover_has_tabs .tab_pulldown_contents_wrapper ul li
-	{
-	    border-radius: 0 !important;
-	    background-image: none !important;
-	    padding: 5px 20px 5px 10px;
-	}
-	[dir="rtl"] .tarfee_profile_settings_btn ul li a, [dir="rtl"] .tarfee_profile_option_btn ul li a, [dir="rtl"] .tarfee_profile_cover_has_tabs .tab_pulldown_contents_wrapper ul li
-	{
-	    padding: 5px 10px 5px 20px;
-	}
-	.tarfee_profile_cover_options li:hover ul.tarfee_profile_options_pulldown
-	{
-	    display: block;
-	}
-	.tarfee_profile_cover_options .save-button
-	{
-	    right: 10px;
-	    bottom: 10px;
-	    position: absolute;
-	}
-	[dir="rtl"] .tarfee_profile_cover_options .save-button
-	{
-	    left: 10px;
-	    right: auto;
-	}
-	.tarfee_profile_cover_options .save-button span
-	{
-	    display: inline-block;
-	    margin-left: 5px;
-	}
-	[dir="rtl"] .tarfee_profile_cover_options .save-button span
-	{
-	    margin-left: 0;
-	    margin-right: 5px;
-	}
-	.tarfee_profile_cover_options .save-button span i
-	{
-	    padding: 5px;
-	}
-	.tarfee_profile_option_btn .icon_cog, .tarfee_profile_option_btn .icon_down
-	{
-	    background-size: 12px auto;
-	    display: inline-block;
-	    height: 12px;
-	    margin: 0 2px;
-	    position: relative;
-	    top: 2px;
-	    width: 12px;
-	}
-	.tarfee_profile_option_btn .icon_cog
-	{
-	
-	}
-	.tarfee_profile_option_btn .icon_down
-	{
-	
-	}
+		
+		.tarfee_profile_cover_photo_wrapper{
+			height: 310px;
+			min-height:200px;
+			position: relative;
+			clear: both;
+			padding: 0px;
+
+			.draggable{
+				opacity: 0.5;
+				cursor: move;
+			}
+
+		    .cover-reposition{
+			    z-index: 10;
+			    position: absolute;
+			    width: 100%;
+			    span > a 
+			    {
+				    display: block;
+				    border-top: 1px solid #fff;
+				    background-color: rgba(0, 0, 0, 0.6);
+				    padding: 5px 10px;
+					float: left;
+					margin-right: 2px;				    
+				}
+			}
+	        
+	        .status_parent{
+	            position: absolute;
+	            right: 0;
+	            top: 0;
+	            height: 100%;
+	            padding: 50px 10px 10px 70px;
+	            width: 157px;
+	            background: url(~/application/modules/User/externals/images/bg-gradient.png) repeat-y;
+	            
+	            ul#main_tabs{
+	                li{
+	                    margin-bottom: 15px;
+	                    font-weight: bold;
+	                    a{                        
+	                        span{
+	                            color: #fff;
+	                            font-size: 25px;
+	                        }
+	                        
+	                        div{
+	                            color: #fff;
+	                            font-weight: bold;
+	                            font-size: 15px;
+	                        }
+	                    }
+	                }
+	            }
+	        }
+
+
+			.tarfee_profile_cover_photo{
+			    overflow: hidden;
+			    position: relative;
+			    height: 100%;
+			    width: 100%;
+
+			    img{
+				    width: 100%;
+				    min-height: 100%;
+				    border: none;
+				    position: relative;
+			    }
+			}
+		}
+	}/*profile cover wrapper*/
+
+
+	/*Style avatar and infomation*/
+	.tarfee_profile_avatar_infomation{
+		background: $theme_body_background_color;
+		width: 100%;
+		border-bottom: 1px solid $theme_border_color;
+		height: 70px;
+
+		.tarfee_profile_cover_has_tabs{
+			position: relative;
+			width: 1170px;
+			padding: 0 15px;
+			margin: auto;
+			overflow: hidden;
+			top: -160px;
+
+			.item_photo{
+				width: 213px;
+				height: 213px;
+				float: left;
+				display: block;
+	            background-size: cover;
+	            background-repeat: no-repeat;
+	            background-position: center;
+	            border-radius: 5px;
+	            -webkit-border-radius: 5px;
+	            -moz-border-radius: 5px;
+	            -ms-border-radius: 5px;
+	            overflow: hidden;
+	            position: relative;
+	            z-index: 100;
+
+	            &:hover{
+            	  	span#edit-photo-btn{
+            	  		opacity: 1;
+            	  	}
+	            }
+	         
+	            span#edit-photo-btn{
+	            	text-transform: lowercase;
+	            	text-align: center;
+	            	display: block;
+	            	padding: 5px;
+	            	width: 100%;
+	            	background: rgba(0,0,0,0.5);
+	            	opacity: 0;
+
+	            	transition: all 300ms;
+	            	-webkit-transition: all 300ms;
+	            	-moz-transition: all 300ms;
+	            	-ms-transition: all 300ms;
+	            }
+
+	            .tarfee_profile_cover_tarfee_button{
+        	        position: absolute;
+			        bottom: 0;
+			        width: 100%;
+			        ul{
+			            text-align: center;
+			            padding-bottom: 5px;
+			            overflow: hidden;
+			            li{
+			                display: inline-block;
+			                
+			                a{
+			                    padding: 3px 20px;
+			                    margin-left: 2px;
+			                    font-size: 24px;
+			                    background: rgba(255,255,255, 0.9);
+			                    border-radius: 5px;
+			                    -webkit-border-radius: 5px;
+			                    -moz-border-radius: 5px;
+			                    color: $theme_font_color;
+			                    display: block;
+			                }
+			            }
+			        }
+	            }/* .tarfee_profile_cover_tarfee_button*/
+
+			}
+
+			.tarfee_profile_coverinfo_status{
+				float: left;
+				padding-left: 10px;
+				color: #fff;
+			
+				h2{
+					font-weight: bold;
+					margin-top: 5px;
+					a{
+						color: #fff;
+					}
+				}
+
+				.verified_account{
+					color: #fff;
+					margin-bottom: 5px;
+					padding-left: 5px;
+					i.fa{
+						font-size: 20px;
+					}
+				}
+				
+				.account_type{
+					color: #fff;
+					margin-bottom: 5px;
+					padding-left: 5px;
+
+					i.fa{
+						font-size: 20px;
+					}
+				}
+
+				.founder_member{
+					img{
+						margin-right: 10px;
+						margin-left: 5px;
+					}
+
+					margin-bottom: 5px;
+					background: #ff6633;
+					color: #fff;
+					padding: 6px;
+					border-radius: 5px;
+					-webkit-border-radius: 5px;
+					-moz-border-radius: 5px;
+					-ms-border-radius: 5px;
+					padding-right: 60px;
+					position: relative;
+
+					&:after{
+						content: "";
+						position: absolute;
+						display: block;
+						width: 19px;
+						height: 38px;
+						top: 0;
+						right: -15px;
+						background-size: cover;
+						background: url(~/application/modules/User/externals/images/founder_member_tag.png);
+					  	background-position: center;
+					}
+				}
+			}
+
+			.tarfee_profile_club_item{
+				position: absolute;
+				left: 240px;
+				bottom: -3px;
+
+				ul{
+					padding-left: 10px;
+					li{
+						display: inline-block;
+						margin-right: 60px;
+
+						a{
+							color: $theme_font_color;
+							
+							img{
+								height: 32px;
+								display: block;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+/*End style avatar and information*/
+
+
+
+
+
+
+
+/*-----------------------------------------------------------------------------------------------------------------*/
+
 	.tarfee_cover_rsvp_button select
 	{
 	    bottom: 0;
@@ -602,39 +374,9 @@
 	{
 	    text-align: center;
 	}
-	/*Below css apply when there is no tab container*/
-	.tarfee_notabs .tarfee_profile_cover_has_tabs.tarfee_profile_cover_head_section
-	{
-	    border-width: 0;
-	    min-height: 0;
-	    padding: 0 10px;
-	}
-	.tarfee_notabs .tarfee_profile_cover_has_tabs.tarfee_profile_cover_head_section .tarfee_profile_main_photo_wrapper
-	{
-	    height: 0;
-	}
-	.tarfee_notabs .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status, .tarfee_notabs .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_buttons
-	{
-	    bottom: 20px;
-	}
-	.tarfee_button i.plus_icon
-	{
+
+
 	
-	}
-	.tarfee_button i.minus_icon
-	{
-	
-	}
-	
-	/*Profile Cover Members Ends Here*/
-	.tarfee_profile_cover_has_tabs .layout_tarfee_social_button
-	{
-	    margin: 0;
-	}
-	.tarfee_profile_cover_has_tabs .fb_edge_widget_with_comment
-	{
-	    height: 50px;
-	}
 	.tarfee_profile_cover_tarfee_button .fb_iframe_widget span
 	{
 	    overflow: inherit !important;
@@ -663,20 +405,6 @@
 	    border-radius: 4px;
 	    box-shadow: 0 0 10px;
 	}
-	.layout_user_profile_cover .status_alt.status_parent
-{
-    clear: both;
-    background: none !important;
-    box-shadow: none !Important;
-    border: none !important;
-    border-radius: 0;
-    padding: 0;
-    margin: 0px 0 0 192px;
-    position: relative;
-    overflow: inherit;
-    z-index: 9;
-}
-	
 	/*=================================================Tab
 	 * Container=============================================*/
 	
@@ -763,17 +491,7 @@
 {
     margin-top: 40px;
 }
-.
-.tarfee_profile_cover_head_section.tarfee_profile_cover_has_tabs
-{
-    clear: both;
-}
-.
-.tarfee_profile_cover_head_section.tarfee_profile_cover_has_tabs .status_alt + div
-{
-    clear: both;
-    margin: 0;
-}
+
 /*If there is no profile*/
 .tarfee_profile_cover_no_profile_photo div.status_alt
 {
@@ -817,417 +535,5 @@
 {
     margin-left: 40px;
 }
-.status_alt.status_parent ul li a div span
-{
-	    font-size: 20px;
-	    font-weight: bold;
-	    img
-	    {
-	    	width: 20px;
-	    	height: 20px;
-	    }
-}
 
-
-	.tarfee_profile_cover_photo_wrapper
-	{
-		height: 355px;
-		min-height:200px;
-	    .cover-reposition
-	    {
-		    z-index: 10;
-		    position: absolute;
-		    span a 
-		    {
-			    display: block;
-			    border-top: 1px solid #fff;
-			    background-color: rgba(0, 0, 0, 0.6);
-			    color: #fff;
-			    padding: 5px 10px;
-			}
-		}
-	}
-	.tarfee_profile_main_photo #edit-photo-btn
-	{
-		position: absolute;
-	  	z-index: 10;
-	  	width: 100%;
-	  	text-align: center;
-	  	bottom:0;
-	  	a
-	  	{
-	  		display: block;
-		  	background-color: rgba(0, 0, 0, 0.6);
-		  	color: #fff;
-		  	padding: 5px 10px;
-	  	}
-	}
-}
-/*--------------------PLUGIN RESPONSIVENESS WORK START HERE------------------------------------*/
-
-
-@media only screen and (max-width: 900px)
-{
-	/*---------USER COVER PHOTO CSS END HERE----------------*/
-.generic_layout_container.layout_user_profile_cover{
-	.tarfee_profile_cover_has_tabs .tarfee_profile_cover_head_section_inner
-	{
-		margin-left: 0;
-		position: static;
-		margin-top: 20px;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_buttons
-	{
-		position: inherit;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_cover_tarfee_button
-	{
-		position: inherit;
-		margin-top: 5px;
-	}
-	.tarfee_profile_cover_head_section_inner
-	{
-		margin-left: 0;
-		clear: both;
-	}
-	[dir="rtl"] .tarfee_profile_cover_head_section_inner
-	{
-		margin-right: 0x;
-	}
-	.tarfee_profile_cover_photo img
-	{
-		top: 0 !important;
-	}
-	.tarfee_profile_main_photo_wrapper
-	{
-		margin-left: 0;
-		margin-bottom: 50px;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status h2
-	{
-		font-size: 20px;
-		text-shadow: none;
-		color: #333 !important;
-	}
-	.tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_stats, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_stats a, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_statistics, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_statistics div, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status a, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status div
-	{
-		color: #333 !important;
-		text-shadow: none;
-	}
-	html .tarfee_profile_coverinfo_status *, html .tarfee_profile_coverinfo_status a:link
-	{
-		color: #333 !important;
-	}
-	}
-}
-@media only screen and (max-width: 600px){
-	    /*USER COVER PHOTO CSS END HERE*/
-	    /*Profile Cover Photo Start Here*/
-	    /*Cover Information Starts Here*/
-.generic_layout_container.layout_user_profile_cover{
-	    .tarfee_profile_main_photo_wrapper
-	    {
-	        margin-left: 0;
-	        margin-bottom: 60px;
-	    }
-	    [dir="rtl"] .tarfee_profile_main_photo_wrapper
-	    {
-	        margin-right: 0;
-	    }
-	    .tarfee_profile_coverinfo_buttons > div
-	    {
-	        margin-bottom: 5px;
-	    }
-	    html .tarfee_profile_coverinfo_buttons .tarfee_profile_option_btn
-	    {
-	        float: right;
-	    }
-	    .tarfee_profile_cover_head_section_inner
-	    {
-	        margin-left: 0;
-	    }
-	    [dir="rtl"] .tarfee_profile_cover_head_section_inner
-	    {
-	        margin-right: 0x;
-	    }
-	    .tarfee_profile_coverinfo_status
-	    {
-	        float: left;
-	    }
-	    /*If main tabs comes in top information widget then below css work*/
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_main_photo_wrapper
-	    {
-	        margin-bottom: 0px;
-	    }
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_main_photo
-	    {
-	        bottom: 0px !important;
-	    }
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_cover_head_section_inner
-	    {
-	        margin-left: 0;
-	        margin-top: 20px;
-	        position: static;
-	        overflow: inherit;
-	    }
-	    [dir="rtl"] .tarfee_profile_cover_has_tabs .tarfee_profile_cover_head_section_inner
-	    {
-	        margin-right: 0;
-	    }
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status, .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_buttons
-	    {
-	        position: inherit;
-	        float: left;
-	        margin-bottom: 5px;
-	    }
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_coverinfo_status
-	    {
-	        max-width: 100%;
-	        width: 100%;
-	    }
-	    /*Cover Photo Add Edit Options Starts Here*/
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_cover_options .save-button
-	    {
-	        bottom: 0px;
-	        right: 10px;
-	    }
-	    [dir="rtl"] .tarfee_profile_cover_has_tabs .tarfee_profile_cover_options .save-button
-	    {
-	        left: 10px;
-	        right: auto;
-	    }
-	    .tarfee_profile_cover_options .save-button span
-	    {
-	        display: block;
-	        margin-left: 0px;
-	        margin-bottom: 5px;
-	    }
-	    [dir="rtl"] .tarfee_profile_cover_options .save-button span
-	    {
-	        margin-right: 0px;
-	    }
-	
-	    /*Cover Position Tip Start Here*/
-	    /*.cover_photo_wap .cover_tip_wrap {
-	     z-index:1;
-	     }*/
-	    /*Facebook Like Button*/
-	    .tarfee_profile_cover_has_tabs .tarfee_profile_cover_tarfee_button
-	    {
-	        position: inherit;
-	        margin-top: 5px;
-	        float: left;
-	    }
-	    .tarfee_profile_coverinfo_status
-	    {
-	        overflow: inherit;
-	    }
-	    .tarfee_profile_coverinfo_buttons
-	    {
-	        float: left;
-	        width: 100%;
-	    }
-	    .generic_layout_container.layout_tarfee_social_button ul li
-	    {
-	        margin-bottom: 10px;
-	    }
-	    /*USER COVER PHOTO CSS END HERE*/
-	
-	    /*Cover Photo Upload Photo Popup Starts Here*/
-	    .tarfee_upload_photo_popup
-	    {
-	        margin-right: 15px;
-	        width: 91%;
-	    }
-	    /*Cover Photo Upload Photo Popup end Here*/
-	}
-}
-@media only screen and (max-width: 900px)
-{
-.generic_layout_container.layout_user_profile_cover{
-    .tarfee_profile_cover_head_section div.status_alt
-    {
-		clear: both;
-        margin: 10px 0 !important;
-        position: relative !important
-    }
-    .layout_middle{
-        width: 100%;
-    }
-    .status_alt.status_parent{
-        min-height: 65px;
-    }
-  }
-}	
-@media only screen and (max-width: 600px)
-{
-.generic_layout_container.layout_user_profile_cover{
-    .layout_middle
-    {
-        width: 100%;
-    }
-    .status_alt.status_parent
-	{
-        min-height: 60px;
-    }
-  }
-}
-@media only screen and (max-width: 1000px)
-{
-.generic_layout_container.layout_user_profile_cover{
-    .status_alt.tab_identify_account
-    {
-        clear: both;
-        float: left;
-        margin-top: 10px;
-    }
-  }
-}
-
-.layout_page_user_profile_index
-{
-	.layout_right
-	{
-		width: 330px;
-	}
-}
-
-.layout_user_profile_preferred_clubs_search
-{
-	#group_ids-wrapper
-	{
-		margin-top: 10px;
-	}
-	.user_tag
-	{
-		display: block;
-		margin-bottom: 5px;
-		a
-		{
-			font-weight: bold;
-			img
-			{
-				margin-right: 10px;
-			}
-		}
-		a + a
-		{
-			  margin-left: 10px;
-			  color: red;
-			  font-size: 14pt;
-		}
-	}
-	#preferred-clubs-save-btn
-	{
-		margin-top: 10px;
-	}
-}
-.layout_user_profile_preferred_sports_search
-{
-	#sport_ids-wrapper
-	{
-		margin-top: 10px;
-	}
-	.sport_tag
-	{
-		display: block;
-		margin-bottom: 5px;
-		a
-		{
-			font-weight: bold;
-			margin-left: 10px;
-			color: red;
-			font-size: 14pt;
-		}
-		img
-		{
-			margin-right: 10px;
-		}
-	}
-	#preferred-sports-save-btn
-	{
-		margin-top: 10px;
-	}
-}
-
-.icon_tab_switch
-{
-	display: none;
-}
-/* Tab Profile section and Players*/
-.layout_page_user_profile_index
-{
-	.layout_right
-	{
-		width: 330px;
-	}
-	.layout_middle .layout_core_container_tabs{
-		.tabs_alt.tabs_parent ul {
-			.icon_tab_switch
-			{
-				display: block;
-			}
-			  background-color: #FFF;
-			  border-bottom-left-radius: 5px;
-			  border-bottom-right-radius: 5px;
-			  margin-left: 10px;
-			  margin-right: 10px;
-			  display: -webkit-box;
-			  display: box;
-			  li.tab_layout_user_profile_sections a>span {
-					background-image: url(~/application/modules/User/externals/images/about_tab.png);
-				}
-			  li.tab_layout_user_profile_sections.active a span{
-					background-image: url(~/application/modules/User/externals/images/about_tab_active.png);
-				}
-				li.tab_layout_user_profile_players a span.icon_tab_switch {
-					background-image: url(~/application/modules/User/externals/images/player_tab.png);
-				}
-				li.tab_layout_user_profile_players.active a span.icon_tab_switch{
-					background-image: url(~/application/modules/User/externals/images/player_tab_active.png);
-				}
-			}
-		.tabs_alt.tabs_parent ul li{
-			  width: 100%;
-			  max-width: 100%;
-			  text-align: center;
-			  border-right: 0;
-			  -webkit-box-flex: 1;
-			  -moz-box-flex: 1;
-			  -ms-flex: 1;
-			  box-flex: 1;
-			  border-right: 1px solid #E6E6E6;
-			  display: block;
-			  
-		}
-		
-		.tabs_alt.tabs_parent ul li.active::after {
-		  content: "\\f0d8";
-		  display: inline-block;
-		  font: normal normal normal 14px/1 FontAwesome;
-		  font-size: inherit;
-		  text-rendering: auto;
-		  -webkit-font-smoothing: antialiased;
-		  -moz-osx-font-smoothing: grayscale;
-		  transform: translate(0, 0);
-		  font-size: 30px;
-		  color: #E7E1D3;
-		  position: absolute;
-		  margin: -20px 0px 0 -10px;
-		}
-		.tabs_alt.tabs_parent ul li a span.icon_tab_switch {
-		  width: 18px;
-		  height: 18px;
-		  display: -webkit-inline-box;
-		  background-size: 18px;
-		  vertical-align: middle;
-		}
-	}
-}
-#global_page_user-player-card-crop-photo
-{
-	.global_form div.form-element
-	{
-		max-width: none!important;
-	}
 }

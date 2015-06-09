@@ -1,0 +1,18 @@
+ .plan hr {color:#fafafa;}
+.change-plan-text { font-size:18px; font-weight:bold;}
+.plan-table { width:100%; margin-top:50px;}
+.plan-table th { line-height:55px; font-size:18px; text-align:center;border-bottom:1px solid #ccc;position: relative;padding-right: 15px;}
+.plan-table th.gold {background:url("~/application/modules/Sladvsubscription/externals/images/gold-bg.png") repeat-x;}
+.plan-table th.silver {background:url("~/application/modules/Sladvsubscription/externals/images/silver-bg.png") repeat-x;}
+.plan-table th.silver img { position:relative; top:5px; float:right; right:5px;}
+.plan-table th.bronze {background:url("~/application/modules/Sladvsubscription/externals/images/bronze-bg.png") repeat-x;}
+.plan-table td { line-height:40px; text-align:center; padding:5px; border-right:1px solid #ccc; border-bottom:1px solid #ccc;}
+.plan-table td:first-child {text-align:left; border-left:1px solid #ccc;}
+.plan-table td.no-border { border-left:none !important; border-right:1px solid #ccc;  border-bottom:none !important;}
+.plan-table tr:last-child td { background:#e9f4fa; padding:5px;}
+.plan-table tr:last-child td:first-child { background:#fff;}
+.title-width { width:300px;}
+.detail-width { width:200px;}
+.even{ background-color:#ebebeb !important;}
+.plan-table .price {color:#ff6c00; font-size:24px; font-weight:bold;}
+.plan-table .popular_icon {position: absolute;}

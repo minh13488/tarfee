@@ -16,7 +16,7 @@
   <div>
     <div>
       <h3>
-        <?php echo $this->translate('Confirm Subscription') ?>
+        <?php echo $this->translate('Confirm Membership') ?>
       </h3>
       <p class="form-description">
         <?php echo $this->translate('You are about to subscribe to the plan: ' .

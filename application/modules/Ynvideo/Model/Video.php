@@ -16,18 +16,49 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 
 	// protected $_parent_is_owner = true;
 	
-	public function getRating() {
+	public function getRating($total = false) {
 		if($this -> parent_type == "user_playercard") {
-			$tableRating = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
-			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
-			$ratingTypes = $tableRatingType -> getAllRatingTypes();
-			$overrallValueTotal = 0;
-			foreach($ratingTypes as $item) {
-				$overrallValue = $tableRating -> getRatingOfType($item -> getIdentity(), $this -> video_id); 
-				$overrallValueTotal += $overrallValue;
-	   		}
-	   		$rate = round(($overrallValueTotal/5), 1);
-			return $rate;
+			$ratingTable = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
+			
+			//get list users rating of this video
+			$userIds = $ratingTable -> getUserRatingByResource($this -> video_id);
+			
+			$overrallRatingTotal = 0;
+			$userCount = 0;
+			$overrallTotal = 0;
+			//loop for reach user
+			foreach($userIds as $user_id) {
+				$userCount++;
+				// get all ratings of this user for this video
+				$params = array(
+					'resource_id' => $video_id,
+					'user_id' => $userId,
+				);
+				$ratings = $ratingTable -> getRatingsBy($params);
+				$ratingCount = 0;
+				$ratingTotal = 0;
+				$overrall = 0;
+				// loop for each rating then count the overall rating of user for this video
+				foreach ($ratings as $rating)
+				{
+					$ratingTotal += $rating -> rating;
+					$ratingCount++;
+				}
+				if($ratingCount != 0) {
+					$overrall = round(($ratingTotal/$ratingCount), 2);
+				} 
+				else {
+					$overrall = 0;
+				}
+				$overrallRatingTotal += $overrall;
+			}
+			if($userCount) 	{
+				$overrallTotal = round(($overrallRatingTotal/$userCount), 2);
+			}
+			if($total) {
+				return $overrallRatingTotal;
+			}
+			return $overrallTotal;
 		} 
 		else {
 			return $this -> rating;

@@ -179,7 +179,7 @@ class Payment_Model_Subscription extends Core_Model_Item_Abstract
       if( in_array($this->status, array('initial', 'pending')) ) {
         $this->setActive(true);
         Engine_Api::_()->getDbtable('subscriptions', 'payment')
-          ->cancelAll($this->getUser(), 'User cancelled the subscription.', $this);
+          ->cancelAll($this->getUser(), 'User cancelled the membership.', $this);
       }
       
       // Update expiration to expiration + recurrence or to now + recurrence?

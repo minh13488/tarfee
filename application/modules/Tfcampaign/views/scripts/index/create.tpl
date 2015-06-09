@@ -47,6 +47,23 @@
 	 	if((startDate != "") && (endDate!= "")) {
 	 		var startDateObject  = new Date(startDate);
 	 		var endDateObject  = new Date(endDate);
+	 		var todayObject = new Date();
+	 		//check startDate greater than now
+	 		if(todayObject.getTime() > startDateObject.getTime())
+			{
+		 		var message = "<?php echo $this -> translate('start date must greater than today');?>";
+		 		var div = new Element('div', {
+			       'html': message,
+			       'class': 'create-campaign-error',
+			        styles: {
+				        'color': 'red',
+				        'font-weight': 'bold',
+				    },
+			    });
+		 		$('start_date-wrapper').grab(div,'before');
+		 		return false;
+		 	} 
+	 		
 		 	//miniseconds
 		 	var period = Math.abs(endDateObject - startDateObject); 
 		 	//seconds per hour*hours per day*milisecond
