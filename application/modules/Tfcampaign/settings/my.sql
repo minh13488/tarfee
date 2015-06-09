@@ -11,6 +11,25 @@ ALTER TABLE `engine4_activity_actiontypes` CHANGE  `type`  `type` VARCHAR( 64 ) 
 ALTER TABLE `engine4_activity_actions` CHANGE  `type`  `type` VARCHAR( 64 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL ;
 ALTER TABLE `engine4_activity_stream` CHANGE  `type`  `type` VARCHAR( 64 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL ;
 
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `engine4_tfcampaign_submissions`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_tfcampaign_submissions` (
+`submission_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`user_id` int(11) NOT NULL,
+`player_id` int(11) NOT NULL,
+`campaign_id` int(11) NOT NULL,
+`title` text COLLATE utf8_unicode_ci NOT NULL,
+`description` text COLLATE utf8_unicode_ci NOT NULL,
+`photo_id` int(11) NOT NULL DEFAULT '0',
+`video_id` int(11) NOT NULL DEFAULT '0',
+`creation_date` datetime NOT NULL,
+`modified_date` datetime NOT NULL,
+PRIMARY KEY (`submission_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -73,12 +92,6 @@ INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`
 ('tfcampaign_admin_settings_global', 'tfcampaign', 'Global Settings', '', '{"route":"admin_default","module":"tfcampaign","controller":"settings", "action":"global"}', 'tfcampaign_admin_main', '', 1),
 ('tfcampaign_admin_settings_level', 'tfcampaign', 'Member Level Settings', '', '{"route":"admin_default","module":"tfcampaign","controller":"settings", "action":"level"}', 'tfcampaign_admin_main', '', 2),
 ('tfcampaign_admin_reasons', 'tfcampaign', 'Reasons', '', '{"route":"admin_default","module":"tfcampaign","controller":"reasons", "action":"index"}', 'tfcampaign_admin_main', '', 3);
-
-INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
-('core_main_tfcampaign', 'tfcampaign', 'Campaigns', '', '{"route":"tfcampaign_general"}', 'core_main', '', 999),
-('tfcampaign_main_browse', 'tfcampaign', 'Browse Campaigns', '', '{"route":"tfcampaign_general","action":"browse"}', 'tfcampaign_main', '', 2),
-('tfcampaign_main_manage', 'tfcampaign', 'My Campaigns', 'Tfcampaign_Plugin_Menus', '{"route":"tfcampaign_general","action":"manage"}', 'tfcampaign_main', '', 3),
-('tfcampaign_main_create', 'tfcampaign', 'Create New Campaign', 'Tfcampaign_Plugin_Menus', '{"route":tfcampaign_general","action":"create"}', 'tfcampaign_main', '', 4);
 
 
 -- --------------------------------------------------------

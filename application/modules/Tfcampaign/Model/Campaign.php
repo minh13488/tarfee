@@ -2,6 +2,13 @@
 
 class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 	
+	public function getSubmissionPlayers() {
+		$submissionTable =Engine_Api::_() -> getItemTable('tfcampaign_submission');
+		$select = $submissionTable -> select();
+		$select -> where('campaign_id = ?', $this -> getIdentity());
+		return $submissionTable -> fetchAll($select);
+	}
+	
 	public function setPhoto($photo)
 	{
 		if ($photo instanceof Zend_Form_Element_File)
@@ -93,7 +100,7 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 		return Zend_Controller_Front::getInstance() -> getRouter() -> assemble($params, $route, $reset);
 	}
 	
-	function isViewable() {
+	public function isViewable() {
 		//get viewer
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		
@@ -109,4 +116,15 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
         return $this->authorization()->isAllowed(null, 'view'); 
     }
 	
+	public function isEditable() {
+		return $this->authorization()->isAllowed(null, 'edit'); 
+	}
+	
+	public function isDeletable() {
+		return $this->authorization()->isAllowed(null, 'delete'); 
+	}
+	
+	public function getSportId() {
+		return $this->category_id‏;
+	}
 }

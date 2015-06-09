@@ -7,7 +7,8 @@ class Ynadvsearch_Api_Core extends  Core_Api_Abstract {
 		'group' => 'Club',
 		'tfcampaign_campaign' => 'Campaign',
 		'video' => 'Video',
-		'event' => 'Tryout/Event'
+		'event' => 'Tryout/Event',
+		'blog' => 'Talk'
 	); 
     
 	

@@ -45,7 +45,7 @@ class Ynevent_Form_Create extends Engine_Form
       
     // Title
     $this->addElement('Text', 'title', array(
-      'label' => 'Title',
+      'label' => 'Title(*)',
       'allowEmpty' => false,
       'required' => true,
       'validators' => array(
@@ -128,13 +128,13 @@ class Ynevent_Form_Create extends Engine_Form
 	
 	 // Start time
     $start = new Engine_Form_Element_CalendarDateTime('starttime');
-    $start->setLabel("Start Time");
+    $start->setLabel("Start Time(*)");
     $start->setAllowEmpty(false);
     $this->addElement($start);
 	
     // End time
     $end = new Engine_Form_Element_CalendarDateTime('endtime');
-    $end->setLabel("End Time");
+    $end->setLabel("End Time(*)");
     $end->setAllowEmpty(false);
     $this->addElement($end);
 	
@@ -151,37 +151,37 @@ class Ynevent_Form_Create extends Engine_Form
         ));
 	// Start repeat time
 	$start_repeat_time = new Engine_Form_Element_CalendarDateTime('repeatstarttime');
-    $start_repeat_time->setLabel("Start Time");
+    $start_repeat_time->setLabel("Start Time(*)");
     $start_repeat_time->setAllowEmpty(false);
     $this->addElement($start_repeat_time);
 	
 	// End repeat time
 	$end_repeat_time = new Engine_Form_Element_CalendarDateTime('repeatendtime');
-    $end_repeat_time->setLabel("End Time");
+    $end_repeat_time->setLabel("End Time(*)");
     $end_repeat_time->setAllowEmpty(false);
     $this->addElement($end_repeat_time);	
 	
 	// Start repeat date
 	$start_repeat = new Engine_Form_Element_CalendarDateTime('repeatstartdate');
-    $start_repeat->setLabel("Start Date");
+    $start_repeat->setLabel("Start Date(*)");
     $start_repeat->setAllowEmpty(false);
     $this->addElement($start_repeat);
 	
 	// End repeat date
 	$end_repeat = new Engine_Form_Element_CalendarDateTime('repeatenddate');
-    $end_repeat->setLabel("End Date");
+    $end_repeat->setLabel("End Date(*)");
     $end_repeat->setAllowEmpty(false);
     $this->addElement($end_repeat);
 	
 	// Start time
 	$spec_start_date = new Engine_Form_Element_CalendarDateTime('spec_start_date');
-	$spec_start_date -> setLabel("Add Start Date");
+	$spec_start_date -> setLabel("Add Start Date(*)");
 	$spec_start_date -> setAllowEmpty(false);
 	$this -> addElement($spec_start_date);
 
 	// End time
 	$spec_end_date = new Engine_Form_Element_CalendarDateTime('spec_end_date');
-	$spec_end_date -> setLabel("Add End Date");
+	$spec_end_date -> setLabel("Add End Date(*)");
 	$spec_end_date -> setAllowEmpty(false);
 	$this -> addElement($spec_end_date);
 	
@@ -277,19 +277,23 @@ class Ynevent_Form_Create extends Engine_Form
 	
     // Photo
     $this->addElement('File', 'photo', array(
-      'label' => 'Avatar'
+      'label' => 'Event/Tryout Photo'
     ));
     $this->photo->addValidator('Extension', false, 'jpg,png,gif,jpeg');
 
-    // Category
-    $this->addElement('MultiLevel2', 'category_id', array(
-      'label' => 'Category',
-         'multiOptions' => (array)Engine_Api::_()->getDbTable('categories','ynevent')->getMultiOptions(),
-         'model'=>'Ynevent_Model_DbTable_Categories',
-         'isSearch'=> 0,
-         'module'=>'ynevent',
+	$sportCattable = Engine_Api::_() -> getDbtable('sportcategories', 'user');
+	$node = $sportCattable -> getNode(0);
+	$categories = $node -> getChilren();
+	$sport_categories[0] = '';
+	foreach($categories as $category)
+	{
+		$sport_categories[$category->getIdentity()] = $category -> getTitle();
+	}
+    $this->addElement('Select', 'category_id', array(
+      'label' => 'Sport Category',
+      'multiOptions' => $sport_categories,
     ));
-    
+
     // Email
     $this->addElement('Text', 'email', array(
       'label' => 'Email',
@@ -355,13 +359,6 @@ class Ynevent_Form_Create extends Engine_Form
       'value' => True
     ));
     
-    
-    // Invite
-    $this->addElement('Checkbox', 'group_invite', array(
-      'label' => 'Invited guests can invite groups as well',
-      'value' => True
-    ));
-    
 	// Add subforms	
 	
     if( !$this->_item ) {
@@ -381,39 +378,15 @@ class Ynevent_Form_Create extends Engine_Form
     // Privacy
     $viewOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('event', $user, 'auth_view');
     $commentOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('event', $user, 'auth_comment');
-    $photoOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('event', $user, 'auth_photo');
-    $videoOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('event', $user, 'auth_video');
     
-    if( $this->_parent_type == 'user' ) {
-      $availableLabels = array(
-        'everyone'            => 'Everyone',
-        'registered'          => 'All Registered Members',
-        'owner_network'       => 'Friends and Networks',
-        'owner_member_member' => 'Friends of Friends',
-        'owner_member'        => 'Friends Only',
-        'member'              => 'Event Guests Only',
-        'leader'			  => 'Owner and Leader',	
-        'owner'               => 'Just Me'
-      );
-      $viewOptions = array_intersect_key($availableLabels, array_flip($viewOptions));
-      $commentOptions = array_intersect_key($availableLabels, array_flip($commentOptions));
-      $photoOptions = array_intersect_key($availableLabels, array_flip($photoOptions));
-      $videoOptions = array_intersect_key($availableLabels, array_flip($videoOptions));
-
-    } else if( $this->_parent_type == 'group' ) {
-
-      $availableLabels = array(
-        'everyone'      => 'Everyone',
-        'registered'    => 'All Registered Members',
-        'parent_member' => 'Group Members',
-        'member'        => 'Event Guests Only',
-        'owner'         => 'Just Me',
-      );
-      $viewOptions = array_intersect_key($availableLabels, array_flip($viewOptions));
-      $commentOptions = array_intersect_key($availableLabels, array_flip($commentOptions));
-      $photoOptions = array_intersect_key($availableLabels, array_flip($photoOptions));
-      $videoOptions = array_intersect_key($availableLabels, array_flip($videoOptions));
-    }
+  	$availableLabels = array(
+	    'everyone'      => 'Everyone',
+	    'follower'    => 'Followers',
+	    'invite'        => 'by Invite Only',
+	    'owner'         => 'Just Me',
+	  );
+  	$viewOptions = array_intersect_key($availableLabels, array_flip($viewOptions));
+  	$commentOptions = array_intersect_key($availableLabels, array_flip($commentOptions));
 
     // View
     if( !empty($viewOptions) && count($viewOptions) >= 1 ) {
@@ -446,41 +419,6 @@ class Ynevent_Form_Create extends Engine_Form
             'value' => key($commentOptions),
         ));
         $this->auth_comment->getDecorator('Description')->setOption('placement', 'append');
-      }
-    }
-
-    // Photo
-    if( !empty($photoOptions) && count($photoOptions) >= 1 ) {
-      // Make a hidden field
-      if(count($photoOptions) == 1) {
-        $this->addElement('hidden', 'auth_photo', array('value' => key($photoOptions)));
-      // Make select box
-      } else {
-        $this->addElement('Select', 'auth_photo', array(
-            'label' => 'Photo Uploads',
-            'description' => 'Who may upload photos to this event?',
-            'multiOptions' => $photoOptions,
-            'value' => key($photoOptions)
-        ));
-        $this->auth_photo->getDecorator('Description')->setOption('placement', 'append');
-      }
-    }
-	
-  	// Video
-    if( !empty($videoOptions) && count($videoOptions) >= 1 ) {
-      // Make a hidden field
-      if(count($videoOptions) == 1) 
-      {
-        $this->addElement('hidden', 'auth_video', array('value' => key($videoOptions), 'order' => '30'));
-      // Make select box
-      } else {
-        $this->addElement('Select', 'auth_video', array(
-            'label' => 'Video Creation',
-            'description' => 'Who may create videos for this event?',
-            'multiOptions' => $videoOptions,
-            'value' => key($videoOptions),
-        ));
-        $this->auth_video->getDecorator('Description')->setOption('placement', 'append');
       }
     }
 

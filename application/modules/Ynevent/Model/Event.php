@@ -549,4 +549,8 @@ class Ynevent_Model_Event extends Core_Model_Item_Abstract
 
         return $select;
     }
+
+	public function getSportId() {
+		return $this->category_id;
+	}
 }

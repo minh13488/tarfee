@@ -1,4 +1,4 @@
-<div id="basic-search-filter">
+<div id="basic-search-filter" style="display:none; position: absolute">
 	<div id="contentype-filter">
 		<h3><?php echo $this->translate('Content Type')?></h3>
 		<ul>
@@ -7,6 +7,18 @@
 			<li>
 				<input id="type-<?php echo $key?>" type="checkbox" name="type[]" <?php if (in_array($key, $this->type)) echo 'checked'?> class="type-checkbox" value="<?php echo $key?>"/>
 				<label for="type-<?php echo $key?>"><?php echo $this->translate($value)?></label>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
+	<div id="sport-filter">
+		<h3><?php echo $this->translate('Sport')?></h3>
+		<ul>
+			<?php $sports = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1();?>
+			<?php foreach($sports as $sport):?>
+			<li>
+				<input id="sport-<?php echo $sport->getIdentity()?>" type="checkbox" name="sport[]" <?php if (in_array($sport->getIdentity(), $this->sport)) echo 'checked'?> class="type-checkbox" value="<?php echo $sport->getIdentity()?>"/>
+				<label for="sport-<?php echo $sport->getIdentity()?>"><?php echo $this->translate($sport->getTitle())?></label>
 			</li>
 			<?php endforeach; ?>
 		</ul>
@@ -28,6 +40,9 @@ jQuery.noConflict();
             , allowFreeTagging: true
             , animateDropdown: false
             , prePopulate : <?php echo json_encode($this->tokens)?>
+            <?php if ($this->max_keywords) :?>
+            , tokenLimit: <?php echo $this->max_keywords?>
+            <?php endif; ?>
         };
 		$('#global_search_field').tokenInput('<?php echo $this->url(array('action'=>'suggest-keywords'), 'ynadvsearch_suggest', true)?>', options);
 	
@@ -43,7 +58,12 @@ jQuery.noConflict();
 					text: '<?php echo $this->translate('filter')?>'
 				}).append(
 					$('<i />', {
-						'class': 'fa fa-angle-down'
+						'class': 'fa fa-angle-down',
+						click: function() {
+							var parent = this.closest('#search-filter');
+							var div_filter = $(parent).find('#basic-search-filter');
+							div_filter.toggle();
+						}
 					})
 				)
 			);

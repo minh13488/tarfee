@@ -55,25 +55,32 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
        
     }
 	
-	public function getSelect2($text = array(), $types = array(), $from = null, $limit = null)
+	public function getSelect2($text = array(), $types = array(), $sports = array(), $from = null, $limit = null)
     {
         $table = Engine_Api::_ ()->getDbtable ( 'search', 'core' );
         $table_name = $table->info ( 'name' );
+		$sportmapTbl = Engine_Api::_()->getDbTable('sportmaps', 'ynadvsearch');
+		$sportmapTblName = $sportmapTbl->info('name');
         $db = $table->getAdapter ();
         $select = $table->select ();
+		$select->from($table_name);
+		$select->setIntegrityCheck(false);
+		$select->joinLeft($sportmapTblName, "$sportmapTblName.item_id = $table_name.id and $sportmapTblName.item_type = $table_name.type", "");
         $select->where ( "$table_name.type IN (?)",  $types );
+		$select->where ( "$sportmapTblName.sport_id IN (?)",  $sports);
+		$select->group("$table_name.id");
 		foreach ($text as $str) {
 			$search = '%' . preg_replace ( '/\s+/', '%', $str ) . '%';
 			$select->where ( "$table_name.title like '$search' OR $table_name.description like '$search'" );
 		}
         
         // for search result page
-        if ($limit && $from != null) {
-            $select->limit ( $limit + 1, $from );
+        if ($limit && $from) {
+            $select->limit ( $limit+1, $from );
         }
         
         else if ($limit) {
-            $select->limit ( $limit );
+            $select->limit ( $limit+1 );
         }
 		
         return $select;
@@ -88,9 +95,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
         return $results;
     }
 	
-	public function getResults2($text = array(), $types = array(), $from, $limit = null) {
+	public function getResults2($text = array(), $types = array(), $sports = array(), $from, $limit = null) {
         $table = Engine_Api::_ ()->getDbtable ( 'search', 'core' );
-        $select = $this->getSelect2($text, $types, $from, $limit);
+        $select = $this->getSelect2($text, $types, $sports, $from, $limit);
         $results = $table->fetchAll ( $select );
     //    $results = $this->_checkPermission($results);
         return $results;

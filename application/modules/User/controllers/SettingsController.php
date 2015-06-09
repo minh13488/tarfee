@@ -59,19 +59,7 @@ class User_SettingsController extends Core_Controller_Action_User {
 		$user = Engine_Api::_() -> core() -> getSubject();
 		$this -> view -> form = $form = new User_Form_Settings_General( array('item' => $user));
 
-		// Set up profile type options
-		/*
-		 $aliasedFields = $user->fields()->getFieldsObjectsByAlias();
-		 if( isset($aliasedFields['profile_type']) )
-		 {
-		 $options = $aliasedFields['profile_type']->getElementParams($user);
-		 unset($options['options']['order']);
-		 $form->accountType->setOptions($options['options']);
-		 }
-		 else
-		 { */
 		$form -> removeElement('accountType');
-		/* } */
 
 		// Removed disabled features
 		if ($form -> getElement('username') && (!Engine_Api::_() -> authorization() -> isAllowed('user', $user, 'username') || Engine_Api::_() -> getApi('settings', 'core') -> getSetting('user.signup.username', 1) <= 0)) {
@@ -241,6 +229,12 @@ class User_SettingsController extends Core_Controller_Action_User {
 		if (count($form -> comment -> options) <= 1) {
 			$form -> removeElement('comment');
 		}
+		
+		 // Hides options from the form if there are less then one option.
+	    if( count($form->get_notification_privacy->options) <= 1 ) {
+	      $form->removeElement('get_notification_privacy');
+	    }
+	
 
 		// Populate form
 		$form -> populate($user -> toArray());

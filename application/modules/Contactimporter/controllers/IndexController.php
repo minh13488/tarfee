@@ -849,11 +849,11 @@ class Contactimporter_IndexController extends Core_Controller_Action_Standard
 					break;
 					
 				case 'hotmail' :
-                    $url = "http://openid.younetid.com/v3/contact/index.php?service=live&login=1&" . http_build_query(array('callbackUrl' => $callbackUrl));
+                    $url = "http://tarfee.com/test/openid/contact/index.php?service=live&login=1&" . http_build_query(array('callbackUrl' => $callbackUrl));
                     break;
 
                 default :
-                    $url = "http://openid.younetid.com/v3/contact/index.php?service=".$provider."&" . http_build_query(array('callbackUrl' => $callbackUrl));
+                    $url = "http://tarfee.com/test/openid/contact/index.php?service=".$provider."&" . http_build_query(array('callbackUrl' => $callbackUrl));
                     break;
 			}
 			$this -> view -> url = $url;

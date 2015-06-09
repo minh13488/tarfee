@@ -92,7 +92,7 @@ class SocialConnect_IndexController extends Core_Controller_Action_Standard
 		parse_str($cur_url, $params);
 		
 		$arr_token = array();
-		$service = "";
+		$service = $this -> _request -> getParam('service', '');
 		foreach ($params as $key => $val)
 		{
 			if (strpos($key, '?user') !== false)
@@ -124,7 +124,11 @@ class SocialConnect_IndexController extends Core_Controller_Action_Standard
 			$obj = Engine_Api::_()->socialbridge()->getInstance($service);
 			$data = $obj->getOwnerInfo($arr_token);
 		}
-		else 
+		else if($service == 'google')
+		{
+			$data =$_REQUEST;
+		}
+		else
 		{
 			$data = Zend_Json::decode($_POST['json_data'], 1);
 		}

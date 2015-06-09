@@ -33,6 +33,7 @@
   // Items ---------------------------------------------------------------------
     'items' => array(
   		'tfcampaign_campaign',
+  		'tfcampaign_submission',
     ),
  	// Routes ---------------------------------------------------------------------
 	'routes' => array(
@@ -56,7 +57,7 @@
 				'action' => 'browse',
 			),
 			'reqs' => array(
-	            'action' => '(browse|create|manage|edit)',
+	            'action' => '(create|browse)',
 	        )
 		),
 		'tfcampaign_specific' => array(
@@ -67,7 +68,7 @@
 	            'action' => 'index',
 	        ),
 	        'reqs' => array(
-	            'action' => '(edit|delete)',
+	            'action' => '(edit|delete|submit)',
 	            'campaign_id' => '\d+',
 	        )
 	    ),

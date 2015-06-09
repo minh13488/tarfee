@@ -830,7 +830,7 @@ class User_Model_User extends Core_Model_Item_Abstract
 		$friendslist = $this->getFriendsList();
 		foreach ($friendslist as $friend) {
 			$recommendation = Engine_Api::_()->getDbTable('recommendations', 'user')->getRecommendation($this->getIdentity(), $friend->getIdentity());
-			if (!$recommendation) return true;
+			if (!$recommendation && $friend->membership()->isMember($this, 1)) return true;
 		}
 		return false;
 	}
@@ -904,6 +904,11 @@ class User_Model_User extends Core_Model_Item_Abstract
 			$arr[$sport->getIdentity()] = $sport->getTitle();
 		}
 		return $arr;
+	}
+	
+	public function getSportId() {
+		$arr = $this->getSportsAssoc();
+		return array_keys($arr);
 	}
 	
 	public function setCoverPhoto($photo)

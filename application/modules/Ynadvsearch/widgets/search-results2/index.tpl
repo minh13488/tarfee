@@ -3,9 +3,6 @@
 		font-weight: bold;
 	}
 </style>
-<div id="ynadvsearch_loading" class="ynadvsearch_loading" style="display: none">
-    <img src='application/modules/Ynadvsearch/externals/images/loading.gif'/>
-</div>
 <?php if(count($this->results) <= 0): ?>
 <div class="tip">
 	<span>
@@ -14,7 +11,9 @@
 </div>
 <?php else: ?>
 <ul class = "ynadvsearch_searchresult" id="ynadvsearch_searchresults">
+<?php $count = 1;?>
 <?php foreach( $this->results as $row): ?>
+	<?php if ($count > $this->limit) break;?>
 	<?php $item = $this->item($row->type, $row->id);?>
 	<?php if ($item) :?>
 	<li class="result-search-item <?php echo $item->getType()?>-item">
@@ -41,6 +40,46 @@
       	</div>
 	</li>
 	<?php endif; ?>
-<?php endforeach;?>	
+	<?php $count++;?>
+<?php endforeach;?>
 </ul>
+<?php if (count($this->results) > $this->limit && !$this->reachLimit):?>
+<a id="ynadvsearch-viewmore-btn" href="javascript:void(0)" onclick="showMore(<?php echo ($this->limit + $this->from)?>)"><?php echo $this->translate('View more result') ?></a>
+<div id="ynadvsearch-loading" style="display: none;">
+	<img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;' />
+</div>
+<script type="text/javascript">
+function showMore(from){
+    var url = '<?php echo $this->url(array('module' => 'core','controller' => 'widget','action' => 'index','name' => 'ynadvsearch.search-results2'), 'default', true) ?>';
+    $('ynadvsearch-viewmore-btn').destroy();
+    $('ynadvsearch-loading').style.display = '';
+    var token = '<?php echo implode(',', array_column($this->tokens, 'id'))?>';
+    var type = <?php echo json_encode($this->type)?>;
+    var sport = <?php echo json_encode($this->sport)?>;
+    var request = new Request.HTML({
+      	url : url,
+      	data : {
+        	format : 'html',
+        	'from' : from,
+        	'token': token,
+        	'type': type,
+        	'sport': sport
+      	},
+      	onSuccess : function(responseTree, responseElements, responseHTML, responseJavaScript) {
+        	$('ynadvsearch-loading').destroy();
+            var result = Elements.from(responseHTML);
+            var results = result.getElement('#ynadvsearch_searchresults').getChildren();
+            $('ynadvsearch_searchresults').adopt(results);
+            var viewMore = result.getElement('#ynadvsearch-viewmore-btn');
+            if (viewMore[0]) viewMore.inject($('ynadvsearch_searchresults'), 'after');
+            var loading = result.getElement('#ynadvsearch-loading');
+            if (loading[0]) loading.inject($('ynadvsearch_searchresults'), 'after');
+            eval(responseJavaScript);
+        }
+    });
+   request.send();
+  }
+
+</script>
+<?php endif;?>	
 <?php endif; ?>

@@ -671,28 +671,13 @@ class Ynevent_IndexController extends Core_Controller_Action_Standard
 						// Set auth
 						$auth = Engine_Api::_() -> authorization() -> context;
 
-						if ($values['parent_type'] == 'group')
-						{
-							$roles = array(
+						$roles = array(
 								'owner',
-								'member',
-								'parent_member',
-								'registered',
+								'invite',
+								'follower',
 								'everyone'
 							);
-						}
-						else
-						{
-							$roles = array(
-								'owner',
-								'member',
-								'owner_member',
-								'owner_member_member',
-								'owner_network',
-								'registered',
-								'everyone'
-							);
-						}
+							
 						if (empty($values['auth_view']))
 						{
 							$values['auth_view'] = 'everyone';

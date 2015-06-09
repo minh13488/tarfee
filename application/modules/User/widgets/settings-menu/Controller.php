@@ -21,11 +21,16 @@ class User_Widget_SettingsMenuController extends Engine_Content_Widget_Abstract
   public function indexAction()
   {
     $id = $this->_getParam('id', null);
-    
+    $active = '';
+	$action = Zend_Controller_Front::getInstance()->getRequest() -> getActionName();
+	if(in_array($action, array('password', 'delete')))
+	{
+		$active = 'user_settings_general';
+	}
     // Set up navigation
     $this->view->navigation = $navigation = Engine_Api::_()
       ->getApi('menus', 'core')
-      ->getNavigation('user_settings', ( $id ? array('params' => array('id'=>$id)) : array()));
+      ->getNavigation('user_settings', ( $id ? array('params' => array('id'=>$id)) : array()), $active);
     
     // Check last super admin
     $user = Engine_Api::_()->user()->getViewer();
