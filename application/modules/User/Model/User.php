@@ -830,7 +830,7 @@ class User_Model_User extends Core_Model_Item_Abstract
 		$friendslist = $this->getFriendsList();
 		foreach ($friendslist as $friend) {
 			$recommendation = Engine_Api::_()->getDbTable('recommendations', 'user')->getRecommendation($this->getIdentity(), $friend->getIdentity());
-			if (!$recommendation) return true;
+			if (!$recommendation && $friend->membership()->isMember($this, 1)) return true;
 		}
 		return false;
 	}
