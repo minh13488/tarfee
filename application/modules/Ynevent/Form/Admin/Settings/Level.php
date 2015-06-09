@@ -106,13 +106,9 @@ class Ynevent_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_A
         'description' => 'EVENT_FORM_ADMIN_LEVEL_AUTHVIEW_DESCRIPTION',
         'multiOptions' => array(
           'everyone' => 'Everyone',
-          'registered' => 'Registered Members',
-          'owner_network' => 'Friends and Networks (user events only)',
-          'owner_member_member' => 'Friends of Friends (user events only)',
-          'owner_member' => 'Friends Only (user events only)',
-          'parent_member' => 'Group Members (group events only)',
-          'member' => "Event Guests Only",
-          //'owner' => 'Just Me'
+          'follower' => 'Followers',
+          'invite'   => 'by Invite Only',
+          'owner'    => 'Just Me',
         )
       ));
 
@@ -121,39 +117,13 @@ class Ynevent_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_A
         'label' => 'Event Posting Options',
         'description' => 'EVENT_FORM_ADMIN_LEVEL_AUTHCOMMENT_DESCRIPTION',
         'multiOptions' => array(
-          'registered' => 'Registered Members',
-          'owner_network' => 'Friends and Networks (user events only)',
-          'owner_member_member' => 'Friends of Friends (user events only)',
-          'owner_member' => 'Friends Only (user events only)',
-          'parent_member' => 'Group Members (group events only)',
-          'member' => "Event Guests Only",
-          'leader' => "Owner and Leader",
-          'owner' => 'Just Me'
-          
+         'everyone' => 'Everyone',
+          'follower' => 'Followers',
+          'invite'   => 'by Invite Only',
+          'owner'    => 'Just Me',
         )
       ));
 
-      // Element: auth_photo
-      $this->addElement('MultiCheckbox', 'auth_photo', array(
-        'label' => 'Photo Upload Options',
-        'description' => 'EVENT_FORM_ADMIN_LEVEL_AUTHUPHOTO_DESCRIPTION',
-        'multiOptions' => array(
-          'member' => 'All Guests',
-          'owner' => 'Just Me'
-        )
-      ));
-	
-      // Element: auth_video
-      $this->addElement('MultiCheckbox', 'auth_video', array(
-        'label' => 'Video Creation Options',
-        'description' => 'EVENT_FORM_ADMIN_LEVEL_AUTHVIDEO_DESCRIPTION',
-        'multiOptions' => array(
-          'registered' => 'Registered Members',
-          'member' => 'Event Guests Only',
-          'owner' => 'Just Me'
-        )
-      ));
-      
       $this->addElement('Radio', 'style', array(
         'label' => 'Allow Profile Style',
         'required' => true,

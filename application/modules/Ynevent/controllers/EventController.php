@@ -440,12 +440,12 @@ class Ynevent_EventController extends Core_Controller_Action_Standard
 		// Populate auth
 		$auth = Engine_Api::_() -> authorization() -> context;
 
-		if ($event -> parent_type == 'group') 
-		{
-			$roles = array('owner', 'member', 'parent_member', 'registered', 'everyone');
-		} else {
-			$roles = array('owner', 'member', 'owner_member', 'owner_member_member', 'owner_network', 'registered', 'everyone');
-		}
+		$roles = array(
+			'owner',
+			'invite',
+			'follower',
+			'everyone'
+		);
 
 		foreach ($roles as $role) 
 		{
@@ -455,18 +455,8 @@ class Ynevent_EventController extends Core_Controller_Action_Standard
 			if (isset($form -> auth_comment -> options[$role]) && $auth -> isAllowed($event, $role, 'comment')) {
 				$form -> auth_comment -> setValue($role);
 			}
-			if (isset($form -> auth_photo -> options[$role]) && $auth -> isAllowed($event, $role, 'photo')) {
-				$form -> auth_photo -> setValue($role);
-			}
 		}
 
-		$rolesVideo = array('owner', 'member', 'parent_member', 'registered', 'everyone');
-		foreach ($rolesVideo as $i => $r) 
-		{
-			if (isset($form -> auth_video -> options[$r]) && $auth -> isAllowed($event, $r, 'video')) {
-				$form -> auth_video -> setValue($r);
-			}
-		}
 		$form -> auth_invite -> setValue($auth -> isAllowed($event, 'member', 'invite'));
 
 		// Sub category
