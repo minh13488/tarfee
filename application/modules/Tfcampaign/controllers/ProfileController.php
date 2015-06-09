@@ -27,10 +27,12 @@ class Tfcampaign_ProfileController extends Core_Controller_Action_Standard
 		{
 	    	return $this->_helper->requireSubject()->forward();
 		}	
-	    $this -> view -> campaign = $subject = Engine_Api::_()->core()->getSubject();
+	    $this -> view -> campaign = $campaign = Engine_Api::_()->core()->getSubject();
         // Check authorization to view business.
-        if (!$subject->isViewable()) {
+        if (!$campaign->isViewable()) {
             return $this -> _helper -> requireAuth() -> forward();
         }
+		
+		$this -> view -> submissionPlayers = $campaign -> getSubmissionPlayers();
   	}
 }
