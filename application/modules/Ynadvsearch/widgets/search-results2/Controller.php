@@ -15,16 +15,15 @@ class Ynadvsearch_Widget_SearchResults2Controller extends Engine_Content_Widget_
         
 		$this->view->text = $text = array_column($tokens, 'name');
 		
-		$from = null;		
+		$from = 0;
+		
+		$limit = $from + 3;		
 		
 		$type = $request->getParam('type',array_keys(Engine_Api::_()->ynadvsearch()->getAllowSearchTypes()));
-		$limit = 10;
-		$this->view->limit = $limit;
-		$results = Engine_Api::_()->getApi('search', 'ynadvsearch')->getResults2( $text, $type, $from, $limit );
+		$sport = $request->getParam('sport',array_keys(Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1Assoc()));
+		$results = Engine_Api::_()->getApi('search', 'ynadvsearch')->getResults2( $text, $type, $sport, $from, $limit );
         
+		$this->view->limit = $limit;
 		$this->view->results = $results;
-		if (isset($values['isViewMore']) && $values['isViewMore'] == 1) {
-			$this->view->isViewMore = $values['isViewMore'];
-		}
 	}
 }

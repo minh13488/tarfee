@@ -884,4 +884,8 @@ class Advgroup_Model_Group extends Core_Model_Item_Abstract
 
         return $select;
     }
+
+	public function getSportId() {
+		return $this->sportcategory_id;
+	}
 }

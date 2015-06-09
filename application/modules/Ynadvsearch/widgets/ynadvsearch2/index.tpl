@@ -11,6 +11,18 @@
 			<?php endforeach; ?>
 		</ul>
 	</div>
+	<div id="sport-filter">
+		<h3><?php echo $this->translate('Sport')?></h3>
+		<ul>
+			<?php $sports = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1();?>
+			<?php foreach($sports as $sport):?>
+			<li>
+				<input id="sport-<?php echo $sport->getIdentity()?>" type="checkbox" name="sport[]" <?php if (in_array($sport->getIdentity(), $this->sport)) echo 'checked'?> class="type-checkbox" value="<?php echo $sport->getIdentity()?>"/>
+				<label for="sport-<?php echo $sport->getIdentity()?>"><?php echo $this->translate($sport->getTitle())?></label>
+			</li>
+			<?php endforeach; ?>
+		</ul>
+	</div>
 </div>
 <script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery.tokeninput.js"></script>
 <script>

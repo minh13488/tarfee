@@ -116,4 +116,8 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 	public function isDeletable() {
 		return $this->authorization()->isAllowed(null, 'delete'); 
 	}
+	
+	public function getSportId() {
+		return $this->category_id‏;
+	}
 }

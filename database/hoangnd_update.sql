@@ -221,4 +221,14 @@ INSERT IGNORE INTO `engine4_authorization_permissions`
   FROM `engine4_authorization_levels` WHERE `type` NOT IN('public');
   
   -- 6.6.2015
-  ALTER TABLE `engine4_ynadvsearch_keywords` CHANGE `count` `count` INT(11) NOT NULL DEFAULT '0';
+ALTER TABLE `engine4_ynadvsearch_keywords` CHANGE `count` `count` INT(11) NOT NULL DEFAULT '0';
+  
+-- Table structure for table `engine4_ynadvsearch_sportmaps`
+--
+CREATE TABLE IF NOT EXISTS `engine4_ynadvsearch_sportmaps` (
+  `sportmap_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `item_type` varchar(128) NOT NULL,
+  `item_id` int(11) unsigned NOT NULL,
+  `sport_id` int(11) unsigned NOT NULL,	
+  PRIMARY KEY (`sportmap_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

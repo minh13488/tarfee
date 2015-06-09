@@ -549,4 +549,12 @@ class Ynevent_Model_Event extends Core_Model_Item_Abstract
 
         return $select;
     }
+
+	public function getSportId() {
+		$owner = $this->getOwner();
+		if ($owner && method_exists($owner, 'getSportId')) {
+			return $owner->getSportId();
+		}
+		return null;
+	}
 }
