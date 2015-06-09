@@ -906,6 +906,11 @@ class User_Model_User extends Core_Model_Item_Abstract
 		return $arr;
 	}
 	
+	public function getSportId() {
+		$arr = $this->getSportsAssoc();
+		return array_keys($arr);
+	}
+	
 	public function setCoverPhoto($photo)
 	{
 		if ($photo instanceof Zend_Form_Element_File)

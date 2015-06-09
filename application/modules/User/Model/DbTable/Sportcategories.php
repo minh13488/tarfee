@@ -23,4 +23,12 @@ class User_Model_DbTable_Sportcategories extends User_Model_DbTable_Nodes {
 		return $this->fetchAll($select);
 	}
 	
+	public function getCategoriesLevel1Assoc($params = array()) {
+		$result = array();
+		$rows = $this->getCategoriesLevel1($params);
+		foreach ($rows as $row) {
+			$result[$row->getIdentity()] = $row->getTitle();
+		}
+		return $result;
+	}
 }

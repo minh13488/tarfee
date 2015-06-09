@@ -75,10 +75,10 @@ INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`
 ('tfcampaign_admin_reasons', 'tfcampaign', 'Reasons', '', '{"route":"admin_default","module":"tfcampaign","controller":"reasons", "action":"index"}', 'tfcampaign_admin_main', '', 3);
 
 INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
-('core_main_tfcampaign', 'tfcampaign', 'Campaigns', '', '{"route":"tfcampaign_general"}', 'core_main', '', 999),
+('core_main_tfcampaign', 'tfcampaign', 'Campaigns', '', '{"route":"tfcampaign_general","action":"browse"}', 'core_main', '', 999),
 ('tfcampaign_main_browse', 'tfcampaign', 'Browse Campaigns', '', '{"route":"tfcampaign_general","action":"browse"}', 'tfcampaign_main', '', 2),
 ('tfcampaign_main_manage', 'tfcampaign', 'My Campaigns', 'Tfcampaign_Plugin_Menus', '{"route":"tfcampaign_general","action":"manage"}', 'tfcampaign_main', '', 3),
-('tfcampaign_main_create', 'tfcampaign', 'Create New Campaign', 'Tfcampaign_Plugin_Menus', '{"route":tfcampaign_general","action":"create"}', 'tfcampaign_main', '', 4);
+('tfcampaign_main_create', 'tfcampaign', 'Create New Campaign', 'Tfcampaign_Plugin_Menus', '{"route":"tfcampaign_general","action":"create"}', 'tfcampaign_main', '', 4);
 
 
 -- --------------------------------------------------------

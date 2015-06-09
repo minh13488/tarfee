@@ -39,6 +39,21 @@
       ),
     ),
   ),
+  // Hooks ---------------------------------------------------------------------
+  'hooks' => array(
+    array(
+      'event' => 'onItemCreateAfter',
+      'resource' => 'Ynadvsearch_Plugin_Core',
+    ),
+    array(
+      'event' => 'onItemUpdateAfter',
+      'resource' => 'Ynadvsearch_Plugin_Core',
+    ),
+    array(
+		'event' => 'onItemDeleteAfter',
+		'resource' => 'Ynadvsearch_Plugin_Core',
+	),
+  ),
       // Routes --------------------------------------------------------------------
   'routes' => array(
         'ynadvsearch_extended' => array(

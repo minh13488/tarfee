@@ -7,11 +7,11 @@
 	$startDateObj = null;
 	if (!is_null($campaign->start_date) && !empty($campaign->start_date) && $campaign->start_date) 
 	{
-		$endDateObj = new Zend_Date(strtotime($campaign->start_date));	
+		$startDateObj = new Zend_Date(strtotime($campaign->start_date));	
 	}
 	if (!is_null($campaign->end_date) && !empty($campaign->end_date) && $campaign->end_date) 
 	{
-		$startDateObj = new Zend_Date(strtotime($campaign->end_date));	
+		$endDateObj = new Zend_Date(strtotime($campaign->end_date));	
 	}
 	if( $this->viewer() && $this->viewer()->getIdentity() ) {
 		$tz = $this->viewer()->timezone;

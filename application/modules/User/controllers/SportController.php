@@ -140,6 +140,7 @@ class User_SportController extends Core_Controller_Action_Standard {
 				$row -> sport_id = $sportId;
 				$row -> save();
 			}
+			Engine_Api::_()->getDbTable('sportmaps', 'ynadvsearch')->updateItem(Engine_Api::_()->getItem('user', $user_id));
 			$status = 'true';
 			$db -> commit();
 

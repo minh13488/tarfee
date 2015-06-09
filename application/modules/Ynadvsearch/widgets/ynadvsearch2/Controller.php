@@ -115,5 +115,6 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 		$this->view->tokens = $tokens;
 		
 		$this->view->type = Zend_Controller_Front::getInstance ()->getRequest ()->getParam('type',array_keys(Engine_Api::_()->ynadvsearch()->getAllowSearchTypes()));
+		$this->view->sport = Zend_Controller_Front::getInstance ()->getRequest ()->getParam('sport',array_keys(Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1Assoc()));
 	}
 }
