@@ -426,5 +426,16 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 
 		return $file -> map();
 	}
-
+	
+	public function getSportId() {
+		$parent = $this->getParent();
+		if ($parent && method_exists($parent, 'getSportId')) {
+			return $parent->getSportId();
+		}
+		$owner = $this->getOwner();
+		if ($owner && method_exists($owner, 'getSportId')) {
+			return $owner->getSportId();
+		}
+		return null;
+	}
 }

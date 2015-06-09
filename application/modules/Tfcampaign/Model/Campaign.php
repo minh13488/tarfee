@@ -109,4 +109,7 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
         return $this->authorization()->isAllowed(null, 'view'); 
     }
 	
+	public function getSportId() {
+		return $this->category_id‏;
+	}
 }
