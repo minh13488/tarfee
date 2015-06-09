@@ -18,15 +18,4 @@ return array(
         'name' => 'tfcampaign.user-profile-campaign'
 	),
 	
-	array(
-        'title' => 'Search Campaign',
-        'description' => 'Displays search campaign form.',
-        'category' => 'Campaign',
-        'type' => 'widget',
-        'name' => 'tfcampaign.search-campaign',
-        'isPaginated' => true,
-        'defaultParams' => array(
-            'title' => 'Search Campaigns'
-        ),
-    ),
 );
