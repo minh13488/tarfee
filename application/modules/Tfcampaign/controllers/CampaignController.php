@@ -14,6 +14,9 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 	}
 	
 	public function submitAction() {
+		// Return if guest try to access to create link.
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
 		$campaign = Engine_Api::_() -> core() -> getSubject();
 		$this -> view -> form = $form = new Tfcampaign_Form_Submit(array('campaign' => $campaign));
 		

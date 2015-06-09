@@ -61,11 +61,13 @@
         $this->translate('Delete'), 
         array('class' => 'smoothbox')) ?>
     <?php endif;?>
+    <?php if($this -> viewer() -> getIdentity()) :?>
     -
 	<?php echo $this->htmlLink(
         array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
         $this->translate('Submit Player Profile'), 
     array('class' => 'smoothbox')) ?>
+    <?php endif;?>
     
 <?php if(count(submissionPlayers)) :?>
 <h3><?php echo $this -> translate('Submitted Player Cards');?></h3>

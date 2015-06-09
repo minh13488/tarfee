@@ -6,8 +6,6 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 	public function browseAction() {
 		$this -> _helper -> content	-> setEnabled();
 		$viewer = Engine_Api::_() -> user() -> getViewer();
-		if (!$this -> _helper -> requireUser -> isValid())
-			return;
 		$params = $this -> _getAllParams();
 		unset($params['module']);
 		unset($params['controller']);
