@@ -77,21 +77,100 @@
 	        <?php if($player -> isViewable()) :?>
 	        	<li id="player-item-<?php echo $player->playercard_id ?>">
 	           	<div id='profile_photo'>
-					<?php $photoUrl = $player -> getPhotoUrl('thumb.profile');?>
+					<?php $photoUrl = $player -> getPhotoUrl('thumb.main');?>
 					<div class="avatar">
-						<a href="<?php echo $player -> getHref()?>">
-							<span alt="" class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)"></span>
-						</a>
-						<?php if($player -> getSport()):?>
-							<?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?>
-							<?php echo $player -> getSport() -> getTitle();?>
-						<?php endif;?>
-						<?php if($player -> getPosition()):?>
-							<?php echo $player -> getPosition() -> getTitle();?>
-						<?php endif;?>
-						<?php 
-		            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())):
-						?>
+						<div class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)">
+							
+							<div class="avatar-box-hover">
+								<ul class="actions">
+
+									<?php if ($this -> viewer() -> getIdentity()):?>
+									<li title="<?php echo $this -> translate("eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
+			                    		<?php if($player->isEyeOn()): ?>              
+			                        	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
+			                        		<span>
+			                        			<i class="fa fa-eye-slash"></i>
+		                        			</span>
+			                    		</a>
+			                    		<?php else: ?>
+			                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
+			                        		<span>
+			                        			<i class="fa fa-eye"></i>
+		                        			</span>
+			                        	</a>
+			                    		<?php endif; ?>
+			                		</li>
+			                		<?php endif;?>
+
+									<li title="<?php echo $this -> translate('comment')?>">
+										<a class="actions_generic" href="<?php echo $player -> getHref()?>">
+											<span>
+												<i class="fa fa-comment"></i>
+											</span>
+										</a>
+									</li>
+									
+									<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+									<li>
+										<a class="actions_generic smoothbox" href="<?php echo $url?>">
+											<span>
+												<i class="fa fa-flag"></i>
+											</span>
+										</a>
+									</li>
+
+								</ul>
+
+							</div>
+							<div class="tarfee_sport_type_position">
+								<?php if($player -> getSport()):?>
+									<?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?>
+									<?php echo $player -> getSport() -> getTitle();?>
+								<?php endif;?>
+								
+								<span class="player-position">
+									<?php if($player -> getPosition()):?>
+										<?php echo $player -> getPosition() -> getTitle();?>
+									<?php endif;?>
+								</span>
+							</div><!--tarfee_sport_type_position-->
+						</div>
+					</div>
+
+
+
+
+					<div class="tarfee_gender_player_name">
+						<span class="gender_player">
+							<?php if (($player->gender) == 1){
+								echo '<i class="fa fa-mars"></i>';
+							}else{
+								echo '<i class="fa fa-venus"></i>';
+							}
+
+							?>
+							
+						</span>
+						<a href="<?php echo $player -> getHref()?>" class="player_name" ><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 20)?></a>
+					</div>
+
+					<?php $overRallRating = $player -> getOverallRating();?>
+					<div class="user_rating" title="<?php echo $overRallRating;?>">
+						<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
+					        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
+					    <?php endfor; ?>
+					    <?php if ((round($overRallRating) - $overRallRating) > 0): $x ++; ?>
+					        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;
+					    <?php endif; ?>
+					    <?php if ($x <= 5) :?>
+					        <?php for (; $x <= 5; $x++ ) : ?>
+					            <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>&nbsp;
+					        <?php endfor; ?>
+					    <?php endif; ?>
+					</div>
+
+					<?php 
+		            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())): ?>
 						<span class="setting" onclick="showOptions(<?php echo $player->playercard_id?>, this)"><i class="fa fa-cog"></i>
 							<ul class="setting-list" style="display: none" id="setting-list_<?php echo $player->playercard_id?>">
 								<li class="first">
@@ -156,110 +235,85 @@
 								</li>
 							</ul>
 						</span>
-						
-						    <?php endif;?>
-					</div>
-					<div><span><a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 15)?></span></a></div>
-					<?php $overRallRating = $player -> getOverallRating();?>
-					<div class="user_rating" title="<?php echo $overRallRating;?>">
-						<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
-					        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
-					    <?php endfor; ?>
-					    <?php if ((round($overRallRating) - $overRallRating) > 0): $x ++; ?>
-					        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;
-					    <?php endif; ?>
-					    <?php if ($x <= 5) :?>
-					        <?php for (; $x <= 5; $x++ ) : ?>
-					            <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>&nbsp;
-					        <?php endfor; ?>
-					    <?php endif; ?>
-					</div>
+				    <?php endif;?>
+
+
 					<?php
 						$countryName = '';
 						if($player ->country_id && $country = Engine_Api::_() -> getItem('user_location', $player ->country_id))
 						{
 							$countryName = $country -> getTitle();
 						}
-						?>
-						<div>
-					<?php echo  $this->locale()->toDate($player -> birth_date);?> 
-					<?php if($countryName)
-							echo ' | '.$countryName?>
-					<br/>
-					<?php 
-					$laguages = json_decode($player -> languages);
-					$arr_tmp = array();
-					foreach ($laguages as $lang_id) 
-					{
-						$langTb =  Engine_Api::_() -> getDbTable('languages', 'user');
-						$lang = $langTb -> fetchRow($langTb ->select()->where('language_id = ?', $lang_id));
-						if($lang)
-							$arr_tmp[] = $lang -> title;
-					}
-					echo implode(' | ', $arr_tmp);
 					?>
-					<hr>
-					<span><?php 
-						$eyeons = $player->getEyeOns();
-						echo count($eyeons);
-						echo $this->translate('eye on'); ?>
-					</span>
-					<span>
+
+					<div class="tarfee_infomation_player">
+						<p>
+							<?php echo  $this->locale()->toDate($player -> birth_date);?> 
+						</p>
+
+						<p>
+							<?php 
+								if($countryName)
+									echo $countryName
+							?>
+						</p>
 						
-					</span>
-					<span>
-						<?php
-						$params = array();
-						$params['owner_type'] = $player -> getType();
-						$params['owner_id'] = $player -> getIdentity();
-						$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
-						$totalVideo = $mappingTable -> getTotalVideo($params);
-						echo $totalVideo;
-						echo $this->translate(array('video','videos', $totalVideo));
-						?>
-					</span>
-					<span>
-						<?php
-						echo $totalPhoto;
-						echo $this->translate(array('photo','photos', $totalPhoto));
-						?>
-					</span>
-					<hr>
+						<p>
+							<?php 
+								$laguages = json_decode($player -> languages);
+								$arr_tmp = array();
+								foreach ($laguages as $lang_id) 
+								{
+									$langTb =  Engine_Api::_() -> getDbTable('languages', 'user');
+									$lang = $langTb -> fetchRow($langTb ->select()->where('language_id = ?', $lang_id));
+									if($lang)
+										$arr_tmp[] = $lang -> title;
+								}
+								echo implode(' | ', $arr_tmp);
+							?>
+						</p>
+					</div>
+
+					<ul class="tarfee_count">
+						<li>
+							<?php $eyeons = $player->getEyeOns(); ?>
+								<span class="tarfee-count-number"><?php  echo count($eyeons); ?></span>
+								<span><?php echo $this->translate('eye on');  ?></span>
+						</li>
+
+
+						<li>
+							<?php
+							$params = array();
+							$params['owner_type'] = $player -> getType();
+							$params['owner_id'] = $player -> getIdentity();
+							$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+							$totalVideo = $mappingTable -> getTotalVideo($params); ?>
+
+							<span class="tarfee-count-number"><?php  echo $totalVideo; ?></span>
+							<span><?php echo $this->translate(array('video','videos', $totalVideo)); ?></span>
+							
+						</li>
+
+						<li>
+							
+							<span class="tarfee-count-number"><?php echo $totalPhoto; ?></span>
+							<span><?php echo $this->translate(array('photo','photos', $totalPhoto));?></span>
+						</li>
+					</ul>
+					
 					<div class="nickname">
-							<?php echo $this->htmlLink($player -> getOwner()->getHref(), $this->itemPhoto($player -> getOwner(), 'thumb.icon', $player -> getOwner()->getTitle(), array('style' => 'width: auto')), array('class' => 'members_thumb')) ?>
-							<div class='members_info'>
-						        <div class='members_name'>
-							          <?php echo $this->htmlLink($player -> getOwner()->getHref(), $player -> getOwner() ->getTitle()) ?>
-						        </div>
-						        <div class='members_date'>
-						          <?php echo $this->timestamp($player -> getOwner() -> creation_date) ?>
-						        </div>
-					      	</div>
-					     </div>
-					</div>
-					<div class="actions">
-					<ul>
-						<?php if ($this -> viewer() -> getIdentity()):?>
-							<li title="<?php echo $this -> translate("eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
-	                    		<?php if($player->isEyeOn()): ?>              
-	                        	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
-	                        		<span><i class="fa fa-eye-slash"></i></span>
-                        		</a>
-	                    		<?php else: ?>
-	                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
-	                        		<span><i class="fa fa-eye"></i></span>
-	                        	</a>
-	                    		<?php endif; ?>
-	                		</li>
-                			<span></span>
-                		<?php endif;?>
-						<li><a class="actions_generic" href=""><span><i class="fa fa-plus"></i></span></a></li>
-						<span></span>
-						<li title="<?php echo $this -> translate('comment')?>"><a class="actions_generic" href="<?php echo $player -> getHref()?>"><span><i class="fa fa-comment"></i></span></a></li>
-						<span></span>
-						<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid(), 'format' => 'smoothbox'),'default', true);?>
-						<li><a class="actions_generic smoothbox" href="<?php echo $url?>"><span><i class="fa fa-flag"></i></span></a></li>
-					</div>
+						<?php echo $this->htmlLink($player -> getOwner()->getHref(), $this->itemPhoto($player -> getOwner(), 'thumb.icon', $player -> getOwner()->getTitle(), array('style' => 'width: auto')), array('class' => 'members_thumb')) ?>
+						<div class='members_info'>
+					        <div class='members_name'>
+						          <?php echo $this->htmlLink($player -> getOwner()->getHref(), $player -> getOwner() ->getTitle()) ?>
+					        </div>
+					        <div class='members_date'>
+					          <?php echo $this->timestamp($player -> getOwner() -> creation_date) ?>
+					        </div>
+				      	</div>
+			     	</div>
+
 				</div>
 	        </li>
 			<?php endif;?>
