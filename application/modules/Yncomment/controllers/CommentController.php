@@ -575,6 +575,9 @@ class Yncomment_CommentController extends Core_Controller_Action_Standard {
 
             if (Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> isDislike($commentedItem, $viewer))
                 Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> removeDislike($commentedItem, $viewer);
+			
+			if (Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> isUnsure($commentedItem, $viewer))
+                Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> removeUnsure($commentedItem, $viewer);
 
             if (!Engine_Api::_() -> getDbtable('likes', 'core') -> isLike($commentedItem, $viewer))
                 Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($commentedItem) -> addLike($viewer);
@@ -733,6 +736,12 @@ class Yncomment_CommentController extends Core_Controller_Action_Standard {
 
         try {
 
+			if (Engine_Api::_() -> getDbtable('likes', 'core') -> isLike($commentedItem, $viewer))
+                Engine_Api::_() -> getDbtable('likes', 'core') -> removeLike($commentedItem, $viewer);
+			
+			if (Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> isDislike($commentedItem, $viewer))
+                Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> removeDislike($commentedItem, $viewer);
+			
             if (!Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> isUnsure($commentedItem, $viewer))
                 Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> addUnsure($commentedItem, $viewer);
 
@@ -907,6 +916,9 @@ class Yncomment_CommentController extends Core_Controller_Action_Standard {
 
             if (Engine_Api::_() -> getDbtable('likes', 'core') -> isLike($commentedItem, $viewer))
                 Engine_Api::_() -> getDbtable('likes', 'core') -> removeLike($commentedItem, $viewer);
+			
+			if (Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> isUnsure($commentedItem, $viewer))
+                Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> removeUnsure($commentedItem, $viewer);
 
             if (!Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> isDislike($commentedItem, $viewer))
                 Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> addDislike($commentedItem, $viewer);
