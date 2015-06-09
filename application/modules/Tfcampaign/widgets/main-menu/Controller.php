@@ -9,6 +9,5 @@ class Tfcampaign_Widget_MainMenuController extends Engine_Content_Widget_Abstrac
         if( count($this->view->navigation) == 1 ) {
             $this->view->navigation = null;
         }
-
     }
 }
