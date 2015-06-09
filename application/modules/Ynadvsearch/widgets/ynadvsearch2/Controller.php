@@ -116,5 +116,21 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 		
 		$this->view->type = Zend_Controller_Front::getInstance ()->getRequest ()->getParam('type',array_keys(Engine_Api::_()->ynadvsearch()->getAllowSearchTypes()));
 		$this->view->sport = Zend_Controller_Front::getInstance ()->getRequest ()->getParam('sport',array_keys(Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1Assoc()));
+		
+		$viewer = Engine_Api::_()->user()->getViewer();
+		$level_id = ($viewer->getIdentity()) ? $viewer->level_id : 5;
+		$permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
+	    $max_keywords = $permissionsTable->getAllowed('user', $level_id, 'max_keyword');
+	    if ($max_keywords == null) {
+	        $row = $permissionsTable->fetchRow($permissionsTable->select()
+	        ->where('level_id = ?', $level_id)
+	        ->where('type = ?', 'user')
+	        ->where('name = ?', 'max_keyword'));
+	        if ($row) {
+	            $max_keywords = $row->value;
+	        }
+	    }
+		
+		$this->view->max_keywords = $max_keywords;	
 	}
 }

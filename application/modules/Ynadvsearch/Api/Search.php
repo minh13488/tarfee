@@ -67,7 +67,8 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 		$select->setIntegrityCheck(false);
 		$select->joinLeft($sportmapTblName, "$sportmapTblName.item_id = $table_name.id and $sportmapTblName.item_type = $table_name.type", "");
         $select->where ( "$table_name.type IN (?)",  $types );
-	//	$select->where ( "$sportmapTblName.sport_id IN (?)",  $sports);
+		$select->where ( "$sportmapTblName.sport_id IN (?)",  $sports);
+		$select->group("$table_name.id");
 		foreach ($text as $str) {
 			$search = '%' . preg_replace ( '/\s+/', '%', $str ) . '%';
 			$select->where ( "$table_name.title like '$search' OR $table_name.description like '$search'" );
