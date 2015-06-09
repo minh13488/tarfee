@@ -69,7 +69,7 @@
     array('class' => 'smoothbox')) ?>
     <?php endif;?>
     
-<?php if(count(submissionPlayers)) :?>
+<?php if(count($this -> submissionPlayers)) :?>
 <h3><?php echo $this -> translate('Submitted Player Cards');?></h3>
 <?php foreach($this -> submissionPlayers as $submissionPlayer) :?>
 	<?php $player = Engine_Api::_() -> getItem('user_playercard', $submissionPlayer -> player_id);?>
