@@ -440,23 +440,18 @@ class Ynevent_EventController extends Core_Controller_Action_Standard
 		// Populate auth
 		$auth = Engine_Api::_() -> authorization() -> context;
 
-		$roles = array(
-			'owner',
-			'invite',
-			'follower',
-			'everyone'
-		);
+		$roles = array('owner', 'member', 'owner_member', 'owner_member_member', 'owner_network', 'registered', 'everyone');
 
 		foreach ($roles as $role) 
 		{
-			if (isset($form -> auth_view -> options[$role]) && $auth -> isAllowed($event, $role, 'view')) {
+			if (isset($form -> auth_view -> options[$role]) && $auth -> isAllowed($event, $role, 'view')) 
+			{
 				$form -> auth_view -> setValue($role);
 			}
 			if (isset($form -> auth_comment -> options[$role]) && $auth -> isAllowed($event, $role, 'comment')) {
 				$form -> auth_comment -> setValue($role);
 			}
 		}
-
 		$form -> auth_invite -> setValue($auth -> isAllowed($event, 'member', 'invite'));
 
 		// Sub category

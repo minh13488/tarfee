@@ -380,11 +380,15 @@ class Ynevent_Form_Create extends Engine_Form
     $commentOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('event', $user, 'auth_comment');
     
   	$availableLabels = array(
-	    'everyone'      => 'Everyone',
-	    'follower'    => 'Followers',
-	    'invite'        => 'by Invite Only',
-	    'owner'         => 'Just Me',
-	  );
+        'everyone'            => 'Everyone',
+        'registered'          => 'All Registered Members',
+        'owner_network'       => 'Friends and Networks',
+        'owner_member_member' => 'Friends of Friends',
+        'owner_member'        => 'Friends Only',
+        'member'              => 'Event Guests Only',
+        'leader'			  => 'Owner and Leader',	
+        'owner'               => 'Just Me'
+      );
   	$viewOptions = array_intersect_key($availableLabels, array_flip($viewOptions));
   	$commentOptions = array_intersect_key($availableLabels, array_flip($commentOptions));
 
