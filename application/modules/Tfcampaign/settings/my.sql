@@ -61,6 +61,8 @@ CREATE TABLE IF NOT EXISTS `engine4_tfcampaign_campaigns` (
 `photo_required` tinyint(1) NULL default '0',
 `video_required` tinyint(1) NULL default '0',
 `deleted` tinyint(1) NOT NULL default '0',
+`view_count` int(11) NOT NULL DEFAULT '0',
+
 
 PRIMARY KEY (`campaign_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -102,7 +104,7 @@ INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`
 INSERT IGNORE INTO `engine4_authorization_permissions`
 SELECT
     level_id as `level_id`,
-    'ynmultilisting_listing' as `type`,
+    'tfcampaign_campaign' as `type`,
     'auth_view' as `name`,
     5 as `value`,
     '["everyone","registered","owner_network","owner_member_member","owner_member","owner"]' as `params`
