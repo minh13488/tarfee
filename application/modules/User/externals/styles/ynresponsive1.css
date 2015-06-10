@@ -1,3 +1,10 @@
+=tarfee_border_radius($radius){
+    border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+}
+
 /*Profile Cover Photo Start Here*/
 .layout_user_profile_cover{
     border: none !important;
@@ -71,6 +78,18 @@
 			    height: 100%;
 			    width: 100%;
 
+			    .tarfee_profile_cover_bg_gradient{
+			    	background: url(~/application/modules/User/externals/images/bg-gradient-cover-bottom.png) repeat-x bottom;
+					display: block;
+					width: 100%;
+					position: absolute;
+					height: 141px;
+					bottom: 0;
+					left: 0;
+					z-index: 1;
+			    }
+
+
 			    img{
 				    width: 100%;
 				    min-height: 100%;
@@ -96,6 +115,7 @@
 			margin: auto;
 			overflow: hidden;
 			top: -160px;
+			z-index: 1;
 
 			.item_photo{
 				width: 213px;
@@ -536,4 +556,78 @@
     margin-left: 40px;
 }
 
+}
+
+
+#global_page_user-profile-index{
+    .layout_right{
+        width: 430px;
+
+        .generic_layout_container{
+        	position: relative;
+        	background: #fff;
+			+tarfee_border_radius(4px);
+			overflow: hidden;
+        }
+        .layout_profile_completeness_profile_completeness{
+        	background: transparent;
+        }
+    }
+}
+
+.tarfee_total_items{
+	color: #fff;
+	font-weight: bold;
+	background-color: $theme_link_color;
+	width: 20px;
+	height: 20px;
+	display: block;
+	text-align: center;
+	border-radius: 50%;
+	position: absolute;
+	right: 10px;
+	top: 11px;
+}
+
+div.btn-add-more,
+.tarfee_create_item{
+	margin: 15px;
+	a{
+		text-align: center;
+		display: block;
+		color: #fff !important;
+		font-weight: bold;
+		background-color: $theme_link_color;
+		padding: 7px;
+		+tarfee_border_radius(4px);
+	}
+}
+
+.icon_event_viewall{
+	text-align: center;
+	display: block;
+	color: #fff !important;
+	font-weight: bold;
+	background-color: $theme_link_color;
+	padding: 7px;
+	+tarfee_border_radius(4px);
+	margin: 15px;
+}
+
+ul.tfcampaign_list{
+	li{
+		margin: 15px;
+		border-top: 1px solid $theme_border_color;
+		padding-top: 15px;
+
+
+		&:first-child{
+			border-top: 0;
+			padding-top: 0;
+		}
+
+		.tfcampaign_title{
+			font-weight: bold;
+		}
+	}
 }
