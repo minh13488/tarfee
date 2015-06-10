@@ -3,6 +3,106 @@
 class Tfcampaign_Model_Submission extends Core_Model_Item_Abstract {
 	
 	
+	public function getCampaign() {
+		return Engine_Api::_() -> getItem('tfcampaign_campaign', $this -> campaign_id);
+	}
+	
+	public function getPlayer() {
+		return Engine_Api::_() -> getItem('user_playercard', $this -> player_id);
+	}
+	
+	public function countPercentMatching(){
+		$campaign = $this -> getCampaign();
+		$player = $this -> getPlayer();
+		if($campaign && $player) {
+			$countMatching = 0;
+			$countMatchingTotal = 0;
+			//age matching
+			if($campaign -> from_age != 0 || $campaign -> to_age != 0) {
+				$countMatchingTotal++;
+				$today = new DateTime();
+				$birthdate = new DateTime($player -> birth_date);
+				$interval = $today->diff($birthdate);
+				$player_age =  $interval->format('%y');
+				if($campaign -> from_age == 0 && $campaign -> to_age != 0) {
+					//max age
+					if($player_age <= $campaign -> to_age) {
+						$countMatching++;
+					}
+				} else if($campaign -> from_age != 0 && $campaign -> to_age == 0) {
+					//min age
+					if($player_age >= $campaign -> from_age) {
+						$countMatching++;
+					}
+				} else if($campaign -> from_age != 0 && $campaign -> to_age != 0) {
+					//between
+					if($player_age >= $campaign -> from_age && $player_age <= $campaign -> to_age) {
+						$countMatching++;
+					}
+				}
+			}
+			//gender matching
+			if($campaign -> gender != 0) {
+				$countMatchingTotal++;
+				if($player -> gender == $campaign -> gender) {
+					$countMatching++;
+				}
+			}
+			//category matching
+			if($campaign -> category_id != 0) {
+				$countMatchingTotal++;
+				if($player -> category_id == $campaign -> category_id) {
+					$countMatching++;
+				}
+				//position matching
+				if($campaign -> position_id != 0) {
+					$countMatchingTotal++;
+					if($player -> position_id == $campaign -> position_id) {
+						$countMatching++;
+					}
+				}
+				//referred foot matching (for category id = 2)
+				if($campaign -> category_id == 2) {
+					$countMatchingTotal++;
+					if($player -> referred_foot == $campaign -> referred_foot) {
+						$countMatching++;
+					}
+				}
+			}
+			//country matching
+			if($campaign -> country_id != 0) {
+				$countMatchingTotal++;
+				if($player -> country_id == $campaign -> country_id) {
+					$countMatching++;
+				}
+				//province matching
+				if(isset($campaign -> province_id)) {
+					$countMatchingTotal++;
+					if($player -> province_id == $campaign -> province_id) {
+						$countMatching++;
+					}
+					//city matching
+					if(isset($campaign -> city_id)) {
+						$countMatchingTotal++;
+						if($player -> city_id == $campaign -> city_id) {
+							$countMatching++;
+						}
+					}
+				}
+			}
+			//language matching
+			$player_languages = json_decode($player->languages);
+			$campaign_languages = json_decode($campaign->languages);
+			if(!empty($campaign_languages)) {
+				//country matching
+			}
+			if($countMatchingTotal > 0){
+				return round(($countMatching/$countMatchingTotal), 2) * 100;
+			}	
+		}
+		return "0";
+	}
+	
 	public function setPhoto($photo)
 	{
 		if ($photo instanceof Zend_Form_Element_File)
