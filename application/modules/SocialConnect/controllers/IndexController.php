@@ -862,7 +862,7 @@ class SocialConnect_IndexController extends Core_Controller_Action_Standard
 			
 			$topStructure = Engine_Api::_() -> fields() -> getFieldStructureTop('user');
 			$formArgs = array();
-			if (count($topStructure) == 1 && $topStructure[0] -> getChild() -> type == 'profile_type')
+			if (count($topStructure) >= 1 && $topStructure[0] -> getChild() -> type == 'profile_type')
 			{
 				$profileTypeField = $topStructure[0] -> getChild();
 				$options = $profileTypeField -> getOptions();
@@ -878,14 +878,11 @@ class SocialConnect_IndexController extends Core_Controller_Action_Standard
 				$arr_data = array();
 				foreach ($struct as $fskey => $map)
 				{
-					$field = $map -> getChild();
-					$type = $field -> type;
-					if (isset($data[$type]))
+					if (isset($data[$fskey]))
 					{
-						$arr_data[$fskey] = $data[$type];
+						$arr_data[$fskey] = $data[$fskey];
 					}
 				}
-
 				$profileTypeValue = $formArgs['topLevelValue'];
 				$values = Engine_Api::_() -> fields() -> getFieldsValues($user);
 

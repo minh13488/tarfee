@@ -15,8 +15,8 @@ class SocialConnect_Form_Map extends Engine_Form
 		$profileFields = $table -> getProfileFields();
 		$values = $table -> getProfileFieldStructure($service);
 		$counter = 0;
-
 		$view = Zend_Registry::get('Zend_View');
+		$profile_label = '';
 		foreach ($profileFields as $field)
 		{
 			$profileLabel = $field['profile_label'];
@@ -25,14 +25,18 @@ class SocialConnect_Form_Map extends Engine_Form
 				$value = $field['type'];
 			else
 				$value = $values[$field['field_id']];
-
-			if ($field['type'] == 'profile_type')
+			if ($field['profile_label'] != $profile_label)
 			{
 				$id = 'profile_type_' . ($counter++);
 				$content = sprintf('<h3>Profile Type: %s</h3><p>This configure is apply for profile type: <a href="%s/admin/user/fields?option_id=%s">%s</a></p>', $profileLabel, $view -> baseUrl(), $profileId, $profileLabel);
 				$this -> addElement('Dummy', $id, array(
 					'content' => $content,
 					'decorators' => array('ViewHelper')
+				));
+				$this -> addElement('select', "pfid_" . $field['field_id'], array(
+					'label' => $field['label'],
+					'multiOptions' => $options,
+					'value' => $value,
 				));
 			}
 			else
@@ -43,6 +47,7 @@ class SocialConnect_Form_Map extends Engine_Form
 					'value' => $value,
 				));
 			}
+			$profile_label = $field['profile_label'];
 		}
 
 		// Init submit
@@ -79,12 +84,9 @@ class SocialConnect_Form_Map extends Engine_Form
 	public function commitSave($service)
 	{
 		$api = Engine_Api::_() -> getApi('Core', 'SocialConnect');
-
 		$service = $api -> getMapService($service);
-
 		$data = $this -> getValues();
 		$table = Engine_Api::_() -> getDbTable('Fields', 'SocialConnect');
-
 		try
 		{
 			$where = "service = '" . $service . "'";
@@ -94,7 +96,7 @@ class SocialConnect_Form_Map extends Engine_Form
 				if (strpos($pfid, 'pfid_') === 0)
 				{
 					$opt_id = str_replace('pfid_', '', $pfid);
-					$item = $table -> getItem($service, $field);
+					$item = $table -> getItem($service, $field, $opt_id);
 					$item -> opt_id = $opt_id;
 					$item -> save();
 				}

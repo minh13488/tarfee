@@ -111,7 +111,9 @@ class SocialConnect_Api_Core
 			}
 			catch(Exception $e)
 			{
+				//echo $e -> getMessage();
 			}
+			//echo $_SESSION['main_photo_file_id']; die;
 		}
 		$_SESSION['SocialConnect_SignUp_Data'] = array_merge($account, $profile);
 	}

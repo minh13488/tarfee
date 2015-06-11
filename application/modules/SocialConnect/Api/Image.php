@@ -120,6 +120,8 @@ class SocialConnect_Api_Image
 
 	public function _fetchImage($photo_url)
 	{
+		$data = file_get_contents($photo_url);
+		/*
 		$ch = curl_init();
 		curl_setopt($ch, CURLOPT_URL, $photo_url);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -128,7 +130,8 @@ class SocialConnect_Api_Image
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
 		curl_setopt($ch, CURLOPT_MAXREDIRS, 5);
 		$data = curl_exec($ch);
-		curl_close($ch);
+		 */
+		//curl_close($ch);
 		$tmpfile = APPLICATION_PATH_TMP . DS . md5($photo_url) . '.jpg';
 		@file_put_contents($tmpfile, $data);
 		$this -> _resizeImages($tmpfile);
