@@ -76,7 +76,6 @@
                 },
                 'onSuccess' : function(responseJSON, responseText)
                 {
-                	console.log(responseJSON.rating);
                 	is_click = 1;
 					new_rate = responseJSON[0].rating;
 					set_rating(responseJSON[0].rating_type);
