@@ -24,6 +24,30 @@
 		</ul>
 	</div>
 </div>
+
+<div id="advanced-search-filter">
+	<input id="radio-none-advanced" type="radio" name="advanced" value="none" checked />
+	<label for="radio-none-advanced"><?php echo $this->translate('None')?></label>
+	<div id="campaign-advanced-search">
+		<input id="radio-campaign-advanced" type="radio" name="campaign" value="none" />
+		<label for="radio-campaign-advanced"><?php echo $this->translate('Campaign')?></label>
+		<div class="form-wrapper search-wrapper">
+			<label class="form-label search-label" for="campaign_keyword"><?php echo $this->translate('Keyword')?></label>
+			<input type="text" class="form-element search-element" id="campaign_keyword" name="campaign_keyword" />
+		</div>
+		
+		<div class="form-wrapper search-wrapper">
+			<label class="form-label search-label" for="campaign_sport"><?php echo $this->translate('Sport Type')?></label>
+			<select type="text" class="form-element search-element" id="campaign_sport" name="campaign_sport">
+				<option value="0"></option>
+				<?php foreach ($this->sports as $key => $value):?>
+				<option value="<?php echo $key?>"><?php echo $value?></option>
+				<?php endforeach;?>
+			</select>
+		</div>
+	</div>	
+</div>
+
 <script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery.tokeninput.js"></script>
 <script>
 jQuery.noConflict();
@@ -48,6 +72,30 @@ jQuery.noConflict();
 	
 		var form = $('#global_search_form');
 		if (form) {
+			var button = $('<button />', {
+				type: 'button',
+				text: '<?php echo $this->translate('Search')?>',
+				click: function() {
+					var searchForm = $(this).closest('#global_search_form');
+					var query = searchForm.find('#global_search_field');
+					var input = searchForm.find('#token-input-global_search_field');
+					query.val(input.val());
+					var values = query.tokenInput('get');
+					var arr = [];
+					for (var i = 0; i < values.length; i++) {
+						arr.push(values[i].id);
+					}
+					var token = $('<input />', {
+						'type' : 'hidden',
+						'name' : 'token',
+						'value' : arr.join() 
+					});
+					searchForm.append(token);
+					searchForm.submit();
+				}	
+			});
+			form.append(button);
+			
 			form.attr('method', 'POST');
 			var filter = $('<div />', {
 				id: 'search-filter',
@@ -60,8 +108,8 @@ jQuery.noConflict();
 					$('<i />', {
 						'class': 'fa fa-angle-down',
 						click: function() {
-							var parent = this.closest('#search-filter');
-							var div_filter = $(parent).find('#basic-search-filter');
+							var parent = $(this).closest('#search-filter');
+							var div_filter = parent.find('#basic-search-filter');
 							div_filter.toggle();
 						}
 					})
