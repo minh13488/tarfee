@@ -7,10 +7,73 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		{
 			Engine_Api::_() -> core() -> setSubject($campaign);
 		}
+		$this -> _helper -> requireSubject('tfcampaign_campaign');
+	}
+	
+	public function unhideAction() {
+		// Return if guest try to access to create link.
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
+		$submission = Engine_Api::_() -> getItem('tfcampaign_submission', $this ->_getParam('id'));
+		if(!$submission) {
+			return $this -> _helper -> requireSubject() -> forward();
+		}
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$campaign = $submission -> getCampaign();
+		if(!$viewer -> isSelf($campaign -> getOwner())) {
+			return $this -> _helper -> requireAuth() -> forward();
+		}
+		$this -> view -> form = $form = new Tfcampaign_Form_UnHide();
 		if (!$this -> getRequest() -> isPost()) {
 			return;
 		}
-		$this -> _helper -> requireSubject('tfcampaign_campaign');
+		$posts = $this -> getRequest() -> getPost();
+		if (!$form -> isValid($posts)) {
+			return;
+		}
+		$submission -> reason_id = 0;
+		$submission -> hided = false;
+		$submission -> save(); 
+		
+		// Redirect
+		return $this -> _forward('success', 'utility', 'core', array(
+			'parentRefresh' => true,
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Please wait...'))
+		));
+	}
+	
+	public function hideAction() {
+		// Return if guest try to access to create link.
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
+		$submission = Engine_Api::_() -> getItem('tfcampaign_submission', $this ->_getParam('id'));
+		if(!$submission) {
+			return $this -> _helper -> requireSubject() -> forward();
+		}
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$campaign = $submission -> getCampaign();
+		if(!$viewer -> isSelf($campaign -> getOwner())) {
+			return $this -> _helper -> requireAuth() -> forward();
+		}
+		$this -> view -> form = $form = new Tfcampaign_Form_Hide();
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		$posts = $this -> getRequest() -> getPost();
+		if (!$form -> isValid($posts)) {
+			return;
+		}
+		$values = $form -> getValues();
+		$reason_id = (isset($values['reason_id']))? $values['reason_id'] : 0;
+		$submission -> reason_id = $reason_id;
+		$submission -> hided = true;
+		$submission -> save(); 
+		
+		// Redirect
+		return $this -> _forward('success', 'utility', 'core', array(
+			'parentRefresh' => true,
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Please wait...'))
+		));
 	}
 	
 	public function submitAction() {
