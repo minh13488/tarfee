@@ -1,19 +1,24 @@
-<span><?php echo $this -> total;?></span>
+<span class="tarfee_total_items"><?php echo $this -> total;?></span>
 
 <?php if($this -> viewer() -> isSelf($this -> subject())) :?>
-	<a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>">
-		<button><?php echo $this -> translate('add more campaign');?></button>
-	</a>
+	<div class="btn-add-more">
+		<a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>">
+			<?php echo $this -> translate('add more campaign');?>
+		</a>
+	</div>
 <?php endif;?>
 
-<ul>
+<ul class="tfcampaign_list">
 <?php foreach($this -> campaigns as $campaign) :?>
 	<li>
-	<?php if($campaign -> photo_id != 0) :?>
-		<?php echo $this -> itemPhoto($campaign) ;?>
-	<?php endif;?>
-	<?php echo $campaign;?>
-	<?php echo $campaign -> getDescription();?>
+		<?php if($campaign -> photo_id != 0) :?>
+			<?php echo $this -> itemPhoto($campaign) ;?>
+		<?php endif;?>
+		<div class="tfcampaign_title"><?php echo $campaign;?></div>
+		
+		<div class="tfcampaign_description">
+			<?php echo $campaign -> getDescription();?>
+		</div>	
 	</li>
 <?php endforeach;?>
 </ul>
