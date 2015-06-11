@@ -73,86 +73,90 @@ endif;
         var total_votes = <?php echo $this->rating_count; ?>;
         var viewer = <?php echo $this->viewer_id; ?>;
 		
-		var rating_over = window.rating_over = function(rating) {
-            if( rated == 1 ) {
-                $('rating_text').innerHTML = "<?php echo $this->translate('you already rated'); ?>";
-                //set_rating();
-            } else if( viewer == 0 ) {
-                $('rating_text').innerHTML = "<?php echo $this->translate('please login to rate'); ?>";
-            } else {
-                $('rating_text').innerHTML = "<?php echo $this->translate('click to rate'); ?>";
-                for(var x=1; x<=5; x++) {
-                    if(x <= rating) {
-                        $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
-                    } else {
-                        $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
-                    }
-                }
-            }
-        }
-
-        var rating_out = window.rating_out = function() {
-            //$('rating_text').innerHTML = " <?php echo $this->translate(array('%s rating', '%s ratings', $this->rating_count), $this->locale()->toNumber($this->rating_count)) ?>";
-            $('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
-            
-            if (pre_rate != 0){
-                set_rating();
-            }
-            else {
-                for(var x=1; x<=5; x++) {
-                    $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
-                }
-            }
-        }
-
-        var set_rating = window.set_rating = function() {
-            var rating = pre_rate;
-            $('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
-            //$('rating_text').innerHTML = "<?php echo $this->translate(array('%s rating', '%s ratings', $this->rating_count), $this->locale()->toNumber($this->rating_count)) ?>";
-            for(var x=1; x<=parseInt(rating); x++) {
-                $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
-            }
-
-            for(var x=parseInt(rating)+1; x<=5; x++) {
-                $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
-            }
-
-            var remainder = Math.round(rating)-rating;
-            if (remainder <= 0.5 && remainder !=0){
-                var last = parseInt(rating)+1;
-                $('rate_'+last).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_half');
-            }
-        }
-
-        var rate = window.rate = function(rating) {
-            $('rating_text').innerHTML = "<?php echo $this->translate('Thanks for rating!'); ?>";
-            for(var x=1; x<=5; x++) {
-                $('rate_'+x).set('onclick', '');
-            }
-            (new Request.JSON({
-                'format': 'json',
-                'url' : '<?php echo $this->url(array('action' => 'rate'), 'video_general', true) ?>',
-                'data' : {
-                    'format' : 'json',
-                    'rating' : rating,
-                    'video_id': video_id
-                },
-                'onRequest' : function(){
-                    rated = 1;
-                    total_votes = total_votes+1;
-                    pre_rate = (pre_rate+rating)/total_votes;
-                    set_rating();
-                },
-                'onSuccess' : function(responseJSON, responseText)
-                {
-                	var total = responseJSON[0].total;
-                	total_votes = responseJSON[0].total;
-                	$('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
-                    //$('rating_text').innerHTML = responseJSON[0].total + " <?php $this->translate('ratings')?>";
-                }
-            })).send();
-
-        }
+		<?php if($this -> video -> parent_type != "user_playercard") :?>
+		
+			var rating_over = window.rating_over = function(rating) {
+	            if( rated == 1 ) {
+	                $('rating_text').innerHTML = "<?php echo $this->translate('you already rated'); ?>";
+	                //set_rating();
+	            } else if( viewer == 0 ) {
+	                $('rating_text').innerHTML = "<?php echo $this->translate('please login to rate'); ?>";
+	            } else {
+	                $('rating_text').innerHTML = "<?php echo $this->translate('click to rate'); ?>";
+	                for(var x=1; x<=5; x++) {
+	                    if(x <= rating) {
+	                        $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
+	                    } else {
+	                        $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	                    }
+	                }
+	            }
+	        }
+	
+	        var rating_out = window.rating_out = function() {
+	            //$('rating_text').innerHTML = " <?php echo $this->translate(array('%s rating', '%s ratings', $this->rating_count), $this->locale()->toNumber($this->rating_count)) ?>";
+	            $('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
+	            
+	            if (pre_rate != 0){
+	                set_rating();
+	            }
+	            else {
+	                for(var x=1; x<=5; x++) {
+	                    $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	                }
+	            }
+	        }
+	
+	        var set_rating = window.set_rating = function() {
+	            var rating = pre_rate;
+	            $('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
+	            //$('rating_text').innerHTML = "<?php echo $this->translate(array('%s rating', '%s ratings', $this->rating_count), $this->locale()->toNumber($this->rating_count)) ?>";
+	            for(var x=1; x<=parseInt(rating); x++) {
+	                $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
+	            }
+	
+	            for(var x=parseInt(rating)+1; x<=5; x++) {
+	                $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	            }
+	
+	            var remainder = Math.round(rating)-rating;
+	            if (remainder <= 0.5 && remainder !=0){
+	                var last = parseInt(rating)+1;
+	                $('rate_'+last).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_half');
+	            }
+	        }
+	
+	        var rate = window.rate = function(rating) {
+	            $('rating_text').innerHTML = "<?php echo $this->translate('Thanks for rating!'); ?>";
+	            for(var x=1; x<=5; x++) {
+	                $('rate_'+x).set('onclick', '');
+	            }
+	            (new Request.JSON({
+	                'format': 'json',
+	                'url' : '<?php echo $this->url(array('action' => 'rate'), 'video_general', true) ?>',
+	                'data' : {
+	                    'format' : 'json',
+	                    'rating' : rating,
+	                    'video_id': video_id
+	                },
+	                'onRequest' : function(){
+	                    rated = 1;
+	                    total_votes = total_votes+1;
+	                    pre_rate = (pre_rate+rating)/total_votes;
+	                    set_rating();
+	                },
+	                'onSuccess' : function(responseJSON, responseText)
+	                {
+	                	var total = responseJSON[0].total;
+	                	total_votes = responseJSON[0].total;
+	                	$('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
+	                    //$('rating_text').innerHTML = responseJSON[0].total + " <?php $this->translate('ratings')?>";
+	                }
+	            })).send();
+	
+	        }
+	        
+		<?php endif;?>
 		
         var tagAction = window.tagAction = function(tag){
             $('tag').value = tag;
@@ -176,14 +180,6 @@ endif;
                 echo $this->htmlLink($poster, $poster->getTitle());
             }
             ?>
-            <?php 
-            $parent = $this->video->getParent();
-            if ($parent) 
-            {
-            	echo $this->translate('in '); 
-                echo $this->htmlLink($parent, $parent->getTitle());
-            }
-           ?>
         </div>
     </div>
 		<!-- AddThis Smart Layers BEGIN -->
@@ -260,7 +256,7 @@ endif;
             	
 	            <!-- if viewer type professional or club -> can rate -->
 	            <?php if($this -> viewer() -> getIdentity() 
-	            		&& in_array($this -> viewer() -> level_id, array('6','7')) 
+	            		&& $this -> video -> canAddRatings()
 	            		&& $this -> video -> parent_type == "user_playercard") :?>
 		            <?php 
 		    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
@@ -275,7 +271,7 @@ endif;
 				<!-- if player video -->
 				<?php if( $this -> video -> parent_type == "user_playercard"):?>
 					<!-- view ratings for user not in professional and club-->
-					<?php if($this -> viewer() -> getIdentity() && !in_array($this -> viewer() -> level_id, array('6','7'))) :?>
+					<?php if($this -> viewer() -> getIdentity() && !$this -> video -> canAddRatings()) :?>
 					<?php 
 		    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
 						$rating_types = $tableRatingType -> getAllRatingTypes();

@@ -5,6 +5,11 @@ class Tfcampaign_Model_DbTable_Reasons extends Engine_Db_Table {
 		return $this -> fetchAll($this -> select());
 	}
 	
+	public function getReason($reason_id) {
+		$select = $this -> select() -> where('reason_id = ?', $reason_id) -> limit(1);
+		return $this -> fetchRow($select);
+	}
+	
 	public function getReasonArray()
 	{
 		$typeArray = array();

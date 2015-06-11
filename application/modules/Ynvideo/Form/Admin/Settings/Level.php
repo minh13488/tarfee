@@ -47,7 +47,18 @@ class Ynvideo_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_A
         }
 
         if (!$this->isPublic()) {
-
+			
+			// Element: video_add_ratings
+            $this->addElement('Radio', 'video_addratings', array(
+                'label' => 'Allow to Add Professional Ratings to Videos?',
+                'description' => 'Do you want to let members to add professional ratings?',
+                'multiOptions' => array(
+                    1 => 'Yes, allow to add of professional ratings.',
+                    0 => 'No, do not allow to add of professional ratings.'
+                ),
+                'value' => 1,
+            ));
+			
             // Element: create
             $this->addElement('Radio', 'video_create', array(
                 'label' => 'Allow Creation of Videos?',

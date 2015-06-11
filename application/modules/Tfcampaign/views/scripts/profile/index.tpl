@@ -79,43 +79,7 @@ array('class' => 'smoothbox')) ?>
 	<?php echo $this -> translate(array("%s view", "%s views", $campaign -> view_count), $campaign -> view_count);?>
 <?php endif;?>
 
-<!-- filter -->
-<select id="filter-submission">
-	<option value="matching"><?php echo $this -> translate("% of matching");?></option>
-	<option value="rating"><?php echo $this -> translate("rating");?></option>
-	<option value="location"><?php echo $this -> translate("location");?></option>
-	<option value="age"><?php echo $this -> translate("age");?></option>
-	<option value="gender"><?php echo $this -> translate("gender");?></option>
-</select>
 
-<!-- submissionPlayers -->   
-
-<?php if(count($this -> submissionPlayers)) :?>
-<h3><?php echo $this -> translate('Submitted Player Cards');?></h3>
-<?php foreach($this -> submissionPlayers as $submissionPlayer) :?>
-	<?php $player = Engine_Api::_() -> getItem('user_playercard', $submissionPlayer -> player_id);?>
-	<?php echo $player -> getOverallRating();?>
-	<?php echo $this -> itemPhoto($player);?>
-	<?php echo $player;?> - 
-	<?php echo $player -> getOwner();?>
-	<?php echo $this -> translate("Note");?><?php echo $submissionPlayer -> getTitle();?> 
-	<?php echo $this -> translate("Description");?><?php echo $submissionPlayer -> getDescription();?>
-	<?php echo $submissionPlayer -> countPercentMatching();?>
-<?php endforeach;?>
-<?php endif;?>
-
-<script type="text/javascript">
-	window.addEvent('domready', function(){
-		<?php if($this -> filterType):?>
-			$('filter-submission').set('value', '<?php echo $this -> filterType;?>');
-		<?php endif;?>
-		$('filter-submission').addEvent('change', function(){
-			type_id = this.value;
-			url = '<?php echo $this -> url(array('id' => $campaign -> getIdentity(), 'slug' => $campaign -> getSlug()), 'tfcampaign_profile',true);?>' + '/sort/' + type_id;
-			window.location.assign(url);
-		});
-	});
-</script>
 
 
 
