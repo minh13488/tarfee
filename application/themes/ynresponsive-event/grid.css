@@ -97,9 +97,16 @@
 /*****************************/
 @media (min-width: 1200px) {
 
+    body#global_page_user-profile-index{
+         #global_content{
+            max-width: 100%;
+            padding-top: 5px;
+        }
+    }
+
     #global_content{
-        width: 100%;
-        margin: 0;
+        max-width: 1170px;
+        margin: 0 auto;
     }
 	#core_menu_mini_menu > ul,
 	.navbar.navbar-default {
@@ -110,8 +117,13 @@
     
     /*Set width header full width 100%*/
     .layout_ynresponsiveevent_event_mini_menu{
-        max-width: 100%;
+        width: 100%;
         padding: 0 15px;
+        margin: auto;
+
+        .yntheme-event-container{
+            max-width: 100%;
+        }
     }
     
     .yntheme-event-container,
@@ -119,11 +131,11 @@
     .layout_page_ynresponsiveevent_index_event .layout_top .layout_middle > div > div,
     .layout_page_core_index_index .layout_main .layout_middle > div > div {
         margin: 0 auto;
-/*		max-width: 1170px;*/
+		max-width: 1170px;
         
         &.row {
             margin: 0 auto;
-/*            max-width: 1170px;*/
+            max-width: 1170px;
         }
     }
 }

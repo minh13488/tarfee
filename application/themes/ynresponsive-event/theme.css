@@ -252,19 +252,16 @@ html[dir="rtl"] .layout_right
 .layout_right > div > h3, 
 .layout_middle > div > h3
 {
-	padding-bottom: 10px;	
-	border-bottom: 1px solid $theme_border_medium_color;
+	background: #f2f2f2;
+	padding: 10px;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+	margin-bottom: 10px;
 	margin-top: 0;
-    
-    &:after {
-        content: "";
-        display: block;
-        width: 50px;
-        height: 2px;
-        margin-top: 10px;
-        background-color: $theme_link_color;
-        position: absolute;
-    }
+	font-size: 18px;
+	font-weight: bold;
 }
 
 /*
@@ -4412,6 +4409,12 @@ Shows the mini menu and search widget
 		font-size: 1.154em;
 		color: $theme_font_color_light;
 		cursor: pointer;
+		position: relative;
+		top: -15px;
+
+		&:hover{
+			color: $theme_link_color_hover;
+		}
 
 		i.fa{
 			position: relative;
@@ -4423,6 +4426,25 @@ Shows the mini menu and search widget
     #global_search_form_container {   
     	display: inline-block;
     	margin-left: 30px;
+    	position: relative;
+    	top: 20px;
+
+    	button{
+			position: relative;
+			top: -7px;
+			margin-left: -35px;
+			width: 20px;
+			outline: 0;
+			height: 20px;
+			text-indent: -9999px;
+			background-color: transparent;
+			background-image: url(/tarfee/application/themes/ynresponsive-event/images/icon_search.png?c=24);
+			background-position: center center;
+			background-repeat: no-repeat;
+    	}
+    	.box-search_form_filter{
+
+    	}
 
         #global_search_field
         {
