@@ -93,6 +93,7 @@ else {
 <div class="tarfee_profile_cover_wrapper">
     <div class="tarfee_profile_cover_photo_wrapper" id="siteuser_cover_photo">
         <div class="tarfee_profile_cover_photo">
+            <span class="tarfee_profile_cover_bg_gradient"></span>
             <div class="cover-reposition">
           	  	<?php if($this->user -> isSelf($this -> viewer())):?>
     		        <span id="edit-cover-btn">
@@ -301,10 +302,9 @@ else {
                             $badge = Engine_Api::_()->authorization()->getPermission($this->subject(), 'user', 'badge');
                             if($badge && strpos($badge,'public/admin') !== false): ?>
                                 <img height="26" src="<?php echo $badge?>" />
+                                <?php echo $this->translate('professional account'); ?>
                         	<?php endif;?>
                     	<?php endif;?>
-                    <?php echo $this->translate('professional account'); ?>
-
                 </div>
 
                 <?php if($this->src_img):?>

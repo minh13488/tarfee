@@ -131,6 +131,9 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 	        }
 	    }
 		
-		$this->view->max_keywords = $max_keywords;	
+		$this->view->max_keywords = $max_keywords;
+		
+		//advanced search campaign
+		$this->view->sports = $sport = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1Assoc();	
 	}
 }

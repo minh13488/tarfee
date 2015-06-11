@@ -1082,6 +1082,7 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
     float: right;
     padding: 10px;
 }
+
 #global_page_user-profile-index {
     .layout_user_profile_players {
         .tarfee_list {
@@ -1142,6 +1143,7 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                 &:nth-child(3n+1){
                     margin-left: 0;
                 }
+
 
                 #profile_photo {
                     background: #fff;
@@ -1243,7 +1245,7 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                             white-space: nowrap;
                             overflow: hidden;
                             text-overflow: ellipsis;
-                            width: 77%;
+                            width: 70%;
                             display: inline-block;
                         }
                     }
@@ -1966,7 +1968,7 @@ body#global_page_user-profile-index {
 
             li {
                 text-align: center;
-                width: 33%;
+                width: 32.5%;
                 border-color: $theme_border_dark_color;
                 margin-top: 4px;
                 margin-bottom: 4px;
@@ -1977,6 +1979,7 @@ body#global_page_user-profile-index {
                 a {
                     color: $theme_font_color;
                     font-size: 16px;
+                    text-transform: lowercase;
 
                     &:hover {
                         color: $theme_link_color;
@@ -2032,3 +2035,5 @@ body#global_page_user-profile-index {
         }
     }
 }
+
+
