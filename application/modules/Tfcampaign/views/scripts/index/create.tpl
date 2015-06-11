@@ -64,12 +64,19 @@
 		 		return false;
 		 	} 
 	 		
+	 		//check period from admin
+		 	<?php 
+				$settings = Engine_Api::_()->getApi('settings', 'core');
+				$period = $settings->getSetting('tfcampaign_max_period', "20");
+		 	?>
+	 		
 		 	//miniseconds
-		 	var period = Math.abs(endDateObject - startDateObject); 
+		 	var period = (endDateObject - startDateObject); 
 		 	//seconds per hour*hours per day*milisecond
 		 	var period_day = (period/(3600*24*1000));
-		 	if(period_day > 14 || period_day <= 0) {
-		 		var message = "<?php echo $this -> translate('end date must greater than is start date (maximum 2 weeks)');?>";
+		 	var max_period = "<?php echo $period;?>";
+		 	if(period_day > max_period || period_day <= 0) {
+		 		var message = "<?php echo $this -> translate('end date must greater than is start date (maximum %s days)', $period);?>";
 		 		var div = new Element('div', {
 			       'html': message,
 			       'class': 'create-campaign-error',
@@ -82,44 +89,6 @@
 		 		return false;
 		 	} 
 	 	}
-	 	
-	 	//check period from admin
-	 	<?php 
-	 		$campaignTable = Engine_Api::_() -> getItemTable('tfcampaign_campaign');
-			$campaign = $campaignTable -> getLastestCampaign($this -> viewer());
-			$settings = Engine_Api::_()->getApi('settings', 'core');
-			$period = $settings->getSetting('tfcampaign_max_period', "20");
-	 	?>
-	 	<?php if($campaign) :?>
-	 		//if has campaign then check valid period
-	 		<?php
-	 			$end_date = strtotime($campaign->end_date);
-	 		?>
-		 	var prevCampaignEndDate = '<?php print date("m/d/Y", $end_date); ?>';
-		 	var prevCampaignEndDateObject  = new Date(prevCampaignEndDate);
-		 	var startDate = $('start_date-date').get('value');
-		 	var startDateObject  = new Date(startDate);
-		 	//miniseconds
-		 	var period = Math.abs(startDateObject - prevCampaignEndDateObject); 
-		 	//seconds per hour*hours per day*milisecond
-		 	var period_day = (period/(3600*24*1000)); 
-		 	//get max period in admin
-		 	var max_period = "<?php echo $period;?>";
-		 	if(period_day < max_period) {
-				prevCampaignEndDateObject.setTime(prevCampaignEndDateObject.getTime() + max_period * 86400000);
-		 		var message = "<?php echo $this -> translate('start date must be greater than ');?>" + prevCampaignEndDateObject.toDateString();
-		 		var div = new Element('div', {
-			       'html': message,
-			       'class': 'create-campaign-error',
-			        styles: {
-				        'color': 'red',
-				        'font-weight': 'bold',
-				    },
-			    });
-		 		$('start_date-wrapper').grab(div,'before');
-		 		return false;
-		 	}
-	 	<?php endif;?>
 	 	
 	 	//check age
 	 	var from_age = $('from_age').get('value');
