@@ -673,8 +673,11 @@ class Ynevent_IndexController extends Core_Controller_Action_Standard
 
 						$roles = array(
 								'owner',
-								'invite',
-								'follower',
+								'member',
+								'owner_member',
+								'owner_member_member',
+								'owner_network',
+								'registered',
 								'everyone'
 							);
 							

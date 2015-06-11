@@ -125,6 +125,6 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 	}
 	
 	public function getSportId() {
-		return $this->category_id‏;
+		return 'category_id‏';
 	}
 }
