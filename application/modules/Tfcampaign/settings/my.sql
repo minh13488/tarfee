@@ -28,6 +28,8 @@ CREATE TABLE IF NOT EXISTS `engine4_tfcampaign_submissions` (
 `video_id` int(11) NOT NULL DEFAULT '0',
 `creation_date` datetime NOT NULL,
 `modified_date` datetime NOT NULL,
+`hided` tinyint(1) NOT NULL default '0',
+`reason_id` int(11) NOT NULL DEFAULT '0',
 PRIMARY KEY (`submission_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
