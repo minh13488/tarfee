@@ -2042,8 +2042,12 @@ body#global_page_user-profile-index {
 	margin-top: 5px;
 	#user_ids-element span a > img
 	{
-		width: 32px;
-		height: 32px;
+		width: 26px;
+		height: 26px;
 		margin-right: 5px;
+	}
+	span + span
+	{
+		margin-left: 10px;
 	}
 }
