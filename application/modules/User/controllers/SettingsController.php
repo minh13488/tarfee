@@ -36,19 +36,12 @@ class User_SettingsController extends Core_Controller_Action_User {
 		$this -> _helper -> requireSubject();
 		$this -> _helper -> requireAuth() -> setAuthParams($subject, null, 'edit');
 
-		// Set up navigation
-		// $this->view->navigation = $navigation = Engine_Api::_()
-		//   ->getApi('menus', 'core')
-		//   ->getNavigation('user_settings', ( $id ? array('params' => array('id'=>$id)) : array()));
-
 		$contextSwitch = $this -> _helper -> contextSwitch;
 		$contextSwitch
-		// -> addActionContext('reject', 'json')
 		-> initContext();
 
 		// Render
 		$this -> _helper -> content
-		// -> setNoRender()
 		-> setEnabled();
 	}
 

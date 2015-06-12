@@ -49,7 +49,7 @@ class User_Form_Settings_Privacy extends Engine_Form
     // Init blocklist
     $this->addElement('Hidden', 'blockList', array(
       'label' => 'Blocked Members',
-      'description' => 'Adding a person to your block list makes your profile (and all of your other content) unviewable to them. Any connections you have to the blocked person will be canceled. To add someone to your block list, visit that person\'s profile page.',
+      'description' => 'Adding a person to your block list makes your profile (and all of your other content) unviewable to them. Any connections you have to the blocked person will be canceled.',
       'order' => -1
     ));
     Engine_Form::addDefaultDecorators($this->blockList);

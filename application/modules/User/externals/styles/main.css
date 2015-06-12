@@ -2037,3 +2037,13 @@ body#global_page_user-profile-index {
 }
 
 
+#user_ids-wrapper
+{
+	margin-top: 5px;
+	#user_ids-element span a > img
+	{
+		width: 32px;
+		height: 32px;
+		margin-right: 5px;
+	}
+}
