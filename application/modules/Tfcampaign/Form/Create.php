@@ -45,7 +45,6 @@ class Tfcampaign_Form_Create extends Engine_Form
 	$sportCattable = Engine_Api::_() -> getDbtable('sportcategories', 'user');
 	$node = $sportCattable -> getNode(0);
 	$categories = $node -> getChilren();
-	$sport_categories[0] = '';
 	foreach($categories as $category)
 	{
 		$sport_categories[$category->getIdentity()] = $category -> getTitle();
@@ -137,6 +136,7 @@ class Tfcampaign_Form_Create extends Engine_Form
 	));
 	
 	$positions = $sportCattable -> getMultiOptions('--', '', FALSE);
+	array_shift($positions);
 	$this -> addElement('Select', 'position_id', array(
 		'label' => 'Position',
 		'multiOptions' => $positions,
@@ -151,6 +151,26 @@ class Tfcampaign_Form_Create extends Engine_Form
         'label' => 'Video Required',
     )); 
 	
+	$this->addElement('Select', 'percentage', array(
+        'label' => 'Matching Percentage',
+        'description' => 'The minimum percentage of matching.',
+        'multiOptions' => array(
+			'25' => '25%',
+			'50' => '50%',
+			'75' => '75%',
+			'100' => '100%',
+		),
+        'value' => 25,
+    ));
+	
+	$this->addElement('Radio', 'allow_submit', array(
+      'label' => 'Allow users to submit their player',
+      'multiOptions' => array(
+        1 => 'Yes, allow users to submit their players.',
+        0 => 'No, do not allow users to submit their players.'
+      ),
+      'value' => 1,
+    ));
 	
 	// View for specific users
     $this -> addElement('Text', 'user', array(
