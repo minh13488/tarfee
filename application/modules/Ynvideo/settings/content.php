@@ -470,5 +470,13 @@ return array(
         'type' => 'widget',
         'name' => 'ynvideo.list-videos',
     ),
+    
+	array(
+        'title' => 'Main Page Videos',
+        'description' => 'Displays a list of videos on main page.',
+        'category' => 'Advanced Videos',
+        'type' => 'widget',
+        'name' => 'ynvideo.main-page-videos',
+    ),
 )
 ?>
