@@ -94,8 +94,8 @@
 	 	var from_age = $('from_age').get('value');
 	 	var to_age = $('to_age').get('value');
 	 	if(from_age != "" && to_age != ""){
-	 		if(from_age > to_age) {
-	 			var message = "<?php echo $this -> translate('to date must be greater than from date ');?>";
+	 		if(parseInt(from_age) > parseInt(to_age)) {
+	 			var message = "<?php echo $this -> translate('to age must be greater than from age');?>";
 		 		var div = new Element('div', {
 			       'html': message,
 			       'class': 'create-campaign-error',
