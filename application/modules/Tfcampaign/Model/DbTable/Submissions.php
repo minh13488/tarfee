@@ -36,6 +36,10 @@ class Tfcampaign_Model_DbTable_Submissions extends Engine_Db_Table {
 		$select -> joinLeft("$locationTblName as location", "location.location_id = player.country_id", null) ;
         $select -> group("submission.submission_id");
         
+		if(isset($params['campaign_id'])) {
+			$select -> where('submission.campaign_id = ?', $params['campaign_id']);
+		}
+		
 		if (isset($params['order'])) {
 	        if (empty($params['direction'])) {
 	            $params['direction'] = ($params['order'] == 'submission.submission_id') ? 'DESC' : 'ASC';
