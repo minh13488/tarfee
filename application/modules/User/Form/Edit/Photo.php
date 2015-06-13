@@ -51,7 +51,7 @@ class User_Form_Edit_Photo extends Engine_Form
       'label' => 'Photo Link (URL)',
       'description' => 'Paste the web address of the photo here (jpg,jpeg,png,gif).',
       'onchange'=>'javascript:uploadSignupPhoto();',
-      'maxlength' => '50'
+      'maxlength' => '200'
     ));
     $this->url->getDecorator("Description")->setOption("placement", "append");
 	
