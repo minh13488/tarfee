@@ -211,7 +211,7 @@ else {
                                 'user_id' => $subject->getIdentity(),
                                 'rev' => true
                             ), '<span class="profile_follow_button"><i class="fa fa-flag"></i></span>', array(
-                                'class' => 'smoothbox profile_follow'
+                                'class' => 'smoothbox profile_follow', 'title' => $this -> translate("Follow")
                             ));
                         }
                         else if( $subjectRow->resource_approved == 0 ) {
@@ -223,7 +223,7 @@ else {
                                 'user_id' => $subject->getIdentity(),
                                 'rev' => true
                             ), '<span class="profile_follow_button"><i class="fa fa-flag-o"></i></span>', array(
-                                'class' => 'smoothbox profile_unfollow'
+                                'class' => 'smoothbox profile_unfollow', 'title' => $this -> translate("Unfollow")
                             ));
                         }
                         else
@@ -236,7 +236,7 @@ else {
                                 'user_id' => $subject->getIdentity(),
                                 'rev' => true
                             ), '<span class="profile_follow_button"><i class="fa fa-flag-o"></i></span>', array(
-                                'class' => 'smoothbox profile_unfollow'
+                                'class' => 'smoothbox profile_unfollow', 'title' => $this -> translate("Unfollow")
                             ));
                         } 
                         ?>
@@ -247,7 +247,7 @@ else {
                             'action' => 'compose',
                             'to' => $this -> subject() ->getIdentity()
                         ), '<span class="profile_inbox_button"><i class="fa fa-comments"></i></span>', array(
-                            'class' => 'smoothbox'
+                            'class' => 'smoothbox', 'title' => $this -> translate("Message")
                         ));
                         ?>
                      </li>
@@ -261,15 +261,13 @@ else {
                             'type' => 'user',
                             'id' => $this->subject() -> getIdentity(),
                         ), '<span class="profile_share_button"><i class="fa fa-rss"></i></span>', array(
-                            'class' => 'smoothbox'
+                            'class' => 'smoothbox', 'title' => $this -> translate("Share")
                         ));
                         ?>
                      </li>
                 </ul>
             </div>
         </div>
-
-
          <div class="tarfee_profile_coverinfo_status">
                <h2>
                    <a href="<?php echo $this -> user -> getHref();?>">

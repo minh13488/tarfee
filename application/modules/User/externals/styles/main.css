@@ -1175,10 +1175,15 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                             }
                             span.player-position{
                                 float: right;
+                                width: 35%;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-align: right;
+                                text-overflow: ellipsis;
                             }
                             span.player-title{
                                 display: block;
-                                width: 50%;
+                                width: 45%;
                                 white-space: nowrap;
                                 overflow: hidden;
                                 text-overflow: ellipsis;

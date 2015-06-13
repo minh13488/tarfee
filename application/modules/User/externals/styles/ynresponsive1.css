@@ -44,7 +44,8 @@
 				    background-color: rgba(0, 0, 0, 0.6);
 				    padding: 5px 10px;
 					float: left;
-					margin-right: 2px;				    
+					margin-right: 2px;		
+					text-transform: lowercase;		    
 				}
 			}
 	        
@@ -181,6 +182,11 @@
 			                    -moz-border-radius: 5px;
 			                    color: $theme_font_color;
 			                    display: block;
+
+			                    &:hover{
+			                    	background: $theme_link_color_hover;
+			                    	color: #fff;
+			                    }
 			                }
 			            }
 			        }
