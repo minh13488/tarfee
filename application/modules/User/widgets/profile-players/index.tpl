@@ -160,40 +160,39 @@
 
 										<!-- asd sa d  -->
 										<?php if ($this -> viewer() -> getIdentity()):?>
-										<li title="<?php echo $this -> translate("eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
-				                    		<?php if($player->isEyeOn()): ?>              
-				                        	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
-				                        		<span>
-				                        			<i class="fa fa-eye-slash"></i>
-			                        			</span>
-				                    		</a>
-				                    		<?php else: ?>
-				                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
-				                        		<span>
-				                        			<i class="fa fa-eye"></i>
-			                        			</span>
-				                        	</a>
-				                    		<?php endif; ?>
-				                		</li>
-				                		<?php endif;?>
+											<li title="<?php echo $this -> translate("Eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
+					                    		<?php if($player->isEyeOn()): ?>              
+					                        	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
+					                        		<span>
+					                        			<i class="fa fa-eye-slash"></i>
+				                        			</span>
+					                    		</a>
+					                    		<?php else: ?>
+					                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
+					                        		<span>
+					                        			<i class="fa fa-eye"></i>
+				                        			</span>
+					                        	</a>
+					                    		<?php endif; ?>
+					                		</li>
 
-										<li title="<?php echo $this -> translate('comment')?>">
-											<a class="actions_generic" href="<?php echo $player -> getHref()?>">
-												<span>
-													<i class="fa fa-comment"></i>
-												</span>
-											</a>
-										</li>
+											<li title="<?php echo $this -> translate('Comment')?>">
+												<a class="actions_generic" href="<?php echo $player -> getHref()?>">
+													<span>
+														<i class="fa fa-comment"></i>
+													</span>
+												</a>
+											</li>
 										
-										<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid(), 'format' => 'smoothbox'),'default', true);?>
-										<li>
-											<a class="actions_generic smoothbox" href="<?php echo $url?>">
-												<span>
-													<i class="fa fa-flag"></i>
-												</span>
-											</a>
-										</li>
-
+											<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+											<li title="<?php echo $this -> translate('Report')?>">
+												<a class="actions_generic smoothbox" href="<?php echo $url?>">
+													<span>
+														<i class="fa fa-flag"></i>
+													</span>
+												</a>
+											</li>
+										<?php endif;?>
 									<?php endif; ?>
 									
 								</ul>
@@ -201,14 +200,14 @@
 							<div class="tarfee_sport_type_position">
 								<?php if($player -> getSport()):?>
 									<?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?>
-									<span class="player-title"><?php echo $player -> getSport() -> getTitle();?></span>
+									<span title="<?php echo $player -> getSport() -> getTitle();?>" class="player-title"><?php echo $player -> getSport() -> getTitle();?></span>
+								<?php endif;?>
+								<?php if($player -> getPosition()):?>
+									<span title="<?php echo $player -> getPosition() -> getTitle();?>" class="player-position">
+										<?php echo $player -> getPosition() -> getTitle();?>
+									</span>
 								<?php endif;?>
 								
-								<span class="player-position">
-									<?php if($player -> getPosition()):?>
-										<?php echo $player -> getPosition() -> getTitle();?>
-									<?php endif;?>
-								</span>
 							</div><!--tarfee_sport_type_position-->
 						</div>
 					</div>
@@ -223,7 +222,7 @@
 							?>
 							
 						</span>
-						<a href="<?php echo $player -> getHref()?>" class="player_name" ><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 20)?></a>
+						<a title="<?php echo $player -> first_name.' '.$player -> last_name;?>" href="<?php echo $player -> getHref()?>" class="player_name" ><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 20)?></a>
 					</div>
 
 					<?php $overRallRating = $player -> getOverallRating();?>
@@ -255,7 +254,7 @@
 						<p>
 							<?php 
 								if($countryName)
-									echo $countryName
+								echo $countryName
 							?>
 						</p>
 						<p>

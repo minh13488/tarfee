@@ -53,6 +53,7 @@
 	            position: absolute;
 	            right: 0;
 	            top: 0;
+	            z-index: 11;
 	            height: 100%;
 	            padding: 50px 10px 10px 70px;
 	            width: 157px;
@@ -122,7 +123,7 @@
 			margin: auto;
 			overflow: hidden;
 			top: -160px;
-			z-index: 12;
+			z-index: 11;
 
 			.item_photo{
 				width: 213px;

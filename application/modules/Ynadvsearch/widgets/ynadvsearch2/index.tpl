@@ -377,8 +377,11 @@
 window.addEvent('domready', function() {
 	$$('.search-tab-item').addEvent('click', function() {
 		var index = $('advanced-search-tab').getChildren('li.search-tab-item').indexOf(this);
+		$$('.search-tab-item').removeClass('active');
+		this.addClass('active');
 		index = index+1;
 		$$('.search-form-item').removeClass('active');
+
 		$$('.search-form-item:nth-child('+index+')').addClass('active');
 	});
 	
@@ -485,6 +488,7 @@ jQuery.noConflict();
 		if (form) {
 			var button = $('<button />', {
 				type: 'button',
+				class: 'btn-search-main',
 				text: '<?php echo $this->translate('Search')?>',
 				click: function() {
 					var searchForm = $(this).closest('#global_search_form');
@@ -552,6 +556,16 @@ jQuery.noConflict();
 			$("#advanced-search-filter").detach().appendTo(advsearch);
 			form.append(advsearch);
 		}
+
+		$('#search-filter .global_search_form_filter_advanced').click(function() {
+			$('#advanced-search-filter').css('display','none');
+		});
+
+		
+		$('#search-advsearch .global_search_form_filter_advanced').click(function() {
+			$('#basic-search-filter').css('display','none');
+		});
+
 	});
 })(jQuery);
 </script>

@@ -1,0 +1,7 @@
+@charset "utf-8";
+/* CSS Document */
+form#EditPhoto{float:left; margin-right:10px; width:330px; overflow:visible; }
+form#EditPhoto > div > div, form#SignupForm > div > div{height:510px; width:915px;}
+#global_page_user-signup-index embed, #global_page_user-edit-photo embed, #global_page_user-edit-photo-popup embed, #global_page_webcamavatar-edit-photo embed, #global_page_user-signup-index object, #global_page_user-edit-photo object, #global_page_webcamavatar-edit-photo object{position:absolute; margin-left:355px; margin-top:40px;}
+#global_page_user-signup-index .photo_form  #done-wrapper{margin-bottom:90px;}
+#global_page_user-signup-index  .global_form > div, #global_page_user-edit-photo .global_form > div, #global_page_webcamavatar-edit-photo .global_form > div{overflow:visible;}

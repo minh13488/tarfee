@@ -305,12 +305,25 @@ else {
                     	<?php endif;?>
                 </div>
 
-                <?php if($this->src_img):?>
-                    <div class="verified_account">
+                <div class="verified_account">
+                	<?php if($this->src_img):?>
                         <img height="26" src='<?php echo $this->src_img;?>'>
                         <?php echo $this -> translate("verified account");?>
-                    </div>
-                <?php endif;?>
+                     <?php endif;?>
+                     <?php $menu = new Slprofileverify_Plugin_Menus();
+						$aVerifyButton = $menu->onMenuInitialize_UserProfileVerified();
+                     	?>
+                     <?php if($aVerifyButton):?>
+                     	<a href="<?php echo $this->url($aVerifyButton['params'], 
+		                	$aVerifyButton['route'], array());?>" 
+		                	class="<?php echo $aVerifyButton['class'];?> buttonlink"
+		                	title="<?php echo $aVerifyButton['label']; ?>"
+		                	style="background-image: url(<?php echo $aVerifyButton['icon']?>);"
+		                	target=""> 
+		                	<?php echo $aVerifyButton['label'];?>
+	                	</a>
+                 	 <?php endif;?>
+                </div>
          </div>
          <div class="tarfee_profile_club_item">
              <ul>               
