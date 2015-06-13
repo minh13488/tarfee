@@ -10,6 +10,34 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		$this -> _helper -> requireSubject('tfcampaign_campaign');
 	}
 	
+	public function saveAction() {
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(true);
+		
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
+		
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$saveTbl = Engine_Api::_() -> getDbTable("saves", "tfcampaign");
+		$campaign = Engine_Api::_() -> core() -> getSubject();
+		$saveRow = $saveTbl -> getSaveRow($viewer -> getIdentity(), $campaign -> getIdentity());
+		if ($saveRow) {
+			//existing row
+			$saveRow -> active = 1 - $saveRow -> active;
+			$saveRow -> save();
+		} else {
+			//create new
+			$saveRow = $saveTbl -> createRow();
+			$saveRow -> setFromArray(array(
+				'user_id' => $viewer -> getIdentity(), 
+				'campaign_id' => $campaign -> getIdentity(), 
+				'creation_date' => new Zend_Db_Expr("NOW()"), 
+			));
+			$saveRow -> active = true;
+			$saveRow -> save();
+		}
+	}
+	
 	public function withdrawAction() {
 		// Return if guest try to access to create link.
 		if (!$this -> _helper -> requireUser -> isValid())

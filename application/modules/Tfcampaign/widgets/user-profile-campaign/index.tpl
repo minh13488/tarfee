@@ -6,6 +6,11 @@
 			<?php echo $this -> translate('add more campaign');?>
 		</a>
 	</div>
+	<div class="btn-view-all-campaigns">
+		<a href="<?php echo $this -> url(array('action' => 'view-campaigns'), 'tfcampaign_general', true);?>">
+			<?php echo $this -> translate('view campaigns');?>
+		</a>
+	</div>
 <?php endif;?>
 
 <ul class="tfcampaign_list">

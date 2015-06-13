@@ -57,7 +57,7 @@
 				'action' => 'browse',
 			),
 			'reqs' => array(
-	            'action' => '(create|browse)',
+	            'action' => '(create|browse|view-campaigns)',
 	        )
 		),
 		'tfcampaign_specific' => array(
@@ -68,7 +68,7 @@
 	            'action' => 'index',
 	        ),
 	        'reqs' => array(
-	            'action' => '(edit|delete|submit|hide|unhide|withdraw)',
+	            'action' => '(edit|delete|submit|hide|unhide|withdraw|save)',
 	            'campaign_id' => '\d+',
 	        )
 	    ),

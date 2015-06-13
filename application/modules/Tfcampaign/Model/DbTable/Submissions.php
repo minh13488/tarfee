@@ -3,11 +3,19 @@ class Tfcampaign_Model_DbTable_Submissions extends Engine_Db_Table {
 	
 	protected $_rowClass = 'Tfcampaign_Model_Submission';
 	
+	public function getCampaignIdsSubmitted($user) {
+		$select = $this -> select()
+						-> distinct()
+						-> from($this -> info('name'), 'campaign_id')
+						-> where('user_id = ?', $user -> getIdentity());
+		return $select->query()->fetchAll(FETCH_ASSOC, 0);
+	}					
+	
 	public function getSubmissionsPaginator($params = array()) 
     {
         return Zend_Paginator::factory($this->getSubmissionsSelect($params));
     }
-  
+  	
     public function getSubmissionsSelect($params = array()) {
     	
 		$submissionTbl = $this;

@@ -58,7 +58,7 @@
     array('class' => '')) ?>
    <?php endif;?>
   
-   <?php if($campaign -> isDeletable()) :?>
+<?php if($campaign -> isDeletable()) :?>
  -
 <?php echo $this->htmlLink(
     array('route' => 'tfcampaign_specific','action' => 'delete', 'campaign_id' => $campaign->getIdentity()), 
@@ -71,6 +71,8 @@
     array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
     $this->translate('Submit Player Profile'), 
 array('class' => 'smoothbox')) ?>
+-
+<span class="<?php echo ($campaign -> isSaved())? 'campaign-save-active' : ''  ?>" id="tfcampaign-campaign-save"><i class="fa fa-floppy-o"></i></span>
 <?php endif;?>
 
 <!-- meta data -->
@@ -78,6 +80,27 @@ array('class' => 'smoothbox')) ?>
 	<?php echo $this -> translate(array("%s submission", "%s submissions", count($this -> submissionPlayers)), count($this -> submissionPlayers));?>
 	<?php echo $this -> translate(array("%s view", "%s views", $campaign -> view_count), $campaign -> view_count);?>
 <?php endif;?>
+
+<script type="text/javascript">
+	window.addEvent('domready', function(){
+		<?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
+		$('tfcampaign-campaign-save').addEvent('click', function(){
+			if(this.hasClass('campaign-save-active')) {
+				this.removeClass('campaign-save-active');
+			} else {
+				this.addClass('campaign-save-active');
+			}
+			var url = '<?php echo $this -> url(array('action' => 'save', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific', true) ?>';
+			new Request.JSON({
+		        url: url,
+		        data: {
+		            'campaign_id': '<?php echo $campaign -> getIdentity() ?>',
+		        },
+		    }).send();
+		});
+		<?php endif;?>
+	});
+</script>
 
 
 
