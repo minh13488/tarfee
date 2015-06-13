@@ -29,7 +29,6 @@ class User_Form_Edit_Photo extends Engine_Form
       'ignore' => true,
       'decorators' => array(array('ViewScript', array(
         'viewScript' => '_formEditImage.tpl',
-        //'viewScript' => '_formImageCrop.tpl',
         'class'      => 'form element',
         'testing' => 'testing'
       )))
@@ -42,12 +41,20 @@ class User_Form_Edit_Photo extends Engine_Form
       'multiFile' => 1,
       'validators' => array(
         array('Count', false, 1),
-        // array('Size', false, 612000),
         array('Extension', false, 'jpg,jpeg,png,gif'),
       ),
       'onchange'=>'javascript:uploadSignupPhoto();'
     ));
-
+	
+	 // Init url
+    $this->addElement('Text', 'url', array(
+      'label' => 'Photo Link (URL)',
+      'description' => 'Paste the web address of the photo here (jpg,jpeg,png,gif).',
+      'onchange'=>'javascript:uploadSignupPhoto();',
+      'maxlength' => '50'
+    ));
+    $this->url->getDecorator("Description")->setOption("placement", "append");
+	
     $this->addElement('Hidden', 'coordinates', array(
       'filters' => array(
         'HtmlEntities',
