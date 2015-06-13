@@ -37,11 +37,12 @@ class Ynvideo_Model_DbTable_ReviewRatings extends Engine_Db_Table
 	}
 	
 	public function getRatingsBy($params = array()) {
+		$select = $this -> select();
 		if(isset($params['resource_id']) && !empty($params['resource_id'])) {
-			$select = $this -> select() -> where('resource_id = ?', $params['resource_id']);
+			$select -> where('resource_id = ?', $params['resource_id']);
 		}
 		if(isset($params['user_id']) && !empty($params['user_id'])) {
-			$select = $this -> select() -> where('user_id = ?', $params['user_id']);
+			$select -> where('user_id = ?', $params['user_id']);
 		}
 		return $this -> fetchAll($select);
 	}

@@ -29,46 +29,46 @@
                 {
                     $action = 'photo';
                     $key = 'photo_pc';
-					// echo $this->htmlLink(array(
-	    //                 'route' => 'default',
-	    //                 'module' => 'user',
-	    //                 'controller' => 'edit',
-	    //                 'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_($key) . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
-	    //             );
+					echo $this->htmlLink(array(
+	                    'route' => 'default',
+	                    'module' => 'user',
+	                    'controller' => 'edit',
+	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_($key) . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
+	                );
                 } 
 				else if($key == 'sportlike')
 				{
 					$action = 'photo';
-					// echo $this->htmlLink(array(
-	    //                 'route' => 'default',
-	    //                 'module' => 'user',
-	    //                 'controller' => 'edit',
-	    //                 'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_('like sport') . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
-	    //             );
+					echo $this->htmlLink(array(
+	                    'route' => 'default',
+	                    'module' => 'user',
+	                    'controller' => 'edit',
+	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_('like sport') . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
+	                );
 				}
 				else if($key == 'clubfollow')
 				{
-					 // echo $this->htmlLink(array(
-	     //                'route' => 'group_general',
-	     //                'action' => 'browse'), '+ ' . Zend_Registry::get('Zend_Translate')->_('follow clubs') . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
-	     //            );
+					 echo $this->htmlLink(array(
+	                    'route' => 'group_general',
+	                    'action' => 'browse'), '+ ' . Zend_Registry::get('Zend_Translate')->_('follow clubs') . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
+	                );
 				}
 				else if($key == 'videoupload')
 				{
-					// echo $this->htmlLink(array(
-	    //                 'route' => 'video_general',
-	    //                 'action' => 'create'), '+ ' . Zend_Registry::get('Zend_Translate')->_('upload video') . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
-	    //             );
+					echo $this->htmlLink(array(
+	                    'route' => 'video_general',
+	                    'action' => 'create'), '+ ' . Zend_Registry::get('Zend_Translate')->_('upload video') . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
+	                );
 				}
                 else 
                 {
                     $action = 'profile';
-					// echo $this->htmlLink(array(
-	    //                 'route' => 'default',
-	    //                 'module' => 'user',
-	    //                 'controller' => 'edit',
-	    //                 'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_($key) . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
-	    //             );
+					echo $this->htmlLink(array(
+	                    'route' => 'default',
+	                    'module' => 'user',
+	                    'controller' => 'edit',
+	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_($key) . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
+	                );
                 }
                 break;
             }
@@ -76,9 +76,9 @@
         <?php endforeach; ?>
     </li>
     <li>
-       <b> <?php
+       <b style="text-transform: lowercase"> <?php
         if ($this->percent_completed != 100) {
-            // echo $this->link_UpdateProfile;
+            echo $this->link_UpdateProfile;
         };
         ?>
        </b>

@@ -284,7 +284,7 @@ class SocialConnect_Api_Core
 				if (class_exists('User_Model_DbTable_Facebook'))
 				{
 					$table = new User_Model_DbTable_Facebook;
-					$account = $table -> fetchRow($table -> select() -> where('user_id=?', $userId));
+					$account = $table -> fetchRow($table -> select() -> where("user_id = {$userId} OR facebook_uid = {$identity}"));
 					if($account)
 					{
 						$account -> delete();

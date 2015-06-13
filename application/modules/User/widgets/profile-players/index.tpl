@@ -83,41 +83,123 @@
 							
 							<div class="avatar-box-hover">
 								<ul class="actions">
+									<?php if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())): ?>
 
-									<?php if ($this -> viewer() -> getIdentity()):?>
-									<li title="<?php echo $this -> translate("eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
-			                    		<?php if($player->isEyeOn()): ?>              
-			                        	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
-			                        		<span>
-			                        			<i class="fa fa-eye-slash"></i>
-		                        			</span>
-			                    		</a>
-			                    		<?php else: ?>
-			                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
-			                        		<span>
-			                        			<i class="fa fa-eye"></i>
-		                        			</span>
-			                        	</a>
-			                    		<?php endif; ?>
-			                		</li>
-			                		<?php endif;?>
-
-									<li title="<?php echo $this -> translate('comment')?>">
-										<a class="actions_generic" href="<?php echo $player -> getHref()?>">
-											<span>
-												<i class="fa fa-comment"></i>
-											</span>
-										</a>
+									<!-- Button Edit Crop Delete -->
+									<li class="first">
+										<?php
+							            	echo $this->htmlLink(array(
+									            'route' => 'user_extended',
+									            'controller' => 'player-card',
+									            'action' => 'edit',
+									            'id' => $player->playercard_id,
+									        ), '<i class="fa fa-pencil"></i>', array(
+									            'class' => ''
+									        ));
+										?>
 									</li>
+
+									<li class="second">
+										<?php
+							        		echo $this->htmlLink(array(
+									            'route' => 'user_extended',
+									            'controller' => 'player-card',
+									            'action' => 'crop-photo',
+									            'id' => $player->playercard_id,
+									        ), '<i class="fa fa-crop"></i>', array(
+									            'class' => 'smoothbox'
+									        ));
+										?>
+									</li>
+
+									<li class="fifth">
+										<?php
+											echo $this->htmlLink(array(
+									            'route' => 'user_extended',
+									            'controller' => 'player-card',
+									            'action' => 'delete',
+									            'id' => $player->playercard_id,
+									        ), '<i class="fa fa-times"></i>', array(
+									            'class' => 'smoothbox'
+									        ));
+										?>
+									</li>
+
+
+
+
+									<li class="setting" onclick="showOptions(<?php echo $player->playercard_id ?>, this)">
+										<a href="javascript:void(0)"><i class="fa fa-plus"></i></a>
+									</li>
+										<ul class="setting-list" style="display: none" id="setting-list_<?php echo $player->playercard_id?>">
+
+											<li>
+											<?php
+							        			echo $this->htmlLink(array(
+												'route' => 'video_general',
+													'action' => 'create',
+													'parent_type' =>'user_playercard',
+													'subject_id' =>  $player->playercard_id,
+												), '<i class="fa fa-video-camera"></i>&nbsp;'.$this->translate('Add Video'), array(
+												'class' => ''
+												)) ;
+											?>
+											</li>
+
+											<li>
+											<?php
+												echo $this->htmlLink(array(
+										            'route' => 'user_photo',
+										            'controller' => 'upload',
+										            'id' => $player->playercard_id,
+										            'type' => $player->getType(),
+										        ), '<i class="fa fa-camera"></i>&nbsp;'.$this->translate('Add Photos'), array(
+										            'class' => 'smoothbox'
+										        ));
+											?>
+											</li>
+										</ul>
 									
-									<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid(), 'format' => 'smoothbox'),'default', true);?>
-									<li>
-										<a class="actions_generic smoothbox" href="<?php echo $url?>">
-											<span>
-												<i class="fa fa-flag"></i>
-											</span>
-										</a>
-									</li>
+								    <?php endif;?>
+
+									<?php if(!($player -> getOwner())) :?>
+
+										<?php if ($this -> viewer() -> getIdentity()):?>
+										<li title="<?php echo $this -> translate("eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
+				                    		<?php if($player->isEyeOn()): ?>              
+				                        	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
+				                        		<span>
+				                        			<i class="fa fa-eye-slash"></i>
+			                        			</span>
+				                    		</a>
+				                    		<?php else: ?>
+				                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
+				                        		<span>
+				                        			<i class="fa fa-eye"></i>
+			                        			</span>
+				                        	</a>
+				                    		<?php endif; ?>
+				                		</li>
+				                		<?php endif;?>
+
+										<li title="<?php echo $this -> translate('comment')?>">
+											<a class="actions_generic" href="<?php echo $player -> getHref()?>">
+												<span>
+													<i class="fa fa-comment"></i>
+												</span>
+											</a>
+										</li>
+										
+										<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+										<li>
+											<a class="actions_generic smoothbox" href="<?php echo $url?>">
+												<span>
+													<i class="fa fa-flag"></i>
+												</span>
+											</a>
+										</li>
+
+									<?php endif; ?>
 
 								</ul>
 
@@ -125,7 +207,7 @@
 							<div class="tarfee_sport_type_position">
 								<?php if($player -> getSport()):?>
 									<?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?>
-									<?php echo $player -> getSport() -> getTitle();?>
+									<span class="player-title"><?php echo $player -> getSport() -> getTitle();?></span>
 								<?php endif;?>
 								
 								<span class="player-position">
@@ -169,73 +251,7 @@
 					    <?php endif; ?>
 					</div>
 
-					<?php 
-		            	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())): ?>
-						<span class="setting" onclick="showOptions(<?php echo $player->playercard_id?>, this)"><i class="fa fa-cog"></i>
-							<ul class="setting-list" style="display: none" id="setting-list_<?php echo $player->playercard_id?>">
-								<li class="first">
-									<?php
-						            	echo $this->htmlLink(array(
-								            'route' => 'user_extended',
-								            'controller' => 'player-card',
-								            'action' => 'edit',
-								            'id' => $player->playercard_id,
-								        ), '<i class="fa fa-pencil"></i>&nbsp;'.$this->translate('Edit'), array(
-								            'class' => ''
-								        ));
-									?>
-								</li>
-								<li class="second">
-								<?php
-					        		echo $this->htmlLink(array(
-							            'route' => 'user_extended',
-							            'controller' => 'player-card',
-							            'action' => 'crop-photo',
-							            'id' => $player->playercard_id,
-							        ), '<i class="fa fa-crop"></i>&nbsp;'.$this->translate('Crop Photo'), array(
-							            'class' => 'smoothbox'
-							        ));
-								?>
-								</li>
-								<li class="third">	
-								<?php
-				        			echo $this->htmlLink(array(
-									'route' => 'video_general',
-										'action' => 'create',
-										'parent_type' =>'user_playercard',
-										'subject_id' =>  $player->playercard_id,
-									), '<i class="fa fa-plus-square"></i>&nbsp;'.$this->translate('Add Video'), array(
-									'class' => ''
-									)) ;
-								?>
-								</li>
-								<li class="fourth">
-								<?php
-									echo $this->htmlLink(array(
-							            'route' => 'user_photo',
-							            'controller' => 'upload',
-							            'id' => $player->playercard_id,
-							            'type' => $player->getType(),
-							        ), '<i class="fa fa-plus-square"></i>&nbsp;'.$this->translate('Add Photos'), array(
-							            'class' => 'smoothbox'
-							        ));
-								?>
-								</li>
-								<li class="fifth">
-								<?php
-									echo $this->htmlLink(array(
-							            'route' => 'user_extended',
-							            'controller' => 'player-card',
-							            'action' => 'delete',
-							            'id' => $player->playercard_id,
-							        ), '<i class="fa fa-times"></i>&nbsp;'.$this->translate('Delete'), array(
-							            'class' => 'smoothbox'
-							        ));
-								?>
-								</li>
-							</ul>
-						</span>
-				    <?php endif;?>
+
 
 
 					<?php

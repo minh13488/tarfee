@@ -10,6 +10,35 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		$this -> _helper -> requireSubject('tfcampaign_campaign');
 	}
 	
+	public function withdrawAction() {
+		// Return if guest try to access to create link.
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
+		$submission = Engine_Api::_() -> getItem('tfcampaign_submission', $this ->_getParam('id'));
+		if(!$submission) {
+			return $this -> _helper -> requireSubject() -> forward();
+		}
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		if(!$viewer -> isSelf($submission -> getOwner())) {
+			return $this -> _helper -> requireAuth() -> forward();
+		}
+		$this -> view -> form = $form = new Tfcampaign_Form_WithDraw();
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		$posts = $this -> getRequest() -> getPost();
+		if (!$form -> isValid($posts)) {
+			return;
+		}
+		$submission -> delete();
+		
+		// Redirect
+		return $this -> _forward('success', 'utility', 'core', array(
+			'parentRefresh' => true,
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Please wait...'))
+		));
+	}
+	
 	public function unhideAction() {
 		// Return if guest try to access to create link.
 		if (!$this -> _helper -> requireUser -> isValid())
