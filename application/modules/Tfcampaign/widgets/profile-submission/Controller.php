@@ -27,7 +27,11 @@ class Tfcampaign_Widget_ProfileSubmissionController extends Engine_Content_Widge
 			case 'gender':
 				$params['order'] = "player.gender";
 				$params['direction'] = "DESC";
-				break;	
+				break;
+			case 'rating': 
+				$params['order'] = "player.rating";
+				$params['direction'] = "DESC";
+				break;
 		}
 		
 		$submissionTable = Engine_Api::_() -> getItemTable('tfcampaign_submission');
@@ -38,21 +42,6 @@ class Tfcampaign_Widget_ProfileSubmissionController extends Engine_Content_Widge
 					$arrMatch = array();
 					foreach($submissionPlayers as $submissionPlayer) {
 						$arrMatch[$submissionPlayer -> getIdentity()] = $submissionPlayer -> countPercentMatching();
-					}
-					arsort($arrMatch);
-					$submissionPlayers = null;
-					foreach($arrMatch as $key => $value) {
-						$submission = Engine_Api::_() -> getItem('tfcampaign_submission', $key);
-						if($submission)
-							$submissionPlayers[] = $submission;
-					}
-					break;
-				case 'rating':
-					$arrMatch = array();
-					foreach($submissionPlayers as $submissionPlayer) {
-						$player = $submissionPlayer -> getPlayer();
-						if($player)
-							$arrMatch[$submissionPlayer -> getIdentity()] = $player -> getOverallRating();
 					}
 					arsort($arrMatch);
 					$submissionPlayers = null;
