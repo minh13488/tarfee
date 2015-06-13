@@ -5339,7 +5339,12 @@ ul.ynevent_slideshow_pagination li a .ynevent_album_title,
 .layout_ynresponsiveevent_event_mini_menu .ybo_logo
 {
 	display: inline-block;
-	margin: 8px 0 0 0;
+	margin: 15px 0 0 0;
+
+	a{
+		position: relative;
+		top: 3px;
+	}
 }
 
 .ybo_logo {
