@@ -245,6 +245,17 @@ class Authorization_Form_Admin_Level_Edit extends Authorization_Form_Admin_Level
 					'plaintext' => 'Plain Text',
 				)
 			));
+			
+			// Element: max
+		      $this->addElement('Text', 'max_follow', array(
+		        'label' => 'Number of allowed friends',
+		        'description' => 'Enter the maximum number of allowed friends. The field must contain an integer, use zero for unlimited.',
+		        'validators' => array(
+		          array('Int', true),
+		          new Engine_Validate_AtLeast(0),
+		        ),
+		        'value' => 5,
+		      ));
 
 			$this -> messages_auth -> getDecorator('Description') -> setOption('placement', 'PREPEND');
 		}
