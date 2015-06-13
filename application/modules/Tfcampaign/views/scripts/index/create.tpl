@@ -94,8 +94,8 @@
 	 	var from_age = $('from_age').get('value');
 	 	var to_age = $('to_age').get('value');
 	 	if(from_age != "" && to_age != ""){
-	 		if(from_age > to_age) {
-	 			var message = "<?php echo $this -> translate('to date must be greater than from date ');?>";
+	 		if(parseInt(from_age) > parseInt(to_age)) {
+	 			var message = "<?php echo $this -> translate('to age must be greater than from age');?>";
 		 		var div = new Element('div', {
 			       'html': message,
 			       'class': 'create-campaign-error',
@@ -225,6 +225,7 @@
 					{
 						$('position_id-wrapper').show();
 						document.getElementById('position_id-element').innerHTML = '<select id= "position_id" name = "position_id"><option value="0" label="" selected= "selected"></option>' + respone + '</select>';
+						$("position_id").remove(0);
 					}
 					else
 						$('position_id-wrapper').hide();
@@ -239,6 +240,7 @@
 	}
 	window.addEvent('domready', function() 
 	{
+		subCategories();
 		<?php if(!$this -> showPreferredFoot):?>
 			$('referred_foot-wrapper').hide();
 		<?php endif;?>

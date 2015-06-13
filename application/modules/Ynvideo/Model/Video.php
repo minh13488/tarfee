@@ -18,7 +18,8 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 	
 	function canAddRatings()
 	{
-		return $this -> authorization() -> isAllowed(null, 'addratings');
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		return Engine_Api::_() -> authorization() -> getPermission($viewer, $this -> getType(),  'addratings');
 	}
 	
 	public function getRating($total = false) {

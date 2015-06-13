@@ -6,16 +6,18 @@
             </div> 
         </div>
    </li>
-   <li>
+
+   <li class="profile_project_content_info">
         <?php
         
-        echo $this->translate(" profile completeness:");
+        echo $this->translate(" profile completeness: ");
         
         echo $this->translate(round($this->percent_completed));
         echo "%";
         ?>
     </li>
-    <li>
+
+    <li  class="profile_project_content_info">
         <?php 
     		if($this->percent_completed != 100){
     			// echo $this->translate("Next: ");
@@ -75,13 +77,11 @@
             ?>
         <?php endforeach; ?>
     </li>
-    <li>
-       <b style="text-transform: lowercase"> <?php
-        if ($this->percent_completed != 100) {
-            echo $this->link_UpdateProfile;
-        };
+
+        <?php
+            if ($this->percent_completed != 100) {
+                //echo $this->link_UpdateProfile;
+            };
         ?>
-       </b>
-    </li>
 </ul>
 

@@ -9,6 +9,21 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 		return $submissionTable -> fetchAll($select);
 	}
 	
+	public function isSaved(){
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$saveTable = Engine_Api::_() -> getDbTable('saves','tfcampaign');
+		$row = $saveTable -> getSaveRow($viewer -> getIdentity(), $this -> getIdentity());
+		if($row) {
+			if($row -> active) {
+				return true;
+			} else {
+				return false;
+			}
+		} else {
+			return false;
+		}
+	}
+	
 	public function setPhoto($photo)
 	{
 		if ($photo instanceof Zend_Form_Element_File)

@@ -1,15 +1,3 @@
-<?php
-/**
- * SocialEngine
- *
- * @category   Application_Core
- * @package    User
- * @copyright  Copyright 2006-2010 Webligo Developments
- * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9595 2012-01-11 20:49:39Z john $
- * @author     John
- */
-?>
 <style>
 .ynsc_sprite
 {
@@ -20,6 +8,12 @@
 	padding: 2px;
 }
 </style>
+<?php
+$background = rand(1, 3);
+?>
+<div class="tf_bgbody_landing" style="background-image: url(application/themes/ynresponsive-event/images/Bkgden_<?php echo $background?>.jpg)">
+	<div class="tf_bgdot_landing"></div>
+</div>
 
 <h1><img src="application/themes/ynresponsive-event/images/example_only.png" alt="tarfee . Spring 2015" class="brand"></h1>
 
@@ -49,6 +43,16 @@
   </h3>
   <?php echo $this->form->setAttrib('class', 'global_form_box no_form')->render($this) ?>
 <?php endif; ?>
+
+<div class="tf_footer_landing">
+	<ul>
+		<li><a class="smoothbox" href="<?php echo $this -> url(array('module' => 'core', 'controller' => 'index', 'action' => 'how-it-works'), 'default');?>"><?php echo $this -> translate("How it works?");?></a></li>
+		<li><a class="smoothbox" href="<?php echo $this -> url(array('module' => 'core', 'controller' => 'index', 'action' => 'promote-look'), 'default');?>"><?php echo $this -> translate("Promoting talents + Looking for talents?");?></a></li>
+		<li><a class="smoothbox" href="<?php echo $this -> url(array('module' => 'core', 'controller' => 'index', 'action' => 'about-us'), 'default');?>"><?php echo $this -> translate("About Us");?></a></li>
+	</ul>
+</div><!--end tf footer landing-->
+
+
 <script type="text/javascript">
 	 var toggleIt =  function(id2,id1)
 	 {

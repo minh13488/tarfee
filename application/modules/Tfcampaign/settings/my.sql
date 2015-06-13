@@ -12,6 +12,20 @@ ALTER TABLE `engine4_activity_actions` CHANGE  `type`  `type` VARCHAR( 64 ) CHAR
 ALTER TABLE `engine4_activity_stream` CHANGE  `type`  `type` VARCHAR( 64 ) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL ;
 
 -- --------------------------------------------------------
+--
+-- Table structure for table `engine4_tfcampaign_saves`
+--
+
+CREATE TABLE IF NOT EXISTS `engine4_tfcampaign_saves` (
+`save_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+`user_id` int(11) unsigned NOT NULL DEFAULT '0',
+`campaign_id` int(11) unsigned NOT NULL DEFAULT '0',
+`active` tinyint(1) NOT NULL default '0',
+`creation_date` datetime NOT NULL,
+PRIMARY KEY (`save_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `engine4_tfcampaign_submissions`
@@ -64,7 +78,8 @@ CREATE TABLE IF NOT EXISTS `engine4_tfcampaign_campaigns` (
 `video_required` tinyint(1) NULL default '0',
 `deleted` tinyint(1) NOT NULL default '0',
 `view_count` int(11) NOT NULL DEFAULT '0',
-
+`percentage` int(11) NOT NULL DEFAULT '0',
+`allow_submit` tinyint(1) NOT NULL default '0',
 
 PRIMARY KEY (`campaign_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

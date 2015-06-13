@@ -44,43 +44,125 @@
 	margin-top: 19px;
 }
 
+#global_page_social-connect-index-account-linking{
+	#global_content{
+		min-height: 400px;
+	}
+}
+
 /* nhittb end added  */
 .socialconnect_account,
 .socialconnect_services
 {
 	margin-bottom: 10px;
-	border-style: solid;
-	border-width: 1px;
 	padding: 10px;
 	margin-right: 10px;
-	background: #fff;
-	width: 21%;
+	width: 24%;
 	float: left;
-	border-color: #bbb;
-	box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
-	max-height: 42px;
+	height: 60px;
+	border:1px solid $theme_border_dark_color;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+
+	& > img{
+		float: left;
+		margin-right: 5px;
+		width: 32px;
+		height: 32px;
+	}
+
+	strong{
+	color: $theme_link_color;
+	}
 }
 .socialconnect_account span,
 .socialconnect_services span
 {
-	display: inline-block;
-	float: none;
-	font-size: 12px;
-	padding: 0 0 0 4px;
+	float: left;
 	position: relative;
-	top: -8px;
-	width: 77%;
+	width: 70%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: $theme_link_color;
+
+	div{
+		a{
+			font-size: 14px;
+		}
+	}
 }
-.socialconnect_services span
+.socialconnect_account span  a,
+.socialconnect_services span  a
 {
-	top: -17px;
-}
-.socialconnect_services span > a
-{
-	width: 75%;
+	color: $theme_link_color;
+	font-weight: bold;
+	text-transform: lowercase;
+	font-size: 16px;
 }
 .ynsc_logo
 {
-	width: 16px;
-	margin-left: 95%;
+	float: right;
+}
+
+
+.tf_footer_landing{
+	padding: 20px;
+	background: #eee;
+	font-size: 12px;
+	color: #888;
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	text-align: center;
+
+	ul{
+		li{
+			padding: 0 10px;
+			display: inline-block;
+			border-left: 1px solid $theme_border_dark_color;
+
+			&:first-child{
+				border-left: 0;
+			}
+			a{
+				color: #888;
+				font-size: 14px;
+			}
+		}
+	}
+}
+
+.tf_bgbody_landing{
+	width: 100%;
+	height: 100%;
+	display: block;
+	position: fixed;
+	top: 0;
+
+	background-repeat: no-repeat;
+	background-position: center center;
+	background-size: cover;
+	z-index: -1;
+}
+
+.tf_bgdot_landing{
+	width: 100%;
+	background-image: url(~/application/themes/ynresponsive-event/images/background-image-overlay-full.png);
+	height: 100%;
+	display: block;
+	position: fixed;
+	top: 0;
+	opacity: 0.35;
+}
+ 
+body#global_page_core-index-how-it-works,
+body#global_page_core-index-promote-look,
+body#global_page_core-index-about-us{
+	#global_content_simple{
+		padding: 10px;
+		min-width: 700px;
+		min-height: 400px;
+	}
 }
