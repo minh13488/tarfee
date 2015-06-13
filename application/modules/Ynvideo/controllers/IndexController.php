@@ -252,7 +252,8 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			{
 				$auth -> setAllowed($video, $role, 'comment', ($i <= $commentMax));
 			}
-
+			
+			
 			// Add tags
 			$tags = preg_split('/[,]+/', $values['tags']);
 			$video -> tags() -> addTagMaps($viewer, $tags);
@@ -914,7 +915,11 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 					$row -> save();
 				}
 			}
-		
+			$player = Engine_Api::_() -> getItem('user_playercard', $video -> parent_id);
+			if($player){
+				$player -> rating = $player -> getOverallRating();
+				$player -> save();
+			}
 			$db -> commit();
 		}
 		catch (Exception $e)
