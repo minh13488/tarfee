@@ -1044,3 +1044,7 @@ li.sideicon_generic:hover{
 		margin-top: 0
 	}
 }
+
+#TB_iframeContent{
+	max-width: 100%;
+}
