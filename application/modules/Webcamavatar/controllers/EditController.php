@@ -82,7 +82,34 @@ class Webcamavatar_EditController extends Core_Controller_Action_User
     {
       return;
     }
+	$values = $form -> getValues();
+	if(!empty($values['url']))
+	{
+		$filename = $this -> copyImg($this -> getImageURL($values['image']), md5($values['image']));
+		echo $filename; die; 
+		$user -> setPhoto($filename);
+		@unlink($filename);
+		$iMain = Engine_Api::_()->getItem('storage_file', $user->photo_id);
+        // Insert activity
+        $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($user, $user, 'profile_photo_update',
+          '{item:$subject} added a new profile photo.');
 
+        // Hooks to enable albums to work
+        if( $action ) {
+          $event = Engine_Hooks_Dispatcher::_()
+            ->callEvent('onUserProfilePhotoUpload', array(
+                'user' => $user,
+                'file' => $iMain,
+              ));
+
+          $attachment = $event->getResponse();
+          if( !$attachment ) $attachment = $iMain;
+
+          // We have to attach the user himself w/o album plugin
+          Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $attachment);
+		}
+	}
+	
     // Uploading a new photo
     if( $form->Filedata->getValue() !== null )
     {
@@ -416,15 +443,59 @@ class Webcamavatar_EditController extends Core_Controller_Action_User
       $viewer = Engine_Api::_()->user()->getViewer();
       $viewer->status = '';
       $viewer->status_date = '00-00-0000';
-      // twitter-style handling
-      // $lastStatus = $viewer->status()->getLastStatus();
-      // if( $lastStatus ) {
-      //   $viewer->status = $lastStatus->body;
-      //   $viewer->status_date = $lastStatus->creation_date;
-      // }
       $viewer->save();
       
       $this->view->status = true;
     } 
   }
+  public function getImageURL($url) {
+		if (strpos($url, '-/h') > 0) {
+			$type = substr($url, strrpos($url, '.'));
+			$image_url = substr($url, strpos($url, '-/h') + 2, strrpos($url, '.') - (strpos($url, '-/h') + 2)) . $type;
+			$image_url = str_replace("%3A", ":", $image_url);
+			return $image_url;
+		} else {
+			return $url;
+		}
+	}
+  public function copyImg($url, $name) {
+		$path = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'temporary';
+		$check_allow_url_fopen = ini_get('allow_url_fopen');
+		if (($check_allow_url_fopen == 'on') || ($check_allow_url_fopen == 'On') || ($check_allow_url_fopen == '1')) {
+			$gis = getimagesize($url);
+			$type = $gis[2];
+			switch($type) {
+				case "1" :
+					$imorig = imagecreatefromgif($url);
+					break;
+				case "2" :
+					$imorig = imagecreatefromjpeg($url);
+					break;
+				case "3" :
+					$imorig = imagecreatefrompng($url);
+					break;
+				default :
+					$imorig = imagecreatefromjpeg($url);
+			}
+		} else {
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, $url);
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($ch, CURLOPT_BINARYTRANSFER, 1);
+			$data = curl_exec($ch);
+			curl_close($ch);
+			$imorig = imagecreatefromstring($data);
+		}
+
+		// Save
+		$filename = $path . DIRECTORY_SEPARATOR . $name . '.png';
+		$im = imagecreatetruecolor(150, 112);
+		$x = imagesx($imorig);
+		$y = imagesy($imorig);
+		if (imagecopyresampled($im, $imorig, 0, 0, 0, 0, 150, 112, $x, $y)) 
+		{
+			imagejpeg($im, $filename);
+		}
+		return $filename; 
+	}
 }
