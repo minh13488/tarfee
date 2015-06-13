@@ -68,7 +68,7 @@
 	            'action' => 'index',
 	        ),
 	        'reqs' => array(
-	            'action' => '(edit|delete|submit|hide|unhide)',
+	            'action' => '(edit|delete|submit|hide|unhide|withdraw)',
 	            'campaign_id' => '\d+',
 	        )
 	    ),
