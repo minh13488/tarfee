@@ -1277,6 +1277,10 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                             &:nth-child(2){
                                 float: right;
                             }
+
+                            a{
+                                color: $theme_font_color;
+                            }
                         }
 
                         span.tarfee-count-number{

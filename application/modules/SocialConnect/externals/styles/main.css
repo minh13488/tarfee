@@ -156,3 +156,13 @@
 	top: 0;
 	opacity: 0.35;
 }
+ 
+body#global_page_core-index-how-it-works,
+body#global_page_core-index-promote-look,
+body#global_page_core-index-about-us{
+	#global_content_simple{
+		padding: 10px;
+		min-width: 700px;
+		min-height: 400px;
+	}
+}

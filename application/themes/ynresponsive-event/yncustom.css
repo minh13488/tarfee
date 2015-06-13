@@ -1045,6 +1045,13 @@ li.sideicon_generic:hover{
 	}
 }
 
+#advanced-search-filter{
+	width: 100%;
+	background: tomato;
+}
+
+
+
 #TB_iframeContent{
 	max-width: 100%;
 }

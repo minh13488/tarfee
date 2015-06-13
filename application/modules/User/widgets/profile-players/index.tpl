@@ -84,7 +84,6 @@
 							<div class="avatar-box-hover">
 								<ul class="actions">
 									<?php if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())): ?>
-
 									<!-- Button Edit Crop Delete -->
 									<li class="first">
 										<?php
@@ -94,7 +93,7 @@
 									            'action' => 'edit',
 									            'id' => $player->playercard_id,
 									        ), '<i class="fa fa-pencil"></i>', array(
-									            'class' => ''
+									            'class' => '', 'title' => $this -> translate('Edit')
 									        ));
 										?>
 									</li>
@@ -107,7 +106,7 @@
 									            'action' => 'crop-photo',
 									            'id' => $player->playercard_id,
 									        ), '<i class="fa fa-crop"></i>', array(
-									            'class' => 'smoothbox'
+									            'class' => 'smoothbox', 'title' => $this -> translate('Crop Photo')
 									        ));
 										?>
 									</li>
@@ -120,19 +119,15 @@
 									            'action' => 'delete',
 									            'id' => $player->playercard_id,
 									        ), '<i class="fa fa-times"></i>', array(
-									            'class' => 'smoothbox'
+									            'class' => 'smoothbox', 'title' => $this -> translate('Delete')
 									        ));
 										?>
 									</li>
-
-
-
 
 									<li class="setting" onclick="showOptions(<?php echo $player->playercard_id ?>, this)">
 										<a href="javascript:void(0)"><i class="fa fa-plus"></i></a>
 									</li>
 										<ul class="setting-list" style="display: none" id="setting-list_<?php echo $player->playercard_id?>">
-
 											<li>
 											<?php
 							        			echo $this->htmlLink(array(
@@ -141,7 +136,7 @@
 													'parent_type' =>'user_playercard',
 													'subject_id' =>  $player->playercard_id,
 												), '<i class="fa fa-video-camera"></i>&nbsp;'.$this->translate('Add Video'), array(
-												'class' => ''
+												'class' => '', 'title' => $this -> translate('Add Video')
 												)) ;
 											?>
 											</li>
@@ -154,7 +149,7 @@
 										            'id' => $player->playercard_id,
 										            'type' => $player->getType(),
 										        ), '<i class="fa fa-camera"></i>&nbsp;'.$this->translate('Add Photos'), array(
-										            'class' => 'smoothbox'
+										            'class' => 'smoothbox', 'title' => $this -> translate('Add Photos')
 										        ));
 											?>
 											</li>
@@ -198,11 +193,8 @@
 												</span>
 											</a>
 										</li>
-
 									<?php endif; ?>
-
 								</ul>
-
 							</div>
 							<div class="tarfee_sport_type_position">
 								<?php if($player -> getSport()):?>
@@ -218,10 +210,6 @@
 							</div><!--tarfee_sport_type_position-->
 						</div>
 					</div>
-
-
-
-
 					<div class="tarfee_gender_player_name">
 						<span class="gender_player">
 							<?php if (($player->gender) == 1){
@@ -250,10 +238,6 @@
 					        <?php endfor; ?>
 					    <?php endif; ?>
 					</div>
-
-
-
-
 					<?php
 						$countryName = '';
 						if($player ->country_id && $country = Engine_Api::_() -> getItem('user_location', $player ->country_id))
@@ -266,14 +250,12 @@
 						<p>
 							<?php echo  $this->locale()->toDate($player -> birth_date);?> 
 						</p>
-
 						<p>
 							<?php 
 								if($countryName)
 									echo $countryName
 							?>
 						</p>
-						
 						<p>
 							<?php 
 								$laguages = json_decode($player -> languages);
@@ -289,14 +271,20 @@
 							?>
 						</p>
 					</div>
-
 					<ul class="tarfee_count">
 						<li>
 							<?php $eyeons = $player->getEyeOns(); ?>
-								<span class="tarfee-count-number"><?php  echo count($eyeons); ?></span>
+							<?php $url = $this->url(array('action'=>'view-eye-on', 'player_id'=>$player->getIdentity()), 'user_playercard' , true)?>
+							<?php if(count($eyeons)):?>		
+							<a href="<?php echo $url?>" class="smoothbox">
+								<span class="tarfee-count-number"><?php echo count($eyeons); ?></span>
 								<span><?php echo $this->translate('eye on');  ?></span>
+							</a>
+							<?php else:?>
+								<span class="tarfee-count-number"><?php echo count($eyeons); ?></span>
+								<span><?php echo $this->translate('eye on');  ?></span>
+							<?php endif;?>
 						</li>
-
 
 						<li>
 							<?php
