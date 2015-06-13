@@ -275,10 +275,15 @@
 						<li>
 							<?php $eyeons = $player->getEyeOns(); ?>
 							<?php $url = $this->url(array('action'=>'view-eye-on', 'player_id'=>$player->getIdentity()), 'user_playercard' , true)?>
+							<?php if(count($eyeons)):?>		
 							<a href="<?php echo $url?>" class="smoothbox">
-								<span class="tarfee-count-number"><?php  echo count($eyeons); ?></span>
+								<span class="tarfee-count-number"><?php echo count($eyeons); ?></span>
 								<span><?php echo $this->translate('eye on');  ?></span>
 							</a>
+							<?php else:?>
+								<span class="tarfee-count-number"><?php echo count($eyeons); ?></span>
+								<span><?php echo $this->translate('eye on');  ?></span>
+							<?php endif;?>
 						</li>
 
 						<li>
