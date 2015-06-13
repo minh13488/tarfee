@@ -5,6 +5,12 @@
     -ms-border-radius: $radius;
 }
 
+=tarfee_text_overflow{
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
 /*Profile Cover Photo Start Here*/
 .layout_user_profile_cover{
     border: none !important;
@@ -86,7 +92,7 @@
 					height: 141px;
 					bottom: 0;
 					left: 0;
-					z-index: 1;
+					z-index: 11;
 			    }
 
 
@@ -115,7 +121,7 @@
 			margin: auto;
 			overflow: hidden;
 			top: -160px;
-			z-index: 1;
+			z-index: 12;
 
 			.item_photo{
 				width: 213px;
@@ -262,6 +268,7 @@
 							
 							img{
 								height: 32px;
+								width: 32px;
 								display: block;
 							}
 						}
@@ -562,6 +569,7 @@
 #global_page_user-profile-index{
     .layout_right{
         width: 430px;
+		margin-left: 15px;
 
         .generic_layout_container{
         	position: relative;
@@ -604,6 +612,10 @@ div.btn-add-more,
 }
 
 .icon_event_viewall{
+	text-transform: lowercase;
+}
+
+.icon_event_viewall{
 	text-align: center;
 	display: block;
 	color: #fff !important;
@@ -628,6 +640,18 @@ ul.tfcampaign_list{
 
 		.tfcampaign_title{
 			font-weight: bold;
+		}
+	}
+}
+
+.ynevents_profile_tab{
+	padding: 15px;
+
+	.ynevents_profile_tab_title{
+		
+		a{
+			+tarfee_text_overflow;
+			display: inherit;
 		}
 	}
 }

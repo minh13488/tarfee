@@ -53,18 +53,12 @@ function showMore(from){
     var url = '<?php echo $this->url(array('module' => 'core','controller' => 'widget','action' => 'index','name' => 'ynadvsearch.search-results2'), 'default', true) ?>';
     $('ynadvsearch-viewmore-btn').destroy();
     $('ynadvsearch-loading').style.display = '';
-    var token = '<?php echo implode(',', array_column($this->tokens, 'id'))?>';
-    var type = <?php echo json_encode($this->type)?>;
-    var sport = <?php echo json_encode($this->sport)?>;
+    var params = <?php echo json_encode($this->params)?>;
+    params.format = 'html';
+    params.from = from;
     var request = new Request.HTML({
       	url : url,
-      	data : {
-        	format : 'html',
-        	'from' : from,
-        	'token': token,
-        	'type': type,
-        	'sport': sport
-      	},
+      	data : params,
       	onSuccess : function(responseTree, responseElements, responseHTML, responseJavaScript) {
         	$('ynadvsearch-loading').destroy();
             var result = Elements.from(responseHTML);

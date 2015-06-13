@@ -473,7 +473,111 @@ class User_IndexController extends Core_Controller_Action_Standard
         $data = Zend_Json::encode($data);
         $this->getResponse()->setBody($data);
     }
-	
+
+	public function suggestUserBlockAction() {
+        $this -> _helper -> layout -> disableLayout();
+        $this -> _helper -> viewRenderer -> setNoRender(true);
+        $table = Engine_Api::_()->getItemTable('user');
+    	$user = Engine_Api::_()->user()->getViewer();
+        // Get params
+        $text = $this->_getParam('text', $this->_getParam('search', $this->_getParam('value')));
+        $limit = (int) $this->_getParam('limit', 10);
+    
+        // Generate query
+        $select = Engine_Api::_()->getItemTable('user')->select()->where('search = ?', 1);
+    	$select -> where('user_id <> ?', $user -> getIdentity());
+		// get user blocked
+		$blockedUsers = array();
+		foreach ($user->getBlockedUsers() as $blocked_user_id) 
+		{
+			$blockedUsers[] = $blocked_user_id;
+		}
+		if($blockedUsers)
+		{
+			$select -> where('user_id NOT IN (?)', $blockedUsers);
+		}
+        if( null !== $text ) 
+        {
+            $select->where('`'.$table->info('name').'`.`displayname` LIKE ?', '%'. $text .'%');
+        }
+        $select->limit($limit);
+    
+        // Retv data
+        $data = array();
+        foreach( $select->getTable()->fetchAll($select) as $friend ){
+            $data[] = array(
+                'id' => $friend->getIdentity(),
+                'label' => $friend->getTitle(), // We should recode this to use title instead of label
+                'title' => $friend->getTitle(),
+                'photo' => $this->view->itemPhoto($friend, 'thumb.icon'),
+                'url' => $friend->getHref(),
+                'type' => 'user',
+            );
+        }
+    
+        // send data
+        $data = Zend_Json::encode($data);
+        $this->getResponse()->setBody($data);
+    }
+	public function blockUsersAction()
+	{
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(true);
+
+		$userIds = $this -> _getParam('ids');
+		$viewer = Engine_Api::_()->user()->getViewer();
+		
+		$db = Engine_Api::_()->getDbtable('block', 'user')->getAdapter();
+		$db -> beginTransaction();
+		try
+		{
+			$userIds = explode(",", $userIds);
+			foreach ($userIds as $user_id)
+			{
+				$user = Engine_Api::_()->getItem('user', $user_id);
+		        $viewer->addBlock($user);
+		        if( $user->membership()->isMember($viewer, null) ) 
+		        {
+		        	$user->membership()->removeMember($viewer);
+		      	}
+			      
+		      	try 
+		      	{
+			        // Set the requests as handled
+			        $notification = Engine_Api::_()->getDbtable('notifications', 'activity')
+			          ->getNotificationBySubjectAndType($viewer, $user, 'friend_request');
+			        if( $notification ) 
+			        {
+			          $notification->mitigated = true;
+			          $notification->read = 1;
+			          $notification->save();
+			        }
+			        $notification = Engine_Api::_()->getDbtable('notifications', 'activity')
+			            ->getNotificationBySubjectAndType($viewer, $user, 'friend_follow_request');
+			        if( $notification ) 
+			        {
+			          $notification->mitigated = true;
+			          $notification->read = 1;
+			          $notification->save();
+			        }
+		      	} 
+		      	catch( Exception $e ) {}
+			}
+			$status = 'true';
+			$db -> commit();
+
+		}
+		catch (Exception $e)
+		{
+			$db -> rollBack();
+			$status = 'false';
+		}
+
+		$data = array();
+		$data[] = array('status' => $status, );
+
+		return $this -> _helper -> json($data);
+	}
 	public function saveBasicAction() {
 		$this -> _helper -> layout -> disableLayout();
         $this -> _helper -> viewRenderer -> setNoRender(true);
@@ -590,5 +694,19 @@ class User_IndexController extends Core_Controller_Action_Standard
 		
 		$data = Zend_Json::encode($data);
         $this->getResponse()->setBody($data);
+	}
+
+	public function getCountriesAction() {
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(TRUE);
+		$continent = $this -> getRequest() -> getParam('continent', '');
+		$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesByContinent($continent);
+		$html = '';
+		foreach ($countries as $country)
+		{
+			$html .= '<option value="' . $country -> getIdentity() . '" label="' . $country -> getTitle() . '" >' . $country -> getTitle() . '</option>';
+		}
+		echo $html;
+		return;
 	}
 }
