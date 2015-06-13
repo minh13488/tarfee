@@ -102,6 +102,26 @@ class Ynfbpp_Api_Core
 			if ($numOfMessDay >= $messDay) return false;
 		}
 		
+		$messMonth = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'user', 'mess_month');
+		if ($messMonth == null) {
+	        $row = $permissionsTable->fetchRow($permissionsTable->select()
+	        ->where('level_id = ?', $viewer -> level_id)
+	        ->where('type = ?', 'user')
+	        ->where('name = ?', 'mess_month'));
+	        if ($row) {
+	            $messMonth = $row->value;
+	        }
+	    }
+		
+		if ($messMonth > 0) {
+			$messTbl = Engine_Api::_()->getDbTable('messages', 'messages');
+			$now = 
+			$select = $messTbl->select()
+				->where('user_id = ?', $viewer->getIdentity())
+				->where('date >= ?', date('Y-m-d H:i:s', strtotime('last month')));
+			$numOfMessMonth = count($messTbl->fetchAll($select));
+			if ($numOfMessMonth >= $messMonth) return false;
+		}
         return true;
     }
 
@@ -113,11 +133,20 @@ class Ynfbpp_Api_Core
             $viewer = Engine_Api::_() -> user() -> getViewer();
         }
 
-        if (!$viewer || !$viewer -> getIdentity() || $user -> isSelf($viewer))
-        {
-            return $actions;
+        if (!$viewer || !$viewer -> getIdentity()) {
+            $actions[] = $this -> view -> htmlLink(array(
+                'route' => 'user_signup'
+            ), $this -> view -> translate('Register to View Profile/Message/Email this user!'), array(
+                'style' => "",
+                'class' => 'buttonlink icon_sign_up',
+                'title' => $this -> view -> translate('Register Now!')
+            ));
         }
-
+		
+		if ($user -> isSelf($viewer)) {
+			return $actions;
+		}
+		
         $direction = (int)Engine_Api::_() -> getApi('settings', 'core') -> getSetting('user.friends.direction', 1);
 
         // Get data

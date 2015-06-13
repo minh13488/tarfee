@@ -441,6 +441,7 @@ class Messages_MessagesController extends Core_Controller_Action_User
       return $this->_forward('success', 'utility', 'core', array(
         'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your message has been sent successfully.')),
         'smoothboxClose' => true,
+        'parentRefresh' => true,
       ));
     } else {
       return $this->_forward('success', 'utility', 'core', array(

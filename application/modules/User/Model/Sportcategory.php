@@ -17,7 +17,7 @@ class User_Model_Sportcategory extends User_Model_Node {
 		}
 		else
 		{
-			throw new Ynbusinesspages_Model_Exception('Invalid argument passed to setPhoto: ' . print_r($photo, 1));
+			throw new User_Model_Exception('Invalid argument passed to setPhoto: ' . print_r($photo, 1));
 		}
 
 		$name = basename($file);
