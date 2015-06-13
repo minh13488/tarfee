@@ -20,6 +20,10 @@
 	padding: 2px;
 }
 </style>
+<div class="tf_bgbody_landing" style="background-image: url(application/themes/ynresponsive-event/images/Bkgd1en.jpg)">
+	<div class="tf_bgdot_landing"></div>
+</div>
+
 
 <h1><img src="application/themes/ynresponsive-event/images/example_only.png" alt="tarfee . Spring 2015" class="brand"></h1>
 
@@ -49,6 +53,16 @@
   </h3>
   <?php echo $this->form->setAttrib('class', 'global_form_box no_form')->render($this) ?>
 <?php endif; ?>
+
+<div class="tf_footer_landing">
+	<ul>
+		<li><a href="#">How it works?</a></li>
+		<li><a href="#">Promoting talents + Looking for talents?</a></li>
+		<li><a href="#">About Us</a></li>
+	</ul>
+</div><!--end tf footer landing-->
+
+
 <script type="text/javascript">
 	 var toggleIt =  function(id2,id1)
 	 {

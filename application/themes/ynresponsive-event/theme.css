@@ -4401,7 +4401,7 @@ Shows the mini menu and search widget
     }  
     
     div.box-search_form_filter,
-    .box-search_form_advanced{
+    div.box-search_form_advsearch{
         display: inline-block;
     }
 	span.global_search_form_filter_advanced{
@@ -5386,20 +5386,23 @@ body[id^=global_page_ynevent] .layout_ynevent_list_most_time .tabs_alt.tabs_pare
     color: $theme_main_color_scheme !important;
 }
 
+
+
 #global_page_core-index-index
 {
-  background-image: url(~/application/themes/ynresponsive-event/images/Bkgd1en.jpg);
-  background-repeat: repeat-x, repeat;
-  background-position: 0px bottom, center center;
-  background-size: cover;
+
+
+.layout_page_core_index_index .layout_main .layout_middle > div > div{
+	max-width: 100%;
+}
+
   #global_content_simple {
 	  display: block;
 	  position: relative;
-	  max-width: 1000px;
 	  margin: 0 auto;
 	}
 	form#user_form_login {
-	  width: 50%;
+	  width: 600px;
 	  margin: 0 auto;
 	  vertical-align: top;
 	  display: block;
