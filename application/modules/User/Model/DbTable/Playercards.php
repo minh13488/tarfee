@@ -2,6 +2,12 @@
 class User_Model_DbTable_Playercards extends Engine_Db_Table 
 {
 	protected $_rowClass = 'User_Model_Playercard';
+	
+	public function getAllPlayers() {
+		$select = $this -> select();
+		return $this -> fetchAll($select);
+	}
+	
 	public function getPlayersPaginator($user_id = 0)
 	{
 		$select = $this -> select();

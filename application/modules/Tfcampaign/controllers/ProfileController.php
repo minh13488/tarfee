@@ -35,6 +35,7 @@ class Tfcampaign_ProfileController extends Core_Controller_Action_Standard
 		$campaign -> view_count++;
 		$campaign -> save();
 		
+		$this -> view -> submissionPlayers =  $submissionPlayers = $campaign -> getSubmissionPlayers();
 		$this -> _helper -> content	-> setEnabled();
   	}
 }

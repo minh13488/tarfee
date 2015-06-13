@@ -225,6 +225,7 @@
 					{
 						$('position_id-wrapper').show();
 						document.getElementById('position_id-element').innerHTML = '<select id= "position_id" name = "position_id"><option value="0" label="" selected= "selected"></option>' + respone + '</select>';
+						$("position_id").remove(0);
 					}
 					else
 						$('position_id-wrapper').hide();
@@ -239,6 +240,7 @@
 	}
 	window.addEvent('domready', function() 
 	{
+		subCategories();
 		<?php if(!$this -> showPreferredFoot):?>
 			$('referred_foot-wrapper').hide();
 		<?php endif;?>

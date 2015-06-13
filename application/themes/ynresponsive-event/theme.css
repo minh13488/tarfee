@@ -4429,7 +4429,7 @@ Shows the mini menu and search widget
     	position: relative;
     	top: 20px;
 
-    	button{
+    	button.btn-search-main{
 			position: relative;
 			top: -5px;
 			margin-left: -35px;

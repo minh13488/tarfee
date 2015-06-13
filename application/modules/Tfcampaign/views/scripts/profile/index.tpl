@@ -66,19 +66,65 @@
     array('class' => 'smoothbox')) ?>
 <?php endif;?>
 <?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
--
-<?php echo $this->htmlLink(
-    array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
-    $this->translate('Submit Player Profile'), 
-array('class' => 'smoothbox')) ?>
+	<?php if($campaign -> allow_submit) :?>
+		-
+		<?php echo $this->htmlLink(
+		    array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
+		    $this->translate('Submit Player Profile'), 
+		array('class' => 'smoothbox')) ?>
+	<?php endif;?>
 -
 <span class="<?php echo ($campaign -> isSaved())? 'campaign-save-active' : ''  ?>" id="tfcampaign-campaign-save"><i class="fa fa-floppy-o"></i></span>
 <?php endif;?>
 
 <!-- meta data -->
+<h1><?php echo $this -> translate('Meta Data');?></h1>
 <?php if($campaign -> getOwner() -> isSelf($this -> viewer())) :?>
+	<br/>
 	<?php echo $this -> translate(array("%s submission", "%s submissions", count($this -> submissionPlayers)), count($this -> submissionPlayers));?>
+	<br/>
 	<?php echo $this -> translate(array("%s view", "%s views", $campaign -> view_count), $campaign -> view_count);?>
+	<br/>
+	<?php
+		$submissionPlayers = $this -> submissionPlayers;
+		$submissionTotalCount = 0;
+		$submissionValidCount = 0;
+		$percentageMatch = 0;
+		foreach($submissionPlayers as $submissionPlayer) {
+			$submissionTotalCount++;
+			$percentagePlayer = $submissionPlayer -> countPercentMatching();
+			if($percentagePlayer >= $campaign -> percentage) {
+				$submissionValidCount++;
+			}
+		}
+		if($submissionTotalCount > 0){
+			$percentageMatch =  round(($submissionValidCount/$submissionTotalCount), 2) * 100;
+		} else {
+			$percentageMatch = 0;
+		}
+		echo $this -> translate("%s of submitted player cards that match the campaign preferences", $percentageMatch."%");
+	?>
+	<br/>
+	<?php
+		$submissionTotalCount = 0;
+		$submissionValidCount = 0;
+		$percentageMatch = 0;
+		$tablePlayer = Engine_Api::_() -> getItemTable('user_playercard');
+		$players = $tablePlayer -> getAllPlayers();
+		foreach($players as $player) {
+			$submissionTotalCount++;
+			if($player -> countPercentMatching($campaign) >= $campaign -> percentage){
+				$submissionValidCount++;
+			}
+		}
+		if($submissionTotalCount > 0){
+			$percentageMatch =  round(($submissionValidCount/$submissionTotalCount), 2) * 100;
+		} else {
+			$percentageMatch = 0;
+		}
+		echo $this -> translate("%s of player cards that match the campaign preferences", $percentageMatch."%");
+	?>
+	
 <?php endif;?>
 
 <script type="text/javascript">
