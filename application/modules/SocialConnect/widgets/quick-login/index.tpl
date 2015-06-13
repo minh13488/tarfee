@@ -27,3 +27,15 @@ $str .= '</div>
   <br />';
 
 echo $str;
+?>
+<script type="text/javascript">
+window.addEvent('domready', function()
+{
+	if($$('.layout_social_connect_quick_login').length > 1)
+	{
+		$$('.layout_social_connect_quick_login')[1].style.display = 'none';
+		if($$('.layout_social_connect_quick_login')[1].getParent('.layout_page_core_error_requireuser'))
+			$$('.layout_social_connect_quick_login')[1].getParent('.layout_page_core_error_requireuser').style.display='none';
+	}
+});
+</script>

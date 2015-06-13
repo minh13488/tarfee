@@ -85,8 +85,7 @@ class Webcamavatar_EditController extends Core_Controller_Action_User
 	$values = $form -> getValues();
 	if(!empty($values['url']))
 	{
-		$filename = $this -> copyImg($this -> getImageURL($values['image']), md5($values['image']));
-		echo $filename; die; 
+		$filename = $this -> copyImg($this -> getImageURL($values['url']), md5($values['url']));
 		$user -> setPhoto($filename);
 		@unlink($filename);
 		$iMain = Engine_Api::_()->getItem('storage_file', $user->photo_id);
@@ -186,6 +185,7 @@ class Webcamavatar_EditController extends Core_Controller_Action_User
       // Remove temp files
       @unlink($iName);
     }
+	$form -> reset();
   }
 
   public function removePhotoAction()
@@ -489,10 +489,10 @@ class Webcamavatar_EditController extends Core_Controller_Action_User
 
 		// Save
 		$filename = $path . DIRECTORY_SEPARATOR . $name . '.png';
-		$im = imagecreatetruecolor(150, 112);
+		$im = imagecreatetruecolor(720, 720);
 		$x = imagesx($imorig);
 		$y = imagesy($imorig);
-		if (imagecopyresampled($im, $imorig, 0, 0, 0, 0, 150, 112, $x, $y)) 
+		if (imagecopyresampled($im, $imorig, 0, 0, 0, 0, 720, 720, $x, $y)) 
 		{
 			imagejpeg($im, $filename);
 		}
