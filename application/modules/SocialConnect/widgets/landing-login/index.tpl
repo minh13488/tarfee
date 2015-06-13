@@ -20,6 +20,7 @@
 	padding: 2px;
 }
 </style>
+
 <div class="tf_bgbody_landing" style="background-image: url(application/themes/ynresponsive-event/images/Bkgd1en.jpg)">
 	<div class="tf_bgdot_landing"></div>
 </div>
