@@ -695,4 +695,18 @@ class User_IndexController extends Core_Controller_Action_Standard
 		$data = Zend_Json::encode($data);
         $this->getResponse()->setBody($data);
 	}
+
+	public function getCountriesAction() {
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(TRUE);
+		$continent = $this -> getRequest() -> getParam('continent', '');
+		$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesByContinent($continent);
+		$html = '';
+		foreach ($countries as $country)
+		{
+			$html .= '<option value="' . $country -> getIdentity() . '" label="' . $country -> getTitle() . '" >' . $country -> getTitle() . '</option>';
+		}
+		echo $html;
+		return;
+	}
 }

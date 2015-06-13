@@ -135,5 +135,8 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 		
 		//advanced search campaign
 		$this->view->sports = $sport = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1Assoc();	
+		$this->view->continents = $continents = Engine_Api::_()->ynadvsearch()->getContinents();
+		$this->view->services = $services = Engine_Api::_()->getDbTable('services', 'user')->getAllServices();
+		$this->view->relations = $relations = Engine_Api::_() -> getDbTable('relations','user') -> getRelationSearchArray();
 	}
 }

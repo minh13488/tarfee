@@ -1170,9 +1170,19 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                             img{
                                 width: 23px;
                                 height: 23px;
+                                float: left;
+                                margin-right: 5px;
                             }
                             span.player-position{
                                 float: right;
+                            }
+                            span.player-title{
+                                display: block;
+                                width: 50%;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                float: left;
                             }
                         }
 
@@ -1199,6 +1209,7 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                                 margin-top: 25px;
                                 li{
                                     display: inline-block;
+                                    margin-bottom: 6px;
                                     
                                     a{
                                         padding: 3px 20px;
@@ -1332,37 +1343,18 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                     /*--------------------------------------*/
                     .setting-list {
                         position: absolute;
-                        width: 120px;
-                        float: left;
                         font-size: 12px;
                         text-align: left;
                         z-index: 100;
-                        margin-left: -78px;
-                        margin-top: 2px;
-                    }
-                    .setting:hover, .active {
-                        background: #3096e8;
-                        color: #000 !important;
-                        cursor: pointer;
-                    }
-                    .setting-list li {
-                        cursor: pointer;
-                        background: #ffffff;
-                        border-top: 1px solid #e5e6e6;
-                        padding: 15px 10px;
-                    }
-                    .setting-list li:hover {
-                        background: #ddd;
-                    }
-                    .setting-list li:last-child {
-                        border-radius: 0 0 3px 3px;
-                        -o-border-radius: 0 0 3px 3px;
-                        -ms-border-radius: 0 0 3px 3px;
-                        -moz-border-radius: 0 0 3px 3px;
-                        -webkit-border-radius: 0 0 3px 3px;
-                    }
-                    .setting-list li [class^="icon-"] {
-                        margin: 0 3px 0 0;
+                        text-align: center;
+
+                        li{
+                            padding: 0;
+                            a{
+                                text-transform: lowercase;
+                                font-size: 18px !important;
+                            }
+                        }
                     }
                 }
             }
