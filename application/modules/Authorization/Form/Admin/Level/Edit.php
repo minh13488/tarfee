@@ -228,14 +228,13 @@ class Authorization_Form_Admin_Level_Edit extends Authorization_Form_Admin_Level
 			// Element: messages_auth
 			$this -> addElement('Radio', 'messages_auth', array(
 				'label' => 'Allow messaging?',
-				'description' => 'USER_FORM_ADMIN_SETTINGS_LEVEL_MESSAGESAUTH_DESCRIPTION',
+				'description' => 'Allow member to send message to friends',
 				'multiOptions' => array(
-					'everyone' => 'Everyone',
-					'friends' => 'Friends Only',
-					'none' => 'Disable messaging',
+					'friends' => 'Yes',
+					'none' => 'No',
 				)
 			));
-
+			
 			// Element: messages_editor
 			$this -> addElement('Radio', 'messages_editor', array(
 				'label' => 'Use editor for messaging?',

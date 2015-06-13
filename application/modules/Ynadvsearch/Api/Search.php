@@ -103,6 +103,81 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
         return $results;
     }
     
+	public function getAdvsearchResults($type, $params = array(), $from, $limit = null) {
+		$results = array();
+		switch ($type) {
+			case 'event':
+				$table = Engine_Api::_()->getItemTable('event');
+				$select = $table->select();
+				if (!empty($params['keyword'])) {
+					$select->where('title LIKE ? or description LIKE ?', '%'.$params['keyword'].'%');
+				}
+				if (isset($params['event_type'])) {
+					$select->where('type_id = ?', $params['type_id']);
+				}
+				if (!empty($params['sport'])) {
+					$select->where('category_id = ?', $params['sport']);
+				}
+				if (!empty($params['continent'])) {
+					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
+					if (!empty($countries)) {
+						$select->where('country_id IN (?)', array_keys($countries));
+					}
+					else {
+						$select->where('country_id IN (?)', array(0));
+					}
+				}
+				if (!empty($params['country_id'])) {
+					$select->where('country_id = ?', $params['country_id']);
+				}
+				
+				if (!empty($params['province_id'])) {
+					$select->where('province_id = ?', $params['province_id']);
+				}
+				
+				if (!empty($params['city_id'])) {
+					$select->where('city_id = ?', $params['city_id']);
+				}
+				break;
+				
+			case 'campaign':
+				$table = Engine_Api::_()->getItemTable('tfcampaign_campaign');
+				$select = $table->select();
+				if (!empty($params['keyword'])) {
+					$select->where('title LIKE ? or description LIKE ?', '%'.$params['keyword'].'%');
+				}
+				if (!empty($params['sport'])) {
+					$select->where('category_id = ?', $params['sport']);
+				}
+				if (!empty($params['continent'])) {
+					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
+					if (!empty($countries)) {
+						$select->where('country_id IN (?)', array_keys($countries));
+					}
+					else {
+						$select->where('country_id IN (?)', array(0));
+					}
+				}
+				if (!empty($params['country_id'])) {
+					$select->where('country_id = ?', $params['country_id']);
+				}
+				
+				if (!empty($params['province_id'])) {
+					$select->where('province_id = ?', $params['province_id']);
+				}
+				
+				if (!empty($params['city_id'])) {
+					$select->where('city_id = ?', $params['city_id']);
+				}
+				break;
+		}
+
+		if ($table && $select) {
+			$results = $table->fetchAll($select);
+		}
+		
+		return $results;
+	}
     private function _checkPermission($search) {
         //check permissions
         $search_results = array();

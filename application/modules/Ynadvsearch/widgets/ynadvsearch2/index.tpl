@@ -26,30 +26,200 @@
 </div>
 
 <div id="advanced-search-filter">
-	<input id="radio-none-advanced" type="radio" name="advanced" value="none" checked />
-	<label for="radio-none-advanced"><?php echo $this->translate('None')?></label>
-	<div id="campaign-advanced-search">
-		<input id="radio-campaign-advanced" type="radio" name="campaign" value="none" />
-		<label for="radio-campaign-advanced"><?php echo $this->translate('Campaign')?></label>
-		<div class="form-wrapper search-wrapper">
-			<label class="form-label search-label" for="campaign_keyword"><?php echo $this->translate('Keyword')?></label>
-			<input type="text" class="form-element search-element" id="campaign_keyword" name="campaign_keyword" />
+	<ul id="advanced-search-tab" class="advanced-search-tab">
+		<li class="search-tab-item active"><?php echo $this->translate('Event/Tryout')?></li>
+		<li class="search-tab-item"><?php echo $this->translate('Campaign')?></li>
+	</ul>
+	<div class="search-form">
+		<?php $url = $this->url(array(),'ynadvsearch_search',true)?>
+		
+		<div class="search-form-item active" id="event-advanced-search">
+			<form class="advsearch-form" method="post" action="<?php echo $url?>">
+				<input name="advsearch" value="event" type="hidden"/>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="event_keyword"><?php echo $this->translate('Keyword')?></label>
+					<input type="text" class="form-element search-element" id="event_keyword" name="keyword" />
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="event_type"><?php echo $this->translate('Type')?></label>
+					<select type="text" class="form-element search-element" id="event_type" name="event_type">
+						<option value="0"><?php echo $this->translate('Event')?></option>
+						<option value="1"><?php echo $this->translate('Tryout')?></option>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="event_sport"><?php echo $this->translate('Sport Type')?></label>
+					<select type="text" class="form-element search-element" id="event_sport" name="sport">
+						<option value="0"></option>
+						<?php foreach ($this->sports as $key => $value):?>
+						<option value="<?php echo $key?>"><?php echo $value?></option>
+						<?php endforeach;?>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="event_continent"><?php echo $this->translate('Continent')?></label>
+					<select class="form-element search-element continent" id="event_continent" rel="event" name="continent">
+						<option value="0"></option>
+						<?php foreach ($this->continents as $key => $value):?>
+						<option value="<?php echo $key?>"><?php echo $this->translate($value)?></option>
+						<?php endforeach;?>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="event_country"><?php echo $this->translate('Country')?></label>
+					<select class="form-element search-element country_id" rel="event" id="event_country" name="country_id">
+						<option value="0"></option>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="event_province"><?php echo $this->translate('Province/State')?></label>
+					<select class="form-element search-element province_id" rel="event" id="event_province" name="province_id">
+						<option value="0"></option>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="event_city"><?php echo $this->translate('City')?></label>
+					<select class="form-element search-element" id="event_city" name="city_id">
+						<option value="0"></option>
+					</select>
+				</div>
+				
+				<button type="submit"><?php echo $this->translate('Search')?></button>
+			</form>
 		</div>
 		
-		<div class="form-wrapper search-wrapper">
-			<label class="form-label search-label" for="campaign_sport"><?php echo $this->translate('Sport Type')?></label>
-			<select type="text" class="form-element search-element" id="campaign_sport" name="campaign_sport">
-				<option value="0"></option>
-				<?php foreach ($this->sports as $key => $value):?>
-				<option value="<?php echo $key?>"><?php echo $value?></option>
-				<?php endforeach;?>
-			</select>
+		<div class="search-form-item" id="campaign-advanced-search">
+			<form class="advsearch-form" method="post" action="<?php echo $url?>">
+				<input name="advsearch" value="campaign" type="hidden"/>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="campaign_keyword"><?php echo $this->translate('Keyword')?></label>
+					<input type="text" class="form-element search-element" id="campaign_keyword" name="keyword" />
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="campaign_sport"><?php echo $this->translate('Sport Type')?></label>
+					<select type="text" class="form-element search-element" id="campaign_sport" name="sport">
+						<option value="0"></option>
+						<?php foreach ($this->sports as $key => $value):?>
+						<option value="<?php echo $key?>"><?php echo $value?></option>
+						<?php endforeach;?>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="campaign_continent"><?php echo $this->translate('Continent')?></label>
+					<select class="form-element search-element continent" id="campaign_continent" rel="campaign" name="continent">
+						<option value="0"></option>
+						<?php foreach ($this->continents as $key => $value):?>
+						<option value="<?php echo $key?>"><?php echo $this->translate($value)?></option>
+						<?php endforeach;?>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="campaign_country"><?php echo $this->translate('Country')?></label>
+					<select class="form-element search-element country_id" rel="campaign" id="campaign_country" name="country_id">
+						<option value="0"></option>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="campaign_province"><?php echo $this->translate('Province/State')?></label>
+					<select class="form-element search-element province_id" rel="campaign" id="campaign_province" name="province_id">
+						<option value="0"></option>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="campaign_city"><?php echo $this->translate('City')?></label>
+					<select class="form-element search-element" id="campaign_city" name="city_id">
+						<option value="0"></option>
+					</select>
+				</div>
+				
+				<button type="submit"><?php echo $this->translate('Search')?></button>
+			</form>
 		</div>
-	</div>	
+	</div>
 </div>
 
 <script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery.tokeninput.js"></script>
 <script>
+window.addEvent('domready', function() {
+	$$('.continent').addEvent('change', function() {
+		var continent = this.value;
+		var type = this.get('rel');
+		var makeRequest = new Request({
+  			url: "<?php echo $this->url(array('action'=>'get-countries'),'user_general', true)?>/continent/"+continent,
+  			onComplete: function (respone){
+				respone  = respone.trim();
+				var options = Elements.from(respone);
+				var option = new Element('option', {
+					'value': '0',
+					'text': ''
+				});
+              	if(options.length > 0) {
+                	$(type+'_country').empty();
+                	$(type+'_country').grab(option);
+                	$(type+'_country').adopt(options);
+  				}
+  				else {
+  					$(type+'_country').empty();
+  					$(type+'_country').grab(option);
+  				}
+  			}
+  		})
+  		makeRequest.send();
+	});
+	
+	$$('.country_id').addEvent('change', function() {
+		var id = this.value;
+		var type = this.get('rel');
+		var makeRequest = new Request({
+  			url: "<?php echo $this->url(array('action'=>'sublocations'),'user_general', true)?>/location_id/"+id,
+  			onComplete: function (respone){
+				respone  = respone.trim();
+				var options = Elements.from(respone);
+				var option = new Element('option', {
+						'value': '0',
+						'text': ''
+				});
+              	if(options.length > 0) {
+                	$(type+'_province').empty();
+                	$(type+'_province').grab(option);
+                	$(type+'_province').adopt(options);
+  				}
+  				else {
+  					$(type+'_province').empty();
+  					$(type+'_province').grab(option);
+  				}
+  			}
+  		})
+  		makeRequest.send();
+	});
+	
+	$$('.province_id').addEvent('change', function() {
+		var id = this.value;
+		var type = this.get('rel');
+		var makeRequest = new Request({
+  			url: "<?php echo $this->url(array('action'=>'sublocations'),'user_general', true)?>/location_id/"+id,
+  			onComplete: function (respone){
+				respone  = respone.trim();
+				var options = Elements.from(respone);
+				var option = new Element('option', {
+						'value': '0',
+						'text': ''
+				});
+              	if(options.length > 0) {
+                	$(type+'_city').empty();
+                	$(type+'_city').grab(option);
+                	$(type+'_city').adopt(options);
+  				}
+  				else {
+  					$(type+'_city').empty();
+  					$(type+'_city').grab(option);
+  				}
+  			}
+  		})
+  		makeRequest.send();
+	});
+});
+
 jQuery.noConflict();
 (function($) { 
 	$(document).ready(function () {
