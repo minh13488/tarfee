@@ -31,9 +31,9 @@ class Sladvsubscription_Form_Admin_Signup_Subscription extends Engine_Form
 
     // Element: enable
     $this->addElement('Radio', 'enable', array(
-      'label' => 'Choose Subscription Plan',
+      'label' => 'Choose Membership Plan',
       'description' => 'Do you want your users to be able to choose a ' .
-        'subscription plan upon signup?',
+        'membership plan upon signup?',
       'multiOptions' => array(
         '1' => 'Yes, give users the option to choose upon signup.',
         '0' => 'No, do not allow users to choose upon signup.',
