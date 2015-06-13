@@ -228,13 +228,14 @@ class Authorization_Form_Admin_Level_Edit extends Authorization_Form_Admin_Level
 			// Element: messages_auth
 			$this -> addElement('Radio', 'messages_auth', array(
 				'label' => 'Allow messaging?',
-				'description' => 'Allow member to send message to friends',
+				'description' => 'USER_FORM_ADMIN_SETTINGS_LEVEL_MESSAGESAUTH_DESCRIPTION',
 				'multiOptions' => array(
-					'friends' => 'Yes',
-					'none' => 'No',
+					'everyone' => 'Everyone',
+					'friends' => 'Friends Only',
+					'none' => 'Disable messaging',
 				)
 			));
-			
+
 			// Element: messages_editor
 			$this -> addElement('Radio', 'messages_editor', array(
 				'label' => 'Use editor for messaging?',
@@ -244,57 +245,7 @@ class Authorization_Form_Admin_Level_Edit extends Authorization_Form_Admin_Level
 					'plaintext' => 'Plain Text',
 				)
 			));
-			
-			$this -> addElement('Radio', 'mail_auth', array(
-				'label' => 'Allow send email?',
-				'description' => 'Allow member to send email to non-friends',
-				'multiOptions' => array(
-					1 => 'Yes',
-					0 => 'No',
-				),
-				'value' => 1
-			));
-			
-			$this->addElement('Integer', 'mess_day', array(
-                'label' => 'Maximum messages user can send per day',
-                'description' => 'Set 0 is unlimited',
-                'required' =>true,
-                'validators' => array(
-                    new Engine_Validate_AtLeast(0),
-                ),
-                'value' => 0,
-            ));
-			
-			$this->addElement('Integer', 'mess_month', array(
-                'label' => 'Maximum messages user can send per month',
-                'description' => 'Set 0 is unlimited',
-                'required' =>true,
-                'validators' => array(
-                    new Engine_Validate_AtLeast(0),
-                ),
-                'value' => 0,
-            ));
-			
-			$this->addElement('Integer', 'mail_day', array(
-                'label' => 'Maximum emails user can send per day',
-                'description' => 'Set 0 is unlimited',
-                'required' =>true,
-                'validators' => array(
-                    new Engine_Validate_AtLeast(0),
-                ),
-                'value' => 0,
-            ));
-			
-			$this->addElement('Integer', 'mail_month', array(
-                'label' => 'Maximum emails user can send per month',
-                'description' => 'Set 0 is unlimited',
-                'required' =>true,
-                'validators' => array(
-                    new Engine_Validate_AtLeast(0),
-                ),
-                'value' => 0,
-            ));
-			
+
 			$this -> messages_auth -> getDecorator('Description') -> setOption('placement', 'PREPEND');
 		}
 	}

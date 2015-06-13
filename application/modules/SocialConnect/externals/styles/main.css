@@ -44,43 +44,64 @@
 	margin-top: 19px;
 }
 
+#global_page_social-connect-index-account-linking{
+	#global_content{
+		min-height: 400px;
+	}
+}
+
 /* nhittb end added  */
 .socialconnect_account,
 .socialconnect_services
 {
 	margin-bottom: 10px;
-	border-style: solid;
-	border-width: 1px;
 	padding: 10px;
 	margin-right: 10px;
-	background: #fff;
-	width: 21%;
+	width: 24%;
 	float: left;
-	border-color: #bbb;
-	box-shadow: 1px 2px 2px rgba(0, 0, 0, 0.2);
-	max-height: 42px;
+	height: 60px;
+	border:1px solid $theme_border_dark_color;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+
+	& > img{
+		float: left;
+		margin-right: 5px;
+		width: 32px;
+		height: 32px;
+	}
+
+	strong{
+	color: $theme_link_color;
+	}
 }
 .socialconnect_account span,
 .socialconnect_services span
 {
-	display: inline-block;
-	float: none;
-	font-size: 12px;
-	padding: 0 0 0 4px;
+	float: left;
 	position: relative;
-	top: -8px;
-	width: 77%;
+	width: 70%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	color: $theme_link_color;
+
+	div{
+		a{
+			font-size: 14px;
+		}
+	}
 }
-.socialconnect_services span
+.socialconnect_account span  a,
+.socialconnect_services span  a
 {
-	top: -17px;
-}
-.socialconnect_services span > a
-{
-	width: 75%;
+	color: $theme_link_color;
+	font-weight: bold;
+	text-transform: lowercase;
+	font-size: 16px;
 }
 .ynsc_logo
 {
-	width: 16px;
-	margin-left: 95%;
+	float: right;
 }

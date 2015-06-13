@@ -79,6 +79,29 @@ class Ynfbpp_Api_Core
                 return false;
             }
         }
+		
+		$permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
+		$messDay = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'user', 'mess_day');
+		if ($messDay == null) {
+	        $row = $permissionsTable->fetchRow($permissionsTable->select()
+	        ->where('level_id = ?', $viewer -> level_id)
+	        ->where('type = ?', 'user')
+	        ->where('name = ?', 'mess_day'));
+	        if ($row) {
+	            $messDay = $row->value;
+	        }
+	    }
+		
+		if ($messDay > 0) {
+			$messTbl = Engine_Api::_()->getDbTable('messages', 'messages');
+			$now = 
+			$select = $messTbl->select()
+				->where('user_id = ?', $viewer->getIdentity())
+				->where('date >= ?', date('Y-m-d H:i:s', strtotime('yesterday')));
+			$numOfMessDay = count($messTbl->fetchAll($select));
+			if ($numOfMessDay >= $messDay) return false;
+		}
+		
         return true;
     }
 

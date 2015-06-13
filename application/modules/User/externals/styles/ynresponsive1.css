@@ -617,7 +617,8 @@ div.btn-add-more,
 
 .icon_event_viewall{
 	text-align: center;
-	display: block;
+	display: inline-block;
+	float: right;
 	color: #fff !important;
 	font-weight: bold;
 	background-color: $theme_link_color;
