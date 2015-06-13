@@ -61,4 +61,9 @@
         height: 10px;
         background: $theme_link_color !important;
     }
+
+    li.profile_project_content_info{
+      display: inline-block;
+      margin-right: 15px;
+    }
 }
