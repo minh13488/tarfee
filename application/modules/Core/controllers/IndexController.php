@@ -16,30 +16,36 @@
  * @copyright  Copyright 2006-2010 Webligo Developments
  * @license    http://www.socialengine.com/license/
  */
-class Core_IndexController extends Core_Controller_Action_Standard
-{
-  public function indexAction()
-  {
-    if( Engine_Api::_()->user()->getViewer()->getIdentity() )
-    {
-      return $this->_helper->redirector->gotoRoute(array('action' => 'home'), 'user_general', true);
-    }
-	
-	if(isset($_SESSION['skip_registration']))
-	{
-		return $this->_helper->redirector->gotoRoute(array(), 'user_home', true);
+class Core_IndexController extends Core_Controller_Action_Standard {
+	public function indexAction() {
+		if (Engine_Api::_() -> user() -> getViewer() -> getIdentity()) {
+			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'home'), 'user_general', true);
+		}
+
+		if (isset($_SESSION['skip_registration'])) {
+			return $this -> _helper -> redirector -> gotoRoute(array(), 'user_home', true);
+		}
+
+		// check public settings
+		if (!Engine_Api::_() -> getApi('settings', 'core') -> core_general_portal && !$this -> _helper -> requireUser() -> isValid()) {
+			return;
+		}
+
+		// Render
+		$this -> _helper -> content -> setNoRender() -> setEnabled();
 	}
 
-    // check public settings
-    if( !Engine_Api::_()->getApi('settings', 'core')->core_general_portal &&
-        !$this->_helper->requireUser()->isValid() ) {
-      return;
-    }
+	public function howItWorksAction() {
+		// Render
+		$this -> _helper -> content -> setNoRender() -> setEnabled();
+	}
+	public function promoteLookAction() {
+		// Render
+		$this -> _helper -> content -> setNoRender() -> setEnabled();
+	}
+	public function aboutUsAction() {
+		// Render
+		$this -> _helper -> content -> setNoRender() -> setEnabled();
+	}
 
-    // Render
-    $this->_helper->content
-        ->setNoRender()
-        ->setEnabled()
-        ;
-  }
 }

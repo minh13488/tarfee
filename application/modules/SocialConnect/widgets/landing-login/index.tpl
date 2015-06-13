@@ -24,7 +24,6 @@
 	<div class="tf_bgdot_landing"></div>
 </div>
 
-
 <h1><img src="application/themes/ynresponsive-event/images/example_only.png" alt="tarfee . Spring 2015" class="brand"></h1>
 
 <?php if( !$this->noForm ): ?>
@@ -56,9 +55,9 @@
 
 <div class="tf_footer_landing">
 	<ul>
-		<li><a href="#">How it works?</a></li>
-		<li><a href="#">Promoting talents + Looking for talents?</a></li>
-		<li><a href="#">About Us</a></li>
+		<li><a class="smoothbox" href="<?php echo $this -> url(array('module' => 'core', 'controller' => 'index', 'action' => 'how-it-works'), 'default');?>"><?php echo $this -> translate("How it works?");?></a></li>
+		<li><a class="smoothbox" href="<?php echo $this -> url(array('module' => 'core', 'controller' => 'index', 'action' => 'promote-look'), 'default');?>"><?php echo $this -> translate("Promoting talents + Looking for talents?");?></a></li>
+		<li><a class="smoothbox" href="<?php echo $this -> url(array('module' => 'core', 'controller' => 'index', 'action' => 'about-us'), 'default');?>"><?php echo $this -> translate("About Us");?></a></li>
 	</ul>
 </div><!--end tf footer landing-->
 
