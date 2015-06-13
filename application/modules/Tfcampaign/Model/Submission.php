@@ -11,6 +11,11 @@ class Tfcampaign_Model_Submission extends Core_Model_Item_Abstract {
 		return Engine_Api::_() -> getItem('user_playercard', $this -> player_id);
 	}
 	
+	public function getReason() {
+		$reasonTable = Engine_Api::_() -> getDbTable('reasons', 'tfcampaign');
+		return $reasonTable -> getReason($this -> reason_id);
+	}
+	
 	public function countPercentMatching(){
 		$campaign = $this -> getCampaign();
 		$player = $this -> getPlayer();

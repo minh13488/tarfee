@@ -16,6 +16,11 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 
 	// protected $_parent_is_owner = true;
 	
+	function canAddRatings()
+	{
+		return $this -> authorization() -> isAllowed(null, 'addratings');
+	}
+	
 	public function getRating($total = false) {
 		if($this -> parent_type == "user_playercard") {
 			$ratingTable = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');

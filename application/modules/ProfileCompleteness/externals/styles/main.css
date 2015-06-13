@@ -41,3 +41,24 @@
 	clear:both;
 	padding-top:5px;
 }
+
+/*style profile project content*/
+.profile_project_content{
+  padding-left: 30px;
+
+    li{
+        overflow: hidden;
+        +tarfee_border_radius(5px);
+        font-size: 15px !important;
+        color: $theme_font_color;
+    }
+    .profile_process{
+        height: 10px;
+        background: #fff !important;
+    }
+
+    .profile_completed{
+        height: 10px;
+        background: $theme_link_color !important;
+    }
+}

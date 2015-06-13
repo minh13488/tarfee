@@ -91,7 +91,7 @@
 
 <br />
 
-
+<div style="overflow: auto">
 <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
   <table class='admin_table'>
     <thead>
@@ -201,3 +201,4 @@
     </tbody>
   </table>
 <?php endif; ?>
+</div>

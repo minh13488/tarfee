@@ -280,7 +280,7 @@ jQuery.noConflict();
 						click: function() {
 							var parent = $(this).closest('#search-filter');
 							var div_filter = parent.find('#basic-search-filter');
-							div_filter.toggle();
+							div_filter.slideToggle(300);
 						}
 					})
 				)

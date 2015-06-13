@@ -16,12 +16,16 @@ class Tfcampaign_Model_DbTable_Submissions extends Engine_Db_Table {
 		$playerTbl = Engine_Api::_() -> getItemTable('user_playercard');
 		$playerTblName = $playerTbl -> info('name');
 		
+		$locationTbl = Engine_Api::_() -> getDbTable('locations', 'user');
+		$locationTblName = $locationTbl -> info('name');
+		
 		$select = $submissionTbl -> select();
 		$select -> setIntegrityCheck(false);
 
 		$select -> from("$submissionTblName as submission", "submission.*");
 		
 		$select -> joinLeft("$playerTblName as player", "submission.player_id = player.playercard_id", null) ;
+		$select -> joinLeft("$locationTblName as location", "location.location_id = player.country_id", null) ;
         $select -> group("submission.submission_id");
         
 		if (isset($params['order'])) {
@@ -38,7 +42,11 @@ class Tfcampaign_Model_DbTable_Submissions extends Engine_Db_Table {
 				$select->order('submission.submission_id DESC');
 			}
 	    }
-		
+		if(isset($params['hided'])) {
+			$select -> where('hided = ?', $params['hided']);
+		} else {
+			$select -> where('hided = 0');
+		}
     	return $select;
     }
 	

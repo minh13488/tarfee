@@ -18,13 +18,9 @@ class SocialConnect_Model_DbTable_Fields extends Engine_Db_Table
 
 	public function getProfileFields()
 	{
-
 		$maps = array();
-
 		$skipTypes = array('heading' => 1, );
-
 		$topStructure = Engine_Api::_() -> fields() -> getFieldStructureTop('user');
-
 		foreach ($topStructure as $structure)
 		{
 			if ($structure -> getChild() -> type == 'profile_type')
@@ -34,7 +30,6 @@ class SocialConnect_Model_DbTable_Fields extends Engine_Db_Table
 
 				foreach ($options as $option)
 				{
-
 					$profileLabel = $option -> label;
 					$topLevelId = $profileTypeField -> field_id;
 					$topLevelValue = $option -> option_id;
@@ -88,13 +83,10 @@ class SocialConnect_Model_DbTable_Fields extends Engine_Db_Table
 	 * @param string $field
 	 */
 
-	public function getItem($service, $field)
+	public function getItem($service, $field, $opt_id = '')
 	{
-
-		$select = $this -> select() -> where('service = ?', $service) -> where('field = ?', $field);
-
+		$select = $this -> select() -> where('service = ?', $service) -> where('field = ?', $field) -> where('opt_id = ?', $opt_id);
 		$item = $this -> fetchRow($select);
-
 		if (!$item)
 		{
 			$item = $this -> createRow();

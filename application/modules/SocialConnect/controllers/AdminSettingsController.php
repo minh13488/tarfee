@@ -77,16 +77,12 @@ class SocialConnect_AdminSettingsController extends Core_Controller_Action_Admin
 		}
 		$form -> setTitle($title);
 		$form -> setDescription($desc);
-
 		$form -> populateData($service);
-
 		if ($this -> _request -> isPost() && $form -> isValid($_POST))
 		{
 			$result = $form -> commitSave($service);
-
 			if ($result)
 			{
-				//$form -> addNotice('Your changes have been saved.');
 				return $this->_forward ( 'success', 'utility', 'core', array (
 				'messages' => array (
 						Zend_Registry::get ( 'Zend_Translate' )->_ ( 'Your changes have been saved.' )

@@ -302,10 +302,9 @@ else {
                             $badge = Engine_Api::_()->authorization()->getPermission($this->subject(), 'user', 'badge');
                             if($badge && strpos($badge,'public/admin') !== false): ?>
                                 <img height="26" src="<?php echo $badge?>" />
+                                <?php echo $this->translate('professional account'); ?>
                         	<?php endif;?>
                     	<?php endif;?>
-                    <?php echo $this->translate('professional account'); ?>
-
                 </div>
 
                 <?php if($this->src_img):?>
