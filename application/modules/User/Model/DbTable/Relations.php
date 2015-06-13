@@ -16,4 +16,16 @@ class User_Model_DbTable_Relations extends Engine_Db_Table {
 		}
 		return $typeArray;
 	}
+	
+	public function getRelationSearchArray()
+	{
+		$typeArray = array();
+		$select = $this -> select();
+		$types = $this -> fetchAll($select);
+		foreach($types as $type)
+		{
+			$typeArray[$type -> relation_id] = $type -> search_title;  
+		}
+		return $typeArray;
+	}
 }

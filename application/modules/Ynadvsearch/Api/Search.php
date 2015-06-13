@@ -106,6 +106,111 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 	public function getAdvsearchResults($type, $params = array(), $from, $limit = null) {
 		$results = array();
 		switch ($type) {
+			case 'player':
+				$table = Engine_Api::_()->getItemTable('user_playercard');
+				$select = $table->select();
+				if (!empty($params['keyword'])) {
+					$select->where('name LIKE ? or description LIKE ?', '%'.$params['keyword'].'%');
+				}
+				if (!empty($params['sport'])) {
+					$select->where('category_id = ?', $params['sport']);
+				}
+				if (!empty($params['gender'])) {
+					$select->where('gender = ?', $params['gender']);
+				}
+				if (!empty($params['relation_id'])) {
+					$select->where('relation_id = ?', $params['relation_id']);
+				}				
+				if (!empty($params['continent'])) {
+					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
+					if (!empty($countries)) {
+						$select->where('country_id IN (?)', array_keys($countries));
+					}
+					else {
+						$select->where('country_id IN (?)', array(0));
+					}
+				}
+				if (!empty($params['country_id'])) {
+					$select->where('country_id = ?', $params['country_id']);
+				}
+				
+				if (!empty($params['province_id'])) {
+					$select->where('province_id = ?', $params['province_id']);
+				}
+				
+				if (!empty($params['city_id'])) {
+					$select->where('city_id = ?', $params['city_id']);
+				}
+				break;
+				
+			case 'professional':
+				$table = Engine_Api::_()->getItemTable('user');
+				$select = $table->select();
+				if (!empty($params['keyword'])) {
+					$select->where('username LIKE ? or displayname LIKE ?', '%'.$params['keyword'].'%');
+				}
+				if (isset($params['displayname'])) {
+					$select->where('displayname LIKE ?', '%'.$params['displayname'].'%');
+				}
+				if (!empty($params['service'])) {
+					//TODO filter with service
+				}
+				if (!empty($params['continent'])) {
+					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
+					if (!empty($countries)) {
+						$select->where('country_id IN (?)', array_keys($countries));
+					}
+					else {
+						$select->where('country_id IN (?)', array(0));
+					}
+				}
+				if (!empty($params['country_id'])) {
+					$select->where('country_id = ?', $params['country_id']);
+				}
+				
+				if (!empty($params['province_id'])) {
+					$select->where('province_id = ?', $params['province_id']);
+				}
+				
+				if (!empty($params['city_id'])) {
+					$select->where('city_id = ?', $params['city_id']);
+				}
+				break;
+				
+			case 'organization':
+				$table = Engine_Api::_()->getItemTable('user');
+				$select = $table->select();
+				if (!empty($params['keyword'])) {
+					$select->where('username LIKE ? or displayname LIKE ?', '%'.$params['keyword'].'%');
+				}
+				if (isset($params['displayname'])) {
+					$select->where('displayname LIKE ?', '%'.$params['displayname'].'%');
+				}
+				if (!empty($params['sport'])) {
+					//TODO filter with sport
+				}
+				if (!empty($params['continent'])) {
+					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
+					if (!empty($countries)) {
+						$select->where('country_id IN (?)', array_keys($countries));
+					}
+					else {
+						$select->where('country_id IN (?)', array(0));
+					}
+				}
+				if (!empty($params['country_id'])) {
+					$select->where('country_id = ?', $params['country_id']);
+				}
+				
+				if (!empty($params['province_id'])) {
+					$select->where('province_id = ?', $params['province_id']);
+				}
+				
+				if (!empty($params['city_id'])) {
+					$select->where('city_id = ?', $params['city_id']);
+				}
+				break;
+				
 			case 'event':
 				$table = Engine_Api::_()->getItemTable('event');
 				$select = $table->select();
@@ -113,7 +218,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 					$select->where('title LIKE ? or description LIKE ?', '%'.$params['keyword'].'%');
 				}
 				if (isset($params['event_type'])) {
-					$select->where('type_id = ?', $params['type_id']);
+					$select->where('type_id = ?', $params['event_type']);
 				}
 				if (!empty($params['sport'])) {
 					$select->where('category_id = ?', $params['sport']);

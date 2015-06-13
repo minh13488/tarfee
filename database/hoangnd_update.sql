@@ -249,3 +249,7 @@ INSERT IGNORE INTO `engine4_authorization_permissions`
     3 as `value`,
     '0' as `params`
   FROM `engine4_authorization_levels` WHERE `type` IN('admin','moderator','user','public'); 
+  
+-- 6.10.2015
+ALTER TABLE `engine4_user_relations` ADD `search_title` TEXT NOT NULL ;
+ALTER TABLE `engine4_user_playercards` ADD `name` VARCHAR(200) NOT NULL ;
