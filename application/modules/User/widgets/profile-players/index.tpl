@@ -155,10 +155,10 @@
 											</li>
 										</ul>
 									
-								    <?php endif;?>
+									
+									<?php else: ?>
 
-									<?php if(!($player -> getOwner())) :?>
-
+										<!-- asd sa d  -->
 										<?php if ($this -> viewer() -> getIdentity()):?>
 										<li title="<?php echo $this -> translate("eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
 				                    		<?php if($player->isEyeOn()): ?>              
@@ -193,7 +193,9 @@
 												</span>
 											</a>
 										</li>
+
 									<?php endif; ?>
+									
 								</ul>
 							</div>
 							<div class="tarfee_sport_type_position">
