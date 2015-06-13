@@ -9,8 +9,20 @@ class Ynadvsearch_Api_Core extends  Core_Api_Abstract {
 		'video' => 'Video',
 		'event' => 'Tryout/Event',
 		'blog' => 'Talk'
+	);
+	
+	protected $_continents = array(
+		'Africa' => 'Africa',
+		'North America' => 'North America',
+		'South America' => 'South America',
+		'Asia' => 'Asia',
+		'Oceania' => 'Oceania',
+		'Europe' => 'Europe',
 	); 
     
+	public function getContinents() {
+		return $this->_continents;
+	}
 	
 	public function getAllowSearchTypes() {
 		return $this->_allowSearchType;

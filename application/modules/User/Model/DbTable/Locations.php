@@ -14,4 +14,18 @@ class User_Model_DbTable_Locations extends Engine_Db_Table {
 		}
 		return $arr;
 	}
+	
+	public function getCountriesByContinent($continent) {
+		$select = $this->select()->where('continent = ?', $continent)->where('level = ?', 0);
+		return $this->fetchAll($select);
+	}
+	
+	public function getCountriesAssocByContinent($continent) {
+		$arr = array();
+		$rows = $this->getCountriesByContinent($continent);
+		foreach ($rows as $row) {
+			$arr[$row->getIdentity()] = $row->getTitle();
+		}
+		return $arr;
+	}
 }

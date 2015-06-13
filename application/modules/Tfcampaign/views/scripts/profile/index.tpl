@@ -65,7 +65,7 @@
     $this->translate('Delete'), 
     array('class' => 'smoothbox')) ?>
 <?php endif;?>
-<?php if($this -> viewer() -> getIdentity()) :?>
+<?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
 -
 <?php echo $this->htmlLink(
     array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 

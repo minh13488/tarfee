@@ -38,11 +38,11 @@ class User_Form_Admin_Location_Add extends Engine_Form {
 			'label' => 'Continent',
 			'multiOptions' => array(
 				'Africa' => 'Africa',
-				'Americas' => 'Americas',
+				'North America' => 'North America',
+				'South America' => 'South America',
 				'Asia' => 'Asia',
-				'Australia and Oceania' => 'Australia and Oceania',
+				'Oceania' => 'Oceania',
 				'Europe' => 'Europe',
-				'Antarctica' => 'Antarctica'
 			)
 		));
 		
