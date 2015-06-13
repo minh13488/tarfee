@@ -36,8 +36,8 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 				$userCount++;
 				// get all ratings of this user for this video
 				$params = array(
-					'resource_id' => $video_id,
-					'user_id' => $userId,
+					'resource_id' => $this -> video_id,
+					'user_id' => $user_id,
 				);
 				$ratings = $ratingTable -> getRatingsBy($params);
 				$ratingCount = 0;
