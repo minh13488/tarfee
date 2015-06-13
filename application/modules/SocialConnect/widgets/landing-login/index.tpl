@@ -1,15 +1,3 @@
-<?php
-/**
- * SocialEngine
- *
- * @category   Application_Core
- * @package    User
- * @copyright  Copyright 2006-2010 Webligo Developments
- * @license    http://www.socialengine.net/license/
- * @version    $Id: index.tpl 9595 2012-01-11 20:49:39Z john $
- * @author     John
- */
-?>
 <style>
 .ynsc_sprite
 {
@@ -20,8 +8,10 @@
 	padding: 2px;
 }
 </style>
-
-<div class="tf_bgbody_landing" style="background-image: url(application/themes/ynresponsive-event/images/Bkgd1en.jpg)">
+<?php
+$background = rand(1, 3);
+?>
+<div class="tf_bgbody_landing" style="background-image: url(application/themes/ynresponsive-event/images/Bkgden_<?php echo $background?>.jpg)">
 	<div class="tf_bgdot_landing"></div>
 </div>
 
