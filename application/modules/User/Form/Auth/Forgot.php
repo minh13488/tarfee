@@ -47,17 +47,33 @@ class User_Form_Auth_Forgot extends Engine_Form
         'ViewHelper',
       ),
     ));
-
-    $this->addElement('Cancel', 'cancel', array(
-      'label' => 'cancel',
-      'link' => true,
-      'prependText' => Zend_Registry::get('Zend_Translate')->_(' or '),
-      'href' => Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'default', true),
-      'decorators' => array(
-        'ViewHelper',
-      ),
-    ));
-    
+	$request = Zend_Controller_Front::getInstance() -> getRequest();
+	 if($request -> getParam('format', '') == 'smoothbox')
+	 {
+	    $this->addElement('Cancel', 'cancel', array(
+	      'label' => 'cancel',
+	      'link' => true,
+	      'prependText' => Zend_Registry::get('Zend_Translate')->_(' or '),
+	      'href' => 'javascript:void(0)',
+	      'onclick' => 'parent.Smoothbox.close()',
+	      'decorators' => array(
+	        'ViewHelper',
+	      ),
+	    ));
+    }
+	else
+	{
+	    $this->addElement('Cancel', 'cancel', array(
+	      'label' => 'cancel',
+	      'link' => true,
+	      'prependText' => Zend_Registry::get('Zend_Translate')->_(' or '),
+	      'href' => Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'default', true),
+	      'decorators' => array(
+	        'ViewHelper',
+	      ),
+	    ));
+	}
+	
     $this->addDisplayGroup(array(
       'submit',
       'cancel'

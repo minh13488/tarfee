@@ -331,4 +331,58 @@ class User_SignupController extends Core_Controller_Action_Standard
       $mailParams
     );
   }
+
+  public function requestInviteAction()
+  {
+	// Make form
+	$this -> view -> form = $form = new User_Form_Signup_Request();
+	
+	// Check request
+	if (!$this -> getRequest() -> isPost())
+	{
+		return;
+	}
+
+	// Check data
+	if (!$form -> isValid($this -> getRequest() -> getPost()))
+	{
+		return;
+	}
+	$values = $form -> getValues();
+    // Get verify user
+    $userTable = Engine_Api::_()->getDbtable('users', 'user');
+    $user = $userTable->fetchRow($userTable->select()->where('email = ?', $values['email']));
+
+    if( !$user || !$user->getIdentity() ) {
+      $this->view->status = false;
+      $this->view->error = $this->view->translate('The email is exists.');
+      return;
+    }
+	$this->_forward('success', 'utility', 'core', array(
+      'smoothboxClose' => true,
+      'parentRefresh' => false,
+      'messages' => array(Zend_Registry::get('Zend_Translate')->_('Request invite successfully!'))
+    ));
+  }
+  
+  public function registerAction()
+  {
+	    // If the user is logged in, they can't sign up now can they?
+	    if( Engine_Api::_()->user()->getViewer()->getIdentity() ) {
+	      return $this->_helper->redirector->gotoRoute(array(), 'default', true);
+	    }
+	    
+	    $formSequenceHelper = $this->_helper->formSequence;
+	    foreach( Engine_Api::_()->getDbtable('signup', 'user')->fetchAll() as $row ) {
+	      if( $row->enable == 1 ) {
+	        $class = $row->class;
+	        $formSequenceHelper->setPlugin(new $class, $row->order);
+	      }
+	    }
+		
+	    // This will handle everything until done, where it will return true
+	    if( !$this->_helper->formSequence() ) {
+	      return;
+	    }
+  }
 }

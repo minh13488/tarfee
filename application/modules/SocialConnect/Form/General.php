@@ -78,6 +78,12 @@ class SocialConnect_Form_General extends Engine_Form
 			'value' => $settings->getSetting('socialconnect.autoapprove', 1),
 		));
 		
+	    $color = $settings->getSetting('tffooter_color', 'EEEEEE');
+        $this->addElement('Heading', 'tffooter_color', array(
+            'label' => 'Footer Color',
+            'value' => '<input value="'.$color.'" type="color" id="color" name="color"/>'
+        ));
+		
 		// Init submit
 		$this -> addElement('Button', 'submit', array(
 			'label' => 'Save Changes',

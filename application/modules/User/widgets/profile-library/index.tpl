@@ -1,15 +1,16 @@
-<h2><?php echo $this -> library -> getTitle();?></h2>
+<!--h2><?php  //echo $this -> library -> getTitle();?></h2-->
+
 <?php if($this -> viewer() -> isSelf($this -> subject())) :?>
 <div class="user-library-item-action">
-    <span><?php echo $this -> translate('Options');?></span>
+    <span class="ul-item-action-title"><?php echo '<i class="fa fa-plus-square fa-lg"></i>&nbsp;&nbsp;'.$this -> translate('add more');?></span>
+
     <ul>
-    	<li class="user-library-close-box"><i class="fa fa-times"></i></li>
 		<li>
 			<?php echo $this->htmlLink(array(
 					'route' => 'user_library',
 					'action' => 'edit',
 					'id' => $this -> library -> getIdentity(),
-					), '<i class="fa fa-plus-square"></i>'.$this->translate('Edit'), array(
+					), '<i class="fa fa-pencil-square fa-lg"></i>&nbsp;&nbsp;'.$this->translate('Edit'), array(
 					'class' => 'smoothbox buttonlink'
 					)) ;
 			?>
@@ -20,8 +21,7 @@
 					'action' => 'create',
 					'parent_type' =>'user_library',
 					'subject_id' =>  $this->library->getIdentity(),
-					'tab' => $this->identity,
-				), '<i class="fa fa-plus-square"></i>'.$this->translate('Add Video'), array(
+				), '<i class="fa fa-video-camera fa-lg"></i>&nbsp;&nbsp;'.$this->translate('Add Video'), array(
 				'class' => 'buttonlink'
 				)) ;
 			?>
@@ -30,19 +30,19 @@
 			<?php echo $this->htmlLink(array(
 					'route' => 'user_library',
 					'action' => 'create-sub-library',
-				), '<i class="fa fa-plus-square"></i>'.$this->translate('Create Sub Library'), array(
+				), '<i class="fa fa-folder-open fa-lg"></i>&nbsp;&nbsp;'.$this->translate('Create Sub Library'), array(
 				'class' => 'smoothbox buttonlink'
 				)) ;
 			?>
 		</li>
-		
 	</ul>
+
 </div>
 <?php endif;?>
 
-<br/>
+
 <?php if(count($this -> mainVideos)) :?>
-	<ul style="border-bottom: 5px solid #eaeaea;"  class="videos_browse">
+	<ul class="videos_browse tf_library_videos">
  	<?php foreach ($this->mainVideos as $item): ?>
         <?php
         echo $this->partial('_video_listing.tpl', 'user', array(
@@ -56,62 +56,85 @@
 	</ul>
 <?php endif;?>
 
-<br/>
 <!-- get sub libraries -->
 <?php $subLibraries = $this -> library -> getSubLibrary(); ?>
-<div id="accordion">
+<ul class="tf_list_sublibrary">
 <?php foreach($subLibraries as $subLibrary) :?>
 	<?php if($subLibrary -> isViewable()) :?>
-		<div class="sub-title">
-			<h3 style="font-size: large;" class="toggler atStart"> <?php echo $subLibrary -> getTitle();?></h3>
-			
-			<?php echo $this -> itemPhoto($subLibrary);?>
-
-			<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
-			<div class="user-library-item-action">
-			    <span> <?php echo $this -> translate('Options');?></span>
-			    <ul>
-				<li class="user-library-close-box"><i class="fa fa-times"></i></li>
-				<li>
-				<!-- delete link for sub library -->
-				<?php echo $this->htmlLink(array(
-					'route' => 'user_library',
-					'action' => 'delete',
-					'id' => $subLibrary -> getIdentity(),
-					), '<i class="fa fa-plus-square"></i>'.$this->translate('Delete'), array(
-					'class' => 'smoothbox buttonlink'
-					)) ;
-				?>
-				</li>	
-				<li>	
-				<!-- edit link for sub library -->
-				<?php echo $this->htmlLink(array(
-					'route' => 'user_library',
-					'action' => 'edit',
-					'id' => $subLibrary -> getIdentity(),
-					), '<i class="fa fa-plus-square"></i>'.$this->translate('Edit'), array(
-					'class' => 'smoothbox buttonlink'
-					)) ;
-				?>
-				</li>
-				<li>
-					<!-- create video link for sub library -->
+	<li>
+		<div class="item_background" style="background: url(<?php echo $subLibrary -> getPhotoUrl();?>)">
+			<div class="avatar-box-hover">
+			    <ul class="actions">
+					<li>
+						<!-- delete link for sub library -->
+						<?php echo $this->htmlLink(array(
+							'route' => 'user_library',
+							'action' => 'delete',
+							'id' => $subLibrary -> getIdentity(),
+							), '<i class="fa fa-times"></i>', array(
+							'class' => 'smoothbox buttonlink'
+							)) ;
+						?>
+					</li>	
+					<li>	
+						<!-- edit link for sub library -->
+						<?php echo $this->htmlLink(array(
+							'route' => 'user_library',
+							'action' => 'edit',
+							'id' => $subLibrary -> getIdentity(),
+							), '<i class="fa fa-pencil"></i>', array(
+							'class' => 'smoothbox buttonlink'
+							)) ;
+						?>
+					</li>
+					<li>
+						<!-- create video link for sub library -->
 						<?php echo $this->htmlLink(array(
 								'route' => 'video_general',
 								'action' => 'create',
 								'parent_type' =>'user_library',
 								'subject_id' =>  $subLibrary->getIdentity(),
-								'tab' => $this->identity,
-							), '<i class="fa fa-plus-square"></i>'.$this->translate('Add Video'), array(
+							), '<i class="fa fa-video-camera fa-lg"></i>&nbsp;&nbsp;'.$this->translate('Add Video'), array(
 							'class' => 'buttonlink'
-							)) ;
+						)) ;
 						?>
 					</li>	
 				</ul>
-			</div>
-			<?php endif;?>
+			</div>	
 		</div>
-		<div class="element atStart">
+
+		<div class="tf_sublibrary_title">
+			<?php echo $subLibrary -> getTitle();?>
+		</div>
+
+		<div class="tf_sublibrary_count">
+			<div class="count_videos">
+				<span>
+					<?php echo $this->translate('20') ?>
+				</span>
+				<span>
+					<?php echo $this->translate('videos') ?>
+				</span>
+			</div>
+
+			<div class="count_views_comments">
+				<?php echo $this->translate('1.525.506 views') ?> <br>
+				<?php echo $this->translate('1.628 comments') ?>
+			</div>
+		</div>
+
+		<div class="tf_sublibrary_author">
+			by <span>James Jaredson</span>
+		</div>
+
+		<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
+		<div class="user-library-item-action">
+
+		</div>
+		<?php endif;?>
+
+		<!-- show video of sub library -->
+		<div>
 			<!-- get videos of sub libraries -->
 			<?php
 			    $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
@@ -121,9 +144,9 @@
 				$params['owner_id'] = $subLibrary -> getIdentity();
 			    $subVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
 			?>
-			<br/>
+
 			<?php if(count($subVideos)):?>
-				<ul style="border: 5px solid #eaeaea;" class="videos_browse">
+				<ul class="videos_browse">
 				 <?php foreach ($subVideos as $item): ?>
 			            <?php
 			            echo $this->partial('_video_listing.tpl', 'user', array(
@@ -135,26 +158,17 @@
 				<?php endforeach; ?>
 				</ul>
 			<?php endif;?>
-		</div>
-		<br/>
+
+		</div><!-- show video of sub library -->
+
+	</li><!-- end item sublibrary -->
 	<?php endif;?>
 <?php endforeach; ?>
-</div>
+</ul><!--tf_list_sublibrary-->
 
 <script type="text/javascript">
 	window.addEvent('domready', function(){
-		var accordion = new Accordion('h3.atStart', 'div.atStart', {
-			opacity: false,
-			onActive: function(toggler, element){
-				toggler.setStyle('color', '#ff3300');
-			},
 		 
-			onBackground: function(toggler, element){
-				toggler.setStyle('color', '#222');
-			}
-		}, $('accordion'));
-		 
-		
 		$$('.user-library-item-action').addEvent('outerClick', function(){
 	    	if ( this.hasClass('open-submenu') ) {
 	    		this.removeClass('open-submenu');	
@@ -169,11 +183,11 @@
 	    		this.addClass('open-submenu');
 	    	}  
 			
-			if($('global_footer').getStyle('margin-top') != "0px") {
-				$('global_footer').setStyle('margin-top', '');
-			} else {
-				$('global_footer').setStyle('margin-top', '60px');	
-			}
+			// if($('global_footer').getStyle('margin-top') != "0px") {
+			// 	$('global_footer').setStyle('margin-top', '');
+			// } else {
+			// 	$('global_footer').setStyle('margin-top', '60px');	
+			// }
 		});
 		 
 		 $$('.user-library-close-box').addEvent('click', function(){
