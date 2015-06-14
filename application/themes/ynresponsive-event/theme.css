@@ -4438,7 +4438,7 @@ Shows the mini menu and search widget
 			height: 20px;
 			text-indent: -9999px;
 			background-color: transparent;
-			background-image: url(/tarfee/application/themes/ynresponsive-event/images/icon_search.png?c=24);
+			background-image: url(~/application/themes/ynresponsive-event/images/icon_search.png);
 			background-position: center center;
 			background-repeat: no-repeat;
     	}
