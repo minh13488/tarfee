@@ -28,7 +28,7 @@ class User_Form_Admin_Player_Level extends Authorization_Form_Admin_Level_Abstra
         'description' => 'Your members can choose from any of the options checked below when they decide who can see their player card. If you do not check any options, settings will default to the last saved configuration. If you select only one option, members of this level will not have a choice.',
         'multiOptions' => array(
           'everyone'            => 'Everyone',
-          'owner_network'       => 'My Followers and Networks',
+          'owner_network'       => 'Followers and Networks',
           'owner_member'        => 'My Followers',
           'owner'               => 'Only Me',
         ),

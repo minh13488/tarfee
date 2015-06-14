@@ -35,8 +35,8 @@
       <span><?php echo $this->translate(array('%s view', '%s views', $this->user->view_count),$this->locale()->toNumber($this->user->view_count)) ?></span>
     </li>
     <li>
-      <?php echo $this->translate('Friends:') ?>
-      <span><?php echo $this->translate(array('%s friend', '%s friends', $this->user->member_count),$this->locale()->toNumber($this->user->member_count)) ?></span>
+      <?php echo $this->translate('Followers:') ?>
+      <span><?php echo $this->translate(array('%s follower', '%s followers', $this->user->member_count),$this->locale()->toNumber($this->user->member_count)) ?></span>
     </li>
     <li>
       <?php echo $this->translate('Last Update:'); ?>

@@ -193,10 +193,10 @@ class Tfcampaign_Form_Create extends Engine_Form
 	    $availableLabels = array(
 	      'everyone'            => 'Everyone',
 	      'registered'          => 'All Registered Members',
-	      'owner_network'       => 'Friends and Networks',
-	      'owner_member_member' => 'Friends of Friends',
-	      'owner_member'        => 'Friends Only',
-	      'owner'               => 'Just Me'
+	      'owner_network'       => 'Followers and Networks',
+	      'owner_member_member' => 'Followers of Followers',
+	      'owner_member'        => 'My Followers',
+	      'owner'               => 'Only Me'
 	    );
 	
 	    $viewOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('tfcampaign_campaign', $user, 'auth_view');

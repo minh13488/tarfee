@@ -17,7 +17,7 @@
 <?php foreach($this -> submissionPlayers as $submissionPlayer) :?>
 	<?php $player = Engine_Api::_() -> getItem('user_playercard', $submissionPlayer -> player_id);?>
 	<?php if($player) :?>
-		<?php $overRallRating = $player -> getOverallRating();?>
+		<?php $overRallRating = $player -> rating;?>
 		<div class="user_rating" title="<?php echo $overRallRating;?>">
 			<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
 		        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;

@@ -225,7 +225,7 @@
 						<a title="<?php echo $player -> first_name.' '.$player -> last_name;?>" href="<?php echo $player -> getHref()?>" class="player_name" ><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 20)?></a>
 					</div>
 
-					<?php $overRallRating = $player -> getOverallRating();?>
+					<?php $overRallRating = $player -> rating;?>
 					<div class="user_rating" title="<?php echo $overRallRating;?>">
 						<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
 					        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;

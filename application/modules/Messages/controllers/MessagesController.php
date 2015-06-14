@@ -372,7 +372,7 @@ class Messages_MessagesController extends Core_Controller_Action_User
         // Validate friends
         if( 'friends' == Engine_Api::_()->authorization()->getPermission($viewer, 'messages', 'auth') ) {
           if( !$viewer->membership()->isMember($recipients) ) {
-            return $form->addError('One of the members specified is not in your friends list.');
+            return $form->addError('One of the members specified is not in your followers list.');
           }
         }
         
@@ -399,7 +399,7 @@ class Messages_MessagesController extends Core_Controller_Action_User
         if( 'friends' == Engine_Api::_()->authorization()->getPermission($viewer, 'messages', 'auth') ) {
           foreach( $recipientsUsers as &$recipientUser ) {
             if( !$viewer->membership()->isMember($recipientUser) ) {
-              return $form->addError('One of the members specified is not in your friends list.');
+              return $form->addError('One of the members specified is not in your followers list.');
             }
           }
         }

@@ -120,7 +120,7 @@
 	text-align: center;
 	position: fixed;
 	bottom: 0;
-	opacity: 0;
+	opacity: 1;
 	transition: opacity 500ms ease-in-out;
 	-webkit-transition: opacity 500ms ease-in-out;
 	-moz-transition: opacity 500ms ease-in-out;
@@ -227,5 +227,90 @@ body#global_page_core-index-about-us{
 		right: 10px;
 		font-size: 30px;
 		color: $theme_font_color;
+	}
+}
+
+
+.ynadvmenu-html-fixed {
+	overflow: hidden;
+	#global_header { z-index: 0; }
+}
+
+.ynadvmenu-popup-content {
+	display: none;
+}
+
+#global_page_core-index-index #landing_popup {
+	.ynadvmenu-overlay {
+		position: fixed;
+		width: 100%;
+		min-height: 100%;
+		top: 0;
+		left: 0;
+		background-color: rgba(0, 0, 0, 0.8);
+		z-index: 999;
+	}	
+
+	.ynadvmenu-popup-content {
+		display: block;
+		position: fixed;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 1000;
+		overflow-y: auto;
+	}	
+
+	.ynadvmenu-popup-close {
+		position: fixed;
+		width: 100%;
+		min-height: 100%;
+		z-index: 1001;
+	}
+
+	.advmenusystem_lightbox {
+		width: 540px;
+		margin: 100px auto;
+		background-color: #fff;
+		border: 10px solid #111;
+		
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+
+		padding: 10px;
+		position: relative;
+		z-index: 1002;
+
+		h3 {
+			margin-top: 0;
+		}
+
+		.global_form > div {
+			float: none;
+		}
+		div
+		{
+			text-align: left;
+		}
+	}
+
+	.ynadvmenu-user-signup-form
+	{
+		display: none;
+	}
+
+	&.ynadvmenu-signup .ynadvmenu-user-signup-form {
+		display: block;
+
+		.advmenusystem_login_instead_btn {
+			display: inline-block;
+			margin-left: 10px;
+		}
+
+		.global_form div.form-element {
+			max-width: 300px;
+		}
 	}
 }

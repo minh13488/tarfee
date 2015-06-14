@@ -36,8 +36,8 @@ class User_Form_Admin_Library_Level extends Authorization_Form_Admin_Level_Abstr
         'description' => 'Your members can choose from any of the options checked below when they decide who can see their library. If you do not check any options, settings will default to the last saved configuration. If you select only one option, members of this level will not have a choice.',
         'multiOptions' => array(
           'everyone'            => 'Everyone',
-          'owner_network'       => 'My Followers and Networks',
-          'owner_member'        => 'My Followers Only',
+          'owner_network'       => 'Followers and Networks',
+          'owner_member'        => 'My Followers',
           'owner'               => 'Only Me',
         ),
         'value' => array('everyone', 'owner_network', 'owner_member', 'owner'),

@@ -603,26 +603,29 @@ class User_EditController extends Core_Controller_Action_User
 		{
 			$isClose = false;
 			$filename = $this -> copyImg($this -> getImageURL($values['url']), md5($values['url']));
-			$user -> setPhoto($filename);
-			@unlink($filename);
-			$iMain = Engine_Api::_()->getItem('storage_file', $user->photo_id);
-	        // Insert activity
-	        $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($user, $user, 'profile_photo_update',
-	          '{item:$subject} added a new profile photo.');
-	
-	        // Hooks to enable albums to work
-	        if( $action ) {
-	          $event = Engine_Hooks_Dispatcher::_()
-	            ->callEvent('onUserProfilePhotoUpload', array(
-	                'user' => $user,
-	                'file' => $iMain,
-	              ));
-	
-	          $attachment = $event->getResponse();
-	          if( !$attachment ) $attachment = $iMain;
-	
-	          // We have to attach the user himself w/o album plugin
-	          Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $attachment);
+			if($filename)
+			{
+				$user -> setPhoto($filename);
+				@unlink($filename);
+				$iMain = Engine_Api::_()->getItem('storage_file', $user->photo_id);
+		        // Insert activity
+		        $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($user, $user, 'profile_photo_update',
+		          '{item:$subject} added a new profile photo.');
+		
+		        // Hooks to enable albums to work
+		        if( $action ) {
+		          $event = Engine_Hooks_Dispatcher::_()
+		            ->callEvent('onUserProfilePhotoUpload', array(
+		                'user' => $user,
+		                'file' => $iMain,
+		              ));
+		
+		          $attachment = $event->getResponse();
+		          if( !$attachment ) $attachment = $iMain;
+		
+		          // We have to attach the user himself w/o album plugin
+		          Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $attachment);
+				}
 			}
 		}
 		
@@ -730,6 +733,10 @@ class User_EditController extends Core_Controller_Action_User
 		$check_allow_url_fopen = ini_get('allow_url_fopen');
 		if (($check_allow_url_fopen == 'on') || ($check_allow_url_fopen == 'On') || ($check_allow_url_fopen == '1')) {
 			$gis = getimagesize($url);
+			if(!$gis)
+			{
+				return false;
+			}
 			$type = $gis[2];
 			switch($type) {
 				case "1" :
@@ -752,6 +759,10 @@ class User_EditController extends Core_Controller_Action_User
 			$data = curl_exec($ch);
 			curl_close($ch);
 			$imorig = imagecreatefromstring($data);
+			if(!$imorig)
+			{
+				return false;
+			}
 		}
 
 		// Save

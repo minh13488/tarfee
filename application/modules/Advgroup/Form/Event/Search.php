@@ -19,7 +19,7 @@ class Advgroup_Form_Event_Search extends Engine_Form
 			'label' => 'View:',
 			'multiOptions' => array(
 				'' => 'Everyone\'s Events',
-				'5' => 'My Friends\'s Events',
+				'5' => 'My Followers\'s Events',
 				'2' => 'Events I\'m Attending',
 				'1' => 'Events I may Attending',
 				'3' => 'Events I\'m Invited',

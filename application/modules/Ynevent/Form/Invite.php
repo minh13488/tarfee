@@ -10,7 +10,7 @@ class Ynevent_Form_Invite extends Engine_Form
 
 		$this -> addElement('Checkbox', 'all', array(
 			'id' => 'selectall',
-			'label' => 'Choose All Friends',
+			'label' => 'Choose All Followers',
 			'ignore' => true
 		));
 

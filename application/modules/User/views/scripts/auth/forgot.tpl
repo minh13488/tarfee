@@ -10,6 +10,7 @@
  * @author     John
  */
 ?>
+<div class="tarfee-popup-close">x</div>
 <?php if( empty($this->sent) ): ?>
 
   <?php echo $this->form->render($this) ?>
@@ -23,3 +24,6 @@
   </div>
 
 <?php endif; ?>
+<script type="text/javascript">
+	$$('.tarfee-popup-close').addEvent('click',function(){parent.Smoothbox.close()});	
+</script>

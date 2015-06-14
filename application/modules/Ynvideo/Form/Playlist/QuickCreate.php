@@ -19,9 +19,9 @@ class Ynvideo_Form_Playlist_QuickCreate extends Engine_Form {
         $roles = array(
             'everyone' => 'Everyone',
             'registered' => 'All Registered Members',
-            'owner_network' => 'Friends and Networks',
-            'owner_member_member' => 'Friends of Friends',
-            'owner_member' => 'Friends Only',
+            'owner_network' => 'Followers and Networks',
+            'owner_member_member' => 'Followers of Followers',
+            'owner_member' => 'Followers Only',
             'owner' => 'Just Me'
         );
         

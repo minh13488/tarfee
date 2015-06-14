@@ -89,10 +89,10 @@ class Ynblog_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_Ab
         'description'  => 'Your members can choose from any of the options checked below when they decide who can see their blog entries. These options appear on your members\' "Add Entry" and "Edit Entry" pages. If you do not check any options, everyone will be allowed to view blogs.',
         'multiOptions' => array(
             'everyone'            => 'Everyone',
-            'owner_network'       => 'Friends and Networks',
-            'owner_member_member' => 'Friends of Friends',
-            'owner_member'        => 'Friends Only',
-            'owner'               => 'Just Me',
+            'owner_network'       => 'Followers and Networks',
+            'owner_member_member' => 'Followers of Followers',
+            'owner_member'        => 'My Followers',
+            'owner'               => 'Only Me',
         ),
         'value' => array('everyone', 'owner_network', 'owner_member_member', 'owner_member', 'owner'),
       ));
@@ -103,10 +103,10 @@ class Ynblog_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_Ab
         'description'  => 'Your members can choose from any of the options checked below when they decide who can post comments on their entries. If you do not check any options, everyone will be allowed to post comments on entries.',
         'multiOptions' => array(
             'everyone'            => 'Everyone',
-            'owner_network'       => 'Friends and Networks',
-            'owner_member_member' => 'Friends of Friends',
-            'owner_member'        => 'Friends Only',
-            'owner'               => 'Just Me',
+            'owner_network'       => 'Followers and Networks',
+            'owner_member_member' => 'Followers of Followers',
+            'owner_member'        => 'My Followers',
+            'owner'               => 'Only Me',
         ),
         'value' => array('everyone', 'owner_network', 'owner_member_member', 'owner_member', 'owner'),
       ));

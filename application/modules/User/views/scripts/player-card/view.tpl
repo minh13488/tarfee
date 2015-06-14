@@ -60,7 +60,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 			</ul>
 		</div>
 		<div class="user_rating">
-			<?php $overRallRating = $player -> getOverallRating();?>
+			<?php $overRallRating = $player -> rating;?>
 			<div class="user_rating" title="<?php echo $overRallRating;?>">
 				<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
 			        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;

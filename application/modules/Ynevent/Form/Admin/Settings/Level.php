@@ -107,10 +107,10 @@ class Ynevent_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_A
         'multiOptions' => array(
           'everyone' => 'Everyone',
           'registered' => 'Registered Members',
-          'owner_network' => 'Friends and Networks (user events only)',
-          'owner_member_member' => 'Friends of Friends (user events only)',
-          'owner_member' => 'Friends Only (user events only)',
-          'parent_member' => 'Group Members (group events only)',
+          'owner_network' => 'Followers and Networks (user events only)',
+          'owner_member_member' => 'Followers of Followers (user events only)',
+          'owner_member' => 'Followers Only (user events only)',
+          'parent_member' => 'Club Members (club events only)',
           'member' => "Event Guests Only",
           //'owner' => 'Just Me'
         )
@@ -122,10 +122,10 @@ class Ynevent_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_A
         'description' => 'EVENT_FORM_ADMIN_LEVEL_AUTHCOMMENT_DESCRIPTION',
         'multiOptions' => array(
           'registered' => 'Registered Members',
-          'owner_network' => 'Friends and Networks (user events only)',
-          'owner_member_member' => 'Friends of Friends (user events only)',
-          'owner_member' => 'Friends Only (user events only)',
-          'parent_member' => 'Group Members (group events only)',
+          'owner_network' => 'Followers and Networks (user events only)',
+          'owner_member_member' => 'Followers of Followers (user events only)',
+          'owner_member' => 'Followers Only (user events only)',
+          'parent_member' => 'Club Members (club events only)',
           'member' => "Event Guests Only",
           'leader' => "Owner and Leader",
           'owner' => 'Just Me'
