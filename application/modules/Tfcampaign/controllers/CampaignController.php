@@ -10,6 +10,50 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		$this -> _helper -> requireSubject('tfcampaign_campaign');
 	}
 	
+	public function saveSuggestAction() {
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(true);
+		
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
+		
+		$campaign = Engine_Api::_() -> core() -> getSubject();
+		
+		 // Check authorization to edit campaing.
+        if (!$campaign->isEditable()) {
+            return $this -> _helper -> requireAuth() -> forward();
+        }
+		
+	
+		$type = $this ->_getParam('type');
+		$params = $this ->_getAllParams();
+		
+		$db = $campaign -> getTable() -> getAdapter();
+		$db -> beginTransaction();
+		try
+		{
+			switch ($type) {
+			case 'age':
+					$campaign -> from_age = $params['from_age'];
+					$campaign -> to_age = $params['to_age'];
+					$campaign -> save();
+					break;
+				
+				default:
+					
+					break;
+			}
+			$db -> commit();
+		}
+		catch (Exception $e)
+		{
+			$db -> rollBack();
+			throw $e;
+		}
+		echo Zend_Json::encode(array('error_code' => 0));
+		exit ;
+	}
+	
 	public function saveAction() {
 		$this -> _helper -> layout -> disableLayout();
 		$this -> _helper -> viewRenderer -> setNoRender(true);

@@ -176,12 +176,12 @@ class Tfcampaign_Form_Create extends Engine_Form
     $this -> addElement('Text', 'user', array(
         'label' => 'Allow view for',
         'autocomplete' => 'off',
-        'order' => '13'
+        'order' => '20'
     ));
     
     $this -> addElement('Hidden', 'user_ids', array(
         'filters' => array('HtmlEntities'),
-        'order' => '14'
+        'order' => '21'
     ));
     Engine_Form::addDefaultDecorators($this -> user_ids);
 	
@@ -208,10 +208,10 @@ class Tfcampaign_Form_Create extends Engine_Form
 	      // Make select box
 	      } else {
 	        $this->addElement('Select', 'auth_view', array(
-	            'label' => 'Privacy',
-	            'description' => 'Who may see this campaign?',
+	            'label' => 'Who may see this campaign',
 	            'multiOptions' => $viewOptions,
 	            'value' => key($viewOptions),
+	            'onchange' => 'privacyChange()'
 	        ));
 	        $this->auth_view->getDecorator('Description')->setOption('placement', 'append');
 	      }
