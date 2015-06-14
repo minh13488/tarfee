@@ -89,7 +89,7 @@ class Ynblog_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_Ab
         'description'  => 'Your members can choose from any of the options checked below when they decide who can see their blog entries. These options appear on your members\' "Add Entry" and "Edit Entry" pages. If you do not check any options, everyone will be allowed to view blogs.',
         'multiOptions' => array(
             'everyone'            => 'Everyone',
-            'owner_network'       => 'My Followers and Networks',
+            'owner_network'       => 'Followers and Networks',
             'owner_member_member' => 'Followers of Followers',
             'owner_member'        => 'My Followers',
             'owner'               => 'Only Me',
@@ -103,7 +103,7 @@ class Ynblog_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_Ab
         'description'  => 'Your members can choose from any of the options checked below when they decide who can post comments on their entries. If you do not check any options, everyone will be allowed to post comments on entries.',
         'multiOptions' => array(
             'everyone'            => 'Everyone',
-            'owner_network'       => 'My Followers and Networks',
+            'owner_network'       => 'Followers and Networks',
             'owner_member_member' => 'Followers of Followers',
             'owner_member'        => 'My Followers',
             'owner'               => 'Only Me',

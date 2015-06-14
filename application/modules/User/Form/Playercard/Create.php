@@ -158,7 +158,7 @@ class User_Form_Playercard_Create extends Engine_Form
 	// View
     $availableLabels = array(
       'everyone'            => 'Everyone',
-      'owner_network'       => 'My Followers and Networks',
+      'owner_network'       => 'Followers and Networks',
       'owner_member'        => 'My Followers',
       'owner'               => 'Only Me'
     );

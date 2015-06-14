@@ -193,8 +193,8 @@ class Tfcampaign_Form_Create extends Engine_Form
 	    $availableLabels = array(
 	      'everyone'            => 'Everyone',
 	      'registered'          => 'All Registered Members',
-	      'owner_network'       => 'My Followers and Networks',
-	      'owner_member_member' => 'My Followers of Followers',
+	      'owner_network'       => 'Followers and Networks',
+	      'owner_member_member' => 'Followers of Followers',
 	      'owner_member'        => 'My Followers',
 	      'owner'               => 'Only Me'
 	    );
