@@ -63,8 +63,8 @@ class User_Form_Settings_Privacy extends Engine_Form
 
     $availableLabels = array(
       'owner'       => 'Only Me',
-      'member'      => 'Only My Friends',
-      'network'     => 'Friends & Networks',
+      'member'      => 'Only My Followers',
+      'network'     => 'Followers & Networks',
       'registered'  => 'All Registered Members',
       'everyone'    => 'Everyone',
     );
@@ -87,8 +87,8 @@ class User_Form_Settings_Privacy extends Engine_Form
 
     $availableLabelsComment = array(
       'owner'       => 'Only Me',
-      'member'      => 'Only My Friends',
-      'network'     => 'Friends & Networks',
+      'member'      => 'Only My Followers',
+      'network'     => 'Followers & Networks',
       'registered'  => 'All Registered Members',
     );
 
@@ -110,8 +110,8 @@ class User_Form_Settings_Privacy extends Engine_Form
 
 	$availableLabels = array(
 	      'owner'       => 'Only Me',
-	      'member'      => 'Only My Friends',
-	      'network'     => 'Friends & Networks',
+	      'member'      => 'Only My Followers',
+	      'network'     => 'Followers & Networks',
 	      'registered'  => 'All Registered Members',
 	);
 	// Init profile view
@@ -121,8 +121,8 @@ class User_Form_Settings_Privacy extends Engine_Form
 	$this->addElement('Radio', 'get_notification_privacy', array(
       'label' => 'Get Notification Privacy',
       'description' => 'Who can get notification for some of my action? Actions: Create new items. 
-                        Join/attend Group/Event. 
-                        All actions on members (add friend/rate member, etc...). 
+                        Join/attend Club/Event. 
+                        All actions on members (follow/rate member, etc...). 
                         Like/comment an item.',
       'multiOptions' => $get_notification_options,
 	));
