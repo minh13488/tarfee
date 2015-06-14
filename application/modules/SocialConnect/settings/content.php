@@ -250,19 +250,6 @@ return array(
         'category' => 'Social Connect',
         'type' => 'widget',
         'name' => 'social-connect.footer-menu',
-    	'adminForm' => array(
-    		'elements' => array(
-				array(
-						'Text',
-						'footer_color',
-						array(
-								'label' => 'Footer Color',
-								'type' => "color",
-								'value' => 'EEEEEE'
-						),
-				),
-    		)
-    	)
     ),
     array(
         'title' => 'Call Popup Invite Friends',
@@ -271,5 +258,5 @@ return array(
         'type' => 'widget',
         'name' => 'social-connect.call-popup-invite',
     ),
-	)
+)
 ?>
