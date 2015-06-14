@@ -536,7 +536,7 @@ class User_AuthController extends Core_Controller_Action_Standard
 
 		// Make form
 		$this -> view -> form = $form = new User_Form_Auth_Forgot();
-
+		
 		// Check request
 		if (!$this -> getRequest() -> isPost())
 		{
@@ -602,6 +602,15 @@ class User_AuthController extends Core_Controller_Action_Standard
 			$this -> view -> sent = true;
 
 			$db -> commit();
+			if($this -> _getParam('format', '') == 'smoothbox')
+			{
+				$this->_forward('success', 'utility', 'core', array(
+			      'smoothboxClose' => true,
+			      'parentRefresh' => false,
+			      'messages' => array(Zend_Registry::get('Zend_Translate')->_('USER_VIEWS_SCRIPTS_AUTH_FORGOT_DESCRIPTION'))
+			    ));
+			}
+			
 		}
 
 		catch( Exception $e )

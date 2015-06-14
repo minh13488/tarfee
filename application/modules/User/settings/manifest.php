@@ -184,6 +184,22 @@ return array(
         'action' => 'home'
       )
     ),
+    'user_request' => array(
+      'route' => '/request-invite/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'signup',
+        'action' => 'request-invite'
+      )
+    ),
+    'user_register' => array(
+      'route' => '/register/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'signup',
+        'action' => 'register'
+      )
+    ),
     'user_login' => array(
       'route' => '/login/*',
       'defaults' => array(
