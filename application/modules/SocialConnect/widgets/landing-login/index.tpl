@@ -78,9 +78,9 @@ $background = rand(1, 3);
 		}	
 	
 		// close popup
-		landing_popup.getElement('.ynadvmenu-popup-close').addEvent('click',function(){
+		landing_popup.getElement('.tarfee-popup-close').addEvent('click',function(){
 			main_html.removeClass('ynadvmenu-html-fixed');
-			landing_popup.removeClass('ynadvmenu-login').removeClass('ynadvmenu-signup');
+			landing_popup.removeClass('ynadvmenu-signup');
 			landing_popup.getElements('.ynadvmenu-popup').destroy();
 		});
 	}
