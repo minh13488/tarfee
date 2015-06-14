@@ -78,8 +78,8 @@
 <?php endif;?>
 
 <!-- meta data -->
-<h1><?php echo $this -> translate('Meta Data');?></h1>
 <?php if($campaign -> getOwner() -> isSelf($this -> viewer())) :?>
+<h1><?php echo $this -> translate('Meta Data');?></h1>	
 	<br/>
 	<?php echo $this -> translate(array("%s submission", "%s submissions", count($this -> submissionPlayers)), count($this -> submissionPlayers));?>
 	<br/>
