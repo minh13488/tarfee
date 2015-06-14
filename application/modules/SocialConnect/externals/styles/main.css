@@ -118,6 +118,16 @@
 	overflow: hidden;
 	width: 100%;
 	text-align: center;
+	position: fixed;
+	bottom: 0;
+	opacity: 0;
+	transition: opacity 500ms ease-in-out;
+	-webkit-transition: opacity 500ms ease-in-out;
+	-moz-transition: opacity 500ms ease-in-out;
+
+	&:hover{
+		opacity: 1;
+	}
 
 	ul{
 		/*float: left;*/
