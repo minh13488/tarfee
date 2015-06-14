@@ -130,7 +130,7 @@
 			<?php else:?>
 			<div class="tip">
 				<span>
-					<?php echo $this -> translate('Currently, there are no friends that you can invite.');?>
+					<?php echo $this -> translate('Currently, there are no followers that you can invite.');?>
 				</span>
 			</div>
 			<?php endif;?>

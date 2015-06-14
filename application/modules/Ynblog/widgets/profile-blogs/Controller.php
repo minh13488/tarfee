@@ -28,6 +28,10 @@ class Ynblog_Widget_ProfileBlogsController extends Engine_Content_Widget_Abstrac
                                 ));
     $paginator->setCurrentPageNumber(1);
 	$this -> view -> items_per_page = $this->_getParam('itemCountPerPage', 5);
+	if($paginator -> getTotalItemCount() <= 0 && !$viewer -> isSelf($subject))
+	{
+		return $this -> setNoRender();
+	}
   }
 
 }

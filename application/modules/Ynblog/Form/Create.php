@@ -107,10 +107,10 @@ class Ynblog_Form_Create extends Engine_Form
     // Prepare privacy options
     $availableLabels = array(
       'everyone'            => 'Everyone',
-      'owner_network'       => 'Friends and Networks',
-      'owner_member_member' => 'Friends of Friends',
-      'owner_member'        => 'Friends Only',
-      'owner'               => 'Just Me'
+      'owner_network'       => 'My Followers and Networks',
+      'owner_member_member' => 'Followers of Followers',
+      'owner_member'        => 'My Followers',
+      'owner'               => 'Only Me'
     );
 
     $viewOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('blog', $user, 'auth_view');

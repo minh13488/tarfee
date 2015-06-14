@@ -34,7 +34,7 @@ class Messages_Form_Admin_Level extends Engine_Form
       ->setMultiOptions(array(
         'registered' => 'All Registered Members',
         'network' => 'Users in the same network',
-        'members' => 'Friends'
+        'members' => 'Followers'
       ));
     $send->getDecorator('Description')->setOption('placement', 'PREPEND');
 

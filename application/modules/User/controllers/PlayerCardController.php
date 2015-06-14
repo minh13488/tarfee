@@ -149,9 +149,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			$roles = array(
 				'owner',
 				'owner_member',
-				'owner_member_member',
 				'owner_network',
-				'registered',
 				'everyone'
 			);
 			if (isset($values['auth_view']))
@@ -405,9 +403,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			$roles = array(
 				'owner',
 				'owner_member',
-				'owner_member_member',
 				'owner_network',
-				'registered',
 				'everyone'
 			);
 			if ($values['auth_view'])
