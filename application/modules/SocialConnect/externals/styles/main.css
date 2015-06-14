@@ -106,18 +106,32 @@
 	float: right;
 }
 
+.layout_social_connect_landing_login{
+	margin-bottom: 70px !important;
+}
 
 .tf_footer_landing{
 	padding: 20px;
 	background: #eee;
 	font-size: 12px;
 	color: #888;
-	position: fixed;
-	bottom: 0;
+	overflow: hidden;
 	width: 100%;
 	text-align: center;
+	position: fixed;
+	bottom: 0;
+	opacity: 0;
+	transition: opacity 500ms ease-in-out;
+	-webkit-transition: opacity 500ms ease-in-out;
+	-moz-transition: opacity 500ms ease-in-out;
+
+	&:hover{
+		opacity: 1;
+	}
 
 	ul{
+		/*float: left;*/
+
 		li{
 			padding: 0 10px;
 			display: inline-block;
@@ -132,7 +146,41 @@
 			}
 		}
 	}
+
+	.tf_footer_col_right{
+		float: right;
+
+		.section-row{
+			text-align: left !important;
+		}
+
+		.buttons-icons{
+			margin-top: 10px;
+		}
+
+		.footer-referral-link{
+			display: inline-block;
+			padding: 5px 10px;
+			border: 1px solid #888;
+			-webkit-border-radius: 4px;
+			-moz-border-radius: 4px;
+			-ms-border-radius: 4px;
+			-o-border-radius: 4px;
+			border-radius: 4px;
+			font-size: 15px;
+			font-weight: 500;
+			text-transform: uppercase;
+			color: $theme_font_color;
+			text-align: left;
+		}
+	}
 }
+
+.tf_footer_landing_inner{
+	max-width: 1170px;
+	margin: auto;
+}
+
 
 .tf_bgbody_landing{
 	width: 100%;
@@ -140,7 +188,7 @@
 	display: block;
 	position: fixed;
 	top: 0;
-
+	
 	background-repeat: no-repeat;
 	background-position: center center;
 	background-size: cover;
@@ -164,5 +212,20 @@ body#global_page_core-index-about-us{
 		padding: 10px;
 		min-width: 700px;
 		min-height: 400px;
+	}
+}
+
+#global_page_core-index-index .modal-backdrop{
+	z-index: -1;
+}
+
+.btn-close-modal{
+
+	.fa{
+		position: relative;
+		top: 10px;
+		right: 10px;
+		font-size: 30px;
+		color: $theme_font_color;
 	}
 }

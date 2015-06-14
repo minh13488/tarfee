@@ -66,10 +66,10 @@ class Tfcampaign_Form_Admin_Settings_Level extends Authorization_Form_Admin_Leve
             $roles = array(
                 'everyone' => 'Everyone',
                 'registered' => 'All Registered Members',
-                'owner_network' => 'Friends and Networks',
-                'owner_member_member' => 'Friends of Friends',
-                'owner_member' => 'Friends Only',
-                'owner' => 'Just Me'
+                'owner_network' => 'Followers and Networks',
+                'owner_member_member' => 'Followers of Followers',
+                'owner_member' => 'My Followers',
+                'owner' => 'Only Me'
             );
             
             $roles_values = array('everyone', 'registered', 'owner_network', 'owner_member_member', 'owner_member', 'owner');

@@ -1,0 +1,1826 @@
+{
+  "type": "module",
+  "name": "webcamavatar",
+  "version": "4.01p1",
+  "revision": null,
+  "path": "application\/modules\/Webcamavatar",
+  "repository": null,
+  "date": "Fri, 16 Sep 2011 02:52:50 +0000",
+  "title": "Webcamavatar",
+  "description": "Webcam  Avatar Module",
+  "thumb": null,
+  "developer": null,
+  "authors": [
+    "YouNet Developments"
+  ],
+  "changeLog": null,
+  "meta": {
+    "date": "Fri, 16 Sep 2011 02:52:50 +0000",
+    "title": "Webcamavatar",
+    "description": "Webcam  Avatar Module",
+    "developer": null,
+    "authors": [
+      "YouNet Developments"
+    ],
+    "changeLog": null
+  },
+  "actions": [
+    "install",
+    "upgrade",
+    "refresh",
+    "enable",
+    "disable"
+  ],
+  "callback": {
+    "path": null,
+    "class": "Engine_Package_Installer_Module",
+    "priority": 100
+  },
+  "dependencies": null,
+  "tests": [
+    
+  ],
+  "permissions": [
+    
+  ],
+  "structure": {
+    "application\/modules\/Webcamavatar": {
+      "type": "directory",
+      "path": "application\/modules\/Webcamavatar",
+      "structure": [
+        {
+          "path": "Bootstrap.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 86,
+          "sha1": "889eaab658dc3474f198a9a34ed9a16dd8b769fd"
+        },
+        {
+          "path": "controllers",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "controllers\/CameraController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 8194,
+          "sha1": "d7dbee6b9b31bdf82c0ef7cc4e6249a9692200d8"
+        },
+        {
+          "path": "controllers\/EditController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 13052,
+          "sha1": "ecddd871604c686d98828010212a173b4678ed0c"
+        },
+        {
+          "path": "controllers\/IndexController.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 164,
+          "sha1": "7813bb437da87329fbbd0e9f68a3ce4f28f10ab9"
+        },
+        {
+          "path": "externals",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "externals\/.htaccess",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 144,
+          "sha1": "47bb36a5f03278d4b6ea5804e494c00ccb02e8e1"
+        },
+        {
+          "path": "externals\/images",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "externals\/images\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "externals\/images\/images_webcam",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 16384,
+          "sha1": null
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame001.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 243566,
+          "sha1": "8b1a31e73eaaed9bca0aa58637061df44c06101e"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame002.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 198043,
+          "sha1": "97d3b44b12d97561aaf4e762c952c599e747b5ab"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame003.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 348429,
+          "sha1": "907c71d3bdb4a2773961ced225823c8bfc84496f"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame004.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 219508,
+          "sha1": "52b70cb25577f70ca9b31640866ac0ec6ed17230"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame005.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 227519,
+          "sha1": "354240a011dc5c3343380ad450fcae039a3a2265"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame006.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 291143,
+          "sha1": "34a97c9c785427e5c2833ba6aa3da06359920119"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame007.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 193063,
+          "sha1": "1b6a4acdc1e86d8d5c2bb8d8e5bc10756abfbd8e"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame008.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 153116,
+          "sha1": "20be7f76804b84b80651b0a1a292563fe38ac4a0"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame009.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 140086,
+          "sha1": "89fa3d9ae75b150d39b5dd52eb8a546c0cc9b24f"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame010.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 151515,
+          "sha1": "879558b19b85253c5f88c2de00961ad4407fa63b"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame011.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 144156,
+          "sha1": "fc909dbb76d8c239fab59bbd58f0636ef4c4f5b9"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame012.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 189923,
+          "sha1": "12a157bfc4f86f04054968ec398c1830ee2546ac"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame013.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 294895,
+          "sha1": "29917046ccf6de5e049df32084fd9a44ac2ade71"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame014.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 224900,
+          "sha1": "f2698044c8053c828bf4c08c8e6bec0140d91a6c"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame015.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 238008,
+          "sha1": "ca36465649b5fe54908d118112190aa489e94199"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame016.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 239217,
+          "sha1": "b0e2d3602a0bfff93a6cb6e351e9852d9bf88be4"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame017.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 223900,
+          "sha1": "e60a66c6c437ebf4783bb73e26209f8d9a4b28b3"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame018.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 161469,
+          "sha1": "837baecc021e27069671dc4f9b2c19002de18993"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame019.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 163859,
+          "sha1": "f3bfc945c2f58758845110d45cb25d03c4b1f875"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame020.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 171428,
+          "sha1": "e9e50e98d2f3674d35de19771b0b339062c75ffe"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame021.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 150262,
+          "sha1": "acd5428efc533613a46081cd8ff1fa9c377b688b"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame022.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 179939,
+          "sha1": "08784a1dcab6626f29df3d5a58cb986b721caf45"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame023.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 183434,
+          "sha1": "6bd812ae1d4e9a62fd9daf510413fb4b78fd2070"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame024.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 188006,
+          "sha1": "3ba1a982d18068155a363c8000563823dacfc68e"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame025.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 181400,
+          "sha1": "9061e2e07a6b3fdb20f3689becc7eb50498be49c"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame026.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 195048,
+          "sha1": "77c7991f1f9b173b52d902c91feff70d3db6ac80"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame027.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 206318,
+          "sha1": "6613153b633eef85f41e05574cc6d40cb75af939"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame028.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 187352,
+          "sha1": "916a7d33fba7e0dd33d4ab23857c8e54e2d489bb"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame029.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 159213,
+          "sha1": "3b0691a25513a926d2c5a2415970f56aef1971d6"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame030.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 181672,
+          "sha1": "db05378785b304b7361dc6a67dbdaf39e13e3303"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame031.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 172331,
+          "sha1": "9791182f0bf5baa09cf97205a1f8a05d0455b33e"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame032.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 297721,
+          "sha1": "3799744583549e291a509ab540868b41bcb27081"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame033.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 282835,
+          "sha1": "09061613b0dae60b416fae86ab74038a77f352ab"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame034.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 255443,
+          "sha1": "92b6a68f4da00993be6075d644e883186f9a740c"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame035.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 261450,
+          "sha1": "5d9464f8d71195d7a3de68eb7fb8535cdc915f33"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame036.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 170561,
+          "sha1": "7d13821d410fec4c1d10ee43aaef3c3be1f6b02e"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame037.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 86802,
+          "sha1": "b6ed0bdb5673ca940422ed81c4fa9f04b61960f1"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame038.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 87719,
+          "sha1": "9387423cf14f20005ff7347fec53d939359587a2"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame039.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 319274,
+          "sha1": "aa0bec2c64a8aaffc6ff9b8310b0ed663031d67b"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame040.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 230412,
+          "sha1": "d47852b0a5afd08113df24e5ad064ff75d11f07e"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame041.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 159840,
+          "sha1": "5f1af1ce0d97fb7d2d37e9750f4991cbbd8b51ba"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame042.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 181063,
+          "sha1": "8e22d96c249734041efe93ec52edd41db417f838"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame043.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 117301,
+          "sha1": "6c9784ffe2c95f599b7db5a66c7ee96a3e713643"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame044.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 166323,
+          "sha1": "fb6430491f2357e5d199445ed57425e3ef707d59"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame045.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 178963,
+          "sha1": "5deb72afc2a0f78627c43323fa4b1f0d777435f6"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame046.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 111562,
+          "sha1": "e1a5d5d2d4de9875cc730237e55c310e28817816"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame047.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 97869,
+          "sha1": "3be802f02f40474089ac22a5b42a648b0bac5cc0"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame048.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 140635,
+          "sha1": "f84afc8abd64738efc08969dcd0dc2aef1e5aa0c"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame049.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 93796,
+          "sha1": "4db22861872a3ccd1833b8cab5fd0573a3a20781"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame050.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 109145,
+          "sha1": "8c2a7d5dcf23420da5871219799728eb1ef09713"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame051.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 168409,
+          "sha1": "06fb0d0d014a75db3c44e04b3e1a01e1cfccabc5"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame052.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 200574,
+          "sha1": "2482bb947b49b4f8101ed51a7a3ae188120d0c88"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame053.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 212005,
+          "sha1": "9b7d66e2fee4e0897a73644b9c51e7a155c3801b"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame054.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 172204,
+          "sha1": "517c25dc37a57088b232d6ad2851c559d1148659"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame055.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 116936,
+          "sha1": "98dd807f20ed4404252c01eda37b3346b7eae47e"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame056.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 43613,
+          "sha1": "27e7472c46d8a3da08f45c2b28a9a470f08a3851"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame057.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 110681,
+          "sha1": "340637758157e33141e928958a7cebdc3dc45aac"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame058.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 138826,
+          "sha1": "e4a9da70c2e7d04f980931097952e07e2c3ebcbd"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame059.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 60060,
+          "sha1": "fd7091226f7cef963eeac663206faccbbb36252c"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame060.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 55126,
+          "sha1": "b2c8374c2d2bd310e2101392dcab7c68dbc6eaa2"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame061.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 98957,
+          "sha1": "f22386e005b208a57e26990d2a990186fcead8e6"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/frame062.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 94244,
+          "sha1": "853bfbb2c824e580a3b1d5e65c63187cc2c3e9c6"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image15.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 291475,
+          "sha1": "38ca97440da21eef5fafa40b9815bcb4bf896097"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image16.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 266425,
+          "sha1": "a48807a255d45631119e8380318ad16776cc0d75"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image18.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 284497,
+          "sha1": "f578c9d4667a7fd4f4cbb209b87718f6a8d387c4"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image19.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 230336,
+          "sha1": "8b22fe3a70d63d998c7bb6cb02a72dd03799ba85"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image20.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 272403,
+          "sha1": "5141152b18ab1e806a58929c5a649275efde4663"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image21.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 145486,
+          "sha1": "995f4672c797808cab373a82daa1ec9904c94ad0"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image22.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 262581,
+          "sha1": "2468aff60670a1210bdaa109e5d4e2df5e432762"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image23.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 324932,
+          "sha1": "d5317698a76bdb163b10aa62f99cb84579d08bff"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image24.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 156798,
+          "sha1": "aba95cc7241a0d1f6d7abb97147006c7eaceafbf"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image25.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 112848,
+          "sha1": "e16b2327d9b9b96cd3b345fe1f91f1fa7ff4e462"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image26.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 339701,
+          "sha1": "64907dbf4f0081ea966dc1d190526edda75dbf5f"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image27.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 221401,
+          "sha1": "bce100633cd0a034980a53a38f9be5f341a582ac"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image28.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 72189,
+          "sha1": "fdd0bd3f400a9f33e14a3ee13b5eb420bf02cd9d"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image29.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 276233,
+          "sha1": "dff080fd086108e7db0f1118bf86f72d23c3a0eb"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image30.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 59862,
+          "sha1": "45efd8e69b47d1747ff0b1beefe04da2a7e88375"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image31.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 246802,
+          "sha1": "97c1ff85c2ee97cb53ede4c959755204a124997e"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image32.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 227864,
+          "sha1": "2e9de3a3d367b96f0dccc699fc9eaf134c8e41ad"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image33.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 276454,
+          "sha1": "21f4fb8716bd242cfb7c6adeb0fdbc9e3aa54f70"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/image34.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 175423,
+          "sha1": "11c0d4c131ced90144ac3d57161680ba9a8afabb"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/langmang1.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 232555,
+          "sha1": "4b24eb19daa2311970829ae50ff6a1babb229cb8"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/langmang2.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 196321,
+          "sha1": "46862097991e51c8cc117f373c2cfb4a155fd359"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/langmang3.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 210035,
+          "sha1": "b0f8dde8a4b7ea7187eaa3a9ea6e7d8462ac1eb0"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/thucung.png",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 280390,
+          "sha1": "1528990c03725adc9149dfa65eb83a682bd1abf9"
+        },
+        {
+          "path": "externals\/images\/images_webcam\/Thumbs.db",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 8192,
+          "sha1": "03deafc206a2a1d83242f82eba14715ec21fc317"
+        },
+        {
+          "path": "externals\/images\/it",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "externals\/images\/it\/sephiroth",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "externals\/images\/it\/sephiroth\/mloaderWindow.as",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 7683,
+          "sha1": "1d3ca325217fed69568ce565c582a7f746a5ad14"
+        },
+        {
+          "path": "externals\/images\/it\/sephiroth\/PrintScreen.as",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2004,
+          "sha1": "29f2a58b3532c2c0dedf15a8a8abc07f8f9eba66"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 16384,
+          "sha1": null
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame001.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1381,
+          "sha1": "e57d72ddf12562a3d7c354630690240a50c4f382"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame002.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1311,
+          "sha1": "4492fdb1c2f373a8626abd0946c9ef731108d971"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame003.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1129,
+          "sha1": "d0008f6d72c49d25feb74285443e6d841bb7cf95"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame004.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1517,
+          "sha1": "11d10a759e915dec8854ba449155b46b95ed0b65"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame005.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1335,
+          "sha1": "53d048bd58f84e072b4d95c1bace84dd1a8eaaaf"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame006.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1328,
+          "sha1": "d989a6ee74cb285907211bf955c1912acb644ac8"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame007.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1287,
+          "sha1": "34990a989ee2f314bd5ae82137ceff82f0555c91"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame008.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1139,
+          "sha1": "4c9a0cdb4fc6a0356b8dd55ac6ae762a030b63af"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame009.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1137,
+          "sha1": "9be2d8a25606500f70b42208a191a4d824b6db93"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame010.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1311,
+          "sha1": "37b7228d87638ecb747a585275aacf2da6efc0ab"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame011.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1212,
+          "sha1": "8fba3a9c2fce88686a681e8c381b9208c05a5389"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame012.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1451,
+          "sha1": "9dca61d81ea22915601c1f80c7bb95ad0fff3d7d"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame013.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1528,
+          "sha1": "12ac6fccf0aff032555710b25b57efbe3fdc3832"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame014.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1383,
+          "sha1": "57528e47a0ed58c37090a7b1430f3d4ab9de53ae"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame015.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1375,
+          "sha1": "12d9280a6c36b59d141d0df18f96ac086957d0eb"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame016.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1440,
+          "sha1": "ebf56a37001d6ab65f4eac218b44bc2b96a816d3"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame017.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1332,
+          "sha1": "30b683584b386e2836a07ba554ef43e233ae6117"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame018.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1229,
+          "sha1": "1da5d9e9f6657dabe9eef7fc57b5244376d509e7"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame019.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1177,
+          "sha1": "52f50f44e8f3dd13d526ad139a7b2ecb5ebb95ea"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame020.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1171,
+          "sha1": "3f717de0531e081e1945f2aca81103af835500ef"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame021.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1160,
+          "sha1": "3b3e50100694635d4cf37161810f063fa4fe7852"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame022.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1393,
+          "sha1": "3ff43fe07f84790661078eaa6e4eaa9af5a3507a"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame023.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1443,
+          "sha1": "ec3592b268651d1b87f283376982e974f498f208"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame024.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1149,
+          "sha1": "865d5f93679e09c3443141f70937f789fb3ff87b"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame025.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1144,
+          "sha1": "cbd3df79c08b7999c523c6a2eda9ef819aa11739"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame026.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1246,
+          "sha1": "b3e81b5ffab828ae365edcf39ecf9641d5ccbee8"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame027.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1312,
+          "sha1": "955f185ceeb4dff1b63db90310ed566974d74e05"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame028.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1147,
+          "sha1": "9e912026672d7d1ff254a6e1179cce0cb1b27935"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame029.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1203,
+          "sha1": "b908a4ffb4c90f525ead60fe8446d654201f9331"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame030.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1127,
+          "sha1": "7521c3939ac3884577301ecbd0da6257303a14c8"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame031.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1223,
+          "sha1": "c3d2b4b6c3b988a7b6d32127538929d026f444cf"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame032.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1223,
+          "sha1": "aea6855a43e23e83806f469c98a345038bdb0021"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame033.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1362,
+          "sha1": "d9bdff3b15b7dfc180e10206570ed6e0e47419c4"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame034.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1175,
+          "sha1": "be311c367c0a9be1f5099831fe459fe54ebba9d9"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame035.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1255,
+          "sha1": "8a9f91e0da38e49b033f3b2e4fb79bed7e148f91"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame036.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1446,
+          "sha1": "ec1f9c19db35ca233636c0b0fe1da284723b0f30"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame037.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1467,
+          "sha1": "5a929fd756b8d0db2a4376ee5fcb9b587f317f6f"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame038.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1135,
+          "sha1": "50ccf09497d81c158a2a020a01c04e6b1422c946"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame039.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1598,
+          "sha1": "b0fe59c71924c266149b6c8735342a8db453a0f0"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame040.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1323,
+          "sha1": "d22aeafba0098a002508cad3dc0cf973da763db3"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame041.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 942,
+          "sha1": "c9701071c8988630a0a85ad760b36054846368e7"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame042.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1632,
+          "sha1": "9d76b7f2bf922938208cddd6bd187f96c2f735bd"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame043.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 792,
+          "sha1": "2217fd53562fad9c22d4d4b38e32b17c556f261a"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame044.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 904,
+          "sha1": "ae58f65f135fbfcffeecb32318ddc2fc79fd4fba"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame045.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 951,
+          "sha1": "7742f9cfc8b8dfd2529c1e30a13bbc2297d06ae8"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame046.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 947,
+          "sha1": "771e08aa94cd8ffb61ce9c46a310019bff04ad01"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame047.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 974,
+          "sha1": "68abcd1e38a648eda41241c4fed3bbc0674cb138"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame048.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1100,
+          "sha1": "a9465492e373c3a6fb51e04687280787b72f2b6e"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame049.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 991,
+          "sha1": "4109f0f1fbc766a4a0bc817552a5b27c5f48dbe9"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame050.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1041,
+          "sha1": "f8d83a9c4bec5b0b6a1c4d2bb52581f0f69796b5"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame051.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1374,
+          "sha1": "f70c1d5f08f5dbe195e1c1f5482aa8311d6ffcdc"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame052.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1293,
+          "sha1": "552f73597a0e82de2c1fa74f580feabbd912a0ae"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame053.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1406,
+          "sha1": "5d15b5cf775afcc936165486e5fd8f0b401c50b6"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame054.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1334,
+          "sha1": "11c7de32b20181b5fdc78198d6e7969fb3c65357"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame055.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 689,
+          "sha1": "61673b2dbb79d2e11282107b5b0a0f5ae224c96b"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame056.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1109,
+          "sha1": "5bc8570b1c1539a0fcfeb3f5381b643134188f27"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame057.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 928,
+          "sha1": "2be64ec3368547b68cee5c530300e86d9c0dd499"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame058.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 949,
+          "sha1": "1849d8641d7ffd60fdb45d077ccead7395a95cb2"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame059.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 906,
+          "sha1": "2dc3ff98de48677b96b07a5d51d946a347ca508f"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame060.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 864,
+          "sha1": "f9942f86d6f9adde8c28860db504968947d060e8"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame061.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 931,
+          "sha1": "f8ff21aee0b638de95ead3c4fd9c719dc67fc7a7"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/frame062.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 813,
+          "sha1": "be0fc1ac658956a0c6a440d4abdef63cb02f19cc"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image15.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2325,
+          "sha1": "d92f5ca8becee0fff4a3abb11ea843409543d79e"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image16.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2017,
+          "sha1": "a863271bcbdc614b0d8cb2e5957e9a70ef152b14"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image18.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1807,
+          "sha1": "27d467c9af297be59e09426991596524a34c32ee"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image19.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1307,
+          "sha1": "0807d8af60c7007bb12c8bdde1474f7c250c03d8"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image20.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1689,
+          "sha1": "316e976aa2113b716f65ac998aa7c26174f9775e"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image21.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1713,
+          "sha1": "cbeeed30dba32781beb0cbc1f31f672979bc2974"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image22.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2038,
+          "sha1": "8f77c07db0b7863eff6de727ecc5da1d454153ba"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image23.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2316,
+          "sha1": "4ecdc0c654d6d8d94bcd89f0d9eea84ce090609e"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image24.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1633,
+          "sha1": "eb4a0da707741f66030d60481c0fde2fb2550389"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image25.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1428,
+          "sha1": "37d0c66513e890a90c793e8a2b2580c631459be6"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image26.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2685,
+          "sha1": "99b7722e51f03193a35f565f4cd8040e8e7bc001"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image27.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1932,
+          "sha1": "218e23703846255b4a0d80d300108024c46fbd20"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image28.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1126,
+          "sha1": "741ddc3e6d9bbe6a0e04b8bd81bb1e6b74d0d91d"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image29.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1522,
+          "sha1": "3f0486c00323c90afa5b08ddf4a8069d527d8908"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image30.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1141,
+          "sha1": "f53e93d6f95f5ba615d5f072311f50fab2e53651"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image31.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2326,
+          "sha1": "428eaa19806365a54e8a16e458bb51602efc8a05"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image32.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2659,
+          "sha1": "487be9e54cdf3dc6351d00989e660d5372c00212"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image33.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2084,
+          "sha1": "d90c368c72cd1a530f7193b8ef0a4b74ec3e71ae"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/image34.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1466,
+          "sha1": "0e8b71b9bea7c91887fe044d506d480f5f225e5c"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/langmang1.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1106,
+          "sha1": "28c72097e6c7e1727011134e3bcf5c9f144e959d"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/langmang2.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1006,
+          "sha1": "bbdb5098a6baff9f647e7920732eb83302b4f532"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/langmang3.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 818,
+          "sha1": "2df2179b691bb981aba1b096789da5e8358dc8bb"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/thucung.jpg",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1276,
+          "sha1": "0c2cd50db5d1a594214786c51e6cab3a94399331"
+        },
+        {
+          "path": "externals\/images\/thumbnails_webcam\/Thumbs.db",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 57344,
+          "sha1": "193a692957b5fea33521b2f4f28beb07c22b52f7"
+        },
+        {
+          "path": "externals\/images\/webcam_avatar_se4.swf",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 69517,
+          "sha1": "e3eafbd9d3b98da68d3d0e2dc5f1d0a98fe602aa"
+        },
+        {
+          "path": "externals\/images\/webcam_avatar_se4_signup.swf",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 69539,
+          "sha1": "4bd665b3c9c19a2b983b0bd6dec4113553c13d4f"
+        },
+        {
+          "path": "externals\/images\/xmlphoto.xml",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 15506,
+          "sha1": "fe31987f344ce77649698b6111f54f664d7f01c5"
+        },
+        {
+          "path": "externals\/scripts",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "externals\/scripts\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "externals\/scripts\/AC_RunActiveContent.js",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 8030,
+          "sha1": "cec88019cf48761ba4da6d7aed66362dee009ffd"
+        },
+        {
+          "path": "externals\/styles",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "externals\/styles\/main.css",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 748,
+          "sha1": "73e88b21cee7b842850fc1f35a86beefc17b33d1"
+        },
+        {
+          "path": "Form",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Form\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "Form\/Photo.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1546,
+          "sha1": "49f4b7f78960c2af72bf443f4b66e5ff43f3f39c"
+        },
+        {
+          "path": "Model",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Model\/DbTable",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Model\/DbTable\/.htempty",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 0,
+          "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+        },
+        {
+          "path": "Plugin",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Plugin\/Signup",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "Plugin\/Signup\/Photo.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 11008,
+          "sha1": "83eccec24df69f11ef9d0ab4c07575f19f13b10e"
+        },
+        {
+          "path": "settings",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "settings\/manifest.php",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1938,
+          "sha1": "c6fcf91842d3e0b4d3b611cc4ff3eec0fe4ddeff"
+        },
+        {
+          "path": "settings\/my.sql",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 395,
+          "sha1": "3d7cabc1047829c8a89652b88afd51471305e2b5"
+        },
+        {
+          "path": "views",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 4096,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/edit",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/edit\/photo.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2062,
+          "sha1": "cc477e3d4be12bf0ce2cd1d276259e092da3dc55"
+        },
+        {
+          "path": "views\/scripts\/index",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/index\/index.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 80,
+          "sha1": "0fd6511b10004ff0b60e935bcd5937466c4f88a2"
+        },
+        {
+          "path": "views\/scripts\/signup",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/signup\/form",
+          "dir": true,
+          "file": false,
+          "perms": "0777",
+          "size": 0,
+          "sha1": null
+        },
+        {
+          "path": "views\/scripts\/signup\/form\/webcam-photo.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 2083,
+          "sha1": "37ef7f3ad7a888f241ee6e2719631f825a0c17b3"
+        },
+        {
+          "path": "views\/scripts\/_browseUsers.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1737,
+          "sha1": "e9c36d62299ab1e9f9ce7b4a112436468e1c00d1"
+        },
+        {
+          "path": "views\/scripts\/_composeFacebook.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 1472,
+          "sha1": "bc3b688e594d1f37c0a126d3ce4365ba861adc56"
+        },
+        {
+          "path": "views\/scripts\/_formEditImage.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3677,
+          "sha1": "c0ea3d1ef442407a3edf520dc491006dda1d0dea"
+        },
+        {
+          "path": "views\/scripts\/_formSignupImage.tpl",
+          "dir": false,
+          "file": true,
+          "perms": "0666",
+          "size": 3767,
+          "sha1": "e54ec7e7a55bf5df4939b9bfb341a2bdbe54a021"
+        }
+      ]
+    },
+    "application\/languages\/en\/webcamavatar.csv": {
+      "type": "file",
+      "path": "application\/languages\/en\/webcamavatar.csv",
+      "structure": {
+        "path": "webcamavatar.csv",
+        "dir": false,
+        "file": true,
+        "perms": "0666",
+        "size": 0,
+        "sha1": "da39a3ee5e6b4b0d3255bfef95601890afd80709"
+      }
+    }
+  }
+}

@@ -1,21 +1,9 @@
-<style>
-	.sub-title{
-		background-color: #eaeaea;
-		  margin-bottom: 0;
-		  border: 0;
-		  border-bottom: 1px solid #eaeaea;
-		  -moz-border-radius: 0;
-		  -webkit-border-radius: 0;
-		  border-radius: 0;
-	}
-</style>
-
 <h2><?php echo $this -> library -> getTitle();?></h2>
 <?php if($this -> viewer() -> isSelf($this -> subject())) :?>
 <div class="user-library-item-action">
-    <span><i class="fa fa-ellipsis-h"></i> <span> <?php echo $this -> translate('Options');?></span></span>
+    <span><?php echo $this -> translate('Options');?></span>
     <ul>
-    	<li class="user-library-close-box">X</li>
+    	<li class="user-library-close-box"><i class="fa fa-times"></i></li>
 		<li>
 			<?php echo $this->htmlLink(array(
 					'route' => 'user_library',
@@ -73,12 +61,15 @@
 <?php foreach($subLibraries as $subLibrary) :?>
 	<?php if($subLibrary -> isViewable()) :?>
 		<div class="sub-title">
-			<h3 style="font-size: large;" class="toggler atStart">---> <?php echo $subLibrary -> getTitle();?></h3>
+			<h3 style="font-size: large;" class="toggler atStart"> <?php echo $subLibrary -> getTitle();?></h3>
+			
+			<?php echo $this -> itemPhoto($subLibrary);?>
+
 			<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
 			<div class="user-library-item-action">
-			    <span><i class="fa fa-ellipsis-h"></i> <span> <?php echo $this -> translate('Options');?></span></span>
+			    <span> <?php echo $this -> translate('Options');?></span>
 			    <ul>
-				<li class="user-library-close-box">X</li>
+				<li class="user-library-close-box"><i class="fa fa-times"></i></li>
 				<li>
 				<!-- delete link for sub library -->
 				<?php echo $this->htmlLink(array(

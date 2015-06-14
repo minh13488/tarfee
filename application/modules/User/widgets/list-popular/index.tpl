@@ -20,7 +20,7 @@
           <?php echo $this->htmlLink($user->getHref(), $user->getTitle()) ?>
         </div>
         <div class='popularmembers_friends'>
-          <?php echo $this->translate(array('%s friend', '%s friends', $user->member_count),$this->locale()->toNumber($user->member_count)) ?>
+          <?php echo $this->translate(array('%s followers', '%s followers', $user->member_count),$this->locale()->toNumber($user->member_count)) ?>
         </div>
       </div>
     </li>

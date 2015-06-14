@@ -157,9 +157,8 @@ class Authorization_Form_Admin_Level_Edit extends Authorization_Form_Admin_Level
 				'description' => 'USER_FORM_ADMIN_SETTINGS_LEVEL_AUTHVIEW_DESCRIPTION',
 				'multiOptions' => array(
 					'everyone' => 'Everyone',
-					'registered' => 'All Registered Members',
 					'network' => 'My Network',
-					'member' => 'My Friends',
+					'member' => 'My Followers',
 					'owner' => 'Only Me',
 				),
 			));
@@ -170,9 +169,8 @@ class Authorization_Form_Admin_Level_Edit extends Authorization_Form_Admin_Level
 				'label' => 'Profile Commenting Options',
 				'description' => 'USER_FORM_ADMIN_SETTINGS_LEVEL_AUTHCOMMENT_DESCRIPTION',
 				'multiOptions' => array(
-					'registered' => 'All Registered Members',
 					'network' => 'My Network',
-					'member' => 'My Friends',
+					'member' => 'My Followers',
 					'owner' => 'Only Me',
 				)
 			));

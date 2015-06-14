@@ -85,28 +85,30 @@ class Webcamavatar_EditController extends Core_Controller_Action_User
 	$values = $form -> getValues();
 	if(!empty($values['url']))
 	{
-		$filename = $this -> copyImg($this -> getImageURL($values['image']), md5($values['image']));
-		echo $filename; die; 
-		$user -> setPhoto($filename);
-		@unlink($filename);
-		$iMain = Engine_Api::_()->getItem('storage_file', $user->photo_id);
-        // Insert activity
-        $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($user, $user, 'profile_photo_update',
-          '{item:$subject} added a new profile photo.');
-
-        // Hooks to enable albums to work
-        if( $action ) {
-          $event = Engine_Hooks_Dispatcher::_()
-            ->callEvent('onUserProfilePhotoUpload', array(
-                'user' => $user,
-                'file' => $iMain,
-              ));
-
-          $attachment = $event->getResponse();
-          if( !$attachment ) $attachment = $iMain;
-
-          // We have to attach the user himself w/o album plugin
-          Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $attachment);
+		$filename = $this -> copyImg($this -> getImageURL($values['url']), md5($values['url']));
+		if($filename)
+		{
+			$user -> setPhoto($filename);
+			@unlink($filename);
+			$iMain = Engine_Api::_()->getItem('storage_file', $user->photo_id);
+	        // Insert activity
+	        $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($user, $user, 'profile_photo_update',
+	          '{item:$subject} added a new profile photo.');
+	
+	        // Hooks to enable albums to work
+	        if( $action ) {
+	          $event = Engine_Hooks_Dispatcher::_()
+	            ->callEvent('onUserProfilePhotoUpload', array(
+	                'user' => $user,
+	                'file' => $iMain,
+	              ));
+	
+	          $attachment = $event->getResponse();
+	          if( !$attachment ) $attachment = $iMain;
+	
+	          // We have to attach the user himself w/o album plugin
+	          Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $attachment);
+			}
 		}
 	}
 	
@@ -186,6 +188,7 @@ class Webcamavatar_EditController extends Core_Controller_Action_User
       // Remove temp files
       @unlink($iName);
     }
+	$form -> reset();
   }
 
   public function removePhotoAction()
@@ -463,6 +466,10 @@ class Webcamavatar_EditController extends Core_Controller_Action_User
 		$check_allow_url_fopen = ini_get('allow_url_fopen');
 		if (($check_allow_url_fopen == 'on') || ($check_allow_url_fopen == 'On') || ($check_allow_url_fopen == '1')) {
 			$gis = getimagesize($url);
+			if(!$gis)
+			{
+				return false;
+			}
 			$type = $gis[2];
 			switch($type) {
 				case "1" :
@@ -485,14 +492,18 @@ class Webcamavatar_EditController extends Core_Controller_Action_User
 			$data = curl_exec($ch);
 			curl_close($ch);
 			$imorig = imagecreatefromstring($data);
+			if(!$imorig)
+			{
+				return false;
+			}
 		}
 
 		// Save
 		$filename = $path . DIRECTORY_SEPARATOR . $name . '.png';
-		$im = imagecreatetruecolor(150, 112);
+		$im = imagecreatetruecolor(720, 720);
 		$x = imagesx($imorig);
 		$y = imagesy($imorig);
-		if (imagecopyresampled($im, $imorig, 0, 0, 0, 0, 150, 112, $x, $y)) 
+		if (imagecopyresampled($im, $imorig, 0, 0, 0, 0, 720, 720, $x, $y)) 
 		{
 			imagejpeg($im, $filename);
 		}

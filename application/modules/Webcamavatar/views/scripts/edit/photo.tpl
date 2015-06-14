@@ -19,12 +19,24 @@
         if(temp[0].trim()=="user_email")  cookie_email = temp[1];
         if(temp[0].trim()=="user_password") cookie_pass = temp[1];
     }
-    AC_FL_RunContent( 'codebase','http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0','width','670','height','458','src','application/modules/Webcamavatar/externals/images/webcam_avatar_se4','quality','high','pluginspage','http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash','movie','./application/modules/Webcamavatar/externals/images/webcam_avatar_se4', "wmode","transparent"); //end AC code
+    AC_FL_RunContent( 'codebase',
+    'http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0',
+    'width','670','height','458',
+    'src',
+    'application/modules/Webcamavatar/externals/images/webcam_avatar_se4',
+    'quality',
+    'high',
+    'pluginspage',
+    'http://www.adobe.com/go/getflashplayer_de',
+    'movie',
+    './application/modules/Webcamavatar/externals/images/webcam_avatar_se4', 
+    "wmode",
+    "transparent"); //end AC code
 </script>
-<noscript><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,28,0" width="670" height="458">
+<noscript><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0" width="670" height="458">
   <param name="movie" value="application/modules/Webcamavatar/externals/images/webcam_avatar_se4.swf" />
   <param name="quality" value="high" />
-  <embed src="application/modules/Webcamavatar/externals/images/webcam_avatar_se4.swf" quality="high" pluginspage="http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash" type="application/x-shockwave-flash" width="670" height="458"></embed>
+  <embed src="application/modules/Webcamavatar/externals/images/webcam_avatar_se4.swf" quality="high" pluginspage="http://www.adobe.com/go/getflashplayer_de" type="application/x-shockwave-flash" width="670" height="458"></embed>
 </object></noscript>
 <div class="photo_form">
     <?php echo $this->form->render($this); ?>

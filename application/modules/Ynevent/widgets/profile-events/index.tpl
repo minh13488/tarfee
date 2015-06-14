@@ -7,7 +7,7 @@
 	$createTitle = $this -> translate("add more tryout");
  }
 ?>
-<?php if(Engine_Api::_() -> authorization() -> isAllowed('event', null, 'create')):?>
+<?php if($this -> viewer() -> isSelf($this -> subject()) && Engine_Api::_() -> authorization() -> isAllowed('event', null, 'create')):?>
 	<div class="tarfee_create_item">
 		<a href="<?php echo $this->url(array('action' => 'create'), 'event_general')?>"><?php echo $createTitle;?></a>
 	</div>

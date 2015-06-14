@@ -245,11 +245,18 @@ return array(
     	)
     ),
     array(
+        'title' => 'Footer Landing Page',
+        'description' => 'Footer landing page.',
+        'category' => 'Social Connect',
+        'type' => 'widget',
+        'name' => 'social-connect.footer-menu',
+    ),
+    array(
         'title' => 'Call Popup Invite Friends',
         'description' => 'Call popup invite friends after sign up using contact importer plugin',
         'category' => 'Social Connect',
         'type' => 'widget',
         'name' => 'social-connect.call-popup-invite',
     ),
-	)
+)
 ?>

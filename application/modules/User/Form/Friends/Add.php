@@ -1,27 +1,10 @@
 <?php
-/**
- * SocialEngine
- *
- * @category   Application_Core
- * @package    User
- * @copyright  Copyright 2006-2010 Webligo Developments
- * @license    http://www.socialengine.com/license/
- * @version    $Id: Add.php 9747 2012-07-26 02:08:08Z john $
- * @author     John
- */
-
-/**
- * @category   Application_Core
- * @package    User
- * @copyright  Copyright 2006-2010 Webligo Developments
- * @license    http://www.socialengine.com/license/
- */
 class User_Form_Friends_Add extends Engine_Form
 {
   public function init() 
   {
-    $this->setTitle('Add Friend')
-      ->setDescription('Would you like to add this member as a friend?')
+    $this->setTitle('Follow')
+      ->setDescription('Would you like to follow this member?')
       ->setAttrib('class', 'global_form_popup')
       ->setAction($_SERVER['REQUEST_URI'])
       ;
@@ -29,7 +12,7 @@ class User_Form_Friends_Add extends Engine_Form
     //$this->addElement('Hash', 'token');
 
     $this->addElement('Button', 'submit', array(
-      'label' => 'Add Friend',
+      'label' => 'Follow',
       'type' => 'submit',
       'ignore' => true,
       'decorators' => array('ViewHelper')

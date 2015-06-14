@@ -15,6 +15,11 @@ class User_Form_Admin_Player_Global extends Engine_Form
         '0' => 'Optional.',
       ),
     ));
+	
+	$this->addElement('Text', 'user_max_year', array(
+      'label' => 'Maximum year displayed',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('user.max_year', 2003),
+    ));
     
     // Add submit button
     $this->addElement('Button', 'submit', array(

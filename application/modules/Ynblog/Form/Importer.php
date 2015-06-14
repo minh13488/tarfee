@@ -43,10 +43,10 @@ class Ynblog_Form_Importer extends Engine_Form
      $availableLabels = array(
       'everyone'            => 'Everyone',
       'registered'          => 'All Registered Members',
-      'owner_network'       => 'Friends and Networks',
-      'owner_member_member' => 'Friends of Friends',
-      'owner_member'        => 'Friends Only',
-      'owner'               => 'Just Me'
+      'owner_network'       => 'Followers and Networks',
+      'owner_member_member' => 'Followers of Followers',
+      'owner_member'        => 'My Followers',
+      'owner'               => 'Only Me'
     );
     
     $this->addElement('Button', 'submit', array(

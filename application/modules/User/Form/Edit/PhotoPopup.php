@@ -29,6 +29,16 @@ class User_Form_Edit_PhotoPopup extends Engine_Form
       ),
       'onchange'=>'javascript:uploadSignupPhoto();'
     ));
+	
+	// Init url
+    $this->addElement('Text', 'url', array(
+      'label' => 'Photo Link (URL)',
+      'description' => 'Paste the web address of the photo here (jpg,jpeg,png,gif).',
+      'onchange'=>'javascript:uploadSignupPhoto();',
+      'maxlength' => '200',
+      'value' => ''
+    ));
+    $this->url->getDecorator("Description")->setOption("placement", "append");
 
     $this->addElement('Hidden', 'coordinates', array(
       'filters' => array(

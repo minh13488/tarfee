@@ -55,41 +55,42 @@
       originalSize = $("lassoImg").getSize();
       
       lassoCrop = new Lasso.Crop('lassoImg', {
-  ratio : [1, 1],
-  preset : [10,10,58,58],
-  min : [48,48],
-  handleSize : 8,
-  opacity : .6,
-  color : '#7389AE',
-  border : '<?php echo $this->layout()->staticBaseUrl . 'externals/moolasso/crop.gif' ?>',
-  onResize : lassoSetCoords,
-        bgimage : ''
-      });
-
-      $('previewimage').src = $('lassoImg').src;
-      //$('preview-thumbnail').innerHTML = '<img id="previewimage" src="'+sourceImg+'"/>';
-      $('thumbnail-controller').innerHTML = '<a href="javascript:void(0);" onclick="lassoEnd();"><?php echo $this->translate('Apply Changes');?></a> <?php echo $this->translate('or');?> <a href="javascript:void(0);" onclick="lassoCancel();"><?php echo $this->translate('cancel');?></a>';
-      $('coordinates').value = 10 + ':' + 10 + ':' + 58+ ':' + 58;
-    }
-
-    var lassoEnd = function() {
-      $('thumbnail-controller').innerHTML = "<div><img class='loading_icon' src='application/modules/Core/externals/images/loading.gif'/><?php echo $this->translate('Loading...');?></div>";
-      lassoCrop.destroy();
-      $('EditPhoto').submit();
-    }
-
-    var lassoCancel = function() {
-      $('preview-thumbnail').innerHTML = '<img id="previewimage" src="'+orginalThumbSrc+'"/>';
-      $('thumbnail-controller').innerHTML = '<a href="javascript:void(0);" onclick="lassoStart();"><?php echo $this->translate('Edit Thumbnail');?></a>';
-      $('coordinates').value = "";
-      lassoCrop.destroy();
-    }
-    
-    var uploadSignupPhoto = function() {
-      $('thumbnail-controller').innerHTML = "<div><img class='loading_icon' src='application/modules/Core/externals/images/loading.gif'/><?php echo $this->translate('Loading...')?></div>";
-      $('EditPhoto').submit();
-      $('Filedata-wrapper').innerHTML = "";
-    }
+	  ratio : [1, 1],
+	  preset : [10,10,58,58],
+	  min : [48,48],
+	  handleSize : 8,
+	  opacity : .6,
+	  color : '#7389AE',
+	  border : '<?php echo $this->layout()->staticBaseUrl . 'externals/moolasso/crop.gif' ?>',
+	  onResize : lassoSetCoords,
+	        bgimage : ''
+	      });
+	
+	      $('previewimage').src = $('lassoImg').src;
+	      //$('preview-thumbnail').innerHTML = '<img id="previewimage" src="'+sourceImg+'"/>';
+	      $('thumbnail-controller').innerHTML = '<a href="javascript:void(0);" onclick="lassoEnd();"><?php echo $this->translate('Apply Changes');?></a> <?php echo $this->translate('or');?> <a href="javascript:void(0);" onclick="lassoCancel();"><?php echo $this->translate('cancel');?></a>';
+	      $('coordinates').value = 10 + ':' + 10 + ':' + 58+ ':' + 58;
+	    }
+	
+	    var lassoEnd = function() {
+	      $('thumbnail-controller').innerHTML = "<div><img class='loading_icon' src='application/modules/Core/externals/images/loading.gif'/><?php echo $this->translate('Loading...');?></div>";
+	      lassoCrop.destroy();
+	      $('EditPhoto').submit();
+	    }
+	
+	    var lassoCancel = function() {
+	      $('preview-thumbnail').innerHTML = '<img id="previewimage" src="'+orginalThumbSrc+'"/>';
+	      $('thumbnail-controller').innerHTML = '<a href="javascript:void(0);" onclick="lassoStart();"><?php echo $this->translate('Edit Thumbnail');?></a>';
+	      $('coordinates').value = "";
+	      lassoCrop.destroy();
+	    }
+	    
+	    var uploadSignupPhoto = function() {
+	      $('thumbnail-controller').innerHTML = "<div><img class='loading_icon' src='application/modules/Core/externals/images/loading.gif'/><?php echo $this->translate('Loading...')?></div>";
+	      $('EditPhoto').submit();
+	      $('Filedata-wrapper').innerHTML = "";
+	      $('url-wrapper').innerHTML = "";
+	    }
   </script>
 
 <?php endif; ?>

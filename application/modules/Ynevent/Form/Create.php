@@ -382,9 +382,9 @@ class Ynevent_Form_Create extends Engine_Form
   	$availableLabels = array(
         'everyone'            => 'Everyone',
         'registered'          => 'All Registered Members',
-        'owner_network'       => 'Friends and Networks',
-        'owner_member_member' => 'Friends of Friends',
-        'owner_member'        => 'Friends Only',
+        'owner_network'       => 'Followers and Networks',
+        'owner_member_member' => 'Followers of Followers',
+        'owner_member'        => 'Followers Only',
         'member'              => 'Event Guests Only',
         'leader'			  => 'Owner and Leader',	
         'owner'               => 'Just Me'
