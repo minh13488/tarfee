@@ -59,6 +59,7 @@
 						'video_id' => $this -> video->video_id,
 						'parent_type' =>'user_library',
 						'subject_id' =>  $this->library->getIdentity(),
+						'tab' => (isset($this -> tab_id))? $this -> tab_id : "",
 				    ), '<i class="fa fa-pencil-square-o"></i>'.$this->translate('Edit '), array('class' => 'buttonlink'));
 				?>
 		    </li>
@@ -73,6 +74,7 @@
 				         	'subject_id' =>  $this->library->getIdentity(),
 				        	'parent_type' => 'user_library',
 				        	'case' => 'video',
+				        	'tab' => (isset($this -> tab_id))? $this -> tab_id : "",
 				         	'format' => 'smoothbox'), 
 				         	'<i class="fa fa-trash-o"></i>'.$this->translate('Delete Video'), array('class' => 'buttonlink smoothbox'
 				     ));

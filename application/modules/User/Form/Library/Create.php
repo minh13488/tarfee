@@ -38,11 +38,9 @@ class User_Form_Library_Create extends Engine_Form
 	// View
     $availableLabels = array(
       'everyone'            => 'Everyone',
-      'registered'          => 'All Registered Members',
-      'owner_network'       => 'Friends and Networks',
-      'owner_member_member' => 'Friends of Friends',
-      'owner_member'        => 'Friends Only',
-      'owner'               => 'Just Me'
+      'owner_network'       => 'Followers and Networks',
+      'owner_member'        => 'My Followers',
+      'owner'               => 'Only Me'
     );
 	
 	$user = Engine_Api::_()->user()->getViewer();
@@ -56,8 +54,7 @@ class User_Form_Library_Create extends Engine_Form
       // Make select box
       } else {
         $this->addElement('Select', 'auth_view', array(
-            'label' => 'Privacy',
-            'description' => 'Who may see this library?',
+            'label' => 'Who may see this library',
             'multiOptions' => $viewOptions,
             'value' => key($viewOptions),
         ));

@@ -194,7 +194,12 @@ class User_Plugin_Core
 							));
 								
 							$key = 'user_predispatch_url:' . $request -> getParam('module') . '.index.manage';
-							$value = $viewer -> getHref();
+							$tab = $request -> getParam("tab", null);
+							if(isset($tab) && !empty($tab)) {
+								$value = $viewer -> getHref().'/view/tab/'.$tab;
+							} else {
+								$value = $viewer -> getHref();
+							}
 							$_SESSION[$key] = $value;
 							break;
 							
@@ -256,8 +261,13 @@ class User_Plugin_Core
                             }
                             
 							$key = 'user_predispatch_url:' . $module_video . '.index.manage';
-								$value = $value = $viewer -> getHref();
-								$_SESSION[$key] = $value;
+							$tab = $request -> getParam("tab", null);
+							if(isset($tab) && !empty($tab)) {
+								$value = $viewer -> getHref().'/view/tab/'.$tab;
+							} else {
+								$value = $viewer -> getHref();
+							}
+							$_SESSION[$key] = $value;
 							break;		
 					}
 				}
@@ -323,7 +333,13 @@ class User_Plugin_Core
                                 $key = 'user_predispatch_url:' . $module_video . '.index.manage';
                             else
                                 $key = 'user_predispatch_url:' . $module_video . '.index.view';
-							$value = $viewer -> getHref();
+							
+							$tab = $request -> getParam("tab", null);
+							if(isset($tab) && !empty($tab)) {
+								$value = $viewer -> getHref().'/view/tab/'.$tab;
+							} else {
+								$value = $viewer -> getHref();
+							}
 							$_SESSION[$key] = $value;
 							break;
 					}

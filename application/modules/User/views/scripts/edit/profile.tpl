@@ -39,7 +39,7 @@
 
 <?php
   $this->headTranslate(array(
-    'Everyone', 'All Members', 'Friends', 'Only Me',
+    'Everyone', 'All Members', 'Followers', 'Only Me',
   ));
 ?>
 <script type="text/javascript">

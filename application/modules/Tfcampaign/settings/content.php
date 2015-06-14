@@ -11,6 +11,17 @@ return array(
 	),
 	
 	array(
+        'title' => 'Campaign - Profile Player Fulfill Info',
+        'description' => 'Displays Suggest Info for users to fulfill the campaign info on Campaign Detail page',
+        'category' => 'Campaign',
+        'type' => 'widget',
+        'name' => 'tfcampaign.profile-fulfill-info',
+        'requirements' => array(
+	      'subject' => 'tfcampaign_campaign',
+	    ),
+    ),
+	
+	array(
         'title' => 'Campaign - Profile Player Submissions',
         'description' => 'Displays Player Submissions on Campaign Detail page',
         'category' => 'Campaign',

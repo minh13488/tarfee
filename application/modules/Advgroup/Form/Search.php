@@ -40,7 +40,7 @@ class Advgroup_Form_Search extends Engine_Form
       'label' => 'View:',
       'multiOptions' => array(
         '0' => 'Everyone\'s Groups',
-        '1' => 'Only My Friends\' Groups',
+        '1' => 'Only My Followers\' Groups',
       ),
       
     ));

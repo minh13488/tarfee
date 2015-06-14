@@ -16,16 +16,13 @@
 			 : $this->htmlLink(($this -> site_link)?$this -> site_link:$route, $site_name, array('class' => 'navbar-brand'));
 		?>
 	</div>
-	 <?php if ($viewer->getIdentity()): ?>
-            <?php if($this->search_check):?>
-        		<div id="global_search_form_container">
-        			<form id="global_search_form" action="<?php echo $this->url(array('controller' => 'search'), 'default', true) ?>" method="get">
-        			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100' alt='<?php echo $this->translate('Search') ?>' />                       
-        			</form>
-        		</div>
-
-        	<?php endif;?>
-        <?php endif; ?>
+    <?php if($this->search_check):?>
+		<div id="global_search_form_container">
+			<form id="global_search_form" action="<?php echo $this->url(array('controller' => 'search'), 'default', true) ?>" method="get">
+			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100' alt='<?php echo $this->translate('Search') ?>' />                       
+			</form>
+		</div>
+	<?php endif;?>
     <div class="group-mini-menu">
     	<?php
     		// Reverse the navigation order (they're floating right)
@@ -137,6 +134,7 @@
         	if($this->viewer->getIdentity()) : 
             	{
             		$img = $this->itemPhoto($this->viewer(), 'thumb.profile');
+
             		if($this->viewer()->getTitle() == 'admin')
             		{
             			echo "<div data-toggle='collapse' data-target='.user-profile-submenu' id='user-profile-info' class='user-profile-info collapsed'>" .$img. "<span>".$this->translate('Admin') . "</span><i class='ynicon-setting-w'></i></div>";
@@ -151,7 +149,6 @@
             
                 <ul id="user-profile-submenu" class="user-profile-submenu collapse"> 
                     <li class="user-profile-submenu-title"><?php echo $this->translate('Account & Settings  ').'<i class="fa fa-caret-right"></i>'; ?></li>
-            		<?php if ($viewer->getIdentity()): ?>
                         <?php if($this->search_check):?>
                     		<li class="global_search_form_second">
                     			<form action="<?php echo $this->url(array('controller' => 'search'), 'default', true) ?>" method="get">
@@ -159,8 +156,6 @@
                     			</form>
                     		</li>
                     	<?php endif;?>
-                    <?php endif; ?>
-                    
                     <?php foreach( $this->navigation as $item ): ?>
             		<li <?php if ($viewer && !$viewer->getIdentity()): ?> class="Login" <?php endif;?>>
             			<?php echo $this->htmlLink($item->getHref(), $this->translate($item->getLabel()), array_filter(array(

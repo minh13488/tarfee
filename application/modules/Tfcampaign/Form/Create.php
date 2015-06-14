@@ -176,12 +176,12 @@ class Tfcampaign_Form_Create extends Engine_Form
     $this -> addElement('Text', 'user', array(
         'label' => 'Allow view for',
         'autocomplete' => 'off',
-        'order' => '13'
+        'order' => '20'
     ));
     
     $this -> addElement('Hidden', 'user_ids', array(
         'filters' => array('HtmlEntities'),
-        'order' => '14'
+        'order' => '21'
     ));
     Engine_Form::addDefaultDecorators($this -> user_ids);
 	
@@ -193,10 +193,10 @@ class Tfcampaign_Form_Create extends Engine_Form
 	    $availableLabels = array(
 	      'everyone'            => 'Everyone',
 	      'registered'          => 'All Registered Members',
-	      'owner_network'       => 'Friends and Networks',
-	      'owner_member_member' => 'Friends of Friends',
-	      'owner_member'        => 'Friends Only',
-	      'owner'               => 'Just Me'
+	      'owner_network'       => 'Followers and Networks',
+	      'owner_member_member' => 'Followers of Followers',
+	      'owner_member'        => 'My Followers',
+	      'owner'               => 'Only Me'
 	    );
 	
 	    $viewOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('tfcampaign_campaign', $user, 'auth_view');
@@ -208,10 +208,10 @@ class Tfcampaign_Form_Create extends Engine_Form
 	      // Make select box
 	      } else {
 	        $this->addElement('Select', 'auth_view', array(
-	            'label' => 'Privacy',
-	            'description' => 'Who may see this campaign?',
+	            'label' => 'Who may see this campaign',
 	            'multiOptions' => $viewOptions,
 	            'value' => key($viewOptions),
+	            'onchange' => 'privacyChange()'
 	        ));
 	        $this->auth_view->getDecorator('Description')->setOption('placement', 'append');
 	      }

@@ -52,7 +52,7 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 			'tabindex' => 4,
 		));
 		
-		$content = Zend_Registry::get('Zend_Translate')->_("<span><a href='%s'>Forgot Password?</a></span>");
+		$content = Zend_Registry::get('Zend_Translate')->_("<span><a class = 'smoothbox' href='%s'>Forgot Password?</a></span>");
     	$content= sprintf($content, Zend_Controller_Front::getInstance()->getRouter()->assemble(array('module' => 'user', 'controller' => 'auth', 'action' => 'forgot'), 'default', true));
 		// Init forgot password link
 	    $this->addElement('Dummy', 'forgot', array(
@@ -147,9 +147,10 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 
 		// Init forgot password link
 		$this -> addElement('Dummy', 'forgot', array('content' => $content, ));
-		$url = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_signup', true);
+		//$url = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_register', true);
+		$url_request = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_request', true);
 		$skipUrl =  Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_home', true);
-		$request_guest= '<div class="register_guest"><a href="'.$url.'"><span>'.$view -> translate("Register").'</span></a><span>|</span><a href="'.$skipUrl.'"><span>'.$view -> translate("Skip").'</span></a></div>';
+		$request_guest= '<div class="register_guest"><a class = "smoothbox" href="'.$url_request.'"><span>'.$view -> translate("Request Invite").'</span></a><span>|</span><a onclick = "openRegister()" href="javascript:;"><span>'.$view -> translate("Register").'</span></a><span>|</span><a class = "smoothbox" href="'.$skipUrl.'"><span>'.$view -> translate("Skip").'</span></a></div>';
 		$this -> addElement('Dummy', 'register_guest', array(
 				'content' => $request_guest,
 			));

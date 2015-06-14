@@ -33,12 +33,14 @@ if (($this->step != "get_invite" && $this->step != "add_contact") || (($this->er
 					</a>		
 				</div>
 			<?php endif; endforeach;?>
+			<?php if($this -> viewer() -> isAdmin()):?>
 			<div>
-					<a class="usingapi" title="<?php echo $this->translate("Upload CSV/VCF file")?>" href="<?php echo $this->url(array(),'contactimporter_upload')?>">
-						<img src='application/modules/Contactimporter/externals/images/csv.png'>
-						<span class="title"><?php echo $this->translate("Upload CSV/VCF file")?></span>
-					</a>		
+				<a class="usingapi" title="<?php echo $this->translate("Upload CSV/VCF file")?>" href="<?php echo $this->url(array(),'contactimporter_upload')?>">
+					<img src='application/modules/Contactimporter/externals/images/csv.png'>
+					<span class="title"><?php echo $this->translate("Upload CSV/VCF file")?></span>
+				</a>		
 			</div>
+			<?php endif;?>
 			<div>
 					<a class="usingapi" title="<?php echo $this->translate("Invite by manually typing emails")?>" href="<?php echo $this -> url(array('module' => 'invite'), 'default', true); ?>">
 						<img src='application/modules/Contactimporter/externals/images/manual.png'>

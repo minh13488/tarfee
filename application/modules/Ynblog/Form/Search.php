@@ -48,7 +48,7 @@ class Ynblog_Form_Search extends Engine_Form
       'label' => 'Show',
       'multiOptions' => array(
         '1' => 'Everyone\'s Talks',
-        '2' => 'Only My Friends\' Talks',
+        '2' => 'Only My Followers\' Talks',
       ),
       'onchange' => 'this.form.submit();',
     ));

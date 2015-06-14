@@ -4438,7 +4438,7 @@ Shows the mini menu and search widget
 			height: 20px;
 			text-indent: -9999px;
 			background-color: transparent;
-			background-image: url(/tarfee/application/themes/ynresponsive-event/images/icon_search.png?c=24);
+			background-image: url(~/application/themes/ynresponsive-event/images/icon_search.png);
 			background-position: center center;
 			background-repeat: no-repeat;
     	}
@@ -4497,9 +4497,9 @@ Shows the mini menu and search widget
     {
     	display: block;
     	position: relative;
-    	background-image: url(~/application/modules/Ynresponsive1/externals/images/icon_sprites.png);
+    	background-image: url(~/application/themes/ynresponsive-event/images/message.png);
     	background-repeat: no-repeat;
-    	background-size: auto;	
+    	background-size: cover;	
     	height: 26px;
     	width: 30px;	
     	text-decoration: none;
@@ -4524,11 +4524,15 @@ Shows the mini menu and search widget
     /* Messages icon */
     #ynadvmenu_MessagesUpdates a.ynadvmenu_NotifiIcon
     {
-    	background-image: url(~/application/themes/ynresponsive-event/images/ynicon-message.png);
+    	background-image: url(~/application/themes/ynresponsive-event/images/message.png);
+
     }
 
     
     /* Friends Request icon */
+    #ynadvmenu_FriendsRequestUpdates{
+    	display: none;
+    }
     #ynadvmenu_FriendsRequestUpdates a.ynadvmenu_NotifiIcon
     {
     	background-image: url(~/application/themes/ynresponsive-event/images/ynicon-friend.png);
@@ -4537,7 +4541,7 @@ Shows the mini menu and search widget
     /* Notification icon */
     #ynadvmenu_NotificationsUpdates a.ynadvmenu_NotifiIcon
     {
-    	background-image: url(~/application/themes/ynresponsive-event/images/ynicon-notification.png);
+    	background-image: url(~/application/themes/ynresponsive-event/images/notifications02.png);
     }
 
     
@@ -5339,7 +5343,12 @@ ul.ynevent_slideshow_pagination li a .ynevent_album_title,
 .layout_ynresponsiveevent_event_mini_menu .ybo_logo
 {
 	display: inline-block;
-	margin: 8px 0 0 0;
+	margin: 15px 0 0 0;
+
+	a{
+		position: relative;
+		top: 3px;
+	}
 }
 
 .ybo_logo {

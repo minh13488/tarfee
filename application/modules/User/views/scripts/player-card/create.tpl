@@ -108,6 +108,20 @@
 			$('relation_other-wrapper').hide();
 		}
 	}
+	
+	function privacyChange()
+	{
+		if ($('auth_view').value == 'everyone')
+		{
+			$('user-wrapper').hide();
+			$('user_ids-wrapper').hide();
+		}
+		else
+		{
+			$('user-wrapper').show();
+			$('user_ids-wrapper').show();
+		}
+	}
 
 	function subCategories()
 	{
@@ -156,6 +170,17 @@
 		<?php if(!$this -> showPosition):?>
 			$('position_id-wrapper').hide();
 		<?php endif;?>
+		
+		if ($('auth_view').value == 'everyone')
+		{
+			$('user-wrapper').hide();
+			$('user_ids-wrapper').hide();
+		}
+		else
+		{
+			$('user-wrapper').show();
+			$('user_ids-wrapper').show();
+		}
 		
 		if ($$('#province_id option').length <= 1)
 		{

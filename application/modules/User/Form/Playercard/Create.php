@@ -94,11 +94,12 @@ class User_Form_Playercard_Create extends Engine_Form
 	$gender->setMultiOptions(array('1' => 'Male', '2' => 'Female'));
 	$gender -> setRequired(true);
     $this->addElement($gender);
-	
+    
     $birthday = new Fields_Form_Element_Birthdate('birth_date');
     $birthday->setLabel("Date of Birth");
     $birthday->setAllowEmpty(false);
 	$birthday -> setRequired(true);
+	$birthday -> setYearMax(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.max_year', 2003));
     $this->addElement($birthday);
 	$birthday -> setAttrib('required', true);
 	
@@ -157,11 +158,9 @@ class User_Form_Playercard_Create extends Engine_Form
 	// View
     $availableLabels = array(
       'everyone'            => 'Everyone',
-      'registered'          => 'All Registered Members',
-      'owner_network'       => 'Friends and Networks',
-      'owner_member_member' => 'Friends of Friends',
-      'owner_member'        => 'Friends Only',
-      'owner'               => 'Just Me'
+      'owner_network'       => 'Followers and Networks',
+      'owner_member'        => 'My Followers',
+      'owner'               => 'Only Me'
     );
 
     $viewOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('user_playercard', $user, 'auth_view');
@@ -173,12 +172,11 @@ class User_Form_Playercard_Create extends Engine_Form
       // Make select box
       } else {
         $this->addElement('Select', 'auth_view', array(
-            'label' => 'Privacy',
-            'description' => 'Who may see this player card?',
+            'label' => 'Who can view this player',
             'multiOptions' => $viewOptions,
             'value' => key($viewOptions),
+            'onchange' => 'privacyChange()'
         ));
-        $this->auth_view->getDecorator('Description')->setOption('placement', 'append');
       }
     }
 

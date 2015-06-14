@@ -75,7 +75,7 @@ class User_Form_Admin_Settings_Level extends Engine_Form
         'everyone' => 'Everyone',
         'registered' => 'All Registered Members',
         'network' => 'My Network',
-        'member' => 'My Friends',
+        'member' => 'My Followers',
         'owner' => 'Only Me',
       ),
     ));
@@ -90,7 +90,7 @@ class User_Form_Admin_Settings_Level extends Engine_Form
         'everyone' => 'Everyone',
         'registered' => 'All Registered Members',
         'network' => 'My Network',
-        'member' => 'My Friends',
+        'member' => 'My Followers',
         'owner' => 'Only Me',
       )
     ));

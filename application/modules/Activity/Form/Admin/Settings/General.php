@@ -75,8 +75,8 @@ class Activity_Form_Admin_Settings_General extends Engine_Form
       'value' => 'everyone',
       'multiOptions' => array(
         'everyone' => 'All Members',
-        'networks' => 'My Friends & Networks',
-        'friends' => 'My Friends'
+        'networks' => 'Followers & Networks',
+        'friends' => 'My Followers'
       )
     ));
 

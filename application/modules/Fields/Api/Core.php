@@ -770,7 +770,7 @@ class Fields_Api_Core extends Core_Api_Abstract
     return array(
       'everyone' => 'Everyone',
       'registered' => 'Members',
-      'friends' => 'Friends',
+      'friends' => 'Followers',
       'self' => 'Only Me',
     );
   }
