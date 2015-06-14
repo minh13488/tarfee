@@ -46,8 +46,10 @@ $background = rand(1, 3);
 <div class="ynadvmenu-popup">		
 	<div class="ynadvmenu-overlay"></div>
 	<div class="ynadvmenu-popup-content">
-		<div class="ynadvmenu-popup-close">x</div>
+		<div class="ynadvmenu-popup-close"></div>
+
 		<div class='advmenusystem_lightbox' id='user_form_default_sea_lightbox'>
+		<div class="tarfee-popup-close"><i class="fa fa-times fa-lg"></i></div>
 			<div id="user_register_form" class="ynadvmenu-user-signup-form">
 				<?php echo $this->action("register", "signup", "user", array()) ?>
 			</div>

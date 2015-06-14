@@ -314,3 +314,32 @@ body#global_page_core-index-about-us{
 		}
 	}
 }
+
+
+#global_content_simple{
+	.global_form > div {
+		border: none;
+
+		h3{
+			margin-top: 0;
+			margin-bottom: 0
+		}
+	}
+}
+
+.tarfee-popup-close{
+	position: absolute;
+	right: 10px;
+	cursor: pointer;
+	top: 5px;
+
+	&:hover{
+		color: $theme_link_color;
+	}
+}
+
+#global_page_user-auth-forgot{
+	.generic_layout_container.layout_middle{
+		margin-top: 0;
+	}
+}
