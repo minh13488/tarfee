@@ -54,8 +54,7 @@ class User_Form_Library_Create extends Engine_Form
       // Make select box
       } else {
         $this->addElement('Select', 'auth_view', array(
-            'label' => 'Privacy',
-            'description' => 'Who may see this library?',
+            'label' => 'Who may see this library',
             'multiOptions' => $viewOptions,
             'value' => key($viewOptions),
         ));

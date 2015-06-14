@@ -49,6 +49,7 @@
             'video' => $item,
             'library' => $this->library,
             'main' => true,
+            'tab_id' => $this->identity,
         ));
         ?>
 	<?php endforeach; ?>
@@ -93,9 +94,9 @@
 								'action' => 'create',
 								'parent_type' =>'user_library',
 								'subject_id' =>  $subLibrary->getIdentity(),
-							), '<i class="fa fa-plus"></i>', array(
+							), '<i class="fa fa-video-camera fa-lg"></i>&nbsp;&nbsp;'.$this->translate('Add Video'), array(
 							'class' => 'buttonlink'
-							)) ;
+						)) ;
 						?>
 					</li>	
 				</ul>
@@ -151,6 +152,7 @@
 			            echo $this->partial('_video_listing.tpl', 'user', array(
 			                'video' => $item,
 			                'library' => $subLibrary,
+			                'tab_id' => $this->identity,
 			            ));
 			            ?>
 				<?php endforeach; ?>
