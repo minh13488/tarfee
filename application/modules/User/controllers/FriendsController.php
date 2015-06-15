@@ -192,7 +192,7 @@ class User_FriendsController extends Core_Controller_Action_User
       return $this->_forward('success', 'utility', 'core', array(
         'smoothboxClose' => true,
         'parentRefresh' => true,
-        'messages' => array(Zend_Registry::get('Zend_Translate')->_('You cannot befriend yourself.'))
+        'messages' => array(Zend_Registry::get('Zend_Translate')->_('You cannot follow yourself.'))
       ));
     }
 
@@ -201,7 +201,7 @@ class User_FriendsController extends Core_Controller_Action_User
       return $this->_forward('success', 'utility', 'core', array(
         'smoothboxClose' => true,
         'parentRefresh' => true,
-        'messages' => array(Zend_Registry::get('Zend_Translate')->_('You are already friends with this member.'))
+        'messages' => array(Zend_Registry::get('Zend_Translate')->_('You are already followers with this member.'))
       ));
     }
 
@@ -258,15 +258,15 @@ class User_FriendsController extends Core_Controller_Action_User
 
         // Add activity
         Engine_Api::_()->getDbtable('actions', 'activity')
-            ->addActivity($user, $viewer, 'friends', '{item:$object} is now friends with {item:$subject}.');
+            ->addActivity($user, $viewer, 'friends', '{item:$object} is now following {item:$subject}.');
         Engine_Api::_()->getDbtable('actions', 'activity')
-            ->addActivity($viewer, $user, 'friends', '{item:$object} is now friends with {item:$subject}.');
+            ->addActivity($viewer, $user, 'friends', '{item:$object} is now following {item:$subject}.');
 
         // Add notification
         Engine_Api::_()->getDbtable('notifications', 'activity')
             ->addNotification($user, $viewer, $user, 'friend_accepted');
         
-        $message = Zend_Registry::get('Zend_Translate')->_("You are now friends with this member.");
+        $message = Zend_Registry::get('Zend_Translate')->_("You are now following this member.");
 
       } else if( !$user->membership()->isReciprocal() ) {
         // if one way friendship and verification required
@@ -275,7 +275,7 @@ class User_FriendsController extends Core_Controller_Action_User
         Engine_Api::_()->getDbtable('notifications', 'activity')
             ->addNotification($user, $viewer, $user, 'friend_follow_request');
         
-        $message = Zend_Registry::get('Zend_Translate')->_("Your friend request has been sent.");
+        $message = Zend_Registry::get('Zend_Translate')->_("Your following request has been sent.");
         
       } else if( $user->membership()->isReciprocal() ) {
         // if two way friendship and verification required
@@ -284,14 +284,14 @@ class User_FriendsController extends Core_Controller_Action_User
         Engine_Api::_()->getDbtable('notifications', 'activity')
             ->addNotification($user, $viewer, $user, 'friend_request');
         
-        $message = Zend_Registry::get('Zend_Translate')->_("Your friend request has been sent.");
+        $message = Zend_Registry::get('Zend_Translate')->_("Your following request has been sent.");
       }
 
       $db->commit();
 
 
       $this->view->status = true;
-      $this->view->message = Zend_Registry::get('Zend_Translate')->_('Your friend request has been sent.');
+      $this->view->message = Zend_Registry::get('Zend_Translate')->_('Your following request has been sent.');
 
       return $this->_forward('success', 'utility', 'core', array(
         'smoothboxClose' => true,
@@ -363,12 +363,12 @@ class User_FriendsController extends Core_Controller_Action_User
       $db->commit();
 
       $this->view->status = true;
-      $this->view->message = Zend_Registry::get('Zend_Translate')->_('Your friend request has been cancelled.');
+      $this->view->message = Zend_Registry::get('Zend_Translate')->_('Your following request has been cancelled.');
       
       return $this->_forward('success', 'utility', 'core', array(
         'smoothboxClose' => true,
         'parentRefresh' => true,
-        'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your friend request has been cancelled.'))
+        'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your following request has been cancelled.'))
       ));
 
     } catch( Exception $e ) {
@@ -428,9 +428,9 @@ class User_FriendsController extends Core_Controller_Action_User
             ->addActivity($user, $viewer, 'friends_follow', '{item:$subject} is now following {item:$object}.');
       } else {
         Engine_Api::_()->getDbtable('actions', 'activity')
-          ->addActivity($user, $viewer, 'friends', '{item:$object} is now friends with {item:$subject}.');
+          ->addActivity($user, $viewer, 'friends', '{item:$object} is now following {item:$subject}.');
         Engine_Api::_()->getDbtable('actions', 'activity')
-          ->addActivity($viewer, $user, 'friends', '{item:$object} is now friends with {item:$subject}.');
+          ->addActivity($viewer, $user, 'friends', '{item:$object} is now following {item:$subject}.');
       }
       
       // Add notification
@@ -463,7 +463,7 @@ class User_FriendsController extends Core_Controller_Action_User
 
       $db->commit();
 
-      $message = Zend_Registry::get('Zend_Translate')->_('You are now friends with %s');
+      $message = Zend_Registry::get('Zend_Translate')->_('You are now following %s');
       $message = sprintf($message, $user->__toString());
 
       $this->view->status = true;
@@ -692,7 +692,7 @@ class User_FriendsController extends Core_Controller_Action_User
       
       $db->commit();
 
-      $message = Zend_Registry::get('Zend_Translate')->_('This person has been removed from your friends.');
+      $message = Zend_Registry::get('Zend_Translate')->_('This person has been removed from your followers.');
       
       $this->view->status = true;
       $this->view->message = $message;

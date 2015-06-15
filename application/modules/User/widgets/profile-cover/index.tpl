@@ -209,7 +209,6 @@ else {
                                 'controller' => 'friends',
                                 'action' => 'add',
                                 'user_id' => $subject->getIdentity(),
-                                'rev' => true
                             ), '<span class="profile_follow_button"><i class="fa fa-flag"></i></span>', array(
                                 'class' => 'smoothbox profile_follow', 'title' => $this -> translate("Follow")
                             ));
@@ -234,7 +233,6 @@ else {
                                 'controller' => 'friends',
                                 'action' => 'remove',
                                 'user_id' => $subject->getIdentity(),
-                                'rev' => true
                             ), '<span class="profile_follow_button"><i class="fa fa-flag-o"></i></span>', array(
                                 'class' => 'smoothbox profile_unfollow', 'title' => $this -> translate("Unfollow")
                             ));

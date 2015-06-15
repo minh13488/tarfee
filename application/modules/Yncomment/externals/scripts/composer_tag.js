@@ -159,7 +159,15 @@ ComposerYnComment.Plugin.Nctag = new Class({
                     'width': (width - 2) + 'px'
                 }
             }).inject(this.getComposer().elements.body, 'after');
-
+			// Check offset
+			var global_content = this.choices.getParent('#global_content');
+			var y_position = this.choices.getPosition(global_content).y;
+			var p_height = global_content.getHeight();
+			var c_height = 375;
+			if(p_height - y_position < c_height)
+			{
+				this.choices.addClass('users_suggest_reverse');
+			}
             var self = this;
             var options = $merge(this.options.suggestOptions, {
                 'customChoices': this.choices,
@@ -175,6 +183,8 @@ ComposerYnComment.Plugin.Nctag = new Class({
                     });
                     if (token.type != 'user') 
                     {
+                    	if(token.type == 'Group')
+                    		token.type = 'Club';
                         new Element('div', {
                             'html': token.type
                         }).inject(divEl);

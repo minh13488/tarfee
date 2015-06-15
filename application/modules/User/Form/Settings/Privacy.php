@@ -107,7 +107,15 @@ class User_Form_Settings_Privacy extends Engine_Form
         $this->comment->setValue($role);
       }
     }
-
+	
+	 $this->addElement('Radio', 'private_contact', array(
+      'label' => 'Private Contact Information',
+      'description' => 'Who can view my private contact information?',
+      'multiOptions' => array(0 => 'Everyone',
+      						  1 => 'Followers & Professionals',
+	  						  2 => 'Professionals Only'),
+    ));
+    
 	$availableLabels = array(
 	      'owner'       => 'Only Me',
 	      'member'      => 'Only My Followers',
