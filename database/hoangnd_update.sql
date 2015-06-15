@@ -232,6 +232,9 @@ INSERT IGNORE INTO `engine4_authorization_permissions`
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- 6.9.2015
+INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
+('search_admin_settings', 'user', 'Search Settings', '', '{"route":"admin_default","module":"user","controller":"search"}', 'core_admin_main_settings', '', 999);
+
 INSERT IGNORE INTO `engine4_authorization_permissions`
   SELECT
     level_id as `level_id`,

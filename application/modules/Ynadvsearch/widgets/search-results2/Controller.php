@@ -28,7 +28,6 @@ class Ynadvsearch_Widget_SearchResults2Controller extends Engine_Content_Widget_
 			$this->view->reachLimit = true;
 		}
 		
-		
 		$advsearch = $request-> getParam('advsearch', '');
 		if ($advsearch == '') {
 			$tokens = $request-> getParam('token', '');
