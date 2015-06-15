@@ -170,15 +170,17 @@
 	window.addEvent('domready', function(){
 
 		
-		$$('.tf_sublibrary_title').addEvent('click', function(){
-			var parent = this.getParent('.tf_list_sublibrary li')
+		$$('.tf_list_sublibrary li').addEvent('click', function(){
+
 			//Get height -> set padding top
-			var padding = parseInt(parent.getStyle('height')) + 15;
+			var padding = parseInt(this.getStyle('height')) + 15;
 			$$('.tf_list_sublibrary').setStyle('padding-top',padding);
 
 			//Add class chose player
 			$$('.tf_list_sublibrary li').removeClass('chose_player');
-			parent.addClass('chose_player');
+			this.addClass('chose_player');
+			
+
 		})
 
 		 
