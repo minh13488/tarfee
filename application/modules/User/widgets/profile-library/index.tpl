@@ -62,7 +62,8 @@
 <?php foreach($subLibraries as $subLibrary) :?>
 	<?php if($subLibrary -> isViewable()) :?>
 	<li>
-		<div class="item_background" style="background: url(<?php echo $subLibrary -> getPhotoUrl();?>)">
+		<div class="item_sublibrary">
+			<div class="item_background" style="background: url(<?php echo $subLibrary -> getPhotoUrl();?>)">
 			<div class="avatar-box-hover">
 			    <ul class="actions">
 					<li>
@@ -94,43 +95,42 @@
 								'action' => 'create',
 								'parent_type' =>'user_library',
 								'subject_id' =>  $subLibrary->getIdentity(),
-							), '<i class="fa fa-video-camera fa-lg"></i>&nbsp;&nbsp;'.$this->translate('Add Video'), array(
+							), '<i class="fa fa-video-camera"></i>', array(
 							'class' => 'buttonlink'
 						)) ;
 						?>
 					</li>	
 				</ul>
 			</div>	
-		</div>
-
-		<div class="tf_sublibrary_title">
-			<?php echo $subLibrary -> getTitle();?>
-		</div>
-
-		<div class="tf_sublibrary_count">
-			<div class="count_videos">
-				<span>
-					<?php echo $this->translate('20') ?>
-				</span>
-				<span>
-					<?php echo $this->translate('videos') ?>
-				</span>
 			</div>
 
-			<div class="count_views_comments">
-				<?php echo $this->translate('1.525.506 views') ?> <br>
-				<?php echo $this->translate('1.628 comments') ?>
+			<div class="tf_sublibrary_title">
+				<?php echo $subLibrary -> getTitle();?>
 			</div>
-		</div>
 
-		<div class="tf_sublibrary_author">
-			by <span>James Jaredson</span>
+			<div class="tf_sublibrary_count">
+				<div class="count_videos">
+					<span>
+						<?php echo $this->translate('20') ?>
+					</span>
+					<span>
+						<?php echo $this->translate('videos') ?>
+					</span>
+				</div>
+
+				<div class="count_views_comments">
+					<?php echo $this->translate('1.525.506 views') ?> <br>
+					<?php echo $this->translate('1.628 comments') ?>
+				</div>
+			</div>
+
+			<div class="tf_sublibrary_author">
+				by <span>James Jaredson</span>
+			</div>
 		</div>
 
 		<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
-		<div class="user-library-item-action">
 
-		</div>
 		<?php endif;?>
 
 		<!-- show video of sub library -->
@@ -168,6 +168,19 @@
 
 <script type="text/javascript">
 	window.addEvent('domready', function(){
+
+		
+		$$('.tf_sublibrary_title').addEvent('click', function(){
+			var parent = this.getParent('.tf_list_sublibrary li')
+			//Get height -> set padding top
+			var padding = parseInt(parent.getStyle('height')) + 15;
+			$$('.tf_list_sublibrary').setStyle('padding-top',padding);
+
+			//Add class chose player
+			$$('.tf_list_sublibrary li').removeClass('chose_player');
+			parent.addClass('chose_player');
+		})
+
 		 
 		$$('.user-library-item-action').addEvent('outerClick', function(){
 	    	if ( this.hasClass('open-submenu') ) {
