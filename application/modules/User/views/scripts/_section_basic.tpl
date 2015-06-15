@@ -273,6 +273,30 @@
 	</ul>
 </div>
 <?php endif;?>
+<?php 
+$laguages = json_decode($user -> languages);
+$arr_tmp = array();
+foreach ($laguages as $lang_id) 
+{
+	$langTb =  Engine_Api::_() -> getDbTable('languages', 'user');
+	$lang = $langTb -> fetchRow($langTb ->select()->where('language_id = ?', $lang_id));
+	if($lang)
+		$arr_tmp[] = $lang -> title;
+}
+	if($arr_tmp):?>
+	<div class="profile_fields">
+		<ul>
+			<li>
+				<span>
+				<?php echo $this->translate('Languages')?>		
+				</span>
+				<span>
+				<?php echo implode(' | ', $arr_tmp);	?>
+				</span>
+			</li>
+		</ul>
+	</div>
+	<?php endif;?>
 <?php endif; ?>
 </div>
 

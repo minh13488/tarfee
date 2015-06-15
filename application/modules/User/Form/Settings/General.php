@@ -248,6 +248,17 @@ class User_Form_Settings_General extends Engine_Form
       'description' => 'Dates, times, and other settings will be displayed using this locale setting.',
       'multiOptions' => $localeMultiOptions
     ));
+	
+	$languages = Engine_Api::_()->getDbTable('languages', 'user')->getLanguagesArray();
+	$this->addElement('MultiCheckbox', 'languages', array(
+      'label' => 'Language Preference',
+      'allowEmpty' => false,
+      'multiOptions' => $languages,
+      'filters' => array(
+        'StripTags',
+        new Engine_Filter_Censor(),
+      ),
+    ));
 
     
     // Init submit
