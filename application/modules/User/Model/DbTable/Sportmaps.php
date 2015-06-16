@@ -45,4 +45,10 @@ class User_Model_DbTable_Sportmaps extends Engine_Db_Table {
 			return $e;
 		}
 	}
+	
+	public function getAllUserHaveSport($sport_id) {
+		$select = $this->select()->from($this->info('name'), 'user_id');
+		$select->where('sport_id = ?', $sport_id);
+		return $select->query()->fetchAll(FETCH_ASSOC, 0);
+	}
 }

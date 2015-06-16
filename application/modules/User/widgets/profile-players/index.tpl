@@ -83,6 +83,7 @@
 							
 							<div class="avatar-box-hover">
 								<ul class="actions">
+									<li><a href="<?php echo $player -> getHref()?>"><i class="fa fa-external-link"></i></a></li>
 									<?php if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())): ?>
 									<!-- Button Edit Crop Delete -->
 									<li class="first">

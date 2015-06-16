@@ -14,5 +14,20 @@ class Tfcampaign_Widget_ProfileFulfillInfoController extends Engine_Content_Widg
 		if(!$viewer -> isSelf($campaign -> getOwner())) {
 			return $this -> setNoRender();
 		}
+		
+		//age
+		if($campaign -> from_age == 0 && $campaign -> from_age == 0) {
+			$this -> view -> type = 'age';
+		}
+		else if(!$campaign -> gender) {
+			//gender 
+			$this -> view -> type = 'gender';
+		} 
+		else if(!$campaign -> country_id) {
+			//country 
+			$this -> view -> type = 'country';
+		} else {
+			return $this -> setNoRender();
+		}
 	}
 }

@@ -38,7 +38,16 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 					$campaign -> to_age = $params['to_age'];
 					$campaign -> save();
 					break;
-				
+			case 'gender':
+					$campaign -> gender = $params['gender'];
+					$campaign -> save();
+					break;	
+			case 'country':
+					$campaign -> country_id = $params['country_id'];
+					$campaign -> province_id = $params['province_id'];
+					$campaign -> city_id = $params['city_id'];
+					$campaign -> save();
+					break;
 				default:
 					
 					break;
