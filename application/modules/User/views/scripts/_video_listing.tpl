@@ -28,33 +28,43 @@
 	?>
 
 	<div class="tf_video_info">
-		<div>
+		<div class="tf_video_title">
 			<a class="<?php if(!$isMobile) echo 'smoothbox' ?> video_title" href="<?php echo $this -> video->getHref(array('smoothbox'=>'1'));?>">
-		  	<?php echo $this -> string() -> truncate($this -> video->getTitle(), 16);?>
+		  	<?php echo $this -> video->getTitle();?>
 		  	</a> 
 		</div>
 
 
-		<div>
+		<div style="display:none">
 	  		<?php echo $this->translate('By');?> <?php echo $this->htmlLink($this -> video->getOwner()->getHref(), $this -> video->getOwner()->getTitle()) ?>
 		</div>
 
-		<div class="video_stats">
-			<span class="video_views"><?php echo $this -> video->view_count;?> <?php echo $this->translate('views');?></span>
+		<div class="tf_video_count">
+			<span><?php echo $this -> video->view_count;?> <?php echo $this->translate('views');?>&nbsp;&nbsp;</span>
+			<span><?php echo $this->translate('1,523 comments') ?></span>
 		</div>
 
-	   <div class="video_stats">
+	   <div class="tf_video_rating">
 	   		<?php if($this -> video->getRating() > 0):?>
-	        	<?php for($x=1; $x<=$this -> video->getRating(); $x++): ?><span class="rating_star_generic rating_star"></span><?php endfor; ?><?php if((round($this -> video->rating)-$this -> video->getRating())>0):?><span class="rating_star_generic rating_star_half"></span><?php endif; ?>
+	        	<?php for($x=1; $x<=$this -> video->getRating(); $x++): ?><span class="rating_star_generic"><i class="fa fa-star"></i></span><?php endfor; ?><?php if((round($this -> video->rating)-$this -> video->getRating())>0):?><span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span><?php endif; ?>
 	 		<?php else :?>
-				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic rating_star_disabled"></span><?php endfor; ?>
+				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic"><i class="fa fa-star-o"></i></span><?php endfor; ?>
 	 		<?php endif;?>
 		</div>
+
+		<div class="tf_video_key">
+			<?php echo $this->translate('Cristiano Ronaldo') ?>
+		</div>
+
+		<div class="tf_video_category">
+			<?php echo $this->translate('Football') ?>
+		</div>
+
 	</div>
 
 
 	<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
-   		<ul>
+   		<ul class="tf_video_action">
    			<li>
 				<?php
 					echo $this->htmlLink(array(
@@ -66,7 +76,7 @@
 						'parent_type' =>'user_library',
 						'subject_id' =>  $this->library->getIdentity(),
 						'tab' => (isset($this -> tab_id))? $this -> tab_id : "",
-				    ), '<i class="fa fa-pencil-square-o"></i>'.$this->translate('Edit '), array('class' => 'buttonlink'));
+				    ), '<i class="fa fa-pencil-square-o"></i>', array('class' => 'buttonlink'));
 				?>
 		    </li>
 		    <li>
@@ -82,7 +92,7 @@
 				        	'case' => 'video',
 				        	'tab' => (isset($this -> tab_id))? $this -> tab_id : "",
 				         	'format' => 'smoothbox'), 
-				         	'<i class="fa fa-trash-o"></i>'.$this->translate('Delete Video'), array('class' => 'buttonlink smoothbox'
+				         	'<i class="fa fa-trash-o"></i>', array('class' => 'buttonlink smoothbox'
 				     ));
 				?>
 			</li>
@@ -94,7 +104,7 @@
 							'action' => 'move-to-sub',
 							'id' =>  $this -> video -> video_id,
 							'libid' =>  $this->library->getIdentity(),
-						), '<i class="fa fa-plus-square"></i>'.$this->translate('Move to Sub Library '), array(
+						), '<i class="fa fa-arrows"></i>', array(
 						'class' => 'smoothbox buttonlink'
 						)) ;
 					?>
