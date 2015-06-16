@@ -31,6 +31,10 @@
 	<div class="top">
 		<?php
             $title = $this->translate('Followers who following you');
+			if(!$this -> viewer() -> isSelf($this -> subject()))
+			{
+				$title = $this->translate('Followers who following %s', $this -> subject() -> getTitle());
+			}
 		?>
 		<div class="heading"><?php echo $title; ?></div>
 	</div>
@@ -59,50 +63,52 @@
 							<?php echo $this->htmlLink($user_info->getHref(), $this -> string() -> truncate($user_info->getTitle(), 20), array('title' => $user_info->getTitle(), 'target' => '_parent', 'class' => '', 'rel'=> 'user'.' '.$user_info->getIdentity())); ?>
 						</div>
 					</div>	
-				</div>
-				<div class="item_member_options">
-					<?php echo $this->htmlLink(array(
-			            'route' => 'user_extended',
-			            'controller' => 'friends',
-			            'action' => 'remove',
-			            'user_id' => $user_info->getIdentity(),
-			            'rev' => true
-			        ), $this->translate('Remove as Follower'), array(
-			            'class' => 'buttonlink smoothbox'
-			        ));
-	        		?>
-	        		
-	        		<?php echo $this->htmlLink($user_info->getHref(), $this -> translate('Visit Profile'), array('title' => $this -> translate('Visit Profile'), 'target' => '_parent', 'class' => '')); ?>
-					
-					<?php echo $this->htmlLink(array(
-			            'route' => 'messages_general',
-			            'action' => 'compose',
-			            'to' => $user_info->getIdentity()
-			        ), $this->translate('Send Message'), array(
-			            'class' => 'buttonlink smoothbox'
-			        ));
-	        		?>
-					
-					<?php echo $this->htmlLink(array(
-			            'route' => 'user_extended',
-			            'controller' => 'block',
-			            'action' => 'add',
-			            'user_id' => $user_info->getIdentity()
-			        ), $this->translate('Block'), array(
-			            'class' => 'buttonlink smoothbox'
-			        ));
-	        		?>
-	        		
-	        		<?php echo $this->htmlLink(array(
-			            'route' => 'default',
-			            'module' => 'core',
-			            'controller' => 'report',
-			            'action' => 'create',
-			            'subject' => $user_info->getGuid()
-			        ), $this->translate('Report Abuse'), array(
-			            'class' => 'buttonlink smoothbox'
-			        ));
-	        		?>
+					<?php if($this -> viewer() -> isSelf($this -> subject())):?>
+					<div class="item_member_options">
+						<?php echo $this->htmlLink(array(
+				            'route' => 'user_extended',
+				            'controller' => 'friends',
+				            'action' => 'remove',
+				            'user_id' => $user_info->getIdentity(),
+				            'rev' => true
+				        ), $this->translate('Remove as Follower'), array(
+				            'class' => 'buttonlink smoothbox'
+				        ));
+		        		?>
+		        		
+		        		<?php echo $this->htmlLink($user_info->getHref(), $this -> translate('Visit Profile'), array('title' => $this -> translate('Visit Profile'), 'target' => '_parent', 'class' => '')); ?>
+						
+						<?php echo $this->htmlLink(array(
+				            'route' => 'messages_general',
+				            'action' => 'compose',
+				            'to' => $user_info->getIdentity()
+				        ), $this->translate('Send Message'), array(
+				            'class' => 'buttonlink smoothbox'
+				        ));
+		        		?>
+						
+						<?php echo $this->htmlLink(array(
+				            'route' => 'user_extended',
+				            'controller' => 'block',
+				            'action' => 'add',
+				            'user_id' => $user_info->getIdentity()
+				        ), $this->translate('Block'), array(
+				            'class' => 'buttonlink smoothbox'
+				        ));
+		        		?>
+		        		
+		        		<?php echo $this->htmlLink(array(
+				            'route' => 'default',
+				            'module' => 'core',
+				            'controller' => 'report',
+				            'action' => 'create',
+				            'subject' => $user_info->getGuid()
+				        ), $this->translate('Report Abuse'), array(
+				            'class' => 'buttonlink smoothbox'
+				        ));
+		        		?>
+					</div>
+					<?php endif;?>
 				</div>
 				<?php	}
 			 } else { ?>

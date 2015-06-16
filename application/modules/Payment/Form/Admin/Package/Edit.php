@@ -29,7 +29,7 @@ class Payment_Form_Admin_Package_Edit extends Payment_Form_Admin_Package_Create
           'creation. If you wish to change these, you will have to create a ' .
           'new plan and disable the current one.')
       ;
-
+/*
     // Disable some elements
     $this->getElement('price')
         ->setIgnore(true)
@@ -52,6 +52,8 @@ class Payment_Form_Admin_Package_Edit extends Payment_Form_Admin_Package_Create
         ->setRequired(false)
         ->setAllowEmpty(true)
         ;
+ * 
+ */
     $this->removeElement('trial_duration');
 
     // Change the submit label
