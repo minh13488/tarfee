@@ -172,7 +172,35 @@ class User_EditController extends Core_Controller_Action_User
 		{
 			return;
 		}
-
+		$values = $form -> getValues();
+		if(!empty($values['url']))
+		{
+			$filename = $this -> copyImg($this -> getImageURL($values['url']), md5($values['url']));
+			if($filename)
+			{
+				$user -> setPhoto($filename);
+				@unlink($filename);
+				$iMain = Engine_Api::_()->getItem('storage_file', $user->photo_id);
+		        // Insert activity
+		        $action = Engine_Api::_()->getDbtable('actions', 'activity')->addActivity($user, $user, 'profile_photo_update',
+		          '{item:$subject} added a new profile photo.');
+		
+		        // Hooks to enable albums to work
+		        if( $action ) {
+		          $event = Engine_Hooks_Dispatcher::_()
+		            ->callEvent('onUserProfilePhotoUpload', array(
+		                'user' => $user,
+		                'file' => $iMain,
+		              ));
+		
+		          $attachment = $event->getResponse();
+		          if( !$attachment ) $attachment = $iMain;
+		
+		          // We have to attach the user himself w/o album plugin
+		          Engine_Api::_()->getDbtable('actions', 'activity')->attachActivity($action, $attachment);
+				}
+			}
+		}
 		// Uploading a new photo
 		if ($form -> Filedata -> getValue() !== null)
 		{
@@ -249,6 +277,7 @@ class User_EditController extends Core_Controller_Action_User
 			// Remove temp files
 			@unlink($iName);
 		}
+		$form -> reset();
 	}
 
 	public function removePhotoAction()

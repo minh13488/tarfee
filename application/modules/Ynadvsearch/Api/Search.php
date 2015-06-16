@@ -110,7 +110,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				$table = Engine_Api::_()->getItemTable('user_playercard');
 				$select = $table->select();
 				if (!empty($params['keyword'])) {
-					$select->where('name LIKE ? or description LIKE ?', '%'.$params['keyword'].'%');
+					$select->where("CONCAT(first_name, ' ', last_name) LIKE ? or description LIKE ?", '%'.$params['keyword'].'%');
 				}
 				if (!empty($params['sport'])) {
 					$select->where('category_id = ?', $params['sport']);
@@ -130,6 +130,25 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 						$select->where('country_id IN (?)', array(0));
 					}
 				}
+				
+				if (!empty($params['age_from'])) {
+					$searchStr = '-'.$params['age_from'].' years';
+					$select->where('birth_date <= ?', date('Y-m-d H:i:s', strtotime($searchStr)));
+				}
+
+				if (!empty($params['age_to'])) {
+					$searchStr = '-'.$params['age_to'].' years';
+					$select->where('birth_date >= ?', date('Y-m-d H:i:s', strtotime($searchStr)));
+				}
+				
+				if (isset($params['rating_from']) && is_numeric($params['rating_from'])) {
+					$select->where('rating >= ?', $params['rating_from']);
+				}
+
+				if (isset($params['rating_to']) && is_numeric($params['rating_to'])) {
+					$select->where('rating >= ?', $params['rating_to']);
+				}
+
 				if (!empty($params['country_id'])) {
 					$select->where('country_id = ?', $params['country_id']);
 				}
@@ -146,6 +165,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 			case 'professional':
 				$table = Engine_Api::_()->getItemTable('user');
 				$select = $table->select();
+				
+				$select->where('level_id = ?', '6');
+				
 				if (!empty($params['keyword'])) {
 					$select->where('username LIKE ? or displayname LIKE ?', '%'.$params['keyword'].'%');
 				}
@@ -153,7 +175,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 					$select->where('displayname LIKE ?', '%'.$params['displayname'].'%');
 				}
 				if (!empty($params['service'])) {
-					//TODO filter with service
+					$user_ids = Engine_Api::_()->getDbTable('offerservices', 'user')->getAllUserHaveService($params['service']);
+					if (empty($user_ids)) $user_ids = array(0);
+					$select->where('user_id IN (?)', $user_ids);
 				}
 				if (!empty($params['continent'])) {
 					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
@@ -180,6 +204,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 			case 'organization':
 				$table = Engine_Api::_()->getItemTable('user');
 				$select = $table->select();
+				$select->where('level_id = ?', '7');
 				if (!empty($params['keyword'])) {
 					$select->where('username LIKE ? or displayname LIKE ?', '%'.$params['keyword'].'%');
 				}
@@ -187,7 +212,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 					$select->where('displayname LIKE ?', '%'.$params['displayname'].'%');
 				}
 				if (!empty($params['sport'])) {
-					//TODO filter with sport
+					$user_ids = Engine_Api::_()->getDbTable('sportmaps', 'user')->getAllUserHaveSport($params['sport']);
+					if (empty($user_ids)) $user_ids = array(0);
+					$select->where('user_id IN (?)', $user_ids);
 				}
 				if (!empty($params['continent'])) {
 					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
@@ -276,7 +303,17 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				}
 				break;
 		}
-
+		
+		if ($select) {
+			if ($limit && $from) {
+	            $select->limit ( $limit+1, $from );
+	        }
+	        
+	        else if ($limit) {
+	            $select->limit ( $limit+1 );
+	        }
+		}
+		
 		if ($table && $select) {
 			$results = $table->fetchAll($select);
 		}

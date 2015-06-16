@@ -8,4 +8,10 @@ class User_Model_DbTable_Offerservices extends Engine_Db_Table
         ->order('offerservice_id ASC');
         return $this->fetchAll($select);
     }
+	
+	public function getAllUserHaveService($service_id) {
+		$select = $this->select()->from($this->info('name'), 'user_id');
+		$select->where('service_id = ?', $service_id);
+		return $select->query()->fetchAll(FETCH_ASSOC, 0);
+	}
 }
