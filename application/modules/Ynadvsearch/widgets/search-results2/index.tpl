@@ -14,7 +14,7 @@
 <?php $count = 1;?>
 <?php foreach( $this->results as $row): ?>
 	<?php if ($count > $this->limit) break;?>
-	<?php $item = $this->item($row->type, $row->id);?>
+	<?php $item = (!empty($row->type) && !empty($row->id)) ? $this->item($row->type, $row->id): $row;?>
 	<?php if ($item) :?>
 	<li class="result-search-item <?php echo $item->getType()?>-item">
 		<div class="ynadvsearch-result-item-photo">
