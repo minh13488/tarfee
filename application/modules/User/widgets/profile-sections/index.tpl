@@ -15,7 +15,7 @@ $this -> headScript() -> appendFile($staticBaseUrl . 'application/modules/User/e
 <div id="user-profile-sections-content">
     <ul id="sections-content-items">
     <?php 
-    $allSections = Engine_Api::_()->user()->getAllSections();
+    $allSections = Engine_Api::_()->user()->getAllSections($subject);
     foreach ($allSections as $key => $section): ?>
 		<?php 
 			$content = Engine_Api::_()->user()->renderSection($key, $subject, array());

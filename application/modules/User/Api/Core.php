@@ -338,8 +338,43 @@ class User_Api_Core extends Core_Api_Abstract
   }
   
   	//HOANGND get all profile sections
-  	public function getAllSections() {
-        return $this->_sections;    
+  	public function getAllSections($user = null) 
+  	{
+        $sections = $this->_sections;
+		if($user)
+		{
+			// check private contact
+			$private_contact = $user -> private_contact;
+			$viewer = Engine_Api::_()->user()->getViewer();
+			if($private_contact == 1)
+			{
+				if($viewer -> getIdentity())
+				{
+					$subjectRow = $user->membership()->getRow($viewer);
+					if($subjectRow === null && $viewer -> level_id != 6)
+					{
+						unset($sections['contact']);
+					}
+				}
+				else {
+					unset($sections['contact']);
+				}
+			}
+			else if($private_contact == 2)
+			{
+				if($viewer -> getIdentity())
+				{
+					if($viewer -> level_id != 6)
+					{
+						unset($sections['contact']);
+					}
+				}
+				else {
+					unset($sections['contact']);
+				}
+			}
+		}
+		return $sections;
     }
 	
 	//HOANGND render profile sections

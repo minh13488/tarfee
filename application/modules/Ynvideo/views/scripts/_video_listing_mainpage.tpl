@@ -8,9 +8,6 @@
  */
 ?>
 <div class="ynvideo_thumb_wrapper video_thumb_wrapper">
-    <?php if ($this->video->duration): ?>
-        <?php echo $this->partial('_video_duration.tpl', 'ynvideo', array('video' => $this->video)) ?>
-    <?php endif ?>
     <?php
     if ($this->video->photo_id) {
         echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.normal'));
@@ -18,19 +15,44 @@
         echo '<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">';
     }
     ?>
-    <span class="video_button_add_to_area">
-        <button class="ynvideo_uix_button ynvideo_add_button" id="ynvideo_btn_video_<?php echo $this->video->getIdentity()?>" 
-            video-id="<?php echo $this->video->getIdentity()?>">
-            <div class="ynvideo_plus" />
-        </button>
-    </span>
 </div>
-<?php 
-    echo $this->htmlLink($this->video->getHref(), 
-            $this->string()->truncate($this->video->getTitle(), 30), 
-            array('class' => 'ynvideo_title', 'title' => $this->video->getTitle())) 
-?>
+<?php if ($this->video->parent_type == 'user_playercard') :?>
+<?php $player = $this->video->getParent();?>
+<?php if ($player):?>
+<?php $sport = $player->getSport();?>
+<?php if ($sport):?>	
+<div class="player-sport-icon">
+	<?php echo $this->itemPhoto($sport, 'thumb.icon')?>
+</div>
+<?php endif;?>
+<div class="player-info">
+	<div class="player-photo">
+		<?php echo $this->itemPhoto($player, 'thumb.icon')?>
+	</div>
+	<div class="player-title">
+		<?php echo $player?>
+	</div>
+	<?php $position = $player->getPosition()?>
+	<?php if ($positon) : ?>
+	<div class="player-position">
+		<?php echo $position?>
+	</div>
+	<?php endif;?>
+</div>
+<?php endif;?>
+<?php endif;?>
 
+<div class="video-title">
+	<?php echo $this->htmlLink($this->video->getHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
+</div>S
+
+<div class="video-statistic-rating">
+	<div class="video-statistic">
+		<p><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></p>
+		<?php $commentCount = $this->video->comments()->getCommentCount(); ?>
+		<p><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></p>
+	</div>
+</div>
 <div class="video_author">
     <?php $user = $this->video->getOwner() ?>
     <?php if ($user) : ?>

@@ -548,7 +548,10 @@ img#compose-yncomment-photo-loading-image {
 	bottom: 25px !important;
 	top: auto !important;
 }
-
+.users_suggest_reverse
+{
+	bottom: 70px;
+}
 .yncomment_comment_embox {
 	color: $theme_font_color_light;
 	background-color: #fff;

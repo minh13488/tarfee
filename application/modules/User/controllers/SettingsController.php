@@ -92,8 +92,11 @@ class User_SettingsController extends Core_Controller_Action_User {
 		}
 
 		// Check if post and populate
-		if (!$this -> getRequest() -> isPost()) {
-			$form -> populate($user -> toArray());
+		if (!$this -> getRequest() -> isPost()) 
+		{
+			$arr_user = $user -> toArray();
+			$arr_user['languages'] = json_decode($arr_user['languages']);
+			$form -> populate($arr_user);
 			$form -> populate(array('janrainnoshare' => $userSettings -> getSetting($user, 'janrain.no-share', 0), ));
 
 			$this -> view -> status = false;
@@ -111,7 +114,7 @@ class User_SettingsController extends Core_Controller_Action_User {
 		// -- Process --
 
 		$values = $form -> getValues();
-
+		$values['languages'] = json_encode($values['languages']);
 		// Check email against banned list if necessary
 		if (($emailEl = $form -> getElement('email')) && isset($values['email']) && $values['email'] != $user -> email) {
 			$bannedEmailsTable = Engine_Api::_() -> getDbtable('BannedEmails', 'core');
@@ -136,23 +139,16 @@ class User_SettingsController extends Core_Controller_Action_User {
 		$user -> setDisplayName($aliasValues);
 
 		$user -> save();
-
-		// Update account type
-		/*
-		 $accountType = $form->getValue('accountType');
-		 if( isset($aliasedFields['profile_type']) )
-		 {
-		 $valueRow = $aliasedFields['profile_type']->getValue($user);
-		 if( null === $valueRow ) {
-		 $valueRow = Engine_Api::_()->fields()->getTable('user', 'values')->createRow();
-		 $valueRow->field_id = $aliasedFields['profile_type']->field_id;
-		 $valueRow->item_id = $user->getIdentity();
-		 }
-		 $valueRow->value = $accountType;
-		 $valueRow->save();
-		 }
-		 *
-		 */
+		
+		if(!empty($values['languages']))
+		{
+			foreach(json_decode($values['languages']) as $langId)
+			{
+				 // save language map
+				 $mappingTable = Engine_Api::_() -> getDbtable('languagemappings', 'user');
+				 $mappingTable -> save($langId, $user);
+			}
+		}
 
 		// Update facebook settings
 		if (isset($facebook) && $form -> getElement('facebook_id')) {
