@@ -302,7 +302,7 @@ class Payment_AdminPackageController extends Core_Controller_Action_Admin
     }
 
     // Hack em up
-    $form->populate($otherValues);
+    //$form->populate($otherValues);
 
     // Process
     $values = $form->getValues();
@@ -332,6 +332,7 @@ class Payment_AdminPackageController extends Core_Controller_Action_Admin
     $values['trial_duration'] = (int) $tmp[0];
     $values['trial_duration_type'] = $tmp[1];
     */
+    /*
     unset($values['price']);
     unset($values['recurrence']);
     unset($values['recurrence_type']);
@@ -339,7 +340,24 @@ class Payment_AdminPackageController extends Core_Controller_Action_Admin
     unset($values['duration_type']);
     unset($values['trial_duration']);
     unset($values['trial_duration_type']);
+    */
     
+    $tmp = $values['recurrence'];
+    unset($values['recurrence']);
+    if( empty($tmp) || !is_array($tmp) ) {
+      $tmp = array(null, null);
+    }
+    $values['recurrence'] = (int) $tmp[0];
+    $values['recurrence_type'] = $tmp[1];
+
+    $tmp = $values['duration'];
+    unset($values['duration']);
+    if( empty($tmp) || !is_array($tmp) ) {
+      $tmp = array(null, null);
+    }
+    $values['duration'] = (int) $tmp[0];
+    $values['duration_type'] = $tmp[1];
+	
     if( !empty($values['default']) && (float) $values['price'] > 0 ) {
       return $form->addError('Only a free plan may be the default plan.');
     }
