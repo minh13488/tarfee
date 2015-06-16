@@ -165,6 +165,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 			case 'professional':
 				$table = Engine_Api::_()->getItemTable('user');
 				$select = $table->select();
+				
+				$select->where('level_id = ?', '6');
+				
 				if (!empty($params['keyword'])) {
 					$select->where('username LIKE ? or displayname LIKE ?', '%'.$params['keyword'].'%');
 				}
@@ -172,7 +175,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 					$select->where('displayname LIKE ?', '%'.$params['displayname'].'%');
 				}
 				if (!empty($params['service'])) {
-					//TODO filter with service
+					$user_ids = Engine_Api::_()->getDbTable('offerservices', 'user')->getAllUserHaveService($params['service']);
+					if (empty($user_ids)) $user_ids = array(0);
+					$select->where('user_id IN (?)', $user_ids);
 				}
 				if (!empty($params['continent'])) {
 					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
@@ -199,6 +204,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 			case 'organization':
 				$table = Engine_Api::_()->getItemTable('user');
 				$select = $table->select();
+				$select->where('level_id = ?', '7');
 				if (!empty($params['keyword'])) {
 					$select->where('username LIKE ? or displayname LIKE ?', '%'.$params['keyword'].'%');
 				}
@@ -206,7 +212,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 					$select->where('displayname LIKE ?', '%'.$params['displayname'].'%');
 				}
 				if (!empty($params['sport'])) {
-					//TODO filter with sport
+					$user_ids = Engine_Api::_()->getDbTable('sportmaps', 'user')->getAllUserHaveSport($params['sport']);
+					if (empty($user_ids)) $user_ids = array(0);
+					$select->where('user_id IN (?)', $user_ids);
 				}
 				if (!empty($params['continent'])) {
 					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
