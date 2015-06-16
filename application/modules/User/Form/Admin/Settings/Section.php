@@ -109,26 +109,6 @@ class User_Form_Admin_Settings_Section extends Authorization_Form_Admin_Level_Ab
             ));
         }
         
-		$this->addElement('Integer', 'max_result', array(
-            'label' => 'Maximum search results will appear for the user',
-            'description' => 'Set 0 is unlimited',
-            'required' =>true,
-            'validators' => array(
-                new Engine_Validate_AtLeast(0),
-            ),
-            'value' => 0,
-        ));
-		
-		$this->addElement('Integer', 'max_keyword', array(
-            'label' => 'Maximum search keywords can be conducted for the user',
-            'description' => 'Set 0 is unlimited',
-            'required' =>true,
-            'validators' => array(
-                new Engine_Validate_AtLeast(0),
-            ),
-            'value' => 0,
-        ));
-			
         $this->addElement('Button', 'submit', array(
           'label' => 'Save Changes',
           'type' => 'submit',

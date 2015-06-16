@@ -481,6 +481,7 @@ $.TokenList = function (input, url_or_data, settings) {
     function insert_token(item) {
         var this_token = settings.tokenFormatter(item);
         this_token = $(this_token)
+          .css('background-color',"#" + Math.random().toString(16).slice(2, 8))
           .addClass(settings.classes.token)
           .insertBefore(input_token);
 

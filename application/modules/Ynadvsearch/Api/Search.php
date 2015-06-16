@@ -110,7 +110,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				$table = Engine_Api::_()->getItemTable('user_playercard');
 				$select = $table->select();
 				if (!empty($params['keyword'])) {
-					$select->where('name LIKE ? or description LIKE ?', '%'.$params['keyword'].'%');
+					$select->where("CONCAT(first_name, ' ', last_name) LIKE ? or description LIKE ?", '%'.$params['keyword'].'%');
 				}
 				if (!empty($params['sport'])) {
 					$select->where('category_id = ?', $params['sport']);
@@ -130,6 +130,25 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 						$select->where('country_id IN (?)', array(0));
 					}
 				}
+				
+				if (!empty($params['age_from'])) {
+					$searchStr = '-'.$params['age_from'].' years';
+					$select->where('birth_date <= ?', date('Y-m-d H:i:s', strtotime($searchStr)));
+				}
+
+				if (!empty($params['age_to'])) {
+					$searchStr = '-'.$params['age_to'].' years';
+					$select->where('birth_date >= ?', date('Y-m-d H:i:s', strtotime($searchStr)));
+				}
+				
+				if (isset($params['rating_from']) && is_numeric($params['rating_from'])) {
+					$select->where('rating >= ?', $params['rating_from']);
+				}
+
+				if (isset($params['rating_to']) && is_numeric($params['rating_to'])) {
+					$select->where('rating >= ?', $params['rating_to']);
+				}
+
 				if (!empty($params['country_id'])) {
 					$select->where('country_id = ?', $params['country_id']);
 				}
@@ -276,7 +295,17 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				}
 				break;
 		}
-
+		
+		if ($select) {
+			if ($limit && $from) {
+	            $select->limit ( $limit+1, $from );
+	        }
+	        
+	        else if ($limit) {
+	            $select->limit ( $limit+1 );
+	        }
+		}
+		
 		if ($table && $select) {
 			$results = $table->fetchAll($select);
 		}
