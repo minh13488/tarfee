@@ -9,8 +9,6 @@
  */
 class Ynvideo_Widget_ProfileFavoriteVideosController extends Engine_Content_Widget_Abstract {
 
-    protected $_childCount;
-
     public function indexAction() {
         // Don't render this if not authorized
         $viewer = Engine_Api::_()->user()->getViewer();
@@ -44,13 +42,6 @@ class Ynvideo_Widget_ProfileFavoriteVideosController extends Engine_Content_Widg
         // Do not render if nothing to show
         if ($paginator->getTotalItemCount() <= 0) {
             return $this->setNoRender();
-        } else {
-            $this->_childCount = $paginator->getTotalItemCount();
         }
     }
-
-    public function getChildCount() {
-        return $this->_childCount;
-    }
-
 }
