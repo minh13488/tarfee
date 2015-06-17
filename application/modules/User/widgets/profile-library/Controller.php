@@ -9,6 +9,7 @@ class User_Widget_ProfileLibraryController extends Engine_Content_Widget_Abstrac
     if( !Engine_Api::_()->core()->hasSubject() ) {
       return $this->setNoRender();
     }
+	$this -> getElement() -> removeDecorator('Title');
 	
 	// Get subject
     $this->view->subject = $subject = Engine_Api::_()->core()->getSubject('user');

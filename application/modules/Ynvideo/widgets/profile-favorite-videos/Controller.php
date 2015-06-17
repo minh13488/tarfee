@@ -21,6 +21,7 @@ class Ynvideo_Widget_ProfileFavoriteVideosController extends Engine_Content_Widg
         if (!$subject->authorization()->isAllowed($viewer, 'view')) {
             return $this->setNoRender();
         }
+		$this -> getElement() -> removeDecorator('Title');
 
         // Get paginator
         $profile_owner_id = $subject->getIdentity();
