@@ -61,7 +61,7 @@
 <ul class="tf_list_sublibrary">
 <?php foreach($subLibraries as $subLibrary) :?>
 	<?php if($subLibrary -> isViewable()) :?>
-	<li>
+	<li class="tf_item_sublibrary">
 		<div class="item_sublibrary">
 			<div class="item_background" style="background: url(<?php echo $subLibrary -> getPhotoUrl();?>)">
 			<div class="avatar-box-hover">
@@ -169,19 +169,15 @@
 <script type="text/javascript">
 	window.addEvent('domready', function(){
 
-		
-		$$('.tf_list_sublibrary li').addEvent('click', function(){
-
-			//Get height -> set padding top
-			var padding = parseInt(this.getStyle('height')) + 15;
+		//Chose sub library show video
+		$$('.tf_sublibrary_title').addEvent('click',function(){
+			var padding = parseInt(this.getParent('.tf_item_sublibrary').getStyle('height')) + 15;
 			$$('.tf_list_sublibrary').setStyle('padding-top',padding);
 
-			//Add class chose player
-			$$('.tf_list_sublibrary li').removeClass('chose_player');
-			this.addClass('chose_player');
-			
+			$$('.tf_item_sublibrary').removeClass('chose_player');
+			this.getParent('.tf_item_sublibrary').addClass('chose_player');
 
-		})
+		});
 
 		 
 		$$('.user-library-item-action').addEvent('outerClick', function(){
