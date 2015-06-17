@@ -58,7 +58,7 @@
 		            'route' => 'user_extended',
 		            'controller' => 'player-card',
 		            'action' => 'create',
-		        ), '<i class="fa fa-plus-square"></i> '.$this->translate('Add New Player Card'), array(
+		        ), '<i class="fa fa-plus-square fa-lg"></i>&nbsp;&nbsp;'.$this->translate('add new player card'), array(
 		            'class' => ''
 		        ))
 		        ?>

@@ -1090,12 +1090,14 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
             margin-left: 5px;
         }
         .tarfee-profile-module-header {
-            border-radius: 5px;
-            background-color: #F63;
-            margin-bottom: 15px;
-
             a {
+                border-radius: 5px;
+                background-color: $theme_link_color;
+                margin-bottom: 15px;
                 color: #FFF;
+                text-decoration: none;
+                display: block;
+                padding: 12px;
             }
         }
 
@@ -1128,7 +1130,6 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
     /*STYLE TABS PLAYERS*/
     .layout_user_profile_players .player_contents {
         .tarfee-profile-header-right {
-            padding: 12px;
             text-align: center;
         }
         ul.players_browse{
@@ -1375,6 +1376,7 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
 
     .layout_user_profile_library {
         clear: both;
+        min-height: 300px;
     }
     #global_content .layout_main {
         clear: both;
