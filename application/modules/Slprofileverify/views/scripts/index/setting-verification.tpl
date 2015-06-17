@@ -48,10 +48,8 @@
                                 '<p>' + <?php echo Zend_Json::encode(str_replace(array("\r\n", "\n", "\r"), "", $this->translate("DESCRIPTION_WHY_GET_VERIFIED"))); ?> + '</p>' +
                             '</div>';
             Smoothbox.open(content);
-            var height = $('TB_ajaxContent').getStyle('height').toInt() - 23;
-            var width = $('TB_ajaxContent').getStyle('width').toInt() - 20;
+            var height = $('TB_ajaxContent').get('height').toInt() - 123;
             $('TB_ajaxContent').setStyle('height', height + 'px');
-            $('TB_ajaxContent').setStyle('width', width + 'px');
             $('TB_ajaxContent').setStyle('padding-bottom', '12px');
             $('TB_ajaxContent').setStyle('overflow', 'hidden');
         });
@@ -62,10 +60,8 @@
                                 '<p>' + <?php echo Zend_Json::encode(str_replace(array("\r\n", "\n", "\r"), "", $this->translate("WHY_IT_IS_SAFE_DESCRIPTION"))); ?> + '</p>' +
                             '</div>';
             Smoothbox.open(content);
-            var height = $('TB_ajaxContent').getStyle('height').toInt() - 23;
-            var width = $('TB_ajaxContent').getStyle('width').toInt() - 20;
+            var height = $('TB_ajaxContent').get('height').toInt() - 50;
             $('TB_ajaxContent').setStyle('height', height + 'px');
-            $('TB_ajaxContent').setStyle('width', width + 'px');
             $('TB_ajaxContent').setStyle('padding-bottom', '12px');
             $('TB_ajaxContent').setStyle('overflow', 'hidden');
         });

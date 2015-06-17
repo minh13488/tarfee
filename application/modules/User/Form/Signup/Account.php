@@ -370,7 +370,7 @@ class User_Form_Signup_Account extends Engine_Form_Email
     $bannedUsernamesTable = Engine_Api::_()->getDbtable('BannedUsernames', 'core');
 	if(in_array($value, array('admin','index','groups','members','invite','videos','messages','login','logout','search','activity','annoucement','like','help','pages','report','link','tag','sitemap','utility',
 				'widget','comment','confirm','cross-domain','error','member','photo','album','post','profile','topic','signup','network','ipn','settings','subscription','upload','ajax','auth','block','edit','friends',
-				'video')))
+				'video','events','event','talk','talks','club','clubs','campaign','campaigns')))
 	{
 		return FALSE;
 	}

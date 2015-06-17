@@ -420,14 +420,11 @@ class Contactimporter_Api_Core extends Core_Api_Abstract
 
 					for ($i = 0; $i < $count; $i = $i + 1)
 					{
-
-						if ($row[$i] == "E-mail Display Name" || $row[$i] == "First" || $row[$i] == "First Name")
+						if ($row[$i] == "E-mail Display Name" || $row[$i] == "First" || $row[$i] == "First Name" || $row[$i] == "Name")
 						{
-
 							$first_name_pos = $i;
-
 						}
-						elseif ($row[$i] == "E-mail Address" || $row[$i] == "Email" || $row[$i] == "E-mail Address")
+						elseif ($row[$i] == "E-mail Address" || $row[$i] == "Email" || $row[$i] == "E-mail 1 - Value")
 						{
 							$email_pos = $i;
 						}

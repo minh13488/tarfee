@@ -317,10 +317,8 @@ class Slprofileverify_IndexController extends Core_Controller_Action_Standard {
         $format = "" .
                 'window.addEvent("domready", function(){ ' .
                 "Smoothbox.open(" . Zend_Json::encode(str_replace(array("\r\n", "\n", "\r"), "", $body)) . ",{onClose:function(){window.location.href='" . $viewer->getHref() . "'}});" .
-                "var height = $('TB_ajaxContent').getStyle('height').toInt() - 23;" .
-                "var width = $('TB_ajaxContent').getStyle('width').toInt() - 20;" .
+                "var height = $('TB_ajaxContent').get('height').toInt() - 100;" .
                 "$('TB_ajaxContent').setStyle('height', height + 'px');" .
-                "$('TB_ajaxContent').setStyle('width', width + 'px');" .
                 "$('TB_ajaxContent').setStyle('padding-bottom', '12px');" .
                 "$('TB_ajaxContent').setStyle('overflow', 'hidden');" .
                 '});';
