@@ -262,12 +262,15 @@
 							<?php 
 								$laguages = json_decode($player -> languages);
 								$arr_tmp = array();
-								foreach ($laguages as $lang_id) 
+								if($laguages)
 								{
-									$langTb =  Engine_Api::_() -> getDbTable('languages', 'user');
-									$lang = $langTb -> fetchRow($langTb ->select()->where('language_id = ?', $lang_id));
-									if($lang)
-										$arr_tmp[] = $lang -> title;
+									foreach ($laguages as $lang_id) 
+									{
+										$langTb =  Engine_Api::_() -> getDbTable('languages', 'user');
+										$lang = $langTb -> fetchRow($langTb ->select()->where('language_id = ?', $lang_id));
+										if($lang)
+											$arr_tmp[] = $lang -> title;
+									}
 								}
 								echo implode(' | ', $arr_tmp);
 							?>
