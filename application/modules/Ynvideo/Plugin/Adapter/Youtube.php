@@ -102,11 +102,11 @@ class Ynvideo_Plugin_Adapter_Youtube extends Ynvideo_Plugin_Adapter_Abstract {
     }
 
     public function getVideoDuration() {
-        return $this->duration;
+		return $this->_information['duration'];
     }
 
     public function getVideoTitle() {
-        return $this->title;
+		return $this->_information['title'];
     }
     
     public function getVideoDescription() {
