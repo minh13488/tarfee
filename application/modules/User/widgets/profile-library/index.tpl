@@ -5,6 +5,7 @@
     <span class="ul-item-action-title"><?php echo '<i class="fa fa-plus-square fa-lg"></i>&nbsp;&nbsp;'.$this -> translate('add more');?></span>
 
     <ul>
+    	<!--
 		<li>
 			<?php echo $this->htmlLink(array(
 					'route' => 'user_library',
@@ -15,6 +16,7 @@
 					)) ;
 			?>
 		</li>
+		-->
 		<li>
 			<?php echo $this->htmlLink(array(
 					'route' => 'video_general',
