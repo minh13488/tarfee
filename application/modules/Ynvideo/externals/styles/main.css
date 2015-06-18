@@ -1275,11 +1275,16 @@ div.video_object
                 padding-top: 5px;
             }
         }
-        .nickname{
+
+        .player-info{
+            border-bottom: 1px solid $theme_border_medium_color;
+        }
+        .nickname,
+        .player-info{
             padding: 10px 15px;
             overflow: hidden;
 
-            a{
+            a,.player-photo{
                 margin-right: 10px;
                 overflow: hidden;
                 float: left;
@@ -1290,20 +1295,43 @@ div.video_object
                 color: $theme_font_color;
             }
 
+            .player_info_detail{
+                overflow: hidden;
+                padding-top: 5px;
+
+                .player-title{
+                   a{
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        overflow: hidden;
+                        width: 100%;
+                   }
+                }
+            }
+
+            .members_info{
+                overflow: hidden;
+                padding-top: 5px;
+            }
+
             .members_name{
                 a{
                     margin-right: 10px;
                     overflow: hidden;
-                    float: left;
                     border-radius: 4px;
                     -webkit-border-radius: 4px;
                     -moz-border-radius: 4px;
                     font-weight: bold;
                     color: $theme_font_color;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    display: inline-block;
+                    width: 100%;
                 }
             }
 
-            .members_date{
+            .members_date,.player-position{
                 text-align: left;
                 font-size: 13px;
                 color: #999;

@@ -28,7 +28,7 @@
 <?php if ($player):?>
 <?php $sport = $player->getSport();?>
 <?php if ($sport):?>	
-<div class="player-sport-icon">
+<div class="player-sport-icon" style="display: none">
 	<?php echo $this->itemPhoto($sport, 'thumb.icon')?>
 </div>
 <?php endif;?>
@@ -36,18 +36,22 @@
 	<div class="player-photo">
 		<?php echo $this->itemPhoto($player, 'thumb.icon')?>
 	</div>
-	<div class="player-title">
-		<?php echo $player?>
+	<div class="player_info_detail">
+		<div class="player-title">
+			<?php echo $player?>
+		</div>
+		<?php $position = $player->getPosition()?>
+		<?php if ($position) : ?>
+		<div class="player-position">
+			<?php echo $position?>
+		</div>
+		<?php endif;?>
 	</div>
-	<?php $position = $player->getPosition()?>
-	<?php if ($position) : ?>
-	<div class="player-position">
-		<?php echo $position?>
-	</div>
-	<?php endif;?>
 </div>
 <?php endif;?>
 <?php endif;?>
+
+
 
 
 <?php $user = $this->video->getOwner() ?>
