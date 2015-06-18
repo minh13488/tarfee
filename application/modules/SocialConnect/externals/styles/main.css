@@ -274,7 +274,7 @@ body#global_page_core-index-about-us{
 		width: 540px;
 		margin: 100px auto;
 		background-color: #fff;
-		border: 10px solid #111;
+		border: 2px solid #ccc;
 		
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
@@ -353,5 +353,14 @@ body.modal-open{
 #global_page_core-index-index{
 	#dp_swf_engine{
 		top: 0;
+	}
+
+	#TB_window{
+		border: 2px solid #ccc;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-ms-border-radius: 5px;
+
 	}
 }
