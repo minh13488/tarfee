@@ -39,6 +39,7 @@ class SocialConnect_AdminSettingsController extends Core_Controller_Action_Admin
 				Engine_Api::_() -> getApi('settings', 'core') -> setSetting($key, $value);
 			}
 			$form -> addNotice('Your changes have been saved.');
+			$form -> tffooter_color -> setValue('<input value="'. $values['tffooter_color'] .'" type="color" id="color" name="color"/>');
 		}
 
 	}
