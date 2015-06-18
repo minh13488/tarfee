@@ -107,7 +107,7 @@
 }
 
 .layout_social_connect_landing_login{
-	margin-bottom: 70px !important;
+	margin-bottom: 300px !important;
 }
 
 .tf_footer_landing{
@@ -118,7 +118,7 @@
 	overflow: hidden;
 	width: 100%;
 	text-align: center;
-	position: fixed;
+	position: ;
 	bottom: 0;
 	opacity: 1;
 	transition: opacity 500ms ease-in-out;
@@ -130,7 +130,8 @@
 	}
 
 	ul{
-		/*float: left;*/
+		float: left;
+		margin-top: 50px;
 
 		li{
 			padding: 0 10px;
@@ -273,7 +274,7 @@ body#global_page_core-index-about-us{
 		width: 540px;
 		margin: 100px auto;
 		background-color: #fff;
-		border: 10px solid #111;
+		border: 2px solid #ccc;
 		
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
@@ -341,5 +342,25 @@ body#global_page_core-index-about-us{
 #global_page_user-auth-forgot{
 	.generic_layout_container.layout_middle{
 		margin-top: 0;
+	}
+}
+
+body.modal-open{
+	margin-right: 0 !important;
+}
+
+
+#global_page_core-index-index{
+	#dp_swf_engine{
+		top: 0;
+	}
+
+	#TB_window{
+		border: 2px solid #ccc;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-ms-border-radius: 5px;
+
 	}
 }

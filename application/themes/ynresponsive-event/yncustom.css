@@ -1145,3 +1145,92 @@ li.sideicon_generic:hover{
 }
 
 
+/*Tabs about player libraries*/
+body#global_page_user-profile-index {
+    .tabs_parent {
+        ul#main_tabs {
+            background: $theme_body_background_color;
+            border-radius: 0 0 5px 5px;
+            -webki-border-radius: 0 0 5px 5px;
+            -moz-border-radius: 0 0 5px 5px;
+            -ms-border-radius: 0 0 5px 5px;
+            border: none;
+
+            li {
+                text-align: center;
+                width: 24%;
+                border-color: $theme_border_dark_color;
+                margin-top: 4px;
+                margin-bottom: 4px;
+
+                &:last-child {
+                    border-right: 0 !important;
+                }
+                a {
+                    color: $theme_font_color;
+                    font-size: 16px;
+                    text-transform: lowercase;
+
+                    &:hover {
+                        color: $theme_link_color;
+                    }
+                    &:before {
+                        content: "\\f000";
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        text-decoration: inherit;
+                        font-size: 24px;
+                    }
+                }
+            }
+            li.active {
+                position: relative;
+
+                a {
+                    color: $theme_link_color;
+                }
+                &:after {
+                    content: "";
+                    width: 0;
+                    position: absolute;
+                    bottom: -4px;
+                    height: 0;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 10px solid #dedede;
+                }
+            }
+            li.tab_layout_user_profile_sections {
+                a {
+                    &:before {
+                        content: "\\f05a";
+                    }
+                }
+            }
+            li.tab_layout_user_profile_players {
+                a {
+                    &:before {
+                        content: "\\f183";
+                    }
+                }
+            }
+            li.tab_layout_user_profile_library {
+                a {
+                    &:before {
+                        content: "\\f1c5";
+                    }
+                }
+            }
+            li.tab_layout_ynvideo_profile_favorite_videos{
+                a {
+                    &:before {
+                        content: "\\f1c8";
+                    }
+                }
+            }
+        }
+    }
+}
+
+
