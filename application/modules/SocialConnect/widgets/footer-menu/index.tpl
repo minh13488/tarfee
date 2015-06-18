@@ -9,11 +9,58 @@
 <!end tf footer landing-->
 <div class="tf_footer_landing">
 	<div class="tf_footer_landing_inner">
-		<ul>
-			<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal"><?php echo $this -> translate("How it works?");?></a></li>
-			<li><a href="javascript:void(0)" data-target="#promoting" data-toggle="modal"><?php echo $this -> translate("Promoting talents + Looking for talents?");?></a></li>
-			<li><a href="javascript:void(0)" data-target="#about" data-toggle="modal"><?php echo $this -> translate("About Us");?></a></li>
-		</ul>
+<!-- 		<ul>
+			<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal"><?php //echo $this -> translate("How it works?");?></a></li>
+			<li><a href="javascript:void(0)" data-target="#promoting" data-toggle="modal"><?php //echo $this -> translate("Promoting talents + Looking for talents?");?></a></li>
+			<li><a href="javascript:void(0)" data-target="#about" data-toggle="modal"><?php //echo $this -> translate("About Us");?></a></li>
+		</ul> -->
+
+		<div class="tf_footer_col_left">
+			<ul>
+				<li class="category_title"><a href="#">How it work</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Why Getaround</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Benefits of sharing</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Owner guide</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Mobile </a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Trust & Safety</a></li>
+			</ul>
+
+			<ul>
+				<li class="category_title"><a href="#">Cities</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">San Francisco</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Berkeley</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Oakland</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Portland</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Washington D.C.</a></li>
+			</ul>
+
+
+			<ul>
+				<li class="category_title"><a href="#">Collections</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Convertible</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Exotic</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Luxury</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">SUV</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Tesla</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Truck</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Van</a></li>
+			</ul>
+
+			<ul>
+				<li class="category_title"><a href="#">Getaround</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">About</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Help</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Jobs</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Press</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Terms</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Privacy</a></li>
+				<li><a href="javascript:void(0)" data-target="#howitwork" data-toggle="modal">Blog</a></li>
+
+			</ul>
+
+
+		</div>
+
 
 		<div class="tf_footer_col_right">
 			<div class="section-row">

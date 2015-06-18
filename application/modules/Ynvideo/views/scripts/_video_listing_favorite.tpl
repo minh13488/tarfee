@@ -1,7 +1,7 @@
 <div class="ynvideo_thumb_wrapper video_thumb_wrapper">
     <?php
     if ($this->video->photo_id) {
-        echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.normal'));
+        echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.large'));
     } else {
         echo '<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">';
     }
@@ -26,12 +26,7 @@
 <?php if ($this->video->parent_type == 'user_playercard') :?>
 <?php $player = $this->video->getParent();?>
 <?php if ($player):?>
-<?php $sport = $player->getSport();?>
-<?php if ($sport):?>	
-<div class="player-sport-icon" style="display: none">
-	<?php echo $this->itemPhoto($sport, 'thumb.icon')?>
-</div>
-<?php endif;?>
+
 <div class="player-info">
 	<div class="player-photo">
 		<?php echo $this->itemPhoto($player, 'thumb.icon')?>
@@ -40,12 +35,17 @@
 		<div class="player-title">
 			<?php echo $player?>
 		</div>
+		<div class="player-position">
 		<?php $position = $player->getPosition()?>
 		<?php if ($position) : ?>
-		<div class="player-position">
 			<?php echo $position?>
-		</div>
 		<?php endif;?>
+
+		<?php $sport = $player->getSport();?>
+			<?php if ($sport):?>	
+				<?php echo ' - '.$sport->title ?>
+		<?php endif;?>
+		</div>
 	</div>
 </div>
 <?php endif;?>
