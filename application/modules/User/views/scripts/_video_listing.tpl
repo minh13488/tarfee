@@ -1,7 +1,7 @@
 <li style="height:auto" class="user-library-video-content">
   	<div class="video_thumb_wrapper">
 	    <?php if ($this -> video->duration):?>
-	        <span class="video_length">
+	        <span class="video_length" style="display:none">
 	          <?php
 	            if( $this -> video->duration>360 ) $duration = gmdate("H:i:s", $this -> video->duration); else $duration = gmdate("i:s", $this -> video->duration);
 	            if ($duration[0] =='0') $duration = substr($duration,1); echo $duration;
@@ -11,7 +11,7 @@
 	    <div class="avatar">
 	        <?php
 	          if( $this -> video->photo_id ) {
-	            echo $this->htmlLink($this -> video->getHref(), $this->itemPhoto($this -> video, 'thumb.normal'));
+	            echo $this->htmlLink($this -> video->getHref(), $this->itemPhoto($this -> video, 'thumb.large'));
 	          } else {
 	            echo '<img alt="" src="' . $this->layout()->staticBaseUrl . 'application/modules/Video/externals/images/video.png">';
 	          }
