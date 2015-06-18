@@ -107,7 +107,7 @@
 }
 
 .layout_social_connect_landing_login{
-	margin-bottom: 300px !important;
+	margin-bottom: 200px !important;
 }
 
 .tf_footer_landing{
@@ -136,7 +136,7 @@
 		ul{
 			float: left;
 			clear: both;
-			margin-bottom: 15px;
+			margin-bottom: 13px;
 			font-size: 12px;
 
 			&:last-child{
@@ -156,13 +156,13 @@
 					height: 14px;
 					display: inline-block;
 					position: absolute;
-					right: 0px;
+					right: -2px;
 					top: 3px;
 				}
 				
 				&:first-child{
 					border-right: 0;
-					min-width: 110px;
+					min-width: 160px;
 					text-align: left;
 					
 					&:after{

@@ -1,3 +1,6 @@
+
+
+
 /* $Id: main.css 9319 2011-09-23 20:48:26Z john $*/
 =string_strip
 {
@@ -1036,6 +1039,8 @@ div.ynevent_photo_view>div.comments {
 EVENTS USER PROFILE TAB
 Styles the list of events on a user's Events profile tab.
 */
+
+
 ul.ynevents_profile_tab>li {
 	overflow: hidden;
 }
