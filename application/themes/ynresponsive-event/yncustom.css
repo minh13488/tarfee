@@ -1255,3 +1255,43 @@ body#global_page_user-profile-index {
 		outline: 0 none;
 	}
 }
+
+
+/*Style profile event*/
+.ynevents_profile_tab{
+    li{
+        border-bottom: 3px solid tomato;
+        margin-bottom: 10px;
+        background: #ccc;
+
+        .ynevents_profile_tab_photo{
+            float: left;
+            margin-right: 10px;
+
+            img{
+            	width: 150px;
+            	height: 110px;
+            }
+        }
+
+        .ynevents_profile_tab_info{
+        	.ynevents_profile_tab_title{
+        		a{
+        			font-weight: bold;
+        			color: $theme_font_color;
+        			text-decoration: none;
+
+        			&:hover{
+        				color: $theme_link_color;
+        			}
+        		}
+        	}
+
+        	.ynevents_profile_tab_desc{
+				line-height: 1.2em;
+				max-height: 90px;
+				overflow: hidden;
+        	}
+        }
+    }
+}
