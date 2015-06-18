@@ -1,5 +1,4 @@
 <?php
-
 class SocialConnect_AdminSettingsController extends Core_Controller_Action_Admin {
 
 	public function init() {
@@ -203,24 +202,143 @@ class SocialConnect_AdminSettingsController extends Core_Controller_Action_Admin
 	public function pagesAction()
 	{
 		$this -> view -> navigation = $navigation = Engine_Api::_() -> getApi('menus', 'core') -> getNavigation('socialconnect_admin', array(), 'socialconnect_admin_pages');
-		 if ($this->getRequest()->isPost()) {
-            $values = $this->getRequest()->getPost();
-            foreach ($values as $key => $value) {
-                if ($key == 'delete_' . $value) 
-                {
-                	$page = Engine_Api::_() -> getDbTable('pages', 'socialConnect') -> findRow($value);
-                    $page->delete();
-                }
-            }
-        }
-        
         //make paginator for contain list of books
         $page = $this->_getParam('page',1);
+		$category_id = $this -> _getParam('id', 0);
         $table = Engine_Api::_()->getDbTable('pages', 'socialConnect');
-        $pages = $table->fetchAll();
+		$select = $table -> select();
+		if($category_id)
+		{
+			$this -> view -> category = Engine_Api::_() -> getDbTable('categories', 'socialConnect') -> findRow($category_id);
+			$select -> where('category_id = ?', $category_id);
+		}
+        $pages = $table->fetchAll($select -> order('order'));
         $this->view->paginator = Zend_Paginator::factory($pages);
         $this->view->paginator->setItemCountPerPage(10);
         $this->view->paginator->setCurrentPageNumber($page);
 	}
+	public function sortCategoryAction()
+  	{
+		$categories = Engine_Api::_() -> getDbTable('categories', 'socialConnect') -> getAllCategories();
+	    $order = explode(',', $this->getRequest()->getParam('order'));
+	    foreach( $order as $i => $item ) {
+	      $category_id = substr($item, strrpos($item, '_')+1);
+	      foreach( $categories as $category ) {
+	        if( $category->category_id == $category_id ) {
+	          $category->order = $i;
+	          $category->save();
+	        }
+	    	}
+    	}
+	}
+	public function sortPageAction()
+  	{
+		$pages = Engine_Api::_() -> getDbTable('pages', 'socialConnect') -> getAllPages();
+	    $order = explode(',', $this->getRequest()->getParam('order'));
+	    foreach( $order as $i => $item ) {
+	      $page_id = substr($item, strrpos($item, '_')+1);
+	      foreach( $pages as $page ) {
+	        if( $page->page_id == $page_id ) {
+	          $page->order = $i;
+	          $page->save();
+	        }
+	    	}
+    	}
+	}
+	 public function deletePageAction() {
+        // In smoothbox
+        $this->_helper->layout->setLayout('admin-simple');
+        $id = $this->_getParam('id');
+        $this->view->page_id = $id;
+        // Check post
+        if( $this->getRequest()->isPost()) {
+            $db = Engine_Db_Table::getDefaultAdapter();
+            $db->beginTransaction();
 
+            try {
+                $row = Engine_Api::_() -> getDbTable('pages', 'socialConnect') -> findRow($id);
+				if($row)
+                	$row->delete();
+                $db->commit();
+            }
+
+            catch(Exception $e) {
+                $db->rollBack();
+                throw $e;
+            }
+
+            $this->_forward('success', 'utility', 'core', array(
+                'smoothboxClose' => true,
+                'parentRefresh'=> true,
+                'messages' => array('')
+            ));
+        }
+    }
+    
+    public function editPageAction() {
+        $id = $this->_getParam('id');
+        $this->view->form = $form = new SocialConnect_Form_Admin_EditPage();
+		
+        $row = Engine_Api::_() -> getDbTable('pages', 'socialConnect') -> findRow($id);
+        $form->populate($row->toArray());
+        // Output
+		$this -> renderScript('admin-settings/form.tpl');     
+        if(!$this->getRequest()->isPost()) {
+            return;
+        }
+    
+        if(!$form->isValid($this->getRequest()->getPost()) ) {
+            return;
+        }
+        $db = Engine_Api::_()->getDbtable('pages', 'socialConnect')->getAdapter();
+        $db->beginTransaction();
+        try {
+            $row->setFromArray($form->getValues());
+            $row->save();
+            $success = TRUE;
+        }
+        catch( Exception $e ) {
+            $db->rollBack();
+            throw $e;
+        }       
+
+        $db->commit();
+        $this -> _forward('success', 'utility', 'core', array('smoothboxClose' => 10, 'parentRefresh' => 10, 'messages' => array('')));
+    }
+    
+    public function addPageAction() {
+        $this->view->form = $form = new SocialConnect_Form_Admin_CreatePage();
+		// Output
+		$this -> renderScript('admin-settings/form.tpl');
+		
+        if(!$this->getRequest()->isPost()) {
+            return;
+        }
+    
+        if( !$form->isValid($this->getRequest()->getPost()) ) {
+            return;
+        }
+        $success = FALSE;
+        
+        $values = array_merge($form->getValues(), array(
+                'created_date' => date('Y-m-d H:i:s')
+            ));
+        
+        $db = Engine_Api::_() -> getDbTable('pages', 'socialConnect') ->getAdapter();
+        $db->beginTransaction();
+        try {
+            $table = Engine_Api::_()->getDbtable('pages', 'socialConnect');
+            $page = $table->createRow();
+            $page->setFromArray($values);
+            $page->save();
+            $success = TRUE;
+        }
+        catch( Exception $e ) {
+            $db->rollBack();
+            throw $e;
+        }       
+
+        $db->commit();
+		$this -> _forward('success', 'utility', 'core', array('smoothboxClose' => 10, 'parentRefresh' => 10, 'messages' => array('')));
+    }
 }
