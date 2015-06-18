@@ -1323,7 +1323,8 @@ Used for the modal popup smoothbox.
 	z-index:100;
 	top: 0px;
 	left: 0px;
-	background-color:#000;
+	background-color: rgba(0, 0, 0, 0.8);
+  	opacity: 1!important;
 }
 
 #TB_window {
