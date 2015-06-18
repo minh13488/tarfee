@@ -38,7 +38,7 @@
 		    <?php foreach ($this->paginator as $item): ?>
 		      <tr id='page_item_<?php echo $item->getIdentity() ?>'>
 		        <td><?php echo $this->translate($item->title) ?></td>
-		        <td><?php echo $this->translate($item->content)?></td>
+		        <td><?php echo strip_tags(($item->content))?></td>
 		        <td><?php $row = Engine_Api::_() -> getDbTable('categories', 'socialConnect') -> findRow($item -> category_id);
 				if($row)
 		        	  echo $this->translate($row->category_name); ?></td>
