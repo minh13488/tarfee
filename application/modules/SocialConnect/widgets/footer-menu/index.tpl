@@ -1,3 +1,4 @@
+<!--
 <div class="tf_footer_landing">
 	<ul>
 		<li><a class="smoothbox" href="<?php echo $this -> url(array('module' => 'core', 'controller' => 'index', 'action' => 'how-it-works'), 'default');?>"><?php echo $this -> translate("How it works?");?></a></li>
@@ -6,7 +7,6 @@
 	</ul>
 </div>
 <!--end tf footer landing-->
-<!--
 <div class="tf_footer_landing">
 	<div class="tf_footer_landing_inner">
 		<ul>
@@ -44,7 +44,6 @@
 
 
 <!-- Modal How it works -->
-<!--
 <div class="modal fade" id="howitwork" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -59,10 +58,8 @@
   </div>
 </div>
 
--->
 
 <!-- Modal Promoting looking -->
-<!--
 <div class="modal fade" id="promoting" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -76,11 +73,9 @@
     </div>
   </div>
 </div>
--->
 
 
 <!-- Modal About us -->
-<!--
 <div class="modal fade" id="about" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="false">
   <div class="modal-dialog">
     <div class="modal-content">
@@ -94,4 +89,3 @@
     </div>
   </div>
 </div>
--->
