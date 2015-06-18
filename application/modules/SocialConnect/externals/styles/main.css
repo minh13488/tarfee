@@ -164,15 +164,12 @@
 					border-right: 0;
 					min-width: 160px;
 					text-align: left;
+					font-weight: bold;
 					
 					&:after{
 						display: none;
 					}
 
-					a{
-						font-weight: bold;
-
-					}
 				}
 
 				&:last-child{
