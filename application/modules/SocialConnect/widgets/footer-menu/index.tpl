@@ -6,7 +6,7 @@
 		<li><a class="smoothbox" href="<?php echo $this -> url(array('module' => 'core', 'controller' => 'index', 'action' => 'about-us'), 'default');?>"><?php echo $this -> translate("About Us");?></a></li>
 	</ul>
 </div>
-<!--end tf footer landing-->
+<!end tf footer landing-->
 <div class="tf_footer_landing">
 	<div class="tf_footer_landing_inner">
 		<ul>

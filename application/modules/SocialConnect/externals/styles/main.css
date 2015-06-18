@@ -107,7 +107,7 @@
 }
 
 .layout_social_connect_landing_login{
-	margin-bottom: 70px !important;
+	margin-bottom: 300px !important;
 }
 
 .tf_footer_landing{
@@ -118,7 +118,7 @@
 	overflow: hidden;
 	width: 100%;
 	text-align: center;
-	position: fixed;
+	position: ;
 	bottom: 0;
 	opacity: 1;
 	transition: opacity 500ms ease-in-out;
@@ -130,7 +130,8 @@
 	}
 
 	ul{
-		/*float: left;*/
+		float: left;
+		margin-top: 50px;
 
 		li{
 			padding: 0 10px;
