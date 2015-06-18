@@ -35,7 +35,7 @@
     });
 </script>
 
-<ul id="ynvideo_favorite_videos" class="videos_browse">
+<ul id="ynvideo_favorite_videos">
     <?php foreach ($this->paginator as $item): ?>
         <li>
             <?php
