@@ -344,3 +344,14 @@ body#global_page_core-index-about-us{
 		margin-top: 0;
 	}
 }
+
+body.modal-open{
+	margin-right: 0 !important;
+}
+
+
+#global_page_core-index-index{
+	#dp_swf_engine{
+		top: 0;
+	}
+}
