@@ -1853,6 +1853,31 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
             margin-left: 0%;
         }
 
+        .avatar{
+            height: 135px;
+            a{
+                height: 100%;
+                
+                &:after{
+                    content: "";
+                    background-image: url(~/application/modules/Ynvideo/externals/images/icon_play_video.png);
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    display: block;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-color: rgba(0, 0, 0, 0.4);
+                }
+
+                img{
+                    height: 100%;
+                }
+            }
+        }
+
         .tf_video_info{
             padding: 10px;
             clear: both;
