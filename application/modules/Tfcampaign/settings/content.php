@@ -20,6 +20,15 @@ return array(
 	      'subject' => 'tfcampaign_campaign',
 	    ),
     ),
+    
+	array(
+        'title' => 'Campaign - Recent Campaigns',
+        'description' => 'Displays recent campaigns on main page.',
+        'category' => 'Campaign',
+        'type' => 'widget',
+        'isPaginated' => true,
+        'name' => 'tfcampaign.recent-campaign'
+	),
 	
 	array(
         'title' => 'Campaign - Profile Player Submissions',
