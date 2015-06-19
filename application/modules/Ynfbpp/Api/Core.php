@@ -129,7 +129,7 @@ class Ynfbpp_Api_Core
             return false;
         }
 		
-		if (isset($subject->email)) {
+		if (empty($subject->email)) {
 			return false;
 		}
 		
@@ -156,7 +156,7 @@ class Ynfbpp_Api_Core
 			$select = $mailTbl->select()
 				->where('user_id = ?', $viewer->getIdentity())
 				->where('creation_date >= ?', date('Y-m-d H:i:s', strtotime('yesterday')));
-			$numOfMailDay = count($messTbl->fetchAll($select));
+			$numOfMailDay = count($mailTbl->fetchAll($select));
 			if ($numOfMailDay >= $mailDay) return false;
 		}
 		
@@ -176,7 +176,7 @@ class Ynfbpp_Api_Core
 			$select = $mailTbl->select()
 				->where('user_id = ?', $viewer->getIdentity())
 				->where('creation_date >= ?', date('Y-m-d H:i:s', strtotime('last month')));
-			$numOfMailMonth = count($messTbl->fetchAll($select));
+			$numOfMailMonth = count($mailTbl->fetchAll($select));
 			if ($numOfMailMonth >= $mailMonth) return false;
 		}
 		

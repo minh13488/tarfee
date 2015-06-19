@@ -740,7 +740,7 @@ class User_IndexController extends Core_Controller_Action_Standard
 			$select = $mailTbl->select()
 				->where('user_id = ?', $viewer->getIdentity())
 				->where('creation_date >= ?', date('Y-m-d H:i:s', strtotime('yesterday')));
-			$numOfMailDay = count($messTbl->fetchAll($select));
+			$numOfMailDay = count($mailTbl->fetchAll($select));
 			if ($numOfMailDay >= $mailDay) {
 				return $this->_helper->requireAuth()->forward();
 			}
@@ -759,10 +759,10 @@ class User_IndexController extends Core_Controller_Action_Standard
 		
 		if ($mailMonth > 0) {
 			$mailTbl = Engine_Api::_()->getDbTable('mails', 'user');
-			$select = $messTbl->select()
+			$select = $mailTbl->select()
 				->where('user_id = ?', $viewer->getIdentity())
 				->where('creation_date >= ?', date('Y-m-d H:i:s', strtotime('last month')));
-			$numOfMailMonth = count($messTbl->fetchAll($select));
+			$numOfMailMonth = count($mailTbl->fetchAll($select));
 			if ($numOfMailMonth >= $mailMonth) return $this->_helper->requireAuth()->forward();
 		}
 		
@@ -778,7 +778,8 @@ class User_IndexController extends Core_Controller_Action_Standard
 		else {
 			$description = $this->view->translate('You can send email unlimited.');
 		}
-		$form->setDescription($this->view->translate('Send this email to %s', $user).$description);
+		$form->setDescription($this->view->translate('Send this email to %s. ', $user).$description);
+		$form->getDecorator('Description')->setOption('escape', false);
 		
         if (!$this -> getRequest() -> isPost()) {
             return;

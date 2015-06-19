@@ -9,7 +9,6 @@ class User_Form_InMail extends Engine_Form {
 		// Init form
 		$this -> setTitle('Email To User') -> setDescription('Send this email to your friends.') -> setLegend('');
 		$this -> setAttrib('class', 'global_form_popup');
-		$this -> getDecorator('Description')->setOption('escape', false);
 
 		// Init custom message
 		$this -> addElement('Textarea', 'message', array(
