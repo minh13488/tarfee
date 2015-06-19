@@ -985,7 +985,7 @@ return array(
 				),
 		),
 		array(
-				'title' => 'Recent Events',
+				'title' => 'Recent Events - Main Page',
 				'description' => 'Displays a list of recently created advanced events.',
 				'category' => 'Advanced Events',
 				'type' => 'widget',
