@@ -22,6 +22,127 @@ class User_SignupController extends Core_Controller_Action_Standard
   {
   }
   
+  
+  public function accountAction()
+  {
+    
+    // Get settings
+    $settings = Engine_Api::_()->getApi('settings', 'core');
+
+    // If the user is logged in, they can't sign up now can they?
+    if( Engine_Api::_()->user()->getViewer()->getIdentity() ) {
+      return $this->_helper->redirector->gotoRoute(array(), 'default', true);
+    }
+    
+    $formSequenceHelper = $this->_helper->formSequence;
+    foreach( Engine_Api::_()->getDbtable('signup1', 'user')->fetchAll() as $row ) {
+      if( $row->enable == 1 ) {
+        $class = $row->class;
+        $formSequenceHelper->setPlugin(new $class, $row->order);
+      }
+    }
+
+    // This will handle everything until done, where it will return true
+    if( !$this->_helper->formSequence() ) {
+      return;
+    }
+
+    // Get viewer
+    $viewer = Engine_Api::_()->user()->getViewer();
+
+    // Run post signup hook
+    $event = Engine_Hooks_Dispatcher::getInstance()->callEvent('onUserSignupAfter', $viewer);
+    $responses = $event->getResponses();
+    if( $responses ){
+      foreach( $event->getResponses() as $response ) {
+        if( is_array($response) ) {
+          // Clear login status
+          if( !empty($response['error']) ) {
+            Engine_Api::_()->user()->setViewer(null);
+            Engine_Api::_()->user()->getAuth()->getStorage()->clear();
+          }
+          // Redirect
+          if( !empty($response['redirect']) ) {
+            return $this->_helper->redirector->gotoUrl($response['redirect'], array('prependBase' => false));
+          }
+        }
+      }
+    }
+    
+    // Handle subscriptions
+    if( Engine_Api::_()->hasModuleBootstrap('payment') ) {
+      // Check for the user's plan
+      $subscriptionsTable = Engine_Api::_()->getDbtable('subscriptions', 'payment');
+      if( !$subscriptionsTable->check($viewer) ) {
+    
+        // Handle default payment plan
+        $defaultSubscription = null;
+        try {
+          $subscriptionsTable = Engine_Api::_()->getDbtable('subscriptions', 'payment');
+          if( $subscriptionsTable ) {
+            $defaultSubscription = $subscriptionsTable->activateDefaultPlan($viewer);
+            if( $defaultSubscription ) {
+              // Re-process enabled?
+              $viewer->enabled = true;
+              $viewer->save();
+            }
+          }
+        } catch( Exception $e ) {
+          // Silence
+        }
+        
+        if( !$defaultSubscription ) {
+          // Redirect to subscription page, log the user out, and set the user id
+          // in the payment session
+          $subscriptionSession = new Zend_Session_Namespace('Payment_Subscription');
+          $subscriptionSession->user_id = $viewer->getIdentity();
+          
+          Engine_Api::_()->user()->setViewer(null);
+          Engine_Api::_()->user()->getAuth()->getStorage()->clear();
+
+          if( !empty($subscriptionSession->subscription_id) ) {
+            return $this->_helper->redirector->gotoRoute(array('module' => 'payment',
+              'controller' => 'subscription', 'action' => 'gateway'), 'default', true);
+          } else {
+            return $this->_helper->redirector->gotoRoute(array('module' => 'payment',
+              'controller' => 'subscription', 'action' => 'index'), 'default', true);
+          }
+        }
+      }
+    }
+
+    // Handle email verification or pending approval
+    if( !$viewer->enabled ) {
+      Engine_Api::_()->user()->setViewer(null);
+      Engine_Api::_()->user()->getAuth()->getStorage()->clear();
+
+      $confirmSession = new Zend_Session_Namespace('Signup_Confirm');
+      $confirmSession->approved = $viewer->approved;
+      $confirmSession->verified = $viewer->verified;
+      $confirmSession->enabled  = $viewer->enabled;
+      return $this->_helper->_redirector->gotoRoute(array('action' => 'confirm'), 'user_signup', true);
+    }
+
+    // Handle normal signup
+    else {
+      Engine_Api::_()->user()->getAuth()->getStorage()->write($viewer->getIdentity());
+      Engine_Hooks_Dispatcher::getInstance()
+          ->callEvent('onUserEnable', $viewer);
+    }
+
+    // Set lastlogin_date here to prevent issues with payment
+    if( $viewer->getIdentity() ) {
+      $viewer->lastlogin_date = date("Y-m-d H:i:s");
+      if( 'cli' !== PHP_SAPI ) {
+        $ipObj = new Engine_IP();
+        $viewer->lastlogin_ip = $ipObj->toBinary();
+      }
+      $viewer->save();
+    }
+    
+    return $this->_helper->_redirector->gotoRoute(array('action' => 'home'), 'user_general', true);
+  }
+  
   public function indexAction()
   {
     // Render
@@ -373,7 +494,7 @@ class User_SignupController extends Core_Controller_Action_Standard
 	    }
 	    
 	    $formSequenceHelper = $this->_helper->formSequence;
-	    foreach( Engine_Api::_()->getDbtable('signup', 'user')->fetchAll() as $row ) {
+	    foreach( Engine_Api::_()->getDbtable('signup1', 'user')->fetchAll() as $row ) {
 	      if( $row->enable == 1 ) {
 	        $class = $row->class;
 	        $formSequenceHelper->setPlugin(new $class, $row->order);
