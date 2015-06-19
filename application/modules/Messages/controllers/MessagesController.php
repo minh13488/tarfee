@@ -233,13 +233,71 @@ class Messages_MessagesController extends Core_Controller_Action_User
     // Make form
     $this->view->form = $form = new Messages_Form_Compose();
     //$form->setAction($this->view->url(array('to' => null, 'multi' => null)));
-
     // Get params
     $multi = $this->_getParam('multi');
     $to = $this->_getParam('to');
     $viewer = Engine_Api::_()->user()->getViewer();
     $toObject = null;
-
+	
+	$permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
+	$messDay = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'user', 'mess_day');
+	if ($messDay == null) {
+        $row = $permissionsTable->fetchRow($permissionsTable->select()
+        ->where('level_id = ?', $viewer -> level_id)
+        ->where('type = ?', 'user')
+        ->where('name = ?', 'mess_day'));
+        if ($row) {
+            $messDay = $row->value;
+        }
+    }
+	
+	if ($messDay > 0) {
+		$messTbl = Engine_Api::_()->getDbTable('messages', 'messages');
+		$now = 
+		$select = $messTbl->select()
+			->where('user_id = ?', $viewer->getIdentity())
+			->where('date >= ?', date('Y-m-d H:i:s', strtotime('yesterday')));
+		$numOfMessDay = count($messTbl->fetchAll($select));
+		if ($numOfMessDay >= $messDay) {
+			return $this->_helper->requireAuth()->forward();
+		}
+	}
+	
+	$messMonth = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'user', 'mess_month');
+	if ($messMonth == null) {
+        $row = $permissionsTable->fetchRow($permissionsTable->select()
+        ->where('level_id = ?', $viewer -> level_id)
+        ->where('type = ?', 'user')
+        ->where('name = ?', 'mess_month'));
+        if ($row) {
+            $messMonth = $row->value;
+        }
+    }
+	
+	if ($messMonth > 0) {
+		$messTbl = Engine_Api::_()->getDbTable('messages', 'messages');
+		$now = 
+		$select = $messTbl->select()
+			->where('user_id = ?', $viewer->getIdentity())
+			->where('date >= ?', date('Y-m-d H:i:s', strtotime('last month')));
+		$numOfMessMonth = count($messTbl->fetchAll($select));
+		if ($numOfMessMonth >= $messMonth) return $this->_helper->requireAuth()->forward();
+	}
+	
+	if ($messDay > 0 && $messMonth > 0) {
+		$description = $this->view->translate('You have %s/%s messages sent during today and %s/%s messages sent during this month.', $numOfMessDay, $messDay, $numOfMessMonth, $messMonth);
+	}
+	else if ($messDay > 0) {
+		$description = $this->view->translate('You have %s/%s messages sent during today.', $numOfMessDay, $messDay);
+	}
+	else if ($messMonth > 0) {
+		$description = $this->view->translate('You have %s/%s messages sent during this month.', $numOfMessMonth, $messMonth);
+	}
+	else {
+		$description = $this->view->translate('You can send messages unlimited.');
+	}
+	
+	$form->setDescription($description);
     // Build
     $isPopulated = false;
     if( !empty($to) && (empty($multi) || $multi == 'user') ) {
@@ -248,6 +306,8 @@ class Messages_MessagesController extends Core_Controller_Action_User
       $toUser = Engine_Api::_()->getItem('user', $to);
       $isMsgable = ( 'friends' != Engine_Api::_()->authorization()->getPermission($viewer, 'messages', 'auth') ||
           $viewer->membership()->isMember($toUser) );
+		  
+		
       if( $toUser instanceof User_Model_User &&
           (!$viewer->isBlockedBy($toUser) && !$toUser->isBlockedBy($viewer)) &&
           isset($toUser->user_id) &&

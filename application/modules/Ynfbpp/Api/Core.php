@@ -94,7 +94,6 @@ class Ynfbpp_Api_Core
 		
 		if ($messDay > 0) {
 			$messTbl = Engine_Api::_()->getDbTable('messages', 'messages');
-			$now = 
 			$select = $messTbl->select()
 				->where('user_id = ?', $viewer->getIdentity())
 				->where('date >= ?', date('Y-m-d H:i:s', strtotime('yesterday')));
@@ -115,13 +114,72 @@ class Ynfbpp_Api_Core
 		
 		if ($messMonth > 0) {
 			$messTbl = Engine_Api::_()->getDbTable('messages', 'messages');
-			$now = 
 			$select = $messTbl->select()
 				->where('user_id = ?', $viewer->getIdentity())
 				->where('date >= ?', date('Y-m-d H:i:s', strtotime('last month')));
 			$numOfMessMonth = count($messTbl->fetchAll($select));
 			if ($numOfMessMonth >= $messMonth) return false;
 		}
+        return true;
+    }
+
+	protected function _allowMail($viewer, $subject) {
+        // Not logged in
+        if (!$viewer -> getIdentity() || $viewer -> getGuid(false) === $subject -> getGuid(false)) {
+            return false;
+        }
+		
+		if (isset($subject->email)) {
+			return false;
+		}
+		
+        // Get setting?
+        $permission = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'user', 'mail_auth');
+        if (Authorization_Api_Core::LEVEL_DISALLOW === $permission)  {
+            return false;
+        }
+		
+		$permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
+		$mailDay = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'user', 'mail_day');
+		if ($mailDay == null) {
+	        $row = $permissionsTable->fetchRow($permissionsTable->select()
+	        ->where('level_id = ?', $viewer -> level_id)
+	        ->where('type = ?', 'user')
+	        ->where('name = ?', 'mail_day'));
+	        if ($row) {
+	            $mailDay = $row->value;
+	        }
+	    }
+		
+		if ($mailDay > 0) {
+			$mailTbl = Engine_Api::_()->getDbTable('mail', 'user');
+			$select = $messTbl->select()
+				->where('user_id = ?', $viewer->getIdentity())
+				->where('creation_date >= ?', date('Y-m-d H:i:s', strtotime('yesterday')));
+			$numOfMailDay = count($messTbl->fetchAll($select));
+			if ($numOfMailDay >= $mailDay) return false;
+		}
+		
+		$mailMonth = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'user', 'mail_month');
+		if ($mailMonth == null) {
+	        $row = $permissionsTable->fetchRow($permissionsTable->select()
+	        ->where('level_id = ?', $viewer -> level_id)
+	        ->where('type = ?', 'user')
+	        ->where('name = ?', 'mail_month'));
+	        if ($row) {
+	            $mailMonth = $row->value;
+	        }
+	    }
+		
+		if ($mailMonth > 0) {
+			$mailTbl = Engine_Api::_()->getDbTable('mail', 'user');
+			$select = $messTbl->select()
+				->where('user_id = ?', $viewer->getIdentity())
+				->where('creation_date >= ?', date('Y-m-d H:i:s', strtotime('last month')));
+			$numOfMailMonth = count($messTbl->fetchAll($select));
+			if ($numOfMailMonth >= $mailMonth) return false;
+		}
+		
         return true;
     }
 
@@ -319,6 +377,19 @@ class Ynfbpp_Api_Core
                 'title' => $this -> view -> translate('Send Message')
             ));
         }
+		
+		else if ($this->_allowMail($viewer, $user)) {
+			$actions[] = $this -> view -> htmlLink(array(
+                'route' => 'user_general',
+                'action' => 'in-mail',
+                'to' => $user -> user_id
+            ), $this -> view -> translate('Send Mail'), array(
+                'style' => "background-image: url('application/modules/Messages/externals/images/send.png')",
+                'class' => 'buttonlink icon_mail_send',
+                'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;',
+                'title' => $this -> view -> translate('Send Mail')
+            ));
+		}
 
         // check to add reward point
         if (Engine_Api::_() -> hasModuleBootstrap('ynrewardpoints'))

@@ -256,3 +256,13 @@ INSERT IGNORE INTO `engine4_authorization_permissions`
 -- 6.10.2015
 ALTER TABLE `engine4_user_relations` ADD `search_title` TEXT NOT NULL ;
 ALTER TABLE `engine4_user_playercards` ADD `name` VARCHAR(200) NOT NULL ;
+
+
+-- 6.10.2015
+CREATE TABLE IF NOT EXISTS `engine4_user_mails` (
+  `mail_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `creation_date` datetime NOT NULL,	
+  PRIMARY KEY (`mail_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
