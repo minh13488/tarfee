@@ -2,11 +2,11 @@
 
 return array(
 
-  // Profile Blogs Widget
+  // Profile Talks Widget
   array(
-    'title' => 'Profile Blogs',
-    'description' => 'Displays a member\'s blog entries on their profile.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Profile Talks',
+    'description' => 'Displays a member\'s talk entries on their profile.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.profile-blogs',
     'isPaginated' => true,
@@ -14,130 +14,148 @@ return array(
 						'subject' => 'user',
 				),
     'defaultParams' => array(
-        'title' => 'Blogs',
+        'title' => 'Talks',
     ),
   ),
 
-  //Blogs Menu Widget
+  //Talks Menu Widget
   array(
-    'title' => 'Blog Menu',
-    'description' => 'Displays menu blogs on Blog Browse Page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Talk Menu',
+    'description' => 'Displays menu talks on Talk Browse Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.blogs-menu',
   ),
   
-  // Top Blogs (Most Liked Blogs) Widget
+  // Top Talks (Most Liked Talks) Widget
   array(
-    'title' => 'Top Blogs',
-    'description' => 'Displays most liked blogs on Blog Browse Page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Top Talks',
+    'description' => 'Displays most liked talks on Talk Browse Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.top-blogs',
     'defaultParams' => array(
-      'title' => 'Top Blogs',
+      'title' => 'Top Talks',
     ),
     'adminForm' => array(
         'elements' => array(
           array('Text', 'title', array( 'label' => 'Title')),
-          array('Text', 'max', array('label' => 'Number of Blogs show on page.',
+          array('Text', 'max', array('label' => 'Number of Talks show on page.',
                                      'value' => 8)),
         )
     ),
   ),
 
-  // New Blogs Widget
+  // New Talks Widget
    array(
-    'title' => 'New Blogs',
-    'description' => 'Displays new blogs on Blog Browse Page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'New Talks',
+    'description' => 'Displays new talks on Talk Browse Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.new-blogs',
     'defaultParams' => array(
-      'title' => 'New Blogs',
+      'title' => 'New Talks',
     ),
     'adminForm' => array(
         'elements' => array(
           array('Text', 'title', array('label' => 'Title')),
-          array('Text', 'max', array( 'label' => 'Number of Blogs show on page.',
+          array('Text', 'max', array( 'label' => 'Number of Talks show on page.',
+                                      'value' => 8)),
+        )
+     ),
+    ),
+    // New Talks Widget
+   array(
+    'title' => 'Recent Talks',
+    'description' => 'Displays recent talks on main page.',
+    'category' => 'Advanced Talks',
+    'type' => 'widget',
+    'name' => 'ynblog.recent-blogs',
+    'defaultParams' => array(
+      'title' => 'Talks',
+    ),
+    'adminForm' => array(
+        'elements' => array(
+          array('Text', 'title', array('label' => 'Title')),
+          array('Text', 'max', array( 'label' => 'Number of Talks show on page.',
                                       'value' => 8)),
         )
      ),
     ),
 
-   //Most Viewed Blogs Widget
+   //Most Viewed Talks Widget
    array(
-    'title' => 'Most Viewed Blogs',
-    'description' => 'Displays most viewed blogs on Blog Browse Page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Most Viewed Talks',
+    'description' => 'Displays most viewed talks on Talk Browse Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.most-viewed-blogs',
     'defaultParams' => array(
-      'title' => 'Most Viewed Blogs',
+      'title' => 'Most Viewed Talks',
     ),
     'adminForm' => array(
         'elements' => array(
           array('Text', 'title', array( 'label' => 'Title')),
-          array('Text', 'max',array( 'label' => 'Number of Blogs show on page.',
+          array('Text', 'max',array( 'label' => 'Number of Talks show on page.',
                                      'value' => 4)),
         )
      ),
    ),
 
-   //Most Commented Blogs Widget
+   //Most Commented Talks Widget
    array(
-    'title' => 'Most Commented Blogs',
-    'description' => 'Displays most commented blogs on Blog Browse Page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Most Commented Talks',
+    'description' => 'Displays most commented talks on Talk Browse Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.most-commented-blogs',
     'defaultParams' => array(
-      'title' => 'Most Commented Blogs',
+      'title' => 'Most Commented Talks',
     ),
     'adminForm' => array(
         'elements' => array(
             array('Text', 'title', array('label' => 'Title')),
-            array('Text', 'max', array('label' => 'Number of Blogs show on page.',
+            array('Text', 'max', array('label' => 'Number of Talks show on page.',
                                        'value' => 4)),
         )
      ),
   ),
 
-  //Featured Blogs Widget
+  //Featured Talks Widget
   array(
-    'title' => 'Featured Blogs',
-    'description' => 'Displays featured blogs on Blog Browse Page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Featured Talks',
+    'description' => 'Displays featured talks on Talk Browse Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.featured-blogs',
       'defaultParams' => array(
-      'title' => 'Featured Blogs',
+      'title' => 'Featured Talks',
     ),
   ),
 
   //Blog Categories Widget
   array(
-    'title' => 'Blog Categories',
-    'description' => 'Displays blog categories on browse blogs page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Talk Categories',
+    'description' => 'Displays blog categories on browse talks page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.blog-categories',
   ),
 
   //Blog Search Widget
   array(
-    'title' => 'Blogs Search',
-    'description' => 'Displays blog search box on browse blogs page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Talks Search',
+    'description' => 'Displays blog search box on browse talks page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.blogs-search',
   ),
   
   //Blog Listing Widget
   array(
-    'title' => 'Blogs Listing',
-    'description' => 'Displays list of blogs on Listing Blogs Page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Talks Listing',
+    'description' => 'Displays list of talks on Listing talks Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.blogs-listing',
   ),
@@ -145,8 +163,8 @@ return array(
   //Blog Statistics
    array(
     'title' => 'Blog Statistics',
-    'description' => 'Displays blog statistics on Blogs Browse Page.',
-    'category' => 'Advanced Blogs',
+    'description' => 'Displays blog statistics on Talks Browse Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.blogs-statistic',
   ),
@@ -154,8 +172,8 @@ return array(
   //Top Bloggers Widget
   array(
     'title' => 'Top Bloggers',
-    'description' => 'Displays top bloggers on Blogs Browse Page.',
-    'category' => 'Advanced Blogs',
+    'description' => 'Displays top bloggers on Talks Browse Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.top-bloggers',
     'defaultParams' => array(
@@ -170,47 +188,47 @@ return array(
      ),
    ),
 
-  //View By Date Blogs Widget
+  //View By Date Talks Widget
   array(
     'title' => 'View By Date',
-    'description' => 'Displays view by date on Blogs Browse Page.',
-    'category' => 'Advanced Blogs',
+    'description' => 'Displays view by date on Talks Browse Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.view-by-date-blogs',
   ),
 
-  //Blog Tags Widget
+  //Talk Tags Widget
   array(
     'title' => 'Tags',
-    'description' => 'Displays tags on Blogs Browse Page.',
-    'category' => 'Advanced Blogs',
+    'description' => 'Displays tags on Talks Browse Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.blogs-tags',
   ),
 
   // Blog Owner Photo Widget
    array(
-    'title' => 'Blog Owner Photo',
-    'description' => 'Displays blog owner photo on User Blog List Page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Talk Owner Photo',
+    'description' => 'Displays talk owner photo on User Talk List Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.owner-photo',
   ),
 
     // Blog Gluter Menu Widget
    array(
-    'title' => 'Blog Side Menu',
-    'description' => 'Displays blog side menu on User Blog List Page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Talk Side Menu',
+    'description' => 'Displays talk side menu on User Talk List Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.blogs-side-menu',
    ),
 
      // Blog User Archieves Widget
    array(
-    'title' => 'Blog User Archive',
-    'description' => 'Displays user\'s blog archives Blog List Page.',
-    'category' => 'Advanced Blogs',
+    'title' => 'Talk User Archive',
+    'description' => 'Displays user\'s talk archives Blog List Page.',
+    'category' => 'Advanced Talks',
     'type' => 'widget',
     'name' => 'ynblog.user-blog-archives',
    ),
