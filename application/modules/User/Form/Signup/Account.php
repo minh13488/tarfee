@@ -74,7 +74,6 @@ class User_Form_Signup_Account extends Engine_Form_Email
     if( !empty($inviteSession->invite_email) ) {
       $emailElement->setValue($inviteSession->invite_email);
     }
-
     // Element: code
     if( $settings->getSetting('user.signup.inviteonly') > 0 ) {
       $codeValidator = new Engine_Validate_Callback(array($this, 'checkInviteCode'), $emailElement);
@@ -127,7 +126,7 @@ class User_Form_Signup_Account extends Engine_Form_Email
       $specialValidator->setMessage('Password did not match', 'invalid');
       $this->passconf->addValidator($specialValidator);
     }
-
+	/*
     // Element: username
     if( $settings->getSetting('user.signup.username', 1) > 0 ) {
       $description = Zend_Registry::get('Zend_Translate')
@@ -162,7 +161,7 @@ class User_Form_Signup_Account extends Engine_Form_Email
       $bannedUsernameValidator->setMessage("This profile url is not available, please use another one.");
       $this->username->addValidator($bannedUsernameValidator);
     }
-    
+    */
     // Element: profile_type
     $topStructure = Engine_Api::_()->fields()->getFieldStructureTop('user');
     if( count($topStructure) == 1 && $topStructure[0]->getChild()->type == 'profile_type' ) {
