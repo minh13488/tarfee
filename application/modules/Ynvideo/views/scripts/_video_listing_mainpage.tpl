@@ -52,43 +52,28 @@
 		<?php $commentCount = $this->video->comments()->getCommentCount(); ?>
 		<p><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></p>
 	</div>
-</div>
-<div class="video_author">
-    <?php $user = $this->video->getOwner() ?>
-    <?php if ($user) : ?>
-        <?php echo $this->translate('By') ?>
-        <?php echo $this->htmlLink($user->getHref(), htmlspecialchars ($this->string()->truncate($user->getTitle(), 25)), array('title' => $user->getTitle())) ?>
-    <?php endif; ?>
-    <?php 
-    	$session = new Zend_Session_Namespace('mobile');
-		 if(!$session -> mobile)
-		 {
-    ?>
-    |
-    <?php } ?>
-    <span class="video_views">
-        <?php if (!isset($this->infoCol) || ($this->infoCol == 'view')) : ?>
-            <?php echo $this->translate(array('%1$s view', '%1$s views', $this->video->view_count), $this->locale()->toNumber($this->video->view_count)) ?>
-        <?php else : ?>
-            <?php if ($this->infoCol == 'like') : ?>
-                <?php
-                    $likeCount = $this->video->likes()->getLikeCount();
-                    echo $this->translate(array('%1$s like', '%1$s likes', $likeCount), $this->locale()->toNumber($likeCount));
-                ?>
-            <?php elseif ($this->infoCol == 'comment') : ?>
-                <?php
-                    $commentCount = $this->video->comments()->getCommentCount();
-                    echo $this->translate(array('%1$s comment', '%1$s comments', $commentCount), $this->locale()->toNumber($commentCount));
-                ?>
-            <?php elseif ($this->infoCol == 'favorite') : ?>
-            <?php
-                echo $this->translate(array('%1$s favorite', '%1$s favorites', $this->video->favorite_count), $this->locale()->toNumber($this->video->favorite_count));
-            ?>
-            <?php endif; ?>
-        <?php endif; ?>
-    </span>
+	<div class="video-rating">
+		<?php 
+        	echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video));
+    	?>
+	</div>
 </div>
 
-    <?php 
-        echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video));
-    ?>
+<?php if ($player):?>
+<div class="video-player-rating">
+	<?php 
+		$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
+		$rating_types = $tableRatingType -> getAllRatingTypes();
+    	echo $this->partial('_view_rate_video.tpl', 'ynvideo', array(
+	        'ratingTypes' => $rating_types,
+	        'video_id' => $this->video->getIdentity(),
+        )); 
+	        
+	?>
+</div>
+<?php endif;?>
+<div class="video_author">
+    <?php $user = $this->video->getOwner() ?>
+    <?php $user = ($user) ? $user : $this->translate('Unknown')?>
+    <?php echo $this->translate('post by %s', $user);?>
+</div>
