@@ -152,8 +152,8 @@ class Ynfbpp_Api_Core
 	    }
 		
 		if ($mailDay > 0) {
-			$mailTbl = Engine_Api::_()->getDbTable('mail', 'user');
-			$select = $messTbl->select()
+			$mailTbl = Engine_Api::_()->getDbTable('mails', 'user');
+			$select = $mailTbl->select()
 				->where('user_id = ?', $viewer->getIdentity())
 				->where('creation_date >= ?', date('Y-m-d H:i:s', strtotime('yesterday')));
 			$numOfMailDay = count($messTbl->fetchAll($select));
@@ -172,8 +172,8 @@ class Ynfbpp_Api_Core
 	    }
 		
 		if ($mailMonth > 0) {
-			$mailTbl = Engine_Api::_()->getDbTable('mail', 'user');
-			$select = $messTbl->select()
+			$mailTbl = Engine_Api::_()->getDbTable('mails', 'user');
+			$select = $mailTbl->select()
 				->where('user_id = ?', $viewer->getIdentity())
 				->where('creation_date >= ?', date('Y-m-d H:i:s', strtotime('last month')));
 			$numOfMailMonth = count($messTbl->fetchAll($select));

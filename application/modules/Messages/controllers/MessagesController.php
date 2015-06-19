@@ -253,7 +253,6 @@ class Messages_MessagesController extends Core_Controller_Action_User
 	
 	if ($messDay > 0) {
 		$messTbl = Engine_Api::_()->getDbTable('messages', 'messages');
-		$now = 
 		$select = $messTbl->select()
 			->where('user_id = ?', $viewer->getIdentity())
 			->where('date >= ?', date('Y-m-d H:i:s', strtotime('yesterday')));
@@ -276,7 +275,6 @@ class Messages_MessagesController extends Core_Controller_Action_User
 	
 	if ($messMonth > 0) {
 		$messTbl = Engine_Api::_()->getDbTable('messages', 'messages');
-		$now = 
 		$select = $messTbl->select()
 			->where('user_id = ?', $viewer->getIdentity())
 			->where('date >= ?', date('Y-m-d H:i:s', strtotime('last month')));

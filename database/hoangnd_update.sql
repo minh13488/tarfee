@@ -266,3 +266,5 @@ CREATE TABLE IF NOT EXISTS `engine4_user_mails` (
   PRIMARY KEY (`mail_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
+INSERT IGNORE INTO `engine4_core_mailtemplates` (`type`, `module`, `vars`) VALUES
+('user_send_inmail', 'user', '[host],[email],[date],[sender_title],[sender_link],[sender_photo],[message]');

@@ -687,3 +687,13 @@ Please login to the admin panel to aprovie this user.
 "require-select_valid";"Plese select a valid value for %s."
 "month-year-before-current_valid";"Please enter a date no later than current date."
 "email_valid";"%s is invalid!
+
+# user_send_inmail
+"_EMAIL_USER_SEND_INMAIL_TITLE";"Email from user"
+"_EMAIL_USER_SEND_INMAIL_DESCRIPTION";"This is the email that gets sent when user wants contact with other users."
+"_EMAIL_USER_SEND_INMAIL_SUBJECT";"You have received an email from [sender_title]!"
+"_EMAIL_USER_SEND_INMAIL_BODY";"[header]
+
+[message]
+
+[footer]"
