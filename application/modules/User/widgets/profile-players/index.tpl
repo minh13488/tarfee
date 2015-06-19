@@ -58,7 +58,7 @@
 		            'route' => 'user_extended',
 		            'controller' => 'player-card',
 		            'action' => 'create',
-		        ), '<i class="fa fa-plus-square"></i> '.$this->translate('Add New Player Card'), array(
+		        ), '<i class="fa fa-plus-square fa-lg"></i>&nbsp;&nbsp;'.$this->translate('add new player card'), array(
 		            'class' => ''
 		        ))
 		        ?>
@@ -83,6 +83,7 @@
 							
 							<div class="avatar-box-hover">
 								<ul class="actions">
+									<li><a href="<?php echo $player -> getHref()?>"><i class="fa fa-external-link"></i></a></li>
 									<?php if($this -> viewer() -> getIdentity() && $player -> getOwner() -> isSelf($this -> viewer())): ?>
 									<!-- Button Edit Crop Delete -->
 									<li class="first">
@@ -261,12 +262,15 @@
 							<?php 
 								$laguages = json_decode($player -> languages);
 								$arr_tmp = array();
-								foreach ($laguages as $lang_id) 
+								if($laguages)
 								{
-									$langTb =  Engine_Api::_() -> getDbTable('languages', 'user');
-									$lang = $langTb -> fetchRow($langTb ->select()->where('language_id = ?', $lang_id));
-									if($lang)
-										$arr_tmp[] = $lang -> title;
+									foreach ($laguages as $lang_id) 
+									{
+										$langTb =  Engine_Api::_() -> getDbTable('languages', 'user');
+										$lang = $langTb -> fetchRow($langTb ->select()->where('language_id = ?', $lang_id));
+										if($lang)
+											$arr_tmp[] = $lang -> title;
+									}
 								}
 								echo implode(' | ', $arr_tmp);
 							?>

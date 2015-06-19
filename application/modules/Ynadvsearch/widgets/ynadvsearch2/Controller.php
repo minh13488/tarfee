@@ -138,5 +138,9 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 		$this->view->continents = $continents = Engine_Api::_()->ynadvsearch()->getContinents();
 		$this->view->services = $services = Engine_Api::_()->getDbTable('services', 'user')->getAllServices();
 		$this->view->relations = $relations = Engine_Api::_() -> getDbTable('relations','user') -> getRelationSearchArray();
+	
+		$viewer = Engine_Api::_()->user()->getViewer();
+		$level_id = ($viewer->getIdentity()) ? $viewer->level_id : 5;
+		$this->view->isPro = $isPro = ($level_id == 6 || $level_id == 7) ? true : false;
 	}
 }

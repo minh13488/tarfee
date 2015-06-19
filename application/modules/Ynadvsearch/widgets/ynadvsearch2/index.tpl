@@ -35,17 +35,21 @@
 	</div>
 </div>
 
+<?php if ($this->viewer()->getIdentity()):?>
 <div id="advanced-search-filter" style="display:none; position: absolute">
 	<ul id="advanced-search-tab" class="advanced-search-tab">
-		<li class="search-tab-item active"><?php echo $this->translate('Player')?></li>
+		<?php if ($this->isPro) :?>
+		<li class="search-tab-item"><?php echo $this->translate('Player')?></li>	
 		<li class="search-tab-item"><?php echo $this->translate('Professional')?></li>
 		<li class="search-tab-item"><?php echo $this->translate('Organization')?></li>
 		<li class="search-tab-item"><?php echo $this->translate('Event/Tryout')?></li>
+		<?php endif; ?>
 		<li class="search-tab-item"><?php echo $this->translate('Campaign')?></li>
 	</ul>
 	<div class="search-form" id="advsearch-form">
 		<?php $url = $this->url(array(),'ynadvsearch_search',true)?>
 		
+		<?php if ($this->isPro) :?>
 		<div class="search-form-item active" id="player-advanced-search">
 			<form class="advsearch-form" method="post" action="<?php echo $url?>">
 				<input name="advsearch" value="player" type="hidden"/>
@@ -152,7 +156,8 @@
 					<label class="form-label search-label" for="professional_displayname"><?php echo $this->translate('Name')?></label>
 					<input type="text" class="form-element search-element" id="professional_displayname" name="displayname" />
 				</div>
-				<div class="form-wrapper search-wrapper">
+				
+				<!-- <div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="professional_role"><?php echo $this->translate('Role')?></label>
 					<select class="form-element search-element" id="professional_role" name="role">
 						<option value="any"><?php echo $this->translate('Any')?></option>
@@ -163,7 +168,8 @@
 						<option value="admin"><?php echo $this->translate('Admin')?></option>
 						<option value="medical"><?php echo $this->translate('Medical')?></option>
 					</select>
-				</div>
+				</div> -->
+				
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="professional_service"><?php echo $this->translate('Services Offered')?></label>
 					<select class="form-element search-element" id="professional_service" name="service">
@@ -225,7 +231,8 @@
 						<?php endforeach;?>
 					</select>
 				</div>
-				<div class="form-wrapper search-wrapper">
+				
+				<!-- <div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="organization_type"><?php echo $this->translate('Type')?></label>
 					<select class="form-element search-element" id="organization_type" name="organization_type">
 						<option value="0"></option>
@@ -234,7 +241,8 @@
 						<option value="academy"><?php echo $this->translate('Academy')?></option>
 						<option value="none_profit"><?php echo $this->translate('Non-for-Profit')?></option>
 					</select>
-				</div>
+				</div> -->
+				
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="organization_continent"><?php echo $this->translate('Continent')?></label>
 					<select class="form-element search-element continent" id="organization_continent" rel="organization" name="continent">
@@ -321,6 +329,7 @@
 				<button type="submit"><?php echo $this->translate('Search')?></button>
 			</form>
 		</div>
+		<?php endif; ?>
 		
 		<div class="search-form-item" id="campaign-advanced-search">
 			<form class="advsearch-form" method="post" action="<?php echo $url?>">
@@ -371,10 +380,14 @@
 		</div>
 	</div>
 </div>
+<?php endif; ?>
 
 <script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery.tokeninput.js"></script>
 <script>
 window.addEvent('domready', function() {
+	<?php if ($this->viewer()->getIdentity()):?>
+	$$('.search-tab-item:first-child').addClass('active');
+	$$('.search-form-item:first-child').addClass('active');
 	$$('.search-tab-item').addEvent('click', function() {
 		var index = $('advanced-search-tab').getChildren('li.search-tab-item').indexOf(this);
 		$$('.search-tab-item').removeClass('active');
@@ -462,6 +475,7 @@ window.addEvent('domready', function() {
   		})
   		makeRequest.send();
 	});
+	 <?php endif;?>
 });
 
 jQuery.noConflict();
@@ -534,6 +548,7 @@ jQuery.noConflict();
 			$("#basic-search-filter").detach().appendTo(filter);
 			form.append(filter);
 			
+			<?php if ($this->viewer()->getIdentity()):?>
 			var advsearch = $('<div />', {
 				id: 'search-advsearch',
 				'class': 'box-search_form_advsearch'
@@ -555,8 +570,10 @@ jQuery.noConflict();
 			
 			$("#advanced-search-filter").detach().appendTo(advsearch);
 			form.append(advsearch);
+			<?php endif;?>
 		}
-
+		
+		<?php if ($this->viewer()->getIdentity()):?>
 		$('#search-filter .global_search_form_filter_advanced').click(function() {
 			$('#advanced-search-filter').css('display','none');
 		});
@@ -565,6 +582,8 @@ jQuery.noConflict();
 		$('#search-advsearch .global_search_form_filter_advanced').click(function() {
 			$('#basic-search-filter').css('display','none');
 		});
+		
+		<?php endif;?>
 
 	});
 })(jQuery);

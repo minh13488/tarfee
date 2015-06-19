@@ -1,5 +1,5 @@
 
-<form method="post" id="popup-deny" class="global_form_popup" style="width: 500px; height: <?php echo 145 + (count($this->reasons)*10);?>px">
+<form method="post" id="popup-deny" class="global_form_popup" style="width: 500px; height: <?php echo 150 + (count($this->reasons)*15);?>px">
     <div>
         <h3><?php echo $this->translate("Notice") ?></h3>
         <p>
@@ -53,24 +53,22 @@
     var iframe_height = 0;
     function checkOther()
     {
-        
-        
         <?php if(isset($this->error_reason)):?>
             if($('other').checked == true)
              {
                  $('other_content').setStyle('display','');
-                 height = <?php echo 145 + 165 + 40 + (count($this->reasons)*10);?>;
+                 height = <?php echo 160 + 165 + 40 + (count($this->reasons)*15);?>;
                  $('popup-deny').setStyle('height', height + 'px');
-                 iframe_height = parent.document.getElementById('TB_iframeContent').getStyle('height').toInt() + 150 + <?php echo (count($this->reasons)*10);?>;
+                 iframe_height = parent.document.getElementById('TB_iframeContent').get('height').toInt() + 10 + <?php echo (count($this->reasons)*15);?>;
                  parent.document.getElementById('TB_iframeContent').setStyle('height', iframe_height + 'px');
 
              }
              else
              {
                  $('other_content').setStyle('display','none');
-                 height = <?php echo 145 + 40 + (count($this->reasons)*10);?>;
+                 height = <?php echo 160 + 60 + (count($this->reasons)*15);?>;
                  $('popup-deny').setStyle('height', height + 'px');
-                 iframe_height = parent.document.getElementById('TB_iframeContent').getStyle('height').toInt() - 150 - <?php echo (count($this->reasons)*10);?>;
+                 iframe_height = parent.document.getElementById('TB_iframeContent').get('height').toInt() - 150 - <?php echo (count($this->reasons)*15);?>;
                  parent.document.getElementById('TB_iframeContent').setStyle('height', iframe_height + 'px');
 
              }
@@ -78,18 +76,18 @@
             if($('other').checked == true)
             {
                 $('other_content').setStyle('display','');
-                height = <?php echo 145 + 165 + (count($this->reasons)*10);?>;
+                height = <?php echo 160 + 165 + (count($this->reasons)*15);?>;
                 $('popup-deny').setStyle('height', height + 'px');
-                iframe_height = parent.document.getElementById('TB_iframeContent').getStyle('height').toInt() + 130 + <?php echo (count($this->reasons)*10);?>;
+                iframe_height = parent.document.getElementById('TB_iframeContent').get('height').toInt() + 10 + <?php echo (count($this->reasons)*15);?>;
                 parent.document.getElementById('TB_iframeContent').setStyle('height', iframe_height + 'px');
 
             }
             else
             {
                 $('other_content').setStyle('display','none');
-                height = <?php echo 145 + (count($this->reasons)*10);?>;
+                height = <?php echo 165 + (count($this->reasons)*15);?>;
                 $('popup-deny').setStyle('height', height + 'px');
-                iframe_height = parent.document.getElementById('TB_iframeContent').getStyle('height').toInt() - 130 - <?php echo (count($this->reasons)*10);?>;
+                iframe_height = parent.document.getElementById('TB_iframeContent').get('height').toInt() - 130 - <?php echo (count($this->reasons)*15);?>;
                 parent.document.getElementById('TB_iframeContent').setStyle('height', iframe_height + 'px');
 
             }
@@ -104,23 +102,20 @@
        if($('other').checked == true)
         {
             $('other_content').setStyle('display','');
-            height = <?php echo 145 + 165 + 40 + (count($this->reasons)*10);?>;
+            height = <?php echo 150 + 165 + 40 + (count($this->reasons)*15);?>;
             $('popup-deny').setStyle('height', height + 'px');
-            iframe_height = parent.document.getElementById('TB_iframeContent').getStyle('height').toInt() + 40 + 150 + <?php echo (count($this->reasons)*10);?>;
+            iframe_height = parent.document.getElementById('TB_iframeContent').get('height').toInt() + 40 + <?php echo (count($this->reasons)*15);?>;
             parent.document.getElementById('TB_iframeContent').setStyle('height', iframe_height + 'px');
             
         }
         else
         {
             $('other_content').setStyle('display','none');
-            height = <?php echo 145 + 40 + (count($this->reasons)*10);?>;
+            height = <?php echo 150 + 40 + (count($this->reasons)*15);?>;
             $('popup-deny').setStyle('height', height + 'px');
-            iframe_height = parent.document.getElementById('TB_iframeContent').getStyle('height').toInt() + 40 - 150 - <?php echo (count($this->reasons)*10);?>;
+            iframe_height = parent.document.getElementById('TB_iframeContent').get('height').toInt() + 40 - 150 - <?php echo (count($this->reasons)*15);?>;
             parent.document.getElementById('TB_iframeContent').setStyle('height', iframe_height + 'px');
             
         }
     <?php endif;?>
-    
-    
-    
 </script>

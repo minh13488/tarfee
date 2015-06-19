@@ -157,6 +157,44 @@ return array(
 				),
 		),
 		array(
+				'title' => 'Recent Events',
+				'description' => 'Displays events on main page.',
+				'category' => 'Advanced Events',
+				'type' => 'widget',
+				'name' => 'ynevent.recent-events',
+				'isPaginated' => true,
+				'defaultParams' => array(
+						'title' => 'Events',
+						'type' => 0
+				),
+				'requirements' => array(
+						'subject' => 'user',
+				),
+				'adminForm' => array(
+					'elements' => array(
+						array(
+							'Text',
+							'title',
+							array(
+									'label' => 'Title'
+							)
+						),
+						array(
+							'Radio',
+							'type',
+							array(
+									'label' => 'Type',
+									'multiOptions' => array(
+											0 => 'Event',
+											1 => 'Tryout',
+									),
+									'value' => 0,
+							)
+						),
+					)
+				),
+		),
+		array(
 				'title' => 'Advanced Event Profile Discussions',
 				'description' => 'Displays a advanced event\'s discussions on it\'s profile.',
 				'category' => 'Advanced Events',
@@ -947,7 +985,7 @@ return array(
 				),
 		),
 		array(
-				'title' => 'Recent Events',
+				'title' => 'Recent Events - Main Page',
 				'description' => 'Displays a list of recently created advanced events.',
 				'category' => 'Advanced Events',
 				'type' => 'widget',

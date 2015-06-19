@@ -107,7 +107,7 @@
 }
 
 .layout_social_connect_landing_login{
-	margin-bottom: 70px !important;
+	margin-bottom: 100px !important;
 }
 
 .tf_footer_landing{
@@ -118,7 +118,7 @@
 	overflow: hidden;
 	width: 100%;
 	text-align: center;
-	position: fixed;
+	position: ;
 	bottom: 0;
 	opacity: 1;
 	transition: opacity 500ms ease-in-out;
@@ -129,20 +129,61 @@
 		opacity: 1;
 	}
 
-	ul{
-		/*float: left;*/
 
-		li{
-			padding: 0 10px;
-			display: inline-block;
-			border-left: 1px solid $theme_border_dark_color;
+	.tf_footer_col_left{
+		float: left;
 
-			&:first-child{
-				border-left: 0;
+		ul{
+			float: left;
+			clear: both;
+			margin-bottom: 13px;
+			
+
+			&:last-child{
+				margin-bottom: 0;
 			}
-			a{
-				color: #888;
-				font-size: 14px;
+			
+			li{
+				padding: 0 10px;
+				display: inline-block;
+				position: relative;
+				
+
+				&:after{
+					width: 1px;
+					content: "";
+					background: #888;
+					height: 11px;
+					display: inline-block;
+					position: absolute;
+					right: -2px;
+					top: 6px;
+				}
+				
+				&:first-child{
+					border-right: 0;
+					min-width: 160px;
+					text-align: left;
+					font-weight: bold;
+					
+					&:after{
+						display: none;
+					}
+
+				}
+
+				&:last-child{
+					border-right: 0;
+
+					&:after{
+						display: none;
+					}
+				}
+				a{
+					color: #888;
+					font-size: 12px;
+					font-weight: normal;
+				}
 			}
 		}
 	}
@@ -273,7 +314,7 @@ body#global_page_core-index-about-us{
 		width: 540px;
 		margin: 100px auto;
 		background-color: #fff;
-		border: 10px solid #111;
+		border: 2px solid #ccc;
 		
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
@@ -343,3 +384,41 @@ body#global_page_core-index-about-us{
 		margin-top: 0;
 	}
 }
+
+body.modal-open{
+	margin-right: 0 !important;
+}
+.modal-content{
+	padding: 15px 20px;
+	text-align: left;
+
+	h1,h2,h3,h4,h5,h6{
+		margin-top: 0;
+	}
+}
+button.close.btn-close-modal{
+	position: absolute;
+	top: 0;
+	right: 0;
+	outline: 0;
+}
+.modal-backdrop.in{
+	opacity: 0.7 !important;
+}
+
+#global_page_core-index-index{
+	#dp_swf_engine{
+		top: 0;
+	}
+
+	#TB_window{
+		border: 2px solid #ccc;
+		border-radius: 5px;
+		-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		-ms-border-radius: 5px;
+
+	}
+}
+
+

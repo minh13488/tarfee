@@ -1,13 +1,3 @@
-<?php
-/**
- * YouNet Company
- *
- * @category   Application_Extensions
- * @package    Ynvideo
- * @author     YouNet Company
- */
-?>
-
 <script type="text/javascript">    
     en4.core.runonce.add(function(){
         addEventForButtonAddTo();
@@ -45,11 +35,11 @@
     });
 </script>
 
-<ul id="ynvideo_favorite_videos" class="videos_browse">
+<ul id="ynvideo_favorite_videos">
     <?php foreach ($this->paginator as $item): ?>
         <li>
             <?php
-                echo $this->partial('_video_listing.tpl', 'ynvideo', array('video' => $item));
+                echo $this->partial('_video_listing_favorite.tpl', 'ynvideo', array('video' => $item));
             ?>
         </li>
 <?php endforeach; ?>

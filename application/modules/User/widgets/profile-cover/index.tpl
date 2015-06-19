@@ -250,6 +250,7 @@ else {
                         ?>
                      </li>
                      <?php endif;?>
+                     <!--
                      <li>
                         <?php echo $this->htmlLink(array(
                             'route' => 'default',
@@ -263,6 +264,7 @@ else {
                         ));
                         ?>
                      </li>
+                     -->
                 </ul>
             </div>
         </div>

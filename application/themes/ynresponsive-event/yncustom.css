@@ -1143,3 +1143,155 @@ li.sideicon_generic:hover{
 #TB_iframeContent{
 	max-width: 100%;
 }
+
+
+/*Tabs about player libraries*/
+body#global_page_user-profile-index {
+    .tabs_parent {
+        ul#main_tabs {
+            background: $theme_body_background_color;
+            border-radius: 0 0 5px 5px;
+            -webki-border-radius: 0 0 5px 5px;
+            -moz-border-radius: 0 0 5px 5px;
+            -ms-border-radius: 0 0 5px 5px;
+            border: none;
+
+            li {
+                text-align: center;
+                width: 24%;
+                border-color: $theme_border_dark_color;
+                margin-top: 4px;
+                margin-bottom: 4px;
+
+                &:last-child {
+                    border-right: 0 !important;
+                }
+                a {
+                    color: $theme_font_color;
+                    font-size: 16px;
+                    text-transform: lowercase;
+
+                    &:hover {
+                        color: $theme_link_color;
+                    }
+                    &:before {
+                        content: "\\f000";
+                        font-family: FontAwesome;
+                        font-style: normal;
+                        font-weight: normal;
+                        text-decoration: inherit;
+                        font-size: 24px;
+                    }
+                }
+            }
+            li.active {
+                position: relative;
+
+                a {
+                    color: $theme_link_color;
+                }
+                &:after {
+                    content: "";
+                    width: 0;
+                    position: absolute;
+                    bottom: -4px;
+                    height: 0;
+                    border-left: 10px solid transparent;
+                    border-right: 10px solid transparent;
+                    border-bottom: 10px solid #dedede;
+                }
+            }
+            li.tab_layout_user_profile_sections {
+                a {
+                    &:before {
+                        content: "\\f05a";
+                    }
+                }
+            }
+            li.tab_layout_user_profile_players {
+                a {
+                    &:before {
+                        content: "\\f183";
+                    }
+                }
+            }
+            li.tab_layout_user_profile_library {
+                a {
+                    &:before {
+                        content: "\\f1c5";
+                    }
+                }
+            }
+            li.tab_layout_ynvideo_profile_favorite_videos{
+                a {
+                    &:before {
+                        content: "\\f1c8";
+                    }
+                }
+            }
+        }
+    }
+}
+
+.layout_ynresponsiveevent_event_mini_menu{
+	
+	textarea:focus,
+	input[type="text"]:focus,
+	input[type="password"]:focus,
+	input[type="datetime"]:focus,
+	input[type="datetime-local"]:focus,
+	input[type="date"]:focus,
+	input[type="month"]:focus,
+	input[type="time"]:focus,
+	input[type="week"]:focus,
+	input[type="number"]:focus,
+	input[type="email"]:focus,
+	input[type="url"]:focus,
+	input[type="search"]:focus,
+	input[type="tel"]:focus,
+	input[type="color"]:focus {
+		border-color: transparent !important;
+		box-shadow: none !important;
+		outline: 0 none;
+	}
+}
+
+
+/*Style profile event*/
+.ynevents_profile_tab{
+    li{
+        border-bottom: 3px solid tomato;
+        margin-bottom: 10px;
+        background: #ccc;
+
+        .ynevents_profile_tab_photo{
+            float: left;
+            margin-right: 10px;
+
+            img{
+            	width: 150px;
+            	height: 110px;
+            }
+        }
+
+        .ynevents_profile_tab_info{
+        	.ynevents_profile_tab_title{
+        		a{
+        			font-weight: bold;
+        			color: $theme_font_color;
+        			text-decoration: none;
+
+        			&:hover{
+        				color: $theme_link_color;
+        			}
+        		}
+        	}
+
+        	.ynevents_profile_tab_desc{
+				line-height: 1.2em;
+				max-height: 90px;
+				overflow: hidden;
+        	}
+        }
+    }
+}

@@ -72,7 +72,7 @@ class Ynblog_Form_Create extends Engine_Form
           'html'   => 1,
           'theme_advanced_buttons1' => array(
               'undo', 'redo', 'cleanup', 'removeformat', 'pasteword',  '|',
-              'media', 'image','link', 'unlink', 'fullscreen', 'preview', 'emotions', 'code',
+              'media', 'image','link', 'unlink', 'fullscreen', 'preview', 'emotions', 'code','spellchecker'
           ),
           'theme_advanced_buttons2' => array(
               'fontselect', 'fontsizeselect', 'bold', 'italic', 'underline',
@@ -81,13 +81,14 @@ class Ynblog_Form_Create extends Engine_Form
           ),
           'plugins' => array(
 		   		'table', 'fullscreen', 'media', 'preview', 'paste',
-		   		'code', 'image', 'textcolor', 'jbimages'
+		   		'code', 'image', 'textcolor', 'jbimages','spellchecker'
 		  ),
    		  
 	      'toolbar1' => array(
 		      'undo', '|', 'redo', '|', 'removeformat', '|', 'pastetext', '|', 'code', '|', 'media', '|', 
 		      'image', '|', 'link', '|', 'jbimages', '|', 'fullscreen', '|', 'preview'
-		    ),         
+		    ),     
+		   'spellchecker_language' => "+English=en,Swedish=sv" , 
           'upload_url' => $upload_url,
       ),
       'required'   => true,

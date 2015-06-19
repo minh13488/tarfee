@@ -33,7 +33,7 @@
 		<?php echo $player?>
 	</div>
 	<?php $position = $player->getPosition()?>
-	<?php if ($positon) : ?>
+	<?php if ($position) : ?>
 	<div class="player-position">
 		<?php echo $position?>
 	</div>
