@@ -1,13 +1,5 @@
 <span class="tarfee_total_items"><?php echo $this -> total;?></span>
 
-<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
-	<div class="btn-add-more">
-		<a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>">
-			<?php echo $this -> translate('add more campaign');?>
-		</a>
-	</div>
-<?php endif;?>
-
 <ul class="tfcampaign_list">
 <?php foreach($this -> campaigns as $campaign) :?>
 	<li>

@@ -7,12 +7,6 @@
 	$createTitle = $this -> translate("add more tryout");
  }
 ?>
-<?php if($this -> viewer() -> isSelf($this -> subject()) && Engine_Api::_() -> authorization() -> isAllowed('event', null, 'create')):?>
-	<div class="tarfee_create_item">
-		<a href="<?php echo $this->url(array('action' => 'create'), 'event_general')?>"><?php echo $createTitle;?></a>
-	</div>
-<?php endif;?>
-
 <ul id="profile_events_<?php echo $this->identity?>" class="ynevents_profile_tab">
     <?php foreach( $this->paginator as $event ): ?>
 

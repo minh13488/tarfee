@@ -11,8 +11,8 @@ class Ynevent_Widget_RecentEventsController extends Engine_Content_Widget_Abstra
 	$type = $this -> _getParam('type', 0);
 
     // Get paginator
-    $membership = Engine_Api::_()->getDbtable('membership', 'ynevent');
-    $this->view->paginator = $paginator = Zend_Paginator::factory($membership -> select() -> where('type_id = ?', $type) ->order('creation_date DESC'));
+    $eventTb = Engine_Api::_()->getDbtable('events', 'ynevent');
+    $this->view->paginator = $paginator = Zend_Paginator::factory($eventTb -> select() -> where('type_id = ?', $type) ->order('creation_date DESC'));
 
     // Set item count per page and current page number
     $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 5));
