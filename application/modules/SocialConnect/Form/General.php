@@ -84,6 +84,16 @@ class SocialConnect_Form_General extends Engine_Form
             'value' => '<input value="'.$color.'" type="color" id="color" name="color"/>'
         ));
 		
+		$this -> addElement('Text', 'tffooter_applelink', array(
+			'label' => 'App Store Link',
+			'value' => $settings->getSetting('tffooter_applelink', ''),
+		));
+		
+		$this -> addElement('Text', 'tffooter_googlelink', array(
+			'label' => 'Google Play Link',
+			'value' => $settings->getSetting('tffooter_googlelink', ''),
+		));
+		
 		// Init submit
 		$this -> addElement('Button', 'submit', array(
 			'label' => 'Save Changes',

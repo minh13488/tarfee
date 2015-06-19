@@ -59,7 +59,6 @@ class User_Form_Settings_General extends Engine_Form
     $this->email->getValidator('NotEmpty')->setMessage('Please enter a valid email address.', 'isEmpty');
     $this->email->getValidator('Db_NoRecordExists')->setMessage('Someone has already registered this email address, please use another one.', 'recordFound');
     $this->email->getValidator('EmailAddress')->getHostnameValidator()->setValidateTld(false);
-
     // Init username
     if( Engine_Api::_()->getApi('settings', 'core')->getSetting('user.signup.username', 1) > 0 ) 
     {
@@ -268,9 +267,6 @@ class User_Form_Settings_General extends Engine_Form
       'ignore' => true,
     ));
     
-    // Create display group for buttons
-    #$this->addDisplayGroup($emailAlerts, 'checkboxes');
-
     // Set default action
     $this->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
        'module' => 'user',
@@ -284,7 +280,7 @@ class User_Form_Settings_General extends Engine_Form
     $bannedUsernamesTable = Engine_Api::_()->getDbtable('BannedUsernames', 'core');
 	if(in_array($value, array('admin','index','groups','members','invite','videos','messages','login','logout','search','activity','annoucement','like','help','pages','report','link','tag','sitemap','utility',
 				'widget','comment','confirm','cross-domain','error','member','photo','album','post','profile','topic','signup','network','ipn','settings','subscription','upload','ajax','auth','block','edit','friends',
-				'video')))
+				'video','events','event','talk','talks','club','clubs','campaign','campaigns')))
 	{
 		return FALSE;
 	}

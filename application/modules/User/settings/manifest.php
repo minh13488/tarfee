@@ -226,6 +226,15 @@ return array(
       )
     ),
     
+    'user_signup1' => array(
+      'route' => '/signup/account/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'signup',
+        'action' => 'account'
+      )
+    ),
+    
 	'user_sport' => array(
       'route' => '/user/sport/:action/*',
       'defaults' => array(

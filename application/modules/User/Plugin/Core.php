@@ -233,6 +233,7 @@ class User_Plugin_Core
                             $select = $table -> select() -> where('owner_id = ?', $subject_id) -> where('item_id = ?', $payload -> getIdentity()) -> where('item_type = ?', 'video') -> limit(1);
                             $video_row = $table -> fetchRow($select);
                             if (!$video_row) {
+                            	$row = $table -> createRow();
                                 $row -> setFromArray(array(
                                    'user_id' => $viewer -> getIdentity(),
                                    'item_id' => $payload -> getIdentity(),

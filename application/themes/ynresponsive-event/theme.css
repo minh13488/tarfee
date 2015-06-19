@@ -5429,10 +5429,18 @@ body[id^=global_page_ynevent] .layout_ynevent_list_most_time .tabs_alt.tabs_pare
 	  -webkit-background-clip: padding-box;
 	  -moz-background-clip: padding;
 	  background-clip: padding-box;
+
+		div{
+			text-align: center;
+		}
 	}
-	span#global_content_simple div {
-	  text-align: center;
+	
+	.layout_social_connect_landing_login{
+		h1{
+			text-align: center;
+		}
 	}
+
 	#user_form_login .form-elements input {
 	  font-size: 1em !important;
 	  background-color: #fff !important;
