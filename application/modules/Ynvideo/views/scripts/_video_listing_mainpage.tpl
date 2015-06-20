@@ -7,52 +7,80 @@
  * @author     YouNet Company
  */
 ?>
+
+
+
+
+
 <div class="ynvideo_thumb_wrapper video_thumb_wrapper">
+    <?php if ($this->video->parent_type == 'user_playercard') :?>
+        <span class="icon-player">
+            <img src="application\themes\ynresponsive-event\images\icon-player.png" />
+        </span>
+    <?php endif; ?>
+
     <?php
     if ($this->video->photo_id) {
-        echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.normal'));
+        echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.large'));
     } else {
         echo '<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">';
     }
     ?>
 </div>
+
 <?php if ($this->video->parent_type == 'user_playercard') :?>
 <?php $player = $this->video->getParent();?>
 <?php if ($player):?>
-<?php $sport = $player->getSport();?>
-<?php if ($sport):?>	
-<div class="player-sport-icon">
-	<?php echo $this->itemPhoto($sport, 'thumb.icon')?>
-</div>
-<?php endif;?>
+
 <div class="player-info">
-	<div class="player-photo">
-		<?php echo $this->itemPhoto($player, 'thumb.icon')?>
-	</div>
-	<div class="player-title">
-		<?php echo $player?>
-	</div>
-	<?php $position = $player->getPosition()?>
-	<?php if ($position) : ?>
-	<div class="player-position">
-		<?php echo $position?>
-	</div>
-	<?php endif;?>
+    <div class="player-photo">
+        <?php echo $this->itemPhoto($player, 'thumb.icon')?>
+    </div>
+    <div class="player_info_detail">
+        <div class="player-title">
+            <?php echo $player?>
+        </div>
+        <div class="player-position">
+        <?php $position = $player->getPosition()?>
+        <?php if ($position) : ?>
+            <?php //echo $position?>
+
+        <?php echo substr($position,0, 2)?>
+
+        <?php endif;?>
+
+        <?php $sport = $player->getSport();?>
+            <?php if ($sport):?>    
+                <?php //echo ' - '.$sport->title ?>
+            <?php endif;?>
+        </div>
+    </div>
 </div>
 <?php endif;?>
 <?php endif;?>
+
+
 
 <div class="video-title">
-	<?php echo $this->htmlLink($this->video->getHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
-</div>S
+    <?php echo $this->htmlLink($this->video->getHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
+</div>
 
 <div class="video-statistic-rating">
-	<div class="video-statistic">
-		<p><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></p>
-		<?php $commentCount = $this->video->comments()->getCommentCount(); ?>
-		<p><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></p>
-	</div>
+    <div class="video-statistic">
+        <span><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></span>
+        <?php $commentCount = $this->video->comments()->getCommentCount(); ?>
+        <span><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></span>
+    </div>
+
+    <?php 
+        echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video));
+    ?>
 </div>
+
+
+
+
+
 <div class="video_author">
     <?php $user = $this->video->getOwner() ?>
     <?php if ($user) : ?>
@@ -64,9 +92,9 @@
 		 if(!$session -> mobile)
 		 {
     ?>
-    |
+    
     <?php } ?>
-    <span class="video_views">
+    <span class="video_views" style="display: none">
         <?php if (!isset($this->infoCol) || ($this->infoCol == 'view')) : ?>
             <?php echo $this->translate(array('%1$s view', '%1$s views', $this->video->view_count), $this->locale()->toNumber($this->video->view_count)) ?>
         <?php else : ?>
@@ -89,6 +117,3 @@
     </span>
 </div>
 
-    <?php 
-        echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video));
-    ?>
