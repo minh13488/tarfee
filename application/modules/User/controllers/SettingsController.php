@@ -109,6 +109,9 @@ class User_SettingsController extends Core_Controller_Action_User {
 
 		// Check if valid
 		if (!$form -> isValid($this -> getRequest() -> getPost())) {
+			$arr_user = $user -> toArray();
+			$arr_user['languages'] = json_decode($arr_user['languages']);
+			$form -> populate($arr_user);
 			$this -> view -> status = false;
 			$this -> view -> error = Zend_Registry::get('Zend_Translate') -> _('Invalid data');
 			return;
