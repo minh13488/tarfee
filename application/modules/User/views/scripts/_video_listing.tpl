@@ -11,7 +11,7 @@
 	    <div class="avatar">
 	        <?php
 	          if( $this -> video->photo_id ) {
-	            echo $this->htmlLink($this -> video->getPopupHref(), $this->itemPhoto($this -> video, 'thumb.large'));
+	            echo $this->htmlLink($this -> video->getPopupHref(), $this->itemPhoto($this -> video, 'thumb.large'), array('class' => 'smoothbox'));
 	          } else {
 	            echo '<img alt="" src="' . $this->layout()->staticBaseUrl . 'application/modules/Video/externals/images/video.png">';
 	          }

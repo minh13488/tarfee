@@ -1,14 +1,20 @@
 <div class="ynvideo_thumb_wrapper video_thumb_wrapper">
     <?php
     if ($this->video->photo_id) {
-        echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.large'));
+        echo $this->htmlLink($this->video->getPopupHref(), $this->itemPhoto($this->video, 'thumb.large'), array('class'=>'smoothbox'));
     } else {
         echo '<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">';
     }
     ?>
+    
 </div>
+<ul class="tf_video_action">
+		<li>
+			<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('remove')?></a>
+	    </li>
+    </ul>
 <div class="video-title">
-	<?php echo $this->htmlLink($this->video->getHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
+	<?php echo $this->htmlLink($this->video->getPopupHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
 </div>
 <div class="video-statistic-rating">
 	<div class="video-statistic">
@@ -50,10 +56,6 @@
 </div>
 <?php endif;?>
 <?php endif;?>
-
-
-
-
 <?php $user = $this->video->getOwner() ?>
 <?php if ($user) : ?>
 	<div class="nickname">
@@ -64,11 +66,9 @@
 		    <?php echo $this->htmlLink($user->getHref(), htmlspecialchars ($this->string()->truncate($user->getTitle(), 25)), array('title' => $user->getTitle())) ?>
 		    </div>
 	    	<div class="members_date">
-				<span title="Wed, 20 May 2015 0:55:31 +0700" class="timestamp">20 tháng năm</span>					    
+				<?php echo $this->timestamp($user->creation_date);?>				    
 			</div>
 	    </div>
 
     </div>
-
-
 <?php endif; ?>
