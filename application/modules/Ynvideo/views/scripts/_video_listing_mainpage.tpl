@@ -13,17 +13,27 @@
     }
     ?>
 </div>
-<?php if($this -> viewer() -> getIdentity()):?>
-<div id="favorite_<?php echo $this->video -> getIdentity()?>">
-	<?php if($this->video -> hasFavorite()):?>
-		<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
-	<?php else:?>	
-		<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
-	<?php endif;?>	
+
+<div class="button-action-video">
+    <?php if($this -> viewer() -> getIdentity()):?>
+    <div id="favorite_<?php echo $this->video -> getIdentity()?>">
+        <?php if($this->video -> hasFavorite()):?>
+            <a href="javascript:;" title="<?php echo $this->translate('unfavorite')?>" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)">
+                <i class="fa fa-heart-o"></i>
+            </a>
+        <?php else:?>   
+            <a href="javascript:;" title="<?php echo $this->translate('favorite')?>" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)">
+                <i class="fa fa-heart"></i>
+            </a>
+        <?php endif;?>  
+    </div>
+
+    <div id="like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
+        <?php echo $this -> action('list-likes', 'video', 'ynvideo', array( 'id' => $this -> video -> getIdentity()));?>
+    </div>
 </div>
-<div id="like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
-	<?php echo $this -> action('list-likes', 'video', 'ynvideo', array( 'id' => $this -> video -> getIdentity()));?>
-</div>
+
+
 <?php endif;?>
 <?php if ($this->video->parent_type == 'user_playercard') :?>
 <?php $player = $this->video->getParent();?>
@@ -77,9 +87,9 @@
         <?php echo $this->htmlLink($user->getHref(), htmlspecialchars ($this->string()->truncate($user->getTitle(), 25)), array('title' => $user->getTitle())) ?>
     <?php endif; ?>
     <?php 
-    	$session = new Zend_Session_Namespace('mobile');
-		 if(!$session -> mobile)
-		 {
+        $session = new Zend_Session_Namespace('mobile');
+         if(!$session -> mobile)
+         {
     ?>
     <?php } ?>
 </div>

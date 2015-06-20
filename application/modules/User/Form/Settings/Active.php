@@ -3,8 +3,8 @@ class User_Form_Settings_Active extends Engine_Form {
   public function init()
   {
     $this
-      ->setTitle('Active Account')
-      ->setDescription('Are you sure you want to active your account?')
+      ->setTitle('Activate Account')
+      ->setDescription('Are you sure you want to activate your account?')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()))
       ;
 
@@ -13,7 +13,7 @@ class User_Form_Settings_Active extends Engine_Form {
 
     // Element: execute
     $this->addElement('Button', 'execute', array(
-      'label' => 'Yes, Active My Account',
+      'label' => 'Yes, Activate My Account',
       'type' => 'submit',
       'ignore' => true,
       //'style' => 'color:#D12F19;',

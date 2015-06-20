@@ -7,7 +7,7 @@ class Ynevent_Controller_Plugin_Dispatch extends Zend_Controller_Plugin_Abstract
 		$module = $request -> getModuleName();
 		$controller = $request -> getControllerName();
 		$action = $request -> getActionName();
-	
+		
 		$key = 'ynevent_predispatch_url:' . $module . '.' . $controller . '.' . $action;
 		if (isset($_SESSION[$key]) && $_SESSION[$key]) {
 			$url = $_SESSION[$key];
