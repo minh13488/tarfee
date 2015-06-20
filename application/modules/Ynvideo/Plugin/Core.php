@@ -59,6 +59,7 @@ class Ynvideo_Plugin_Core
 	}
 	
 	public function onItemDeleteBefore($event) {
+		$payload = $event -> getPayload();
         if ($payload->getType() == 'activity_action' && $payload->object_type == 'video' && $payload->type == 'share') {
             $id = $payload->object_id;
             $video = Engine_Api::_()->getItem('video', $id);
