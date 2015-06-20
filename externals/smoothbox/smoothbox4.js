@@ -652,11 +652,12 @@ Smoothbox.Modal.Iframe = new Class({
     var bind = this;
     var loadIsOkay = true;
 
-    var uriSrc = new URI(this.options.url);
-    if( this.options.autoFormat ) {
-      uriSrc.setData({'format' : this.options.autoFormat}, true, 'query');
+    if( this.options.autoFormat ) 
+    {
+      //uriSrc.setData({'format' : this.options.autoFormat}, false, 'query');
+      this.options.url += '/format/' + this.options.autoFormat;
     }
-
+	var uriSrc = new URI(this.options.url);
     this.content = new IFrame({
       src : uriSrc,
       id : 'TB_iframeContent',
