@@ -55,7 +55,42 @@ class User_Api_Core extends Core_Api_Abstract
 		'education' => 'Education',
 	//	'recommendation' => 'Recommendations'
     );
-
+  
+  //@TODO change profile base on level user
+  public function getProfileTypeBaseOnLevel($level_id) {
+  		switch ($level_id) {
+			  case '4':
+				  return "1";
+				  break;
+			  case '6':
+				  return "4";
+				  break;
+			  case '7':
+				  return "5";
+				  break;	  
+			  default:
+				  
+				  break;
+		  }
+  }
+  
+  public function getLevelBaseOnProfileType($profileType_id) {
+  		switch ($profileType_id) {
+			  case '1':
+				  return "4";
+				  break;
+			  case '4':
+				  return "6";
+				  break;
+			  case '5':
+				  return "7";
+				  break;	  
+			  default:
+				  
+				  break;
+		  }
+  }
+  
   // Users
 
   /**
@@ -590,6 +625,87 @@ class User_Api_Core extends Core_Api_Abstract
         'displayname' => 'User Deactive Account Settings Page',
         'title' => 'Deactive Account',
         'description' => 'This page is the deactive accout page.',
+        'custom' => 0,
+      ));
+      $page_id = $db->lastInsertId();
+      
+      // Insert top
+      $db->insert('engine4_core_content', array(
+        'type' => 'container',
+        'name' => 'top',
+        'page_id' => $page_id,
+        'order' => 1,
+      ));
+      $top_id = $db->lastInsertId();
+      
+      // Insert main
+      $db->insert('engine4_core_content', array(
+        'type' => 'container',
+        'name' => 'main',
+        'page_id' => $page_id,
+        'order' => 2,
+      ));
+      $main_id = $db->lastInsertId();
+      
+      // Insert top-middle
+      $db->insert('engine4_core_content', array(
+        'type' => 'container',
+        'name' => 'middle',
+        'page_id' => $page_id,
+        'parent_content_id' => $top_id,
+      ));
+      $top_middle_id = $db->lastInsertId();
+      
+      // Insert main-middle
+      $db->insert('engine4_core_content', array(
+        'type' => 'container',
+        'name' => 'middle',
+        'page_id' => $page_id,
+        'parent_content_id' => $main_id,
+        'order' => 2,
+      ));
+      $main_middle_id = $db->lastInsertId();
+      
+      // Insert menu
+      $db->insert('engine4_core_content', array(
+        'type' => 'widget',
+        'name' => 'user.settings-menu',
+        'page_id' => $page_id,
+        'parent_content_id' => $top_middle_id,
+        'order' => 1,
+      ));
+      
+      // Insert content
+      $db->insert('engine4_core_content', array(
+        'type' => 'widget',
+        'name' => 'core.content',
+        'page_id' => $page_id,
+        'parent_content_id' => $main_middle_id,
+        'order' => 1,
+      ));
+    }
+  }
+
+	public function addActiveAccountPage()
+  {
+    $db = Engine_Db_Table::getDefaultAdapter();
+
+    // profile page
+    $page_id = $db->select()
+      ->from('engine4_core_pages', 'page_id')
+      ->where('name = ?', 'user_settings_active')
+      ->limit(1)
+      ->query()
+      ->fetchColumn();
+      
+    if( !$page_id ) {
+      
+      // Insert page
+      $db->insert('engine4_core_pages', array(
+        'name' => 'user_settings_active',
+        'displayname' => 'User Active Account Settings Page',
+        'title' => 'Active Account',
+        'description' => 'This page is the active accout page.',
         'custom' => 0,
       ));
       $page_id = $db->lastInsertId();

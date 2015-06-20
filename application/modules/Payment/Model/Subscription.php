@@ -85,6 +85,20 @@ class Payment_Model_Subscription extends Core_Model_Item_Abstract
     }
     $user->enabled = true; // This will get set correctly in the update hook
     $user->save();
+	
+	//change profile base on level
+	$table = Engine_Api::_()->getApi('core', 'fields')->getTable('user', 'values');
+    $select = $table->select();
+    $select->where('field_id = ?', 1);
+    $select->where('item_id = ?', $user -> getIdentity());
+    $value_profile = $table->fetchRow($select);
+	if($value_profile)
+	{
+		$profile_id = Engine_Api::_() -> user() -> getProfileTypeBaseOnLevel($user->level_id);
+		$value_profile -> value = $profile_id;
+		$value_profile -> save();
+	}	
+	
     return $this;
   }
 

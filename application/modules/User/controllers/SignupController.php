@@ -113,13 +113,14 @@ class User_SignupController extends Core_Controller_Action_Standard
 
     // Handle email verification or pending approval
     if( !$viewer->enabled ) {
-      Engine_Api::_()->user()->setViewer(null);
-      Engine_Api::_()->user()->getAuth()->getStorage()->clear();
+      //Engine_Api::_()->user()->setViewer(null);
+      //Engine_Api::_()->user()->getAuth()->getStorage()->clear();
 
       $confirmSession = new Zend_Session_Namespace('Signup_Confirm');
       $confirmSession->approved = $viewer->approved;
       $confirmSession->verified = $viewer->verified;
       $confirmSession->enabled  = $viewer->enabled;
+	  $confirmSession->viewer_id = $viewer -> getIdentity();
       return $this->_helper->_redirector->gotoRoute(array('action' => 'confirm'), 'user_signup', true);
     }
 
@@ -385,9 +386,15 @@ class User_SignupController extends Core_Controller_Action_Standard
   public function confirmAction()
   {
     $confirmSession = new Zend_Session_Namespace('Signup_Confirm');
+	$this->view->viewer_id = $viewer_id = $confirmSession->viewer_id;
     $this->view->approved = $this->_getParam('approved', $confirmSession->approved);
     $this->view->verified = $this->_getParam('verified', $confirmSession->verified);
     $this->view->enabled  = $this->_getParam('verified', $confirmSession->enabled);
+	
+	//set login for viewer
+	Zend_Auth::getInstance()->getStorage()->write($viewer_id);
+	Engine_Api::_()->user()->setViewer();
+	
   }
 
 

@@ -35,13 +35,9 @@ class Payment_Form_Signup1_Subscription extends Engine_Form
 	
 	$sessionStep2 = new Zend_Session_Namespace('User_Plugin_Signup1_Step2');
 	$dataStep2 = $sessionStep2 -> data;
+	$level_id = Engine_Api::_() -> user() -> getLevelBaseOnProfileType($dataStep2['profile_type']);
 	
-	if(isset($dataStep2['profile_type']) && $dataStep2['profile_type'] == 1){
-		$packagesSelect -> where("level_id = 4");
-	}
-	if(isset($dataStep2['profile_type']) && $dataStep2['profile_type'] == 4){
-		$packagesSelect -> where("level_id = 6");
-	}
+	$packagesSelect -> where("level_id = ?", $level_id);
 	
     $multiOptions = array();
     $this->_packages = $packagesTable->fetchAll($packagesSelect);

@@ -13,12 +13,9 @@
 
 .ynvideo_rating_star_generic
 {
-  float: left;
-  display: inline-block;
-  width: 16px;
-  height: 16px;
-  background-repeat: no-repeat;
-  font-size: 1px;
+    font-size: 25px;
+    display: inline;text-align: center;
+    color: $theme_link_color;
 }
 
 /*
@@ -1282,7 +1279,7 @@ div.video_object
                 color: #999;
                 overflow: hidden;
             }
-            .ynvideo_block{
+            .tf_video_rating{
                 padding: 0;
                 margin: 0;
                 float: right;

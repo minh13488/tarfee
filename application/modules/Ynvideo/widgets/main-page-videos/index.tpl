@@ -1,3 +1,10 @@
+<?php
+    $this->headScript()
+    ->appendFile($this->baseUrl() . '/application/modules/Ynvideo/externals/wookmark/jquery.min.js')
+    ->appendFile($this->baseUrl() . '/application/modules/Ynvideo/externals/wookmark/jquery.wookmark.js')
+    ->appendFile($this->baseUrl() . '/application/modules/Ynvideo/externals/wookmark/jquery.imagesloaded.js');
+?>
+
 <ul class = "video-items" id="main-page-videos">
 <?php $count = 1;?>
 <?php foreach( $this->results as $row): ?>
@@ -17,7 +24,39 @@
 <div id="video-loading" style="display: none;">
 	<img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;' />
 </div>
+
+
+
+
+
 <script type="text/javascript">
+
+  window.addEvent('domready', function() {
+    setPinterestMode();
+  });
+
+//Set mode layout wookmark
+    function setPinterestMode() 
+    {
+        jQuery.noConflict();
+        (function (jQuery){
+            var handler = jQuery('#main-page-videos li');
+
+            handler.wookmark({
+                // Prepare layout options.
+                autoResize: true, // This will auto-update the layout when the browser window is resized.
+                container: jQuery('#main-page-videos'), // Optional, used for some extra CSS styling
+                offset: 15, // Optional, the distance between grid items
+                outerOffset: 0, // Optional, the distance to the containers border
+                itemWidth: 225, // Optional, the width of a grid item
+                flexibleWidth: '100%',
+            });
+        })(jQuery);
+        
+        
+    }
+
+
 function showMore(from){
     var url = '<?php echo $this->url(array('module' => 'core','controller' => 'widget','action' => 'index','name' => 'ynvideo.main-page-videos'), 'default', true) ?>';
     $('video-viewmore-btn').destroy();

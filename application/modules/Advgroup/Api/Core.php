@@ -10,6 +10,18 @@ class Advgroup_Api_Core extends Core_Api_Abstract {
 		}
 	}
 	
+	public function checkGroupUser(){
+		$viewer = Engine_Api::_() -> user()-> getViewer();
+		$groupTable = Engine_Api::_() -> getItemTable('group');
+		$select = $groupTable -> select() -> where('user_id = ?', $viewer -> getIdentity()) -> limit(1);
+		$group = $groupTable -> fetchRow($select);
+		if($group) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+	
 	public function sendFollowNotify($group, $type) {
 		//send notify for users following this group
 		$followTable = Engine_Api::_() -> getDbtable('follow', 'advgroup');
