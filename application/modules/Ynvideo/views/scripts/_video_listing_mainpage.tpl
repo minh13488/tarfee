@@ -14,15 +14,16 @@
     ?>
 </div>
 <?php if($this -> viewer() -> getIdentity()):?>
-<ul class="tf_video_action">
-	<li id="favorite_<?php echo $this->video -> getIdentity()?>">
-		<?php if($this->video -> hasFavorite()):?>
-			<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
-		<?php else:?>	
-			<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
-		<?php endif;?>	
-    </li>
-</ul>
+<div id="favorite_<?php echo $this->video -> getIdentity()?>">
+	<?php if($this->video -> hasFavorite()):?>
+		<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
+	<?php else:?>	
+		<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
+	<?php endif;?>	
+</div>
+<div id="like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
+	<?php echo $this -> action('list-likes', 'video', 'ynvideo', array( 'id' => $this -> video -> getIdentity()));?>
+</div>
 <?php endif;?>
 <?php if ($this->video->parent_type == 'user_playercard') :?>
 <?php $player = $this->video->getParent();?>
