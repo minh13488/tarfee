@@ -121,4 +121,36 @@ class User_Model_DbTable_Mappings extends Engine_Db_Table
         }
 	    return $select->query()->fetchColumn(0);
 	}
+	
+	public function getTotalVideoComment($params = array())
+	{
+		$table = Engine_Api::_()->getItemTable('video');
+        $rName = $table->info('name');
+	    $select = new Zend_Db_Select($table->getAdapter());
+	    $select->from($rName, "SUM($rName.comment_count) AS count");
+		$ids = $this -> getItemIdsMapping('video', $params);
+		if (!empty($ids) && count($ids) > 0) {
+            $select->where('video_id IN (?)', $ids);
+        }
+		else {
+			$select->where('video_id = 0');
+		}
+	    return $select->query()->fetchColumn(0);
+	}
+	
+	public function getTotalVideoView($params = array())
+	{
+		$table = Engine_Api::_()->getItemTable('video');
+        $rName = $table->info('name');
+	    $select = new Zend_Db_Select($table->getAdapter());
+	    $select->from($rName, "SUM($rName.view_count) AS count");
+		$ids = $this -> getItemIdsMapping('video', $params);
+		if (!empty($ids) && count($ids) > 0) {
+            $select->where('video_id IN (?)', $ids);
+        }
+		else {
+			$select->where('video_id = 0');
+		}
+	    return $select->query()->fetchColumn(0);
+	}
 }
