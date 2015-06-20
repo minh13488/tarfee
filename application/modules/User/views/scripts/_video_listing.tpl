@@ -18,7 +18,6 @@
 	        ?>
 	    </div>
   	</div>
-
 	<?php 
 	  	$isMobile = false;
 	    if(Engine_Api::_() -> hasModuleBootstrap('ynresponsive1')) 
@@ -49,6 +48,15 @@
 	</div>
 	<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
    		<ul class="tf_video_action">
+   			<?php if($this -> viewer() -> getIdentity()):?>
+				<li id="favorite_<?php echo $this->video -> getIdentity()?>">
+					<?php if($this->video -> hasFavorite()):?>
+						<a href="javascript:;" onclick="unfavorite_video_lib(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
+					<?php else:?>	
+						<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
+					<?php endif;?>	
+			    </li>
+			<?php endif;?>
    			<li>
 				<?php
 					echo $this->htmlLink(array(

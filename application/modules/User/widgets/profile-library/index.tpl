@@ -181,4 +181,38 @@
 		
 				
   	});	
+  var unfavorite_video_lib = function(videoId)
+   {
+   	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
+       var request = new Request.JSON({
+            'method' : 'post',
+            'url' :  url,
+            'data' : {
+                'video_id' : videoId
+            },
+            'onComplete':function(responseObject)
+            {  
+            	obj = document.getElementById('favorite_'+ videoId);
+                obj.innerHTML = '<a href="javascript:;" onclick="favorite_video('+videoId+')">' + '<?php echo $this->translate("favourite")?>' + '</a>';
+            }
+        });
+        request.send();  
+   } 
+   var favorite_video = function(videoId)
+   {
+   	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
+       var request = new Request.JSON({
+            'method' : 'post',
+            'url' :  url,
+            'data' : {
+                'video_id' : videoId
+            },
+            'onComplete':function(responseObject)
+            {  
+            	obj = document.getElementById('favorite_' + videoId);
+                obj.innerHTML = '<a href="javascript:;" onclick="unfavorite_video_lib('+videoId+')">' + '<?php echo $this->translate("unfavourite")?>' + '</a>';
+            }
+        });
+        request.send();  
+   } 
 </script>
