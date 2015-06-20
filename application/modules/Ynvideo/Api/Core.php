@@ -637,20 +637,6 @@ class Ynvideo_Api_Core extends Core_Api_Abstract {
             $video->favorite_count = new Zend_Db_Expr('favorite_count + 1');
             $video->save();
 
-//            $roles = array('owner', 'owner_member', 'owner_member_member', 'owner_network', 'registered', 'everyone');
-            // set the view permission on the favorite, by the view permission on the video
-//            foreach ($roles as $role) {
-//                if ($auth->isAllowed($video, $role, 'view')) {
-//                    $auth->setAllowed($favorite, $role, 'view', true);
-//                }
-//            }
-            // set the comment permission on the favorite, by the comment permission on the video
-//            foreach ($roles as $role) {
-//                if ($auth->isAllowed($video, $role, 'comment')) {
-//                    $auth->setAllowed($favorite, $role, 'comment', true);
-//                }
-//            }
-
             return $favorite;
         } else {
             throw new Ynvideo_Model_ExistedException();
