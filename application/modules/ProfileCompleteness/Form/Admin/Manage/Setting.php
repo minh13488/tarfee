@@ -25,7 +25,18 @@ class ProfileCompleteness_Form_Admin_Manage_Setting extends Engine_Form {
         $this->color->getValidator('NotEmpty')->setMessage('Please enter a valid color in Hex.', 'isEmpty');
         $this->color->getValidator('Regex')->setMessage('Please enter a valid color in Hex.', 'regexNotMatch');
 
-
+		$this->addElement('Text', 'usernameweight', array(
+            'label' => 'Profile URL Weight',
+            'description' => 'Enter 0 to skip profile url checking, by default it\'s included with value 2',
+            'required' => true,
+            'validators' => array(
+                array('NotEmpty', true),
+                array('Int', true),
+                new Engine_Validate_AtLeast(0),
+                ),
+        ));
+        $this->usernameweight->getValidator('NotEmpty')->setMessage('Please enter a number, and greater than 0.', 'isEmpty');
+		
         $this->addElement('Text', 'photoweight', array(
             'label' => 'Profile Photo Weight',
             'description' => 'Enter 0 to skip photo checking, by default it\'s included with value 2',

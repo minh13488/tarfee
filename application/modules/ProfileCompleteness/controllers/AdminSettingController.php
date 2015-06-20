@@ -16,6 +16,9 @@ class ProfileCompleteness_AdminSettingController extends Core_Controller_Action_
 		$values = array();
 		
 		// get profile photo weight
+        $values['usernameweight'] = $table -> getGlobalWeight(-4);
+		
+		// get profile photo weight
         $values['photoweight'] = $table -> getGlobalWeight(0);
 		
 		// get sport like/follow weight
@@ -47,6 +50,7 @@ class ProfileCompleteness_AdminSettingController extends Core_Controller_Action_
 				$table -> setGlobalWeight(-1, $values['sportlikeweight']);
 				$table -> setGlobalWeight(-2, $values['clubfollowweight']);
 				$table -> setGlobalWeight(-3, $values['videouploadweight']);
+				$table -> setGlobalWeight(-4, $values['usernameweight']);
 				
                 $select = $table->select()->setIntegrityCheck(false);
                 $table = Engine_Api::_()->getDbtable('settings', 'profileCompleteness');

@@ -56,7 +56,6 @@ endif;
 			var rating_over = window.rating_over = function(rating) {
 	            if( rated == 1 ) {
 	                $('rating_text').innerHTML = "<?php echo $this->translate('you already rated'); ?>";
-	                //set_rating();
 	            } else if( viewer == 0 ) {
 	                $('rating_text').innerHTML = "<?php echo $this->translate('please login to rate'); ?>";
 	            } else {
@@ -152,6 +151,53 @@ endif;
             ?>
         </div>
     </div>
+    <?php if($this -> viewer() -> getIdentity()):?>
+		<div id="favorite_<?php echo $this->video -> getIdentity()?>">
+			<?php if($this->video -> hasFavorite()):?>
+				<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
+			<?php else:?>	
+				<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
+			<?php endif;?>	
+		</div>
+		<script type="text/javascript">
+		   var unfavorite_video = function(videoId)
+		   {
+		   	   var obj = document.getElementById('favorite_' + videoId);
+		   	   obj.innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+		   	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
+		       var request = new Request.JSON({
+		            'method' : 'post',
+		            'url' :  url,
+		            'data' : {
+		                'video_id' : videoId
+		            },
+		            'onComplete':function(responseObject)
+		            {  
+		                obj.innerHTML = '<a href="javascript:;" onclick="favorite_video('+videoId+')">' + '<?php echo $this->translate("favourite")?>' + '</a>';
+		            }
+		        });
+		        request.send();  
+		   } 
+		   var favorite_video = function(videoId)
+		   {
+		   	   var obj = document.getElementById('favorite_' + videoId);
+		   	   obj.innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+		   	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
+		       var request = new Request.JSON({
+		            'method' : 'post',
+		            'url' :  url,
+		            'data' : {
+		                'video_id' : videoId
+		            },
+		            'onComplete':function(responseObject)
+		            {  
+		                obj.innerHTML = '<a href="javascript:;" onclick="unfavorite_video('+videoId+')">' + '<?php echo $this->translate("unfavourite")?>' + '</a>';
+		            }
+		        });
+		        request.send();  
+		   }
+		</script>   
+	<?php endif; ?>
 </div>
 <div class="video_view video_view_container">
 	<div class="left"> 
@@ -242,12 +288,47 @@ endif;
 					<?php endif;?> 
 				<?php endif;?>
 	        </div>
+	        
 	        	<?php if($this->video->description):?>
 	            <div class="ynvideo_text_header">
 	                <?php echo $this->translate('Description') ?>
 	            </div>
 	            <?php echo $this->video->description; ?>
 	            <?php endif;?>
+	             <div class="video-statistic">
+			        <span><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></span>
+			        <?php $commentCount = $this->video->comments()->getCommentCount(); ?>
+			        <span><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></span>
+			    </div>
+			    <?php if ($this->video->parent_type == 'user_playercard') :?>
+				<?php $player = $this->video->getParent();?>
+					<?php if ($player):?>
+						<div class="player-info">
+						    <div class="player-photo">
+						        <?php echo $this->itemPhoto($player, 'thumb.icon')?>
+						    </div>
+						    <div class="player_info_detail">
+						        <div class="player-title">
+						            <?php echo $player?>
+						        </div>
+						        <div class="player-position">
+						        <?php $position = $player->getPosition()?>
+						        <?php if ($position) : ?>
+						            <?php //echo $position?>
+						
+						        <?php echo substr($position,0, 2)?>
+						
+						        <?php endif;?>
+						
+						        <?php $sport = $player->getSport();?>
+						            <?php if ($sport):?>    
+						                <?php //echo ' - '.$sport->title ?>
+						            <?php endif;?>
+						        </div>
+						    </div>
+						</div>
+					<?php endif;?>
+				<?php endif;?>
 	        </div>
 	        <?php 
 	        $json = '{"taggingContent":["friends"],"showComposerOptions":["addLink","addSmilies"],"showAsNested":"1","showAsLike":"0","showDislikeUsers":"1","showLikeWithoutIcon":"0","showLikeWithoutIconInReplies":"0","commentsorder":"1","loaded_by_ajax":"0","name":"yncomment.comments","nomobile":"0","notablet":"0","nofullsite":"0"}';
