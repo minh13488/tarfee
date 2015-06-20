@@ -5433,6 +5433,9 @@ body[id^=global_page_ynevent] .layout_ynevent_list_most_time .tabs_alt.tabs_pare
 		div{
 			text-align: center;
 		}
+		#remember-element{
+			min-width: 142px;
+		}
 	}
 	
 	.layout_social_connect_landing_login{

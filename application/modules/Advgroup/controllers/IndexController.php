@@ -59,7 +59,7 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
     
     // Check authorization to create group.
     if( !$this->_helper->requireAuth()->setAuthParams('group', null, 'create')->isValid() ) return;
-
+	
     // Navigation
     $this->view->navigation = $navigation = Engine_Api::_()->getApi('menus', 'core')
           ->getNavigation('advgroup_main');
@@ -68,7 +68,16 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
         //->setNoRender()
         ->setEnabled()
         ;   
-
+	
+	//check user have only one clubs
+	$checkGroupUser = Engine_Api::_() -> advgroup() -> checkGroupUser();
+	if($checkGroupUser) {
+		//already have club
+		$this -> view -> errorMessage = $this -> view -> translate('You are already have club.');
+		return;
+	}
+	
+	
     // Create Form
      if($this->_getParam('parent') && is_numeric($this->_getParam('parent'))){
         $this->view->form = $form = new Advgroup_Form_Create(array('parent_id'=> $this->_getParam('parent')));

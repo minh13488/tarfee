@@ -73,6 +73,7 @@
 	    <ul class="players_browse">  
 	        <?php foreach ($this->paginator as $player): 
 			$totalPhoto = $player -> getPhotosTotal();
+			$totalVideo = $player -> getTotalVideo();
 	        ?>
 	        <?php if($player -> isViewable()) :?>
 	        	<li id="player-item-<?php echo $player->playercard_id ?>">
@@ -229,14 +230,14 @@
 					<?php $overRallRating = $player -> rating;?>
 					<div class="user_rating" title="<?php echo $overRallRating;?>">
 						<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
-					        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
+					        <span class="rating_star_generic"><i class="fa fa-star"></i></span>
 					    <?php endfor; ?>
 					    <?php if ((round($overRallRating) - $overRallRating) > 0): $x ++; ?>
-					        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;
+					        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>
 					    <?php endif; ?>
 					    <?php if ($x <= 5) :?>
 					        <?php for (; $x <= 5; $x++ ) : ?>
-					            <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>&nbsp;
+					            <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>
 					        <?php endfor; ?>
 					    <?php endif; ?>
 					</div>
@@ -292,18 +293,9 @@
 						</li>
 
 						<li>
-							<?php
-							$params = array();
-							$params['owner_type'] = $player -> getType();
-							$params['owner_id'] = $player -> getIdentity();
-							$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
-							$totalVideo = $mappingTable -> getTotalVideo($params); ?>
-
 							<span class="tarfee-count-number"><?php  echo $totalVideo; ?></span>
 							<span><?php echo $this->translate(array('video','videos', $totalVideo)); ?></span>
-							
 						</li>
-
 						<li>
 							
 							<span class="tarfee-count-number"><?php echo $totalPhoto; ?></span>
