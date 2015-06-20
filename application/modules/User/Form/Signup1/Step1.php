@@ -21,12 +21,12 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
   public function init()
   {
     $settings = Engine_Api::_()->getApi('settings', 'core');
-    
+    $inviteSession = new Zend_Session_Namespace('invite');
     $tabIndex = 1;
     
     // Init form
     $this->setTitle('Create Account');
-
+	
     // Element: email
     $emailElement = $this->addEmailElement(array(
       'label' => 'Email Address',
@@ -58,28 +58,37 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
     if( !empty($inviteSession->invite_email) ) {
       $emailElement->setValue($inviteSession->invite_email);
     }
-
-    if( $settings->getSetting('user.signup.random', 0) == 0 && 
-        empty($_SESSION['facebook_signup']) && 
-        empty($_SESSION['twitter_signup']) && 
-        empty($_SESSION['janrain_signup']) ) {
-
-      // Element: password
-      $this->addElement('Password', 'password', array(
-        'label' => 'Password',
-        'description' => 'Passwords must be at least 6 characters in length.',
-        'required' => true,
-        'allowEmpty' => false,
-        'validators' => array(
-          array('NotEmpty', true),
-          array('StringLength', false, array(6, 32)),
-        ),
-        'tabindex' => $tabIndex++,
+    // Element: code
+    if( $settings->getSetting('user.signup.inviteonly') > 0 ) {
+      $codeValidator = new Engine_Validate_Callback(array($this, 'checkInviteCode'), $emailElement);
+      $codeValidator->setMessage("This invite code is invalid or does not match the selected email address");
+      $this->addElement('Text', 'code', array(
+        'label' => 'Invite Code',
+        'required' => true
       ));
-      $this->password->getDecorator('Description')->setOptions(array('placement' => 'APPEND'));
-      $this->password->getValidator('NotEmpty')->setMessage('Please enter a valid password.', 'isEmpty');
+      $this->code->addValidator($codeValidator);
 
+      if( !empty($inviteSession->invite_code) ) {
+        $this->code->setValue($inviteSession->invite_code);
+      }
     }
+
+
+	  // Element: password
+	  $this->addElement('Password', 'password', array(
+	    'label' => 'Password',
+	    'description' => 'Passwords must be at least 6 characters in length.',
+	    'required' => true,
+	    'allowEmpty' => false,
+	    'validators' => array(
+	      array('NotEmpty', true),
+	      array('StringLength', false, array(6, 32)),
+	    ),
+	    'tabindex' => $tabIndex++,
+	  ));
+	  $this->password->getDecorator('Description')->setOptions(array('placement' => 'APPEND'));
+	  $this->password->getValidator('NotEmpty')->setMessage('Please enter a valid password.', 'isEmpty');
+
 
     // Init submit
     $this->addElement('Button', 'submit', array(

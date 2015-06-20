@@ -62,6 +62,6 @@ class Invite_SignupController extends Engine_Controller_Action
       }
     }
 
-    return $this->_helper->redirector->gotoRoute(array(), 'user_signup', true);
+    return $this->_helper->redirector->gotoRoute(array(), 'user_signup1', true);
   }
 }
