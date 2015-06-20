@@ -1006,4 +1006,33 @@ class User_Model_User extends Core_Model_Item_Abstract
 	public function getEyeOns() {
 		return Engine_Api::_()->getDbTable('eyeons', 'user')->getUserEyeOns($this->getIdentity());
 	}
+	
+	public function sendInMail($email, $message) {
+        // Check message
+        $message = trim($message);
+        $photo_url = ($this->getPhotoUrl('thumb.profile')) ? $this->getPhotoUrl('thumb.profile') : 'application/modules/User/externals/images/nophoto_user_thumb_profile.png';
+        $mailType = 'user_send_inmail';
+        $mailParams = array(
+          	'host' => $_SERVER['HTTP_HOST'],
+          	'email' => $email,
+          	'date' => time(),
+          	'sender_email' => $this->email,
+          	'sender_title' => $this->getTitle(),
+          	'sender_link' => $this->getHref(),
+          	'sender_photo' => $photo_url,
+          	'message' => $message,
+        );
+        
+        Engine_Api::_()->getApi('mail', 'core')->sendSystem(
+          	$email,
+          	$mailType,
+          	$mailParams
+        );
+		
+		$table = Engine_Api::_()->getDbTable('mails', 'user');
+		$row = $table->createRow();
+		$row->user_id = $this->getIdentity();
+		$row->creation_date = date('Y-m-d H:i:s');
+		$row->save();
+	}
 }

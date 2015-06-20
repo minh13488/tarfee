@@ -256,3 +256,22 @@ INSERT IGNORE INTO `engine4_authorization_permissions`
 -- 6.10.2015
 ALTER TABLE `engine4_user_relations` ADD `search_title` TEXT NOT NULL ;
 ALTER TABLE `engine4_user_playercards` ADD `name` VARCHAR(200) NOT NULL ;
+
+
+-- 6.10.2015
+CREATE TABLE IF NOT EXISTS `engine4_user_mails` (
+  `mail_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `creation_date` datetime NOT NULL,	
+  PRIMARY KEY (`mail_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+INSERT IGNORE INTO `engine4_core_mailtemplates` (`type`, `module`, `vars`) VALUES
+('user_send_inmail', 'user', '[host],[email],[date],[sender_title],[sender_link],[sender_photo],[message]');
+
+-- 6.12.2015
+ALTER TABLE `engine4_video_videos` ADD `share_count` INT(11) NOT NULL DEFAULT '0' ;
+ALTER TABLE `engine4_video_videos` ADD `like_count` INT(11) NOT NULL DEFAULT '0' ;
+
+-- 6.17.2015
+ALTER TABLE `engine4_users` ADD `deactive` INT(11) NOT NULL DEFAULT '0' ;

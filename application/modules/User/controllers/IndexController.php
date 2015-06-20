@@ -709,4 +709,93 @@ class User_IndexController extends Core_Controller_Action_Standard
 		echo $html;
 		return;
 	}
+	
+	public function inMailAction() {
+		if (!$this -> _helper -> requireUser() -> isValid())
+            return;
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+       
+		$to = $this->_getParam('to', 0);
+		$user = Engine_Api::_()->getItem('user', $to);
+		if (!$to || !$user) {
+			return $this->_helper->requireSubject()->forward();
+		}		
+		
+        $this->view->form = $form = new User_Form_InMail();
+        
+		$permissionsTable = Engine_Api::_()->getDbtable('permissions', 'authorization');
+		$mailDay = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'user', 'mail_day');
+		if ($mailDay == null) {
+	        $row = $permissionsTable->fetchRow($permissionsTable->select()
+	        ->where('level_id = ?', $viewer -> level_id)
+	        ->where('type = ?', 'user')
+	        ->where('name = ?', 'mail_day'));
+	        if ($row) {
+	            $mailDay = $row->value;
+	        }
+	    }
+		
+		if ($mailDay > 0) {
+			$mailTbl = Engine_Api::_()->getDbTable('mails', 'user');
+			$select = $mailTbl->select()
+				->where('user_id = ?', $viewer->getIdentity())
+				->where('creation_date >= ?', date('Y-m-d H:i:s', strtotime('yesterday')));
+			$numOfMailDay = count($mailTbl->fetchAll($select));
+			if ($numOfMailDay >= $mailDay) {
+				return $this->_helper->requireAuth()->forward();
+			}
+		}
+		
+		$mailMonth = Engine_Api::_() -> authorization() -> getPermission($viewer -> level_id, 'user', 'mail_month');
+		if ($mailMonth == null) {
+	        $row = $permissionsTable->fetchRow($permissionsTable->select()
+	        ->where('level_id = ?', $viewer -> level_id)
+	        ->where('type = ?', 'user')
+	        ->where('name = ?', 'mail_month'));
+	        if ($row) {
+	            $mailMonth = $row->value;
+	        }
+	    }
+		
+		if ($mailMonth > 0) {
+			$mailTbl = Engine_Api::_()->getDbTable('mails', 'user');
+			$select = $mailTbl->select()
+				->where('user_id = ?', $viewer->getIdentity())
+				->where('creation_date >= ?', date('Y-m-d H:i:s', strtotime('last month')));
+			$numOfMailMonth = count($mailTbl->fetchAll($select));
+			if ($numOfMailMonth >= $mailMonth) return $this->_helper->requireAuth()->forward();
+		}
+		
+		if ($mailDay > 0 && $mailMonth > 0) {
+			$description = $this->view->translate('You have %s/%s emails sent during today and %s/%s emails sent during this month.', $numOfMailDay, $mailDay, $numOfMailMonth, $mailMonth);
+		}
+		else if ($mailDay > 0) {
+			$description = $this->view->translate('You have %s/%s emails sent during today.', $numOfMailDay, $mailDay);
+		}
+		else if ($mailMonth > 0) {
+			$description = $this->view->translate('You have %s/%s emails sent during this month.', $numOfMailMonth, $mailMonth);
+		}
+		else {
+			$description = $this->view->translate('You can send email unlimited.');
+		}
+		$form->setDescription($this->view->translate('Send this email to %s. ', $user).$description);
+		$form->getDecorator('Description')->setOption('escape', false);
+		
+        if (!$this -> getRequest() -> isPost()) {
+            return;
+        }
+        
+        if (!$form -> isValid($this -> getRequest() -> getPost())) {
+            return;
+        }
+        $values = $form -> getValues();
+        $sentEmails = $viewer -> sendInMail($user->email, @$values['message']);
+        
+        $message = Zend_Registry::get('Zend_Translate') -> _("Your email have been sent.");
+        return $this -> _forward('success', 'utility', 'core', array(
+            'parentRefresh' => true,
+            'smoothboxClose' => true,
+            'messages' => $message
+        ));
+	}
 }

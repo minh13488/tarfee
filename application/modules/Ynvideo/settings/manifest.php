@@ -82,6 +82,15 @@ return array(
             'event' => 'onUserDeleteBefore',
             'resource' => 'Ynvideo_Plugin_Core',
         ),
+        array(
+            'event' => 'onItemCreateAfter',
+            'resource' => 'Ynvideo_Plugin_Core',
+        ),
+    	array(
+            'event' => 'onItemDeleteBefore',
+            'resource' => 'Ynvideo_Plugin_Core',
+        ),    
+	
     ),
     'routes' => array(
         'video_other_route' => array(
