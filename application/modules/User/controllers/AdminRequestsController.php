@@ -15,7 +15,7 @@ class User_AdminRequestsController extends Core_Controller_Action_Admin {
 	 	$this->_helper->layout->setLayout('admin-simple');
         $id = $this->_getParam('id', 0);
 		$table = Engine_Api::_()->getDbTable('inviterequests', 'user');
-		$request = $table->find($id);
+		$request = Engine_Api::_()->getItem('user_inviterequest', $id);
 		if (!request) {
 			$this->_forward('success', 'utility', 'core', array(
                 'smoothboxClose' => true,
@@ -23,7 +23,7 @@ class User_AdminRequestsController extends Core_Controller_Action_Admin {
                 'messages' => array('Request not found.')
             ));
 		}
-		$this->view->request = $request;
+		$this->view->req = $request;
 	 }
 	 
 	 public function rejectAction() {
@@ -38,7 +38,7 @@ class User_AdminRequestsController extends Core_Controller_Action_Admin {
             $db->beginTransaction();
 
             try {
-                $request = $table->find($id);
+                $request = Engine_Api::_()->getItem('user_inviterequest', $id);
                 $request->delete();
                 $db->commit();
             }
@@ -61,7 +61,7 @@ class User_AdminRequestsController extends Core_Controller_Action_Admin {
         $this->_helper->layout->setLayout('admin-simple');
         $id = $this->_getParam('id', 0);
         $table = Engine_Api::_()->getDbTable('inviterequests', 'user');
-		$request = $table->find($id);
+		$request = Engine_Api::_()->getItem('user_inviterequest', $id);
 		if (!request) {
 			$this->_forward('success', 'utility', 'core', array(
                 'smoothboxClose' => true,
@@ -76,6 +76,8 @@ class User_AdminRequestsController extends Core_Controller_Action_Admin {
 	    $db->beginTransaction();
 	    
 	    try {
+	    	$request->approved = 1;
+			$request->save();
       		$emailsSent = $inviteTable->sendInvites($viewer, $request->email, '', 0);
 	      	$db->commit();
 	    } 
@@ -105,7 +107,7 @@ class User_AdminRequestsController extends Core_Controller_Action_Admin {
             $ids_array = explode(",", $ids);
 			$table = Engine_Api::_()->getDbTable('inviterequests', 'user');
             foreach ($ids_array as $id) {
-                $request = $table->find($id);
+                $request = Engine_Api::_()->getItem('user_inviterequest', $id);
                 if ($request) {
                     $request->delete();
                 }

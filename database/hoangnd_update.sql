@@ -280,6 +280,7 @@ CREATE TABLE IF NOT EXISTS `engine4_user_inviterequests` (
   `inviterequest_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `email` varchar(128) NOT NULL,
   `phone` varchar(64) NULL,
+  `name` varchar(64) NULL,
   `message` text NOT NULL,
   `approved` tinyint(1) NOT NULL DEFAULT '0',
   `creation_date` datetime NOT NULL,	

@@ -47,24 +47,24 @@ function deleteSelected(){
         <tbody>
         <?php foreach ($this->paginator as $item): ?>
             <tr>
-                <td><input type='checkbox' class='checkbox' name='delete_<?php echo $item->getIdentity(); ?>' value="<?php echo $item->getIdentity(); ?>" /></td>
+                <td><input type='checkbox' class='checkbox' name='delete_<?php echo $item->inviterequest_id; ?>' value="<?php echo $item->inviterequest_id; ?>" /></td>
                 <td><?php echo $item->email ?></td>
                 <td><?php echo $this->locale()->toDateTime($item->creation_date) ?></td>
                 <td>
                 <?php echo $this->htmlLink(
-                    array('route' => 'admin_default', 'module' => 'user', 'controller' => 'requests', 'action' => 'view-detail', 'id' => $item->getIdentity()),
+                    array('route' => 'admin_default', 'module' => 'user', 'controller' => 'requests', 'action' => 'view-detail', 'id' => $item->inviterequest_id),
                     $this->translate('view detail'),
                     array('class' => 'smoothbox')
                 )?>
                  | 
                 <?php echo $this->htmlLink(
-                    array('route' => 'admin_default', 'module' => 'user', 'controller' => 'requests', 'action' => 'approve', 'id' => $item->getIdentity()),
+                    array('route' => 'admin_default', 'module' => 'user', 'controller' => 'requests', 'action' => 'approve', 'id' => $item->inviterequest_id),
                     $this->translate('approve'),
                     array('class' => 'smoothbox')
                 )?>
                   | 
                 <?php echo $this->htmlLink(
-                    array('route' => 'admin_default', 'module' => 'user', 'controller' => 'requests', 'action' => 'reject', 'id' => $item->getIdentity()),
+                    array('route' => 'admin_default', 'module' => 'user', 'controller' => 'requests', 'action' => 'reject', 'id' => $item->inviterequest_id),
                     $this->translate('reject'),
                     array('class' => 'smoothbox')
                 )?>  

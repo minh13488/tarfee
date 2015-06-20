@@ -52,7 +52,7 @@
 </div>
 
 <div class="video-statistic-rating">
-<<<<<<< HEAD
+
     <div class="video-statistic">
         <span><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></span>
         <?php $commentCount = $this->video->comments()->getCommentCount(); ?>
@@ -103,36 +103,3 @@
         <?php endif; ?>
     </span>
 </div>
-
-=======
-	<div class="video-statistic">
-		<p><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></p>
-		<?php $commentCount = $this->video->comments()->getCommentCount(); ?>
-		<p><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></p>
-	</div>
-	<div class="video-rating">
-		<?php 
-        	echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video));
-    	?>
-	</div>
-</div>
-
-<?php if ($player):?>
-<div class="video-player-rating">
-	<?php 
-		$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
-		$rating_types = $tableRatingType -> getAllRatingTypes();
-    	echo $this->partial('_view_rate_video.tpl', 'ynvideo', array(
-	        'ratingTypes' => $rating_types,
-	        'video_id' => $this->video->getIdentity(),
-        )); 
-	        
-	?>
-</div>
-<?php endif;?>
-<div class="video_author">
-    <?php $user = $this->video->getOwner() ?>
-    <?php $user = ($user) ? $user : $this->translate('Unknown')?>
-    <?php echo $this->translate('post by %s', $user);?>
-</div>
->>>>>>> 71d556f13b899eb9db19c684b2bd1b392f72f73b
