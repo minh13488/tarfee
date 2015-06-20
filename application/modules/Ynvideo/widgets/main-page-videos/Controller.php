@@ -19,7 +19,6 @@ class Ynvideo_Widget_MainPageVideosController extends Engine_Content_Widget_Abst
 		foreach ($friends as $friend) {
 			$user_ids[] = $friend->getIdentity();
 		}
-		
 		$group_ids = array();
 		$followGroups = Engine_Api::_()->getDbTable('follow', 'advgroup')->getFollowGroups($viewer->getIdentity());		
 		foreach ($followGroups as $group) {

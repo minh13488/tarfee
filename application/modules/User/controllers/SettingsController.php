@@ -528,8 +528,11 @@ class User_SettingsController extends Core_Controller_Action_User {
 		$db -> beginTransaction();
 
 		try {
+			$table = Engine_Api::_() -> getDbtable('users', 'user');
+			$last_user = $table->fetchRow($table->select()->order('user_id DESC'));
+			$next_id = intval($last_user->user_id) + 1;
 			$user -> deactive = $user->getIdentity();
-			$user -> user_id = 999999999;
+			$user -> user_id = $next_id;
 			$user -> save();
 
 			$db -> commit();
@@ -550,7 +553,7 @@ class User_SettingsController extends Core_Controller_Action_User {
 
 		$user = Engine_Api::_() -> core() -> getSubject();
 		
-		if (!$user->deactive || $user->getIdentity() != 999999999) {
+		if (!$user->deactive) {
 			return $this->_forward('success', 'utility', 'core', array(
 		        'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your request is invalid.')),
 		        'redirect' => $this->getFrontController()->getRouter()->assemble(array('action' => 'home'), 'user_general', true)

@@ -13,7 +13,46 @@
     }
     ?>
 </div>
-
+<?php if($this -> viewer() -> getIdentity()):?>
+<div id="favorite_<?php echo $this->video -> getIdentity()?>">
+	<?php if($this->video -> hasFavorite()):?>
+		<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
+	<?php else:?>	
+		<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
+	<?php endif;?>	
+</div>
+<div id="like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
+	<?php if(!Engine_Api::_()->getDbtable('likes', 'core')->isLike($this->video, $this->viewer())):?>
+		<a style="display:inline-block;" href="javascript:void(0);" onclick="video_like('<?php echo $this->video->getIdentity() ?>')">
+			<i class="fa fa-thumbs-up ynfontawesome"></i> <?php echo $this->translate('Like') ?>
+		</a>
+	<?php else:?>
+		<a style="display:inline-block; color: #2A6496" href="javascript:void(0);" onclick="video_unlike('<?php echo $this->video->getIdentity() ?>')">
+			<i class="fa fa-thumbs-up ynfontawesome"></i> <?php echo $this->translate('Like') ?>
+		</a>
+	<?php endif;?>
+	 &nbsp;&middot;&nbsp; 
+	<?php if(Engine_Api::_()->getDbtable('unsures', 'yncomment')->getUnsure($this->video, $this->viewer())):?>
+		<a style="display:inline-block; color: #2A6496" href="javascript:void(0);" onclick="video_undounsure('<?php echo $this->video->getIdentity() ?>')">
+			<i class="fa fa-meh-o ynfontawesome"></i> <?php echo $this->translate('Unsure') ?>
+		</a>
+		<?php else :?>
+		<a style="display:inline-block;" href="javascript:void(0);" onclick="video_unsure('<?php echo $this->video->getIdentity() ?>')">
+			<i class="fa fa-meh-o ynfontawesome"></i> <?php echo $this->translate('Unsure') ?>
+		</a>
+		<?php endif;?>
+	 &nbsp;&middot;&nbsp; 
+	<?php if(Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislike($this->video, $this->viewer())):?>
+	<a style="display:inline-block; color: #2A6496" href="javascript:void(0);" onclick="video_undounlike('<?php echo $this->video->getIdentity() ?>')">
+		<i class="fa fa-thumbs-down ynfontawesome"></i> <?php echo $this->translate('Dislike') ?>
+	</a>
+	<?php else :?>
+	<a style="display:inline-block;" href="javascript:void(0);" onclick="video_unlike('<?php echo $this->video->getIdentity() ?>')">
+		<i class="fa fa-thumbs-down ynfontawesome"></i> <?php echo $this->translate('Dislike') ?>
+	</a>
+	<?php endif;?>
+</div>
+<?php endif;?>
 <?php if ($this->video->parent_type == 'user_playercard') :?>
 <?php $player = $this->video->getParent();?>
 <?php if ($player):?>
@@ -44,13 +83,9 @@
 </div>
 <?php endif;?>
 <?php endif;?>
-
-
-
 <div class="video-title">
     <?php echo $this->htmlLink($this->video->getPopupHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
 </div>
-
 <div class="video-statistic-rating">
 
     <div class="video-statistic">
@@ -58,15 +93,10 @@
         <?php $commentCount = $this->video->comments()->getCommentCount(); ?>
         <span><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></span>
     </div>
-
     <?php 
         echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video));
     ?>
 </div>
-
-
-
-
 
 <div class="video_author">
     <?php $user = $this->video->getOwner() ?>
@@ -79,27 +109,5 @@
 		 if(!$session -> mobile)
 		 {
     ?>
-    
     <?php } ?>
-    <span class="video_views" style="display: none">
-        <?php if (!isset($this->infoCol) || ($this->infoCol == 'view')) : ?>
-            <?php echo $this->translate(array('%1$s view', '%1$s views', $this->video->view_count), $this->locale()->toNumber($this->video->view_count)) ?>
-        <?php else : ?>
-            <?php if ($this->infoCol == 'like') : ?>
-                <?php
-                    $likeCount = $this->video->likes()->getLikeCount();
-                    echo $this->translate(array('%1$s like', '%1$s likes', $likeCount), $this->locale()->toNumber($likeCount));
-                ?>
-            <?php elseif ($this->infoCol == 'comment') : ?>
-                <?php
-                    $commentCount = $this->video->comments()->getCommentCount();
-                    echo $this->translate(array('%1$s comment', '%1$s comments', $commentCount), $this->locale()->toNumber($commentCount));
-                ?>
-            <?php elseif ($this->infoCol == 'favorite') : ?>
-            <?php
-                echo $this->translate(array('%1$s favorite', '%1$s favorites', $this->video->favorite_count), $this->locale()->toNumber($this->video->favorite_count));
-            ?>
-            <?php endif; ?>
-        <?php endif; ?>
-    </span>
 </div>

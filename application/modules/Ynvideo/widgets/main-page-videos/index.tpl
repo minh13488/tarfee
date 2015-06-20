@@ -24,39 +24,7 @@
 <div id="video-loading" style="display: none;">
 	<img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;' />
 </div>
-
-
-
-
-
 <script type="text/javascript">
-
-  window.addEvent('domready', function() {
-    setPinterestMode();
-  });
-
-//Set mode layout wookmark
-    function setPinterestMode() 
-    {
-        jQuery.noConflict();
-        (function (jQuery){
-            var handler = jQuery('#main-page-videos li');
-
-            handler.wookmark({
-                // Prepare layout options.
-                autoResize: true, // This will auto-update the layout when the browser window is resized.
-                container: jQuery('#main-page-videos'), // Optional, used for some extra CSS styling
-                offset: 15, // Optional, the distance between grid items
-                outerOffset: 0, // Optional, the distance to the containers border
-                itemWidth: 225, // Optional, the width of a grid item
-                flexibleWidth: '100%',
-            });
-        })(jQuery);
-        
-        
-    }
-
-
 function showMore(from){
     var url = '<?php echo $this->url(array('module' => 'core','controller' => 'widget','action' => 'index','name' => 'ynvideo.main-page-videos'), 'default', true) ?>';
     $('video-viewmore-btn').destroy();
@@ -84,3 +52,66 @@ function showMore(from){
 
 </script>
 <?php endif;?>	
+
+<script type="text/javascript">
+   var unfavorite_video = function(videoId)
+   {
+   	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
+       var request = new Request.JSON({
+            'method' : 'post',
+            'url' :  url,
+            'data' : {
+                'video_id' : videoId
+            },
+            'onComplete':function(responseObject)
+            {  
+            	obj = document.getElementById('favorite_'+ videoId);
+                obj.innerHTML = '<a href="javascript:;" onclick="favorite_video('+videoId+')">' + '<?php echo $this->translate("favourite")?>' + '</a>';
+            }
+        });
+        request.send();  
+   } 
+   var favorite_video = function(videoId)
+   {
+   	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
+       var request = new Request.JSON({
+            'method' : 'post',
+            'url' :  url,
+            'data' : {
+                'video_id' : videoId
+            },
+            'onComplete':function(responseObject)
+            {  
+            	obj = document.getElementById('favorite_' + videoId);
+                obj.innerHTML = '<a href="javascript:;" onclick="unfavorite_video('+videoId+')">' + '<?php echo $this->translate("unfavourite")?>' + '</a>';
+            }
+        });
+        request.send();  
+   } 
+</script>
+
+<script type="text/javascript">
+  window.addEvent('domready', function() {
+    setPinterestMode();
+  });
+
+//Set mode layout wookmark
+function setPinterestMode() 
+{
+    jQuery.noConflict();
+    (function (jQuery){
+        var handler = jQuery('#main-page-videos li');
+
+        handler.wookmark({
+            // Prepare layout options.
+            autoResize: true, // This will auto-update the layout when the browser window is resized.
+            container: jQuery('#main-page-videos'), // Optional, used for some extra CSS styling
+            offset: 15, // Optional, the distance between grid items
+            outerOffset: 0, // Optional, the distance to the containers border
+            itemWidth: 225, // Optional, the width of a grid item
+            flexibleWidth: '100%',
+        });
+    })(jQuery);
+}
+</script>
+

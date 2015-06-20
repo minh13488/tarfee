@@ -159,6 +159,7 @@ class Ynvideo_FavoriteController extends Core_Controller_Action_Standard {
 	{
 		if (!$this -> _helper -> requireUser() -> isValid())
 			return;
+		$viewer = Engine_Api::_()->user()->getViewer();
 		$video_id = (int) $this->_getParam('video_id');
         $video = Engine_Api::_()->getItem('ynvideo_video', $video_id);
 		if (isset($video)) {
