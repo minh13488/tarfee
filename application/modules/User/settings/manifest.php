@@ -132,7 +132,7 @@ return array(
         'action' => 'browse'
       ),
       'reqs' => array(
-        'action' => '(home|browse|render-section|get-my-location|upload-photo|sublocations|get-continent|suggest-group|save-preferred-clubs|get-view-preferred-clubs|suggest-user|save-basic|get-countries|suggest-user-block|block-users)',
+        'action' => '(home|browse|render-section|get-my-location|upload-photo|sublocations|get-continent|suggest-group|save-preferred-clubs|get-view-preferred-clubs|suggest-user|save-basic|get-countries|suggest-user-block|block-users|in-mail)',
       )
     ),
 	
@@ -223,6 +223,15 @@ return array(
         'module' => 'user',
         'controller' => 'signup',
         'action' => 'index'
+      )
+    ),
+    
+    'user_signup1' => array(
+      'route' => '/signup/account/*',
+      'defaults' => array(
+        'module' => 'user',
+        'controller' => 'signup',
+        'action' => 'account'
       )
     ),
     

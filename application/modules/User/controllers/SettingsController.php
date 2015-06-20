@@ -35,7 +35,10 @@ class User_SettingsController extends Core_Controller_Action_User {
 		$this -> _helper -> requireUser();
 		$this -> _helper -> requireSubject();
 		$this -> _helper -> requireAuth() -> setAuthParams($subject, null, 'edit');
-
+		
+		Engine_Api::_()->user()->addDeactiveAccountPage();
+		Engine_Api::_()->user()->addActiveAccountPage();
+		
 		$contextSwitch = $this -> _helper -> contextSwitch;
 		$contextSwitch
 		-> initContext();
@@ -499,6 +502,177 @@ class User_SettingsController extends Core_Controller_Action_User {
 
 		return $this -> _helper -> redirector -> gotoRoute(array(), 'default', true);
 	}
+
+	public function deactiveAction() {
+
+		$user = Engine_Api::_() -> core() -> getSubject();
+		
+		$this -> view -> isLastSuperAdmin = false;
+		if (1 === count(Engine_Api::_() -> user() -> getSuperAdmins()) && 1 === $user -> level_id) {
+			$this -> view -> isLastSuperAdmin = true;
+			return;
+		}
+		
+		// Form
+		$this -> view -> form = $form = new User_Form_Settings_Deactive();
+
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		if (!$form -> isValid($this -> getRequest() -> getPost())) {
+			return;
+		}
+
+		// Process
+		$db = Engine_Api::_() -> getDbtable('users', 'user') -> getAdapter();
+		$db -> beginTransaction();
+
+		try {
+			$user -> deactive = $user->getIdentity();
+			$user -> user_id = 999999999;
+			$user -> save();
+
+			$db -> commit();
+		} catch( Exception $e ) {
+			$db -> rollBack();
+			throw $e;
+		}
+
+		// Unset viewer, remove auth, clear session
+		Engine_Api::_() -> user() -> setViewer(null);
+		Zend_Auth::getInstance() -> getStorage() -> clear();
+		Zend_Session::destroy();
+
+		return $this -> _helper -> redirector -> gotoRoute(array(), 'default', true);
+	}
+	
+	public function activeAction() {
+
+		$user = Engine_Api::_() -> core() -> getSubject();
+		
+		if (!$user->deactive || $user->getIdentity() != 999999999) {
+			return $this->_forward('success', 'utility', 'core', array(
+		        'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your request is invalid.')),
+		        'redirect' => $this->getFrontController()->getRouter()->assemble(array('action' => 'home'), 'user_general', true)
+			));
+		}
+		
+		// Form
+		$this -> view -> form = $form = new User_Form_Settings_Active();
+
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		if (!$form -> isValid($this -> getRequest() -> getPost())) {
+			return;
+		}
+
+		// Process
+		$db = Engine_Api::_() -> getDbtable('users', 'user') -> getAdapter();
+		$db -> beginTransaction();
+
+		try {
+			$user -> user_id = $user -> deactive;
+			$user -> deactive = 0;
+			$user -> save();
+
+			$db -> commit();
+		} catch( Exception $e ) {
+			$db -> rollBack();
+			throw $e;
+		}
+
+		// Register login
+		$loginTable = Engine_Api::_() -> getDbtable('logins', 'user');
+		$ipObj = new Engine_IP();
+		$ipExpr = new Zend_Db_Expr($db -> quoteInto('UNHEX(?)', bin2hex($ipObj -> toBinary())));
+		$loginTable -> insert(array(
+			'user_id' => $user -> getIdentity(),
+			'email' => $user->email,
+			'ip' => $ipExpr,
+			'timestamp' => new Zend_Db_Expr('NOW()'),
+			'state' => 'success',
+			'active' => true,
+		));
+		$_SESSION['login_id'] = $login_id = $loginTable -> getAdapter() -> lastInsertId();
+
+		// Increment sign-in count
+		Engine_Api::_() -> getDbtable('statistics', 'core') -> increment('user.logins');
+
+		// Test activity @todo remove
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		if ($viewer -> getIdentity())
+		{
+			$viewer -> lastlogin_date = date("Y-m-d H:i:s");
+			if ('cli' !== PHP_SAPI)
+			{
+				$viewer -> lastlogin_ip = $ipExpr;
+			}
+			$viewer -> save();
+			Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($viewer, $viewer, 'login');
+		}
+
+		// Assign sid to view for json context
+		$this -> view -> status = true;
+		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Login successful');
+		$this -> view -> sid = Zend_Session::getId();
+		$this -> view -> sname = Zend_Session::getOptions('name');
+
+		// Run post login hook
+		$event = Engine_Hooks_Dispatcher::getInstance() -> callEvent('onUserLoginAfter', $viewer);
+		
+		// Do redirection only if normal context
+		if (null === $this -> _helper -> contextSwitch -> getCurrentContext())
+		{
+			// Redirect by form
+			$uri = $form -> getValue('return_url');
+			if ($uri)
+			{
+				if (substr($uri, 0, 3) == '64-')
+				{
+					$uri = base64_decode(substr($uri, 3));
+				}
+				return $this -> _redirect($uri, array('prependBase' => false));
+			}
+
+			// Redirect by session
+			$session = new Zend_Session_Namespace('Redirect');
+			if (isset($session -> uri))
+			{
+				$uri = $session -> uri;
+				$opts = $session -> options;
+				$session -> unsetAll();
+				return $this -> _redirect($uri, $opts);
+			}
+			else
+			if (isset($session -> route))
+			{
+				$session -> unsetAll();
+				return $this -> _helper -> redirector -> gotoRoute($session -> params, $session -> route, $session -> reset);
+			}
+
+			// Redirect by hook
+			foreach ((array) $event->getResponses() as $response)
+			{
+				if (is_array($response))
+				{
+					if (!empty($response['error']) && !empty($response['message']))
+					{
+						return $form -> addError($response['message']);
+					}
+					else
+					if (!empty($response['redirect']))
+					{
+						return $this -> _helper -> redirector -> gotoUrl($response['redirect'], array('prependBase' => false));
+					}
+				}
+			}
+
+			// Just redirect to home
+			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'home'), 'user_general', true);
+		}
+	}
+
 	public function referralAction()
 	{
 		if( !$this->_helper->requireUser->isValid() ) return;
