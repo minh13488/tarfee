@@ -553,7 +553,7 @@ class User_SettingsController extends Core_Controller_Action_User {
 	}
 	
 	public function activeAction() {
-
+		$this -> _helper -> layout -> setLayout('default-simple');
 		$user = Engine_Api::_() -> core() -> getSubject();
 		
 		if (!$user->deactive) {

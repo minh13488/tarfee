@@ -747,15 +747,6 @@ class User_Api_Core extends Core_Api_Abstract
       ));
       $main_middle_id = $db->lastInsertId();
       
-      // Insert menu
-      $db->insert('engine4_core_content', array(
-        'type' => 'widget',
-        'name' => 'user.settings-menu',
-        'page_id' => $page_id,
-        'parent_content_id' => $top_middle_id,
-        'order' => 1,
-      ));
-      
       // Insert content
       $db->insert('engine4_core_content', array(
         'type' => 'widget',

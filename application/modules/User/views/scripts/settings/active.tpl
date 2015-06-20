@@ -1,11 +1,9 @@
-<?php echo $this->form->setAttrib('id', 'user_form_settings_deactive')->render($this) ?>
+<?php echo $this->form->setAttrib('id', 'user_form_settings_active')->render($this) ?>
 
 <script type="text/javascript">
 	window.addEvent('domready', function() {
-		$$('#cancel').addEvent('click', function(e) {
-			var url = '<?php $this->url(array(), 'user_logout', true)?>';
-			this.set('href', url);
-			return true;	
-		})
+		$('cancel').set('onclick', '');
+		var url = '<?php echo $this->url(array(), 'user_logout', true)?>';
+		$('cancel').set('href', url);	
 	})	
 </script>
