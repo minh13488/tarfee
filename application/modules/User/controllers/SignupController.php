@@ -474,11 +474,31 @@ class User_SignupController extends Core_Controller_Action_Standard
     $userTable = Engine_Api::_()->getDbtable('users', 'user');
     $user = $userTable->fetchRow($userTable->select()->where('email = ?', $values['email']));
 
-    if( !$user || !$user->getIdentity() ) {
-      $this->view->status = false;
-      $this->view->error = $this->view->translate('The email is exists.');
+    if($user) {
+      $form->addError($this->view->translate('The email is exists.'));
       return;
     }
+	
+	$table = Engine_Api::_()->getDbtable('inviterequests', 'user');
+    $request = $table->fetchRow($table->select()->where('email = ?', $values['email']));
+
+    if($request) {
+      $form->addError($this->view->translate('The request with this email is exists.'));
+      return;
+	}
+	$db = $table->getAdapter();
+	$db->beginTransaction();
+    try {
+        $request = $table->createRow();
+        $request->setFromArray($values);
+        $request->save();
+        $db->commit();
+    }
+    catch( Exception $e ) {
+        $db->rollBack();
+        throw $e;
+    } 
+	
 	$this->_forward('success', 'utility', 'core', array(
       'smoothboxClose' => true,
       'parentRefresh' => false,
@@ -494,7 +514,7 @@ class User_SignupController extends Core_Controller_Action_Standard
 	    }
 	    
 	    $formSequenceHelper = $this->_helper->formSequence;
-	    foreach( Engine_Api::_()->getDbtable('signup1', 'user')->fetchAll() as $row ) {
+	    foreach( Engine_Api::_()->getDbtable('signup', 'user')->fetchAll() as $row ) {
 	      if( $row->enable == 1 ) {
 	        $class = $row->class;
 	        $formSequenceHelper->setPlugin(new $class, $row->order);
