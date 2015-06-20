@@ -18,12 +18,12 @@
 		</a>
 		<?php endif;?>
 	<?php if(Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislike($this->video, $this->viewer())):?>
-	<a id="undislike_video_<?php echo $this->video->getIdentity() ?>" title="<?php echo $this->translate('Dislike') ?>
-	</a>" style="background: #2A6496" href="javascript:void(0);" onclick="video_like('<?php echo $this->video->getIdentity() ?>', 'undislike')">
+	<a id="undislike_video_<?php echo $this->video->getIdentity() ?>" title="<?php echo $this->translate('Dislike') ?>" style="background: #2A6496" href="javascript:void(0);" onclick="video_like('<?php echo $this->video->getIdentity() ?>', 'undislike')">
 		<i class="fa fa-thumbs-down"></i> 
+		</a>
 	<?php else :?>
-	<a id="dislike_video_<?php echo $this->video->getIdentity() ?>" title="<?php echo $this->translate('Dislike') ?>
-	</a>" href="javascript:void(0);" onclick="video_like('<?php echo $this->video->getIdentity() ?>', 'dislike')">
+	<a id="dislike_video_<?php echo $this->video->getIdentity() ?>" title="<?php echo $this->translate('Dislike') ?>" href="javascript:void(0);" onclick="video_like('<?php echo $this->video->getIdentity() ?>', 'dislike')">
 		<i class="fa fa-thumbs-down"></i> 
+		</a>
 	<?php endif;?>
 <!-- </div> -->
