@@ -15,7 +15,7 @@
 ?>
 <?php if (($manage || count($recommendations) || $canRecommendation) && $enable) : ?>
 <div id="user-profile-recommendation">
-<h3 class="section-label"><?php echo $this->translate('Recommendations');?></h3>
+<!-- <h3 class="section-label"><?php //echo $this->translate('Recommendations');?></h3> -->
 <div class="profile-section-button">
 <?php if ($canAsk) :?>
 	<span class="manage-button">
@@ -57,7 +57,6 @@
 	    	<div class="giver-info">
 	    		<?php $giver = Engine_Api::_()->user()->getUser($item->giver_id);?>
 	    		<div class="photo"><?php echo $this->htmlLink($giver->getHref(), $this->itemPhoto($giver, 'thumb.icon'), array())?></div>
-	    		<div class="title"><?php echo $giver?></div>
 	    	</div>
 	    	<div class="recommendation-content">
 	    		<div class="content">
@@ -66,6 +65,7 @@
 	    		<div class="time">
 	    			<?php echo date('M, d, Y', $item->getGivenDate()->getTimestamp());?>
 	    		</div>
+	    		<div class="title"><?php echo $giver?></div>
 	    	</div>
 	    </li>
 	    <?php endforeach;?>
@@ -87,7 +87,6 @@
 		    	<div class="giver-info">
 		    		<?php $giver = Engine_Api::_()->user()->getUser($item->giver_id);?>
 		    		<div class="photo"><?php echo $this->htmlLink($giver->getHref(), $this->itemPhoto($giver, 'thumb.icon'), array())?></div>
-		    		<div class="title"><?php echo $giver?></div>
 		    	</div>
 		    	<div class="recommendation-content">
 		    		<div class="content">
@@ -96,6 +95,7 @@
 		    		<div class="time">
 		    			<?php echo date('M, d, Y', $item->getGivenDate()->getTimestamp());?>
 		    		</div>
+		    		<div class="title"><?php echo $giver?></div>
 		    	</div>
 		    	<div class="recommendation-options">
 		    		<div class="button-wrapper">
@@ -129,7 +129,6 @@
 		    	<div class="giver-info">
 		    		<?php $giver = Engine_Api::_()->user()->getUser($item->giver_id);?>
 		    		<div class="photo"><?php echo $this->htmlLink($giver->getHref(), $this->itemPhoto($giver, 'thumb.icon'), array())?></div>
-		    		<div class="title"><?php echo $giver?></div>
 		    	</div>
 		    	<div class="recommendation-content">
 		    		<div class="content">
@@ -138,6 +137,7 @@
 		    		<div class="time">
 		    			<?php echo date('M, d, Y', $item->getGivenDate()->getTimestamp());?>
 		    		</div>
+		    		<div class="title"><?php echo $giver?></div>
 		    	</div>
 		    	<div class="recommendation-options">
 		    		<div class="button-wrapper">

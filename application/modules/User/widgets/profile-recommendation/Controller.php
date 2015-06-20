@@ -1,6 +1,7 @@
 <?php
 class User_Widget_ProfileRecommendationController extends Engine_Content_Widget_Abstract {
 	public function indexAction() {
+
 		$this->view->section = 'recommendation';
         $this->view->user = $user = Engine_Api::_()->core()->getSubject('user');
 		
