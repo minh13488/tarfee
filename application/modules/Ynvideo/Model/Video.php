@@ -71,7 +71,21 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 		}
 	}
 	
-	
+	public function getPopupHref($params = array())
+	{
+		$params = array_merge(array(
+				'route' => 'video_popup_view',
+				'reset' => true,
+				'user_id' => $this -> owner_id,
+				'video_id' => $this -> video_id,
+				'slug' => $this -> getSlug(),
+			), $params);
+		$route = $params['route'];
+		$reset = $params['reset'];
+		unset($params['route']);
+		unset($params['reset']);
+		return Zend_Controller_Front::getInstance() -> getRouter() -> assemble($params, $route, $reset);
+	}
 	public function getHref($params = array())
 	{
       	$isMobile = false;
@@ -483,5 +497,71 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 			return $owner->getSportId();
 		}
 		return null;
+	}
+	
+	public function setPhoto($photo)
+	{
+		if ($photo instanceof Zend_Form_Element_File)
+		{
+			$file = $photo -> getFileName();
+		}
+		else
+		if (is_array($photo) && !empty($photo['tmp_name']))
+		{
+			$file = $photo['tmp_name'];
+		}
+		else
+		if (is_string($photo) && file_exists($photo))
+		{
+			$file = $photo;
+		}
+		else
+		{
+			throw new User_Model_Exception('invalid argument passed to setPhoto');
+		}
+
+		$name = basename($file);
+		$path = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'temporary';
+		$params = array(
+			'parent_type' => 'video',
+			'parent_id' => $this -> getIdentity()
+		);
+
+		// Save
+		$storage = Engine_Api::_() -> storage();
+
+		// Resize image (main)
+		$image = Engine_Image::factory();
+		$image -> open($file) -> resize(720, 720) -> write($path . '/m_' . $name) -> destroy();
+
+		// Resize image (profile)
+		$image = Engine_Image::factory();
+		$image -> open($file) -> resize(200, 400) -> write($path . '/p_' . $name) -> destroy();
+
+		// Store
+		$iMain = $storage -> create($path . '/m_' . $name, $params);
+		$iProfile = $storage -> create($path . '/p_' . $name, $params);
+		$iMain -> bridge($iProfile, 'thumb.normal');
+
+		// Remove temp files
+		@unlink($path . '/p_' . $name);
+		@unlink($path . '/m_' . $name);
+
+		// Update row
+		$this -> modified_date = date('Y-m-d H:i:s');
+		$this -> photo_id = $iMain -> file_id;
+		$this -> large_photo_id = $iMain -> file_id;
+		$this -> save();
+
+		return $this;
+	}
+	public function hasFavorite()
+	{
+		$viewer = Engine_Api::_()->user()->getViewer();
+		$userId = $viewer -> getIdentity();
+		$videoId = $this -> getIdentity();
+		$favoriteTbl = Engine_Api::_()->getDbTable('favorites', 'ynvideo');
+        $row = $favoriteTbl->fetchRow(array("video_id = $videoId", "user_id = $userId"));
+		return $row;
 	}
 }

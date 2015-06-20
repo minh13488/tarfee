@@ -79,5 +79,38 @@ class User_Model_Library extends Core_Model_Item_Abstract
 
 		return $this;
 	}
+	
+	public function getTotalVideo()
+	{
+		$params['owner_type'] = $this -> getType();
+		$params['owner_id'] = $this -> getIdentity();
+		$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+		return $mappingTable -> getTotalVideo($params);
+	}
+	
+	public function getVideos()
+	{
+		$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+	    $videoTable = Engine_Api::_()->getItemTable('video');
+	    $params['owner_type'] = $this -> getType();
+		$params['owner_id'] = $this -> getIdentity();
+	    return $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));
+	}
+	
+	public function getTotalVideoView()
+	{
+		$params['owner_type'] = $this -> getType();
+		$params['owner_id'] = $this -> getIdentity();
+		$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+		return (int)$mappingTable -> getTotalVideoView($params);
+	}
+	
+	public function getTotalVideoComment()
+	{
+		$params['owner_type'] = $this -> getType();
+		$params['owner_id'] = $this -> getIdentity();
+		$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+		return (int)$mappingTable -> getTotalVideoComment($params);
+	}
 
 }

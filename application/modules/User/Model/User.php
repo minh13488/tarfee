@@ -845,7 +845,7 @@ class User_Model_User extends Core_Model_Item_Abstract
 	
 	public function getFriendsList() {
 		$table = Engine_Api::_()->getItemTable('user');
-		$select = $this->membership()->getMembersObjectSelect();
+		$select = $this->membership()->getMembershipsOfSelect($this);
 		return $table->fetchAll($select);
 	}
 	

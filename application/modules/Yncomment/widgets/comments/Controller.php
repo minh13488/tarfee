@@ -29,7 +29,6 @@ class Yncomment_Widget_CommentsController extends Engine_Content_Widget_Abstract
                 return $this->setNoRender();
             }
         }
-
         if ($subject) 
         {
             $this->view->addHelperPath(APPLICATION_PATH . '/application/modules/Yncomemnt/View/Helper', 'Yncomment_View_Helper');

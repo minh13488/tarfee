@@ -143,6 +143,57 @@ class Ynvideo_FavoriteController extends Core_Controller_Action_Standard {
         ));
     }
 
+	public function removeFavoriteAction()
+	{
+		if (!$this -> _helper -> requireUser() -> isValid())
+			return;
+		$video_id = (int) $this->_getParam('video_id');
+        $video = Engine_Api::_()->getItem('ynvideo_video', $video_id);
+		if ($video) 
+		{
+			Engine_Api::_()->ynvideo()->removeVideoFromFavorite($video->getIdentity(), $this->view->viewer->getIdentity());
+		}
+		exit();
+	}
+	public function addFavoriteAction()
+	{
+		if (!$this -> _helper -> requireUser() -> isValid())
+			return;
+		$viewer = Engine_Api::_()->user()->getViewer();
+		$video_id = (int) $this->_getParam('video_id');
+        $video = Engine_Api::_()->getItem('ynvideo_video', $video_id);
+		if (isset($video)) {
+            $db = Engine_Db_Table::getDefaultAdapter();
+            $db->beginTransaction();
+            try {
+                $favorite = Engine_Api::_()->ynvideo()->addVideoToFavorite($video->getIdentity(), $this->view->viewer->getIdentity());
+                if ($favorite) {
+                    // CREATE AUTH STUFF HERE
+                    $auth = Engine_Api::_()->authorization()->context;
+                    $auth->setAllowed($favorite, 'registered', 'view', true);
+                    $auth->setAllowed($favorite, 'registered', 'comment', true);
+            
+                    $actionTable = Engine_Api::_()->getDbtable('actions', 'activity');
+                    $action = $actionTable->addActivity($viewer, $favorite, 'ynvideo_add_favorite');
+
+                    if ($action != null) {
+                        $actionTable->attachActivity($action, $video);
+                    }
+
+                    foreach ($actionTable->getActionsByObject($favorite) as $action) {
+                        $actionTable->resetActivityBindings($action);
+                    }
+
+                    $db->commit();
+                }
+            } catch (Ynvideo_Model_ExistedException $e) {
+            } catch (Exception $e) {
+                $db->rollBack();
+                throw $e;
+            }
+        }
+		exit();
+	}
 }
 
 ?>

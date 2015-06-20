@@ -7,6 +7,7 @@ class User_Form_Signup_Request extends Engine_Form
     $this->setTitle('Request Invite');
     $this->setDescription($description);
     $this->setAttrib('id', 'user_form_request');
+	$this->setAttrib('method', 'post');
     $this->loadDefaultDecorators();
     $this->getDecorator('Description')->setOption('escape', false);
   	// init email
@@ -29,6 +30,21 @@ class User_Form_Signup_Request extends Engine_Form
       'tabindex' => 2,
     ));
 	$this -> name -> setAttrib('required', true);
+	
+	$this->addElement('Text', 'phone', array(
+      'label' => 'Phone',
+      'required' => false,
+      'allowEmpty' => true,
+      'tabindex' => 3,
+    ));
+	
+	$this->addElement('Textarea', 'message', array(
+      'label' => 'Message',
+      'required' => true,
+      'allowEmpty' => false,
+      'tabindex' => 4,
+    ));	
+	
     // Init submit
     $this->addElement('Button', 'submit', array(
       'label' => 'Send Request',

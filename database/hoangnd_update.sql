@@ -275,3 +275,18 @@ ALTER TABLE `engine4_video_videos` ADD `like_count` INT(11) NOT NULL DEFAULT '0'
 
 -- 6.17.2015
 ALTER TABLE `engine4_users` ADD `deactive` INT(11) NOT NULL DEFAULT '0' ;
+
+CREATE TABLE IF NOT EXISTS `engine4_user_inviterequests` (
+  `inviterequest_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `email` varchar(128) NOT NULL,
+  `phone` varchar(64) NULL,
+  `name` varchar(64) NULL,
+  `message` text NOT NULL,
+  `approved` tinyint(1) NOT NULL DEFAULT '0',
+  `creation_date` datetime NOT NULL,	
+  PRIMARY KEY (`inviterequest_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- 6.20.2015
+INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
+('core_admin_main_manage_requests', 'user', 'Invite Requests', '', '{"route":"admin_default","module":"user","controller":"requests", "action":"index"}', 'core_admin_main_manage', '', 999);

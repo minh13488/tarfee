@@ -11,14 +11,13 @@
 	    <div class="avatar">
 	        <?php
 	          if( $this -> video->photo_id ) {
-	            echo $this->htmlLink($this -> video->getHref(), $this->itemPhoto($this -> video, 'thumb.large'));
+	            echo $this->htmlLink($this -> video->getPopupHref(), $this->itemPhoto($this -> video, 'thumb.large'), array('class' => 'smoothbox'));
 	          } else {
 	            echo '<img alt="" src="' . $this->layout()->staticBaseUrl . 'application/modules/Video/externals/images/video.png">';
 	          }
 	        ?>
 	    </div>
   	</div>
-
 	<?php 
 	  	$isMobile = false;
 	    if(Engine_Api::_() -> hasModuleBootstrap('ynresponsive1')) 
@@ -27,21 +26,16 @@
 	  	} 
 	?>
 
-	<div class="tf_video_info">
+	<div class="tf_video_info <?php if(isset($this -> main) && $this -> main) :?>video_main<?php endif;?>">
 		<div class="tf_video_title">
-			<a class="<?php if(!$isMobile) echo 'smoothbox' ?> video_title" href="<?php echo $this -> video->getHref(array('smoothbox'=>'1'));?>">
+			<a class="<?php if(!$isMobile) echo 'smoothbox' ?> video_title" href="<?php echo $this -> video->getPopupHref();?>">
 		  	<?php echo $this -> video->getTitle();?>
 		  	</a> 
 		</div>
 
-
-		<div style="display:none">
-	  		<?php echo $this->translate('By');?> <?php echo $this->htmlLink($this -> video->getOwner()->getHref(), $this -> video->getOwner()->getTitle()) ?>
-		</div>
-
 		<div class="tf_video_count">
-			<span><?php echo $this -> video->view_count;?> <?php echo $this->translate('views');?>&nbsp;&nbsp;</span>
-			<span><?php echo $this->translate('1,523 comments') ?></span>
+			<span><?php echo $this->translate(array('%s view', '%s views', $this -> video -> view_count), $this -> video -> view_count); ?>&nbsp;&nbsp;</span>
+			<span><?php echo $this->translate(array('%s comment', '%s comments', $this -> video -> comment_count), $this -> video -> comment_count); ?></span>
 		</div>
 
 	   <div class="tf_video_rating">
@@ -51,20 +45,18 @@
 				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic"><i class="fa fa-star-o"></i></span><?php endfor; ?>
 	 		<?php endif;?>
 		</div>
-
-		<div class="tf_video_key">
-			<?php echo $this->translate('Cristiano Ronaldo') ?>
-		</div>
-
-		<div class="tf_video_category">
-			<?php echo $this->translate('Football') ?>
-		</div>
-
 	</div>
-
-
 	<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
    		<ul class="tf_video_action">
+   			<?php if($this -> viewer() -> getIdentity()):?>
+				<li id="favorite_<?php echo $this->video -> getIdentity()?>">
+					<?php if($this->video -> hasFavorite()):?>
+						<a href="javascript:;" onclick="unfavorite_video_lib(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
+					<?php else:?>	
+						<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
+					<?php endif;?>	
+			    </li>
+			<?php endif;?>
    			<li>
 				<?php
 					echo $this->htmlLink(array(
@@ -128,5 +120,10 @@
 				<?php endif;?>
 			<?php endif;?>
 		</ul>
+	<?php endif;?>
+	<?php if(isset($this -> main) && $this -> main) :?>
+	<div class="tf_sublibrary_author">
+		<?php echo $this -> translate("by");?> <span><?php echo $this -> video -> getOwner()?></span>
+	</div>
 	<?php endif;?>
 </li>

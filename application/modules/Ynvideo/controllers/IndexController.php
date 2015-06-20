@@ -186,6 +186,12 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 				$video -> save();
 				$insert_action = true;
 			}
+			
+			// Set photo
+			if (!empty($values['photo']))
+			{
+				$video -> setPhoto($form -> photo);
+			}
 
 			// CREATE AUTH STUFF HERE
 			$auth = Engine_Api::_() -> authorization() -> context;
@@ -481,10 +487,7 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		}
 
 		// Render
-		$smoothbox = $this ->_getParam('smoothbox');
-		if(!isset($smoothbox) && empty($smoothbox)) {
-			$this -> _helper -> content -> setEnabled();
-		}
+		$this -> _helper -> content -> setEnabled();
 	}
 
 	public function validationAction()
@@ -723,10 +726,12 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			$video -> setFromArray($values);
 			$video -> save();
 
-			// get the favorites of this video
-			//            $select = $favoriteTable->select()->where('video_id = ?', $video->getIdentity());
-			//            $favorites = $favoriteTable->fetchAll($select);
-
+			// Set photo
+			if (!empty($values['photo']))
+			{
+				$video -> setPhoto($form -> photo);
+			}
+			
 			// CREATE AUTH STUFF HERE
 			$auth = Engine_Api::_() -> authorization() -> context;
 			$roles = array(
@@ -751,9 +756,6 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			foreach ($roles as $i => $role)
 			{
 				$auth -> setAllowed($video, $role, 'view', ($i <= $viewMax));
-				//                foreach($favorites as $favorite) {
-				//                    $auth->setAllowed($favorite, $role, 'view', ($i <= $viewMax));
-				//                }
 			}
 
 			if ($values['auth_comment'])
@@ -764,9 +766,6 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			foreach ($roles as $i => $role)
 			{
 				$auth -> setAllowed($video, $role, 'comment', ($i <= $commentMax));
-				//                foreach($favorites as $favorite) {
-				//                    $auth->setAllowed($favorite, $role, 'comment', ($i <= $commentMax));
-				//                }
 			}
 
 			// Add tags
@@ -1416,5 +1415,106 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		}
 
 	}
+	public function popupViewAction()
+	{
+		$video_id = $this -> _getParam('video_id');
+		$video = Engine_Api::_() -> getItem('video', $video_id);
+		if ($video)
+		{
+			Engine_Api::_() -> core() -> setSubject($video);
+		}
+		if (!$this -> _helper -> requireSubject() -> isValid())
+		{
+			return;
+		}
+		$type = $video -> getType();
 
+		$video = Engine_Api::_() -> core() -> getSubject('video');
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+
+		//Get Photo Url
+		$photoUrl = $video -> getPhotoUrl('thumb.normal');
+		$pos = strpos($photoUrl, "http");
+		if ($pos === false)
+		{
+			$photoUrl = rtrim((constant('_ENGINE_SSL') ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'], '/') . $photoUrl;
+		}
+
+		//Get Video Url
+		$videoUrl = $video -> getHref();
+		$pos = strpos($videoUrl, "http");
+		if ($pos === false)
+		{
+			$videoUrl = rtrim((constant('_ENGINE_SSL') ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'], '/') . $videoUrl;
+		}
+
+		$watchLaterTbl = Engine_Api::_() -> getDbTable('watchlaters', 'ynvideo');
+		$watchLaterTbl -> update(array(
+			'watched' => '1',
+			'watched_date' => date('Y-m-d H:i:s')
+		), array(
+			"video_id = {$video->getIdentity()}",
+			"user_id = {$viewer->getIdentity()}"
+		));
+
+		// Check if edit/delete is allowed
+		$this -> view -> can_edit = $can_edit = $this -> _helper -> requireAuth() -> setAuthParams($video, null, 'edit') -> checkRequire();
+		$this -> view -> can_delete = $can_delete = $this -> _helper -> requireAuth() -> setAuthParams($video, null, 'delete') -> checkRequire();
+		$embedded = "";
+		// increment count
+		if ($video -> status == 1)
+		{
+			if (!$video -> isOwner($viewer))
+			{
+				$video -> view_count++;
+				$video -> save();
+			}
+            $embedded = $video -> getRichContent(true);
+		}
+
+		if ($video -> type == Ynvideo_Plugin_Factory::getUploadedType() && $video -> status == 1)
+		{
+			$session = new Zend_Session_Namespace('mobile');
+			$responsive_mobile = FALSE;
+			if (defined('YNRESPONSIVE'))
+			{
+				$responsive_mobile = Engine_Api::_()-> ynresponsive1() -> isMobile();
+			}
+			if (!empty($video -> file1_id))
+			{
+				$storage_file = Engine_Api::_() -> getItem('storage_file', $video -> file_id);
+				if ($session -> mobile || $responsive_mobile)
+				{
+					$storage_file = Engine_Api::_() -> getItem('storage_file', $video -> file1_id);
+				}
+				if ($storage_file)
+				{
+					$this -> view -> video_location1 = $storage_file -> map();
+					$this -> view -> video_location = '';
+				}
+			}
+			else 
+			{
+				$storage_file = Engine_Api::_() -> getItem('storage_file', $video -> file_id);
+				if ($storage_file)
+				{
+					$this -> view -> video_location = $storage_file -> map();
+					$this -> view -> video_location1 = '';
+				}
+			}
+		}
+		else
+		if ($video -> type == Ynvideo_Plugin_Factory::getVideoURLType())
+		{
+			$this -> view -> video_location = $video -> code;
+		}
+
+		$settings = Engine_Api::_() -> getApi('settings', 'core');
+		$this -> view -> numberOfEmail = $settings -> getSetting('ynvideo.friend.emails', 5);
+		$this -> view -> viewer_id = $viewer -> getIdentity();
+		$this -> view -> rating_count = Engine_Api::_() -> ynvideo() -> ratingCount($video -> getIdentity());
+		$this -> view -> video = $video;
+		$this -> view -> rated = Engine_Api::_() -> ynvideo() -> checkRated($video -> getIdentity(), $viewer -> getIdentity());
+		$this -> view -> videoEmbedded = $embedded;
+	}
 }
