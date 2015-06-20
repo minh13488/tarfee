@@ -2494,14 +2494,25 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                     transform: translate(0, 0);
                     text-align: center;
                     margin-bottom: 15px;
-                    font-size: 26px;
+                    font-size: 18px;
+
 
                 }
 
-                & > li.recommendation-item{
-                    background: #ccc;
+                & > li.recommendation-item,
+                & > li.section-item{
 
-                    .giver-info{
+                    &:last-child{
+                        .recommendation-content{
+                            border-bottom: none;
+                            padding-bottom: 0px;
+                            margin-bottom: 0;
+                        }
+
+                    }
+
+                    .giver-info,
+                    .receiver-info{
                         float: left;
                         display: inline-block;
                         margin-right: 20px;
@@ -2518,6 +2529,55 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                     .recommendation-content{
                         display: inline-block;
                         width: 80%;
+                        border-bottom: 1px solid $theme_border_medium_color;
+                        padding-bottom: 15px;
+                        margin-bottom: 15px;
+
+                        .content{
+                            font-family: Georgia, Times, 'Times New Roman', serif;
+                            font-style: oblique;
+                        }
+                        .time{
+                            display: none;
+                        }
+
+                    }
+                    .title{
+                        display: block;
+                        text-align: center;
+                        margin-top: 15px;
+
+                        a{
+                            color: $theme_font_color;
+                        }
+
+                        &:before{
+                            content: "- ";
+                        }
+                    }
+
+                    .recommendation-options,{
+                        margin-top: 10px;
+
+                        .button-wrapper{
+                            text-align: center;
+
+                            & > button{
+                                border-radius: 5px;
+                                -webkit-border-radius: 5px;
+                                -moz-border-radius: 5px;
+                                -ms-border-radius: 5px;
+                                font-weight: bold;
+                                padding: 10px 20px;
+                                text-transform: lowercase;
+
+                                &.recommendation-delete-btn{
+                                    background: transparent;
+                                    color: $theme_font_color !important;
+                                    border: 1px solid $theme_border_medium_color;
+                                }
+                            }
+                        }
                     }
                 }
             }

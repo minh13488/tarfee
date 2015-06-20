@@ -96,16 +96,17 @@
 		    			<?php echo date('M, d, Y', $item->getGivenDate()->getTimestamp());?>
 		    		</div>
 		    		<div class="title"><?php echo $giver?></div>
-		    	</div>
-		    	<div class="recommendation-options">
-		    		<div class="button-wrapper">
-		    			<?php if ($item->show) :?>
-		    			<button type="button" class="recommendation-hide-btn" rel="received" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('Hide')?></button>
-		    			<?php else: ?>
-		    			<button type="button" class="recommendation-show-btn" rel="received" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('Show')?></button>
-		    			<?php endif; ?>
-		    			<button type="button" class="recommendation-delete-btn" rel="received" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('Delete')?></button>
-		    		</div>
+
+			    	<div class="recommendation-options">
+			    		<div class="button-wrapper">
+			    			<?php if ($item->show) :?>
+			    			<button type="button" class="recommendation-hide-btn" rel="received" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('Hide')?></button>
+			    			<?php else: ?>
+			    			<button type="button" class="recommendation-show-btn" rel="received" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('Show')?></button>
+			    			<?php endif; ?>
+			    			<button type="button" class="recommendation-delete-btn" rel="received" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('Delete')?></button>
+			    		</div>
+			    	</div>
 		    	</div>
 		    </li>
 		<?php endforeach;?>
@@ -138,12 +139,12 @@
 		    			<?php echo date('M, d, Y', $item->getGivenDate()->getTimestamp());?>
 		    		</div>
 		    		<div class="title"><?php echo $giver?></div>
-		    	</div>
-		    	<div class="recommendation-options">
-		    		<div class="button-wrapper">
-		    			<button type="button" class="recommendation-approve-btn" rel="pending" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('Approve')?></button>
-		    			<button type="button" class="recommendation-delete-btn" rel="pending" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('Delete')?></button>
-		    		</div>
+			    	<div class="recommendation-options">
+			    		<div class="button-wrapper">
+			    			<button type="button" class="recommendation-approve-btn" rel="pending" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('accept')?></button>
+			    			<button type="button" class="recommendation-delete-btn" rel="pending" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('decline')?></button>
+			    		</div>
+			    	</div>
 		    	</div>
 		    </li>
 		<?php endforeach;?>
@@ -167,10 +168,10 @@
 		    	<div class="receiver-info">
 		    		<?php $giver = Engine_Api::_()->user()->getUser($item->receiver_id);?>
 		    		<span class="photo"><?php echo $this->htmlLink($giver->getHref(), $this->itemPhoto($giver, 'thumb.icon'), array())?></span>
-		    		<span class="title"><?php echo $giver?></span>
 		    	</div>
 		    	<div class="recommendation-options">
-		    		<div class="button-wrapper">
+		    		<span class="title" style="text-align: left"><?php echo $giver?></span>
+		    		<div class="button-wrapper" style="text-align: left">
 		    			<button type="button" class="recommendation-delete-btn" rel="request" value="<?php echo $item->getIdentity()?>"><?php echo $this->translate('Ignore')?></button>
 		    			<button type="button" class="widget-recommendation-popup" rel="request" href="<?php echo $this->url(array('action'=>'give', 'receiver_id'=>$item->receiver_id), 'user_recommendation', true)?>"><?php echo $this->translate('Write Recommendation')?></button>
 		    		</div>
