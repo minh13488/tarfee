@@ -8,11 +8,13 @@
     ?>
     
 </div>
-<ul class="tf_video_action">
+<?php if($this -> viewer() -> getIdentity()):?>
+	<ul class="tf_video_action">
 		<li>
 			<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('remove')?></a>
 	    </li>
-    </ul>
+	</ul>
+<?php endif;?>
 <div class="video-title">
 	<?php echo $this->htmlLink($this->video->getPopupHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
 </div>

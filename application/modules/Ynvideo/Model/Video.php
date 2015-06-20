@@ -555,4 +555,13 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 
 		return $this;
 	}
+	public function hasFavorite()
+	{
+		$viewer = Engine_Api::_()->user()->getViewer();
+		$userId = $viewer -> getIdentity();
+		$videoId = $this -> getIdentity();
+		$favoriteTbl = Engine_Api::_()->getDbTable('favorites', 'ynvideo');
+        $row = $favoriteTbl->fetchRow(array("video_id = $videoId", "user_id = $userId"));
+		return $row;
+	}
 }
