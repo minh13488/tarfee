@@ -13,46 +13,57 @@
     }
     ?>
 </div>
-<?php if($this -> viewer() -> getIdentity()):?>
-<div id="favorite_<?php echo $this->video -> getIdentity()?>">
-	<?php if($this->video -> hasFavorite()):?>
-		<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
-	<?php else:?>	
-		<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
-	<?php endif;?>	
-</div>
-<div id="like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
-	<?php if(!Engine_Api::_()->getDbtable('likes', 'core')->isLike($this->video, $this->viewer())):?>
-		<a style="display:inline-block;" href="javascript:void(0);" onclick="video_like('<?php echo $this->video->getIdentity() ?>')">
-			<i class="fa fa-thumbs-up ynfontawesome"></i> <?php echo $this->translate('Like') ?>
-		</a>
-	<?php else:?>
-		<a style="display:inline-block; color: #2A6496" href="javascript:void(0);" onclick="video_unlike('<?php echo $this->video->getIdentity() ?>')">
-			<i class="fa fa-thumbs-up ynfontawesome"></i> <?php echo $this->translate('Like') ?>
-		</a>
-	<?php endif;?>
-	 &nbsp;&middot;&nbsp; 
-	<?php if(Engine_Api::_()->getDbtable('unsures', 'yncomment')->getUnsure($this->video, $this->viewer())):?>
-		<a style="display:inline-block; color: #2A6496" href="javascript:void(0);" onclick="video_undounsure('<?php echo $this->video->getIdentity() ?>')">
-			<i class="fa fa-meh-o ynfontawesome"></i> <?php echo $this->translate('Unsure') ?>
-		</a>
+
+<div class="button-action-video">
+    <?php if($this -> viewer() -> getIdentity()):?>
+    <div id="favorite_<?php echo $this->video -> getIdentity()?>">
+    	<?php if($this->video -> hasFavorite()):?>
+    		<a href="javascript:;" title="<?php echo $this->translate('unfavorite')?>" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)">
+                <i class="fa fa-heart-o"></i>
+            </a>
+    	<?php else:?>	
+    		<a href="javascript:;" data-toggle="tooltip" title="<?php echo $this->translate('favorite')?>" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)">
+                <i class="fa fa-heart"></i>
+            </a>
+    	<?php endif;?>	
+    </div>
+
+    <div id="like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
+    	<?php if(!Engine_Api::_()->getDbtable('likes', 'core')->isLike($this->video, $this->viewer())):?>
+    		<a onclick="video_like('<?php echo $this->video->getIdentity() ?>')" title="<?php echo $this->translate('Like') ?>">
+    			<i class="fa fa-thumbs-up"></i>
+    		</a>
+    	<?php else:?>
+    		<a href="javascript:void(0);" onclick="video_unlike('<?php echo $this->video->getIdentity() ?>')" title="<?php echo $this->translate('Like') ?>">
+    			<i class="fa fa-thumbs-up"></i> 
+    		</a>
+    	<?php endif;?>
+
+    	<?php if(Engine_Api::_()->getDbtable('unsures', 'yncomment')->getUnsure($this->video, $this->viewer())):?>
+    		<a href="javascript:void(0);" title="<?php echo $this->translate('Unsure') ?>" onclick="video_undounsure('<?php echo $this->video->getIdentity() ?>')">
+    			<i class="fa fa-meh-o "></i> 
+    		</a>
 		<?php else :?>
-		<a style="display:inline-block;" href="javascript:void(0);" onclick="video_unsure('<?php echo $this->video->getIdentity() ?>')">
-			<i class="fa fa-meh-o ynfontawesome"></i> <?php echo $this->translate('Unsure') ?>
-		</a>
+    		<a href="javascript:void(0);" title="<?php echo $this->translate('Unsure') ?>" onclick="video_unsure('<?php echo $this->video->getIdentity() ?>')">
+    			<i class="fa fa-meh-o"></i> 
+    		</a>
 		<?php endif;?>
-	 &nbsp;&middot;&nbsp; 
-	<?php if(Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislike($this->video, $this->viewer())):?>
-	<a style="display:inline-block; color: #2A6496" href="javascript:void(0);" onclick="video_undounlike('<?php echo $this->video->getIdentity() ?>')">
-		<i class="fa fa-thumbs-down ynfontawesome"></i> <?php echo $this->translate('Dislike') ?>
-	</a>
-	<?php else :?>
-	<a style="display:inline-block;" href="javascript:void(0);" onclick="video_unlike('<?php echo $this->video->getIdentity() ?>')">
-		<i class="fa fa-thumbs-down ynfontawesome"></i> <?php echo $this->translate('Dislike') ?>
-	</a>
-	<?php endif;?>
-</div>
-<?php endif;?>
+
+    	<?php if(Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislike($this->video, $this->viewer())):?>
+        	<a href="javascript:void(0);" title="<?php echo $this->translate('Dislike') ?>" onclick="video_undounlike('<?php echo $this->video->getIdentity() ?>')">
+        		<i class="fa fa-thumbs-down"></i>
+        	</a>
+    	<?php else :?>
+        	<a href="javascript:void(0);" title="<?php echo $this->translate('Dislike') ?>" onclick="video_unlike('<?php echo $this->video->getIdentity() ?>')">
+        		<i class="fa fa-thumbs-down"></i> 
+        	</a>
+    	<?php endif;?>
+
+    </div>
+    <?php endif;?>
+</div><!--end button action vide -->
+
+
 <?php if ($this->video->parent_type == 'user_playercard') :?>
 <?php $player = $this->video->getParent();?>
 <?php if ($player):?>

@@ -1332,12 +1332,13 @@ body#global_page_user-profile-index {
 .layout_ynvideo_main_page_videos{
 	#main-page-videos{
 		overflow: hidden;
+		position: relative;
 	}
     li{
         float: left;
-        margin-bottom: 2%;
-        width: 32%;
-        margin-left: 2%;
+        /*margin-bottom: 2%;*/
+        width: 30%;
+        /*margin-left: 2%;*/
         overflow: hidden;
         border-radius: 5px;
         -webkit-border-radius: 5px;
@@ -1346,6 +1347,14 @@ body#global_page_user-profile-index {
 
         &:nth-child(3n+1){
             margin-left: 0;
+        }
+
+        .button-action-video{
+        	background: khaki;
+
+        	& > div{
+        		display: inline;
+        	}
         }
 
         .ynvideo_thumb_wrapper{

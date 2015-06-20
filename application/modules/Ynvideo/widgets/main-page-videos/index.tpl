@@ -91,13 +91,7 @@ function showMore(from){
 </script>
 
 <script type="text/javascript">
-  window.addEvent('domready', function() {
-    setPinterestMode();
-  });
 
-//Set mode layout wookmark
-function setPinterestMode() 
-{
     jQuery.noConflict();
     (function (jQuery){
         var handler = jQuery('#main-page-videos li');
@@ -106,12 +100,11 @@ function setPinterestMode()
             // Prepare layout options.
             autoResize: true, // This will auto-update the layout when the browser window is resized.
             container: jQuery('#main-page-videos'), // Optional, used for some extra CSS styling
-            offset: 15, // Optional, the distance between grid items
+            offset: 10, // Optional, the distance between grid items
             outerOffset: 0, // Optional, the distance to the containers border
             itemWidth: 225, // Optional, the width of a grid item
-            flexibleWidth: '100%',
+            flexibleWidth: '50%',
         });
     })(jQuery);
-}
 </script>
 
