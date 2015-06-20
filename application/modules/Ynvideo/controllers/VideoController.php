@@ -176,5 +176,52 @@ class Ynvideo_VideoController extends Core_Controller_Action_Standard
 		$data = Zend_Json::encode($data);
 		$this -> getResponse() -> setBody($data);
 	}
-	
+
+	public function listLikesAction() 
+	{
+		$video = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> video = $video;
+	}
+
+	public function likeAction() 
+	{
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $video = Engine_Api::_() -> core() -> getSubject();
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($video) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+
+            if (Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> isDislike($video, $viewer))
+                Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> removeDislike($video, $viewer);
+			
+			if (Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> isUnsure($video, $viewer))
+                Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> removeUnsure($video, $viewer);
+
+            if (!Engine_Api::_() -> getDbtable('likes', 'core') -> isLike($video, $viewer))
+                Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($video) -> addLike($viewer);
+
+            // Add notification
+            $owner = $video -> getOwner();
+            if ($owner -> getType() == 'user' && $owner -> getIdentity() != $viewer -> getIdentity()) {
+                $notifyApi = Engine_Api::_() -> getDbtable('notifications', 'activity');
+                $notifyApi -> addNotification($owner, $viewer, $video, 'liked', array('label' => $video -> getShortType()));
+            }
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+
+        $this -> view -> body = $this -> view -> action('list-likes', 'video', 'ynvideo', array( 'id' => $id));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
 }

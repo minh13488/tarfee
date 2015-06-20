@@ -87,7 +87,28 @@ function showMore(from){
             }
         });
         request.send();  
-   } 
+   }
+   
+   var tempLike = 0;
+   var tempUnlike = 0;
+   var video_like = function(id)
+   {
+   		if (tempLike == 0) 
+   		{
+   			en4.core.request.send(new Request.JSON({
+				url : en4.core.baseUrl + 'ynvideo/video/like',
+				data : {
+					format : 'json',
+					id : id
+				},
+				onComplete : function(e) {
+					tempLike = tempUnlike = 0;
+				}
+			}), {
+				'element' : $('like_unsure_dislike_' + id)
+			});
+		}
+   }
 </script>
 
 <script type="text/javascript">
