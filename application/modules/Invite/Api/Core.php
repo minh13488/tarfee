@@ -18,5 +18,9 @@
  */
 class Invite_Api_Core extends Core_Api_Abstract
 {
-  
+  	public function getRowCode($code){
+  		$tableInvite = Engine_Api::_() -> getDbTable('invites', 'invite');
+		$select = $tableInvite -> select() -> where('code = ?', $code) -> limit(1);
+		return $tableInvite -> fetchRow($select);
+  	}
 }

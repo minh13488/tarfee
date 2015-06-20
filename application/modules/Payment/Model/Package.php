@@ -33,7 +33,7 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
 
   public function isFree()
   {
-    return ( $this->price <= 0 );
+    return ( $this->getPrice() <= 0 );
   }
 
   public function isOneTime()
@@ -76,7 +76,7 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
     return array(
       'title' => $this->title,
       'description' => $this->description,
-      'price' => $this->price,
+      'price' => $this->getPrice(),
       'extension_type' => 'payment_subscription',
       'extension_id' => $this->package_id,
     );
@@ -87,10 +87,10 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
     $translate = Zend_Registry::get('Zend_Translate');
     $currency = Engine_Api::_()->getApi('settings', 'core')->getSetting('payment.currency', 'USD');
     $view = Zend_Registry::get('Zend_View');
-    $priceStr = $view->locale()->toCurrency($this->price, $currency);
+    $priceStr = $view->locale()->toCurrency($this->getPrice(), $currency);
     
     // Plan is free
-    if( $this->price == 0 ) {
+    if( $this->getPrice() == 0 ) {
       $str = $translate->translate('Free');
     }
     
@@ -137,7 +137,7 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
 
     // General
     $params['name'] = $this->title;
-    $params['price'] = $this->price;
+    $params['price'] = $this->getPrice();
     $params['description'] = $this->description;
     $params['vendor_product_id'] = $this->getGatewayIdentity();
     $params['tangible'] = false;
@@ -302,5 +302,55 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
     $product->save();
     
     parent::_postUpdate();
+  }
+  
+  public function getPrice()
+  {
+  	  $referCode =  $_SESSION['ref_code'];
+	  $isEnabled = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1);
+	  $discount = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_discount', 0);
+	  $period = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_trial ', 0);
+	  $now =  date("Y-m-d H:i:s");
+	  
+	  $invite = null;
+	  
+	  if(isset($referCode) && !is_null($referCode) && !empty($referCode))
+	  {
+	  	 $invite = Engine_Api::_() -> invite() -> getRowCode($referCode);
+	  }
+	  if($isEnabled && $invite)
+	  {
+	  	  //if exist code then get expire date
+		  if($period == 1)
+		  {
+				$type = 'day';
+	      }
+		  else 
+		  {
+				$type = 'days';
+		  }
+		  $expiration_date = date_add(date_create($invite->timestamp),date_interval_create_from_date_string($period." ".$type));
+		  
+	      $expirationDate = date_create($expiration_date);
+		  $nowDate = date_create($now);
+		  
+	  	  if($period != 0) 
+	  	  {
+	  	  	  if ($nowDate >= $expirationDate) 
+			  {
+			  	//check if code not expire
+			  	return $this -> price*(1 - $discount/100);
+			  }
+	  	  }
+		  else 
+		  {
+		  	   //if code never expired
+	  	   		return $this -> price*(1 - $discount/100);
+		  }
+	  }
+	  else 
+	  {
+	  	 return $this -> price;
+	  }
   }
 }

@@ -584,7 +584,9 @@ class User_SettingsController extends Core_Controller_Action_User {
 			$db -> rollBack();
 			throw $e;
 		}
-
+		
+		 Zend_Auth::getInstance()->getStorage()->write($user -> user_id);
+ 		Engine_Api::_()->user()->setViewer();
 		// Register login
 		$loginTable = Engine_Api::_() -> getDbtable('logins', 'user');
 		$ipObj = new Engine_IP();

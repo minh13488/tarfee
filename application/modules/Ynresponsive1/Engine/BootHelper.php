@@ -227,6 +227,7 @@ class Ynresponsive1_BootHelper extends Zend_Controller_Action_Helper_Abstract
 				$$('body')[0].addClass('".YNRESPONSIVE_ACTIVE."');
 			});";
 		$view->headScript()->appendScript( $bootstrap_script );
+		
 	}
 
 }
