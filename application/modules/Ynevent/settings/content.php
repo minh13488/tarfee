@@ -157,7 +157,7 @@ return array(
 				),
 		),
 		array(
-				'title' => 'Recent Events',
+				'title' => 'Recent Events - Main Page',
 				'description' => 'Displays events on main page.',
 				'category' => 'Advanced Events',
 				'type' => 'widget',
@@ -985,7 +985,7 @@ return array(
 				),
 		),
 		array(
-				'title' => 'Recent Events - Main Page',
+				'title' => 'Recent Events',
 				'description' => 'Displays a list of recently created advanced events.',
 				'category' => 'Advanced Events',
 				'type' => 'widget',
