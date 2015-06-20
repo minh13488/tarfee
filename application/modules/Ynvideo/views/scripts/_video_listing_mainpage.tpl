@@ -1,17 +1,3 @@
-<?php
-/**
- * YouNet Company
- *
- * @category   Application_Extensions
- * @package    Ynvideo
- * @author     YouNet Company
- */
-?>
-
-
-
-
-
 <div class="ynvideo_thumb_wrapper video_thumb_wrapper">
     <?php if ($this->video->parent_type == 'user_playercard') :?>
         <span class="icon-player">
@@ -21,7 +7,7 @@
 
     <?php
     if ($this->video->photo_id) {
-        echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.large'));
+        echo $this->htmlLink($this->video->getPopupHref(), $this->itemPhoto($this->video, 'thumb.large'), array('class'=>'smoothbox'));
     } else {
         echo '<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">';
     }
@@ -62,7 +48,7 @@
 
 
 <div class="video-title">
-    <?php echo $this->htmlLink($this->video->getHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
+    <?php echo $this->htmlLink($this->video->getPopupHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
 </div>
 
 <div class="video-statistic-rating">

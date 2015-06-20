@@ -148,7 +148,12 @@ class Ynvideo_Form_Video extends Engine_Form
 				$this -> auth_comment -> getDecorator('Description') -> setOption('placement', 'append');
 			}
 		}
-
+		
+		$this->addElement('File', 'photo', array(
+	      'label' => 'Artwork image'
+	    ));
+	    $this->photo->addValidator('Extension', false, 'jpg,png,gif,jpeg');
+		
 		$this -> addAdditionalElements();
 
 		// Init submit

@@ -146,6 +146,18 @@ return array(
                 'user_id' => '\d+'
             )
         ),
+        'video_popup_view' => array(
+            'route' => 'videos/popup/:user_id/:video_id/:slug/*',
+            'defaults' => array(
+                'module' => 'ynvideo',
+                'controller' => 'index',
+                'action' => 'popup-view',
+                'slug' => '',
+            ),
+            'reqs' => array(
+                'user_id' => '\d+'
+            )
+        ),
         'video_favorite' => array(
             'route' => 'videos/favorite/:action/*',
             'defaults' => array(

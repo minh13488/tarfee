@@ -37,14 +37,31 @@
 
 <ul id="ynvideo_favorite_videos">
     <?php foreach ($this->paginator as $item): ?>
-        <li>
+        <li id="favorite_video_<?php echo $item -> getIdentity()?>">
             <?php
                 echo $this->partial('_video_listing_favorite.tpl', 'ynvideo', array('video' => $item));
             ?>
         </li>
 <?php endforeach; ?>
 </ul>
-
+<script type="text/javascript">
+   var unfavorite_video = function(videoId)
+   {
+   	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
+       var request = new Request.JSON({
+            'method' : 'post',
+            'url' :  url,
+            'data' : {
+                'video_id' : videoId
+            },
+            'onComplete':function(responseObject)
+            {  
+            	$('favorite_video_' + videoId).destroy();
+            }
+        });
+        request.send();  
+   } 
+</script>
 <div>
     <div id="ynvideo_fav_videos_previous" class="paginator_previous">
         <?php
