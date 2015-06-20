@@ -26,7 +26,14 @@ class Ynvideo_VideoController extends Core_Controller_Action_Standard
 			$video = Engine_Api::_() -> getItem('video', $id);
 			if ($video)
 			{
-				Engine_Api::_() -> core() -> setSubject($video);
+				if (!Engine_Api::_() -> core() -> hasSubject()) 
+				{
+					Engine_Api::_() -> core() -> setSubject($video);
+				}
+				else {
+					Engine_Api::_() -> core() -> clearSubject();
+					Engine_Api::_() -> core() -> setSubject($video);
+				}
 			}
 		}
 
@@ -176,5 +183,217 @@ class Ynvideo_VideoController extends Core_Controller_Action_Standard
 		$data = Zend_Json::encode($data);
 		$this -> getResponse() -> setBody($data);
 	}
-	
+
+	public function listLikesAction() 
+	{
+		$video = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> video = $video;
+		$this -> renderScript('video/list-likes.tpl');
+	}
+
+	public function likeAction() 
+	{
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $video = Engine_Api::_() -> core() -> getSubject();
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($video) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+
+            if (Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> isDislike($video, $viewer))
+                Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> removeDislike($video, $viewer);
+			
+			if (Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> isUnsure($video, $viewer))
+                Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> removeUnsure($video, $viewer);
+
+            if (!Engine_Api::_() -> getDbtable('likes', 'core') -> isLike($video, $viewer))
+                Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($video) -> addLike($viewer);
+
+            // Add notification
+            $owner = $video -> getOwner();
+            if ($owner -> getType() == 'user' && $owner -> getIdentity() != $viewer -> getIdentity()) {
+                $notifyApi = Engine_Api::_() -> getDbtable('notifications', 'activity');
+                $notifyApi -> addNotification($owner, $viewer, $video, 'liked', array('label' => $video -> getShortType()));
+            }
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+		
+		$this -> view -> status = true;
+		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Like added');
+        $this -> view -> body = $this -> view -> action('list-likes', 'video', 'ynvideo', array( 'id' => $video -> getIdentity(), 'format' => 'html'));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
+	public function unlikeAction() 
+	{
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $video = Engine_Api::_() -> core() -> getSubject();
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($video) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+            if (Engine_Api::_() -> getDbtable('likes', 'core') -> isLike($video, $viewer))
+                Engine_Api::_() -> getDbtable('likes', 'core') -> removeLike($video, $viewer);
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+		
+		$this -> view -> status = true;
+		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Like added');
+        $this -> view -> body = $this -> view -> action('list-likes', 'video', 'ynvideo', array( 'id' => $video -> getIdentity(), 'format' => 'html'));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
+	public function unsureAction() 
+	{
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $video = Engine_Api::_() -> core() -> getSubject();
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($video) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+
+            if (Engine_Api::_() -> getDbtable('likes', 'core') -> isLike($video, $viewer))
+                Engine_Api::_() -> getDbtable('likes', 'core') -> removeLike($video, $viewer);
+			
+			if (Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> isDislike($video, $viewer))
+                Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> removeDislike($video, $viewer);
+			
+            if (!Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> isUnsure($video, $viewer))
+                Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> addUnsure($video, $viewer);
+
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+		
+		$this -> view -> status = true;
+		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Like added');
+        $this -> view -> body = $this -> view -> action('list-likes', 'video', 'ynvideo', array( 'id' => $video -> getIdentity(), 'format' => 'html'));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
+
+	public function undounsureAction() 
+	{
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $video = Engine_Api::_() -> core() -> getSubject();
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($video) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+             if (Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> isUnsure($video, $viewer))
+                Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> removeUnsure($video, $viewer);
+
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+		
+		$this -> view -> status = true;
+		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Like added');
+        $this -> view -> body = $this -> view -> action('list-likes', 'video', 'ynvideo', array( 'id' => $video -> getIdentity(), 'format' => 'html'));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
+
+	public function dislikeAction() 
+	{
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $video = Engine_Api::_() -> core() -> getSubject();
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($video) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+            if (Engine_Api::_() -> getDbtable('likes', 'core') -> isLike($video, $viewer))
+                Engine_Api::_() -> getDbtable('likes', 'core') -> removeLike($video, $viewer);
+			
+			if (Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> isUnsure($video, $viewer))
+                Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> removeUnsure($video, $viewer);
+
+            if (!Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> isDislike($video, $viewer))
+                Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> addDislike($video, $viewer);
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+		
+		$this -> view -> status = true;
+		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Like added');
+        $this -> view -> body = $this -> view -> action('list-likes', 'video', 'ynvideo', array( 'id' => $video -> getIdentity(), 'format' => 'html'));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
+	public function undislikeAction() 
+	{
+        if (!$this -> _helper -> requireUser() -> isValid()) {
+            return;
+        }
+        if (!$this -> _helper -> requireAuth() -> setAuthParams(null, null, 'comment') -> isValid()) {
+            return;
+        }
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+        $video = Engine_Api::_() -> core() -> getSubject();
+
+        // Process
+        $db = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($video) -> getAdapter();
+        $db -> beginTransaction();
+
+        try {
+            if (Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> isDislike($video, $viewer))
+                Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> removeDislike($video, $viewer);
+            $db -> commit();
+        } catch (Exception $e) {
+            $db -> rollBack();
+            throw $e;
+        }
+		
+		$this -> view -> status = true;
+		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Like added');
+        $this -> view -> body = $this -> view -> action('list-likes', 'video', 'ynvideo', array( 'id' => $video -> getIdentity(), 'format' => 'html'));
+        $this -> _helper -> contextSwitch -> initContext();
+    }
 }

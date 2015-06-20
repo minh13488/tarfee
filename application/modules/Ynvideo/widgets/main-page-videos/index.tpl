@@ -56,6 +56,8 @@ function showMore(from){
 <script type="text/javascript">
    var unfavorite_video = function(videoId)
    {
+   	   var obj = document.getElementById('favorite_' + videoId);
+   	   obj.innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
    	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
        var request = new Request.JSON({
             'method' : 'post',
@@ -65,7 +67,6 @@ function showMore(from){
             },
             'onComplete':function(responseObject)
             {  
-            	obj = document.getElementById('favorite_'+ videoId);
                 obj.innerHTML = '<a href="javascript:;" onclick="favorite_video('+videoId+')">' + '<?php echo $this->translate("favourite")?>' + '</a>';
             }
         });
@@ -73,6 +74,8 @@ function showMore(from){
    } 
    var favorite_video = function(videoId)
    {
+   	   var obj = document.getElementById('favorite_' + videoId);
+   	   obj.innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
    	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
        var request = new Request.JSON({
             'method' : 'post',
@@ -82,12 +85,36 @@ function showMore(from){
             },
             'onComplete':function(responseObject)
             {  
-            	obj = document.getElementById('favorite_' + videoId);
                 obj.innerHTML = '<a href="javascript:;" onclick="unfavorite_video('+videoId+')">' + '<?php echo $this->translate("unfavourite")?>' + '</a>';
             }
         });
         request.send();  
-   } 
+   }
+   
+   var tempLike = 0;
+   var video_like = function(id, action)
+   {
+   		if (tempLike == 0) 
+   		{
+   			tempLike = 1;
+   			if ($(action + '_video_' + id)) {
+				$(action + '_video_' + id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			}
+			var url = en4.core.baseUrl + 'ynvideo/video/' + action;
+   			en4.core.request.send(new Request.JSON({
+				url : url,
+				data : {
+					format : 'json',
+					id : id
+				},
+				onComplete : function(e) {
+					tempLike = 0;
+				}
+			}), {
+				'element' : $('like_unsure_dislike_' + id)
+			});
+		}
+   }
 </script>
 
 <script type="text/javascript">

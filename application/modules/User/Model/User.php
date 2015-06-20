@@ -35,7 +35,7 @@ class User_Model_User extends Core_Model_Item_Abstract
       $tmp = explode('@', $this->email);
       return $tmp[0];
     } else {
-      return "<i>" . Zend_Registry::get('Zend_Translate')->_("Deleted Member") . "</i>";
+      return Zend_Registry::get('Zend_Translate')->_("Deactivated Member");
     }
   }
 
