@@ -108,6 +108,7 @@ return array(
     'user_sportcategory',
     'user_playercard',
     'user_photo',
+    'user_inviterequest'
   ),
   // Routes --------------------------------------------------------------------
   'routes' => array(
