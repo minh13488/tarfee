@@ -605,14 +605,14 @@ class User_Api_Core extends Core_Api_Abstract
 		return $ids;
 	}
 	
-	public function addDeactiveAccountPage()
+	public function addDeactivateAccountPage()
   {
     $db = Engine_Db_Table::getDefaultAdapter();
 
     // profile page
     $page_id = $db->select()
       ->from('engine4_core_pages', 'page_id')
-      ->where('name = ?', 'user_settings_deactive')
+      ->where('name = ?', 'user_settings_deactivate')
       ->limit(1)
       ->query()
       ->fetchColumn();
@@ -621,10 +621,10 @@ class User_Api_Core extends Core_Api_Abstract
       
       // Insert page
       $db->insert('engine4_core_pages', array(
-        'name' => 'user_settings_deactive',
-        'displayname' => 'User Deactive Account Settings Page',
-        'title' => 'Deactive Account',
-        'description' => 'This page is the deactive accout page.',
+        'name' => 'user_settings_deactivate',
+        'displayname' => 'User Deactivate Account Settings Page',
+        'title' => 'Deactivate Account',
+        'description' => 'This page is the deactivate account page.',
         'custom' => 0,
       ));
       $page_id = $db->lastInsertId();
@@ -686,14 +686,14 @@ class User_Api_Core extends Core_Api_Abstract
     }
   }
 
-	public function addActiveAccountPage()
+	public function addActivateAccountPage()
   {
     $db = Engine_Db_Table::getDefaultAdapter();
 
     // profile page
     $page_id = $db->select()
       ->from('engine4_core_pages', 'page_id')
-      ->where('name = ?', 'user_settings_active')
+      ->where('name = ?', 'user_settings_activate')
       ->limit(1)
       ->query()
       ->fetchColumn();
@@ -702,10 +702,10 @@ class User_Api_Core extends Core_Api_Abstract
       
       // Insert page
       $db->insert('engine4_core_pages', array(
-        'name' => 'user_settings_active',
-        'displayname' => 'User Active Account Settings Page',
+        'name' => 'user_settings_activate',
+        'displayname' => 'User Activate Account Settings Page',
         'title' => 'Active Account',
-        'description' => 'This page is the active accout page.',
+        'description' => 'This page is the activate account page.',
         'custom' => 0,
       ));
       $page_id = $db->lastInsertId();

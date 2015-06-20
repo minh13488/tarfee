@@ -37,7 +37,7 @@
 		    </li>
 		    <?php endif;?>
 		    <li>
-		        <a class="menu_user_settings user_settings_network" href="<?php echo $this -> url(array('controller' => 'settings', 'action' => 'deactive'),'user_extended', true) ?>"><?php echo $this -> translate('Deactive Account')?></a>
+		        <a class="menu_user_settings user_settings_network" href="<?php echo $this -> url(array('controller' => 'settings', 'action' => 'deactivate'),'user_extended', true) ?>"><?php echo $this -> translate('Deactivate Account')?></a>
 		    </li>
 		</ul>
   </div>

@@ -318,7 +318,7 @@ class User_AuthController extends Core_Controller_Action_Standard
 
 		// -- Success! --
 		if ($user->deactive) {
-			return $this -> _helper -> redirector -> gotoRoute(array('controller' => 'settings', 'action' => 'active'),'user_extended', true);
+			return $this -> _helper -> redirector -> gotoRoute(array('controller' => 'settings', 'action' => 'activate'),'user_extended', true);
 		}
 		
 		// Register login

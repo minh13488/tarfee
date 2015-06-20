@@ -8,21 +8,6 @@ class Ynevent_Controller_Plugin_Dispatch extends Zend_Controller_Plugin_Abstract
 		$controller = $request -> getControllerName();
 		$action = $request -> getActionName();
 		
-		$full_name = implode('.', array(
-	  		$request -> getModuleName(),
-	  		$request -> getControllerName(),
-	  		$request -> getActionName()
-		));
-		
-		$view  =  Zend_Registry::get('Zend_View');
-		
-		$viewer = Engine_Api::_()->user()->getViewer();
-		if (!empty($viewer->deactive) && ($full_name != 'user.settings.active') && ($full_name != 'user.auth.logout')) {
-			$url = $view->url(array('controller' => 'settings', 'action' => 'active'),'user_extended', true);
-			header('location:' . $url);
-			exit;
-		}
-		
 		$key = 'ynevent_predispatch_url:' . $module . '.' . $controller . '.' . $action;
 		if (isset($_SESSION[$key]) && $_SESSION[$key]) {
 			$url = $_SESSION[$key];

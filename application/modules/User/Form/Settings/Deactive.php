@@ -3,8 +3,8 @@ class User_Form_Settings_Deactive extends Engine_Form {
   public function init()
   {
     $this
-      ->setTitle('Deactive Account')
-      ->setDescription('Are you sure you want to deactive your account?')
+      ->setTitle('Deactivate Account')
+      ->setDescription('Are you sure you want to deactivate your account?')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()))
       ;
 
@@ -13,7 +13,7 @@ class User_Form_Settings_Deactive extends Engine_Form {
 
     // Element: execute
     $this->addElement('Button', 'execute', array(
-      'label' => 'Yes, Deactive My Account',
+      'label' => 'Yes, Deactivate My Account',
       'type' => 'submit',
       'ignore' => true,
       //'style' => 'color:#D12F19;',
