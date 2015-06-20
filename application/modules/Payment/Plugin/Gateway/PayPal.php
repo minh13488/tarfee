@@ -132,16 +132,16 @@ class Payment_Plugin_Gateway_PayPal extends Engine_Payment_Plugin_Abstract
     // This is a one-time fee
     if( $package->isOneTime() ) {
       $params['driverSpecificParams']['PayPal'] = array(
-        'AMT' => $package->price,
+        'AMT' => $package->getPrice(),
         'DESC' => $desc,
         'CUSTOM' => $subscription->subscription_id,
         'INVNUM' => $params['vendor_order_id'],
-        'ITEMAMT' => $package->price,
+        'ITEMAMT' => $package->getPrice(),
         'ITEMS' => array(
           array(
             'NAME' => $package->title,
             'DESC' => $desc,
-            'AMT' => $package->price,
+            'AMT' => $package->getPrice(),
             'NUMBER' => $subscription->subscription_id,
             'QTY' => 1,
           ),
@@ -432,7 +432,7 @@ class Payment_Plugin_Gateway_PayPal extends Engine_Payment_Plugin_Abstract
         'BILLINGPERIOD' => ucfirst($package->recurrence_type),
         'BILLINGFREQUENCY' => $package->recurrence,
         'INITAMT' => 0,
-        'AMT' => $package->price,
+        'AMT' => $package->getPrice(),
         'CURRENCYCODE' => $this->getGateway()->getCurrency(),
       );
 
