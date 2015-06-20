@@ -17,8 +17,8 @@ class User_Controller_Plugin_Dispatch extends Zend_Controller_Plugin_Abstract
 		$view  =  Zend_Registry::get('Zend_View');
 		
 		$viewer = Engine_Api::_()->user()->getViewer();
-		if (!empty($viewer->deactive) && ($full_name != 'user.settings.active') && ($full_name != 'user.auth.logout')) {
-			$url = $view->url(array('controller' => 'settings', 'action' => 'active'),'user_extended', true);
+		if (!empty($viewer->deactive) && ($full_name != 'user.settings.activate') && ($full_name != 'user.auth.logout')) {
+			$url = $view->url(array('controller' => 'settings', 'action' => 'activate'),'user_extended', true);
 			header('location:' . $url);
 			exit;
 		}
