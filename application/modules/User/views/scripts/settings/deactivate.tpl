@@ -28,7 +28,7 @@
 		    </li>
 		    <?php endif;?>
 		    <li class="active">
-		        <a class="menu_user_settings user_settings_network" href="<?php echo $this -> url(array('controller' => 'settings', 'action' => 'deactive'),'user_extended', true) ?>"><?php echo $this -> translate('Deactive Account')?></a>
+		        <a class="menu_user_settings user_settings_network" href="<?php echo $this -> url(array('controller' => 'settings', 'action' => 'deactivate'),'user_extended', true) ?>"><?php echo $this -> translate('Deactivate Account')?></a>
 		    </li>
 		</ul>
   </div>
@@ -42,4 +42,4 @@
   </div>
 <?php return; endif; ?>
 
-<?php echo $this->form->setAttrib('id', 'user_form_settings_deactive')->render($this) ?>
+<?php echo $this->form->setAttrib('id', 'user_form_settings_deactivate')->render($this) ?>

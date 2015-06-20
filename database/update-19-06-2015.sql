@@ -2,8 +2,9 @@ CREATE TABLE IF NOT EXISTS `engine4_user_signup1` (
 `signup_id` int(11) unsigned NOT NULL,
   `class` varchar(128) CHARACTER SET latin1 COLLATE latin1_general_ci NOT NULL,
   `order` smallint(6) NOT NULL DEFAULT '999',
-  `enable` smallint(1) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `enable` smallint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY  (`signup_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `engine4_user_signup1`

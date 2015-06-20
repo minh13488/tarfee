@@ -36,8 +36,8 @@ class User_SettingsController extends Core_Controller_Action_User {
 		$this -> _helper -> requireSubject();
 		$this -> _helper -> requireAuth() -> setAuthParams($subject, null, 'edit');
 		
-		Engine_Api::_()->user()->addDeactiveAccountPage();
-		Engine_Api::_()->user()->addActiveAccountPage();
+		Engine_Api::_()->user()->addDeactivateAccountPage();
+		Engine_Api::_()->user()->addActivateAccountPage();
 		
 		$contextSwitch = $this -> _helper -> contextSwitch;
 		$contextSwitch
@@ -506,7 +506,7 @@ class User_SettingsController extends Core_Controller_Action_User {
 		return $this -> _helper -> redirector -> gotoRoute(array(), 'default', true);
 	}
 
-	public function deactiveAction() {
+	public function deactivateAction() {
 
 		$user = Engine_Api::_() -> core() -> getSubject();
 		
@@ -552,7 +552,7 @@ class User_SettingsController extends Core_Controller_Action_User {
 		return $this -> _helper -> redirector -> gotoRoute(array(), 'default', true);
 	}
 	
-	public function activeAction() {
+	public function activateAction() {
 		$this -> _helper -> layout -> setLayout('default-simple');
 		$user = Engine_Api::_() -> core() -> getSubject();
 		
