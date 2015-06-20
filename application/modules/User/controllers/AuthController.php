@@ -317,7 +317,7 @@ class User_AuthController extends Core_Controller_Action_Standard
 		}
 
 		// -- Success! --
-		if ($user->deactive && $user->getIdentity() == 999999999) {
+		if ($user->deactive) {
 			return $this -> _helper -> redirector -> gotoRoute(array('controller' => 'settings', 'action' => 'active'),'user_extended', true);
 		}
 		
