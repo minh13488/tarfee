@@ -1355,7 +1355,7 @@ body#global_page_user-profile-index {
         	text-align: center;
         	padding-left: 5px;
         	margin-top: 15px;
-        	display: block;
+        	display: flex;
 			float: left;
 			width: 100%;
 
@@ -1365,12 +1365,6 @@ body#global_page_user-profile-index {
 					display: inline;
         		}
 				
-				&:first-child{
-					& > a{
-						margin-right: 1px;
-					}
-				}
-
         		display: inline-block;
 
         		& > a{
