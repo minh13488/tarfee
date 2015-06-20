@@ -268,3 +268,7 @@ CREATE TABLE IF NOT EXISTS `engine4_user_mails` (
 
 INSERT IGNORE INTO `engine4_core_mailtemplates` (`type`, `module`, `vars`) VALUES
 ('user_send_inmail', 'user', '[host],[email],[date],[sender_title],[sender_link],[sender_photo],[message]');
+
+-- 6.12.2015
+ALTER TABLE `engine4_video_videos` ADD `share_count` INT(11) NOT NULL DEFAULT '0' ;
+ALTER TABLE `engine4_video_videos` ADD `like_count` INT(11) NOT NULL DEFAULT '0' ;

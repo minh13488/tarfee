@@ -478,5 +478,33 @@ return array(
         'type' => 'widget',
         'name' => 'ynvideo.main-page-videos',
     ),
+    
+	array(
+        'title' => 'Player of the Week',
+        'description' => 'Displays a list of top talent videos.',
+        'category' => 'Advanced Videos',
+        'type' => 'widget',
+        'name' => 'ynvideo.players-of-week',
+        'defaultParams' => array(
+            'title' => 'Players of the Week',
+            'numberOfVideos' => 5
+        ),
+        'adminForm' => array(
+            'elements' => array(
+                array(
+                    'Text',
+                    'numberOfVideos',
+                    array(
+                        'label' => 'Number of videos',
+                        'value' => '5',
+                        'validators' => array(
+                            array('Int', true),
+                            array('GreaterThan', true, array(0)),
+                        )
+                    )
+                ),
+            )
+        )
+    ),
 )
 ?>
