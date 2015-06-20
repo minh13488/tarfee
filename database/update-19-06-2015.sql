@@ -15,3 +15,6 @@ INSERT INTO `engine4_user_signup1` (`signup_id`, `class`, `order`, `enable`) VAL
 (3, 'User_Plugin_Signup1_Account', 3, 1),
 (4, 'User_Plugin_Signup1_Fields', 4, 1),
 (5, 'Payment_Plugin_Signup1_Subscription', 5, 1);
+
+
+ALTER TABLE `engine4_group_groups` ADD `verified` TINYINT(1) NOT NULL DEFAULT '0' AFTER `approval`;

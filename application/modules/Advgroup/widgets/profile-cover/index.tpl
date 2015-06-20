@@ -205,6 +205,16 @@ if ($this->group->cover_photo)
 				</div>
 				<div>
 					<span>
+						<i class="fa fa-check"></i>
+						<?php if($this -> group -> verified) :?>
+							<?php echo $this -> translate('Verified club');?>
+						<?php else :?>
+							<?php echo $this -> translate('Unverified club');?>
+						<?php endif;?>
+					</span>
+				</div>
+				<div>
+					<span>
 						<i class="ynicon-time" title="Time create"></i>
 						<?php echo $this->group->getTimeAgo() ?>
 					</span>
