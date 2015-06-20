@@ -8,7 +8,13 @@
  */
 ?>
 <div class="photo video_thumb_wrapper">
-    <?php echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.normal'), array('class' => 'thumb')) ?>
+    <?php $href = $this->video->getHref();
+	$request = Zend_Controller_Front::getInstance()->getRequest();
+	if($request -> getParam('format', '') == 'smoothbox')
+	{
+		$href = $this->video->getPopupHref().'/format/smoothbox';
+	}
+    echo $this->htmlLink($href, $this->itemPhoto($this->video, 'thumb.normal'), array('class' => 'thumb')) ?>
     <span class="video_button_add_to_area">
         <button class="ynvideo_uix_button ynvideo_add_button" id="ynvideo_btn_video_<?php echo $this->video->getIdentity()?>" video-id="<?php echo $this->video->getIdentity()?>">
             <div class="ynvideo_plus" />
@@ -18,8 +24,7 @@
 <div class="info">
     <div class="ynvideo_title">
         <?php
-            echo $this->htmlLink($this->video->getHref(), 
-                htmlspecialchars ($this->string()->truncate($this->video->getTitle(), 25)), array('title' => $this->video->getTitle()));
+            echo $this->htmlLink($href, htmlspecialchars ($this->string()->truncate($this->video->getTitle(), 25)), array('title' => $this->video->getTitle()));
         ?>
     </div>
     <div class="ynvideo_date">
