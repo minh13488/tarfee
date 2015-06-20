@@ -1322,6 +1322,11 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
 
                     .user_rating{
                         margin-top: 5px;
+                        text-align: center;
+
+                        .rating_star_generic{
+                            font-size: 20px;
+                        }
                     }
 
                     .tarfee_infomation_player{
@@ -1382,14 +1387,6 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
         clear: both;
         padding-top: 0px;
     }
-}
-.user_rating .rating_star_generic {
-    font-size: 25px;
-    display: inline;
-    color: #F63;
-}
-.user_rating {
-    text-align: center;
 }
 
 /* My Libray Section*/
@@ -1664,13 +1661,6 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                 top: -30px;
                 z-index: 1;
 
-
-                .rating_star_generic{
-                    display: inline;
-                    margin-right: 3px;
-                    color: $theme_link_color;
-                    font-size: 16px;
-                }
             }/*rating*/
 
             .tf_video_key{
@@ -1917,12 +1907,6 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                 z-index: 1;
 
 
-                .rating_star_generic{
-                    display: inline;
-                    margin-right: 3px;
-                    color: $theme_link_color;
-                    font-size: 16px;
-                }
             }/*rating*/
 
             .tf_video_key{

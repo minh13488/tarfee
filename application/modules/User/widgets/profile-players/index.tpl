@@ -229,14 +229,14 @@
 					<?php $overRallRating = $player -> rating;?>
 					<div class="user_rating" title="<?php echo $overRallRating;?>">
 						<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
-					        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
+					        <span class="rating_star_generic"><i class="fa fa-star"></i></span>
 					    <?php endfor; ?>
 					    <?php if ((round($overRallRating) - $overRallRating) > 0): $x ++; ?>
-					        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>&nbsp;
+					        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>
 					    <?php endif; ?>
 					    <?php if ($x <= 5) :?>
 					        <?php for (; $x <= 5; $x++ ) : ?>
-					            <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>&nbsp;
+					            <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>
 					        <?php endfor; ?>
 					    <?php endif; ?>
 					</div>

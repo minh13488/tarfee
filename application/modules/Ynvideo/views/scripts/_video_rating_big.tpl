@@ -8,16 +8,16 @@
  * @author     YouNet Company
  */
 ?>
-<div class="ynvideo_block">
+<div class="tf_video_rating">
     <?php for ($x = 1; $x <= $this->video->rating; $x++): ?>
-        <span class="ynvideo_rating_star_generic rating_star_big"></span>
+        <span class="rating_star_generic"><i class="fa fa-star"></i></span>
     <?php endfor; ?>
     <?php if ((round($this->video->rating) - $this->video->rating) > 0): $x ++; ?>
-        <span class="ynvideo_rating_star_generic rating_star_big_half"></span>
+        <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>
     <?php endif; ?>
     <?php if ($x <= 5) :?>
         <?php for (; $x <= 5; $x++ ) : ?>
-            <span class="ynvideo_rating_star_generic rating_star_big_disabled"></span>
+            <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>   
         <?php endfor; ?>
     <?php endif; ?>
     
