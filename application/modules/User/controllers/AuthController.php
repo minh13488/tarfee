@@ -317,7 +317,10 @@ class User_AuthController extends Core_Controller_Action_Standard
 		}
 
 		// -- Success! --
-
+		if ($user->deactive && $user->getIdentity() == 999999999) {
+			return $this -> _helper -> redirector -> gotoRoute(array('controller' => 'settings', 'action' => 'active'),'user_extended', true);
+		}
+		
 		// Register login
 		$loginTable = Engine_Api::_() -> getDbtable('logins', 'user');
 		$loginTable -> insert(array(
@@ -363,7 +366,7 @@ class User_AuthController extends Core_Controller_Action_Standard
 
 		// Run post login hook
 		$event = Engine_Hooks_Dispatcher::getInstance() -> callEvent('onUserLoginAfter', $viewer);
-
+		
 		// Do redirection only if normal context
 		if (null === $this -> _helper -> contextSwitch -> getCurrentContext())
 		{
