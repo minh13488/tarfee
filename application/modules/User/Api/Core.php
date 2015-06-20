@@ -55,7 +55,42 @@ class User_Api_Core extends Core_Api_Abstract
 		'education' => 'Education',
 	//	'recommendation' => 'Recommendations'
     );
-
+  
+  //@TODO change profile base on level user
+  public function getProfileTypeBaseOnLevel($level_id) {
+  		switch ($level_id) {
+			  case '4':
+				  return "1";
+				  break;
+			  case '6':
+				  return "4";
+				  break;
+			  case '7':
+				  return "5";
+				  break;	  
+			  default:
+				  
+				  break;
+		  }
+  }
+  
+  public function getLevelBaseOnProfileType($profileType_id) {
+  		switch ($profileType_id) {
+			  case '1':
+				  return "4";
+				  break;
+			  case '4':
+				  return "6";
+				  break;
+			  case '5':
+				  return "7";
+				  break;	  
+			  default:
+				  
+				  break;
+		  }
+  }
+  
   // Users
 
   /**
