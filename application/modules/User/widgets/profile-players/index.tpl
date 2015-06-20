@@ -73,6 +73,7 @@
 	    <ul class="players_browse">  
 	        <?php foreach ($this->paginator as $player): 
 			$totalPhoto = $player -> getPhotosTotal();
+			$totalVideo = $player -> getTotalVideo();
 	        ?>
 	        <?php if($player -> isViewable()) :?>
 	        	<li id="player-item-<?php echo $player->playercard_id ?>">
@@ -292,18 +293,9 @@
 						</li>
 
 						<li>
-							<?php
-							$params = array();
-							$params['owner_type'] = $player -> getType();
-							$params['owner_id'] = $player -> getIdentity();
-							$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
-							$totalVideo = $mappingTable -> getTotalVideo($params); ?>
-
 							<span class="tarfee-count-number"><?php  echo $totalVideo; ?></span>
 							<span><?php echo $this->translate(array('video','videos', $totalVideo)); ?></span>
-							
 						</li>
-
 						<li>
 							
 							<span class="tarfee-count-number"><?php echo $totalPhoto; ?></span>

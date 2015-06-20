@@ -257,4 +257,12 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 	public function getSportId() {
 		return $this->category_id;
 	}
+	public function getTotalVideo()
+	{
+		$params = array();
+		$params['owner_type'] = $this -> getType();
+		$params['owner_id'] = $this -> getIdentity();
+		$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+		return $mappingTable -> getTotalVideo($params);
+	}
 }

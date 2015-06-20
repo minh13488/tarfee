@@ -27,21 +27,16 @@
 	  	} 
 	?>
 
-	<div class="tf_video_info">
+	<div class="tf_video_info <?php if(isset($this -> main) && $this -> main) :?>video_main<?php endif;?>">
 		<div class="tf_video_title">
 			<a class="<?php if(!$isMobile) echo 'smoothbox' ?> video_title" href="<?php echo $this -> video->getHref(array('smoothbox'=>'1'));?>">
 		  	<?php echo $this -> video->getTitle();?>
 		  	</a> 
 		</div>
 
-
-		<div style="display:none">
-	  		<?php echo $this->translate('By');?> <?php echo $this->htmlLink($this -> video->getOwner()->getHref(), $this -> video->getOwner()->getTitle()) ?>
-		</div>
-
 		<div class="tf_video_count">
-			<span><?php echo $this -> video->view_count;?> <?php echo $this->translate('views');?>&nbsp;&nbsp;</span>
-			<span><?php echo $this->translate('1,523 comments') ?></span>
+			<span><?php echo $this->translate(array('%s view', '%s views', $this -> video -> view_count), $this -> video -> view_count); ?>&nbsp;&nbsp;</span>
+			<span><?php echo $this->translate(array('%s comment', '%s comments', $this -> video -> comment_count), $this -> video -> comment_count); ?></span>
 		</div>
 
 	   <div class="tf_video_rating">
@@ -51,18 +46,7 @@
 				<?php for($x=1; $x<=5; $x++): ?><span class="rating_star_generic"><i class="fa fa-star-o"></i></span><?php endfor; ?>
 	 		<?php endif;?>
 		</div>
-
-		<div class="tf_video_key">
-			<?php echo $this->translate('Cristiano Ronaldo') ?>
-		</div>
-
-		<div class="tf_video_category">
-			<?php echo $this->translate('Football') ?>
-		</div>
-
 	</div>
-
-
 	<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
    		<ul class="tf_video_action">
    			<li>
@@ -128,5 +112,10 @@
 				<?php endif;?>
 			<?php endif;?>
 		</ul>
+	<?php endif;?>
+	<?php if(isset($this -> main) && $this -> main) :?>
+	<div class="tf_sublibrary_author">
+		<?php echo $this -> translate("by");?> <span><?php echo $this -> video -> getOwner()?></span>
+	</div>
 	<?php endif;?>
 </li>
