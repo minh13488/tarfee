@@ -1350,10 +1350,43 @@ body#global_page_user-profile-index {
         }
 
         .button-action-video{
-        	background: khaki;
+        	overflow: hidden;
+        	clear: both;
+        	text-align: center;
+        	padding-left: 5px;
+        	margin-top: 15px;
+        	display: block;
+			float: left;
+			width: 100%;
 
         	& > div{
-        		display: inline;
+				overflow: hidden;
+        		img{
+					display: inline;
+        		}
+				
+				&:first-child{
+					& > a{
+						margin-right: 1px;
+					}
+				}
+
+        		display: inline-block;
+
+        		& > a{
+					color: #fff;
+					width: 50px;
+					font-size: 18px;
+					background: $theme_link_color;
+					border-radius: 5px;
+					-webkit-border-radius: 5px;
+					-moz-border-radius: 5px;
+					height: 40px;
+					text-align: center;
+					line-height: 40px;
+					float: left;
+					margin-right: 5px;
+        		}
         	}
         }
 

@@ -67,7 +67,7 @@ function showMore(from){
             },
             'onComplete':function(responseObject)
             {  
-                obj.innerHTML = '<a href="javascript:;" onclick="favorite_video('+videoId+')">' + '<?php echo $this->translate("favourite")?>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;" title="<?php echo $this->translate("Favourite")?>" onclick="favorite_video('+videoId+')">' + '<i class="fa fa-heart"></i>' + '</a>';
             }
         });
         request.send();  
@@ -85,7 +85,7 @@ function showMore(from){
             },
             'onComplete':function(responseObject)
             {  
-                obj.innerHTML = '<a href="javascript:;" onclick="unfavorite_video('+videoId+')">' + '<?php echo $this->translate("unfavourite")?>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;" title="<?php echo $this->translate("Unfavourite")?>" onclick="unfavorite_video('+videoId+')">' + '<i class="fa fa-heart-o"></i>' + '</a>';
             }
         });
         request.send();  

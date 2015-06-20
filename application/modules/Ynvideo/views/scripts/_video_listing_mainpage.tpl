@@ -17,66 +17,24 @@
 <div class="button-action-video">
     <?php if($this -> viewer() -> getIdentity()):?>
     <div id="favorite_<?php echo $this->video -> getIdentity()?>">
-    	<?php if($this->video -> hasFavorite()):?>
-    		<a href="javascript:;" title="<?php echo $this->translate('unfavorite')?>" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)">
+        <?php if($this->video -> hasFavorite()):?>
+            <a href="javascript:;" title="<?php echo $this->translate('unfavorite')?>" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)">
                 <i class="fa fa-heart-o"></i>
             </a>
-    	<?php else:?>	
-    		<a href="javascript:;" data-toggle="tooltip" title="<?php echo $this->translate('favorite')?>" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)">
+        <?php else:?>   
+            <a href="javascript:;" title="<?php echo $this->translate('favorite')?>" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)">
                 <i class="fa fa-heart"></i>
             </a>
-    	<?php endif;?>	
+        <?php endif;?>  
     </div>
 
     <div id="like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
-    	<?php if(!Engine_Api::_()->getDbtable('likes', 'core')->isLike($this->video, $this->viewer())):?>
-    		<a onclick="video_like('<?php echo $this->video->getIdentity() ?>')" title="<?php echo $this->translate('Like') ?>">
-    			<i class="fa fa-thumbs-up"></i>
-    		</a>
-    	<?php else:?>
-    		<a href="javascript:void(0);" onclick="video_unlike('<?php echo $this->video->getIdentity() ?>')" title="<?php echo $this->translate('Like') ?>">
-    			<i class="fa fa-thumbs-up"></i> 
-    		</a>
-    	<?php endif;?>
-
-    	<?php if(Engine_Api::_()->getDbtable('unsures', 'yncomment')->getUnsure($this->video, $this->viewer())):?>
-    		<a href="javascript:void(0);" title="<?php echo $this->translate('Unsure') ?>" onclick="video_undounsure('<?php echo $this->video->getIdentity() ?>')">
-    			<i class="fa fa-meh-o "></i> 
-    		</a>
-		<?php else :?>
-    		<a href="javascript:void(0);" title="<?php echo $this->translate('Unsure') ?>" onclick="video_unsure('<?php echo $this->video->getIdentity() ?>')">
-    			<i class="fa fa-meh-o"></i> 
-    		</a>
-		<?php endif;?>
-
-    	<?php if(Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislike($this->video, $this->viewer())):?>
-        	<a href="javascript:void(0);" title="<?php echo $this->translate('Dislike') ?>" onclick="video_undounlike('<?php echo $this->video->getIdentity() ?>')">
-        		<i class="fa fa-thumbs-down"></i>
-        	</a>
-    	<?php else :?>
-        	<a href="javascript:void(0);" title="<?php echo $this->translate('Dislike') ?>" onclick="video_unlike('<?php echo $this->video->getIdentity() ?>')">
-        		<i class="fa fa-thumbs-down"></i> 
-        	</a>
-    	<?php endif;?>
-
+        <?php echo $this -> action('list-likes', 'video', 'ynvideo', array( 'id' => $this -> video -> getIdentity()));?>
     </div>
-    <?php endif;?>
-</div><!--end button action vide -->
+</div>
 
 
-<?php if($this -> viewer() -> getIdentity()):?>
-<div id="favorite_<?php echo $this->video -> getIdentity()?>">
-	<?php if($this->video -> hasFavorite()):?>
-		<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
-	<?php else:?>	
-		<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
-	<?php endif;?>	
-</div>
-<div id="like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
-	<?php echo $this -> action('list-likes', 'video', 'ynvideo', array( 'id' => $this -> video -> getIdentity()));?>
-</div>
 <?php endif;?>
->>>>>>> a7e95f9222e5004fad5767911305a5a6a5242628
 <?php if ($this->video->parent_type == 'user_playercard') :?>
 <?php $player = $this->video->getParent();?>
 <?php if ($player):?>
@@ -129,9 +87,9 @@
         <?php echo $this->htmlLink($user->getHref(), htmlspecialchars ($this->string()->truncate($user->getTitle(), 25)), array('title' => $user->getTitle())) ?>
     <?php endif; ?>
     <?php 
-    	$session = new Zend_Session_Namespace('mobile');
-		 if(!$session -> mobile)
-		 {
+        $session = new Zend_Session_Namespace('mobile');
+         if(!$session -> mobile)
+         {
     ?>
     <?php } ?>
 </div>
