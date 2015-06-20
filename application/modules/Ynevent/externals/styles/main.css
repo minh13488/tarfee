@@ -1039,7 +1039,7 @@ div.ynevent_photo_view>div.comments {
 EVENTS USER PROFILE TAB
 Styles the list of events on a user's Events profile tab.
 */
-
+/*
 
 ul.ynevents_profile_tab>li {
 	overflow: hidden;
@@ -1083,7 +1083,7 @@ ul.ynevents_profile_tab .ynevents_profile_tab_members {
 ul.ynevents_profile_tab .ynevents_profile_tab_desc {
 	margin-top: 7px;
 }
-
+*/
 /*
 POST EVENT TOPIC FORM
 */
