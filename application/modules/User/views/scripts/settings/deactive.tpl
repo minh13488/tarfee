@@ -27,11 +27,19 @@
 		        <a class="menu_user_settings user_settings_network" href="<?php echo $this -> url(array('controller' => 'settings', 'action' => 'delete'),'user_extended', true) ?>"><?php echo $this -> translate('Delete Account')?></a>
 		    </li>
 		    <?php endif;?>
-		    <li>
+		    <li class="active">
 		        <a class="menu_user_settings user_settings_network" href="<?php echo $this -> url(array('controller' => 'settings', 'action' => 'deactive'),'user_extended', true) ?>"><?php echo $this -> translate('Deactive Account')?></a>
 		    </li>
 		</ul>
   </div>
 </div>
+
+<?php if( $this->isLastSuperAdmin ):?>
+  <div class="tip">
+    <span>
+      <?php echo $this->translate('You may not deactive the last super admin account.'); ?>
+    </span>
+  </div>
+<?php return; endif; ?>
 
 <?php echo $this->form->setAttrib('id', 'user_form_settings_deactive')->render($this) ?>

@@ -35,7 +35,9 @@ class User_SettingsController extends Core_Controller_Action_User {
 		$this -> _helper -> requireUser();
 		$this -> _helper -> requireSubject();
 		$this -> _helper -> requireAuth() -> setAuthParams($subject, null, 'edit');
-
+		
+		Engine_Api::_()->user()->addDeactiveAccountPage();
+		
 		$contextSwitch = $this -> _helper -> contextSwitch;
 		$contextSwitch
 		-> initContext();
@@ -503,7 +505,13 @@ class User_SettingsController extends Core_Controller_Action_User {
 	public function deactiveAction() {
 
 		$user = Engine_Api::_() -> core() -> getSubject();
-
+		
+		$this -> view -> isLastSuperAdmin = false;
+		if (1 === count(Engine_Api::_() -> user() -> getSuperAdmins()) && 1 === $user -> level_id) {
+			$this -> view -> isLastSuperAdmin = true;
+			return;
+		}
+		
 		// Form
 		$this -> view -> form = $form = new User_Form_Settings_Deactive();
 
