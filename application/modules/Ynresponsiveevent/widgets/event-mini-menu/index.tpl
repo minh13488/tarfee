@@ -19,7 +19,7 @@
     <?php if($this->search_check):?>
 		<div id="global_search_form_container">
 			<form id="global_search_form" action="<?php echo $this->url(array('controller' => 'search'), 'default', true) ?>" method="get">
-			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100' alt='<?php echo $this->translate('Search') ?>' />                       
+			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100'/>                       
 			</form>
 		</div>
 	<?php endif;?>
@@ -184,20 +184,6 @@
 </div>
 
 <script type='text/javascript'>
-  en4.core.runonce.add(function(){
-    new OverText($('global_search_field'), {
-      poll: true,
-      pollInterval: 500,
-      positionOptions: {
-        position: ( en4.orientation == 'rtl' ? 'upperRight' : 'upperLeft' ),
-        edge: ( en4.orientation == 'rtl' ? 'upperRight' : 'upperLeft' ),
-        offset: {
-          x: ( en4.orientation == 'rtl' ? -4 : 4 ),
-          y: 2
-        }
-      }
-    });
-  });
   var toggleUpdatesPulldown = function(event, element, user_id) {
     if( element.className=='updates_pulldown' ) {
       element.className= 'updates_pulldown_active';
