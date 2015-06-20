@@ -499,6 +499,44 @@ class User_SettingsController extends Core_Controller_Action_User {
 
 		return $this -> _helper -> redirector -> gotoRoute(array(), 'default', true);
 	}
+
+	public function deactiveAction() {
+
+		$user = Engine_Api::_() -> core() -> getSubject();
+
+		// Form
+		$this -> view -> form = $form = new User_Form_Settings_Deactive();
+
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		if (!$form -> isValid($this -> getRequest() -> getPost())) {
+			return;
+		}
+
+		// Process
+		$db = Engine_Api::_() -> getDbtable('users', 'user') -> getAdapter();
+		$db -> beginTransaction();
+
+		try {
+			$user -> deactive = $user->getIdentity();
+			$user -> user_id = 999999999;
+			$user -> save();
+
+			$db -> commit();
+		} catch( Exception $e ) {
+			$db -> rollBack();
+			throw $e;
+		}
+
+		// Unset viewer, remove auth, clear session
+		Engine_Api::_() -> user() -> setViewer(null);
+		Zend_Auth::getInstance() -> getStorage() -> clear();
+		Zend_Session::destroy();
+
+		return $this -> _helper -> redirector -> gotoRoute(array(), 'default', true);
+	}
+
 	public function referralAction()
 	{
 		if( !$this->_helper->requireUser->isValid() ) return;

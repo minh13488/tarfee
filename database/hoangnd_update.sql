@@ -272,3 +272,6 @@ INSERT IGNORE INTO `engine4_core_mailtemplates` (`type`, `module`, `vars`) VALUE
 -- 6.12.2015
 ALTER TABLE `engine4_video_videos` ADD `share_count` INT(11) NOT NULL DEFAULT '0' ;
 ALTER TABLE `engine4_video_videos` ADD `like_count` INT(11) NOT NULL DEFAULT '0' ;
+
+-- 6.17.2015
+ALTER TABLE `engine4_users` ADD `deactive` INT(11) NOT NULL DEFAULT '0' ;
