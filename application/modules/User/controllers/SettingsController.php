@@ -37,7 +37,7 @@ class User_SettingsController extends Core_Controller_Action_User {
 		$this -> _helper -> requireAuth() -> setAuthParams($subject, null, 'edit');
 		
 		Engine_Api::_()->user()->addDeactivateAccountPage();
-		Engine_Api::_()->user()->addActiveAccountPage();
+		Engine_Api::_()->user()->addActivateAccountPage();
 		
 		$contextSwitch = $this -> _helper -> contextSwitch;
 		$contextSwitch
