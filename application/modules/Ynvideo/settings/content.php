@@ -333,14 +333,14 @@ return array(
         ),
     ),
     array(
-        'title' => 'Similar/Suggested Videos',
+        'title' => 'Suggested Videos',
         'description' => 'Displays a list of other videos that the member/player that uploaded this video uploaded.',
         'category' => 'Advanced Videos',
         'type' => 'widget',
         'name' => 'ynvideo.show-same-poster',
         'isPaginated' => true,
         'defaultParams' => array(
-            'title' => 'Similar/Suggested Videos',
+            'title' => 'Suggested Videos',
         ),
         'requirements' => array(
             'subject' => array('video','user')
