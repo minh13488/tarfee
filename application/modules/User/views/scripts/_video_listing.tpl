@@ -11,7 +11,7 @@
 	    <div class="avatar">
 	        <?php
 	          if( $this -> video->photo_id ) {
-	            echo $this->htmlLink($this -> video->getHref(), $this->itemPhoto($this -> video, 'thumb.large'));
+	            echo $this->htmlLink($this -> video->getPopupHref(), $this->itemPhoto($this -> video, 'thumb.large'));
 	          } else {
 	            echo '<img alt="" src="' . $this->layout()->staticBaseUrl . 'application/modules/Video/externals/images/video.png">';
 	          }
@@ -29,7 +29,7 @@
 
 	<div class="tf_video_info <?php if(isset($this -> main) && $this -> main) :?>video_main<?php endif;?>">
 		<div class="tf_video_title">
-			<a class="<?php if(!$isMobile) echo 'smoothbox' ?> video_title" href="<?php echo $this -> video->getHref(array('smoothbox'=>'1'));?>">
+			<a class="<?php if(!$isMobile) echo 'smoothbox' ?> video_title" href="<?php echo $this -> video->getPopupHref();?>">
 		  	<?php echo $this -> video->getTitle();?>
 		  	</a> 
 		</div>
