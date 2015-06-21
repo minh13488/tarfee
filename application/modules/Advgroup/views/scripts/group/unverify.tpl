@@ -1,13 +1,12 @@
 <form method="post" class="global_form_popup" action="<?php echo $this->url(array()) ?>">
   <div>
-    <h3><?php echo $this->translate("Verify Club?") ?></h3>
+    <h3><?php echo $this->translate("Un-verify Club?") ?></h3>
     <p>
-      <?php echo $this->translate("Are you sure that you want to verify this club?") ?>
+      <?php echo $this->translate("Are you sure that you want to un-verify this club?") ?>
     </p>
     <br />
     <p>
-      <input type="hidden" name="confirm" value="<?php echo $this->group_id?>"/>
-      <button type='submit'><?php echo $this->translate("Verify") ?></button>
+      <button type='submit'><?php echo $this->translate("Un-verify") ?></button>
       <?php echo $this->translate("or") ?> <a href='javascript:void(0);' onclick='javascript:parent.Smoothbox.close()'>
       <?php echo $this->translate("cancel") ?></a>
     </p>

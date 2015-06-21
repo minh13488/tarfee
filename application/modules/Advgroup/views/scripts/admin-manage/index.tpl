@@ -142,17 +142,6 @@ function group_good(group_id){
           <td class="center"><?php echo $item->view_count;?></td>
           <td><?php echo $this->locale()->toDateTime($item->creation_date) ?></td>
           <td>
-          	<?php if(!$item -> verified) :?>
-	          	<?php
-	            	echo $this->htmlLink(
-	                	array('route' => 'default', 'module' => 'advgroup', 'controller' => 'admin-manage', 'action' => 'verify', 'id' => $item->group_id),
-	                	$this->translate("verify"),
-	                	array('class' => 'smoothbox'));
-				?>
-			<?php else:?>
-				<?php echo $this -> translate('verified');?>	
-			<?php endif;?>
-			|
             <a href="<?php echo $this->url(array('id' => $item->group_id), 'group_profile') ?>">
               <span><?php echo $this->translate("view") ?></span>
             </a>
