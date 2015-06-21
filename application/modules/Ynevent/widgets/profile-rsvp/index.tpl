@@ -12,10 +12,8 @@
 ?>
 
 <?php if ($this->viewer_id): ?>
-
      <script type="text/javascript">
           en4.core.runonce.add(function(){
-               // alert("Jay úi ùi");
                $$('#rsvp_options input[type=radio]').addEvent('click', function(){
                     var option_id = this.get('value');
                     $('ynevent_radio_' + option_id).className = 'ynevent_radio_loading';

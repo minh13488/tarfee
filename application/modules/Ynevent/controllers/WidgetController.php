@@ -101,4 +101,34 @@ class Ynevent_WidgetController extends Core_Controller_Action_Standard {
             $this->view->eventDates = $eventDates;
         }
     }
+	public function listRsvpAction() 
+	{
+		$event = Engine_Api::_() -> getItem('event', $this -> _getParam('id'));
+		$this -> view -> event = $event;
+		$this -> renderScript('widget/list-rsvp.tpl');
+	}
+	public function rsvpAction()
+	{
+        $event = Engine_Api::_() -> getItem('event', $this -> _getParam('id'));
+        $viewer = Engine_Api::_()->user()->getViewer();
+        if (!$event->membership()->isMember($viewer, true)) 
+        {
+            return;
+        }
+        $row = $event->membership()->getRow($viewer);
+		$option_id = 0;
+        if ($row) 
+        {
+            $option_id = $this->getRequest()->getParam('option_id');
+            $row->rsvp = $option_id;
+            $row->save();
+        }
+        if ($option_id == 2) {
+            $table = Engine_Api::_()->getDbTable('follow', 'ynevent');
+            $table->setOptionFollowEvent($event->getIdentity(), $viewer->getIdentity(), 1);
+        }
+		$this -> view -> status = true;
+        $this -> view -> body = $this -> view -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $event -> getIdentity(), 'format' => 'html'));
+        $this -> _helper -> contextSwitch -> initContext();
+	}
 }
