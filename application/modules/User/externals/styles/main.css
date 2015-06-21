@@ -2046,6 +2046,8 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                         color: $theme_body_background_color;
                     }
                 }
+
+
             }
             .profile-section {
                 border-bottom: 1px solid $theme_border_color;
@@ -2471,6 +2473,25 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
             & > a{
                 float: none;
                 display: inline-block;
+            }
+        }
+        .manage-button{
+            margin-bottom: 15px;
+            clear: both;
+            display: block;
+
+            a{
+                text-align: center;
+                text-decoration: none;
+                display: block;
+                color: #fff !important;
+                font-weight: bold;
+                background-color: #ff6633;
+                padding: 7px;
+                border-radius: 4px;
+                -webkit-border-radius: 4px;
+                -moz-border-radius: 4px;
+                -ms-border-radius: 4px;
             }
         }
         .profile-section-list{
