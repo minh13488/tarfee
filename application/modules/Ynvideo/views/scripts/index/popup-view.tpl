@@ -197,6 +197,8 @@ endif;
 		        request.send();  
 		   }
 		</script>   
+		<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this -> video ->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+		<div class=""><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
 	<?php endif; ?>
 </div>
 <div class="video_view video_view_container">
