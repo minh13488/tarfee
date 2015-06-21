@@ -18,12 +18,12 @@
     <?php if($this -> viewer() -> getIdentity()):?>
     <div id="favorite_<?php echo $this->video -> getIdentity()?>">
         <?php if($this->video -> hasFavorite()):?>
-            <a href="javascript:;" title="<?php echo $this->translate('unfavorite')?>" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)">
-                <i class="fa fa-heart-o"></i>
+            <a href="javascript:;" title="<?php echo $this->translate('Unfavorite')?>" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)">
+                <i class="fa fa-heart"></i>
             </a>
         <?php else:?>   
-            <a href="javascript:;" title="<?php echo $this->translate('favorite')?>" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)">
-                <i class="fa fa-heart"></i>
+            <a href="javascript:;" title="<?php echo $this->translate('Favorite')?>" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)">
+                <i class="fa fa-heart-o"></i>
             </a>
         <?php endif;?>  
     </div>
@@ -31,10 +31,12 @@
     <div id="like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
         <?php echo $this -> action('list-likes', 'video', 'ynvideo', array( 'id' => $this -> video -> getIdentity()));?>
     </div>
+    <?php endif;?>
 </div>
 
 
-<?php endif;?>
+
+
 <?php if ($this->video->parent_type == 'user_playercard') :?>
 <?php $player = $this->video->getParent();?>
 <?php if ($player):?>
