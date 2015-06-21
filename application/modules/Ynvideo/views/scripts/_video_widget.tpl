@@ -14,7 +14,7 @@
 	{
 		$href = $this->video->getPopupHref().'/format/smoothbox';
 	}
-    echo $this->htmlLink($href, $this->itemPhoto($this->video, 'thumb.normal'), array('class' => 'thumb')) ?>
+    echo $this->htmlLink($href, $this->itemPhoto($this->video, 'thumb.large'), array('class' => 'thumb')) ?>
     <span class="video_button_add_to_area">
         <button class="ynvideo_uix_button ynvideo_add_button" id="ynvideo_btn_video_<?php echo $this->video->getIdentity()?>" video-id="<?php echo $this->video->getIdentity()?>">
             <div class="ynvideo_plus" />
