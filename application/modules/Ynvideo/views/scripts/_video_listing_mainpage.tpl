@@ -60,7 +60,6 @@
             <?php if ($sport):?>    
                 <?php //echo ' - '.$sport->title ?>
             <?php endif;?>
-        </div>
     </div>
 </div>
 <?php endif;?>
