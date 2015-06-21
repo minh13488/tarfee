@@ -108,7 +108,8 @@
 				'advgroup_video',
 				'advgroup_report',
 				'advgroup_event',
-				'advgroup_mapping'
+				'advgroup_mapping',
+				'advgroup_request',
 		),
 		// Routes --------------------------------------------------------------------
 		'routes' => array(
@@ -162,7 +163,7 @@
 								'action' => 'index',
 						),
 						'reqs' => array(
-								'action' => '(edit|delete|join|leave|cancel|accept|invite|style|transfer|email-to-followers)',
+								'action' => '(request-verify|verify-request|verify|unverify|edit|delete|join|leave|cancel|accept|invite|style|transfer|email-to-followers)',
 								'group_id' => '\d+',
 						)
 				),

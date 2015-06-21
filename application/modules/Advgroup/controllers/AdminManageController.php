@@ -122,40 +122,4 @@ class Advgroup_AdminManageController extends Core_Controller_Action_Admin
 		$this -> renderScript('admin-manage/delete.tpl');
 	}
 
-	public function verifyAction()
-	{
-		// In smoothbox
-		$this -> _helper -> layout -> setLayout('admin-simple');
-		$id = $this -> _getParam('id');
-		$this -> view -> group_id = $id;
-		// Check post
-		if ($this -> getRequest() -> isPost())
-		{
-			$db = Engine_Db_Table::getDefaultAdapter();
-			$db -> beginTransaction();
-
-			try
-			{
-				$group = Engine_Api::_() -> getItem('group', $id);
-				$group -> verified =  true;
-				$group -> save();
-				$db -> commit();
-			}
-
-			catch( Exception $e )
-			{
-				$db -> rollBack();
-				throw $e;
-			}
-
-			$this -> _forward('success', 'utility', 'core', array(
-				'smoothboxClose' => 10,
-				'parentRefresh' => 10,
-				'messages' => array('')
-			));
-		}
-		// Output
-		$this -> renderScript('admin-manage/verify.tpl');
-	}
-
 }

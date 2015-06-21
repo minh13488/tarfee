@@ -57,6 +57,15 @@ $background = rand(1, 3);
 	</div>
 </div>
 <script type="text/javascript">
+     
+    var closeRegister = function() {
+		landing_popup		= $('landing_popup'),
+		main_html			= $$('html');
+    	main_html.removeClass('ynadvmenu-html-fixed');
+		landing_popup.removeClass('ynadvmenu-signup');
+		landing_popup.getElements('.ynadvmenu-popup').destroy();
+    }
+    
 	var openRegister = function()
 	{
 		var ynadvpopup_content 	= $$('.ynadvmenu-popup')[0],

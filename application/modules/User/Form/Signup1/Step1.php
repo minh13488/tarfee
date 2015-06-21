@@ -102,8 +102,29 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
       'type' => 'submit',
       'ignore' => true,
       'tabindex' => $tabIndex++,
+      'decorators' => array(
+        'ViewHelper'
+      )
     ));
     
+	$this->addElement('Button', 'cancel', array(
+      'label' => 'skip',
+      'link' => true,
+      'prependText' => ' or ',
+      'href' => '',
+      'onclick' => 'closeRegister();',
+      'decorators' => array(
+        'ViewHelper'
+      )
+    ));
+	
+    $this->addDisplayGroup(array('submit', 'cancel'), 'buttons', array(
+      'decorators' => array(
+        'FormElements',
+        'DivDivDivWrapper',
+      ),
+    ));
+	
     // Set default action
     $this->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_signup1', true));
   }

@@ -205,11 +205,24 @@ if ($this->group->cover_photo)
 				</div>
 				<div>
 					<span>
-						<i class="fa fa-check"></i>
 						<?php if($this -> group -> verified) :?>
+							<img height="26" src='application/modules/Advgroup/externals/images/verify/verified.png'>
 							<?php echo $this -> translate('Verified club');?>
+							<?php if($this -> viewer() -> isAdmin()) :?>
+								<img src='application/modules/Advgroup/externals/images/verify/un_verify.png'>
+								<?php echo $this -> htmlLink($this -> url(array('action' => 'unverify', 'group_id' => $this->group->getIdentity()), 'group_specific', true), $this -> translate('Un-verify club'), array('class' => 'smoothbox')); ?>
+							<?php endif;?>
 						<?php else :?>
-							<?php echo $this -> translate('Unverified club');?>
+							<?php if($this -> viewer() -> isAdmin()) :?>
+								<img src='application/modules/Advgroup/externals/images/verify/verify.png'>
+								<?php echo $this -> htmlLink($this -> url(array('action' => 'verify', 'group_id' => $this->group->getIdentity()), 'group_specific', true), $this -> translate('Verify club'), array('class' => 'smoothbox')); ?>
+							<?php endif;?>
+							<?php if(!$this -> group -> requested) :?>
+								<?php if($this -> viewer() -> isSelf($this -> group -> getOwner())) :?>
+									&nbsp;<i class="fa fa-envelope"></i>
+									<?php echo $this -> htmlLink($this -> url(array('action' => 'request-verify', 'group_id' => $this->group->getIdentity()), 'group_specific', true), $this -> translate('Request verify'), array('class' => 'smoothbox')); ?>
+								<?php endif;?>
+							<?php endif;?>
 						<?php endif;?>
 					</span>
 				</div>

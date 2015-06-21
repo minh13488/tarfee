@@ -640,5 +640,138 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
             ));
         }
     }
+	
+	public function requestVerifyAction()
+    {
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+		$group = Engine_Api::_() -> core() -> getSubject();
+		
+        // In smoothbox
+        $this -> _helper -> layout -> setLayout('default-simple');
+		
+		//check if can request
+		if($group -> requested) {
+			 return $this -> _helper -> requireAuth -> forward();
+		}
+		
+        // Make form
+        $this -> view -> form = $form = new Advgroup_Form_Request();
 
+        if (!$this -> getRequest() -> isPost())
+        {
+            return;
+		}
+		
+		if (!$form -> isValid($this -> getRequest() -> getPost())) {
+            return;
+        }
+		
+		$requestTable = Engine_Api::_() -> getDbTable('requests', 'advgroup');
+        $db = $requestTable -> getAdapter();
+        $db -> beginTransaction();
+
+        try
+        {
+        	$values = $form -> getValues();
+			$values['user_id'] = Engine_Api::_() -> user() -> getViewer() -> getIdentity();
+			$values['group_id'] = $group -> getIdentity();
+			$values['creation_date'] = new Zend_Db_Expr("NOW()");
+			$values['modified_date'] = new Zend_Db_Expr("NOW()");
+			
+            $request = $requestTable -> createRow();
+			$request -> setFromArray($values);
+			$request -> save();
+			
+			$group -> requested = true;
+			$group -> save();
+			
+            $db -> commit();
+        }
+        catch( Exception $e )
+        {
+            $db -> rollBack();
+            throw $e;
+        }
+
+        $message = Zend_Registry::get('Zend_Translate') -> _('Request sent.');
+
+        return $this -> _forward('success', 'utility', 'core', array(
+            'closeSmoothbox' => true,
+            'parentRefresh' => true,
+            'messages' => $message,
+        ));
+    }
+
+	
+	public function verifyAction()
+	{
+		// In smoothbox
+		$this -> _helper -> layout -> setLayout('admin-simple');
+		$group = Engine_Api::_() -> core() -> getSubject();
+		
+		// Check post
+		if ($this -> getRequest() -> isPost())
+		{
+			$db = Engine_Db_Table::getDefaultAdapter();
+			$db -> beginTransaction();
+
+			try
+			{
+				$group -> verified =  true;
+				$group -> save();
+				$db -> commit();
+			}
+
+			catch( Exception $e )
+			{
+				$db -> rollBack();
+				throw $e;
+			}
+
+			$this -> _forward('success', 'utility', 'core', array(
+				'smoothboxClose' => 10,
+				'parentRefresh' => 10,
+				'messages' => array('')
+			));
+		}
+		// Output
+		$this -> renderScript('group/verify.tpl');
+	}
+	
+	public function unverifyAction()
+	{
+		// In smoothbox
+		$this -> _helper -> layout -> setLayout('admin-simple');
+		$group = Engine_Api::_() -> core() -> getSubject();
+		
+		// Check post
+		if ($this -> getRequest() -> isPost())
+		{
+			$db = Engine_Db_Table::getDefaultAdapter();
+			$db -> beginTransaction();
+
+			try
+			{
+				$group -> verified =  false;
+				$group -> requested = false;
+				$group -> save();
+				$db -> commit();
+			}
+
+			catch( Exception $e )
+			{
+				$db -> rollBack();
+				throw $e;
+			}
+
+			$this -> _forward('success', 'utility', 'core', array(
+				'smoothboxClose' => 10,
+				'parentRefresh' => 10,
+				'messages' => array('')
+			));
+		}
+		// Output
+		$this -> renderScript('group/unverify.tpl');
+	}
+	
 }

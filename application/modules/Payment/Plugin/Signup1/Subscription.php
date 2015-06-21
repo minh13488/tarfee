@@ -7,7 +7,7 @@ class Payment_Plugin_Signup1_Subscription extends Core_Plugin_FormSequence_Abstr
 
   protected $_formClass = 'Payment_Form_Signup1_Subscription';
 
-  protected $_script = array('_signupSubscription.tpl', 'payment');
+  protected $_script = array('_signupSubscription1.tpl', 'payment');
 
   public function init()
   {
@@ -58,6 +58,11 @@ class Payment_Plugin_Signup1_Subscription extends Core_Plugin_FormSequence_Abstr
     
     // Get selected package
     $packagesTable = Engine_Api::_()->getDbtable('packages', 'payment');
+	
+	if(empty($this->getSession()->data['package_id'])){
+		//@TODO if skip will select plan ~~ free
+		$this->getSession()->data['package_id'] = Engine_Api::_() -> user() -> getDefaultPackageId();
+	}
     $package = $packagesTable->find($this->getSession()->data['package_id'])->current();
     if( !$package ) {
       throw new Engine_Exception('No subscription plan');
