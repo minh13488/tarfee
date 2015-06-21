@@ -70,6 +70,17 @@ class ProfileCompleteness_Widget_ProfileCompletenessController extends Engine_Co
                 $emptyField['photo'] = $table -> getGlobalWeight(0);
             }
 			
+			// check profile url
+            if ($viewer->username != "")
+            {
+                $filledField['username'] = $table -> getGlobalWeight(-4);
+            }
+            else
+            {
+                $emptyField['username'] = $table -> getGlobalWeight(-4);
+            }
+			
+			/*
 			// check sport like/follow
 			if($table -> isSportLikeOrFollow())
 			{
@@ -78,7 +89,7 @@ class ProfileCompleteness_Widget_ProfileCompletenessController extends Engine_Co
 			else
 			{
 				$emptyField['sportlike'] = $table -> getGlobalWeight(-1);
-			}
+			}*/
 			
 			// check club follow
 			if($table -> isClubFollow())
