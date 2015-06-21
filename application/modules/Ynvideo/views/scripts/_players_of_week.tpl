@@ -40,7 +40,7 @@
 	</div>
 </div>
 <div class="video-title">
-	<?php echo $this->htmlLink($this->video->getHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
+	<?php echo $this->htmlLink($this->video->getPopupHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
 </div>
 <div class="video-statistic-rating">
 	<div class="video-statistic">
