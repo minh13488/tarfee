@@ -407,5 +407,6 @@ function showOptions(itemId, obj)
 		$('setting-list_' + itemId).style.display = ''
 		obj.addClass('active');
 	}
+
 }
 </script>
