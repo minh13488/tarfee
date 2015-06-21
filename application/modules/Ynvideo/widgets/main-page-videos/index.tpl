@@ -57,7 +57,7 @@ function showMore(from){
    var unfavorite_video = function(videoId)
    {
    	   var obj = document.getElementById('favorite_' + videoId);
-   	   obj.innerHTML = '<a><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
+   	   obj.innerHTML = '<a href="javascript:;" style="background:#2A6496"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
    	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
        var request = new Request.JSON({
             'method' : 'post',
@@ -75,7 +75,7 @@ function showMore(from){
    var favorite_video = function(videoId)
    {
    	   var obj = document.getElementById('favorite_' + videoId);
-   	   obj.innerHTML = '<a><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
+   	   obj.innerHTML = '<a href="javascript:;"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
    	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
        var request = new Request.JSON({
             'method' : 'post',
