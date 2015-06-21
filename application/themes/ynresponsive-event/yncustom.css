@@ -5,6 +5,18 @@
 	z-index: 9;
 }
 
+#global_page_ynvideo-index-popup-view{
+/*	width: 1170px;*/
+}
+
+
+.ynresponsive-event #TB_window{
+	border: 2px solid #ccc;
+	border-radius: 5px;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	-ms-border-radius: 5px;
+}
 /*** fix admin-core ***/
 body[id^=global_page_core-admin-] .admin_language_editor textarea {
 	min-height: 32px;
@@ -1267,9 +1279,18 @@ body#global_page_user-profile-index {
 
 /*Style profile event*/
 .ynevents_profile_tab{
+	background: #fff;
+	border-radius: 0 0 5px 5px;
+	-webkit-border-radius: 0 0 5px 5px;
+	-moz-border-radius: 0 0 5px 5px;
     li{
         border-bottom: 1px solid $theme_border_medium_color;
         margin-bottom: 10px;
+
+        &:last-child{
+	        border-bottom: none;
+	        margin-bottom: 0px;
+        }
 
         .ynevents_photo{
             float: left;
@@ -1326,8 +1347,7 @@ body#global_page_user-profile-index {
         	overflow: hidden;
 
         	.ynevents_time_place{
-				width: 50%;
-				float: left;
+				text-align: center;
 
 				& > span{
 					display: block;
@@ -1338,11 +1358,11 @@ body#global_page_user-profile-index {
 					color: $theme_font_color_light;
 				}
         	}
-        	.ynevents_rating{
+/*        	.ynevents_rating{
 				width: 50%;
 				float: right;
 				text-align: right;
-        	}
+        	}*/
         }
 
         .ynevents_button{
@@ -1361,7 +1381,7 @@ body#global_page_user-profile-index {
 				margin: 0 2px;
 				text-decoration: none;
 
-        		&:hover{
+        		&:hover, &.active{
         			color: $theme_link_color;
         		}
         	}
@@ -1635,7 +1655,12 @@ body#global_page_user-profile-index {
     }
 }
 
-.layout_ynevent_list_recent_events{
+.layout_ynevent_recent_events{
+	background: #fff;
+	overflow: hidden;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius: 5px;
 	.ybo_headline{
 		margin-bottom: 0;
 		border-bottom: 1px solid $theme_border_medium_color;
@@ -1859,6 +1884,11 @@ body#global_page_user-profile-index {
 
 
 .layout_ynblog_recent_blogs{
+	background: #fff;
+	overflow: hidden;
+	border-radius:5px;
+	-webkit-border-radius:5px;
+	-moz-border-radius: 5px;
 	.ybo_headline{
 		margin-bottom: 0;
 		border-bottom: 1px solid #e9e9e9;

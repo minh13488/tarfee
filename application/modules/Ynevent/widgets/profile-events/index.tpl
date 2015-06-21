@@ -59,8 +59,11 @@
 	        <?php endif;?>
         <?php endif;?>
     </li>
+
     <?php endforeach; ?>
 </ul>
+
+
 <?php if($this->paginator->getTotalItemCount() > $this->items_per_page):?>
   <?php echo $this->htmlLink($this->url(array(), 'event_general'), $title, array('class' => 'icon_event_viewall')) ?>
 <?php endif;?>
