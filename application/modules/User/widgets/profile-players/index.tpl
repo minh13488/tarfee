@@ -296,7 +296,7 @@
 							<span class="tarfee-count-number"><?php  echo $totalVideo; ?></span>
 							<span><?php echo $this->translate(array('video','videos', $totalVideo)); ?></span>
 						</li>
-						<li>
+						<li>z
 							
 							<span class="tarfee-count-number"><?php echo $totalPhoto; ?></span>
 							<span><?php echo $this->translate(array('photo','photos', $totalPhoto));?></span>

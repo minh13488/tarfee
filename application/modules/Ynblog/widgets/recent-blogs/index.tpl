@@ -1,27 +1,44 @@
-<ul class="generic_list_widget" style="overflow: hidden;">
+<ul class="tf_list_talk" style="overflow: hidden;">
   <?php if(count($this->blogs) > 0):?>
   <?php foreach( $this->blogs as $item ):?>
   	<?php if ($item->checkPermission($item->getIdentity())) :?>
     <li class="ynblog_new">
-          <div class="photo">
-            <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'thumb.icon'), array('class' => 'thumb')) ?>
+
+      <div class="tf_talk_owner">
+            <?php echo $this->htmlLink($item -> getOwner()->getHref(), $this->itemPhoto($item -> getOwner(), 'thumb.icon', $item -> getOwner()->getTitle(), array('style' => 'width: auto')), array('class' => 'members_thumb')) ?>   
+
+            <div class='members_info'>
+                <div class='members_name'>
+                      <?php echo $this->htmlLink($item -> getOwner()->getHref(), $item -> getOwner() ->getTitle()) ?>
+                </div>
+                <div class='members_date'>
+                  <?php echo $this->timestamp($item->creation_date); ?>
+                </div>
+            </div>
+
+      </div>
+
+      <div class="photo" style="display:none">
+        <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'thumb.icon'), array('class' => 'thumb')) ?>
+      </div>
+
+      <div class="tf_talk_info">
+          <div class="talk_title">
+                <?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>
           </div>
-          <div class="info">
-              <div class="title">
-                    <?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>
-              </div>
-              <div class="stats">
-                    <?php
-                      $owner = $item->getOwner();
-                      echo $this->translate('Posted by %1$s', $this->htmlLink($owner->getHref(), $owner->getTitle()));
-                    ?>
-                    -
-                    <?php echo $this->timestamp($item->creation_date); ?>
-              </div>
-              <div class="description">
-                    <?php echo $item->getDescription(); ?>
-              </div>
+
+          <div class="talk_description">
+                <?php echo $item->getDescription(); ?>
           </div>
+      </div>
+
+      <div class="talk_statistics">
+          <span><?php echo $this->translate('1,522,521 views') ?></span>
+          <span><?php echo $this->translate('1,522,521 comments') ?></span>
+          <span><?php echo $this->translate('151 like') ?></span>
+          <span><?php echo $this->translate('521 dislike') ?></span>
+      </div>
+
     </li>
     <?php endif; ?>
         <?php endforeach; ?>
