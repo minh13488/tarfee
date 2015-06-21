@@ -1,9 +1,7 @@
 <ul class="tf_list_talk" style="overflow: hidden;">
-  <?php if(count($this->blogs) > 0):?>
   <?php foreach( $this->blogs as $item ):?>
   	<?php if ($item->checkPermission($item->getIdentity())) :?>
     <li class="ynblog_new">
-
       <div class="tf_talk_owner">
             <?php echo $this->htmlLink($item -> getOwner()->getHref(), $this->itemPhoto($item -> getOwner(), 'thumb.icon', $item -> getOwner()->getTitle(), array('style' => 'width: auto')), array('class' => 'members_thumb')) ?>   
 
@@ -15,48 +13,41 @@
                   <?php echo $this->timestamp($item->creation_date); ?>
                 </div>
             </div>
-
       </div>
-
+		<!--
       <div class="photo" style="display:none">
         <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'thumb.icon'), array('class' => 'thumb')) ?>
       </div>
-
+     -->
       <div class="tf_talk_info">
           <div class="talk_title">
                 <?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>
           </div>
-
           <div class="talk_description">
                 <?php echo $item->getDescription(); ?>
           </div>
       </div>
-
       <div class="talk_statistics">
-          <span><?php echo $this->translate('1,522,521 views') ?></span>
-          <span><?php echo $this->translate('1,522,521 comments') ?></span>
-          <span><?php echo $this->translate('151 like') ?></span>
-          <span><?php echo $this->translate('521 dislike') ?></span>
+          <span><?php echo $this->translate(array('%s view', '%s views', $item -> view_count), $item -> view_count) ?></span>
+          <span><?php echo $this->translate(array('%s comment', '%s comments', $item -> comment_count), $item -> comment_count) ?></span>
+          <?php 
+          $totalLike = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($item) -> getLikeCount();
+          $totalDislike = Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> getDislikeCount($item);?>
+          <span><?php echo $this->translate(array('%s like', '%s likes', $totalLike), $totalLike) ?></span>
+          <span><?php echo $this->translate(array('%s dislike', '%s dislikes', $totalDislike), $totalDislike) ?></span>
       </div>
-
     </li>
     <?php endif; ?>
-        <?php endforeach; ?>
+  <?php endforeach; ?>
+  <!-- 
     <?php if(count($this->blogs) == $this->limit): ?>
-        <li>
+       <li>
           <div class="more" style="float:right;margin-left:15px;margin-bottom: 10px;">
               <a href="<?php echo $this->url(array(),'default'); ?>talks/listing/sort/recent" >
                 <?php echo $this->translate('View all');?>
               </a>
           </div>
-        </li>
+       </li> 
     <?php endif; ?>
-
-    <?php else:?>
-        <div class="tip">
-            <span>
-                   <?php echo $this->translate('No one has written any blog entries yet.');?>
-            </span>
-        </div>
-  <?php endif;?>
+    -->
 </ul>
