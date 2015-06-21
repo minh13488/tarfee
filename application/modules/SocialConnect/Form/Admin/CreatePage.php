@@ -29,6 +29,9 @@ class SocialConnect_Form_Admin_CreatePage extends Engine_Form {
         
         $this->addElement('TinyMce', 'content', array(
             'label' => 'Content',
+            'editorOptions' => array(
+           	'browser_spellcheck' => true,
+		  	'contextmenu' => false),
         ));
 		
         $this->addElement('Button', 'submit', array(
