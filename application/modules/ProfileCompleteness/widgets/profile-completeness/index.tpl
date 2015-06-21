@@ -38,7 +38,18 @@
 	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_($key) . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
 	                );
                 } 
-				else if($key == 'sportlike')
+				else if ($key == 'username') 
+                {
+                    $action = 'general';
+                    $key = 'profile url';
+					echo $this->htmlLink(array(
+	                    'route' => 'default',
+	                    'module' => 'user',
+	                    'controller' => 'settings',
+	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_($key) . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
+	                );
+                } 
+				/*else if($key == 'sportlike')
 				{
 					$action = 'photo';
 					echo $this->htmlLink(array(
@@ -47,7 +58,7 @@
 	                    'controller' => 'edit',
 	                    'action' => $action), '+ ' . Zend_Registry::get('Zend_Translate')->_('like sport') . ' (+' . round(($emptyf*100)/$this->sum) . '%)', array('target' => '_blank')
 	                );
-				}
+				}*/
 				else if($key == 'clubfollow')
 				{
 					 echo $this->htmlLink(array(
