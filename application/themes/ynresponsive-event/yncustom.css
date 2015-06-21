@@ -1268,26 +1268,31 @@ body#global_page_user-profile-index {
 /*Style profile event*/
 .ynevents_profile_tab{
     li{
-        border-bottom: 3px solid tomato;
+        border-bottom: 1px solid $theme_border_medium_color;
         margin-bottom: 10px;
-        background: #ccc;
 
-        .ynevents_profile_tab_photo{
+        .ynevents_photo{
             float: left;
             margin-right: 10px;
 
             img{
-            	width: 150px;
+            	width: 145px;
             	height: 110px;
             }
         }
 
-        .ynevents_profile_tab_info{
-        	.ynevents_profile_tab_title{
+        .ynevents_info{
+        	min-height: 122px;
+        	.ynevents_title{
+        		margin-bottom: 10px;
         		a{
         			font-weight: bold;
         			color: $theme_font_color;
-        			text-decoration: none;
+        			line-height: 1.5em;
+        			max-height: 45px;
+					text-decoration: none;
+					overflow: hidden;
+					display: inherit;
 
         			&:hover{
         				color: $theme_link_color;
@@ -1295,10 +1300,70 @@ body#global_page_user-profile-index {
         		}
         	}
 
-        	.ynevents_profile_tab_desc{
+        	.ynevents_desc{
 				line-height: 1.2em;
 				max-height: 90px;
 				overflow: hidden;
+        	}
+        }
+        .ynevents_members{
+        	border-top: 1px solid $theme_border_medium_color;
+        	border-bottom: 1px solid $theme_border_medium_color;
+        	text-align: center;
+        	font-weight: bold;
+        	color: $theme_link_color_hover;  
+        	padding: 10px;
+  			margin: 10px 0;
+
+  			& > i.fa{
+				color: $theme_font_color;
+  			}
+        }
+
+        .ynevents_time_place_rating{
+        	padding: 10px 0;
+        	overflow: hidden;
+        	overflow: hidden;
+
+        	.ynevents_time_place{
+				width: 50%;
+				float: left;
+
+				& > span{
+					display: block;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					font-weight: bold;
+					color: $theme_font_color_light;
+				}
+        	}
+        	.ynevents_rating{
+				width: 50%;
+				float: right;
+				text-align: right;
+        	}
+        }
+
+        .ynevents_button{
+        	padding: 10px 0;
+        	display: flex;
+
+        	a{
+        		font-weight: bold;
+        		text-transform: lowercase;
+        		color: $theme_font_color;
+        		padding: 10px 15px;
+				border-radius: 5px;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;        		
+				border: 2px solid $theme_border_medium_color;
+				margin: 0 2px;
+				text-decoration: none;
+
+        		&:hover{
+        			color: $theme_link_color;
+        		}
         	}
         }
     }

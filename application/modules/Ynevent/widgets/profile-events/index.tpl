@@ -17,24 +17,46 @@
     <?php foreach( $this->paginator as $event ): ?>
 
     <li>
-        <div class="ynevents_profile_tab_photo">
+        <div class="ynevents_photo">
             <?php echo $this->htmlLink($event, $this->itemPhoto($event, 'thumb.normal')) ?>
         </div>
 
-        <div class="ynevents_profile_tab_info">
-            <div class="ynevents_profile_tab_title">
+        <div class="ynevents_info">
+            <div class="ynevents_title">
                 <?php echo $this->htmlLink($event->getHref(), $event->getTitle()) ?>
             </div>
-            <div class="ynevents_profile_tab_desc">
+            <div class="ynevents_desc">
                 <?php echo $event->getDescription() ?>
             </div>
-            <div class="ynevents_members">
-                <?php echo $this->locale()->toDateTime($event->starttime) ?>
-            </div>
-            <div class="ynevents_profile_tab_members">
-                <?php echo $this->translate(array('%s guest', '%s guests', $event->member_count),$this->locale()->toNumber($event->member_count)) ?>
+
+        </div>
+        
+
+        <div class="ynevents_members">
+            <?php echo '<i class="fa fa-user"></i> &nbsp;&nbsp;'.$this->translate(array('%s guest', '%s guests', $event->member_count),$this->locale()->toNumber($event->member_count)) ?>
+        </div>
+
+
+        <div class="ynevents_time_place_rating">
+            <div class="ynevents_time_place">
+                <span>
+                    <?php echo $this->locale()->toDateTime($event->starttime) ?>
+                </span>
+                <span>
+                    <?php echo $this->translate("70 Lu Gia") ?>
+                </span>
             </div>
 
+            <div class="ynevents_rating">
+                
+            </div>
+        </div>
+
+        <div class="ynevents_button">
+            <a href="#"><?php echo $this->translate('attending'); ?></a>
+            <a href="#"><?php echo $this->translate('not attending'); ?></a>
+            <a href="#"><?php echo $this->translate('maybe'); ?></a>
+            <a href="#"><?php echo $this->translate('share'); ?></a>
         </div>
         
 
