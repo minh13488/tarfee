@@ -1,3 +1,10 @@
+<?php
+    $this->headScript()
+    ->appendFile($this->baseUrl() . '/application/modules/Ynvideo/externals/wookmark/jquery.min.js')
+    ->appendFile($this->baseUrl() . '/application/modules/Ynvideo/externals/wookmark/jquery.wookmark.js')
+    ->appendFile($this->baseUrl() . '/application/modules/Ynvideo/externals/wookmark/jquery.imagesloaded.js');
+?>
+
 <script type="text/javascript">    
     en4.core.runonce.add(function(){
         addEventForButtonAddTo();
@@ -44,6 +51,34 @@
         </li>
 <?php endforeach; ?>
 </ul>
+
+<script type="text/javascript">
+
+    function setPin(){
+        jQuery.noConflict();
+        (function (jQuery){
+            var handler = jQuery('#ynvideo_favorite_videos li');
+
+            handler.wookmark({
+                // Prepare layout options.
+                autoResize: true, // This will auto-update the layout when the browser window is resized.
+                container: jQuery('#ynvideo_favorite_videos'), // Optional, used for some extra CSS styling
+                offset: 10, // Optional, the distance between grid items
+                outerOffset: 0, // Optional, the distance to the containers border
+                itemWidth: 200, // Optional, the width of a grid item
+                flexibleWidth: '100%',
+            });
+        })(jQuery);
+    };
+
+    $$('.tab_layout_ynvideo_profile_favorite_videos').addEvent('click',function(){
+        setPin();
+    })
+
+</script>
+
+
+
 <script type="text/javascript">
    var unfavorite_video = function(videoId)
    {
@@ -80,3 +115,5 @@
         ?>
     </div>
 </div>
+
+
