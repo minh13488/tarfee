@@ -24,6 +24,10 @@
 	<div id="sport-filter">
 		<h3><?php echo $this->translate('Sport')?></h3>
 		<ul>
+			<li>
+				<input id="sport-all" type="checkbox" name="sport[]" <?php if (in_array('all', $this->sport)) echo 'checked'?> class="type-checkbox" value="all"/>
+				<label for="sport-all"><?php echo $this->translate(All Sport)?></label>
+			</li>
 			<?php $sports = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1();?>
 			<?php foreach($sports as $sport):?>
 			<li>
@@ -391,6 +395,19 @@
 <script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery.tokeninput.js"></script>
 <script>
 window.addEvent('domready', function() {
+	$$('.type-checkbox').addEvent('click', function() {
+		var id = this.get('id');
+		if (id == 'sport-all') {
+			if (this.checked) {
+				$$('.type-checkbox').set('checked', true);
+			}
+		}
+		else {
+			if (!this.checked) {
+				$('sport-all').set('checked', false);
+		}
+	});
+	
 	<?php if ($this->viewer()->getIdentity()):?>
 	$$('.search-tab-item:first-child').addClass('active');
 	$$('.search-form-item:first-child').addClass('active');
