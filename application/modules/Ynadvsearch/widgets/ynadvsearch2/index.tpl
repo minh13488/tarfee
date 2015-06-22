@@ -67,6 +67,12 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="player_position_id"><?php echo $this->translate('Sport Position')?></label>
+					<select class="form-element search-element" id="player_position_id" name="position_id">
+						<option value="0"></option>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_gender"><?php echo $this->translate('Gender')?></label>
 					<select class="form-element search-element" id="player_gender" name="gender">
 						<option value="0"></option>
@@ -79,13 +85,13 @@
 					<select class="form-element search-element" id="player_age_from" name="age_from">
 						<option value="0"></option>
 						<?php for ($i = 13; $i <= 100; $i++ ) :?>
-						<option value="<?php echo $i?>"><?php echo $i?></option>	
+						<option value="<?php echo $i?>"><?php echo $i.' ('.(date("Y") - $i).')'?></option>	
 						<?php endfor;?>
 					</select>
 					<select class="form-element search-element" id="player_age_to" name="age_to">
 						<option value="0"></option>
 						<?php for ($i = 13; $i <= 100; $i++ ) :?>
-						<option value="<?php echo $i?>"><?php echo $i?></option>	
+						<option value="<?php echo $i?>"><?php echo $i.' ('.(date("Y") - $i).')'?></option>	
 						<?php endfor;?>
 					</select>
 				</div>
@@ -471,6 +477,25 @@ window.addEvent('domready', function() {
   					$(type+'_city').empty();
   					$(type+'_city').grab(option);
   				}
+  			}
+  		})
+  		makeRequest.send();
+	});
+	
+	$$('#player_sport').addEvent('change', function() {
+		var id = this.value;
+		var type = this.get('rel');
+		var makeRequest = new Request({
+  			url: url : "user/player-card/subcategories/cat_id/"+id,
+  			onComplete: function (respone){
+				respone  = respone.trim();
+				$('player_position_id').empty();
+				if (respone != "") {
+					$('player_position_id').innerHTML = '<option value="0"></option>' + respone;
+				}
+				else {
+					$('player_position_id').innerHTML = '<option value="0"></option>';
+				}
   			}
   		})
   		makeRequest.send();

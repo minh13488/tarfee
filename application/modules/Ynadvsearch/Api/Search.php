@@ -120,6 +120,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				}
 				if (!empty($params['relation_id'])) {
 					$select->where('relation_id = ?', $params['relation_id']);
+				}
+				if (!empty($params['position_id'])) {
+					$select->where('position_id = ?', $params['position_id']);
 				}				
 				if (!empty($params['continent'])) {
 					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
