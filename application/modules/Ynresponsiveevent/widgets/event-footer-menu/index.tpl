@@ -1,4 +1,9 @@
 <div class="tf_right_menu">
+   
+   <span id="show-hide-list-items">
+      <i class="fa fa-angle-double-right"></i>
+   </span>
+   
    <ul class="list-items">
       <li class="item-action">
          <a href="javascript:void;"><img src="application/themes/ynresponsive-event/images/add.png" /></a>
@@ -87,6 +92,11 @@
    // });
 
    jQuery.noConflict();
+
+      jQuery('#show-hide-list-items').click(function() {
+         jQuery('.list-items').fadeToggle(400);
+      });
+
       jQuery('.item-action').click(function() {
          jQuery(this).find('.list-items-dropdown').fadeToggle(400);
       });
