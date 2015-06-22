@@ -486,7 +486,7 @@ window.addEvent('domready', function() {
 		var id = this.value;
 		var type = this.get('rel');
 		var makeRequest = new Request({
-  			url: url : "user/player-card/subcategories/cat_id/"+id,
+  			url: "user/player-card/subcategories/cat_id/"+id,
   			onComplete: function (respone){
 				respone  = respone.trim();
 				$('player_position_id').empty();
@@ -500,7 +500,7 @@ window.addEvent('domready', function() {
   		})
   		makeRequest.send();
 	});
-	 <?php endif;?>
+	<?php endif;?>
 });
 
 jQuery.noConflict();
