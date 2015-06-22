@@ -41,14 +41,17 @@ class Ynadvsearch_IndexController extends Core_Controller_Action_Standard {
 			);
 		}
 		if (count($result) < 20) {
+			$types = Engine_Api::_()->ynadvsearch()->getAllowSearchTypes();
+			$types = array_keys($types);
 			$limit = 20 - count($result);
 			$names = array_column($result, 'name');
 			$searchTbl = Engine_Api::_()->getDbTable('search', 'core');
 			$searchSelect = $searchTbl->select()
 				->where('title LIKE ?', '%'.$search.'%')
+				->where('type IN (?)', $types)
 				->limit($limit);
 			if (!empty($names))
-			$searchSelect->where('title NOT IN ?', $names);
+			$searchSelect->where('title NOT IN (?)', $names);
 			$rows = $searchTbl->fetchAll($searchSelect);
 			foreach ($rows as $row) {
 				$keyword = $table->createRow();
