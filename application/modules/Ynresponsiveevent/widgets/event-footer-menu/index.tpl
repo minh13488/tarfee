@@ -2,6 +2,11 @@
 $viewer = $this -> viewer();
 ?>
 <div class="tf_right_menu">
+   
+   <span id="show-hide-list-items">
+      <i class="fa fa-angle-double-right"></i>
+   </span>
+   
    <ul class="list-items">
    	<?php if($viewer -> getIdentity()):
 	$library =  $viewer -> getMainLibrary();
@@ -110,6 +115,11 @@ $viewer = $this -> viewer();
 
 <script type="text/javascript">
    jQuery.noConflict();
+
+      jQuery('#show-hide-list-items').click(function() {
+         jQuery('.list-items').fadeToggle(400);
+      });
+
       jQuery('.item-action').click(function() {
          jQuery(this).find('.list-items-dropdown').fadeToggle(400);
       });
