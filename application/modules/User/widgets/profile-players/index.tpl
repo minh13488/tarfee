@@ -78,7 +78,7 @@
 	        <?php if($player -> isViewable()) :?>
 	        	<li id="player-item-<?php echo $player->playercard_id ?>">
 	           	<div id='profile_photo'>
-					<?php $photoUrl = $player -> getPhotoUrl('thumb.main');?>
+					<?php $photoUrl = ($player -> getPhotoUrl('thumb.main')) ? $player->getPhotoUrl('thumb.main') : "application/modules/User/externals/images/nophoto_playercard_thumb_profile.png" ?>
 					<div class="avatar">
 						<div class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)">
 							
@@ -297,7 +297,6 @@
 							<span><?php echo $this->translate(array('video','videos', $totalVideo)); ?></span>
 						</li>
 						<li>
-							
 							<span class="tarfee-count-number"><?php echo $totalPhoto; ?></span>
 							<span><?php echo $this->translate(array('photo','photos', $totalPhoto));?></span>
 						</li>
@@ -407,5 +406,6 @@ function showOptions(itemId, obj)
 		$('setting-list_' + itemId).style.display = ''
 		obj.addClass('active');
 	}
+
 }
 </script>

@@ -813,10 +813,10 @@ body[id^=global_page_advgroup] {
 	padding: 0;
 	border: none;
 }
-.ynvideo_thumb_wrapper img, .ynvideo_thumb_wrapper span.item_nophoto
+/*.ynvideo_thumb_wrapper img, .ynvideo_thumb_wrapper span.item_nophoto
 {
 	margin: 5px auto!important;
-}
+}*/
 
 body[id^=global_page_advgroup] .ynvideo_addTo_frame
 {

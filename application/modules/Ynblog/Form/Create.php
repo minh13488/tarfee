@@ -8,7 +8,7 @@ class Ynblog_Form_Create extends Engine_Form
   {
     // Form Attributes
     $this->setTitle('Write New Entry')
-      ->setDescription('Compose your new blog entry below, then click "Post Entry" to publish the entry to your blog.')
+      ->setDescription('Compose your new talk entry below, then click "Post Entry" to publish the entry to your talk.')
       ->setAttrib('name', 'ynblogs_create');
 
     // Get user and user level
@@ -70,9 +70,11 @@ class Ynblog_Form_Create extends Engine_Form
       'editorOptions' => array(
           'bbcode' => 1,
           'html'   => 1,
+          'browser_spellcheck' => true,
+		  'contextmenu' => false,
           'theme_advanced_buttons1' => array(
               'undo', 'redo', 'cleanup', 'removeformat', 'pasteword',  '|',
-              'media', 'image','link', 'unlink', 'fullscreen', 'preview', 'emotions', 'code','spellchecker'
+              'media', 'image','link', 'unlink', 'fullscreen', 'preview', 'emotions', 'code'
           ),
           'theme_advanced_buttons2' => array(
               'fontselect', 'fontsizeselect', 'bold', 'italic', 'underline',
@@ -81,14 +83,13 @@ class Ynblog_Form_Create extends Engine_Form
           ),
           'plugins' => array(
 		   		'table', 'fullscreen', 'media', 'preview', 'paste',
-		   		'code', 'image', 'textcolor', 'jbimages','spellchecker'
+		   		'code', 'image', 'textcolor', 'jbimages'
 		  ),
    		  
 	      'toolbar1' => array(
 		      'undo', '|', 'redo', '|', 'removeformat', '|', 'pastetext', '|', 'code', '|', 'media', '|', 
 		      'image', '|', 'link', '|', 'jbimages', '|', 'fullscreen', '|', 'preview'
 		    ),     
-		   'spellchecker_language' => "+English=en,Swedish=sv" , 
           'upload_url' => $upload_url,
       ),
       'required'   => true,
@@ -101,7 +102,7 @@ class Ynblog_Form_Create extends Engine_Form
 
     // Search privacy field
     $this->addElement('Checkbox', 'search', array(
-      'label' => 'Show this blog entry in search results',
+      'label' => 'Show this talk entry in search results',
       'value' => 1,
     ));
 
@@ -121,7 +122,7 @@ class Ynblog_Form_Create extends Engine_Form
     if( !empty($viewOptions) && count($viewOptions) >= 1 ) {
     $this->addElement('Select', 'auth_view', array(
       'label'        => 'View Privacy',
-      'description'  => 'Who may see this blog entry?',
+      'description'  => 'Who may see this talk entry?',
       'multiOptions' => $viewOptions,
       'value'        => 'everyone',
     ));
@@ -135,7 +136,7 @@ class Ynblog_Form_Create extends Engine_Form
      if( !empty($commentOptions) && count($commentOptions) >= 1 ) {
     $this->addElement('Select', 'auth_comment', array(
       'label' => 'Comment Privacy',
-      'description' => 'Who may post comments on this blog entry?',
+      'description' => 'Who may post comments on this talk entry?',
       'multiOptions' => $commentOptions,
       'value' => 'everyone',
     ));

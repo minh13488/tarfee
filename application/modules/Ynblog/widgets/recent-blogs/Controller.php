@@ -23,7 +23,11 @@ class Ynblog_Widget_RecentBlogsController extends Engine_Content_Widget_Abstract
     $table  = Engine_Api::_()->getItemTable('blog');
     $select = Engine_Api::_()->ynblog()->getBlogsSelect($params);
     
-    $this->view->blogs =$table->fetchAll($select);
+    $this->view->blogs = $blogs = $table->fetchAll($select);
+	if(count($blogs) <= 0)
+	{
+		return $this -> setNoRender();
+	}
     $this->view->limit = $limitNblog;
   }
 }

@@ -56,6 +56,16 @@ class User_Api_Core extends Core_Api_Abstract
 	//	'recommendation' => 'Recommendations'
     );
   
+  //@TODO get default package
+  public function getDefaultPackageId(){
+  	return "2";
+  }
+  
+  //@TODO get default profile type
+  public function getDefaultProfileTypeId(){
+  	return "1";
+  }
+  
   //@TODO change profile base on level user
   public function getProfileTypeBaseOnLevel($level_id) {
   		switch ($level_id) {

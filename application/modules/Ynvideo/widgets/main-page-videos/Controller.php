@@ -7,7 +7,7 @@ class Ynvideo_Widget_MainPageVideosController extends Engine_Content_Widget_Abst
 		$from = $request-> getParam('from', 0);
 		$from = intval($from);
 		
-		$limit = 10;
+		$limit = 20;
 		
 		$viewer = Engine_Api::_()->user()->getViewer();
 		if (!$viewer || !$viewer->getIdentity()) {

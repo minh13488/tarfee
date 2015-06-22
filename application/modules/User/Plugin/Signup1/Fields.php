@@ -26,8 +26,7 @@ class User_Plugin_Signup1_Fields extends Core_Plugin_FormSequence_Abstract
     // Preload profile type field stuff
     $profileTypeField = $this->getProfileTypeField();
     if( $profileTypeField ) {
-      $step2Session = new Zend_Session_Namespace('User_Plugin_Signup1_Step2');
-      $profileTypeValue = @$step2Session->data['profile_type'];
+      $profileTypeValue = Engine_Api::_() -> user() -> getDefaultProfileTypeId();
       if( $profileTypeValue ) {
         $values = Engine_Api::_()->fields()->getFieldsValues($user);
         $valueRow = $values->createRow();

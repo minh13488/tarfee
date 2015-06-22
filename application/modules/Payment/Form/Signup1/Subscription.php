@@ -33,11 +33,6 @@ class Payment_Form_Signup1_Subscription extends Engine_Form
       $packagesSelect->where('after_signup = ?', true);
     }
 	
-	$sessionStep2 = new Zend_Session_Namespace('User_Plugin_Signup1_Step2');
-	$dataStep2 = $sessionStep2 -> data;
-	$level_id = Engine_Api::_() -> user() -> getLevelBaseOnProfileType($dataStep2['profile_type']);
-	
-	$packagesSelect -> where("level_id = ?", $level_id);
 	
     $multiOptions = array();
     $this->_packages = $packagesTable->fetchAll($packagesSelect);
@@ -51,8 +46,6 @@ class Payment_Form_Signup1_Subscription extends Engine_Form
     //if( count($multiOptions) > 1 ) {
       $this->addElement('Radio', 'package_id', array(
         'label' => 'Choose Plan:',
-        'required' => true,
-        'allowEmpty' => false,
         'multiOptions' => $multiOptions,
       ));
     //}

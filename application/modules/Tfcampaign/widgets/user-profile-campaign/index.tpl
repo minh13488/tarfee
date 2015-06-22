@@ -25,6 +25,7 @@
 
 <?php if($this -> total > count($this -> campaigns)) :?>
 <!-- view more filter based on user subject --> 
+<!--
 <a href="<?php echo $this -> url(array('action' => 'browse', 'user_id' => $this -> subject() -> getIdentity()), 'tfcampaign_general', true);?>">
 		<button><?php echo $this -> translate('view more');?></button>
 </a>
@@ -34,3 +35,4 @@
 		<?php echo $this -> translate('view campaigns');?>
 	</a>
 </div>
+-->

@@ -5,7 +5,7 @@
     if ($this->video->photo_id) {
         echo $this->htmlLink($this->video->getPopupHref(), $this->itemPhoto($this->video, 'thumb.large'), array('class'=>'smoothbox'));
     } else {
-        echo '<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">';
+        echo $this->htmlLink($this->video->getPopupHref(),'<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">', array('class'=>'smoothbox'));
     }
     ?>
 </div>
@@ -40,7 +40,7 @@
 	</div>
 </div>
 <div class="video-title">
-	<?php echo $this->htmlLink($this->video->getHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
+	<?php echo $this->htmlLink($this->video->getPopupHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
 </div>
 <div class="video-statistic-rating">
 	<div class="video-statistic">

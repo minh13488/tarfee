@@ -1205,19 +1205,29 @@ div.video_object
 
 /*Style widget profile favorite videos*/
 #ynvideo_favorite_videos{
+    overflow: hidden;
+    position: relative;
     li{
-        float: left;
-        margin-bottom: 10px;
-        width: 32%;
-        margin-left: 2%;
         overflow: hidden;
         border-radius: 5px;
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         background: #fff;
 
-        &:nth-child(3n+1){
-            margin-left: 0;
+        span.tf_video_action{
+            a{
+                padding: 5px 10px;
+                text-decoration: none;
+                text-align: center;
+                display: block;
+                overflow: hidden;
+                background-color: $theme_link_color;      
+                border-radius: 0 0 5px 5px;
+                -webkit-border-radius:0 0 5px 5px;
+                -moz-border-radius:0 0 5px 5px;
+                color: #fff;
+                font-weight: bold;
+            }
         }
 
         .ynvideo_thumb_wrapper{
