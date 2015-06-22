@@ -1,5 +1,3 @@
-<span class="tarfee_total_items"><?php echo $this -> total;?></span>
-
 <ul class="tfcampaign_list">
 <?php foreach($this -> campaigns as $campaign) :?>
 	<li>

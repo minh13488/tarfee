@@ -1,4 +1,3 @@
-<div class = 'tarfee_total_items'><?php echo  $this->paginator -> getTotalItemCount()?></div>
 <?php
  $title = $this->translate('View All');
  $createTitle = $this -> translate("add more event");
