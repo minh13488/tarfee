@@ -31,8 +31,8 @@ class Ynadvsearch_IndexController extends Core_Controller_Action_Standard {
 		$search = trim($search);
 		
 		$table = Engine_Api::_()->getDbTable('keywords', 'ynadvsearch');
-		$search = $table->select()->where('title LIKE ?', '%'.$search.'%')->order('count DESC');
-		$rows = $table->fetchAll($search);
+		$select = $table->select()->where('title LIKE ?', '%'.$search.'%')->order('count DESC');
+		$rows = $table->fetchAll($select);
 		$result = array();
 		foreach ($rows as $row) {
 			$result[] = array (
