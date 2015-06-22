@@ -1373,7 +1373,7 @@ body#global_page_user-profile-index {
         		font-weight: bold;
         		text-transform: lowercase;
         		color: $theme_font_color;
-        		padding: 10px 15px;
+        		padding: 10px 14px;
 				border-radius: 5px;
 				-webkit-border-radius: 5px;
 				-moz-border-radius: 5px;        		
