@@ -942,7 +942,7 @@
       content_id = element.get('id').replace('admin_content_', '');
     }
 
-    var url = '<?php echo $this->url(array('action' => 'widget', 'controller' => 'content', 'module' => 'core'), 'admin_default', true)?>';
+    var url = '<?php echo $this->url(array('action' => 'widget', 'controller' => 'content', 'module' => 'core', 'format' => 'smoothbox'), 'admin_default', true)?>';
     var urlObject = new URI(url);
 
     var fullParams = element.retrieve('contentParams');
