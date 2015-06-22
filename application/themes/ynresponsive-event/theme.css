@@ -396,11 +396,15 @@ MAIN CONTENT AREA
             }
         }
         
-        .user-profile-login li {
-            display: inline-block;
-            margin: 0 5px;
-            a { color: $theme_footer_text_color; }        
-        }
+        .user-profile-login {
+        	padding-top: 25px;
+        	
+	        li {
+	            display: inline-block;
+	            margin: 0 5px;
+	            a { color: $theme_footer_text_color; }        
+	        }
+    	}
     }
 }
 

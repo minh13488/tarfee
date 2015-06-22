@@ -36,7 +36,7 @@
 	    <!-- Menu Bar -->
 	    <?php
 	    if($this -> viewer() -> getIdentity()):
-			  $max_player_card = Engine_Api::_()->authorization()->getPermission($this -> viewer(), 'user_playercard', 'max_player_card', 5);
+			 $max_player_card = Engine_Api::_()->authorization()->getPermission($this -> viewer(), 'user_playercard', 'max_player_card', 5);
 	         if($max_player_card == "")
 	         {
 	            $mtable  = Engine_Api::_()->getDbtable('permissions', 'authorization');
@@ -58,6 +58,7 @@
 		            'route' => 'user_extended',
 		            'controller' => 'player-card',
 		            'action' => 'create',
+		            'tab' => 724,
 		        ), '<i class="fa fa-plus-square fa-lg"></i>&nbsp;&nbsp;'.$this->translate('add new player card'), array(
 		            'class' => ''
 		        ))
