@@ -117,6 +117,7 @@ $viewer = $this -> viewer();
 
       jQuery('#show-hide-list-items').click(function() {
          jQuery('.list-items').fadeToggle(400);
+         jQuery(this).toggleClass('list-item-show');
       });
 
       jQuery('.item-action').click(function() {
