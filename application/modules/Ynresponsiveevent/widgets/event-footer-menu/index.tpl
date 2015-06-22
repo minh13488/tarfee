@@ -1,34 +1,40 @@
-<div class="sideicon" style="display: none">
-	<ul>
-		<li class="sideicon_generic plus">
-			<a href="#"><span class="fa fa-plus"></span></a>
-		</li>
-		<li class="sideicon_generic calendar">
-			<a href="<?php echo $this -> url(array(), 'event_general')?>"><span class="fa fa-calendar"></span></a>
-		</li>
-		<li class="sideicon_generic addfriend">
-			<a href="<?php echo $this -> url(array(), 'user_general')?>"><span class="fa fa-user-plus"></span></a>
-		</li>
-		<li class="sideicon_generic friends">
-			<a href="<?php echo $this -> url(array(), 'group_extended')?>"><span class="fa fa-users"></span></a>
-		</li>
-		<li class="sideicon_generic noname">
-			<a href="#"><span class="fa fa-credit-card"></span></a>
-		</li>
-		<li class="sideicon_generic office">
-			<a href="#"><span class="fa fa-building"></span></a>
-		</li>
-		<li class="sideicon_generic news">
-			<a href="<?php echo $this -> url(array(), 'blog_general')?>"><span class="fa fa-newspaper-o"></span></a>
-		</li>
-		<li class="sideicon_generic help">
-			<a href="#"><span class="fa fa-question"></span></a>
-		</li>
-	</ul>
-</div>
-<div class="container">
+<div class="tf_right_menu">
+   <ul class="list-items">
+      <li class="item-action">
+         <a href="javascript:void;"><img src="application/themes/ynresponsive-event/images/add.png" /></a>
 
-    
+         <ul class="list-items-dropdown">
+            <li><a href=""><i class="fa fa-video-camera"></i>Add Video</a></li>
+            <li><a href=""><i class="fa fa-user-plus"></i>Add Player Card</a></li>
+            <li><a href=""><i class="fa fa-calendar"></i>Add Event/Tryout</a></li>
+            <li><a href=""><i class="fa fa-rocket"></i>Add Campaign</a></li>
+            <li><a href=""><i class="fa fa-comments-o"></i>Add Talk</a></li>
+            <li><a href=""><i class="fa fa-search"></i>Find/Invite Friend</a></li>
+         </ul>
+      </li>
+
+      <li><a href=""><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
+      <li><a href=""><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
+      <li><a href=""><img src="application/themes/ynresponsive-event/images/event.png" /></a></li>
+      <li><a href=""><img src="application/themes/ynresponsive-event/images/market.png" /></a></li>
+      <li><a href=""><img src="application/themes/ynresponsive-event/images/professional.png" /></a></li>
+
+      <li class="item-action">
+         <a href="javascript:void;"><img src="application/themes/ynresponsive-event/images/help.png" /></a>
+
+         <ul class="list-items-dropdown">
+            <li><a href=""><i class="fa fa-question-circle"></i>Help Centre</a></li>
+            <li><a href=""><i class="fa fa-info"></i>Suggest Idea or Feature</a></li>
+            <li><a href=""><i class="fa fa-phone"></i>Contact Us</a></li>
+         </ul>
+      </li>
+
+   </ul>
+</div>
+
+
+
+<div class="container">
    <span class="ynresponsive_menus"> 
       <?php foreach( $this->navigation as $item ):
          $attribs = array_diff_key(array_filter($item->toArray()), array_flip(array(
@@ -67,3 +73,22 @@
       </div>
     <?php endif; ?>
 </div>
+
+<script type="text/javascript">
+   // jQuery.noConflict();
+
+   // $$('.item-action').addEvent('click',function(){
+   //    var item_display = $$('.list-items-dropdown').getStyle('display');
+   //    if( item_display == "block" ){
+   //       $$('.list-items-dropdown').setStyle('display','none');
+   //    }else{
+   //       $$('.list-items-dropdown').setStyle({display: 'block' , opacity: 0})fade();
+   //    }
+   // });
+
+   jQuery.noConflict();
+      jQuery('.item-action').click(function() {
+         jQuery(this).find('.list-items-dropdown').fadeToggle(400);
+      });
+
+</script>
