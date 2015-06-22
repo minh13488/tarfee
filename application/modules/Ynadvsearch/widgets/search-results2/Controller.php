@@ -1,19 +1,4 @@
 <?php
-if (!function_exists('array_column')) {
-    function array_column($array, $column_key, $index_key = null)  {
-        return array_reduce($array, function ($result, $item) use ($column_key, $index_key) 
-        {
-            if (null === $index_key) {
-                $result[] = $item[$column_key];
-            } else {
-                $result[$item[$index_key]] = $item[$column_key];
-            }
-
-            return $result;
-        }, array());
-    }
-}
-
 class Ynadvsearch_Widget_SearchResults2Controller extends Engine_Content_Widget_Abstract {
 	public function indexAction() {
 		$request = Zend_Controller_Front::getInstance ()->getRequest ();
@@ -45,17 +30,8 @@ class Ynadvsearch_Widget_SearchResults2Controller extends Engine_Content_Widget_
 		
 		$advsearch = $request-> getParam('advsearch', '');
 		if ($advsearch == '') {
-			$tokens = $request-> getParam('token', '');
-			$tokens = explode(',', $tokens);
 			$query = $request -> getParam('query', '');
-			if (!empty($query)) {
-				$id = Engine_Api::_()->getDbTable('keywords', 'ynadvsearch')->addKeyword($query, false);
-				if ($id) $tokens[] = $id;
-			}
-			
-			$this->view->tokens = $tokens = Engine_Api::_()->getDbTable('keywords', 'ynadvsearch')->getKeywordsAssoc(array('ids' => $tokens));
-	        
-			$this->view->text = $text = array_column($tokens, 'name');
+			$this->view->text = $text = explode(',', $query);
 			
 			$this->view->type = $type = $request->getParam('type',array_keys(Engine_Api::_()->ynadvsearch()->getAllowSearchTypes()));
 			$sport = array_keys(Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1Assoc());
