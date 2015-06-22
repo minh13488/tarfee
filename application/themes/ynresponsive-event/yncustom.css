@@ -990,6 +990,9 @@ iframe.wysihtml5-sandbox {
 
 
 /*Style Right Menu*/
+#global_header{
+	z-index: 21;
+}
 #global_footer{
 	z-index: 20;
 }
@@ -1018,8 +1021,22 @@ iframe.wysihtml5-sandbox {
 		-o-transition: all 500ms ;
 		transition: all 500ms ;
 
+		&:before{
+			content: "\\f101"; 
+			font-family: FontAwesome; 
+			font-style: normal; 
+			font-weight: normal; 
+			text-decoration: inherit;
+		}
+
 		&:hover{
 			opacity: 1;
+		}
+	}
+
+	.list-item-show{
+		&:before{
+			content: "\\f100" !important; 
 		}
 	}
 
