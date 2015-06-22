@@ -495,6 +495,7 @@ jQuery.noConflict();
             <?php if ($this->max_keywords) :?>
             , tokenLimit: <?php echo $this->max_keywords?>
             <?php endif; ?>
+            , resultsLimit: 20
         };
 		$('#global_search_field').tokenInput('<?php echo $this->url(array('action'=>'suggest-keywords'), 'ynadvsearch_suggest', true)?>', options);
 	
