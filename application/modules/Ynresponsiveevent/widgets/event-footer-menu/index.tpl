@@ -21,7 +21,7 @@
       <li><a href=""><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
       <li><a href=""><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
       <li><a href=""><img src="application/themes/ynresponsive-event/images/event.png" /></a></li>
-      <li><a href=""><img src="application/themes/ynresponsive-event/images/talk.png" /></a></li>
+      <li><a href=""><img src="application/themes/ynresponsive-event/images/market.png" /></a></li>
       <li><a href=""><img src="application/themes/ynresponsive-event/images/professional.png" /></a></li>
 
       <li class="item-action">
