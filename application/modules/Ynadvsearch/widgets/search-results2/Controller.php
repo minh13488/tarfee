@@ -1,4 +1,19 @@
 <?php
+if (!function_exists('array_column')) {
+    function array_column($array, $column_key, $index_key = null)  {
+        return array_reduce($array, function ($result, $item) use ($column_key, $index_key) 
+        {
+            if (null === $index_key) {
+                $result[] = $item[$column_key];
+            } else {
+                $result[$item[$index_key]] = $item[$column_key];
+            }
+
+            return $result;
+        }, array());
+    }
+}
+
 class Ynadvsearch_Widget_SearchResults2Controller extends Engine_Content_Widget_Abstract {
 	public function indexAction() {
 		$request = Zend_Controller_Front::getInstance ()->getRequest ();
@@ -43,7 +58,9 @@ class Ynadvsearch_Widget_SearchResults2Controller extends Engine_Content_Widget_
 			$this->view->text = $text = array_column($tokens, 'name');
 			
 			$this->view->type = $type = $request->getParam('type',array_keys(Engine_Api::_()->ynadvsearch()->getAllowSearchTypes()));
-			$this->view->sport = $sport = $request->getParam('sport',array('all') + array_keys(Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1Assoc()));
+			$sport = array_keys(Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1Assoc());
+			$sport[] = 'all';
+			$this->view->sport = $sport = $request->getParam('sport', $sport);
 			$results = Engine_Api::_()->getApi('search', 'ynadvsearch')->getResults2( $text, $type, $sport, $from, $limit );
 	        
 			$params[type] = $type;

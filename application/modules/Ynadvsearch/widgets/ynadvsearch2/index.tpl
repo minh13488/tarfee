@@ -26,7 +26,7 @@
 		<ul>
 			<li>
 				<input id="sport-all" type="checkbox" name="sport[]" <?php if (in_array('all', $this->sport)) echo 'checked'?> class="type-checkbox" value="all"/>
-				<label for="sport-all"><?php echo $this->translate(All Sport)?></label>
+				<label for="sport-all"><?php echo $this->translate('All Sport')?></label>
 			</li>
 			<?php $sports = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1();?>
 			<?php foreach($sports as $sport):?>
@@ -405,6 +405,7 @@ window.addEvent('domready', function() {
 		else {
 			if (!this.checked) {
 				$('sport-all').set('checked', false);
+			}
 		}
 	});
 	
