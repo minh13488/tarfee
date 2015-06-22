@@ -523,7 +523,7 @@ jQuery.noConflict();
             , noResultsText: '<?php echo $this->translate('No keywords found.')?>'
             , searchingText: '<?php echo $this->translate('Searching...')?>'
             , placeholder: '<?php echo $this->translate('Enter keyword')?>'
-            , preventDuplicates: false
+            , preventDuplicates: true
             , hintText: ''
             , allowFreeTagging: true
             , animateDropdown: false
