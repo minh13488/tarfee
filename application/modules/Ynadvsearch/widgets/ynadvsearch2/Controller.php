@@ -106,13 +106,16 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 		$tokens = explode(',', $tokens);
 		
 		$query = Zend_Controller_Front::getInstance ()->getRequest ()-> getParam('query', '');
+		
 		$text = explode(',', $query);
 		$tokens = array();
 		foreach ($text as $key=>$value) {
-			$tokens[] = array(
-				'id' => $key,
-				'name' => $value
-			);
+			if ($value != '') {
+				$tokens[] = array(
+					'id' => $key,
+					'name' => $value
+				);
+			}
 		}
 		$this->view->tokens = $tokens;
 				
