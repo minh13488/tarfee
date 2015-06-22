@@ -24,6 +24,10 @@
 	<div id="sport-filter">
 		<h3><?php echo $this->translate('Sport')?></h3>
 		<ul>
+			<li>
+				<input id="sport-all" type="checkbox" name="sport[]" <?php if (in_array('all', $this->sport)) echo 'checked'?> class="type-checkbox" value="all"/>
+				<label for="sport-all"><?php echo $this->translate('All Sport')?></label>
+			</li>
 			<?php $sports = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1();?>
 			<?php foreach($sports as $sport):?>
 			<li>
@@ -67,6 +71,12 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="player_position_id"><?php echo $this->translate('Sport Position')?></label>
+					<select class="form-element search-element" id="player_position_id" name="position_id">
+						<option value="0"></option>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_gender"><?php echo $this->translate('Gender')?></label>
 					<select class="form-element search-element" id="player_gender" name="gender">
 						<option value="0"></option>
@@ -79,13 +89,13 @@
 					<select class="form-element search-element" id="player_age_from" name="age_from">
 						<option value="0"></option>
 						<?php for ($i = 13; $i <= 100; $i++ ) :?>
-						<option value="<?php echo $i?>"><?php echo $i?></option>	
+						<option value="<?php echo $i?>"><?php echo $i.' ('.(date("Y") - $i).')'?></option>	
 						<?php endfor;?>
 					</select>
 					<select class="form-element search-element" id="player_age_to" name="age_to">
 						<option value="0"></option>
 						<?php for ($i = 13; $i <= 100; $i++ ) :?>
-						<option value="<?php echo $i?>"><?php echo $i?></option>	
+						<option value="<?php echo $i?>"><?php echo $i.' ('.(date("Y") - $i).')'?></option>	
 						<?php endfor;?>
 					</select>
 				</div>
@@ -385,6 +395,20 @@
 <script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery.tokeninput.js"></script>
 <script>
 window.addEvent('domready', function() {
+	$$('.type-checkbox').addEvent('click', function() {
+		var id = this.get('id');
+		if (id == 'sport-all') {
+			if (this.checked) {
+				$$('.type-checkbox').set('checked', true);
+			}
+		}
+		else {
+			if (!this.checked) {
+				$('sport-all').set('checked', false);
+			}
+		}
+	});
+	
 	<?php if ($this->viewer()->getIdentity()):?>
 	$$('.search-tab-item:first-child').addClass('active');
 	$$('.search-form-item:first-child').addClass('active');
@@ -475,7 +499,26 @@ window.addEvent('domready', function() {
   		})
   		makeRequest.send();
 	});
-	 <?php endif;?>
+	
+	$$('#player_sport').addEvent('change', function() {
+		var id = this.value;
+		var type = this.get('rel');
+		var makeRequest = new Request({
+  			url: "user/player-card/subcategories/cat_id/"+id,
+  			onComplete: function (respone){
+				respone  = respone.trim();
+				$('player_position_id').empty();
+				if (respone != "") {
+					$('player_position_id').innerHTML = '<option value="0"></option>' + respone;
+				}
+				else {
+					$('player_position_id').innerHTML = '<option value="0"></option>';
+				}
+  			}
+  		})
+  		makeRequest.send();
+	});
+	<?php endif;?>
 });
 
 jQuery.noConflict();
@@ -495,6 +538,7 @@ jQuery.noConflict();
             <?php if ($this->max_keywords) :?>
             , tokenLimit: <?php echo $this->max_keywords?>
             <?php endif; ?>
+            , resultsLimit: 20
         };
 		$('#global_search_field').tokenInput('<?php echo $this->url(array('action'=>'suggest-keywords'), 'ynadvsearch_suggest', true)?>', options);
 	

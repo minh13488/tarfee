@@ -67,7 +67,8 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 		$select->setIntegrityCheck(false);
 		$select->joinLeft($sportmapTblName, "$sportmapTblName.item_id = $table_name.id and $sportmapTblName.item_type = $table_name.type", "");
         $select->where ( "$table_name.type IN (?)",  $types );
-		$select->where ( "$sportmapTblName.sport_id IN (?)",  $sports);
+        if (!in_array('all', $sports))
+			$select->where ( "$sportmapTblName.sport_id IN (?)",  $sports);
 		$select->group("$table_name.id");
 		foreach ($text as $str) {
 			$search = '%' . preg_replace ( '/\s+/', '%', $str ) . '%';
@@ -120,6 +121,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				}
 				if (!empty($params['relation_id'])) {
 					$select->where('relation_id = ?', $params['relation_id']);
+				}
+				if (!empty($params['position_id'])) {
+					$select->where('position_id = ?', $params['position_id']);
 				}				
 				if (!empty($params['continent'])) {
 					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);
