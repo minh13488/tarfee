@@ -106,14 +106,16 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 		$tokens = explode(',', $tokens);
 		
 		$query = Zend_Controller_Front::getInstance ()->getRequest ()-> getParam('query', '');
-		if (!empty($query)) {
-			$id = Engine_Api::_()->getDbTable('keywords', 'ynadvsearch')->addKeyword($query);
-			if ($id) $tokens[] = $id;
+		$text = explode(',', $query);
+		$tokens = array();
+		foreach ($text as $key=>$value) {
+			$tokens[] = array(
+				'id' => $key,
+				'name' => $value
+			);
 		}
-		
-		$tokens = Engine_Api::_()->getDbTable('keywords', 'ynadvsearch')->getKeywordsAssoc(array('ids' => $tokens));
 		$this->view->tokens = $tokens;
-		
+				
 		$this->view->type = Zend_Controller_Front::getInstance ()->getRequest ()->getParam('type',array_keys(Engine_Api::_()->ynadvsearch()->getAllowSearchTypes()));
 		$sport = array_keys(Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1Assoc());
 		$sport[] = 'all';

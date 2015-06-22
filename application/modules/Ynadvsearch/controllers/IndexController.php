@@ -30,39 +30,20 @@ class Ynadvsearch_IndexController extends Core_Controller_Action_Standard {
 		$search = $this->_getParam('q' ,'');
 		$search = trim($search);
 		
-		$table = Engine_Api::_()->getDbTable('keywords', 'ynadvsearch');
-		$select = $table->select()->where('title LIKE ?', '%'.$search.'%')->order('count DESC');
-		$rows = $table->fetchAll($select);
-		$result = array();
+		$types = Engine_Api::_()->ynadvsearch()->getAllowSearchTypes();
+		$types = array_keys($types);
+		$searchTbl = Engine_Api::_()->getDbTable('search', 'core');
+		$searchSelect = $searchTbl->select()
+			->where('title LIKE ?', '%'.$search.'%')
+			->where('type IN (?)', $types);
+		$rows = $searchTbl->fetchAll($searchSelect);
+		$i = 0;
 		foreach ($rows as $row) {
 			$result[] = array (
-				'id' => $row->keyword_id,
+				'id' => $i,
 				'name' => $row->title
 			);
-		}
-		if (count($result) < 20) {
-			$types = Engine_Api::_()->ynadvsearch()->getAllowSearchTypes();
-			$types = array_keys($types);
-			$limit = 20 - count($result);
-			$names = array_column($result, 'name');
-			$searchTbl = Engine_Api::_()->getDbTable('search', 'core');
-			$searchSelect = $searchTbl->select()
-				->where('title LIKE ?', '%'.$search.'%')
-				->where('type IN (?)', $types)
-				->limit($limit);
-			if (!empty($names))
-			$searchSelect->where('title NOT IN (?)', $names);
-			$rows = $searchTbl->fetchAll($searchSelect);
-			foreach ($rows as $row) {
-				$keyword = $table->createRow();
-				$keyword->title = $row->title;
-				$keyword->creation_date = $keyword->modified_date = date('Y-m-d H:i:s');
-				$keyword->save();
-				$result[] = array (
-					'id' => $keyword->keyword_id,
-					'name' => $keyword->title
-				);
-			}
+			$i++;
 		}
 		echo json_encode($result);
         return;

@@ -523,7 +523,7 @@ jQuery.noConflict();
             , noResultsText: '<?php echo $this->translate('No keywords found.')?>'
             , searchingText: '<?php echo $this->translate('Searching...')?>'
             , placeholder: '<?php echo $this->translate('Enter keyword')?>'
-            , preventDuplicates: true
+            , preventDuplicates: false
             , hintText: ''
             , allowFreeTagging: true
             , animateDropdown: false
@@ -531,7 +531,6 @@ jQuery.noConflict();
             <?php if ($this->max_keywords) :?>
             , tokenLimit: <?php echo $this->max_keywords?>
             <?php endif; ?>
-            , resultsLimit: 20
         };
 		$('#global_search_field').tokenInput('<?php echo $this->url(array('action'=>'suggest-keywords'), 'ynadvsearch_suggest', true)?>', options);
 	
@@ -549,14 +548,12 @@ jQuery.noConflict();
 					var values = query.tokenInput('get');
 					var arr = [];
 					for (var i = 0; i < values.length; i++) {
-						arr.push(values[i].id);
+						arr.push(values[i].name);
 					}
-					var token = $('<input />', {
-						'type' : 'hidden',
-						'name' : 'token',
-						'value' : arr.join() 
-					});
-					searchForm.append(token);
+					if ($this.val() != '') {
+						arr.push($this.val());
+					}
+					query.val(arr.join());
 					searchForm.submit();
 				}	
 			});
