@@ -12,7 +12,7 @@ $viewer = $this -> viewer();
 	$library =  $viewer -> getMainLibrary();
    	?>
       <li class="item-action">
-         <a title="<?php $this -> translate("add")?>" href="javascript:void;"><img src="application/themes/ynresponsive-event/images/add.png" /></a>
+         <a title="<?php echo $this -> translate("add")?>" href="javascript:void;"><img src="application/themes/ynresponsive-event/images/add.png" /></a>
          <ul class="list-items-dropdown">
          	<?php $videoUrl = $this->url(array(
 					'action' => 'create',
@@ -55,14 +55,14 @@ $viewer = $this -> viewer();
          </ul>
       </li>
     <?php endif;?>
-      <li><a title="<?php $this -> translate("campaigns")?>" href="<?php echo $this -> url(array(), 'tfcampaign_general', true);?>"><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
-      <li><a title="<?php $this -> translate("clubs & organizations")?>" href="<?php echo $this -> url(array(), 'group_general', true);?>"><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
-      <li><a title="<?php $this -> translate("events & tryouts")?>" href="<?php echo $this -> url(array(), 'event_general', true);?>"><img src="application/themes/ynresponsive-event/images/event.png" /></a></li>
-      <li><a title="<?php $this -> translate("talks")?>" href="<?php echo $this -> url(array(), 'blog_general', true);?>"><img src="application/themes/ynresponsive-event/images/market.png" /></a></li>
-      <li><a title="<?php $this -> translate("professionals")?>" href="#"><img src="application/themes/ynresponsive-event/images/professional.png" /></a></li>
+      <li><a title="<?php echo $this -> translate("campaigns")?>" href="<?php echo $this -> url(array(), 'tfcampaign_general', true);?>"><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
+      <li><a title="<?php echo $this -> translate("clubs & organizations")?>" href="<?php echo $this -> url(array(), 'group_general', true);?>"><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
+      <li><a title="<?php echo $this -> translate("events & tryouts")?>" href="<?php echo $this -> url(array(), 'event_general', true);?>"><img src="application/themes/ynresponsive-event/images/event.png" /></a></li>
+      <li><a title="<?php echo $this -> translate("talks")?>" href="<?php echo $this -> url(array(), 'blog_general', true);?>"><img src="application/themes/ynresponsive-event/images/market.png" /></a></li>
+      <li><a title="<?php echo $this -> translate("professionals")?>" href="#"><img src="application/themes/ynresponsive-event/images/professional.png" /></a></li>
 
       <li class="item-action">
-         <a title="<?php $this -> translate("help")?>" href="javascript:void;"><img src="application/themes/ynresponsive-event/images/help.png" /></a>
+         <a title="<?php echo $this -> translate("help")?>" href="javascript:void;"><img src="application/themes/ynresponsive-event/images/help.png" /></a>
          <ul class="list-items-dropdown">
             <li><a href="#"><i class="fa fa-question-circle"></i><?php echo $this -> translate("Help Centre")?></a></li>
             <li><a href="#"><i class="fa fa-info"></i><?php echo $this -> translate("Suggest Idea or Feature")?></a></li>
