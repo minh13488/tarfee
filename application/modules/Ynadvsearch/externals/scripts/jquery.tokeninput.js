@@ -286,8 +286,8 @@ $.TokenList = function (input, url_or_data, settings) {
 						for (var i = 0; i < values.length; i++) {
 							arr.push(values[i].name);
 						}
-						if ($this.val() != '') {
-							arr.push($this.val());
+						if ($(this).val() != '') {
+							arr.push($(this).val());
 						}
 						query.val(arr.join());
 						form.submit();

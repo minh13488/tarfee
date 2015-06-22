@@ -544,14 +544,13 @@ jQuery.noConflict();
 					var searchForm = $(this).closest('#global_search_form');
 					var query = searchForm.find('#global_search_field');
 					var input = searchForm.find('#token-input-global_search_field');
-					query.val(input.val());
 					var values = query.tokenInput('get');
 					var arr = [];
 					for (var i = 0; i < values.length; i++) {
 						arr.push(values[i].name);
 					}
-					if ($this.val() != '') {
-						arr.push($this.val());
+					if (input.val() != '') {
+						arr.push(input.val());
 					}
 					query.val(arr.join());
 					searchForm.submit();
