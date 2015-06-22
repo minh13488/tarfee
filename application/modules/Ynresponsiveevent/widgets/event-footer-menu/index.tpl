@@ -1,12 +1,12 @@
 <div class="tf_right_menu">
    
    <span id="show-hide-list-items">
-      <i class="fa fa-angle-double-right"></i>
+      <!-- <i class="fa fa-angle-double-right"></i> -->
    </span>
    
    <ul class="list-items">
       <li class="item-action">
-         <a href="javascript:void;"><img src="application/themes/ynresponsive-event/images/add.png" /></a>
+         <a href="javascript:void(0)"><img src="application/themes/ynresponsive-event/images/add.png" /></a>
 
          <ul class="list-items-dropdown">
             <li><a href=""><i class="fa fa-video-camera"></i>Add Video</a></li>
@@ -21,11 +21,11 @@
       <li><a href=""><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
       <li><a href=""><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
       <li><a href=""><img src="application/themes/ynresponsive-event/images/event.png" /></a></li>
-      <li><a href=""><img src="application/themes/ynresponsive-event/images/market.png" /></a></li>
+      <li><a href=""><img src="application/themes/ynresponsive-event/images/talk.png" /></a></li>
       <li><a href=""><img src="application/themes/ynresponsive-event/images/professional.png" /></a></li>
 
       <li class="item-action">
-         <a href="javascript:void;"><img src="application/themes/ynresponsive-event/images/help.png" /></a>
+         <a href="javascript:void(0)"><img src="application/themes/ynresponsive-event/images/help.png" /></a>
 
          <ul class="list-items-dropdown">
             <li><a href=""><i class="fa fa-question-circle"></i>Help Centre</a></li>
@@ -95,6 +95,7 @@
 
       jQuery('#show-hide-list-items').click(function() {
          jQuery('.list-items').fadeToggle(400);
+         jQuery(this).toggleClass('list-item-show').delay(400);
       });
 
       jQuery('.item-action').click(function() {
