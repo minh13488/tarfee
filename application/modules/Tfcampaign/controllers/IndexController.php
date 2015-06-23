@@ -204,8 +204,10 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 			//send notification to owner of players if their players match with the campaign
 			$notifyApi = Engine_Api::_() -> getDbtable('notifications', 'activity');
 			foreach($players as $player) {
-				if($player -> countPercentMatching($campaign) >= $campaign -> percentage) {
-					$notifyApi -> addNotification($player -> getOwner(), $player, $campaign, 'tfcampaign_alert_player');
+				if($player -> user_id != $campaign -> user_id) {
+					if($player -> countPercentMatching($campaign) >= $campaign -> percentage) {
+						$notifyApi -> addNotification($player -> getOwner(), $player, $campaign, 'tfcampaign_alert_player');
+					}
 				}
 			}
 			
