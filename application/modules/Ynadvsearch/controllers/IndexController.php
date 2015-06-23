@@ -1,5 +1,20 @@
 <?php
 
+if (!function_exists('array_column')) {
+    function array_column($array, $column_key, $index_key = null)  {
+        return array_reduce($array, function ($result, $item) use ($column_key, $index_key) 
+        {
+            if (null === $index_key) {
+                $result[] = $item[$column_key];
+            } else {
+                $result[$item[$index_key]] = $item[$column_key];
+            }
+
+            return $result;
+        }, array());
+    }
+}
+
 class Ynadvsearch_IndexController extends Core_Controller_Action_Standard {
 	public function indexAction() {
 
@@ -15,17 +30,21 @@ class Ynadvsearch_IndexController extends Core_Controller_Action_Standard {
 		$search = $this->_getParam('q' ,'');
 		$search = trim($search);
 		
-		$table = Engine_Api::_()->getDbTable('keywords', 'ynadvsearch');
-		$search = $table->select()->where('title LIKE ?', '%'.$search.'%')->order('count DESC');
-		$rows = $table->fetchAll($search);
-		$result = array();
+		$types = Engine_Api::_()->ynadvsearch()->getAllowSearchTypes();
+		$types = array_keys($types);
+		$searchTbl = Engine_Api::_()->getDbTable('search', 'core');
+		$searchSelect = $searchTbl->select()
+			->where('title LIKE ?', '%'.$search.'%')
+			->where('type IN (?)', $types);
+		$rows = $searchTbl->fetchAll($searchSelect);
+		$i = 0;
 		foreach ($rows as $row) {
 			$result[] = array (
-				'id' => $row->keyword_id,
+				'id' => $i,
 				'name' => $row->title
 			);
+			$i++;
 		}
-		
 		echo json_encode($result);
         return;
 	}

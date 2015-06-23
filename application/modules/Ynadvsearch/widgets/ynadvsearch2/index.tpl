@@ -24,6 +24,10 @@
 	<div id="sport-filter">
 		<h3><?php echo $this->translate('Sport')?></h3>
 		<ul>
+			<li>
+				<input id="sport-all" type="checkbox" name="sport[]" <?php if (in_array('all', $this->sport)) echo 'checked'?> class="type-checkbox" value="all"/>
+				<label for="sport-all"><?php echo $this->translate('All Sport')?></label>
+			</li>
 			<?php $sports = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1();?>
 			<?php foreach($sports as $sport):?>
 			<li>
@@ -67,6 +71,12 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
+					<label class="form-label search-label" for="player_position_id"><?php echo $this->translate('Sport Position')?></label>
+					<select class="form-element search-element" id="player_position_id" name="position_id">
+						<option value="0"></option>
+					</select>
+				</div>
+				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_gender"><?php echo $this->translate('Gender')?></label>
 					<select class="form-element search-element" id="player_gender" name="gender">
 						<option value="0"></option>
@@ -79,13 +89,13 @@
 					<select class="form-element search-element" id="player_age_from" name="age_from">
 						<option value="0"></option>
 						<?php for ($i = 13; $i <= 100; $i++ ) :?>
-						<option value="<?php echo $i?>"><?php echo $i?></option>	
+						<option value="<?php echo $i?>"><?php echo $i.' ('.(date("Y") - $i).')'?></option>	
 						<?php endfor;?>
 					</select>
 					<select class="form-element search-element" id="player_age_to" name="age_to">
 						<option value="0"></option>
 						<?php for ($i = 13; $i <= 100; $i++ ) :?>
-						<option value="<?php echo $i?>"><?php echo $i?></option>	
+						<option value="<?php echo $i?>"><?php echo $i.' ('.(date("Y") - $i).')'?></option>	
 						<?php endfor;?>
 					</select>
 				</div>
@@ -384,103 +394,129 @@
 
 <script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery.tokeninput.js"></script>
 <script>
-window.addEvent('domready', function() {
-	<?php if ($this->viewer()->getIdentity()):?>
-	$$('.search-tab-item:first-child').addClass('active');
-	$$('.search-form-item:first-child').addClass('active');
-	$$('.search-tab-item').addEvent('click', function() {
-		var index = $('advanced-search-tab').getChildren('li.search-tab-item').indexOf(this);
-		$$('.search-tab-item').removeClass('active');
-		this.addClass('active');
-		index = index+1;
-		$$('.search-form-item').removeClass('active');
-
-		$$('.search-form-item:nth-child('+index+')').addClass('active');
-	});
-	
-	$$('.continent').addEvent('change', function() {
-		var continent = this.value;
-		var type = this.get('rel');
-		var makeRequest = new Request({
-  			url: "<?php echo $this->url(array('action'=>'get-countries'),'user_general', true)?>/continent/"+continent,
-  			onComplete: function (respone){
-				respone  = respone.trim();
-				var options = Elements.from(respone);
-				var option = new Element('option', {
-					'value': '0',
-					'text': ''
-				});
-              	if(options.length > 0) {
-                	$(type+'_country').empty();
-                	$(type+'_country').grab(option);
-                	$(type+'_country').adopt(options);
-  				}
-  				else {
-  					$(type+'_country').empty();
-  					$(type+'_country').grab(option);
-  				}
-  			}
-  		})
-  		makeRequest.send();
-	});
-	
-	$$('.country_id').addEvent('change', function() {
-		var id = this.value;
-		var type = this.get('rel');
-		var makeRequest = new Request({
-  			url: "<?php echo $this->url(array('action'=>'sublocations'),'user_general', true)?>/location_id/"+id,
-  			onComplete: function (respone){
-				respone  = respone.trim();
-				var options = Elements.from(respone);
-				var option = new Element('option', {
-						'value': '0',
-						'text': ''
-				});
-              	if(options.length > 0) {
-                	$(type+'_province').empty();
-                	$(type+'_province').grab(option);
-                	$(type+'_province').adopt(options);
-  				}
-  				else {
-  					$(type+'_province').empty();
-  					$(type+'_province').grab(option);
-  				}
-  			}
-  		})
-  		makeRequest.send();
-	});
-	
-	$$('.province_id').addEvent('change', function() {
-		var id = this.value;
-		var type = this.get('rel');
-		var makeRequest = new Request({
-  			url: "<?php echo $this->url(array('action'=>'sublocations'),'user_general', true)?>/location_id/"+id,
-  			onComplete: function (respone){
-				respone  = respone.trim();
-				var options = Elements.from(respone);
-				var option = new Element('option', {
-						'value': '0',
-						'text': ''
-				});
-              	if(options.length > 0) {
-                	$(type+'_city').empty();
-                	$(type+'_city').grab(option);
-                	$(type+'_city').adopt(options);
-  				}
-  				else {
-  					$(type+'_city').empty();
-  					$(type+'_city').grab(option);
-  				}
-  			}
-  		})
-  		makeRequest.send();
-	});
-	 <?php endif;?>
-});
-
 jQuery.noConflict();
 (function($) { 
 	$(document).ready(function () {
+		
+		$('.type-checkbox').on('click', function() {
+			var id = $(this).attr('id');
+			if (id == 'sport-all') {
+				if ($(this).checked) {
+					$('.type-checkbox').attr('checked', true);
+				}
+			}
+			else {
+				if (!$(this).checked) {
+					$('sport-all').attr('checked', false);
+				}
+			}
+		});
+		
+		<?php if ($this->viewer()->getIdentity()):?>
+		$('.search-tab-item:first-child').addClass('active');
+		$('.search-form-item:first-child').addClass('active');
+		$('.search-tab-item').on('click', function() {
+			var index = $('#advanced-search-tab').children('li.search-tab-item').index($(this));
+			$('.search-tab-item').removeClass('active');
+			$(this).addClass('active');
+			index = index+1;
+			$('.search-form-item').removeClass('active');
+	
+			$('.search-form-item:nth-child('+index+')').addClass('active');
+		});
+		
+		$('.continent').on('change', function() {
+			var continent = $(this).val();
+			var type = $(this).attr('rel');
+			$.ajax({
+	  			url: "<?php echo $this->url(array('action'=>'get-countries'),'user_general', true)?>/continent/"+continent,
+	  			success : function (respone){
+					respone  = $.trim(respone);
+					var option = $('<option />', {
+						'value': '0',
+						'text': ''
+					});
+					console.log(respone);
+	              	if(respone.length > 0) {
+	                	$('#'+type+'_country').empty();
+	                	$('#'+type+'_country').append(option);
+	                	$('#'+type+'_country').append(respone);
+	  				}
+	  				else {
+	  					$('#'+type+'_country').empty();
+	  					$('#'+type+'_country').append(option);
+	  				}
+	  			}
+	  		});
+		});
+		
+		$('.country_id').on('change', function() {
+			var id = $(this).val();
+			var type = $(this).attr('rel');
+			$.ajax({
+	  			url: "<?php echo $this->url(array('action'=>'sublocations'),'user_general', true)?>/location_id/"+id,
+	  			success: function (respone){
+					respone  = $.trim(respone);
+					var option = $('<option />', {
+						'value': '0',
+						'text': ''
+					});
+	              	if(respone.length > 0) {
+	                	$('#'+type+'_province').empty();
+	                	$('#'+type+'_province').append(option);
+	                	$('#'+type+'_province').append(respone);
+	  				}
+	  				else {
+	  					$('#'+type+'_province').empty();
+	  					$('#'+type+'_province').append(option);
+	  				}
+	  			}
+	  		});
+		});
+		
+		$('.province_id').on('change', function() {
+			var id = $(this).val();
+			var type = $(this).attr('rel');
+			$.ajax({
+	  			url: "<?php echo $this->url(array('action'=>'sublocations'),'user_general', true)?>/location_id/"+id,
+	  			success: function (respone){
+					respone  = $.trim(respone);
+					var option = $('<option />', {
+						'value': '0',
+						'text': ''
+					});
+	              	if(respone.length > 0) {
+	                	$('#'+type+'_city').empty();
+	                	$('#'+type+'_city').append(option);
+	                	$('#'+type+'_city').append(respone);
+	  				}
+	  				else {
+	  					$('#'+type+'_city').empty();
+	  					$('#'+type+'_city').append(option);
+	  				}
+	  			}
+	  		})
+		});
+		
+		$('#player_sport').on('change', function() {
+			var id = $(this).val();
+			var type = $(this).attr('rel');
+			$.ajax({
+	  			url: "user/player-card/subcategories/cat_id/"+id,
+	  			success: function (respone){
+					respone = $.trim(respone);
+					$('#player_position_id').empty();
+					if (respone != "") {
+						$('#player_position_id').html('<option value="0"></option>' + respone);
+					}
+					else {
+						$('#player_position_id').html('<option value="0"></option>');
+					}
+	  			}
+	  		})
+		});
+		<?php endif;?>
+		
 		var options =  {
             theme: "facebook"
             , method: "POST"
@@ -508,18 +544,15 @@ jQuery.noConflict();
 					var searchForm = $(this).closest('#global_search_form');
 					var query = searchForm.find('#global_search_field');
 					var input = searchForm.find('#token-input-global_search_field');
-					query.val(input.val());
 					var values = query.tokenInput('get');
 					var arr = [];
 					for (var i = 0; i < values.length; i++) {
-						arr.push(values[i].id);
+						arr.push(values[i].name);
 					}
-					var token = $('<input />', {
-						'type' : 'hidden',
-						'name' : 'token',
-						'value' : arr.join() 
-					});
-					searchForm.append(token);
+					if (input.val() != '') {
+						arr.push(input.val());
+					}
+					query.val(arr.join());
 					searchForm.submit();
 				}	
 			});

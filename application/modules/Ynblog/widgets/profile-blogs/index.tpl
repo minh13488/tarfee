@@ -1,9 +1,4 @@
 <div class = 'tarfee_total_items'><?php echo  $this->paginator -> getTotalItemCount()?></div>
-<?php if($this -> viewer() -> isSelf($this -> subject()) && Engine_Api::_() -> authorization() -> isAllowed('blog', null, 'create')):?>
-	<div class="tarfee_create_item">
-		<a href="<?php echo $this->url(array('action' => 'create'), 'blog_general')?>"><?php echo $this -> translate("add more talk");?></a>
-	</div>
-<?php endif;?>
 <ul class="blogs_browse">
   <?php foreach ($this->paginator as $item): ?>
     <li>

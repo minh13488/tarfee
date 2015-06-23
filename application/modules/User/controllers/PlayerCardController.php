@@ -170,6 +170,8 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			}
 
 			$db -> commit();
+			
+			$tab = $this -> _getParam('tab', '');
 
 			// Redirect
 			$pageURL = 'http';
@@ -178,7 +180,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 				$pageURL .= "s";
 			}
 			$pageURL .= "://";
-			return $this -> _helper -> redirector -> gotoUrl($pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref());
+			return $this -> _helper -> redirector -> gotoUrl($pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref().'/view/tab/'.$tab);
 		}
 		catch( Engine_Image_Exception $e )
 		{

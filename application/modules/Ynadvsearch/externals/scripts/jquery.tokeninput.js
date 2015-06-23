@@ -1,4 +1,4 @@
-/*
+	/*
  * jQuery Plugin: Tokenizing Autocomplete Text Entry
  * Version 1.6.0
  *
@@ -270,25 +270,26 @@ $.TokenList = function (input, url_or_data, settings) {
 				
 				case KEY.ENTER:
 					if(selected_dropdown_item) {
-	                    add_token($(selected_dropdown_item).data("tokeninput"));
+						var search = $(selected_dropdown_item).data("tokeninput").name;
+						search = search.split(' ');
+						for (var i = 0; i < search.length; i++) {
+							add_token({id:i,name:search[i]});
+						}
 	                    hidden_input.change();
 	                    return false;
                   	}
                   	else {
 						var form = $(this).closest('#global_search_form');
 						var query = form.find('#global_search_field');
-						query.val($(this).val());
 						var values = query.tokenInput('get');
 						var arr = [];
 						for (var i = 0; i < values.length; i++) {
-							arr.push(values[i].id);
+							arr.push(values[i].name);
 						}
-						var token = $('<input />', {
-							'type' : 'hidden',
-							'name' : 'token',
-							'value' : arr.join() 
-						});
-						form.append(token);
+						if ($(this).val() != '') {
+							arr.push($(this).val());
+						}
+						query.val(arr.join());
 						form.submit();
 					}
 					break;
@@ -297,7 +298,11 @@ $.TokenList = function (input, url_or_data, settings) {
                 case KEY.NUMPAD_ENTER:
                 case KEY.COMMA:
                   if(selected_dropdown_item) {
-                    add_token($(selected_dropdown_item).data("tokeninput"));
+                    var search = $(selected_dropdown_item).data("tokeninput").name;
+					search = search.split(' ');
+					for (var i = 0; i < search.length; i++) {
+						add_token({id:i,name:search[i]});
+					}
                     hidden_input.change();
                     return false;
                   }
@@ -306,7 +311,12 @@ $.TokenList = function (input, url_or_data, settings) {
                 case KEY.ESCAPE:
                   hide_dropdown();
                   return true;
-
+				
+				case KEY.SPACE:
+					var search = $(this).val();
+					search = $.trim(search);
+					add_token({id:0,name:search});
+					
                 default:
                     if(String.fromCharCode(event.which)) {
                         // set a timeout just long enough to let this function finish.
@@ -528,7 +538,7 @@ $.TokenList = function (input, url_or_data, settings) {
             token_list.children().each(function () {
                 var existing_token = $(this);
                 var existing_data = $.data(existing_token.get(0), "tokeninput");
-                if(existing_data && existing_data.id === item.id) {
+                if(existing_data && existing_data.name === item.name) {
                     found_existing_token = existing_token;
                     return false;
                 }
@@ -536,8 +546,6 @@ $.TokenList = function (input, url_or_data, settings) {
 
             if(found_existing_token) {
                 select_token(found_existing_token);
-                input_token.insertAfter(found_existing_token);
-                input_box.focus();
                 return;
             }
         }
@@ -704,7 +712,11 @@ $.TokenList = function (input, url_or_data, settings) {
                     select_dropdown_item($(event.target).closest("li"));
                 })
                 .mousedown(function (event) {
-                    add_token($(event.target).closest("li").data("tokeninput"));
+                    var search = $(selected_dropdown_item).data("tokeninput").name;
+					search = search.split(' ');
+					for (var i = 0; i < search.length; i++) {
+						add_token({id:i,name:search[i]});
+					}
                     hidden_input.change();
                     return false;
                 })
