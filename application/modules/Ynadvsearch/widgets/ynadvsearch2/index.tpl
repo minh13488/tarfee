@@ -1,3 +1,8 @@
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/styles/jquery-slider.css">
+<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/styles/jquery-ui.css">
+<script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery.min.js"></script>
+<script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery-ui.min.js"></script>
+
 <style>
 	.search-form-item {
 		display: none;
@@ -85,19 +90,11 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label"><?php echo $this->translate('Age')?></label>
-					<select class="form-element search-element" id="player_age_from" name="age_from">
-						<option value="0"></option>
-						<?php for ($i = 13; $i <= 100; $i++ ) :?>
-						<option value="<?php echo $i?>"><?php echo $i.' ('.(date("Y") - $i).')'?></option>	
-						<?php endfor;?>
-					</select>
-					<select class="form-element search-element" id="player_age_to" name="age_to">
-						<option value="0"></option>
-						<?php for ($i = 13; $i <= 100; $i++ ) :?>
-						<option value="<?php echo $i?>"><?php echo $i.' ('.(date("Y") - $i).')'?></option>	
-						<?php endfor;?>
-					</select>
+					<label class="form-label search-label"><?php echo $this->translate('Age: ')?></label>
+					<span id="age-rangeval">6 - 80</span>
+					<input type="hidden" class="form-element search-element" value="6" id="player_age_from" name="age_from"/>
+					<input type="hidden" class="form-element search-element" value="80" id="player_age_to" name="age_to"/>
+					<div id="age-rangeslider"></div>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_relation_id"><?php echo $this->translate('Posted by')?></label>
@@ -109,19 +106,11 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label"><?php echo $this->translate('Professional Rating')?></label>
-					<select class="form-element search-element" id="player_rating_from" name="rating_from">
-						<option value="0"></option>
-						<?php for ($i = 0; $i <= 5; $i++ ) :?>
-						<option value="<?php echo $i?>"><?php echo $i?></option>	
-						<?php endfor;?>
-					</select>
-					<select class="form-element search-element" id="player_rating_to" name="rating_to">
-						<option value="0"></option>
-						<?php for ($i = 0; $i <= 5; $i++ ) :?>
-						<option value="<?php echo $i?>"><?php echo $i?></option>	
-						<?php endfor;?>
-					</select>
+					<label class="form-label search-label"><?php echo $this->translate('Professional Rating: ')?></label>
+					<span id="rating-rangeval">0 - 5</span>
+					<input type="hidden" class="form-element search-element" value="0" id="player_rating_from" name="rating_from"/>
+					<input type="hidden" class="form-element search-element" value="5" id="player_rating_to" name="rating_to"/>
+					<div id="rating-rangeslider"></div>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_continent"><?php echo $this->translate('Continent')?></label>
@@ -516,6 +505,33 @@ jQuery.noConflict();
 	  		})
 		});
 		<?php endif;?>
+		if ($('#age-rangeslider')) {
+			$('#age-rangeslider').slider({
+			    range: true,
+			    min: 6,
+			    max: 80,
+			    values: [ 60, 80 ],
+			    slide: function( event, ui ) {
+			      	$('#age-rangeval').html(ui.values[0]+" - "+ui.values[1]);
+			      	$('#player_age_from').val(ui.values[0]);
+			      	$('#player_age_to').val(ui.values[1]);
+			    }
+		  	});
+		}
+		
+		if ($('#rating-rangeslider')) {
+			$('#rating-rangeslider').slider({
+			    range: true,
+			    min: 0,
+			    max: 5,
+			    values: [ 0, 5 ],
+			    slide: function( event, ui ) {
+			      	$('#rating-rangeval').html(ui.values[0]+" - "+ui.values[1]);
+			      	$('#player_rating_from').val(ui.values[0]);
+			      	$('#player_rating_to').val(ui.values[1]);
+			    }
+		  	});
+		}
 		
 		var options =  {
             theme: "facebook"
