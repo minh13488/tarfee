@@ -1,5 +1,4 @@
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/styles/jquery-slider.css">
-<link rel="stylesheet" type="text/css" media="all" href="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/styles/jquery-ui.css">
+<link rel="stylesheet" type="text/css" media="all" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery-ui.min.js"></script>
 
@@ -90,8 +89,7 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label"><?php echo $this->translate('Age: ')?></label>
-					<span id="age-rangeval">6 - 80</span>
+					<label class="form-label search-label"><?php echo $this->translate('Age: ')?><span id="age-rangeval">6 - 80</span></label>
 					<input type="hidden" class="form-element search-element" value="6" id="player_age_from" name="age_from"/>
 					<input type="hidden" class="form-element search-element" value="80" id="player_age_to" name="age_to"/>
 					<div id="age-rangeslider"></div>
@@ -106,8 +104,7 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label"><?php echo $this->translate('Professional Rating: ')?></label>
-					<span id="rating-rangeval">0 - 5</span>
+					<label class="form-label search-label"><?php echo $this->translate('Professional Rating: ')?><span id="rating-rangeval">0 - 5</span></label>
 					<input type="hidden" class="form-element search-element" value="0" id="player_rating_from" name="rating_from"/>
 					<input type="hidden" class="form-element search-element" value="5" id="player_rating_to" name="rating_to"/>
 					<div id="rating-rangeslider"></div>
@@ -384,6 +381,7 @@
 <script type="text/javascript" src="<?php echo $this->baseUrl()?>/application/modules/Ynadvsearch/externals/scripts/jquery.tokeninput.js"></script>
 <script>
 jQuery.noConflict();
+jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 (function($) { 
 	$(document).ready(function () {
 		
@@ -510,7 +508,7 @@ jQuery.noConflict();
 			    range: true,
 			    min: 6,
 			    max: 80,
-			    values: [ 60, 80 ],
+			    values: [ 6, 80 ],
 			    slide: function( event, ui ) {
 			      	$('#age-rangeval').html(ui.values[0]+" - "+ui.values[1]);
 			      	$('#player_age_from').val(ui.values[0]);
@@ -524,6 +522,7 @@ jQuery.noConflict();
 			    range: true,
 			    min: 0,
 			    max: 5,
+			    step: 0.1,
 			    values: [ 0, 5 ],
 			    slide: function( event, ui ) {
 			      	$('#rating-rangeval').html(ui.values[0]+" - "+ui.values[1]);
