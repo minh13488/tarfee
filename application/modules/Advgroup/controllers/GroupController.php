@@ -692,7 +692,10 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
             $db -> rollBack();
             throw $e;
         }
-
+		
+		$notifyApi = Engine_Api::_() -> getDbtable('notifications', 'activity');
+		$notifyApi -> addNotification($group -> getOwner(), $group, $group, 'advgroup_request_sent');
+		
         $message = Zend_Registry::get('Zend_Translate') -> _('Request sent.');
 
         return $this -> _forward('success', 'utility', 'core', array(
@@ -727,7 +730,10 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
 				$db -> rollBack();
 				throw $e;
 			}
-
+			
+			$notifyApi = Engine_Api::_() -> getDbtable('notifications', 'activity');
+			$notifyApi -> addNotification($group -> getOwner(), $group, $group, 'advgroup_group_verified');
+			
 			$this -> _forward('success', 'utility', 'core', array(
 				'smoothboxClose' => 10,
 				'parentRefresh' => 10,
@@ -763,7 +769,10 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
 				$db -> rollBack();
 				throw $e;
 			}
-
+			
+			$notifyApi = Engine_Api::_() -> getDbtable('notifications', 'activity');
+			$notifyApi -> addNotification($group -> getOwner(), $group, $group, 'advgroup_group_unverified');
+			
 			$this -> _forward('success', 'utility', 'core', array(
 				'smoothboxClose' => 10,
 				'parentRefresh' => 10,

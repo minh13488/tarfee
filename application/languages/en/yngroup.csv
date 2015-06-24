@@ -1051,22 +1051,99 @@ http://[host][object_link]
 "Album Music has been deleted";"Album Music has been deleted"
 "Listing has been removed";"Listing has been removed"
 
+# advgroup_email_to_friends
+"_EMAIL_ADVGROUP_EMAIL_TO_FRIENDS_TITLE";"Followers Notification"
+"_EMAIL_ADVGROUP_EMAIL_TO_FRIENDS_DESCRIPTION";"This is the email that gets sent when user wants to send message to followers."
+"_EMAIL_ADVGROUP_EMAIL_TO_FRIENDS_SUBJECT";"You have received an notification of the following club [object_title]!"
+"_EMAIL_ADVGROUP_EMAIL_TO_FRIENDS_BODY";"[header]
+
+[message]
+
+Check out this club
+<img src='http://[host][object_photo]' />[object_description]
+http://[host][object_link]
+
+[footer]"
+
+# notify_advgroup_follow_edit
+"_EMAIL_NOTIFY_ADVGROUP_FOLLOW_EDIT_TITLE";"Following Club Edit"
+"_EMAIL_NOTIFY_ADVGROUP_FOLLOW_EDIT_DESCRIPTION";"This email is sent to the followers of clubs."
+"_EMAIL_NOTIFY_ADVGROUP_FOLLOW_EDIT_SUBJECT";"The club information [object_title] has been edited"
+"_EMAIL_NOTIFY_ADVGROUP_FOLLOW_EDIT_BODY";"[header]
+
+The club information ""[object_title]"" has been edited . Please click the following link to view it:
+
+http://[host][object_link]
+
+[footer]"
+
+"GROUP_VIEWS_SCRIPTS_ADMINREQUEST_DESCRIPTION";"This page lists all the verification requests of club owners."
+"ADVGROUP_FORM_REQUEST_DESCRIPTION";"Please type your verification request message to Admin."
 
 
 
+# notify_advgroup_group_verified
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_VERIFIED_TITLE";"Group Verification"
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_VERIFIED_DESCRIPTION";"This email is sent to group owner."
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_VERIFIED_SUBJECT";"Group Verification"
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_VERIFIED_BODY";"
+Your group [object_title] has been verified. 
+
+Click on the following link for more details:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_advgroup_group_unverified
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_TITLE";"Club Un-Verification"
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_DESCRIPTION";"This email is sent to club owner."
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_SUBJECT";"Club Un-Verification"
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_BODY";"
+Your club [object_title] has been un-verified. 
+
+Click on the following link for more details:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_advgroup_request_accepted
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_TITLE";"Club Verification Request Accepted"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_DESCRIPTION";"This email is sent to club owner."
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_SUBJECT";"Club Verification Request Accepted"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_BODY";"
+Your verification request for club [object_title] has been accepted. 
+
+Click on the following link for more details:
+
+http://[host][object_link]
+
+[footer]"
+
+# notify_advgroup_request_denied
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_TITLE";"Club Verification Request Denied"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_DESCRIPTION";"This email is sent to club owner."
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_SUBJECT";"Club Verification Request Denied"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_BODY";"
+Your verification request for club [object_title] has been denied. 
+
+Click on the following link for more details:
+
+http://[host][object_link]
+
+[footer]"
 
 
+# notify_advgroup_request_denied
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_TITLE";"Club Verification Request Sent"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_DESCRIPTION";"This email is sent to club owner."
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_SUBJECT";"Club Verification Request Sent"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_BODY";"
+Your verification request for club [object_title] has been sent to admin. 
 
+Click on the following link for more details:
 
+http://[host][object_link]
 
-
-
-
-
-
-
-
-
-
-
-
+[footer]"
