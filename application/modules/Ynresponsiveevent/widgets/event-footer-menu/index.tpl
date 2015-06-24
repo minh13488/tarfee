@@ -127,13 +127,24 @@ $viewer = $this -> viewer();
       });
 
 
-      //Outer click
-      jQuery('html').click(function() {
-         jQuery('.list-items-dropdown').hide(400);
-      });
+      // //Outer click
+      // jQuery('html').click(function() {
+      //    jQuery('.list-items-dropdown').hide(400);
+      // });
 
-      jQuery('.item-action').click(function(event){
-         event.stopPropagation();
+      // jQuery('.item-action').click(function(event){
+      //    event.stopPropagation();
+      // });
+
+      jQuery(document).mouseup(function (e)
+      {
+          var container = jQuery('.list-items-dropdown');
+
+          if (!container.is(e.target) // if the target of the click isn't the container...
+              && container.has(e.target).length === 0) // ... nor a descendant of the container
+          {
+              container.hide();
+          }
       });
 
 

@@ -4468,7 +4468,7 @@ Shows the mini menu and search widget
 
         #global_search_field
         {
-        	width: 450px;
+        	width: 700px;
         	outline: none;
         	border: 1px solid $theme_border_medium_color;
             color: $theme_footer_text_color;
