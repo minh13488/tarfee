@@ -11,7 +11,7 @@
  */
 ?>
 
-<form method="get" action="<?php echo $this->escape($this->url(array(), 'default', true)) ?>"
+<form method="get" action="<?php echo $this->escape($this -> url(array('controller' => 'edit', 'action' => 'profile', 'id' => $this -> viewer() -> getIdentity() ), 'user_extended', true)) ?>"
       class="global_form" enctype="application/x-www-form-urlencoded">
   <div>
     <div>

@@ -25,7 +25,7 @@ class User_SignupController extends Core_Controller_Action_Standard
   
   public function accountAction()
   {
-    
+    $this -> _helper -> layout -> setLayout('default-simple');
     // Get settings
     $settings = Engine_Api::_()->getApi('settings', 'core');
 
@@ -101,11 +101,28 @@ class User_SignupController extends Core_Controller_Action_Standard
           Engine_Api::_()->user()->getAuth()->getStorage()->clear();
 
           if( !empty($subscriptionSession->subscription_id) ) {
-            return $this->_helper->redirector->gotoRoute(array('module' => 'payment',
-              'controller' => 'subscription', 'action' => 'gateway'), 'default', true);
+          	
+          // return $this->_helper->redirector->gotoRoute(array('module' => 'payment',
+            // 'controller' => 'subscription', 'action' => 'gateway'), 'default', true);
+			  
+				return $this -> _forward('success', 'utility', 'core', array(
+					'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('module' => 'payment',
+             		'controller' => 'subscription', 'action' => 'gateway'), 'default', true),
+					'smoothboxClose' => true,
+					'parentRefresh' => true,
+					'messages' => $this->view->translate("Please wait..."),
+				));
+			  
           } else {
-            return $this->_helper->redirector->gotoRoute(array('module' => 'payment',
-              'controller' => 'subscription', 'action' => 'index'), 'default', true);
+			  
+			   return $this -> _forward('success', 'utility', 'core', array(
+					'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('module' => 'payment',
+              		'controller' => 'subscription', 'action' => 'index'), 'default', true),
+					'smoothboxClose' => true,
+					'parentRefresh' => true,
+					'messages' => $this->view->translate("Please wait..."),
+				));
+			  
           }
         }
       }
@@ -121,7 +138,14 @@ class User_SignupController extends Core_Controller_Action_Standard
       $confirmSession->verified = $viewer->verified;
       $confirmSession->enabled  = $viewer->enabled;
 	  $confirmSession->viewer_id = $viewer -> getIdentity();
-      return $this->_helper->_redirector->gotoRoute(array('action' => 'confirm'), 'user_signup', true);
+	  
+	  return $this -> _forward('success', 'utility', 'core', array(
+		'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'confirm'), 'user_signup', true),
+		'smoothboxClose' => true,
+		'parentRefresh' => true,
+		'messages' => $this->view->translate("Please wait..."),
+	));
+	  
     }
 
     // Handle normal signup
@@ -141,7 +165,12 @@ class User_SignupController extends Core_Controller_Action_Standard
       $viewer->save();
     }
     
-    return $this->_helper->_redirector->gotoRoute(array('action' => 'home'), 'user_general', true);
+	return $this -> _forward('success', 'utility', 'core', array(
+		'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'home'), 'user_general', true),
+		'smoothboxClose' => true,
+		'parentRefresh' => true,
+		'messages' => $this->view->translate("Please wait..."),
+	));
   }
   
   public function indexAction()
@@ -515,11 +544,11 @@ class User_SignupController extends Core_Controller_Action_Standard
   
   public function registerAction()
   {
+  	
 	    // If the user is logged in, they can't sign up now can they?
 	    if( Engine_Api::_()->user()->getViewer()->getIdentity() ) {
 	      return $this->_helper->redirector->gotoRoute(array(), 'default', true);
 	    }
-	    
 	    $formSequenceHelper = $this->_helper->formSequence;
 	    foreach( Engine_Api::_()->getDbtable('signup1', 'user')->fetchAll() as $row ) {
 	      if( $row->enable == 1 ) {

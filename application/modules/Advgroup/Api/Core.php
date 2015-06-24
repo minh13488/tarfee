@@ -10,6 +10,13 @@ class Advgroup_Api_Core extends Core_Api_Abstract {
 		}
 	}
 	
+	public function getGroupUser($user){
+		$groupTable = Engine_Api::_() -> getItemTable('group');
+		$select = $groupTable -> select() -> where('user_id = ?', $user -> getIdentity()) -> limit(1);
+		$group = $groupTable -> fetchRow($select);
+		return $group;
+	}
+	
 	public function checkGroupUser(){
 		$viewer = Engine_Api::_() -> user()-> getViewer();
 		$groupTable = Engine_Api::_() -> getItemTable('group');

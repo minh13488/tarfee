@@ -107,15 +107,14 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
       )
     ));
     
-	$this->addElement('Button', 'cancel', array(
-      'label' => 'skip',
-      'link' => true,
-      'prependText' => ' or ',
-      'href' => '',
-      'onclick' => 'closeRegister();',
-      'decorators' => array(
-        'ViewHelper'
-      )
+	 $this->addElement('Button', 'cancel', array(
+        'label' => 'skip',
+        'link' => true,
+        'href' => '',
+        'onclick' => 'parent.Smoothbox.close();',
+        'decorators' => array(
+            'ViewHelper'
+        )
     ));
 	
     $this->addDisplayGroup(array('submit', 'cancel'), 'buttons', array(

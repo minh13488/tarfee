@@ -331,7 +331,6 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
 		  }
 		  $expiration_date = date_add(date_create($invite->timestamp),date_interval_create_from_date_string($period." ".$type));
 		  
-	      $expirationDate = date_create($expiration_date);
 		  $nowDate = date_create($now);
 		  
 	  	  if($period != 0) 
