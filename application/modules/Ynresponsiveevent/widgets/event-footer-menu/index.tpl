@@ -115,12 +115,26 @@ $viewer = $this -> viewer();
 <script type="text/javascript">
    jQuery.noConflict();
 
+      //Add class when click icon arrow
       jQuery('#show-hide-list-items').click(function() {
          jQuery('.list-items').fadeToggle(400);
          jQuery(this).toggleClass('list-item-show');
       });
 
+      //Show hide right menu
       jQuery('.item-action').click(function() {
          jQuery(this).find('.list-items-dropdown').fadeToggle(400);
       });
+
+
+      //Outer click
+      jQuery('html').click(function() {
+         jQuery('.list-items-dropdown').hide(400);
+      });
+
+      jQuery('.item-action').click(function(event){
+         event.stopPropagation();
+      });
+
+
 </script>
