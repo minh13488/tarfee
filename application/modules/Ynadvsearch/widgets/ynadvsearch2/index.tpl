@@ -653,20 +653,20 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 		<?php endif;?>
 
       	$(document).mouseup(function (e){
-			var advanced_box = $('#advanced-search-filter');
+			var advanced_box = $('#search-advsearch');
 
 			if (!advanced_box.is(e.target) // if the target of the click isn't the container...
 			  && advanced_box.has(e.target).length === 0) // ... nor a descendant of the container
 			{
-			  advanced_box.hide();
+			  advanced_box.find('#advanced-search-filter').hide();
 			}
 
-			var filter_box = $('#basic-search-filter');
+			var filter_box = $('#search-filter');
 
 			if (!filter_box.is(e.target) // if the target of the click isn't the container...
 			  && filter_box.has(e.target).length === 0) // ... nor a descendant of the container
 			{
-			  filter_box.hide();
+			  filter_box.find('#basic-search-filter').hide();
 			}
       	});
 

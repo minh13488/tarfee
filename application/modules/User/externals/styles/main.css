@@ -2458,7 +2458,22 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
         border-bottom-left-radius: 0px;     
         position: relative
     }
+    
 
+
+    a.widget-recommendation-popup.notice {
+        display: block;
+        text-align: center;
+        color: #fff;
+        background-color: $theme_link_color;
+        padding: 5px 10px;
+        margin-bottom: 18px;
+        border-radius: 5px;
+
+        &:hover{
+            background-color: $theme_link_color_hover;
+        }
+    }
     #user-profile-recommendation{
         padding: 15px;
 

@@ -1231,7 +1231,7 @@ iframe.wysihtml5-sandbox {
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 	-ms-border-radius: 5px;
-	/*border-top: 4px solid $theme_link_color;*/
+	border-top: 2px solid $theme_link_color;	
   	box-shadow: 0px 5px 20px -9px #333;
 }
 
@@ -1317,9 +1317,12 @@ iframe.wysihtml5-sandbox {
 			color: $theme_font_color_light;
 			text-transform: lowercase;
 		}
-
+	
 		input[type="text"]:focus{
 			border: 1px solid $theme_link_color_hover !important;
+		}
+		select{
+			padding: .5 !important;
 		}
 
 		/*Style for Range*/
