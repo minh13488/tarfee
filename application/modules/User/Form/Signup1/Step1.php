@@ -72,13 +72,12 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
       if( !empty($inviteSession->invite_code) ) {
         $this->code->setValue($inviteSession->invite_code);
       }
-    } else {
+    } else if(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1)){
     	 $this->addElement('Text', 'code', array(
 	        'label' => 'Invite Code',
 	        'description' => 'Enter referral code if you have',
 	     ));
     }
-
 
 	  // Element: password
 	  $this->addElement('Password', 'password', array(
