@@ -41,13 +41,9 @@ class User_Plugin_Signup1_Account extends Core_Plugin_FormSequence_Abstract
 	}
     $data = $this->getSession()->data;
 	$sessionStep1 = new Zend_Session_Namespace('User_Plugin_Signup1_Step1');
-	//$sessionStep2 = new Zend_Session_Namespace('User_Plugin_Signup1_Step2');
 	$dataStep1 = $sessionStep1 -> data;
-	//$dataStep2 = $sessionStep2 -> data;
 	$data = array_merge($data, $dataStep1);
-	//$data = array_merge($data, $dataStep2);
 	$data['profile_type'] = Engine_Api::_() -> user() -> getDefaultProfileTypeId();
-
     // Add email and code to invite session if available
     $inviteSession = new Zend_Session_Namespace('invite');
     if( isset($data['email']) ) {
@@ -64,7 +60,6 @@ class User_Plugin_Signup1_Account extends Core_Plugin_FormSequence_Abstract
     if (isset($data['language'])) {
       $data['locale'] = $data['language'];
     }
-
     // Create user
     // Note: you must assign this to the registry before calling save or it
     // will not be available to the plugin in the hook
@@ -72,6 +67,7 @@ class User_Plugin_Signup1_Account extends Core_Plugin_FormSequence_Abstract
     $user->setFromArray($data);
     $user->save();
     
+	
     Engine_Api::_()->user()->setViewer($user);
 
     // Increment signup counter

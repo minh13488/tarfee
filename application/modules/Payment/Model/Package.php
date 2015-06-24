@@ -306,7 +306,9 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
   
   public function getPrice()
   {
-  	  $referCode =  $_SESSION['ref_code'];
+  	  $referCode = null;
+  	  if(isset($_SESSION['ref_code']))
+	  	$referCode = $_SESSION['ref_code'];
 	  $isEnabled = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1);
 	  $discount = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_discount', 0);
 	  $period = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_trial ', 0);

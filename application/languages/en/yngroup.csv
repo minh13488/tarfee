@@ -369,41 +369,42 @@
 "This group has %s member waiting approval or waiting for a invite response.";"This group has %s member waiting approval or waiting for a invite response."
 "Send me notifications when other members reply to this topic.";"Send me notifications when other members reply to this topic."
 
-"ADMIN_ACTIVITY_TYPE_ADVGROUP_CREATE";"When a user (subject) creates a new group (object)."
-"ADMIN_ACTIVITY_TYPE_ADVGROUP_JOIN";"When a user (subject) joins a group (object)."
-"ADMIN_ACTIVITY_TYPE_ADVGROUP_PHOTO_UPLOAD";"When a user (subject) uploads a new photo to a group (object)."
-"ADMIN_ACTIVITY_TYPE_ADVGROUP_PROMOTE";"When a user (subject) is given officer status in a group (object)."
-"ADMIN_ACTIVITY_TYPE_ADVGROUP_TOPIC_CREATE";"When a user (subject) creates a new topic in a group (object)."
-"ADMIN_ACTIVITY_TYPE_ADVGROUP_TOPIC_REPLY";"When a user (subject) replies to a topic in a group (object)."
-"ADMIN_ACTIVITY_TYPE_ADVGROUP_POLL_NEW";"When a user (subject) creates a new poll in a group (object)."
+"ADMIN_ACTIVITY_TYPE_ADVGROUP_CREATE";"When a user (subject) creates a new club (object)."
+"ADMIN_ACTIVITY_TYPE_ADVGROUP_JOIN";"When a user (subject) joins a club (object)."
+"ADMIN_ACTIVITY_TYPE_ADVGROUP_PHOTO_UPLOAD";"When a user (subject) uploads a new photo to a club (object)."
+"ADMIN_ACTIVITY_TYPE_ADVGROUP_PROMOTE";"When a user (subject) is given officer status in a club (object)."
+"ADMIN_ACTIVITY_TYPE_ADVGROUP_TOPIC_CREATE";"When a user (subject) creates a new topic in a club (object)."
+"ADMIN_ACTIVITY_TYPE_ADVGROUP_TOPIC_REPLY";"When a user (subject) replies to a topic in a club (object)."
+"ADMIN_ACTIVITY_TYPE_ADVGROUP_POLL_NEW";"When a user (subject) creates a new poll in a club (object)."
 
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_CREATE";"New groups"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_JOIN";"Joining a group"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_PHOTO_UPLOAD";"Uploading a group photo"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_ALBUM_UPLOAD";"Uploading a group album"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_PROMOTE";"Group promotions"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_TOPIC_CREATE";"Creating a group discussion topic"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_TOPIC_REPLY";"Replying to a group discussion topic"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_WIKI_CREATE";"Creating a new wiki page in group"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_WIKI_MOVE";"Moving a wiki page in group"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_WIKI_UPDATE";"Updating a wiki page in group"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_CREATE";"New clubs"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_JOIN";"Joining a club"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_PHOTO_UPLOAD";"Uploading a club photo"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_ALBUM_UPLOAD";"Uploading a club album"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_PROMOTE";"Club promotions"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_TOPIC_CREATE";"Creating a club discussion topic"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_TOPIC_REPLY";"Replying to a club discussion topic"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_WIKI_CREATE";"Creating a new wiki page in club"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_WIKI_MOVE";"Moving a wiki page in club"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_WIKI_UPDATE";"Updating a wiki page in club"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_LISTING_CREATE";"Creating a new listing in club"
 
-"ACTIVITY_TYPE_COMMENTED_ADVGROUP";"When someone comments on a group I commented on."
-"ACTIVITY_TYPE_COMMENT_ADVGROUP";"When someone comments on one of my groups."
-"ACTIVITY_TYPE_LIKED_ADVGROUP";"When someone comments on a group I liked."
-"ACTIVITY_TYPE_LIKE_ADVGROUP";"When someone likes one of my groups."
-"ACTIVITY_TYPE_ADVGROUP_APPROVE";"When someone requests to join a group I created."
-"ACTIVITY_TYPE_ADVGROUP_ACCEPTED";"When my request to join a group is approved."
-"ACTIVITY_TYPE_ADVGROUP_CREATE";"When a new group is created."
+"ACTIVITY_TYPE_COMMENTED_ADVGROUP";"When someone comments on a club I commented on."
+"ACTIVITY_TYPE_COMMENT_ADVGROUP";"When someone comments on one of my clubs."
+"ACTIVITY_TYPE_LIKED_ADVGROUP";"When someone comments on a club I liked."
+"ACTIVITY_TYPE_LIKE_ADVGROUP";"When someone likes one of my clubs."
+"ACTIVITY_TYPE_ADVGROUP_APPROVE";"When someone requests to join a club I created."
+"ACTIVITY_TYPE_ADVGROUP_ACCEPTED";"When my request to join a club is approved."
+"ACTIVITY_TYPE_ADVGROUP_CREATE";"When a new club is created."
 "ACTIVITY_TYPE_ADVGROUP_DISCUSSION_REPLY";"When people reply to discussion topics that I've replied to."
 "ACTIVITY_TYPE_ADVGROUP_DISCUSSION_RESPONSE";"When people reply to discussion topics that I create."
-"ACTIVITY_TYPE_ADVGROUP_INVITE";"When I'm invited to join a group."
-"ACTIVITY_TYPE_ADVGROUP_JOIN";"When a new member joins a group."
-"ACTIVITY_TYPE_ADVGROUP_PHOTO_UPLOAD";"When a new photo is uploaded to a group."
-"ACTIVITY_TYPE_ADVGROUP_PROMOTE";"When I'm given officer status in a group."
-"ACTIVITY_TYPE_ADVGROUP_TOPIC_CREATE";"When a new group topic is created."
-"ACTIVITY_TYPE_ADVGROUP_TOPIC_REPLY";"When someone replies to a group topic."
-
+"ACTIVITY_TYPE_ADVGROUP_INVITE";"When I'm invited to join a club."
+"ACTIVITY_TYPE_ADVGROUP_JOIN";"When a new member joins a club."
+"ACTIVITY_TYPE_ADVGROUP_PHOTO_UPLOAD";"When a new photo is uploaded to a club."
+"ACTIVITY_TYPE_ADVGROUP_PROMOTE";"When I'm given officer status in a club."
+"ACTIVITY_TYPE_ADVGROUP_TOPIC_CREATE";"When a new club topic is created."
+"ACTIVITY_TYPE_ADVGROUP_TOPIC_REPLY";"When someone replies to a club topic."
+"ACTIVITY_TYPE_ADVGROUP_FOLLOW_EDIT";"When someone edit your following clubs."
 
 "These settings affect all members in your community.";"These settings affect all members in your community."
 "GROUP_FORM_ADMIN_LEVEL_DESCRIPTION";"These settings are applied on a per member level basis. Start by selecting the member level you want to modify, then adjust the settings for that level below."
@@ -675,7 +676,7 @@ http://[host][object_link]
 [footer]"
 
 # notify_advgroup_cancel_invite
-"_EMAIL_NOTIFY_ADVGROUP_CANCEL_INVITE_TITLE";"Cancel Group Invitation"
+"_EMAIL_NOTIFY_ADVGROUP_CANCEL_INVITE_TITLE";"Cancel Club Invitation"
 "_EMAIL_NOTIFY_ADVGROUP_CANCEL_INVITE_DESCRIPTION";"This is the email that gets sent when members cancel the group owner invitation to join group."
 "_EMAIL_NOTIFY_ADVGROUP_CANCEL_INVITE_SUBJECT";"You have received a cancel invitation to join our social network and the group [group_title]!"
 "_EMAIL_NOTIFY_ADVGROUP_CANCEL_INVITE_BODY";"[header]
@@ -871,14 +872,14 @@ http://[host][object_link]
 "GROUP_FORM_ADMIN_LEVEL_AUTHLISTING_DESCRIPTION";"Your users can choose from any of the options checked below when they decide who can create listing pages in their groups. If you do not check any options, all members will be allowed to create listing pages."
 "Sub Group Creation Options";"Sub Group Creation Options"
 "Video Creation Options";"Video Creation Options"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_POLL_NEW";"Creating a group poll"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_SUB_CREATE";"Creating a sub group"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_TRANSFER";"Transferring group owner to other member"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_VIDEO_CREATE";"Creating a group video"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_POLL_NEW";"Creating a club poll"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_SUB_CREATE";"Creating a sub club"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_TRANSFER";"Transferring club owner to other member"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_VIDEO_CREATE";"Creating a club video"
 "ACTIVITY_TYPE_ADVGROUP_POLL_COMMENT";"When someone comment on a poll that I create."
 "ACTIVITY_TYPE_ADVGROUP_POLL_LIKE";"When someone like a poll that I create."
-"ACTIVITY_TYPE_ADVGROUP_TRANSFER";"When someone transfer owner of a group to me."
-"ACTIVITY_TYPE_ADVGROUP_CANCEL_INVITE";"When someone cancel the group invitation"
+"ACTIVITY_TYPE_ADVGROUP_TRANSFER";"When someone transfer owner of a club to me."
+"ACTIVITY_TYPE_ADVGROUP_CANCEL_INVITE";"When someone cancel the club invitation"
 "No Replied";"No Replied"
 "Latest";"Latest"
 "Latest Replied";"Latest Replied"
@@ -917,24 +918,24 @@ http://[host][object_link]
 "&#187; Manage Useful Links";"&#187; Manage Useful Links"
 
 "Activities updated.";"Activities updated."
-"group_activity_post";"Group activities"
+"group_activity_post";"Club activities"
 "group_activity_advgroup_create";"Group creation."
-"group_activity_advgroup_join";"Join of members in the group."
-"group_activity_advgroup_promote";"Promotion of members in the group."
-"group_activity_advgroup_topic_create";"Topic creation in the group."
-"group_activity_advgroup_topic_reply";"Topic replies in the group."
-"group_activity_advgroup_photo_upload";"Photo Upload in the group."
-"group_activity_advgroup_poll_new";"Poll creation in the group."
+"group_activity_advgroup_join";"Join of members in the club."
+"group_activity_advgroup_promote";"Promotion of members in the club."
+"group_activity_advgroup_topic_create";"Topic creation in the club."
+"group_activity_advgroup_topic_reply";"Topic replies in the club."
+"group_activity_advgroup_photo_upload";"Photo Upload in the club."
+"group_activity_advgroup_poll_new";"Poll creation in the club."
 "group_activity_advgroup_sub_create";"Sub-group creation."
-"group_activity_advgroup_transfer";"Owner Transfering in group."
-"group_activity_advgroup_video_create";"Video creation in group."
-"There are no public group actitivies yet.";"There are no public group actitivies yet."
-"group_activity_advgroup_video_create";"Video creation in group."
-"group_activity_advgroup_wiki_create";"Wiki page creation in group."
-"group_activity_advgroup_wiki_move";"Wiki page moving in group."
-"group_activity_advgroup_wiki_update";"Wiki page updates in group."
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_LINK_NEW";"Add new link in group"
-"_ACTIVITY_ACTIONTYPE_ADVGROUP_EVENT_CREATE";"Add new event in group"
+"group_activity_advgroup_transfer";"Owner Transfering in club."
+"group_activity_advgroup_video_create";"Video creation in club."
+"There are no public group actitivies yet.";"There are no public club actitivies yet."
+"group_activity_advgroup_video_create";"Video creation in club."
+"group_activity_advgroup_wiki_create";"Wiki page creation in club."
+"group_activity_advgroup_wiki_move";"Wiki page moving in club."
+"group_activity_advgroup_wiki_update";"Wiki page updates in club."
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_LINK_NEW";"Add new link in club"
+"_ACTIVITY_ACTIONTYPE_ADVGROUP_EVENT_CREATE";"Add new event in club"
 "{item:$subject} created a new event: {body:$body}";"{item:$subject} created a new event: {body:$body}"
 "Groups Directories";"Groups Directories"
 "Search Groups:";"Search Groups:"
@@ -1095,11 +1096,11 @@ http://[host][object_link]
 [footer]"
 
 # notify_advgroup_group_unverified
-"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_TITLE";"Group Un-Verification"
-"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_DESCRIPTION";"This email is sent to group owner."
-"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_SUBJECT";"Group Un-Verification"
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_TITLE";"Club Un-Verification"
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_DESCRIPTION";"This email is sent to club owner."
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_SUBJECT";"Club Un-Verification"
 "_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_BODY";"
-Your group [object_title] has been un-verified. 
+Your club [object_title] has been un-verified. 
 
 Click on the following link for more details:
 
@@ -1108,11 +1109,11 @@ http://[host][object_link]
 [footer]"
 
 # notify_advgroup_request_accepted
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_TITLE";"Group Verification Request Accepted"
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_DESCRIPTION";"This email is sent to group owner."
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_SUBJECT";"Group Verification Request Accepted"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_TITLE";"Club Verification Request Accepted"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_DESCRIPTION";"This email is sent to club owner."
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_SUBJECT";"Club Verification Request Accepted"
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_BODY";"
-Your verification request for group [object_title] has been accepted. 
+Your verification request for club [object_title] has been accepted. 
 
 Click on the following link for more details:
 
@@ -1121,11 +1122,11 @@ http://[host][object_link]
 [footer]"
 
 # notify_advgroup_request_denied
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_TITLE";"Group Verification Request Denied"
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_DESCRIPTION";"This email is sent to group owner."
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_SUBJECT";"Group Verification Request Denied"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_TITLE";"Club Verification Request Denied"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_DESCRIPTION";"This email is sent to club owner."
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_SUBJECT";"Club Verification Request Denied"
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_BODY";"
-Your verification request for group [object_title] has been denied. 
+Your verification request for club [object_title] has been denied. 
 
 Click on the following link for more details:
 
@@ -1135,21 +1136,14 @@ http://[host][object_link]
 
 
 # notify_advgroup_request_denied
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_TITLE";"Group Verification Request Sent"
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_DESCRIPTION";"This email is sent to group owner."
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_SUBJECT";"Group Verification Request Sent"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_TITLE";"Club Verification Request Sent"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_DESCRIPTION";"This email is sent to club owner."
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_SUBJECT";"Club Verification Request Sent"
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_BODY";"
-Your verification request for group [object_title] has been sent to admin. 
+Your verification request for club [object_title] has been sent to admin. 
 
 Click on the following link for more details:
 
 http://[host][object_link]
 
 [footer]"
-
-
-
-
-
-
-

@@ -1,20 +1,9 @@
-<?php
-/**
- * SocialEngine
- *
- * @category   Application_Core
- * @package    User
- * @copyright  Copyright 2006-2010 Webligo Developments
- * @license    http://www.socialengine.com/license/
- * @version    $Id: account.tpl 10143 2014-03-26 16:18:25Z andres $
- * @author     John
- */
-?>
-
+<div class="tarfee-popup-close"><i class="fa fa-times fa-lg"></i></div>
 <style>
-#name-wrapper {
+#name-wrapper, h2 {
   display: none;
 }
+
 </style>
 
 <script type="text/javascript">
@@ -42,5 +31,7 @@
   });
 //]]>
 </script>
-
 <?php echo $this->form->render($this) ?>
+<script type="text/javascript">
+	$$('.tarfee-popup-close').addEvent('click',function(){parent.Smoothbox.close()});	
+</script>

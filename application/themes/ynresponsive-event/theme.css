@@ -4408,6 +4408,22 @@ Shows the mini menu and search widget
     div.box-search_form_advsearch{
         display: inline-block;
     }
+
+	/*Add icon for filer*/
+	#search-filter{
+		position: relative;
+		span.global_search_form_filter_advanced{
+			background-image: url(~/application/themes/ynresponsive-event/images/filter.png);
+			height: 25px;
+			width: 35px;
+			display: block;
+			background-size: contain;
+			text-indent: -9999px;
+			background-repeat: no-repeat;
+			background-position: center;
+		}
+	}
+
 	span.global_search_form_filter_advanced{
 		margin-left: 20px;
 		font-size: 1.154em;
@@ -4452,7 +4468,7 @@ Shows the mini menu and search widget
 
         #global_search_field
         {
-        	width: 450px;
+        	width: 700px;
         	outline: none;
         	border: 1px solid $theme_border_medium_color;
             color: $theme_footer_text_color;

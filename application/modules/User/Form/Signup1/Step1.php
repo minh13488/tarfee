@@ -49,7 +49,9 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
     $emailElement->getDecorator('Description')->setOptions(array('placement' => 'APPEND'));
     $emailElement->getValidator('NotEmpty')->setMessage('Please enter a valid email address.', 'isEmpty');
     $emailElement->getValidator('Db_NoRecordExists')->setMessage('Someone has already registered this email address, please use another one.', 'recordFound');
-
+	
+	$emailElement -> setAttrib('required', true);
+	
     // Add banned email validator
     $bannedEmailValidator = new Engine_Validate_Callback(array($this, 'checkBannedEmail'), $emailElement);
     $bannedEmailValidator->setMessage("This email address is not available, please use another one.");
@@ -68,17 +70,17 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
         'required' => true
       ));
       $this->code->addValidator($codeValidator);
-
+	  $this -> code -> setAttrib('required', true);
       if( !empty($inviteSession->invite_code) ) {
         $this->code->setValue($inviteSession->invite_code);
       }
-    } else {
+    } else if(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1)){
     	 $this->addElement('Text', 'code', array(
 	        'label' => 'Invite Code',
 	        'description' => 'Enter referral code if you have',
 	     ));
+		 $this -> code -> setAttrib('required', true);
     }
-
 
 	  // Element: password
 	  $this->addElement('Password', 'password', array(
@@ -94,7 +96,7 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
 	  ));
 	  $this->password->getDecorator('Description')->setOptions(array('placement' => 'APPEND'));
 	  $this->password->getValidator('NotEmpty')->setMessage('Please enter a valid password.', 'isEmpty');
-
+	 $this -> password -> setAttrib('required', true);
 
     // Init submit
     $this->addElement('Button', 'submit', array(
