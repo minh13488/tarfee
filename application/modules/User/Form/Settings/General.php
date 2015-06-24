@@ -251,7 +251,8 @@ class User_Form_Settings_General extends Engine_Form
 	$languages = Engine_Api::_()->getDbTable('languages', 'user')->getLanguagesArray();
 	$this->addElement('MultiCheckbox', 'languages', array(
       'label' => 'Language Preference',
-      'allowEmpty' => false,
+      'required' => false,
+      'allowEmpty' => true,
       'multiOptions' => $languages,
       'filters' => array(
         'StripTags',

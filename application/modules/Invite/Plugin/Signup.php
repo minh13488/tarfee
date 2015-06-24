@@ -24,7 +24,6 @@ class Invite_Plugin_Signup
     $session = new Zend_Session_Namespace('invite');
     $inviteTable = Engine_Api::_()->getDbtable('invites', 'invite');
     $isEligible = Engine_Api::_()->getApi('settings', 'core')->user_friends_eligible;
-    //$inviteTable = new Zend_Db_Table();
 
     // Get codes
     $codes = array();
@@ -79,16 +78,15 @@ class Invite_Plugin_Signup
       }
     }
 
-    // Update invites
-    /*
-    if( $invites ) {
+   // Update invites
+    if( $updateInviteIds ) {
       $inviteTable->update(array(
         'new_user_id' => $user->getIdentity(),
       ), array(
         'id IN(?)' => $updateInviteIds,
         'new_user_id = ?' => 0,
       ));
-    }*/
+    }
     
     // Befriend users
     if( $isEligible && !empty($befriendUserIds) ) {

@@ -20,7 +20,10 @@ class User_Plugin_Signup1_Step1 extends Core_Plugin_FormSequence_Abstract
       $this->setActive(false);
       $this->onSubmitIsValid();
 	  
-	  $_SESSION['ref_code'] = $values['code'];
+	  if( isset($values['code']) ) 
+	  {
+		  $_SESSION['ref_code'] = $values['code'];
+	  }
       return true;
     }
 

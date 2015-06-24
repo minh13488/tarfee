@@ -40,33 +40,3 @@ CREATE TABLE IF NOT EXISTS `engine4_group_requests` (
   `modified_date` datetime DEFAULT NULL,
   PRIMARY KEY (`request_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ;
-
-
-INSERT IGNORE INTO `engine4_activity_notificationtypes` (`type`, `module`, `body`, `is_request`, `handler`) VALUES
-('advgroup_group_verified', 'advgroup', 'Your group {item:$subject} has been verified.', 0, ''),
-('advgroup_group_unverified', 'advgroup', 'Your group {item:$subject} has been unverified.', 0, ''),
-('advgroup_request_accepted', 'advgroup', 'Your verification request for group {item:$subject} has been accepted.', 0, ''),
-('advgroup_request_denied', 'advgroup', 'Your verification request for group {item:$subject} has been denied.', 0, ''),
-('advgroup_request_sent', 'advgroup', 'Your verification request for group {item:$subject} has been sent to admin.', 0, '');
-
-INSERT IGNORE INTO `engine4_core_mailtemplates` (`type`, `module`, `vars`) VALUES
-('notify_advgroup_group_verified', 'advgroup', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
-('notify_advgroup_group_unverified', 'advgroup', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
-('notify_advgroup_request_accepted', 'advgroup', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
-('notify_advgroup_request_denied', 'advgroup', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]'),
-('notify_advgroup_request_sent', 'advgroup', '[host],[email],[recipient_title],[recipient_link],[recipient_photo],[sender_title],[sender_link],[sender_photo],[object_title],[object_link],[object_photo],[object_description]');
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
