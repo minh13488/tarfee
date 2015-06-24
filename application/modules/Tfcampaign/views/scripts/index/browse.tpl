@@ -5,7 +5,7 @@
     <li>
     	<?php echo $this -> itemPhoto($campaign);?>
 		<h3><?php echo $campaign;?></h3>
-		<p><?php echo $campaign -> getDescription();?></p>
+		<p><?php echo $this->viewMore($campaign -> getDescription());?></p>
 		<?php 
 			$endDateObj = null;
 			$startDateObj = null;
