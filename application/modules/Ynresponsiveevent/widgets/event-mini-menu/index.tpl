@@ -511,7 +511,7 @@
   });
   do_confrim_friend = false;
 
-  $(document).addEvent('click', function() 
+  $(document).addEvent('click', function(event) 
   { 
         if (inbox_status && inbox_count_down <= 0) {
             $('ynadvmenu_messages').removeClass('notifyactive');
@@ -568,6 +568,13 @@
             notification_count_down = 1;
         } else if (notification_status) {
             notification_count_down = (notification_count_down <= 0) ? 0 : --notification_count_down;
+        }
+        
+        var parent = $(event.target).closest('.user-profile');
+        if(parent == null)
+        {
+        	$('user-profile-info').addClass('collapsed');
+	      	$('user-profile-submenu').removeClass('in').addClass('collapse').hide();
         }
    });
 <?php endif;?>
