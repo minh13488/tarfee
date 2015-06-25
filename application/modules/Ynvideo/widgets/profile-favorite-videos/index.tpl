@@ -77,8 +77,6 @@
 
 </script>
 
-
-
 <script type="text/javascript">
    var unfavorite_video = function(videoId)
    {
@@ -89,9 +87,10 @@
             'data' : {
                 'video_id' : videoId
             },
-            'onComplete':function(responseObject)
+            'onSuccess':function(responseJSON, responseText)
             {  
             	$('favorite_video_' + videoId).destroy();
+            	setPin();
             }
         });
         request.send();  
