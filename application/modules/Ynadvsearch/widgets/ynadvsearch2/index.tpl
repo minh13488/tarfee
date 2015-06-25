@@ -388,13 +388,13 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 		$('.type-checkbox').on('click', function() {
 			var id = $(this).attr('id');
 			if (id == 'sport-all') {
-				if ($(this).checked) {
-					$('.type-checkbox').attr('checked', true);
+				if ($(this).is(':checked')) {
+					$('.type-checkbox').prop('checked', true);
 				}
 			}
 			else {
-				if (!$(this).checked) {
-					$('sport-all').attr('checked', false);
+				if (!$(this).is(':checked')) {
+					$('#sport-all').prop('checked', false);
 				}
 			}
 		});
