@@ -21,7 +21,7 @@ class User_Form_Signup1_Step2 extends Engine_Form
   public function init()
   {
     $settings = Engine_Api::_()->getApi('settings', 'core');
-    
+    $tabIndex = 0;
     
     // Init form
     $this->setTitle('Choose Membership');

@@ -1,5 +1,17 @@
 <?php
 return array(
+	
+	array(
+	    'title' => 'Group Create Link',
+	    'description' => 'Displays group create link on user profile page.',
+	    'category' => 'Advanced Groups',
+	    'type' => 'widget',
+	    'name' => 'advgroup.group-create-link',
+	    'requirements' => array(
+	      'subject' => 'user',
+	    ),
+    ),
+	
   array(
     'title' => 'Most Active Groups',
     'description' => 'Displays a list groups that have the most number of topics.',

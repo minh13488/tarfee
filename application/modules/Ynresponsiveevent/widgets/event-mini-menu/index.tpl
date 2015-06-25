@@ -234,6 +234,8 @@
       
       $('user-profile-info').addClass('collapsed');
       $('user-profile-submenu').removeClass('in').addClass('collapse').hide();
+
+
   }
   //refresh box
   var refreshBox = function(box) {
@@ -508,9 +510,9 @@
       }
   });
   do_confrim_friend = false;
-  
+
   $(document).addEvent('click', function() 
-  {
+  { 
         if (inbox_status && inbox_count_down <= 0) {
             $('ynadvmenu_messages').removeClass('notifyactive');
             $('ynadvmenu_messageUpdates').setStyle('display', 'none');
@@ -584,4 +586,5 @@ window.addEvent('domready', function()
 		getNotificationsTotal();
 	<?php endif;?>
 });
+
 </script>

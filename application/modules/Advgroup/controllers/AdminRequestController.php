@@ -54,7 +54,11 @@ class Advgroup_AdminRequestController extends Core_Controller_Action_Admin
 				$db -> rollBack();
 				throw $e;
 			}
-
+			
+			$notifyApi = Engine_Api::_() -> getDbtable('notifications', 'activity');
+			$notifyApi -> addNotification($group -> getOwner(), $group, $group, 'advgroup_request_accepted');
+			$notifyApi -> addNotification($group -> getOwner(), $group, $group, 'advgroup_group_verified');
+			
 			$this -> _forward('success', 'utility', 'core', array(
 				'smoothboxClose' => 10,
 				'parentRefresh' => 10,
@@ -98,7 +102,10 @@ class Advgroup_AdminRequestController extends Core_Controller_Action_Admin
 				$db -> rollBack();
 				throw $e;
 			}
-
+			
+			$notifyApi = Engine_Api::_() -> getDbtable('notifications', 'activity');
+			$notifyApi -> addNotification($group -> getOwner(), $group, $group, 'advgroup_request_denied');
+			
 			$this -> _forward('success', 'utility', 'core', array(
 				'smoothboxClose' => 10,
 				'parentRefresh' => 10,

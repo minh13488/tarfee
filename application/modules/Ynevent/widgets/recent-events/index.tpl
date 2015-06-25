@@ -45,14 +45,10 @@
 
         <?php 
         if($this -> viewer() -> getIdentity()):
-            $row = $event->membership()->getRow($this -> viewer());
-            if($row):
-                $rsvp = $row -> rsvp;
             ?>
             <div class="ynevents_button" id = "ynevent_rsvp_<?php echo $event -> getIdentity()?>">
                <?php echo $this -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $event -> getIdentity()));?>
             </div>
-            <?php endif;?>
         <?php endif;?>
     </li>
 
