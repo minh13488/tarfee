@@ -135,24 +135,22 @@ endif;
         set_rating();
     });
 </script>
-<div style="width: 1000px">
+
+<div style="width: 900px">
 	<div class="ynvideo_video_view_headline">
-	    <div class="ynvideo_video_info">
-	        <div class="ynvideo_video_view_title">
-	            <?php echo htmlspecialchars($this->video->getTitle()) ?>
-	        </div>
-	        <div class="video_desc">
-	            <?php echo $this->translate('Posted by') ?>
-	            <?php
-	            $poster = $this->video->getOwner();
+        <div class="ynvideo_author">
+            <?php echo $this->translate('Posted by') ?>
+
+            <?php
+            $poster = $this->video->getOwner();
 	            if ($poster) {
 	                echo $this->htmlLink($poster, $poster->getTitle());
 	            }
-	            ?>
-	        </div>
-	    </div>
+            ?>
+        </div>
+
 	    <?php if($this -> viewer() -> getIdentity()):?>
-			<div id="favorite_<?php echo $this->video -> getIdentity()?>">
+			<div id="favorite_<?php echo $this->video -> getIdentity()?>" class="yn_video_popup_btn">
 				<?php if($this->video -> hasFavorite()):?>
 					<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
 				<?php else:?>	
@@ -198,11 +196,12 @@ endif;
 			   }
 			</script>   
 			<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this -> video ->getGuid(), 'format' => 'smoothbox'),'default', true);?>
-			<div class=""><a href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
+			<div class="yn_video_popup_btn"><a href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
 		<?php endif; ?>
 	</div>
 	<div class="video_view video_view_container">
-		<div class="left"> 
+		<div class="ynvideo_popup_left"> 
+
 		    <?php if ($this->video->type == Ynvideo_Plugin_Factory::getUploadedType() || $this->video->type == Ynvideo_Plugin_Factory::getVideoURLType()): 
 		    	if($this-> video_location1 || $this->video->type == Ynvideo_Plugin_Factory::getVideoURLType()):
 					if($this->video->type == Ynvideo_Plugin_Factory::getVideoURLType())
@@ -210,16 +209,17 @@ endif;
 						$this-> video_location1 = $this-> video_location;
 					}
 		    	?> 
-		      <span class="view_html5_player">
-		      	<img class = "thumb_video" src ="<?php echo $this-> video -> getPhotoUrl("thumb.large");?>"/>
-			      <video id="my_video" class="video-js vjs-default-skin" controls
+
+		      	<span class="view_html5_player">
+		      		<img class = "thumb_video" src ="<?php echo $this-> video -> getPhotoUrl("thumb.large");?>"/>
+			      	<video id="my_video" class="video-js vjs-default-skin" controls
 						 preload="auto"  poster="<?php echo $this-> video -> getPhotoUrl("thumb.large");?>"
 						 data-setup="{}">
 			        	<source src="<?php echo $this-> video_location1;?>" type='video/mp4'>
-						</video> 
-					</span>	
+					</video> 
+				</span>	
 		    <?php 
-					else:?>
+				else:?>
 					<div id="video_embed" class="video_embed"> </div>
 				<?php		
 					endif;
@@ -230,17 +230,38 @@ endif;
 		            ?>
 		        </div>
 		    <?php endif; ?>
+
 		    <div class="ynvideo_video_view_description ynvideo_video_show_less" style="height: auto;" id="ynvideo_video">
-		        <div class="left">
-		            <div class="video_date">
-		                <?php 
-		                echo $this->translate('Posted') ?>
-		                <?php echo $this->timestamp($this->video->creation_date) ?>
-		                 <?php echo $this->translate(array('%s favorite', '%s favorites', $this->video->favorite_count), $this->locale()->toNumber($this->video->favorite_count)) ?>
-		            </div>
+		    	<div class="yn_video_popup_info">
+		    		<div class="yn_video_info_left">
+				        <div class="ynvideo_video_view_title">
+				            <?php echo htmlspecialchars($this->video->getTitle()) ?>
+				        </div>
+
+			        	<?php if($this->video->description):?>
+			        		<div class="ynvideo_video_view_desc">
+			            		<p><?php echo $this->video->description; ?></p>
+			        		</div>
+			            <?php endif;?>
+
+
+			            <div class="video_date" style="display: none;">
+			                <?php 
+			                echo $this->translate('Posted') ?>
+			                <?php echo $this->timestamp($this->video->creation_date) ?>
+			                 <?php echo $this->translate(array('%s favorite', '%s favorites', $this->video->favorite_count), $this->locale()->toNumber($this->video->favorite_count)) ?>
+			            </div>
+			             <div class="video-statistic">
+					        <span><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></span>
+					        <?php $commentCount = $this->video->comments()->getCommentCount(); ?>
+					        <span><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></span>
+					    </div>
+		    		</div>
+
+
 		            
 		            <?php if($this -> video -> parent_type != "user_playercard") :?>
-		             <div id="video_rating" class="rating" onmouseout="rating_out();">
+		             <div id="video_rating" class="rating ynvideo_rating" onmouseout="rating_out();">
 		                <span id="rate_1" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(1);"<?php endif; ?> onmouseover="rating_over(1);"></span>
 		                <span id="rate_2" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(2);"<?php endif; ?> onmouseover="rating_over(2);"></span>
 		                <span id="rate_3" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(3);"<?php endif; ?> onmouseover="rating_over(3);"></span>
@@ -250,6 +271,8 @@ endif;
 		            </div>
 		            
 		            <?php else :?>
+
+		            	<div class="ynvideo_rating">
 			            <!-- if viewer type professional or club -> can rate -->
 			            <?php if($this -> viewer() -> getIdentity() 
 			            		&& $this -> video -> canAddRatings()
@@ -288,20 +311,11 @@ endif;
 								?>
 							<?php endif;?>
 						<?php endif;?> 
+
+						</div>
 					<?php endif;?>
-		        </div>
-		        
-		        	<?php if($this->video->description):?>
-		            <div class="ynvideo_text_header">
-		                <?php echo $this->translate('Description') ?>
-		            </div>
-		            <?php echo $this->video->description; ?>
-		            <?php endif;?>
-		             <div class="video-statistic">
-				        <span><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></span>
-				        <?php $commentCount = $this->video->comments()->getCommentCount(); ?>
-				        <span><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></span>
-				    </div>
+
+			    </div>
 				    <?php if ($this->video->parent_type == 'user_playercard') :?>
 					<?php $player = $this->video->getParent();?>
 						<?php if ($player):?>
@@ -331,13 +345,15 @@ endif;
 							</div>
 						<?php endif;?>
 					<?php endif;?>
-		        </div>
-		        <?php 
+		        
+		    </div>
+	        <?php 
 		        $json = '{"taggingContent":["friends"],"showComposerOptions":["addLink","addSmilies"],"showAsNested":"1","showAsLike":"0","showDislikeUsers":"1","showLikeWithoutIcon":"0","showLikeWithoutIconInReplies":"0","commentsorder":"1","loaded_by_ajax":"0","name":"yncomment.comments","nomobile":"0","notablet":"0","nofullsite":"0"}';
 				echo $this->content()->renderWidget('yncomment.comments', (array)json_decode($json));
 			?>
 	    </div>
-	    <div class="right">
+	    
+	    <div class="ynvideo_popup_right">
 	    	<div class="suggest_videos">
 	    		<?php echo $this->content()->renderWidget('ynvideo.show-same-poster'); ?>
 	    	</div>
