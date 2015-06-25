@@ -64,6 +64,31 @@ class Tfcampaign_Model_DbTable_Campaigns extends Engine_Db_Table {
     		$select->where('user.displayname LIKE ?', '%'.$params['owner'].'%');
     	}
     	
+		if (isset($params['from_age']) && $params['from_age'] != '') 
+    	{
+    		$select->where('campaign.from_age >= ?', $params['from_age']);
+    	}
+
+		if (isset($params['to_age']) && $params['to_age'] != '') 
+    	{
+    		$select->where('campaign.to_age <= ?', $params['to_age']);
+    	}
+		
+		$sysTimezone = date_default_timezone_get();
+        if (isset($params['start_date_from']) && $params['start_date_from'] != '') 
+        {
+            $from_date = new Zend_Date(strtotime($params['start_date_from']));
+			$from_date->setTimezone($sysTimezone);
+			$select->where('campaign.start_date >= ?', $from_date->get('yyyy-MM-dd'));
+        }
+		
+		if (isset($params['start_date_to']) && $params['start_date_to'] != '') 
+        {
+            $to_date = new Zend_Date(strtotime($params['start_date_to']));
+			$to_date->setTimezone($sysTimezone);
+			$select->where('campaign.start_date <= ?', $to_date->get('yyyy-MM-dd'));
+        }
+		
     	if (!empty($params['category_id']) && $params['category_id'] != 'all') 
     	{
 			$select->where('campaign.category_id IN (?)', $params['category_id']);
@@ -72,6 +97,21 @@ class Tfcampaign_Model_DbTable_Campaigns extends Engine_Db_Table {
     	if(isset($params['user_id'])) 
     	{
     		$select->where('campaign.user_id = ?', $params['user_id']);
+    	}
+		
+		if(isset($params['country_id']) && $params['country_id'] != '0') 
+    	{
+    		$select->where('campaign.country_id = ?', $params['country_id']);
+    	}
+		
+		if(isset($params['province_id']) && $params['province_id'] != '') 
+    	{
+    		$select->where('campaign.province_id = ?', $params['province_id']);
+    	}
+		
+		if(isset($params['city_id']) && $params['city_id'] != '') 
+    	{
+    		$select->where('campaign.city_id = ?', $params['city_id']);
     	}
     	
 		$select -> where('campaign.deleted <> 1');

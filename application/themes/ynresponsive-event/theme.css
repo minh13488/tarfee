@@ -6,6 +6,8 @@
 /*
 GLOBAL STYLES, FONTS & RESETS
 */
+
+.display{display: none !important}
 html
 {
 	min-height: 100%;
