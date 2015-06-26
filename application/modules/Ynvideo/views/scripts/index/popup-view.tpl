@@ -62,9 +62,9 @@ endif;
 	                $('rating_text').innerHTML = "<?php echo $this->translate('click to rate'); ?>";
 	                for(var x=1; x<=5; x++) {
 	                    if(x <= rating) {
-	                        $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
+	                        $('rate_'+x).set('class', 'fa fa-star');
 	                    } else {
-	                        $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	                        $('rate_'+x).set('class', 'fa fa-star-o');
 	                    }
 	                }
 	            }
@@ -79,7 +79,7 @@ endif;
 	            else {
 	                for(var x=1; x<=5; x++) 
 	                {
-	                    $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	                    $('rate_'+x).set('class', 'fa fa-star-o');
 	                }
 	            }
 	        }
@@ -88,17 +88,17 @@ endif;
 	            var rating = pre_rate;
 	            $('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
 	            for(var x=1; x<=parseInt(rating); x++) {
-	                $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
+	                $('rate_'+x).set('class', 'fa fa-star');
 	            }
 	
 	            for(var x=parseInt(rating)+1; x<=5; x++) {
-	                $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	                $('rate_'+x).set('class', 'fa fa-star-o');
 	            }
 	
 	            var remainder = Math.round(rating)-rating;
 	            if (remainder <= 0.5 && remainder !=0){
 	                var last = parseInt(rating)+1;
-	                $('rate_'+last).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_half');
+	                $('rate_'+last).set('class', 'fa-star-half-o');
 	            }
 	        }
 	
@@ -262,11 +262,11 @@ endif;
 		            
 		            <?php if($this -> video -> parent_type != "user_playercard") :?>
 		             <div id="video_rating" class="rating ynvideo_rating" onmouseout="rating_out();">
-		                <span id="rate_1" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(1);"<?php endif; ?> onmouseover="rating_over(1);"></span>
-		                <span id="rate_2" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(2);"<?php endif; ?> onmouseover="rating_over(2);"></span>
-		                <span id="rate_3" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(3);"<?php endif; ?> onmouseover="rating_over(3);"></span>
-		                <span id="rate_4" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(4);"<?php endif; ?> onmouseover="rating_over(4);"></span>
-		                <span id="rate_5" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(5);"<?php endif; ?> onmouseover="rating_over(5);"></span>
+		                <span id="rate_1" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(1);"<?php endif; ?> onmouseover="rating_over(1);"></span>
+		                <span id="rate_2" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(2);"<?php endif; ?> onmouseover="rating_over(2);"></span>
+		                <span id="rate_3" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(3);"<?php endif; ?> onmouseover="rating_over(3);"></span>
+		                <span id="rate_4" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(4);"<?php endif; ?> onmouseover="rating_over(4);"></span>
+		                <span id="rate_5" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(5);"<?php endif; ?> onmouseover="rating_over(5);"></span>
 		                <span id="rating_text" class="rating_text ynvideo_rating_text"><?php echo $this->translate('click to rate'); ?></span>
 		            </div>
 		            

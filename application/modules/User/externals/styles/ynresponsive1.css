@@ -639,6 +639,7 @@ ul.tfcampaign_list{
 		margin: 15px;
 		border-top: 1px solid $theme_border_color;
 		padding-top: 15px;
+		text-align: center;
 
 
 		&:first-child{

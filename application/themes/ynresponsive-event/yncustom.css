@@ -1869,6 +1869,7 @@ body#global_page_user-profile-index {
     }
 }
 
+.layout_tfcampaign_recent_campaign,
 .layout_ynevent_recent_events{
 	background: #fff;
 	overflow: hidden;
@@ -2258,7 +2259,7 @@ body#global_page_user-profile-index {
 
 		.yn_video_info_left{
 			float: left;
-			width: 65%;
+			width: 70%;
 			margin-right: 30px;
 		}
 
@@ -2269,6 +2270,7 @@ body#global_page_user-profile-index {
 		.yn_video_popup_info{
 			padding: 0 10px;
 			margin: 0;
+			margin-top: 10px;
 		}
 
 		.ynvideo_video_view_title{
@@ -2298,6 +2300,29 @@ body#global_page_user-profile-index {
 			}
 		}
 
+		#video_rating{
+			height: 60px !important;
+			text-align: right;
+
+			& > span{
+				font-size: 28px;
+				margin-left: 5px;
+				color: $theme_link_color;
+				cursor: pointer;
+			}
+			.ynvideo_rating_text{
+				clear: both;
+				margin: 0;
+				padding: 0 !important;
+				font-weight: normal;
+				display: block;
+				width: 100%;
+				font-size: 14px;
+				color: $theme_font_color_light;
+				margin-top: 10px;
+			}
+		}
+
 
 		.ynvideo_rating{
 			overflow: hidden;
@@ -2306,13 +2331,23 @@ body#global_page_user-profile-index {
 
 			.rating{
 				float: right;
+				color: $theme_link_color;
+				font-size: 12px;
+				height: 15px !important;
+				margin-top: 0px !important;
+
+				span{
+					width: 19px;
+					cursor: pointer;
+				}
 			}
 		}
 		.ynvideo_rating_player{
 			overflow: hidden;
 			margin-bottom: 5px;
 			font-size: 12px;
-			line-height: 2.5em;
+			height: 20px;
+			line-height: 20px;
 		}
 
 		.player-info{
@@ -2371,10 +2406,19 @@ body#global_page_user-profile-index {
 	.ynvideo_popup_right{
 		width: 35%;
 		float: right;
+		padding-left: 15px;
 
 		.suggest_videos{
 			width: 50%;
 			float: left;
+		}
+
+		.ybo_headline{
+			text-align: center;
+
+			h3{
+				font-weight: normal;
+			}
 		}
 
 		.related_videos{
@@ -2386,12 +2430,33 @@ body#global_page_user-profile-index {
 			margin-right: 0;
 			width: auto;
 		}
+		
+		.ynvideo_title{
+
+			a{
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				display: block;
+			}
+		}
+
+		.generic_list_widget{
+			border: none;
+			border-left: 1px solid $theme_border_medium_color;
+
+			.info{
+				margin: 0;
+				padding: 0;
+			}
+		}
 	
 		ul.ynvideo_widget > li > .photo{
-			padding-left: 10px;
+			padding-left: 0px;
 
 			img{
 				width: 100%;
+				height: 120px;
 				max-width: 100%
 			}
 		}
