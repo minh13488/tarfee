@@ -2,14 +2,6 @@
 return array(
 	
 	array(
-        'title' => 'Campaign - Search Form',
-        'description' => 'Displays campaign search form.',
-        'category' => 'Campaign',
-        'type' => 'widget',
-        'name' => 'tfcampaign.search-form'
-	),
-	
-	array(
         'title' => 'Campaign - User Profile Campaigns',
         'description' => 'Displays campaign on user profile page.',
         'category' => 'Campaign',

@@ -9,6 +9,50 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 		return $submissionTable -> fetchAll($select);
 	}
 	
+	public function getSubmissionByUser($user) {
+		$submissionTable =Engine_Api::_() -> getItemTable('tfcampaign_submission');
+		$ids = $submissionTable -> getSubmissionIdsSubmitted($user, $this);
+		return $ids;
+	}
+	
+	public function getPosition() {
+		if($this -> position_id) {
+			return Engine_Api::_() -> getItem('user_sportcategory', $this -> position_id);
+		}
+	}
+	
+	public function getLocation() {
+		$locationName = '';
+		if($this ->city_id && $city = Engine_Api::_() -> getItem('user_location', $this ->city_id))
+		{
+			$locationName .= $city -> getTitle().", ";
+		}
+		if($this ->province_id && $province = Engine_Api::_() -> getItem('user_location', $this ->province_id))
+		{
+			$locationName .= $province -> getTitle().", ";
+		}
+		if($this ->country_id && $country = Engine_Api::_() -> getItem('user_location', $this ->country_id))
+		{
+			$locationName .= $country -> getTitle();
+		}
+		return $locationName;
+	}
+	
+	public function getGender() {
+		$view = Zend_Registry::get('Zend_View');
+		switch ($this -> gender) {
+			case '1':
+				return $view -> translate("Male");
+				break;
+			case '2':
+				return $view -> translate("Female");
+				break;
+			case '0':
+				return $view -> translate("Unspecified");
+				break;	
+		}
+	}
+	
 	public function isSaved(){
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		$saveTable = Engine_Api::_() -> getDbTable('saves','tfcampaign');

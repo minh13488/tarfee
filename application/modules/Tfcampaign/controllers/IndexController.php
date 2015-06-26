@@ -3,19 +3,52 @@
 class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 {
 	
+	public function saveAction() {
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(true);
+		
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
+		
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$saveTbl = Engine_Api::_() -> getDbTable("saves", "tfcampaign");
+		$campaign_id =  $this ->_getParam('campaign_id');
+		$saveRow = $saveTbl -> getSaveRow($viewer -> getIdentity(), $campaign_id);
+		if ($saveRow) {
+			//existing row
+			$saveRow -> active = 1 - $saveRow -> active;
+			$saveRow -> save();
+		} else {
+			//create new
+			$saveRow = $saveTbl -> createRow();
+			$saveRow -> setFromArray(array(
+				'user_id' => $viewer -> getIdentity(), 
+				'campaign_id' => $campaign_id, 
+				'creation_date' => new Zend_Db_Expr("NOW()"), 
+			));
+			$saveRow -> active = true;
+			$saveRow -> save();
+		}
+	}
+	
 	public function browseAction() {
 		$this -> _helper -> content	-> setEnabled();
-		$viewer = Engine_Api::_() -> user() -> getViewer();
 		$params = $this -> _getAllParams();
 		unset($params['module']);
 		unset($params['controller']);
 		unset($params['action']);
 		unset($params['rewrite']);
-		$params['user_id'] = $this ->_getParam('user_id', $viewer -> getIdentity());
-        $params['direction'] = 'DESC';
+		$this -> view -> params = $params;
+		$isSort = $params['sort'];
+		if(!empty($isSort)) {
+			$params['order'] = $isSort;
+			$params['direction'] = "DESC";
+			$this -> view -> isSort = $isSort;
+		}
+		
 		$this -> view -> paginator = $paginator = Engine_Api::_() -> getItemTable('tfcampaign_campaign') -> getCampaignsPaginator($params);
 		$paginator -> setCurrentPageNumber($this -> _getParam('page', 1));
-		$paginator -> setItemCountPerPage(10);
+		$paginator -> setItemCountPerPage(3);
 		$this -> view -> formValues = $params;
 	}
 	
