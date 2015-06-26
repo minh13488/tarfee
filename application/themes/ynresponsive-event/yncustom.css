@@ -2253,7 +2253,7 @@ body#global_page_user-profile-index {
 		}
 	}
 	.ynvideo_popup_left{
-		width: 75%;
+		width: 65%;
 		float: left;	
 
 		.yn_video_info_left{
@@ -2369,8 +2369,18 @@ body#global_page_user-profile-index {
 	}
 
 	.ynvideo_popup_right{
-		width: 25%;
+		width: 35%;
 		float: right;
+
+		.suggest_videos{
+			width: 50%;
+			float: left;
+		}
+
+		.related_videos{
+			width: 50%;
+			float: right;
+		}
 
 		.video_thumb_wrapper{
 			margin-right: 0;
