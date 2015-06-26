@@ -150,6 +150,10 @@ endif;
         </div>
 
 	    <?php if($this -> viewer() -> getIdentity()):?>
+	    	<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this -> video ->getGuid()),'default', true);?>
+			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
+			<?php $url = $this->url(array('module'=> 'activity', 'controller' => 'index', 'action' => 'share', 'type' => 'video', 'id' => $this->video->getIdentity(),),'default', true);?>
+			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Share"); ?></a></div>
 			<div id="favorite_<?php echo $this->video -> getIdentity()?>" class="yn_video_popup_btn">
 				<?php if($this->video -> hasFavorite()):?>
 					<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
@@ -195,8 +199,6 @@ endif;
 			        request.send();  
 			   }
 			</script>   
-			<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this -> video ->getGuid(), 'format' => 'smoothbox'),'default', true);?>
-			<div class="yn_video_popup_btn"><a href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
 		<?php endif; ?>
 	</div>
 	<div class="video_view video_view_container">

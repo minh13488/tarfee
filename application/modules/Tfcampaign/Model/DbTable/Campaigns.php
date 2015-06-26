@@ -116,6 +116,28 @@ class Tfcampaign_Model_DbTable_Campaigns extends Engine_Db_Table {
     	
 		$select -> where('campaign.deleted <> 1');
 		
+		if (isset($params['order'])) 
+    	{
+    		if (isset($params['direction'])) 
+    		{
+    			$select->order($params['order'].' '.$params['direction']);
+    		}
+    		else 
+    		{
+    			$select->order($params['order'].' '.'DESC');
+    		}
+    	}
+    	else 
+    	{
+    		if (isset($params['direction'])) 
+    		{
+    			$select->order('campaign.campaign_id'.' '.$params['direction']);
+    		}
+			else 
+			{
+				$select->order('campaign.campaign_id DESC');
+			}
+    	}
     	return $select;
     }
 }

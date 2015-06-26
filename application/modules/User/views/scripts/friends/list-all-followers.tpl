@@ -1,5 +1,4 @@
 <?php $paginater_vari = 0; if( !empty($this->followers)) {  $paginater_vari = $this->paginator->getCurrentPageNumber(); }  ?>
-
 <script type="text/javascript">
  var likeMemberPage = <?php if(empty($this->no_result_msg)){ echo sprintf('%d', $paginater_vari); } else { echo 1; } ?>;
  var url = en4.core.baseUrl + 'user/friends/list-all-followers';
@@ -24,8 +23,7 @@
 		request.send();
   }
 </script>
-</div>
-
+<div style="width: 700px">
 <?php  if(empty($this->is_ajax)) { ?>
 <div class="followers_members_popup">
 	<div class="top">
@@ -137,3 +135,4 @@
 	<button onclick="parent.Smoothbox.close();"><?php echo $this->translate("Close") ?></button>
 </div>
 <?php } ?>
+</div>

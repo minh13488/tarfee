@@ -10,6 +10,36 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		$this -> _helper -> requireSubject('tfcampaign_campaign');
 	}
 	
+	public function listWithdrawAction() {
+		$campaign = Engine_Api::_() -> core() -> getSubject();
+		// Return if guest try to access to create link.
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
+		$this -> view -> form = $form = new Tfcampaign_Form_WithDrawList(array('campaign' => $campaign));
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		$posts = $this -> getRequest() -> getPost();
+		if (!$form -> isValid($posts)) {
+			return;
+		}
+		
+		$values = $form -> getValues();
+		$submission_ids = $values['submission_ids'];
+		foreach($submission_ids as $submission_id) {
+			$submision = Engine_Api::_() -> getItem('tfcampaign_submission', $submission_id);
+			if($submision) {
+				$submision -> delete();
+			}
+		}
+					
+		// Redirect
+		return $this -> _forward('success', 'utility', 'core', array(
+			'parentRefresh' => true,
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Please wait...'))
+		));
+	}
+	
 	public function saveSuggestAction() {
 		$this -> _helper -> layout -> disableLayout();
 		$this -> _helper -> viewRenderer -> setNoRender(true);
@@ -61,34 +91,6 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		}
 		echo Zend_Json::encode(array('error_code' => 0));
 		exit ;
-	}
-	
-	public function saveAction() {
-		$this -> _helper -> layout -> disableLayout();
-		$this -> _helper -> viewRenderer -> setNoRender(true);
-		
-		if (!$this -> _helper -> requireUser -> isValid())
-			return;
-		
-		$viewer = Engine_Api::_() -> user() -> getViewer();
-		$saveTbl = Engine_Api::_() -> getDbTable("saves", "tfcampaign");
-		$campaign = Engine_Api::_() -> core() -> getSubject();
-		$saveRow = $saveTbl -> getSaveRow($viewer -> getIdentity(), $campaign -> getIdentity());
-		if ($saveRow) {
-			//existing row
-			$saveRow -> active = 1 - $saveRow -> active;
-			$saveRow -> save();
-		} else {
-			//create new
-			$saveRow = $saveTbl -> createRow();
-			$saveRow -> setFromArray(array(
-				'user_id' => $viewer -> getIdentity(), 
-				'campaign_id' => $campaign -> getIdentity(), 
-				'creation_date' => new Zend_Db_Expr("NOW()"), 
-			));
-			$saveRow -> active = true;
-			$saveRow -> save();
-		}
 	}
 	
 	public function withdrawAction() {
@@ -281,7 +283,7 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		$this -> view -> status = true;
 		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('This campaign has been deleted.');
 		return $this -> _forward('success', 'utility', 'core', array(
-			'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'manage'), 'tfcampaign_general', true),
+			'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array(), 'tfcampaign_general', true),
 			'messages' => Array($this -> view -> message)
 		));
 	}

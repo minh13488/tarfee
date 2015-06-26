@@ -1322,7 +1322,7 @@ iframe.wysihtml5-sandbox {
 			border: 1px solid $theme_link_color_hover !important;
 		}
 		select{
-			padding: .5 !important;
+			height: 33px;
 		}
 
 		/*Style for Range*/
@@ -1337,7 +1337,7 @@ iframe.wysihtml5-sandbox {
 			border:none;
 			width: 90%;
 			margin-left: 5%;
-			margin-top: 20px;
+			margin-top: 36px;
 		}
 		.ui-state-default,
 		.ui-widget-content .ui-state-default,
