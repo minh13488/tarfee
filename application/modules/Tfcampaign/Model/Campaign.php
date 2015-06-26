@@ -21,6 +21,12 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 		}
 	}
 	
+	public function getTotalSubmission() {
+		$submissionTable = Engine_Api::_() -> getItemTable('tfcampaign_submission');
+		$select = $submissionTable -> select() -> where("campaign_id = ?", $this -> getIdentity());
+		return count($submissionTable -> fetchAll($select));
+	}
+	
 	public function getLocation() {
 		$locationName = '';
 		if($this ->city_id && $city = Engine_Api::_() -> getItem('user_location', $this ->city_id))
