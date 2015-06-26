@@ -136,7 +136,7 @@ endif;
     });
 </script>
 
-<div style="width: 900px">
+<div style="width: 1170px;">
 	<div class="ynvideo_video_view_headline">
         <div class="ynvideo_author">
             <?php echo $this->translate('Posted by') ?>
