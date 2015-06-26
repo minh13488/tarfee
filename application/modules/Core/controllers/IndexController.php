@@ -21,10 +21,12 @@ class Core_IndexController extends Core_Controller_Action_Standard {
 		if (Engine_Api::_() -> user() -> getViewer() -> getIdentity()) {
 			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'home'), 'user_general', true);
 		}
-
+		
+		/*
 		if (isset($_SESSION['skip_registration'])) {
 			return $this -> _helper -> redirector -> gotoRoute(array(), 'user_home', true);
 		}
+		 */
 
 		// check public settings
 		if (!Engine_Api::_() -> getApi('settings', 'core') -> core_general_portal && !$this -> _helper -> requireUser() -> isValid()) {

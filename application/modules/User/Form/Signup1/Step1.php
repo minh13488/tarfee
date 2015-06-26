@@ -27,6 +27,28 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
     // Init form
     $this->setTitle('Create Account');
 	
+	// Element: code
+    if( $settings->getSetting('user.signup.inviteonly') > 0 ) {
+      //require code
+      $codeValidator = new Engine_Validate_Callback(array($this, 'checkInviteCode'), $emailElement);
+      $codeValidator->setMessage("This invite code is invalid or does not match the selected email address");
+      $this->addElement('Text', 'code', array(
+        'label' => 'Invite Code',
+        'required' => true
+      ));
+      $this->code->addValidator($codeValidator);
+	  $this -> code -> setAttrib('required', true);
+      if( !empty($inviteSession->invite_code) ) {
+        $this->code->setValue($inviteSession->invite_code);
+      }
+    } else if(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1)){
+    	 $this->addElement('Text', 'code', array(
+	        'label' => 'Invite Code',
+	        'description' => 'Enter referral code if you have',
+	     ));
+		 $this -> code -> setAttrib('required', true);
+    }
+	
     // Element: email
     $emailElement = $this->addEmailElement(array(
       'label' => 'Email Address',
@@ -59,27 +81,6 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
     
     if( !empty($inviteSession->invite_email) ) {
       $emailElement->setValue($inviteSession->invite_email);
-    }
-    // Element: code
-    if( $settings->getSetting('user.signup.inviteonly') > 0 ) {
-      //require code
-      $codeValidator = new Engine_Validate_Callback(array($this, 'checkInviteCode'), $emailElement);
-      $codeValidator->setMessage("This invite code is invalid or does not match the selected email address");
-      $this->addElement('Text', 'code', array(
-        'label' => 'Invite Code',
-        'required' => true
-      ));
-      $this->code->addValidator($codeValidator);
-	  $this -> code -> setAttrib('required', true);
-      if( !empty($inviteSession->invite_code) ) {
-        $this->code->setValue($inviteSession->invite_code);
-      }
-    } else if(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1)){
-    	 $this->addElement('Text', 'code', array(
-	        'label' => 'Invite Code',
-	        'description' => 'Enter referral code if you have',
-	     ));
-		 $this -> code -> setAttrib('required', true);
     }
 
 	  // Element: password
