@@ -88,7 +88,7 @@ var Smoothbox = {
           'mode' : 'Iframe',
           'link' : spec,
           'element' : spec,
-          'url' : spec.get('href'),
+          'url' : spec.get('href') +'/format/smoothbox',
           'title' : spec.get('title')
         });
       }
