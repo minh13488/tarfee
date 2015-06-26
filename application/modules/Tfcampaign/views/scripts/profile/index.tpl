@@ -70,10 +70,9 @@
 		<?php
 			$startDate = date_create($campaign->start_date);
 			$endDate = date_create($campaign->end_date);
-            $nowDate = date_create($now);
-            if ($nowDate <= $endDate && $nowDate >= $startDate) :
+	        $nowDate = date_create($now);
+	        if ($nowDate <= $endDate && $nowDate >= $startDate) :
 		?>
-			-
 			<?php echo $this->htmlLink(
 			    array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
 			    $this->translate('Submit Player Profile'), 
@@ -82,7 +81,6 @@
 	<?php endif;?>
 -
 <span class="<?php echo ($campaign -> isSaved())? 'campaign-save-active' : ''  ?>" id="tfcampaign-campaign-save"><i class="fa fa-floppy-o"></i></span>
-<?php endif;?>
 
 <!-- meta data -->
 <?php if($campaign -> getOwner() -> isSelf($this -> viewer())) :?>
