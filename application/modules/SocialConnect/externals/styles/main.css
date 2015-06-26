@@ -398,8 +398,8 @@ body.modal-open{
 }
 button.close.btn-close-modal{
 	position: absolute;
-	top: 0;
-	right: 0;
+	top: 25px;
+	right: 10px;
 	outline: 0;
 }
 .modal-backdrop.in{

@@ -149,7 +149,7 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 		$this -> addElement('Dummy', 'forgot', array('content' => $content, ));
 		//$url = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_register', true);
 		$url_request = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_request', true);
-		$skipUrl =  Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_home', true);
+		//$skipUrl =  Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_home', true);
 		$registerUrl =  Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_signup1', true);
 		$request_guest = '<div class="register_guest">';
 		if( $settings->getSetting('user.signup.inviteonly') > 0 ) {
@@ -157,7 +157,9 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 		}
 		//<a onclick = "openRegister()" href="javascript:;"><span>
 		//<a class="smoothbox" href="'.$registerUrl.'"><span>
-		$request_guest .= '<a class="smoothbox" href="'.$registerUrl.'"><span>'.$view -> translate("Register").'</span></a><span>|</span><a class = "smoothbox" href="'.$skipUrl.'"><span>'.$view -> translate("Skip").'</span></a></div>';
+		$request_guest .= '<a class="smoothbox" href="'.$registerUrl.'"><span>'.$view -> translate("Register").'</span></a>';
+		//$request_guest .='<span>|</span><a class = "" href="'.$skipUrl.'"><span>'.$view -> translate("Skip").'</span></a>';
+		$request_guest .= '</div>';
 		$this -> addElement('Dummy', 'register_guest', array(
 				'content' => $request_guest,
 			));

@@ -64,7 +64,7 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_continent"><?php echo $this->translate('Continent')?></label>
 					<select class="form-element search-element continent" id="player_continent" rel="player" name="continent">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->continents as $key => $value):?>
 						<option value="<?php echo $key?>"><?php echo $this->translate($value)?></option>
 						<?php endforeach;?>
@@ -73,29 +73,29 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_country"><?php echo $this->translate('Country')?></label>
 					<select class="form-element search-element country_id" rel="player" id="player_country" name="country_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_province"><?php echo $this->translate('Province/State')?></label>
 					<select class="form-element search-element province_id" rel="player" id="player_province" name="province_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_city"><?php echo $this->translate('City')?></label>
 					<select class="form-element search-element" id="player_city" name="city_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_keyword"><?php echo $this->translate('Keyword')?></label>
-					<input type="text" class="form-element search-element" id="player_keyword" name="keyword" />
+					<input type="text" placeholder="<?php echo $this -> translate('keyword...')?>" class="form-element search-element" id="player_keyword" name="keyword" />
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_sport"><?php echo $this->translate('Sport Type')?></label>
 					<select class="form-element search-element" id="player_sport" name="sport">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->sports as $key => $value):?>
 						<option value="<?php echo $key?>"><?php echo $value?></option>
 						<?php endforeach;?>
@@ -104,27 +104,27 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_position_id"><?php echo $this->translate('Sport Position')?></label>
 					<select class="form-element search-element" id="player_position_id" name="position_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_gender"><?php echo $this->translate('Gender')?></label>
 					<select class="form-element search-element" id="player_gender" name="gender">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<option value="1"><?php echo $this->translate('Male')?></option>
 						<option value="2"><?php echo $this->translate('Female')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label"><?php echo $this->translate('Age: ')?><span id="age-rangeval">6 - 80</span></label>
-					<input type="hidden" class="form-element search-element" value="6" id="player_age_from" name="age_from"/>
-					<input type="hidden" class="form-element search-element" value="80" id="player_age_to" name="age_to"/>
+					<label class="form-label search-label"><?php echo $this->translate('Age: ')?><span id="age-rangeval">17 - 29</span></label>
+					<input type="hidden" class="form-element search-element" value="17" id="player_age_from" name="age_from"/>
+					<input type="hidden" class="form-element search-element" value="29" id="player_age_to" name="age_to"/>
 					<div id="age-rangeslider"></div>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="player_relation_id"><?php echo $this->translate('Posted by')?></label>
 					<select class="form-element search-element" id="player_relation_id" name="relation_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->relations as $key => $value):?>
 						<option value="<?php echo $key?>"><?php echo $this->translate($value)?></option>
 						<?php endforeach;?>
@@ -136,11 +136,6 @@
 					<input type="hidden" class="form-element search-element" value="5" id="player_rating_to" name="rating_to"/>
 					<div id="rating-rangeslider"></div>
 				</div>
-
-
-
-
-				
 				<button type="submit"><?php echo $this->translate('Search')?></button>
 			</form>
 		</div>
@@ -151,7 +146,7 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="professional_continent"><?php echo $this->translate('Continent')?></label>
 					<select class="form-element search-element continent" id="professional_continent" rel="professional" name="continent">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->continents as $key => $value):?>
 						<option value="<?php echo $key?>"><?php echo $this->translate($value)?></option>
 						<?php endforeach;?>
@@ -160,29 +155,29 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="professional_country"><?php echo $this->translate('Country')?></label>
 					<select class="form-element search-element country_id" rel="professional" id="professional_country" name="country_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="professional_province"><?php echo $this->translate('Province/State')?></label>
 					<select class="form-element search-element province_id" rel="professional" id="professional_province" name="province_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="professional_city"><?php echo $this->translate('City')?></label>
 					<select class="form-element search-element" id="professional_city" name="city_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="professional_keyword"><?php echo $this->translate('Keyword')?></label>
-					<input type="text" class="form-element search-element" id="professional_keyword" name="keyword" />
+					<input type="text" placeholder="<?php echo $this -> translate('keyword...')?>" class="form-element search-element" id="professional_keyword" name="keyword" />
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="professional_displayname"><?php echo $this->translate('Name')?></label>
-					<input type="text" class="form-element search-element" id="professional_displayname" name="displayname" />
+					<input type="text" placeholder="<?php echo $this -> translate('name...')?>" class="form-element search-element" id="professional_displayname" name="displayname" />
 				</div>
 				
 				<!-- <div class="form-wrapper search-wrapper">
@@ -201,17 +196,12 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="professional_service"><?php echo $this->translate('Services Offered')?></label>
 					<select class="form-element search-element" id="professional_service" name="service">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->services as $service):?>
 						<option value="<?php echo $service->service_id?>"><?php echo $this->translate($service->title)?></option>
 						<?php endforeach;?>
 					</select>
 				</div>
-
-
-
-
-				
 				<button type="submit"><?php echo $this->translate('Search')?></button>
 			</form>
 		</div>
@@ -222,7 +212,7 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="organization_continent"><?php echo $this->translate('Continent')?></label>
 					<select class="form-element search-element continent" id="organization_continent" rel="organization" name="continent">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->continents as $key => $value):?>
 						<option value="<?php echo $key?>"><?php echo $this->translate($value)?></option>
 						<?php endforeach;?>
@@ -231,33 +221,33 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="organization_country"><?php echo $this->translate('Country')?></label>
 					<select class="form-element search-element country_id" rel="organization" id="organization_country" name="country_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="organization_province"><?php echo $this->translate('Province/State')?></label>
 					<select class="form-element search-element province_id" rel="organization" id="organization_province" name="province_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="organization_city"><?php echo $this->translate('City')?></label>
 					<select class="form-element search-element" id="organization_city" name="city_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="organization_keyword"><?php echo $this->translate('Keyword')?></label>
-					<input type="text" class="form-element search-element" id="organization_keyword" name="keyword" />
+					<input type="text" placeholder="<?php echo $this -> translate('keyword...')?>" class="form-element search-element" id="organization_keyword" name="keyword" />
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="organization_displayname"><?php echo $this->translate('Name')?></label>
-					<input type="text" class="form-element search-element" id="organization_displayname" name="displayname" />
+					<input type="text" placeholder="<?php echo $this -> translate('name...')?>" class="form-element search-element" id="organization_displayname" name="displayname" />
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="organization_sport"><?php echo $this->translate('Sport Type')?></label>
 					<select class="form-element search-element" id="organization_sport" name="sport">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->sports as $key => $value):?>
 						<option value="<?php echo $key?>"><?php echo $value?></option>
 						<?php endforeach;?>
@@ -274,12 +264,6 @@
 						<option value="none_profit"><?php echo $this->translate('Non-for-Profit')?></option>
 					</select>
 				</div> -->
-				
-
-
-
-
-				
 				<button type="submit"><?php echo $this->translate('Search')?></button>
 			</form>
 		</div>
@@ -291,7 +275,7 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="event_continent"><?php echo $this->translate('Continent')?></label>
 					<select class="form-element search-element continent" id="event_continent" rel="event" name="continent">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->continents as $key => $value):?>
 						<option value="<?php echo $key?>"><?php echo $this->translate($value)?></option>
 						<?php endforeach;?>
@@ -301,25 +285,25 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="event_country"><?php echo $this->translate('Country')?></label>
 					<select class="form-element search-element country_id" rel="event" id="event_country" name="country_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="event_province"><?php echo $this->translate('Province/State')?></label>
 					<select class="form-element search-element province_id" rel="event" id="event_province" name="province_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="event_city"><?php echo $this->translate('City')?></label>
 					<select class="form-element search-element" id="event_city" name="city_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="event_keyword"><?php echo $this->translate('Keyword')?></label>
-					<input type="text" class="form-element search-element" id="event_keyword" name="keyword" />
+					<input type="text" placeholder="<?php echo $this -> translate('keyword...')?>" class="form-element search-element" id="event_keyword" name="keyword" />
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="event_type"><?php echo $this->translate('Type')?></label>
@@ -331,15 +315,12 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="event_sport"><?php echo $this->translate('Sport Type')?></label>
 					<select class="form-element search-element" id="event_sport" name="sport">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->sports as $key => $value):?>
 						<option value="<?php echo $key?>"><?php echo $value?></option>
 						<?php endforeach;?>
 					</select>
 				</div>
-
-
-				
 				<button type="submit"><?php echo $this->translate('Search')?></button>
 			</form>
 		</div>
@@ -351,7 +332,7 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="campaign_continent"><?php echo $this->translate('Continent')?></label>
 					<select class="form-element search-element continent" id="campaign_continent" rel="campaign" name="continent">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->continents as $key => $value):?>
 						<option value="<?php echo $key?>"><?php echo $this->translate($value)?></option>
 						<?php endforeach;?>
@@ -360,36 +341,34 @@
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="campaign_country"><?php echo $this->translate('Country')?></label>
 					<select class="form-element search-element country_id" rel="campaign" id="campaign_country" name="country_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="campaign_province"><?php echo $this->translate('Province/State')?></label>
 					<select class="form-element search-element province_id" rel="campaign" id="campaign_province" name="province_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="campaign_city"><?php echo $this->translate('City')?></label>
 					<select class="form-element search-element" id="campaign_city" name="city_id">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="campaign_keyword"><?php echo $this->translate('Keyword')?></label>
-					<input type="text" class="form-element search-element" id="campaign_keyword" name="keyword" />
+					<input type="text" placeholder="<?php echo $this -> translate('keyword...')?>" class="form-element search-element" id="campaign_keyword" name="keyword" />
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="campaign_sport"><?php echo $this->translate('Sport Type')?></label>
 					<select class="form-element search-element" id="campaign_sport" name="sport">
-						<option value="0"></option>
+						<option value="0"><?php echo $this -> translate('any')?></option>
 						<?php foreach ($this->sports as $key => $value):?>
 						<option value="<?php echo $key?>"><?php echo $value?></option>
 						<?php endforeach;?>
 					</select>
 				</div>
-				
-				
 				<button type="submit"><?php echo $this->translate('Search')?></button>
 			</form>
 		</div>
@@ -440,9 +419,8 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 					respone  = $.trim(respone);
 					var option = $('<option />', {
 						'value': '0',
-						'text': ''
+						'text': '<?php echo $this -> translate('any')?>'
 					});
-					console.log(respone);
 	              	if(respone.length > 0) {
 	                	$('#'+type+'_country').empty();
 	                	$('#'+type+'_country').append(option);
@@ -465,7 +443,7 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 					respone  = $.trim(respone);
 					var option = $('<option />', {
 						'value': '0',
-						'text': ''
+						'text': '<?php echo $this -> translate('any')?>'
 					});
 	              	if(respone.length > 0) {
 	                	$('#'+type+'_province').empty();
@@ -489,7 +467,7 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 					respone  = $.trim(respone);
 					var option = $('<option />', {
 						'value': '0',
-						'text': ''
+						'text': '<?php echo $this -> translate('any')?>'
 					});
 	              	if(respone.length > 0) {
 	                	$('#'+type+'_city').empty();
@@ -513,10 +491,10 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 					respone = $.trim(respone);
 					$('#player_position_id').empty();
 					if (respone != "") {
-						$('#player_position_id').html('<option value="0"></option>' + respone);
+						$('#player_position_id').html('<option value="0"><?php echo $this -> translate('any')?></option>' + respone);
 					}
 					else {
-						$('#player_position_id').html('<option value="0"></option>');
+						$('#player_position_id').html('<option value="0"><?php echo $this -> translate('any')?></option>');
 					}
 	  			}
 	  		})
@@ -525,9 +503,9 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 		if ($('#age-rangeslider')) {
 			$('#age-rangeslider').slider({
 			    range: true,
-			    min: 6,
-			    max: 80,
-			    values: [ 6, 80 ],
+			    min: 17,
+			    max: 29,
+			    values: [ 17, 29 ],
 			    slide: function( event, ui ) {
 			      	$('#age-rangeval').html(ui.values[0]+" - "+ui.values[1]);
 			      	$('#player_age_from').val(ui.values[0]);
