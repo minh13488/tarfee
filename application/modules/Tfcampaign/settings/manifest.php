@@ -57,7 +57,7 @@
 				'action' => 'browse',
 			),
 			'reqs' => array(
-	            'action' => '(save|create|browse|view-campaigns)',
+	            'action' => '(save|create|browse)',
 	        )
 		),
 		'tfcampaign_specific' => array(

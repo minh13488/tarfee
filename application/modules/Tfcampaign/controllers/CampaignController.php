@@ -283,7 +283,7 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		$this -> view -> status = true;
 		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('This campaign has been deleted.');
 		return $this -> _forward('success', 'utility', 'core', array(
-			'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'manage'), 'tfcampaign_general', true),
+			'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array(), 'tfcampaign_general', true),
 			'messages' => Array($this -> view -> message)
 		));
 	}

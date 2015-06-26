@@ -2,6 +2,30 @@
 return array(
 	
 	array(
+        'title' => 'Campaign - My saved campaigns',
+        'description' => 'Displays saved campaigns of user.',
+        'category' => 'Campaign',
+        'type' => 'widget',
+        'name' => 'tfcampaign.my-saved-campaigns'
+	),
+	
+	array(
+        'title' => 'Campaign - My campaigns',
+        'description' => 'Displays campaigns which are belong to user.',
+        'category' => 'Campaign',
+        'type' => 'widget',
+        'name' => 'tfcampaign.my-campaigns'
+	),
+	
+	array(
+        'title' => 'Campaign - My submissions',
+        'description' => 'Displays submissions which are belong to user.',
+        'category' => 'Campaign',
+        'type' => 'widget',
+        'name' => 'tfcampaign.my-submissions'
+	),
+	
+	array(
         'title' => 'Campaign - User Profile Campaigns',
         'description' => 'Displays campaign on user profile page.',
         'category' => 'Campaign',

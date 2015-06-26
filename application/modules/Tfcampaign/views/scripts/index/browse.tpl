@@ -298,16 +298,21 @@ jQuery(function ()
 		<?php endif;?>
 		
 		
-		<?php $url = $this -> url(array(
-		    'module' => 'activity',
-		    'controller' => 'index',
-		    'action' => 'share',
-		    'type' => $campaign -> getType(),
-		    'id' => $campaign -> getIdentity(),
-		    ),'default', true)
-		;?>
-		<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('share')?></button></a>
 		
+		<?php if($this -> viewer() -> getIdentity()) :?>
+			<?php $url = $this -> url(array(
+			    'module' => 'activity',
+			    'controller' => 'index',
+			    'action' => 'share',
+			    'type' => $campaign -> getType(),
+			    'id' => $campaign -> getIdentity(),
+			    ),'default', true)
+			;?>
+			
+			<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('share')?></button></a>
+			
+		<?php endif;?>
+				
 		<?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
 			<?php 
 				$submissionIds = $campaign -> getSubmissionByUser($this -> viewer(), $campaign);

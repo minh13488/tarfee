@@ -45,31 +45,10 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 			$params['direction'] = "DESC";
 			$this -> view -> isSort = $isSort;
 		}
-		
 		$this -> view -> paginator = $paginator = Engine_Api::_() -> getItemTable('tfcampaign_campaign') -> getCampaignsPaginator($params);
 		$paginator -> setCurrentPageNumber($this -> _getParam('page', 1));
 		$paginator -> setItemCountPerPage(3);
 		$this -> view -> formValues = $params;
-	}
-	
-	public function viewCampaignsAction(){
-		if (!$this -> _helper -> requireUser -> isValid())
-			return;
-		
-		$viewer = Engine_Api::_() -> user() -> getViewer();
-		$campaignTable = Engine_Api::_() -> getItemTable('tfcampaign_campaign');
-		$saveTable = Engine_Api::_() -> getDbTable('saves', 'tfcampaign');
-		$submissionTable = Engine_Api::_() -> getItemTable('tfcampaign_submission');
-				
-		//get all campaigns user own
-		$this -> view -> ownCampaigns = $ownCampaigns = $campaignTable -> getCampaignsByUser($viewer);
-		
-		//get saved campaigns
-		$this -> view -> saveRows = $saveRows = $saveTable -> getSavedCampaigns($viewer -> getIdentity());
-		
-		//get campaigns that user has submited his players
-		$this -> view -> submitCampaignIds = $submitCampaignIds = $submissionTable -> getCampaignIdsSubmitted($viewer);
-		
 	}
 	
 	public function createAction()
