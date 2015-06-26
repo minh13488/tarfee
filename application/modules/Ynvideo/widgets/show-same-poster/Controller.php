@@ -15,8 +15,11 @@ class Ynvideo_Widget_ShowSamePosterController extends Engine_Content_Widget_Abst
             return $this->setNoRender();
         }        
         $this->view->subject = $subject = Engine_Api::_()->core()->getSubject('video');
-
-        // Set stitle
+		
+        // Set default title
+        if (!$this->getElement()->getTitle()) {
+            $this->getElement()->setTitle('Suggested Videos');
+        }
         $viewer = $subject->getOwner();
 
         // Get tags for this video

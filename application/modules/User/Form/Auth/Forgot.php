@@ -37,6 +37,7 @@ class User_Form_Auth_Forgot extends Engine_Form
       'tabindex' => 1,
     ));
     $this->email->getValidator('EmailAddress')->getHostnameValidator()->setValidateTld(false);
+	$this -> email -> setAttrib('required', true);
     // Init submit
     $this->addElement('Button', 'submit', array(
       'label' => 'Send Email',

@@ -4,15 +4,26 @@
 ?>
 	
 <?php foreach($this -> ratingTypes as $item) :?>
-	<?php echo $this -> translate($item -> title);?>	
-	<div id="video_rating_<?php echo $item -> getIdentity();?>" class="rating" onmouseout="set_rating(<?php echo $item -> getIdentity();?>);">
-        <span id="rate_1_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(1, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(1, <?php echo $item -> getIdentity();?>);"></span>
-        <span id="rate_2_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(2, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(2, <?php echo $item -> getIdentity();?>);"></span>
-        <span id="rate_3_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(3, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(3, <?php echo $item -> getIdentity();?>);"></span>
-        <span id="rate_4_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(4, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(4, <?php echo $item -> getIdentity();?>);"></span>
-        <span id="rate_5_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(5, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(5, <?php echo $item -> getIdentity();?>);"></span>
+    <div class="ynvideo_rating_player">
+    	<?php echo $this -> translate($item -> title);?>	
+    	<div id="video_rating_<?php echo $item -> getIdentity();?>" class="rating" onmouseout="set_rating(<?php echo $item -> getIdentity();?>);">
+            <span id="rate_1_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(1, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(1, <?php echo $item -> getIdentity();?>);">
+            </span>
+
+            <span id="rate_2_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(2, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(2, <?php echo $item -> getIdentity();?>);">
+            </span>
+
+            <span id="rate_3_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(3, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(3, <?php echo $item -> getIdentity();?>);">
+            </span>
+
+            <span id="rate_4_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(4, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(4, <?php echo $item -> getIdentity();?>);">
+            </span>
+
+            <span id="rate_5_<?php echo $item -> getIdentity();?>" class="rating_star_big_generic ynvideo_rating_star_big_generic" onclick="rate(5, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(5, <?php echo $item -> getIdentity();?>);">
+            </span>
+        </div>
+        <input type="hidden" id="review_rating_<?php echo $item -> getIdentity();?>" name="review_rating_<?php echo $item -> getIdentity();?>" />
     </div>
-    <input type="hidden" id="review_rating_<?php echo $item -> getIdentity();?>" name="review_rating_<?php echo $item -> getIdentity();?>" />
 <?php endforeach;?>
 <br />
 

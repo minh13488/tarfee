@@ -6,6 +6,8 @@
 /*
 GLOBAL STYLES, FONTS & RESETS
 */
+
+.display{display: none !important}
 html
 {
 	min-height: 100%;
@@ -4416,7 +4418,7 @@ Shows the mini menu and search widget
 			background-image: url(~/application/themes/ynresponsive-event/images/filter.png);
 			height: 25px;
 			width: 35px;
-			display: block;
+			display: inline-block;
 			background-size: contain;
 			text-indent: -9999px;
 			background-repeat: no-repeat;

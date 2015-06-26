@@ -24,8 +24,7 @@
 		request.send();
   }
 </script>
-</div>
-
+<div style="width: 700px">
 <?php  if(empty($this->is_ajax)) { ?>
 <div class="friends_members_popup">
 	<div class="top">
@@ -135,3 +134,4 @@
 	<button onclick="parent.Smoothbox.close();"><?php echo $this->translate("Close") ?></button>
 </div>
 <?php } ?>
+</div>

@@ -153,7 +153,7 @@ class Ynvideo_FavoriteController extends Core_Controller_Action_Standard {
 		{
 			Engine_Api::_()->ynvideo()->removeVideoFromFavorite($video->getIdentity(), $this->view->viewer->getIdentity());
 		}
-		exit();
+		return $this -> _helper -> json(array('status' => true));
 	}
 	public function addFavoriteAction()
 	{
@@ -191,8 +191,8 @@ class Ynvideo_FavoriteController extends Core_Controller_Action_Standard {
                 $db->rollBack();
                 throw $e;
             }
+			return $this -> _helper -> json(array('status' => true));
         }
-		exit();
 	}
 }
 
