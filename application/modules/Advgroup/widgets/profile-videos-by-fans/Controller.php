@@ -68,7 +68,9 @@ class Advgroup_Widget_ProfileVideosByFansController extends Engine_Content_Widge
 		}
     
     	$this->view->paginator = $paginator = $subject -> getVideosPaginator($params);
-  
+  		if (!$paginator->getTotalItemCount()) {
+  			return $this->setNoRender();
+  		}
   	}
 }
 ?>
