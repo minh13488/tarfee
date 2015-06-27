@@ -3,11 +3,12 @@
   	<input type="text" name="search" value="<?php echo $this -> search?>" placeholder="<?php echo $this -> translate("Searh Talks...")?>"/>
   	<a href="<?php echo $this -> url(array('action' => 'create'), 'blog_general', true)?>"><?php echo $this -> translate("Add Talks")?></a>
   	<h3><?php echo $this -> translate("Filters")?></h3>
-  	<?php $cat_arrays = Engine_Api::_()->getItemTable('blog_category')->getCategoriesAssoc();?>
+  	<?php $cat_arrays = Engine_Api::_()->getItemTable('blog_category')->getCategoriesAssoc();
+  	unset($cat_arrays[0]);?>
   	<span><?php echo $this -> translate("Categories")?></span>
   	<?php foreach($cat_arrays as $key => $value):?>
   		<label><?php echo $value?></label>
-  		<input type="checkbox" name="categories[]" value="<?php echo $value?>" <?php if(in_array($value, $this -> categories)):?>  checked="checked" <?php endif;?>/>
+  		<input type="checkbox" name="categories[]" value="<?php echo $key?>" <?php if(in_array($key, $this -> categories)):?>  checked="checked" <?php endif;?>/>
 	<?php endforeach; ?>
 	<span><?php echo $this -> translate("By author")?></span>
 	<label><?php echo $this -> translate("Professional")?></label>
