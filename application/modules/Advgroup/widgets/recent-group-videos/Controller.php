@@ -41,6 +41,7 @@ class Advgroup_Widget_RecentGroupVideosController extends Engine_Content_Widget_
     $params['orderby'] = 'creation_date';
     $params['page'] = $this->_getParam('page',1);
     $params['limit'] = $max;
+	$params['user_id'] = $subject->user_id;
 	
 	//Get data from table Mappings
 	$tableMapping = Engine_Api::_()->getItemTable('advgroup_mapping');

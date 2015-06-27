@@ -536,3 +536,150 @@ div.ynblog_albumfeatured_info > .ynblog_album_info a
 	color: white;
 }
 
+/*Style Tarfee Talk */
+body#global_page_ynblog-index-listing{
+    #global_wrapper{
+        background-color: #dadada;
+    }
+    .layout_core_content{
+        background: #fff;
+    }
+    .layout_right{
+        width: 320px;
+        margin-left: 15px;
+    }
+    .layout_left{
+        margin-right: 15px;
+    }
+}
+
+.tftalk_searchbox{
+
+    .tftalk_input{
+        display: block;
+        margin-bottom: 10px;
+
+        input {
+            width: 100%;
+            max-width: 100%;
+            border: none;
+            padding: 0.8em !important;
+            border-radius: 5px;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            font-size: 14px;
+            padding-right: 40px !important;
+            background-image: url(~/application/themes/ynresponsive-event/images/icon_search.png);
+            background-position: 96% center;
+            background-repeat: no-repeat;
+
+        }
+    }
+
+    a.tfadd_talk{
+        margin-bottom: 10px;
+        display: block;
+        background-color: $theme_link_color;
+        color: #fff;
+        padding: 10px 15px;
+        font-weight: bold;
+        font-size: 16px;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+
+        i.fa{
+            float: right;
+            position: relative;
+            top: 3px;
+        }
+
+        &:hover{
+            color: #fff;
+            background-color: $theme_link_color_hover;
+        }
+    }
+    .tffilter_box{
+        background-color: #fff;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        border-radius: 5px;
+
+        .ybo_headline{
+            margin-bottom: 0;
+            border-bottom: 1px solid $theme_border_medium_color;
+            border-bottom-right-radius: 0px;
+            border-bottom-left-radius: 0px;
+            position: relative;
+        }
+
+        .tffilter_categorires, 
+        .tffilter_author{
+            padding: 10px;
+            border-bottom: 1px solid $theme_border_medium_color;
+            overflow: hidden;
+
+            & > div{
+                clear: both;
+                margin-bottom: 4px;
+                overflow: hidden;
+
+                input{
+                    float: right;
+                }
+                label{
+                    float: left;
+                    font-size: 13px;
+                }
+            }
+        }
+        .tffilter_author{
+            padding: 10px;
+            border-bottom: none;
+
+            button{
+                display: block;
+                background-color: $theme_link_color;
+                color: #fff;
+                padding: 5px 10px;
+                font-weight: bold;
+                font-size: 13px;
+                border-radius: 5px;
+                -webkit-border-radius: 5px;
+                -moz-border-radius: 5px;
+                width: 100%;
+                
+                &:hover{
+                    color: #fff;
+                    background-color: $theme_link_color_hover;
+                }
+            }
+        }
+    }
+    h5.tffilter_title{
+        margin: 0;
+        padding: 0;
+        font-weight: bold;
+        font-size: 15px;
+        border-bottom: 1px solid #e9e9e9;
+        position: relative;
+        padding-bottom: 10px;
+        margin-bottom: 15px;
+
+        &:after{
+            content: "";
+            height: 15px;
+            width: 15px;
+            display: block;
+            background: #fff;
+            border-bottom: 1px solid #e9e9e9;
+            position: absolute;
+            bottom: -8px;
+            left: 30px;
+            -ms-transform: rotate(45deg);
+            -webkit-transform: rotate(45deg);
+            transform: rotate(45deg);
+            border-right: 1px solid #e9e9e9;
+        }
+    }
+}
