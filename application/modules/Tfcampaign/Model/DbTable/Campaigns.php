@@ -79,12 +79,20 @@ class Tfcampaign_Model_DbTable_Campaigns extends Engine_Db_Table {
     	
 		if (isset($params['from_age']) && $params['from_age'] != '') 
     	{
-    		$select->where('campaign.from_age >= ?', $params['from_age']);
+			if(is_numeric($params['from_age'])) {
+				$select->where('campaign.from_age >= '.$params['from_age']);			
+			} else {
+				$select -> where("1 = 0");
+			}
     	}
 
 		if (isset($params['to_age']) && $params['to_age'] != '') 
     	{
-    		$select->where('campaign.to_age <= ?', $params['to_age']);
+			if(is_numeric($params['to_age'])) {
+				$select->where('campaign.to_age <= '.$params['to_age']);
+			} else {
+				$select -> where("1 = 0");
+			}
     	}
 		
 		$sysTimezone = date_default_timezone_get();

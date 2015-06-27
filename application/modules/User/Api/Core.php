@@ -802,12 +802,17 @@ class User_Api_Core extends Core_Api_Abstract
   }
 	
 	public function canTransfer($item = null) {
+		$viewer = Engine_Api::_()->user()->getViewer();
 		if (is_null($item)) {
-			$viewer = Engine_Api::_()->user()->getViewer();
 			if (!$viewer->getIdentity()) return false;
 			$club = $viewer->getClub();
 			if ($club) return true;
 			else return false;
+		}
+		else {
+			if (!$item->isOwner($viewer)) {
+				return false;
+			}
 		}
 		if (!empty($item->parent_type)) {
 			$parentType = $item->parent_type;

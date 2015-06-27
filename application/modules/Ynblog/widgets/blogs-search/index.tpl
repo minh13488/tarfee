@@ -9,7 +9,8 @@
           	<div class="ybo_headline"><h3><?php echo $this -> translate("Filters")?></h3></div>
             
             <div class="tffilter_categorires">
-              	<?php $cat_arrays = Engine_Api::_()->getItemTable('blog_category')->getCategoriesAssoc();?>
+      	         <?php $cat_arrays = Engine_Api::_()->getItemTable('blog_category')->getCategoriesAssoc();
+                    unset($cat_arrays[0]);?>
               	<h5 class="tffilter_title"><?php echo $this -> translate("Categories")?></h5>
               	<?php foreach($cat_arrays as $key => $value):?>
                     <div>
@@ -44,9 +45,7 @@
             </div>
         </div>
     </form>
-
 </div>
-
 <script type="text/javascript">
  var pageAction =function(page){
     $('page').value = page;
