@@ -657,37 +657,36 @@ array(
     'name' => 'advgroup.sub-groups',
     'isPaginated' => true,
 ),
- array(
-    'title' => 'Group Profile Videos',
-    'description' => 'Displays a list of videos that are recently posted on the group.',
-    'category' => 'Advanced Groups',
-    'type' => 'widget',
-    'name' => 'advgroup.recent-group-videos',
-    'isPaginated' => true,
-    'defaultParams' => array(
-      'title' => 'Profile Videos',
-      'titleCount' => true,
-    ),
-    'requirements' => array(
-      'subject' => 'group',
-    ),
-    'adminForm' => array(
-       'elements' => array(
-            array(
-                  'Text',
-                  'marginLeft',
-                  array(
-                      'label' => 'Margin left of each video',
-                      'value' => '26',
-                      'validators' => array(
-                          array('Int', true),
-                          array('GreaterThan', true, array(0)),
-                      )
-                  )
-           ),
-       ),
-    ),
-  ),
+
+ 	array(
+    	'title' => 'Club Profile Videos',
+    	'description' => 'Displays a list of videos that are recently posted by owner on the club.',
+    	'category' => 'Club',
+    	'type' => 'widget',
+    	'name' => 'advgroup.recent-group-videos',
+    	'isPaginated' => true,
+    	'defaultParams' => array(
+      		'title' => 'Videos',
+    	),
+    	'requirements' => array(
+      		'subject' => 'group',
+    	),
+  	),
+  	
+	array(
+    	'title' => 'Club Videos By Fans',
+    	'description' => 'Displays a list of videos that are recently posted by fans on the club.',
+    	'category' => 'Club',
+    	'type' => 'widget',
+    	'name' => 'advgroup.profile-videos-by-fans',
+    	'isPaginated' => true,
+    	'defaultParams' => array(
+      		'title' => 'By Fans',
+    	),
+    	'requirements' => array(
+      		'subject' => 'group',
+    	),
+  	),
   
   array(
                 'title' => 'Advanced Group Profile Slideshow Photos',
