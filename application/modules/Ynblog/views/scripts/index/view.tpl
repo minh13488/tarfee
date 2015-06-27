@@ -71,7 +71,7 @@ white-space: normal;
 </span>
 
 <!-- favourite-->
-<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this->blog->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this->blog->getGuid()),'default', true);?>
 <a href="javascript:;" onclick="openPopup('<?php echo $url?>')"><i class="fa fa-flag"></i> <?php echo $this->translate("Report")?></a>
 </div>
 
