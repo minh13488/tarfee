@@ -28,6 +28,24 @@ class User_Model_DbTable_Playercards extends Engine_Db_Table
 	    return $paginator;
 	}
 	
+	public function getClubPlayersPaginator($club) {
+		$select = $this -> select();
+		$select -> where('parent_id = ?', $club->getIdentity())
+				-> where('parent_type = ?', 'group')
+				-> order('creation_date DESC');
+				
+		$paginator = Zend_Paginator::factory($select);
+	    if( !empty($params['page']) )
+	    {
+	      $paginator->setCurrentPageNumber($params['page']);
+	    }
+	    if( !empty($params['limit']) )
+	    {
+	      $paginator->setItemCountPerPage($params['limit']);
+	    }
+	    return $paginator;
+	}
+	
 	public function getAllPlayerCard($user_id) {
 		$select = $this -> select();
 		$select -> where('user_id = ?', $user_id)
