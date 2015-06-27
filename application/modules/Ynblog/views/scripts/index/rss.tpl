@@ -2,12 +2,12 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <channel>
         <title>
-              <?php echo $this->translate('Blogs'); ?>
+              <?php echo $this->translate('Talks'); ?>
               &#187;
               <?php echo $this->pro_type_name ?>
         </title>
         <description>
-              <?php echo $this->translate('RSS Blogs');?>
+              <?php echo $this->translate('RSS Talks');?>
         </description>
         <link>
               <?php echo "http://".$_SERVER['HTTP_HOST'].$this->url(array('action' => 'listing'), 'blog_general');?>

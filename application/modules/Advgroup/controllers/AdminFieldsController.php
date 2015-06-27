@@ -19,10 +19,10 @@
 
     if($form){
       $display = $form->getElement('display');
-      $display->setLabel('Show on group page?');
+      $display->setLabel('Show on club page?');
       $display->setOptions(array('multiOptions' => array(
-          1 => 'Show on group page',
-          0 => 'Hide on group page'
+          1 => 'Show on club page',
+          0 => 'Hide on club page'
         )));
     }
   }
@@ -35,10 +35,10 @@
     if($form){
 //      $form->setTitle('Edit Group Question');
       $display = $form->getElement('display');
-      $display->setLabel('Show on group page?');
+      $display->setLabel('Show on club page?');
       $display->setOptions(array('multiOptions' => array(
-          1 => 'Show on group page',
-          0 => 'Hide on group page'
+          1 => 'Show on club page',
+          0 => 'Hide on club page'
         )));
     }
   }

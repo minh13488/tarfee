@@ -1,8 +1,8 @@
 <form method="post" class="global_form_popup" action="<?php echo $this->url(array()) ?>">
   <div>
-    <h3><?php echo $this->translate("Delete Group?") ?></h3>
+    <h3><?php echo $this->translate("Delete Club?") ?></h3>
     <p>
-      <?php echo $this->translate("Are you sure that you want to delete this group? It will not be recoverable after being deleted.") ?>
+      <?php echo $this->translate("Are you sure that you want to delete this club? It will not be recoverable after being deleted.") ?>
     </p>
     <br />
     <p>

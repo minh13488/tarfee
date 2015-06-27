@@ -78,6 +78,10 @@ class User_Model_DbTable_Mappings extends Engine_Db_Table
 		$ids = $this -> getItemIdsMapping('video', $mappings_p);
 		if (!empty($ids) && count($ids) > 0) {
             $select->where('video_id IN (?)', $ids);
+            
+			if (!empty($params['user_only'])) {
+				 $select->where('parent_type <> ?', 'group');
+			}
         }
 		else {
 			$select->where('video_id = 0');

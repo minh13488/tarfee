@@ -162,7 +162,54 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
     
     return $params;
   }
+  
+  public function getTrialExpirationDate($rel = null)
+  {
+    if( null === $rel ) {
+      $rel = time();
+    }
 
+    // If it's a one-time payment or a free package with no duration, there
+    // is no expiration
+    if( ($this->isOneTime() || $this->isFree()) && !$this->hasDuration() ) {
+      return false;
+    }
+    
+    // If this is a free or one-time package, the expiration is based on the 
+    // duration, otherwise the expirations is based on the recurrence
+   $interval = $this->trial_duration;
+   $interval_type = 'day';
+
+    // This is weird, it should have been handled by the statement at the top
+    if( $interval == 'forever' ) {
+      return false;
+    }
+    
+    // Calculate when the next payment should be due
+    switch( $interval_type ) {
+      case 'day':
+        $part = Zend_Date::DAY;
+        break;
+      case 'week':
+        $part = Zend_Date::WEEK;
+        break;
+      case 'month':
+        $part = Zend_Date::MONTH;
+        break;
+      case 'year':
+        $part = Zend_Date::YEAR;
+        break;
+      default:
+        throw new Engine_Payment_Exception('Invalid recurrence_type');
+        break;
+    }
+
+    $relDate = new Zend_Date($rel);
+    $relDate->add((int) $interval, $part);
+
+    return $relDate->toValue();
+  }
+  
   public function getExpirationDate($rel = null)
   {
     if( null === $rel ) {
@@ -309,9 +356,9 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
   	  $referCode = null;
   	  if(isset($_SESSION['ref_code']))
 	  	$referCode = $_SESSION['ref_code'];
-	  $isEnabled = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1);
-	  $discount = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_discount', 0);
-	  $period = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_trial ', 0);
+	  $isEnabled = Engine_Api::_()->getApi('settings', 'core')->getSetting('user_referral_enable', 1);
+	  $period = Engine_Api::_()->getApi('settings', 'core')->getSetting('user_referral_trial', 0);
+	  $discount = $this -> discount;
 	  $now =  date("Y-m-d H:i:s");
 	  
 	  $invite = null;

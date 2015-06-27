@@ -697,3 +697,15 @@ Please login to the admin panel to aprovie this user.
 [message]
 
 [footer]"
+
+# user_email_trial_confirm
+"_EMAIL_USER_EMAIL_TRIAL_CONFIRM_TITLE";"Trial Plan Confirmation"
+"_EMAIL_USER_EMAIL_TRIAL_CONFIRM_DESCRIPTION";"This is the email that gets sent when user choose to use trial plan."
+"_EMAIL_USER_EMAIL_TRIAL_CONFIRM_SUBJECT";"Trial Plan Confirmation"
+"_EMAIL_USER_EMAIL_TRIAL_CONFIRM_BODY";"[header]
+
+You are using trial of [plan].
+Please confirm by clicking the link below:
+[link]
+
+[footer]"

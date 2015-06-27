@@ -12,12 +12,12 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
 
     // Element: view
     $this->addElement('Radio', 'view', array(
-      'label' => 'Allow Viewing of Groups?',
+      'label' => 'Allow Viewing of Clubs?',
       'description' => 'GROUP_FORM_ADMIN_LEVEL_VIEW_DESCRIPTION',
       'multiOptions' => array(
-        2 => 'Yes, allow members to view all groups, even private ones.',
-        1 => 'Yes, allow viewing and subscription of groups.',
-        0 => 'No, do not allow groups to be viewed.',
+        2 => 'Yes, allow members to view all clubs, even private ones.',
+        1 => 'Yes, allow viewing and subscription of clubs.',
+        0 => 'No, do not allow clubs to be viewed.',
       ),
       'value' => ( $this->isModerator() ? 2 : 1 ),
     ));
@@ -27,11 +27,11 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
 
     if($this->isModerator()){
          $this->addElement('Radio', 'announcement', array(
-        'label' => 'Allow  to manage Announcements of Groups?',
-        'description' => 'Do you want to allow this user level to manage announcements of all groups?',
+        'label' => 'Allow  to manage Announcements of Clubs?',
+        'description' => 'Do you want to allow this user level to manage announcements of all clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow to manage announcemnents of all groups.',
-          0 => 'No, do not allow to manage announcemnents of any groups.',
+          1 => 'Yes, allow to manage announcemnents of all clubs.',
+          0 => 'No, do not allow to manage announcemnents of any clubs.',
         ),
         'value' => 0,
       ));
@@ -39,11 +39,11 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
 
     if($this->isModerator()){
          $this->addElement('Radio', 'invitation', array(
-        'label' => 'Allow  to manage Invitations of Groups?',
-        'description' => 'Do you want to allow this user level to manage invitations of all groups?',
+        'label' => 'Allow  to manage Invitations of Clubs?',
+        'description' => 'Do you want to allow this user level to manage invitations of all clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow to manage invitations of all groups.',
-          0 => 'No, do not allow to manage invitations of any groups.',
+          1 => 'Yes, allow to manage invitations of all clubs.',
+          0 => 'No, do not allow to manage invitations of any clubs.',
         ),
         'value' => 0,
       ));
@@ -53,18 +53,18 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
 
       // Element: create
       $this->addElement('Radio', 'create', array(
-        'label' => 'Allow Creation of Groups?',
+        'label' => 'Allow Creation of Clubs?',
         'description' => 'GROUP_FORM_ADMIN_LEVEL_CREATE_DESCRIPTION',
         'multiOptions' => array(
-          1 => 'Yes, allow creation of groups.',
-          0 => 'No, do not allow groups to be created.',
+          1 => 'Yes, allow creation of clubs.',
+          0 => 'No, do not allow clubs to be created.',
         ),
         'value' => 1,
       ));
 
       $this->addElement('Text', 'numberSubgroup', array(
-        'label' => 'Number of Sub Groups per Group',
-        'description' => 'How many sub groups that an user can create in a group? (Enter a number between 1 and 10)',
+        'label' => 'Number of Sub Clubs per Club',
+        'description' => 'How many sub clubs that an user can create in a club? (Enter a number between 1 and 10)',
         'allowEmpty' =>false,
         'validators' => array(
             array('Int',true),
@@ -74,12 +74,12 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
        
       // Element: edit
       $this->addElement('Radio', 'edit', array(
-        'label' => 'Allow Editing of Groups?',
-        'description' => 'Do you want to let users edit groups?',
+        'label' => 'Allow Editing of Clubs?',
+        'description' => 'Do you want to let users edit clubs?',
         'multiOptions' => array(
-          2 => 'Yes, allow members to edit everyone\'s groups.',
-          1 => 'Yes, allow  members to edit their own groups.',
-          0 => 'No, do not allow groups to be edited.',
+          2 => 'Yes, allow members to edit everyone\'s clubs.',
+          1 => 'Yes, allow  members to edit their own clubs.',
+          0 => 'No, do not allow clubs to be edited.',
         ),
         'value' => ( $this->isModerator() ? 2 : 1 ),
       ));
@@ -89,12 +89,12 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
 
       // Element: delete
       $this->addElement('Radio', 'delete', array(
-        'label' => 'Allow Deletion of Groups?',
-        'description' => 'Do you want to let members delete groups? If set to no, some other settings on this page may not apply.',
+        'label' => 'Allow Deletion of Clubs?',
+        'description' => 'Do you want to let members delete clubs? If set to no, some other settings on this page may not apply.',
         'multiOptions' => array(
-          2 => 'Yes, allow members to delete all groups.',
-          1 => 'Yes, allow members to delete their own groups.',
-          0 => 'No, do not allow members to delete their groups.',
+          2 => 'Yes, allow members to delete all clubs.',
+          1 => 'Yes, allow members to delete their own clubs.',
+          0 => 'No, do not allow members to delete their clubs.',
         ),
         'value' => ( $this->isModerator() ? 2 : 1 ),
       ));
@@ -104,12 +104,12 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
 
       // Element: comment
       $this->addElement('Radio', 'comment', array(
-        'label' => 'Allow Commenting on Groups?',
-        'description' => 'Do you want to let members of this level comment on groups?',
+        'label' => 'Allow Commenting on Clubs?',
+        'description' => 'Do you want to let members of this level comment on clubs?',
         'multiOptions' => array(
-          2 => 'Yes, allow members to comment on all groups, including private ones.',
-          1 => 'Yes, allow members to comment on groups.',
-          0 => 'No, do not allow members to comment on groups.',
+          2 => 'Yes, allow members to comment on all clubs, including private ones.',
+          1 => 'Yes, allow members to comment on clubs.',
+          0 => 'No, do not allow members to comment on clubs.',
         ),
         'value' => ( $this->isModerator() ? 2 : 1 ),
       ));
@@ -119,11 +119,11 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
 
       //Allow Upload photo
        $this->addElement('Radio', 'photo', array(
-        'label' => 'Allow Upload Photo on Groups?',
-        'description' => 'Do you want to let members of this level upload photo on groups?',
+        'label' => 'Allow Upload Photo on Clubs?',
+        'description' => 'Do you want to let members of this level upload photo on clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow members to upload photo on groups.',
-          0 => 'No, do not allow members to upload photo on groups.',
+          1 => 'Yes, allow members to upload photo on clubs.',
+          0 => 'No, do not allow members to upload photo on clubs.',
         ),
         'value' => 1,
       ));
@@ -139,17 +139,17 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
        ));
       //Allow Create Album
        $this->addElement('Radio', 'album', array(
-        'label' => 'Allow Create Photo Albums on Groups?',
-        'description' => 'Do you want to let members of this level create photo albums on groups?',
+        'label' => 'Allow Create Photo Albums on Clubs?',
+        'description' => 'Do you want to let members of this level create photo albums on clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow members to create photo albums on groups.',
-          0 => 'No, do not allow members to create photo albums on groups.',
+          1 => 'Yes, allow members to create photo albums on clubs.',
+          0 => 'No, do not allow members to create photo albums on clubs.',
         ),
         'value' => 1,
       ));
       $this->addElement('Text', 'numberAlbum', array(
-        'label' => 'Number of Albums per Group',
-        'description' => 'How many Albums that a user can create in a group? (Enter a number between 0 and 999, 0 means unlimited)',
+        'label' => 'Number of Albums per Club',
+        'description' => 'How many Albums that a user can create in a club? (Enter a number between 0 and 999, 0 means unlimited)',
         'allowEmpty' => false,
         'validators' => array(
             array('Int',true),
@@ -159,84 +159,84 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
 
       //Allow Create Poll
       $this->addElement('Radio', 'poll', array(
-        'label' => 'Allow Create Polls on Groups?',
-        'description' => 'Do you want to let members of this level create polls on groups?',
+        'label' => 'Allow Create Polls on Clubs?',
+        'description' => 'Do you want to let members of this level create polls on clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow members to create polls on groups.',
-          0 => 'No, do not allow members to create polls on groups.',
+          1 => 'Yes, allow members to create polls on clubs.',
+          0 => 'No, do not allow members to create polls on clubs.',
         ),
         'value' => 1,
       ));
 
-      //Allow Create Sub Group
+      //Allow Create Sub Club
       $this->addElement('Radio', 'sub_group', array(
-        'label' => 'Allow Create Sub Groups on Groups?',
-        'description' => 'Do you want to let members of this level create sub groups on groups?',
+        'label' => 'Allow Create Sub Clubs on Clubs?',
+        'description' => 'Do you want to let members of this level create sub clubs on clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow members to create sub groups on groups.',
-          0 => 'No, do not allow members to create sub groups on groups.',
+          1 => 'Yes, allow members to create sub clubs on clubs.',
+          0 => 'No, do not allow members to create sub clubs on clubs.',
         ),
         'value' => 1,
       ));
       
       //Allow Create Video
       $this->addElement('Radio', 'video', array(
-        'label' => 'Allow Create Videos on Groups?',
-        'description' => 'Do you want to let members of this level create videos on groups?',
+        'label' => 'Allow Create Videos on Clubs?',
+        'description' => 'Do you want to let members of this level create videos on clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow members to create videos on groups.',
-          0 => 'No, do not allow members to create videos on groups.',
+          1 => 'Yes, allow members to create videos on clubs.',
+          0 => 'No, do not allow members to create videos on clubs.',
         ),
         'value' => 1,
       ));
 
       //Allow Create Wiki Page
       $this->addElement('Radio', 'wiki', array(
-        'label' => 'Allow Create Wiki Pages on Groups?',
-        'description' => 'Do you want to let members of this level create wiki pages on groups?',
+        'label' => 'Allow Create Wiki Pages on Clubs?',
+        'description' => 'Do you want to let members of this level create wiki pages on clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow members to create wiki pages on groups.',
-          0 => 'No, do not allow members to create wiki pages on groups.',
+          1 => 'Yes, allow members to create wiki pages on clubs.',
+          0 => 'No, do not allow members to create wiki pages on clubs.',
         ),
         'value' => 1,
       ));
       
       //Allow Create Music Page
       $this->addElement('Radio', 'music', array(
-        'label' => 'Allow Create Music Pages on Groups?',
-        'description' => 'Do you want to let members of this level create music pages on groups?',
+        'label' => 'Allow Create Music Pages on Clubs?',
+        'description' => 'Do you want to let members of this level create music pages on clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow members to create music pages on groups.',
-          0 => 'No, do not allow members to create music pages on groups.',
+          1 => 'Yes, allow members to create music pages on clubs.',
+          0 => 'No, do not allow members to create music pages on clubs.',
         ),
         'value' => 1,
       ));
       
        //Allow Create Folder Page
       $this->addElement('Radio', 'folder', array(
-        'label' => 'Allow Create Folder Pages on Groups?',
-        'description' => 'Do you want to let members of this level create folder pages on groups?',
+        'label' => 'Allow Create Folder Pages on Clubs?',
+        'description' => 'Do you want to let members of this level create folder pages on clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow members to create folder pages on groups.',
-          0 => 'No, do not allow members to create folder pages on groups.',
+          1 => 'Yes, allow members to create folder pages on clubs.',
+          0 => 'No, do not allow members to create folder pages on clubs.',
         ),
         'value' => 1,
       ));
       
       //Allow Create Listing Page
       $this->addElement('Radio', 'listing', array(
-        'label' => 'Allow Create Listing Pages on Groups?',
-        'description' => 'Do you want to let members of this level create listing pages on groups?',
+        'label' => 'Allow Create Listing Pages on Clubs?',
+        'description' => 'Do you want to let members of this level create listing pages on clubs?',
         'multiOptions' => array(
-          1 => 'Yes, allow members to create listing pages on groups.',
-          0 => 'No, do not allow members to create listing pages on groups.',
+          1 => 'Yes, allow members to create listing pages on clubs.',
+          0 => 'No, do not allow members to create listing pages on clubs.',
         ),
         'value' => 1,
       ));
       
       // Element: auth_view
       $this->addElement('MultiCheckbox', 'auth_view', array(
-        'label' => 'Group Privacy',
+        'label' => 'Club Privacy',
         'description' => 'GROUP_FORM_ADMIN_LEVEL_AUTHVIEW_DESCRIPTION',
         'multiOptions' => array(
           'everyone' => 'Everyone',
@@ -249,7 +249,7 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
 
       // Element: auth_comment
       $this->addElement('MultiCheckbox', 'auth_comment', array(
-        'label' => 'Group Posting Options',
+        'label' => 'Club Posting Options',
         'description' => 'GROUP_FORM_ADMIN_LEVEL_AUTHCOMMENT_DESCRIPTION',
         'multiOptions' => array(
           'registered' => 'Registered Members',
@@ -295,9 +295,9 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
         )
       ));
 
-      // Element: auth_sub_group
+      // Element: auth_sub_Club
       $this->addElement('MultiCheckbox', 'auth_sub_group', array(
-        'label' => 'Sub Group Creation Options',
+        'label' => 'Sub Club Creation Options',
         'description' => 'GROUP_FORM_ADMIN_LEVEL_AUTHSUBGROUP_DESCRIPTION',
         'multiOptions' => array(
           'registered' => 'Registered Members',
@@ -393,11 +393,11 @@ class Advgroup_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_
       
       // Element: style
       $this->addElement('Radio', 'style', array(
-        'label' => 'Allow Group Style',
+        'label' => 'Allow Club Style',
         'required' => true,
         'multiOptions' => array(
-          1 => 'Yes, allow custom group styles.',
-          0 => 'No, do not allow custom group styles.'
+          1 => 'Yes, allow custom club styles.',
+          0 => 'No, do not allow custom club styles.'
         ),
         'value' => 1,
       ));

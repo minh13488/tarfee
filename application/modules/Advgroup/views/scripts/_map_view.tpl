@@ -21,7 +21,7 @@ if($this->datas != '[]'):?>
 	    	center: center
   	  	};
   	  	
-	  	map = new google.maps.Map(document.getElementById('layout_advgroup_list_most_items-map-canvas'),mapOptions);
+	  	map = new google.maps.Map(document.getElementById('layout_adv_list_most_items-map-canvas'),mapOptions);
       
       	for (var i = 0; i < neighborhoods.length; i++) {
       		addMarker(i);
@@ -51,7 +51,7 @@ if($this->datas != '[]'):?>
 <?php else:?>
 	<div class="tip">
         <span>
-            <?php echo $this->translate("There are no group view on this map") ?>
+            <?php echo $this->translate("There are no club view on this map") ?>
         </span>
     </div>
 <?php endif;?>

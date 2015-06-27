@@ -888,4 +888,16 @@ class Advgroup_Model_Group extends Core_Model_Item_Abstract
 	public function getSportId() {
 		return $this->sportcategory_id;
 	}
+	
+	public function getCountry() {
+		return Engine_Api::_()->getItem('user_location', $this->country_id);
+	}
+	
+	public function getProvince() {
+		return Engine_Api::_()->getItem('user_location', $this->province_id);
+	}
+	
+	public function getCity() {
+		return Engine_Api::_()->getItem('user_location', $this->city_id);
+	}
 }

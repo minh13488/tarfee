@@ -3,8 +3,8 @@ class Advgroup_Form_Member_Accept extends Engine_Form
 {
   public function init()
   {
-    $this->setTitle('Accept Group Invitation')
-      ->setDescription('Would you like to join this group?')
+    $this->setTitle('Accept Club Invitation')
+      ->setDescription('Would you like to join this club?')
       ->setMethod('POST')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()))
       ;
@@ -12,7 +12,7 @@ class Advgroup_Form_Member_Accept extends Engine_Form
     //$this->addElement('Hash', 'token');
 
     $this->addElement('Button', 'submit', array(
-      'label' => 'Join Group',
+      'label' => 'Join Club',
       'ignore' => true,
       'decorators' => array('ViewHelper'),
       'type' => 'submit'

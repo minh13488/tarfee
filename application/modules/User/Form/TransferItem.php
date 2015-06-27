@@ -14,7 +14,7 @@ class User_Form_TransferItem extends Engine_Form {
   	
 	$item = $this->getItem();
 	$view = Zend_Registry::get('Zend_View');
-	$label = ($item->parent_type == 'user') ? $view->translate('club') : $view->translate('user profile');
+	$label = ($item->parent_type != 'group') ? $view->translate('club') : $view->translate('user profile');
 	$title = $view->translate('Transfer item to %s', $label);
 	$description = $view->translate('Are you sure you want to transfer this item to %s ?', $label);
     $this

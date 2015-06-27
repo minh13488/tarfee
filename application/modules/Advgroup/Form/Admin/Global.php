@@ -9,8 +9,8 @@ class Advgroup_Form_Admin_Global extends Engine_Form
 
      // Number of group per page
     $this->addElement('Text', 'advgroup_page', array(
-      'label' => 'Groups Per Page',
-      'description' => 'How many groups will be shown per page? (Enter a number between 1 and 999)',
+      'label' => 'Clubs Per Page',
+      'description' => 'How many clubs will be shown per page? (Enter a number between 1 and 999)',
       'allowEmpty' => false,
       'validators' => array(
             array('Int',true),
@@ -21,7 +21,7 @@ class Advgroup_Form_Admin_Global extends Engine_Form
 
       $this->addElement('Text', 'pollmaxoptions', array(
         'label' => 'Maximum Poll Options',
-        'description' => 'How many possible poll answers do you want to permit in a group? (Enter a number between 1 and 100)',
+        'description' => 'How many possible poll answers do you want to permit in a club? (Enter a number between 1 and 100)',
         'allowEmpty' => false,
         'validators' => array(
             array('Int',true),
@@ -32,17 +32,17 @@ class Advgroup_Form_Admin_Global extends Engine_Form
 
        $this->addElement('Radio','pollcanchangevote',array(
         'label' =>'Change Poll Vote?',
-        'description'=>'Do you want to permit the group members to change their poll vote in their group?.',
+        'description'=>'Do you want to permit the club members to change their poll vote in their club?.',
         'multiOptions' =>array(
-            1 => 'Yes, group members can change their vote.',
-            0 => 'No, group members cannot change their vote.',
+            1 => 'Yes, club members can change their vote.',
+            0 => 'No, club members cannot change their vote.',
         ),
         'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('advgroup.pollcanchangevote', 1),
             ));
 		
 		
 		$this->addElement('Text', 'advgrouptime', array(
-        'label' =>'Period time since new group since the created date',
+        'label' =>'Period time since new club since the created date',
         'allowEmpty' => false,
 	    'validators' => array(
 	            array('Int',true),

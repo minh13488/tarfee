@@ -54,7 +54,6 @@ class Payment_Form_Admin_Package_Edit extends Payment_Form_Admin_Package_Create
         ;
  * 
  */
-    $this->removeElement('trial_duration');
 
     // Change the submit label
     $this->getElement('execute')->setLabel('Edit Plan');

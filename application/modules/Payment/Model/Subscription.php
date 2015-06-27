@@ -183,6 +183,47 @@ class Payment_Model_Subscription extends Core_Model_Item_Abstract
     return (bool) $this->_statusChanged;
   }
   
+  public function onTrialPaymentSuccess()
+  {
+    $this->_statusChanged = false;
+    if( in_array($this->status, array('initial', 'trial', 'pending', 'active')) ) {
+
+      // If the subscription is in initial or pending, set as active and
+      // cancel any other active subscriptions
+      if( in_array($this->status, array('initial', 'pending')) ) {
+        $this->setActive(true);
+        Engine_Api::_()->getDbtable('subscriptions', 'payment')
+          ->cancelAll($this->getUser(), 'User cancelled the membership.', $this);
+      }
+      
+      // Update expiration to expiration + recurrence or to now + recurrence?
+      $package = $this->getPackage();
+      $expiration = $package->getTrialExpirationDate();
+      if( $expiration ) {
+        $this->expiration_date = date('Y-m-d H:i:s', $expiration);
+      }
+      
+      // Change status
+      if( $this->status != 'active' ) {
+        $this->status = 'active';
+        $this->_statusChanged = true;
+      }
+
+      // Update user if active
+      if( $this->active ) {
+        $this->upgradeUser();
+      }
+    }
+    $this->save();
+
+    // Check if the member should be enabled
+    $user = $this->getUser();
+    $user->enabled = true; // This will get set correctly in the update hook
+    $user->save();
+
+    return $this;
+  }
+  
   public function onPaymentSuccess()
   {
     $this->_statusChanged = false;
@@ -223,7 +264,7 @@ class Payment_Model_Subscription extends Core_Model_Item_Abstract
 
     return $this;
   }
-
+  
   public function onPaymentPending()
   {
     $this->_statusChanged = false;

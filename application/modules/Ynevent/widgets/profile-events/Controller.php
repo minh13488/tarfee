@@ -25,7 +25,7 @@ class Ynevent_Widget_ProfileEventsController extends Engine_Content_Widget_Abstr
 
     // Get paginator
     $membership = Engine_Api::_()->getDbtable('membership', 'ynevent');
-    $this->view->paginator = $paginator = Zend_Paginator::factory($membership->getMembershipsOfSelect($subject) -> where('type_id = ?', $type) ->order('starttime DESC'));
+    $this->view->paginator = $paginator = Zend_Paginator::factory($membership->getMembershipsOfSelect($subject) -> where('parent_type = ?', 'user') -> where('type_id = ?', $type) ->order('starttime DESC'));
 
     // Set item count per page and current page number
     $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 5));

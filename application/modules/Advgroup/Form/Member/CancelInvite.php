@@ -10,7 +10,7 @@ class Advgroup_Form_Member_CancelInvite extends Engine_Form
   {
     $this
       ->setTitle('Cancel Invitation')
-      ->setDescription('Would you like to cancel your invitation for member(s) in this group?')
+      ->setDescription('Would you like to cancel your invitation for member(s) in this club?')
       ->setMethod('POST')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()));
 

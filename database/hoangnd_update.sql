@@ -310,3 +310,6 @@ ALTER TABLE `engine4_user_playercards` ADD `parent_id` INT(11) NOT NULL ;
 ALTER TABLE `engine4_blog_blogs` ADD `parent_type` VARCHAR(128) NOT NULL DEFAULT 'user' ;
 ALTER TABLE `engine4_blog_blogs` ADD `parent_id` INT(11) NOT NULL ;
 
+ALTER TABLE `engine4_group_groups` ADD `country_id` INT(11) NOT NULL DEFAULT '0' ;
+ALTER TABLE `engine4_group_groups` ADD `province_id` INT(11) NOT NULL DEFAULT '0' ;
+ALTER TABLE `engine4_group_groups` ADD `city_id` INT(11) NOT NULL DEFAULT '0' ;

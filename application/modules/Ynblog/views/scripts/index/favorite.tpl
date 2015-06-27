@@ -10,10 +10,11 @@
 </div>
 
 <div class='layout_middle'>
+	<h3><?php echo $this -> translate("My Favorite Talks")?></h3>
   <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
     <ul class="ynblogs_browse">
       <?php foreach( $this->paginator as $item ): ?>
-        <li>
+        <li id="tftalk_favorite_<?php echo $item -> getIdentity()?>">
           <div class='ynblogs_browse_photo'>
             <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'thumb.icon')) ?>
           </div>
@@ -67,7 +68,7 @@
 
 </div>
 <script type="text/javascript">
-	function unfavourite_blog(blogId)
+   function unfavourite_blog(blogId)
    {
    	   var url = '<?php echo $this -> url(array('action' => 'un-favorite-ajax'), 'blog_general', true)?>';
        var request = new Request.JSON({
@@ -78,8 +79,7 @@
             },
             'onComplete':function(responseObject)
             {  
-                obj = document.getElementById('favourite_id');
-                obj.innerHTML = '<a href="javascript:;" onclick="favourite_blog()">' + '<i class="fa fa-heart-o"></i> <?php echo $this->translate("Favorite")?>' + '</a>';
+                $('tftalk_favorite_' + blogId).destroy();
             }
         });
         request.send();  

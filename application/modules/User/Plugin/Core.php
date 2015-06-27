@@ -292,7 +292,7 @@ class User_Plugin_Core
 		$item = Engine_Api::_()->getItem($payload -> getType(), $payload -> getIdentity());
 		$user = Engine_Api::_()->user()->getViewer();
 		$club = $user->getClub();
-		if (Engine_Api::_()->user()->canTransfer($item) && in_array($payload -> getType(), $availableType)) {
+		if (in_array($payload -> getType(), $availableType) && Engine_Api::_()->user()->canTransfer($item) && ($item->parent_type != 'group')) {
 			$item->parent_type = 'group';
 			$item->parent_id = $club->getIdentity();
 			$item->save();

@@ -22,34 +22,34 @@
 			<?php if(in_array('recent', $this -> tab_enabled)):?>
             <li class="active">
             	<a href="javascript:;" rel="tab_groups_newest" >
-					<?php echo $this->translate('Newest Groups');?>	
+					<?php echo $this->translate('Newest Clubs');?>	
 				</a>
             </li>
 			<?php endif;?>
 			
-			<!-- Popular Groups -->
+			<!-- Popular Clubs -->
 			<?php if(in_array('popular', $this -> tab_enabled)):?>
 			<li>
 				<a href="javascript:;" rel="tab_groups_popular">
-					<?php echo $this->translate('Popular Groups');?>
+					<?php echo $this->translate('Popular Clubs');?>
 				</a>
 			</li>
 			<?php endif;?>
 			
-            <!-- Active Groups -->
+            <!-- Active Clubs -->
             <?php if(in_array('active', $this -> tab_enabled)):?>
 			<li>
 				<a href="javascript:;" rel="tab_groups_active">
-					<?php echo $this->translate('Active Groups');?>
+					<?php echo $this->translate('Active Clubs');?>
 				</a>
 			</li>
 			<?php endif;?>
 			
-			<!-- Directories Groups -->
+			<!-- Directories Clubs -->
 			<?php if(in_array('directory', $this -> tab_enabled)):?>
 			<li>
 				<a href="javascript:;" rel="tab_groups_directories">
-					<?php echo $this->translate('Groups Directories');?>
+					<?php echo $this->translate('Clubs Directories');?>
 				</a>
 			</li>
 			<?php endif;?>
@@ -93,7 +93,7 @@
 	
     <div id="advgroup_list_item_content" class="advgroup-tabs-content ynclearfix">
     	<?php if(in_array('recent', $this -> tab_enabled)):?>
-		<!-- Newest Groups Tab Content-->
+		<!-- Newest Clubs Tab Content-->
 		<div id="tab_groups_newest" class="tabcontent" style="display: block;">
 			<!-- Static Content -->
 			<ul class="generic_list_widget groups_browse">

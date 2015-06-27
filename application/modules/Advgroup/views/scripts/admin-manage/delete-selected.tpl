@@ -3,9 +3,9 @@
   <?php if ($this->ids):?>
   <form method="post">
     <div>
-      <h3><?php echo $this->translate("Delete the selected group(s)?") ?></h3>
+      <h3><?php echo $this->translate("Delete the selected club(s)?") ?></h3>
       <p>
-        <?php echo $this->translate("Are you sure that you want to delete the %d group(s)? It will not be recoverable after being deleted.", $this->count) ?>
+        <?php echo $this->translate("Are you sure that you want to delete the %d club(s)? It will not be recoverable after being deleted.", $this->count) ?>
       </p>
       <br />
       <p>
@@ -21,9 +21,9 @@
   <?php else: ?>
   <form>
     <div>
-      <h3><?php echo $this->translate("Delete the selected group(s)?") ?></h3>
+      <h3><?php echo $this->translate("Delete the selected club(s)?") ?></h3>
       <p>
-        <?php echo $this->translate("Please select a group to delete.") ?>
+        <?php echo $this->translate("Please select a club to delete.") ?>
       </p>
       <br/>
       <a href="<?php echo $this->url(array('action' => 'index')) ?>" class="buttonlink icon_back">

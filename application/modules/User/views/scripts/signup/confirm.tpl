@@ -30,5 +30,5 @@
 <br />
 
 <h3>
-  <a href="<?php echo $this -> url(array('controller' => 'edit', 'action' => 'profile', 'id' => $this -> $viewer_id ), 'user_extended', true);?>"><?php echo $this->translate("OK, thanks!") ?></a>
+  <a href="<?php echo $this -> url(array('controller' => 'edit', 'action' => 'profile', 'id' => $this -> viewer_id ), 'user_extended', true);?>"><?php echo $this->translate("OK, thanks!") ?></a>
 </h3>

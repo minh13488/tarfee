@@ -41,11 +41,11 @@
   <?php echo $this->itemPhoto($this->notification->getObject(), 'thumb.icon') ?>
   <div>
     <div>
-      <?php echo $this->translate('%1$s has invited you to the group %2$s', $this->htmlLink($this->notification->getSubject()->getHref(), $this->notification->getSubject()->getTitle()), $this->htmlLink($this->notification->getObject()->getHref(), $this->notification->getObject()->getTitle())); ?>
+      <?php echo $this->translate('%1$s has invited you to the club %2$s', $this->htmlLink($this->notification->getSubject()->getHref(), $this->notification->getSubject()->getTitle()), $this->htmlLink($this->notification->getObject()->getHref(), $this->notification->getObject()->getTitle())); ?>
     </div>
     <div>
       <button type="submit" onclick='groupWidgetRequestSend("accept", <?php echo $this->string()->escapeJavascript($this->notification->getObject()->getIdentity()) ?>, <?php echo $this->notification->notification_id ?>)'>
-        <?php echo $this->translate('Join Group');?>
+        <?php echo $this->translate('Join Club');?>
       </button>
       <?php echo $this->translate('or');?>
       <a href="javascript:void(0);" onclick='groupWidgetRequestSend("reject", <?php echo $this->string()->escapeJavascript($this->notification->getObject()->getIdentity()) ?>, <?php echo $this->notification->notification_id ?>)'>

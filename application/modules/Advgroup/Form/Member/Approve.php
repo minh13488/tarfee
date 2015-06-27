@@ -11,8 +11,8 @@ class Advgroup_Form_Member_Approve extends Engine_Form
   public function init()
   {
     $this
-      ->setTitle('Approve Group Membership Request')
-      ->setDescription('Would you like to approve the request(s) for membership in this group?')
+      ->setTitle('Approve Club Membership Request')
+      ->setDescription('Would you like to approve the request(s) for membership in this club?')
       ->setMethod('POST')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()));
 

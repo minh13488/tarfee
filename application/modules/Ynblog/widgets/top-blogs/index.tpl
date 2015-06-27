@@ -1,5 +1,4 @@
 <ul class="generic_list_widget" style="overflow: hidden;">
-  <?php if(count($this->blogs) > 0):?>
   <?php foreach( $this->blogs as $item ):?>
   	  	<?php if ($item->checkPermission($item->getIdentity())) :?>
     <li class="ynblog_new">
@@ -19,26 +18,18 @@
                     <?php echo $this->timestamp($item->creation_date); ?>
               </div>
               <div class="description">
-                    <?php echo $item->getDescription(); ?>
+                    <?php echo $this -> viewMore($item -> body); ?>
               </div>
+              <div class="ynblog_statistics">
+		          	<span><?php echo $this->translate(array('%s view','%s views', $item -> view_count), $item -> view_count)?></span>
+		          	<span><?php echo $this->translate(array('%s comment','%s comments', $item -> comment_count), $item -> comment_count)?></span>
+		        	<?php $likeCount = $item ->likes()->getLikeCount(); ?>
+		        	<span><?php echo $this->translate(array('%s like','%s likes', $likeCount), $likeCount)?></span>
+		        	<?php $disLikeCount = Engine_Api::_()->getDbtable('dislikes', 'yncomment') -> getDislikeCount($item); ?>
+		        	<span><?php echo $this->translate(array('%s dislike','%s dislikes', $disLikeCount), $disLikeCount)?></span>
+	          </div>
           </div>
     </li>
         <?php endif; ?>
    <?php endforeach; ?>
-   <?php if(count($this->blogs) == $this->limit): ?>
-       <li>
-          <div class="more" style="float:right;margin-left:15px;margin-bottom: 10px;">
-              <a href="<?php echo $this->url(array(),'default'); ?>talks/listing/sort/recent" >
-                <?php echo $this->translate('View all');?>
-              </a>
-          </div>
-        </li>
-  <?php endif; ?>
-  <?php else:?>
-      <div class="tip">
-          <span>
-                 <?php echo $this->translate('There are no top blogs.');?>
-          </span>
-      </div>
-<?php endif;?>
 </ul>

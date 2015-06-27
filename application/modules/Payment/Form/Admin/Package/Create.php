@@ -120,23 +120,25 @@ class Payment_Form_Admin_Package_Create extends Engine_Form
     ));
     //unset($this->getElement('duration')->options['day']);
     
-    // Element: trial_duration
-    /*
-    $this->addElement('Duration', 'trial_duration', array(
+    $this->addElement('Text', 'trial_duration', array(
       'label' => 'Trial Duration',
-      'description' => 'NOT YET IMPLEMENTED. Please note that the way ' .
-          'payment gateways implement this varies. PayPal implements this ' .
-          'exactly, however 2Checkout uses a negative startup fee. For ' .
-          '2Checkout, you must use a multiple of your billing ' .
-          'cycle.',
+      'description' => 'by days',
       'validators' => array(
         array('Int', true),
         new Engine_Validate_AtLeast(0),
       ),
-      'value' => array('0', 'forever'),
+      'value' => '0',
     ));
-     * 
-     */
+	
+	$this->addElement('Text', 'discount', array(
+      'label' => 'Discount',
+      'description' => 'by percentage',
+      'validators' => array(
+        array('Int', true),
+        new Engine_Validate_AtLeast(0),
+      ),
+      'value' => '0',
+    ));
     
     // Element: enabled
     $this->addElement('Radio', 'enabled', array(

@@ -133,7 +133,7 @@ return array(
         'action' => 'browse'
       ),
       'reqs' => array(
-        'action' => '(home|browse|render-section|get-my-location|upload-photo|sublocations|get-continent|suggest-group|save-preferred-clubs|get-view-preferred-clubs|suggest-user|save-basic|get-countries|suggest-user-block|block-users|in-mail|transfer-item)',
+        'action' => '(confirm-trial|using-trial|home|browse|render-section|get-my-location|upload-photo|sublocations|get-continent|suggest-group|save-preferred-clubs|get-view-preferred-clubs|suggest-user|save-basic|get-countries|suggest-user-block|block-users|in-mail|transfer-item)',
       )
     ),
 	
@@ -150,7 +150,6 @@ return array(
       'defaults' => array(
         'module' => 'user',
         'controller' => 'library',
-        'action' => 'create-sub-library'
       ),
       'reqs' => array(
         'action' => '(create-sub-library|edit|delete|move-to-sub|move-to-main|move-to-player)',
