@@ -19,6 +19,21 @@
             </div>
 
         </div>
+        
+        <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($event)) :?>
+		<div>
+			<?php
+				echo $this->htmlLink(array(
+		            'route' => 'user_general',
+		            'action' => 'transfer-item',
+					'subject' => $event -> getGuid(),
+		        ), '<i class="fa fa-exchange"></i>', array(
+		            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to club')
+		        ));
+			?>
+		</div>
+		<?php endif;?>
+		
         <div class="ynevents_members">
             <?php echo '<i class="fa fa-user"></i> &nbsp;&nbsp;'.$this->translate(array('%s guest', '%s guests', $event->member_count),$this->locale()->toNumber($event->member_count)) ?>
         </div>
