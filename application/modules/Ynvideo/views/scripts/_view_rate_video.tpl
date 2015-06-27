@@ -3,6 +3,7 @@
 ?>
 	
 <?php foreach($this -> ratingTypes as $item) :?>
+  <div class="ynvideo_rating_player">
 	<?php echo $this -> translate($item -> title);?>	
 	<div id="video_rating_<?php echo $item -> getIdentity();?>" class="rating">
         <span id="rate_1_<?php echo $item -> getIdentity();?>" class="fa fa-star"></span>
@@ -12,6 +13,7 @@
         <span id="rate_5_<?php echo $item -> getIdentity();?>" class="fa fa-star "></span>
     </div>
     <input type="hidden" id="review_rating_<?php echo $item -> getIdentity();?>" name="review_rating_<?php echo $item -> getIdentity();?>" />
+  </div>
 <?php endforeach;?>
 <br />
 
