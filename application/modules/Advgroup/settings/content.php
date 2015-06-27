@@ -392,6 +392,19 @@ return array(
       'subject' => 'group',
     ),
   ),
+  
+  array(
+    'title' => 'Club Profile Info',
+    'description' => 'Displays a club\'s info on its profile.',
+    'category' => 'Club',
+    'type' => 'widget',
+    'name' => 'advgroup.profile-info-club',
+    'requirements' => array(
+      'subject' => 'group',
+    ),
+  ),
+  
+  
    array(
     'title' => 'Group Profile Members',
     'description' => 'Displays a group\'s members on its profile.',
