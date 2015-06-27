@@ -1,7 +1,7 @@
 <div>
   <form id="filter_form" action="" method="post">
   	<input type="text" name="search" value="<?php echo $this -> search?>" placeholder="<?php echo $this -> translate("Searh Talks...")?>"/>
-  	<a href="<?php $this -> url(array('action' => 'create'), 'blog_general', true)?>"><?php echo $this -> translate("Add Talks")?></a>
+  	<a href="<?php echo $this -> url(array('action' => 'create'), 'blog_general', true)?>"><?php echo $this -> translate("Add Talks")?></a>
   	<h3><?php echo $this -> translate("Filters")?></h3>
   	<?php $cat_arrays = Engine_Api::_()->getItemTable('blog_category')->getCategoriesAssoc();?>
   	<span><?php echo $this -> translate("Categories")?></span>
