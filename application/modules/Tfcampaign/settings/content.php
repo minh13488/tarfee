@@ -2,6 +2,14 @@
 return array(
 	
 	array(
+        'title' => 'Campaign - Filter campaigns',
+        'description' => 'Displays filter campaigns in home page.',
+        'category' => 'Campaign',
+        'type' => 'widget',
+        'name' => 'tfcampaign.filter-campaigns'
+	),
+	
+	array(
         'title' => 'Campaign - My saved campaigns',
         'description' => 'Displays saved campaigns of user.',
         'category' => 'Campaign',
