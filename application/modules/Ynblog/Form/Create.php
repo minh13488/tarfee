@@ -37,11 +37,12 @@ class Ynblog_Form_Create extends Engine_Form
     ));
     $this->tags->getDecorator("Description")->setOption("placement", "append");
 	
+	/*
 	$this->addElement('File', 'photo', array(
       'label' => 'Profile Photo'
     ));
     $this->photo->addValidator('Extension', false, 'jpg,png,gif,jpeg');
-    
+    */
     // Category field
     $cat_array = Engine_Api::_()->getItemTable('blog_category')->getCategoriesAssoc();
     $this->addElement('Select', 'category_id', array(
