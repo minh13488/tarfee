@@ -1,73 +1,4 @@
-<script type="text/javascript">
-    en4.core.runonce.add(function(){
-        var anchor = $('players').getParent();
-        $('players_previous').style.display = '<?php echo ( $this->paginator->getCurrentPageNumber() == 1 ? 'none' : '' ) ?>';
-        $('players_next').style.display = '<?php echo ( $this->paginator->count() == $this->paginator->getCurrentPageNumber() ? 'none' : '' ) ?>';
-
-        $('players_previous').removeEvents('click').addEvent('click', function(){
-            en4.core.request.send(new Request.HTML({
-                url : en4.core.baseUrl + 'widget/index/content_id/' + <?php echo sprintf('%d', $this->identity) ?>,
-                data : {
-                    format : 'html',
-                    subject : en4.core.subject.guid,
-                    page : <?php echo sprintf('%d', $this->paginator->getCurrentPageNumber() - 1) ?>
-                }
-            }), {
-                'element' : anchor
-            })
-        });
-
-        $('players_next').removeEvents('click').addEvent('click', function(){
-            en4.core.request.send(new Request.HTML({
-                url : en4.core.baseUrl + 'widget/index/content_id/' + <?php echo sprintf('%d', $this->identity) ?>,
-                data : {
-                    format : 'html',
-                    subject : en4.core.subject.guid,
-                    page : <?php echo sprintf('%d', $this->paginator->getCurrentPageNumber() + 1) ?>
-                }
-            }), {
-                'element' : anchor
-            })
-        });
-    });
-</script>
 <div class="player_contents">
-	<div class="tarfee-profile-module-header">
-	    <!-- Menu Bar -->
-	    <?php
-	    if($this -> viewer() -> getIdentity()):
-			 $max_player_card = Engine_Api::_()->authorization()->getPermission($this -> viewer(), 'user_playercard', 'max_player_card', 5);
-	         if($max_player_card == "")
-	         {
-	            $mtable  = Engine_Api::_()->getDbtable('permissions', 'authorization');
-	             $maselect = $mtable->select()
-	                ->where("type = 'user_playercard'")
-	                ->where("level_id = ?",$this -> viewer() -> level_id)
-	                ->where("name = 'max_player_card'");
-	              $mallow_a = $mtable->fetchRow($maselect);          
-	              if (!empty($mallow_a))
-	                $max_player_card = $mallow_a['value'];
-	              else
-	                 $max_player_card = 5;
-	         }
-		    
-			if($this->paginator->getTotalItemCount() < $max_player_card && $this -> viewer() -> isSelf($this -> subject())):
-		    ?>
-		    <div class="tarfee-profile-header-right">
-		        <?php echo $this->htmlLink(array(
-		            'route' => 'user_extended',
-		            'controller' => 'player-card',
-		            'action' => 'create',
-		            'tab' => 724,
-		        ), '<i class="fa fa-plus-square fa-lg"></i>&nbsp;&nbsp;'.$this->translate('add new player card'), array(
-		            'class' => ''
-		        ))
-		        ?>
-		    </div>    
-		    <?php endif;?>  
-		<?php endif;?>
-	</div>
-	
 	<div class="tarfee_list" id="players">
 	    <!-- Content -->
 	    <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
@@ -135,7 +66,7 @@
 									            'action' => 'transfer-item',
 			    								'subject' => $player -> getGuid(),
 									        ), '<i class="fa fa-exchange"></i>', array(
-									            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to club')
+									            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to user profile')
 									        ));
 										?>
 									</li>
@@ -335,20 +266,6 @@
         	<?php endforeach; ?>             
 	    </ul>  
 	    
-	    <div class="players-paginator">
-	        <div id="players_previous" class="paginator_previous">
-	            <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Previous'), array(
-	              'onclick' => '',
-	              'class' => 'buttonlink icon_previous'
-	            )); ?>
-	        </div>
-	        <div id="players_next" class="paginator_next">
-	            <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Next'), array(
-	              'onclick' => '',
-	              'class' => 'buttonlink_right icon_next'
-	            )); ?>
-	        </div>
-	    </div>
 	   
 	    <?php else: ?>
 	    <div class="tip">

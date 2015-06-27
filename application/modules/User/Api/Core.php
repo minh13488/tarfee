@@ -767,4 +767,46 @@ class User_Api_Core extends Core_Api_Abstract
       ));
     }
   }
+	
+	public function canTransfer($item) {
+		if (!empty($item->parent_type)) {
+			$parentType = $item->parent_type;
+			$user = Engine_Api::_()->getItem('user', $item->user_id);
+			if ($parentType == 'group') {
+				if ($user) {
+					return true;
+				}
+			}
+			else if ($parentType == 'user') {
+				$club = $user->getClub();
+				if ($club) return true;
+			}
+		}
+		return false;
+	}
+	
+	public function transfer($item) {
+		if (!empty($item->parent_type)) {
+			$parentType = $item->parent_type;
+			$user = Engine_Api::_()->getItem('user', $item->user_id);
+			if ($parentType == 'group') {
+				if ($user) {
+					$item->parent_type = 'user';
+					$item->parent_id = $user->getIdentity();
+					$item->save();
+					return true;
+				}
+			}
+			else if ($parentType == 'user') {
+				$club = $user->getClub();
+				if ($club) {
+					$item->parent_type = 'group';
+					$item->parent_id = $club->getIdentity();
+					$item->save();
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 }

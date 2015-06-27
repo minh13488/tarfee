@@ -287,6 +287,17 @@ class User_Plugin_Core
 		}
         if(!$request)
             { return;}
+			
+		$availableType = array('user_playercard', 'video', 'event', 'tfcampaign_campaign', 'blog');
+		$item = Engine_Api::_()->getItem($payload -> getType(), $payload -> getIdentity());
+		$user = Engine_Api::_()->user()->getViewer();
+		$club = $user->getClub();
+		if (Engine_Api::_()->user()->canTransfer($item) && in_array($payload -> getType(), $availableType)) {
+			$item->parent_type = 'group';
+			$item->parent_id = $club->getIdentity();
+			$item->save();
+		}
+		
 		$table = Engine_Api::_() -> getDbTable('mappings', 'user');
 			
 			$subject_id = $library_id =  $request -> getParam("subject_id", null);

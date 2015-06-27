@@ -1,5 +1,5 @@
 <ul class = "video-items" id="players-of-week">
-<?php foreach( $this->results as $row): ?>
+<?php foreach( $this->videos as $row): ?>
 	<li class="video-item">
 		<?php
         		echo $this->partial('_players_of_week.tpl', 'ynvideo', array(

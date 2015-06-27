@@ -43,6 +43,15 @@ return array(
 	),
 	
 	array(
+        'title' => 'Campaign - Club Profile Campaigns',
+        'description' => 'Displays campaign on club profile page.',
+        'category' => 'Campaign',
+        'type' => 'widget',
+        'isPaginated' => true,
+        'name' => 'tfcampaign.club-profile-campaign'
+	),
+	
+	array(
         'title' => 'Campaign - Profile Player Fulfill Info',
         'description' => 'Displays Suggest Info for users to fulfill the campaign info on Campaign Detail page',
         'category' => 'Campaign',

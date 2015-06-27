@@ -303,6 +303,21 @@ return array(
     ),
   ),
   
+  	array(
+    	'title' => 'Club Profile Players',
+    	'description' => 'Displays club players on club profile.',
+    	'category' => 'User',
+    	'type' => 'widget',
+    	'name' => 'user.club-profile-players',
+    	'isPaginated' => true,
+    	'defaultParams' => array(
+      		'title' => 'Players',
+    	),
+    	'requirements' => array(
+      		'subject' => 'group',
+    	),
+  	),
+  
 	//HOANGND widget for render profile sections
   	array(
         'title' => 'Profile Sections',

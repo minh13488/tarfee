@@ -25,6 +25,7 @@ class Ynblog_Widget_ProfileBlogsController extends Engine_Content_Widget_Abstrac
                                       'is_approved' => '1',
                                       'visible' => '1',
                                       'user_id' =>  $subject->getIdentity(),
+                                      
                                 ));
     $paginator->setCurrentPageNumber(1);
 	$this -> view -> items_per_page = $this->_getParam('itemCountPerPage', 5);

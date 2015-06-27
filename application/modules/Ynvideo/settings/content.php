@@ -480,31 +480,24 @@ return array(
     ),
     
 	array(
-        'title' => 'Player of the Week',
+        'title' => 'Players of the Week/Day',
         'description' => 'Displays a list of top talent videos.',
         'category' => 'Advanced Videos',
         'type' => 'widget',
         'name' => 'ynvideo.players-of-week',
         'defaultParams' => array(
-            'title' => 'Players of the Week',
-            'numberOfVideos' => 5
+            'title' => 'Players of the Week/Day',
+            'numberOfVideos' => 5,
+            'weekDay' => 'sunday',
+            'dayHour' => 0,
+            'share_internal' => 2,
+            'like' => 3,
+            'comment' => 2,
+            'view' => 1,
+            'dislike' => -1,
+            'unsure' => 0
         ),
-        'adminForm' => array(
-            'elements' => array(
-                array(
-                    'Text',
-                    'numberOfVideos',
-                    array(
-                        'label' => 'Number of videos',
-                        'value' => '5',
-                        'validators' => array(
-                            array('Int', true),
-                            array('GreaterThan', true, array(0)),
-                        )
-                    )
-                ),
-            )
-        )
+        'adminForm' => 'Ynvideo_Form_Admin_Widget_PlayersOfWeek'
     ),
 )
 ?>

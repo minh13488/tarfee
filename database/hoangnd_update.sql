@@ -290,3 +290,23 @@ CREATE TABLE IF NOT EXISTS `engine4_user_inviterequests` (
   `creation_date` datetime NOT NULL,	
   PRIMARY KEY (`inviterequest_id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE `engine4_core_likes` ADD `date` DATETIME NOT NULL ;
+
+CREATE TABLE IF NOT EXISTS `engine4_ynvideo_views` (
+  `view_id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `video_id` varchar(128) NOT NULL,
+  `user_id` int(11) unsigned NOT NULL,
+  `creation_date` datetime NOT NULL,	
+  PRIMARY KEY (`view_id`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+ALTER TABLE `engine4_tfcampaign_campaigns` ADD `parent_type` VARCHAR(128) NOT NULL DEFAULT 'user' ;
+ALTER TABLE `engine4_tfcampaign_campaigns` ADD `parent_id` INT(11) NOT NULL ;
+
+ALTER TABLE `engine4_user_playercards` ADD `parent_type` VARCHAR(128) NOT NULL DEFAULT 'user' ;
+ALTER TABLE `engine4_user_playercards` ADD `parent_id` INT(11) NOT NULL ;
+
+ALTER TABLE `engine4_blog_blogs` ADD `parent_type` VARCHAR(128) NOT NULL DEFAULT 'user' ;
+ALTER TABLE `engine4_blog_blogs` ADD `parent_id` INT(11) NOT NULL ;
+

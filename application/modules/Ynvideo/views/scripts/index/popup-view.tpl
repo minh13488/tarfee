@@ -62,9 +62,9 @@ endif;
 	                $('rating_text').innerHTML = "<?php echo $this->translate('click to rate'); ?>";
 	                for(var x=1; x<=5; x++) {
 	                    if(x <= rating) {
-	                        $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
+	                        $('rate_'+x).set('class', 'fa fa-star');
 	                    } else {
-	                        $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	                        $('rate_'+x).set('class', 'fa fa-star-o');
 	                    }
 	                }
 	            }
@@ -79,7 +79,7 @@ endif;
 	            else {
 	                for(var x=1; x<=5; x++) 
 	                {
-	                    $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	                    $('rate_'+x).set('class', 'fa fa-star-o');
 	                }
 	            }
 	        }
@@ -88,17 +88,17 @@ endif;
 	            var rating = pre_rate;
 	            $('rating_text').innerHTML = en4.core.language.translate(['%s rating', '%s ratings', total_votes], total_votes);
 	            for(var x=1; x<=parseInt(rating); x++) {
-	                $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big');
+	                $('rate_'+x).set('class', 'fa fa-star');
 	            }
 	
 	            for(var x=parseInt(rating)+1; x<=5; x++) {
-	                $('rate_'+x).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_disabled');
+	                $('rate_'+x).set('class', 'fa fa-star-o');
 	            }
 	
 	            var remainder = Math.round(rating)-rating;
 	            if (remainder <= 0.5 && remainder !=0){
 	                var last = parseInt(rating)+1;
-	                $('rate_'+last).set('class', 'ynvideo_rating_star_big_generic ynvideo_rating_star_big_half');
+	                $('rate_'+last).set('class', 'fa-star-half-o');
 	            }
 	        }
 	
@@ -137,6 +137,7 @@ endif;
 </script>
 
 <div style="width: 1170px;">
+	<div class="ynvideo_popup_close"><i class="fa fa-times"></i></div>
 	<div class="ynvideo_video_view_headline">
         <div class="ynvideo_author">
             <?php echo $this->translate('Posted by') ?>
@@ -264,11 +265,11 @@ endif;
 		            
 		            <?php if($this -> video -> parent_type != "user_playercard") :?>
 		             <div id="video_rating" class="rating ynvideo_rating" onmouseout="rating_out();">
-		                <span id="rate_1" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(1);"<?php endif; ?> onmouseover="rating_over(1);"></span>
-		                <span id="rate_2" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(2);"<?php endif; ?> onmouseover="rating_over(2);"></span>
-		                <span id="rate_3" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(3);"<?php endif; ?> onmouseover="rating_over(3);"></span>
-		                <span id="rate_4" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(4);"<?php endif; ?> onmouseover="rating_over(4);"></span>
-		                <span id="rate_5" class="rating_star_big_generic ynvideo_rating_star_big_generic" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(5);"<?php endif; ?> onmouseover="rating_over(5);"></span>
+		                <span id="rate_1" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(1);"<?php endif; ?> onmouseover="rating_over(1);"></span>
+		                <span id="rate_2" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(2);"<?php endif; ?> onmouseover="rating_over(2);"></span>
+		                <span id="rate_3" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(3);"<?php endif; ?> onmouseover="rating_over(3);"></span>
+		                <span id="rate_4" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(4);"<?php endif; ?> onmouseover="rating_over(4);"></span>
+		                <span id="rate_5" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(5);"<?php endif; ?> onmouseover="rating_over(5);"></span>
 		                <span id="rating_text" class="rating_text ynvideo_rating_text"><?php echo $this->translate('click to rate'); ?></span>
 		            </div>
 		            
@@ -279,6 +280,9 @@ endif;
 			            <?php if($this -> viewer() -> getIdentity() 
 			            		&& $this -> video -> canAddRatings()
 			            		&& $this -> video -> parent_type == "user_playercard") :?>
+							
+							<?php echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video)); ?>
+
 				            <?php 
 				    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
 								$rating_types = $tableRatingType -> getAllRatingTypes();
@@ -290,8 +294,10 @@ endif;
 						<?php endif ?>
 						<!-- if player video -->
 						<?php if( $this -> video -> parent_type == "user_playercard"):?>
+
 							<!-- view ratings for user not in professional and club-->
 							<?php if($this -> viewer() -> getIdentity() && !$this -> video -> canAddRatings()) :?>
+								<?php echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video)); ?>
 							<?php 
 				    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
 								$rating_types = $tableRatingType -> getAllRatingTypes();
@@ -303,6 +309,8 @@ endif;
 							<?php endif;?>
 							<!-- view ratings for guest-->
 							<?php if(!$this -> viewer() -> getIdentity()):?>
+								<?php echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video)); ?>
+
 								<?php 
 					    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
 									$rating_types = $tableRatingType -> getAllRatingTypes();
@@ -356,12 +364,16 @@ endif;
 	    </div>
 	    
 	    <div class="ynvideo_popup_right">
-	    	<div class="suggest_videos">
-	    		<?php echo $this->content()->renderWidget('ynvideo.show-same-poster'); ?>
-	    	</div>
+	    	<!-- <div class="suggest_videos" style="display: none">
+	    		<?php //echo $this->content()->renderWidget('ynvideo.show-same-poster'); ?>
+	    	</div> -->
 	    	<div class="related_videos">
 	    	<?php echo $this->content()->renderWidget('ynvideo.show-same-categories'); ?>
 	    	</div>
 	    </div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$$('.ynvideo_popup_close').addEvent('click',function(){parent.Smoothbox.close()});	
+</script>

@@ -3,9 +3,22 @@ class Tfcampaign_Model_DbTable_Campaigns extends Engine_Db_Table {
 	
 	protected $_rowClass = 'Tfcampaign_Model_Campaign';
 	
-	public function getCampaignsByUser($user, $limit = null) {
+	public function getCampaignsByUser($user, $limit = null, $onlyUser = false) {
 		$select = $this -> select();
 		$select -> where('user_id = ?', $user -> getIdentity())
+				-> where('deleted <> ?', '1');
+		if(isset($limit))
+			$select -> limit($limit);
+		if ($onlyUser) {
+			$select->where('parent_type = ?', 'user');
+		}
+		return $this -> fetchAll($select);
+	}
+	
+	public function getCampaignsByClub($club, $limit = null) {
+		$select = $this -> select();
+		$select -> where('parent_id = ?', $club -> getIdentity())
+				-> where('parent_type = ?', 'group')
 				-> where('deleted <> ?', '1');
 		if(isset($limit))
 			$select -> limit($limit);
