@@ -304,6 +304,7 @@ img#compose-yncomment-photo-loading-image {
 }
 .layout_yncomment_comments .yncomment_replies {
 	display: inherit;
+	min-height: 200px;
 }
 .yncomment_replies_child form {
 	border-radius: 4px;
