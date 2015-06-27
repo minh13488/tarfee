@@ -60,7 +60,8 @@ white-space: normal;
  <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
  <script type="text/javascript" src="<?php echo $protocol?>s7.addthis.com/js/250/addthis_widget.js#pubid=<?php echo Engine_Api::_()->getApi('settings', 'core')->getSetting('ynblog.pubid');?>"></script>
  <!-- Add-This Button END -->
- 
+ <br>
+<div class="ynblogs_browse_options">
 <span class="blog_favorite" id = "favourite_id">
 	<?php if(!$this -> blog -> checkFavourite()):?>
 		<a href="javascript:;" onclick="favourite_blog()"><i class="fa fa-heart-o"></i> <?php echo $this -> translate("Favourite") ?></a>
@@ -68,10 +69,11 @@ white-space: normal;
 		<a href="javascript:;" onclick="unfavourite_blog()"><i class="fa fa-heart"></i> <?php echo $this->translate('Unfavourite')?></a>
 	<?php endif;?>
 </span>
-&nbsp;&middot;&nbsp;
+
 <!-- favourite-->
 <?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this->blog->getGuid(), 'format' => 'smoothbox'),'default', true);?>
 <a href="javascript:;" onclick="openPopup('<?php echo $url?>')"><i class="fa fa-flag"></i> <?php echo $this->translate("Report")?></a>
+</div>
 
 <script type="text/javascript">
 	function openPopup(url)

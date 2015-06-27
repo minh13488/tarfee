@@ -10,20 +10,30 @@
          if($item->authorization()->isAllowed(null,'view')):
   ?>
     <li>
-      <div class ="ynblog_entry_owner_photo">
-        <?php echo $this->htmlLink($item->getOwner()->getHref(), $this->itemPhoto($item, 'thumb.icon')) ?>
+      <div class ="ynblog_entry_owner_photo" style="display: none">
+        <?php //echo $this->htmlLink($item->getOwner()->getHref(), $this->itemPhoto($item, 'thumb.icon')) ?>
       </div>
-      <span>
+
         <h3>
           <?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>
         </h3>
-        <div class="ynblog_entrylist_entry_date">
-         <?php echo $this->translate('by');?> <?php echo $this->htmlLink($item->getParent(), $item->getParent()->getTitle()) ?>
-          <?php echo $this->timestamp($item->creation_date) ?>
-        </div>
+
+        <?php $category = Engine_Api::_ ()->getItemTable ( 'blog_category' )->find ( $item->category_id )->current (); ?>
+
+        <?php if($category): ?>
+        <div class="ynblog_category"><?php echo $category -> category_name ?></div>
+        <?php endif; ?>
+
         <div class="ynblog_entrylist_entry_body">
            <?php echo $this -> viewMore($item -> body, 800); ?>
         </div>
+
+        <div class="ynblog_entrylist_entry_date">
+         <?php echo $this->translate('by');?> <?php echo $this->htmlLink($item->getParent(), $item->getParent()->getTitle()) ?>
+
+          <span>&nbsp;-&nbsp;<?php echo $this->timestamp($item->creation_date) ?></span>
+        </div>
+
         <div class="ynblog_statistics">
         	<?php $likeCount = $item ->likes()->getLikeCount(); ?>
         	<span><?php echo $this->translate(array('%s like','%s likes', $likeCount), $likeCount)?></span>
@@ -35,7 +45,7 @@
         	<span><?php echo $this->translate(array('%s share','%s shares', $disLikeCount), $disLikeCount)?></span>
         	-->
         </div>
-      </span>
+
     </li>
   <?php endif; endforeach; ?>
   </ul>
