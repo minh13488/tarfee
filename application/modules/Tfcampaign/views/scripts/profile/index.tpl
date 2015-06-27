@@ -1,55 +1,96 @@
 <?php $campaign = $this -> campaign;?>
-<?php echo $this -> itemPhoto($campaign);?>
-<?php echo $campaign;?>
-<?php echo $this->viewMore($campaign -> getDescription());?>
 
-<?php echo $this -> translate("Position") ;?>
-<?php $position = $campaign -> getPosition();?>
-<?php if($position) :?>
-	<?php echo $position -> getTitle();?>
-<?php endif;?>
+<div class="tfcampaign_detail">
+	
 
-<?php echo $this -> translate("Location");?>
-<?php echo $campaign -> getLocation();?>
+<div class="tfcampaign_title">
+	<?php echo $this -> itemPhoto($campaign);?>
+	<?php echo $campaign;?>
+</div>
+
+<div class="tfcampaign_desc">
+	<?php echo $this->viewMore($campaign -> getDescription());?>
+</div>
+
+
+<div class="tfcampaign_infomation">
+	<ul class="tfcampaign_infomation_item">
+		<li>
+			<span><?php echo $this -> translate("Position") ;?></span>
+			<?php $position = $campaign -> getPosition();?>
+			<?php if($position) :?>
+				<p><?php echo $position -> getTitle();?></p>
+			<?php endif;?>
+		</li>
 		
-<?php echo $this -> translate("Gender") ;?>
-<?php echo $campaign -> getGender();?>
+		<li>
+			<span><?php echo $this -> translate("Location");?></span>
+			<p><?php echo $campaign -> getLocation();?></p>
+		</li>
 
-<?php echo $this -> translate("Age") ;?>
-<?php echo $this -> translate("%s - %s YRS", $campaign -> from_age, $campaign -> to_age);?>
+		<li>
+			<span><?php echo $this -> translate("Gender") ;?></span>
+			<p><?php echo $campaign -> getGender();?></p>
+		</li>
 
-<?php 
-	$endDateObj = null;
-	$startDateObj = null;
-	if (!is_null($campaign->start_date) && !empty($campaign->start_date) && $campaign->start_date) 
-	{
-		$startDateObj = new Zend_Date(strtotime($campaign->start_date));	
-	}
-	if (!is_null($campaign->end_date) && !empty($campaign->end_date) && $campaign->end_date) 
-	{
-		$endDateObj = new Zend_Date(strtotime($campaign->end_date));	
-	}
-	if( $this->viewer() && $this->viewer()->getIdentity() ) {
-		$tz = $this->viewer()->timezone;
-		if (!is_null($endDateObj))
-		{
-			$endDateObj->setTimezone($tz);
-		}
-		if (!is_null($startDateObj))
-		{
-			$startDateObj->setTimezone($tz);
-		}
-    }
-?>
+		<li>
+			<span><?php echo $this -> translate("Age") ;?></span>
+			<p><?php echo $this -> translate("%s - %s YRS", $campaign -> from_age, $campaign -> to_age);?></p>
+		</li>
 
-<?php if(!empty($startDateObj)) :?>
-<?php echo $this -> translate('Start Date') ;?>: <?php echo (!is_null($startDateObj)) ?  date('M d Y', $startDateObj -> getTimestamp()) : ''; ?>
-<?php endif;?>
+		<?php 
+			$endDateObj = null;
+			$startDateObj = null;
+			if (!is_null($campaign->start_date) && !empty($campaign->start_date) && $campaign->start_date) 
+			{
+				$startDateObj = new Zend_Date(strtotime($campaign->start_date));	
+			}
+			if (!is_null($campaign->end_date) && !empty($campaign->end_date) && $campaign->end_date) 
+			{
+				$endDateObj = new Zend_Date(strtotime($campaign->end_date));	
+			}
+			if( $this->viewer() && $this->viewer()->getIdentity() ) {
+				$tz = $this->viewer()->timezone;
+				if (!is_null($endDateObj))
+				{
+					$endDateObj->setTimezone($tz);
+				}
+				if (!is_null($startDateObj))
+				{
+					$startDateObj->setTimezone($tz);
+				}
+		    }
+		?>
+	
+	<?php if(!empty($startDateObj)) :?>
+		<li>
+			<span><?php echo $this -> translate('Start Date') ;?></span>
+			<p><?php echo (!is_null($startDateObj)) ?  date('M d Y', $startDateObj -> getTimestamp()) : ''; ?></p>
+			
+		</li>
+	<?php endif;?>
 
-<?php if(!empty($endDateObj)) :?>
-<?php echo $this -> translate('Closing Date') ;?>: <?php echo (!is_null($endDateObj)) ?  date('M d Y', $endDateObj -> getTimestamp()) : ''; ?>
-<?php endif;?>
 
+
+	<?php if(!empty($endDateObj)) :?>
+		<li>
+			<span><?php echo $this -> translate('Closing Date') ;?></span>
+			<p><?php echo (!is_null($endDateObj)) ?  date('M d Y', $endDateObj -> getTimestamp()) : ''; ?></p>
+			
+		</li>
+	<?php endif;?>
+	</ul>
+</div>
+
+
+
+		
+
+
+
+
+
+<div class="tfcampaign_boxbutton">
 <?php if($this -> viewer() -> getIdentity()) :?>
 	<?php $url = $this -> url(array(
 	    'module' => 'activity',
@@ -66,7 +107,7 @@
 		<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'delete', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("remove");?></button></a>
 	<?php endif;?>
 	<?php if($campaign -> isEditable()) :?>
-		<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'edit', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("remove");?></button></a>
+		<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'edit', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("edit");?></button></a>
 	<?php endif;?>
 	
 	<?php if($campaign -> allow_submit) :?>
@@ -113,16 +154,20 @@
 	
 	
 <?php endif;?>
+</div>
 
-<br/><br/>
+<div class="tf_campaign_metadata">
 <!-- meta data -->
 <?php if($campaign -> getOwner() -> isSelf($this -> viewer())) :?>
-<h1><?php echo $this -> translate('Meta Data');?></h1>	
-	<br/>
-	<?php echo $this -> translate(array("%s submission", "%s submissions", count($this -> submissionPlayers)), count($this -> submissionPlayers));?>
-	<br/>
-	<?php echo $this -> translate(array("%s view", "%s views", $campaign -> view_count), $campaign -> view_count);?>
-	<br/>
+	<h1><?php echo $this -> translate('Meta Data');?></h1>	
+
+	<p>
+	<?php echo '<i class="fa fa-user"></i>&nbsp;'.$this -> translate(array("%s submission", "%s submissions", count($this -> submissionPlayers)), count($this -> submissionPlayers));?>
+	</p>
+
+	<p>
+	<?php echo '<i class="fa fa-eye"></i>&nbsp;'.$this -> translate(array("%s view", "%s views", $campaign -> view_count), $campaign -> view_count);?>
+	</p>
 	<?php
 		$submissionPlayers = $this -> submissionPlayers;
 		$submissionTotalCount = 0;
@@ -140,9 +185,11 @@
 		} else {
 			$percentageMatch = 0;
 		}
+		echo "<p>";
 		echo $this -> translate("%s of submitted player cards that match the campaign preferences", $percentageMatch."%");
+		echo "</p>";
 	?>
-	<br/>
+
 	<?php
 		$submissionTotalCount = 0;
 		$submissionValidCount = 0;
@@ -160,10 +207,14 @@
 		} else {
 			$percentageMatch = 0;
 		}
+		echo "<p>";
 		echo $this -> translate("%s of player cards that match the campaign preferences", $percentageMatch."%");
+		echo "</p>";
+
 	?>
-	
 <?php endif;?>
+</div>
+</div>
 
 <script type="text/javascript">
 	function saveCampaign(ele){

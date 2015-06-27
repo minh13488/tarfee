@@ -1,10 +1,14 @@
 <h3><?php echo $this -> translate("Saved campaigns");?></h3>
 
 <?php if(count($this -> saveRows)) :?>
+	<ul>
 	<?php foreach($this -> saveRows as $saveRow) :?>
+		<li>
 		<?php $campaign = Engine_Api::_() -> getItem('tfcampaign_campaign', $saveRow -> campaign_id);?>
 		<?php if($campaign) :?>
-			<?php echo $campaign;?>
+			<div class="title"><?php echo $campaign;?></div>	
+
+			<div class="date">
 			<?php 
 				$startDateObj = null;
 				if (!is_null($campaign->start_date) && !empty($campaign->start_date) && $campaign->start_date) 
@@ -22,7 +26,12 @@
 			<?php if(!empty($startDateObj)) :?>
 				<?php echo (!is_null($startDateObj)) ?  date('M d Y ', $startDateObj -> getTimestamp()).$this -> translate('at').date(' g:ia', $startDateObj -> getTimestamp()) : ''; ?>
 			<?php endif;?>
-			<?php echo $this -> translate(array("%s submission", "%s submissions", $campaign -> getTotalSubmission()), $campaign -> getTotalSubmission());?>
+			</div>
+			
+			<div class="submission">
+				<i class="fa fa-user fa-lg"></i>
+				<?php echo $this -> translate(array("%s submission", "%s submissions", $campaign -> getTotalSubmission()), $campaign -> getTotalSubmission());?>
+			</div>
 			<?php if($this -> viewer() -> getIdentity()) :?>
 				<?php $url = $this -> url(array(
 				    'module' => 'activity',
@@ -37,5 +46,7 @@
 				<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'remove-save', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_general' , true);?>'><button><?php echo $this->translate('remove')?></button></a>
 			<?php endif;?>
 		<?php endif;?>
+		</li>
 	<?php endforeach;?>
+	</ul>
 <?php endif;?>
