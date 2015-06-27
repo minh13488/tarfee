@@ -16,33 +16,36 @@ class Ynblog_IndexController extends Core_Controller_Action_Standard {
 	/* ----- General Blog Listing Function ----- */
 	public function listingAction() {
 		$viewer = Engine_Api::_ ()->user ()->getViewer ();
-
-		// Search Params
-		$form = new Ynblog_Form_Search ();
-		$form->isValid ( $this->_getAllParams () );
-		$params = $form->getValues ();
-		$params ['date'] = $this->_getParam ( 'date' );
-		$this->view->formValues = $params;
-
-		$params ['draft'] = 0;
-		$params ['is_approved'] = 1;
-		$params ['visible'] = 1;
-
+		$params = $this -> _getAllParams();
+		$ids = array ();
 		// Do the show thingy
-		if (isset ( $params ['show'] ) && $params ['show'] == 2) {
-			// Get an array of friend ids
-			$table = Engine_Api::_ ()->getItemTable ( 'user' );
-			$select = $viewer->membership ()->getMembersSelect ( 'user_id' );
-			$friends = $table->fetchAll ( $select );
-			// Get stuff
-			$ids = array ();
-			foreach ( $friends as $friend ) {
-				$ids [] = $friend->user_id;
+		if (isset($params ['by_authors'] ) && in_array('networks', $params['by_authors'])) 
+		{
+			// Get an array of user ids
+			
+			$network_table = Engine_Api::_()->getDbtable('membership', 'network');
+      		$network_select = $network_table->select()->where('user_id = ?', $viewer -> getIdentity());
+      		$networks = $network_table->fetchAll($network_select);
+			foreach($networks as $network)
+			{
+				$network_select = $network_table->select()->where('resource_id = ?', $network -> resource_id) -> where("active = 1");
+      			$users = $network_table->fetchAll($network_select);
+				foreach ( $users as $user ) {
+					$ids [] = $user->user_id;
+				}
 			}
-			// unset($values['show']);
-			$params ['users'] = $ids;
+			
 		}
-
+		if (isset($params ['by_authors'] ) && in_array('professional', $params['by_authors'])) 
+		{
+			$userIds = Engine_Api::_() -> user() -> getProfessionalUsers();
+			foreach ($userIds as $id) {
+				$ids [] = $id;
+			}
+		}
+		
+		$params ['users'] = $ids;
+		
 		// Get blog paginator
 		$paginator = Engine_Api::_ ()->ynblog ()->getBlogsPaginator ( $params );
 		$items_per_page = Engine_Api::_ ()->getApi ( 'settings', 'core' )->getSetting ( 'ynblog.page', 10 );
@@ -408,10 +411,15 @@ class Ynblog_IndexController extends Core_Controller_Action_Standard {
 			$db->rollBack ();
 			throw $e;
 		}
-
-		return $this->_helper->redirector->gotoRoute ( array (
+		if($this -> _getParam('browse', false))
+		{
+			return $this->_helper->redirector->gotoRoute (array(),'blog_general', true);
+		}
+		else {
+			return $this->_helper->redirector->gotoRoute (array(
 				'action' => 'manage'
-		) );
+			) );
+		}
 	}
 
 	/* ----- Blog Delete Action ----- */
@@ -739,25 +747,13 @@ class Ynblog_IndexController extends Core_Controller_Action_Standard {
 		if (! empty ( $categories ) && is_array ( $categories ) && $form->getElement ( 'category' )) {
 			$form->getElement ( 'category' )->addMultiOptions ( $categories );
 		}
+		$form -> removeElement('mode');
+		$form -> removeElement('show');
 
 		// Process form
 		$form->isValid ( $this->_getAllParams () );
 		$values = $form->getValues ();
 		$this->view->formValues = array_filter ( $values );
-		$values ['user_id'] = $viewer->getIdentity ();
-		$mode = $values ['mode'];
-
-		if (isset ( $mode )) {
-			if ($mode == '0') {
-				$values ['draft'] = 1;
-			} else if ($mode == '1') {
-				$values ['draft'] = 0;
-				$values ['is_approved'] = 0;
-			} else if ($mode == '2') {
-				$values ['draft'] = 0;
-				$values ['is_approved'] = 1;
-			}
-		}
 		$values['favorite_owner_id'] = $viewer -> getIdentity();
 		// Get blog paginator
 		$this->view->paginator = $paginator = Engine_Api::_ ()->ynblog ()->getBlogsPaginator ( $values );

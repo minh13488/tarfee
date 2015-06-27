@@ -125,9 +125,16 @@ class Ynblog_Api_Core extends Core_Api_Abstract {
 		}
 
 		// Show type filter
-		if (!empty($params['show']) && $params['show'] == 2) {
+		if ((!empty($params['show']) && $params['show'] == 2) || (!empty($params['by_authors']) && !in_array('all', $params['by_authors']))) 
+		{
 			$str = (string)(is_array($params['users']) ? "'" . join("', '", $params['users']) . "'" : $params['users']);
 			$select -> where($blog_name . '.owner_id in (?)', new Zend_Db_Expr($str));
+		}
+		
+		if (!empty($params['categories'])) 
+		{
+			$str = (string)(is_array($params['categories']) ? "'" . join("', '", $params['categories']) . "'" : $params['categories']);
+			$select -> where($blog_name . '.category_id in (?)', new Zend_Db_Expr($str));
 		}
 
 		//Tag filter
