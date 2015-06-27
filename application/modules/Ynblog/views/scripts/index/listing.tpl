@@ -22,7 +22,7 @@
           <?php echo $this->timestamp($item->creation_date) ?>
         </div>
         <div class="ynblog_entrylist_entry_body">
-           <?php echo $this -> viewMore($item -> body); ?>
+           <?php echo $this -> viewMore($item -> body, 800); ?>
         </div>
         <div class="ynblog_statistics">
         	<?php $likeCount = $item ->likes()->getLikeCount(); ?>
