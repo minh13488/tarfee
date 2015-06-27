@@ -807,11 +807,17 @@ class User_IndexController extends Core_Controller_Action_Standard
 		{
 	    	return $this->_helper->requireSubject()->forward();
 		}	
-	    $item = Engine_Api::_()->core()->getSubject();
+	    $this->view->item = $item = Engine_Api::_()->core()->getSubject();
 		
 		if (!Engine_Api::_()->user()->canTransfer($item)) {
 			return $this->_helper->requireAuth()->forward();
 		}
+		
+		$this -> view -> form = $form = new User_Form_TransferItem(array('item' => $item));
+		
+		if (!$this -> getRequest() -> isPost()) {
+            return;
+        }
 		
 		$result = Engine_Api::_()->user()->transfer($item);
 		
