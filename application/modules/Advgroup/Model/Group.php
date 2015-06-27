@@ -833,7 +833,10 @@ class Advgroup_Model_Group extends Core_Model_Item_Abstract
         if (!empty($params['user_id']) && is_numeric($params['user_id'])) {
             $select->where($rName . '.owner_id = ?', $params['user_id']);
         }
-
+		
+		if (!empty($params['user_ids']) && is_array($params['user_ids'])) {
+			$select->where($rName . '.owner_id IN (?)', $params['user_ids']);
+		}
         if (!empty($params['user']) && $params['user'] instanceof User_Model_User) {
             $select->where($rName . '.owner_id = ?', $params['user_id']->getIdentity());
         }

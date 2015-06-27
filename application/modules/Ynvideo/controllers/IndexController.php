@@ -280,11 +280,15 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 				$owner = $video -> getOwner();
 				if ($parent_type == 'group')
 				{
-					$action = Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($owner, $item, 'advgroup_video_create');
+					$item = Engine_Api::_()->getItem($parent_type, $parent_id);
+					if ($item)
+						$action = Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($owner, $item, 'advgroup_video_create');
 				}
 				elseif ($parent_type == 'event')
 				{
-					$action = Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($owner, $item, 'ynevent_video_create');
+					$item = Engine_Api::_()->getItem($parent_type, $parent_id);
+					if ($item)
+						$action = Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($owner, $item, 'ynevent_video_create');
 				}
 				else
 				{
