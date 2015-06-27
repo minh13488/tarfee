@@ -251,7 +251,7 @@
 "Yes, add Captcha when creating a blog.";"Yes, add Captcha when creating a blog."
 "No, do not add Captcha when creating a blog.";"No, do not add Captcha when creating a blog."
 "show";"show"
-"hide";"show"
+"hide";"hide"
 "_ACTIVITY_ACTIONTYPE_COMMENT_YNBLOG";"When I comments on a talk."
 "_ACTIVITY_ACTIONTYPE_LIKE_YNBLOG";"When I likes on a talk."
 "_ACTIVITY_ACTIONTYPE_YNBLOG_NEW";"When I create a talk."
