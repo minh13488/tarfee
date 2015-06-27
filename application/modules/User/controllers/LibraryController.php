@@ -31,7 +31,7 @@ class User_LibraryController extends Core_Controller_Action_Standard
 		$video = Engine_Api::_() -> getItem('video', $videoID);
 		
 		if ($values['move_type'] == 'group') {
-			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'transfer', 'subject' => $video->getGuid()),'user_general', true);
+			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'transfer-item', 'subject' => $video->getGuid()),'user_general', true);
 		}
 		
 		$move_to = $values['move_to'];

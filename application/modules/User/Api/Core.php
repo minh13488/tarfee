@@ -802,6 +802,13 @@ class User_Api_Core extends Core_Api_Abstract
 				if ($user) {
 					$item->parent_type = 'user';
 					$item->parent_id = $user->getIdentity();
+					
+					if ($item->getType() == 'video') {
+						$lib = $user->getMainLibrary();
+						$item->parent_type = $lib->getType();
+						$item->parent_id = $lib->getIdentity();	
+					}
+					
 					$item->save();
 					return true;
 				}

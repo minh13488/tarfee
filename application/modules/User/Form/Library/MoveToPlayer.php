@@ -25,6 +25,7 @@ class User_Form_Library_MoveToPlayer extends Engine_Form
 	
 	$this->addElement('Select', 'move_type', array(
 		'label' => 'Move To',
+		'multiOptions' => $move_type
 	));
 	
 	 $this->addElement('Select', 'move_to', array(

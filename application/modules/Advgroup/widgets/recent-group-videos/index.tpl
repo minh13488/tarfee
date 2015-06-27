@@ -88,6 +88,20 @@
                    			<strong style="color: red;"><?php echo " - " . $this->translate("highlighted"); ?></strong> 
                     <?php endif;?>
                </div>
+               
+               <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($item)) :?>
+				<div>
+					<?php
+						echo $this->htmlLink(array(
+				            'route' => 'user_general',
+				            'action' => 'transfer-item',
+							'subject' => $item -> getGuid(),
+				        ), '<i class="fa fa-exchange"></i>', array(
+				            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to user profile')
+				        ));
+					?>
+				</div>
+				<?php endif;?>
             </li>
             
         <?php endforeach; ?>
