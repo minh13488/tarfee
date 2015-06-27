@@ -253,7 +253,7 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 			
 			// Redirect
 			return $this -> _forward('success', 'utility', 'core', array(
-				'parentRedirect' => $viewer -> getHref(),
+				'parentRedirect' => $campaign -> getHref(),
 				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Please wait...'))
 			));
 		}
