@@ -608,7 +608,7 @@ body#global_page_ynblog-index-listing{
     margin-bottom: 10px;
     a{
         background-color: $theme_link_color;
-        color: #fff;
+        color: #fff !important;
         padding: 10px 15px;
         font-weight: bold;
         font-size: 13px;
@@ -623,7 +623,7 @@ body#global_page_ynblog-index-listing{
 
         &:hover{
             background-color: $theme_link_color_hover;
-            color: #fff;
+            color: #fff !important;
         }
     }
 }
