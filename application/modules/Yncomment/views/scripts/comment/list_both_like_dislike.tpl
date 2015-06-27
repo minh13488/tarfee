@@ -41,9 +41,9 @@
 						</a>
 				<?php endif;?>
 			<?php endif;?>
-			<!-- unsure-->
+			<!-- unsure 
 			&nbsp;&middot;&nbsp; 
-	    		<!--WITHOUT ICON-->
+	    		<!--WITHOUT ICON
 	    		<?php if($this->showLikeWithoutIcon):?>
 	    			<?php if(Engine_Api::_()->getDbtable('unsures', 'yncomment')->getUnsure($this->subject, $this->viewer())):?>
 	    				<a id="unsure_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;color: #2A6496" href="javascript:void(0);" <?php if($this->viewer()->getIdentity()):?>onclick="en4.yncomment.yncomments.undounsure('<?php echo
@@ -65,6 +65,7 @@
 	    					</a>
 	    			<?php endif;?>
 	    		<?php endif; ?>
+	    		-->
 	           &nbsp;&middot;&nbsp; 
 	    		<!--WITHOUT ICON-->
 	    		<?php if($this->showLikeWithoutIcon):?>

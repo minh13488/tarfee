@@ -440,6 +440,7 @@ class Ynresponsive1_AdminContentController extends Core_Controller_Action_Admin
     // Render by widget name
     $mod = $this->_getParam('mod');
     $name = $this->_getParam('name');
+	$name = str_replace('/format/smoothbox', '', $name);
     if( null === $name ) {
       throw new Exception('no widget found with name: ' . $name);
     }

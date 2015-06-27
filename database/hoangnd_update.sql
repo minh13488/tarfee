@@ -306,3 +306,7 @@ ALTER TABLE `engine4_tfcampaign_campaigns` ADD `parent_id` INT(11) NOT NULL ;
 
 ALTER TABLE `engine4_user_playercards` ADD `parent_type` VARCHAR(128) NOT NULL DEFAULT 'user' ;
 ALTER TABLE `engine4_user_playercards` ADD `parent_id` INT(11) NOT NULL ;
+
+ALTER TABLE `engine4_blog_blogs` ADD `parent_type` VARCHAR(128) NOT NULL DEFAULT 'user' ;
+ALTER TABLE `engine4_blog_blogs` ADD `parent_id` INT(11) NOT NULL ;
+
