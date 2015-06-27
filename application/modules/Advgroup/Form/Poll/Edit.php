@@ -36,7 +36,7 @@ class Advgroup_Form_Poll_Edit extends Engine_Form
     $availableLabels = array(
         'everyone'      => 'Everyone',
         'registered'    => 'All Registered Members',
-        'parent_member' => 'Group Members',
+        'parent_member' => 'Club Members',
         'owner'         => 'Just Me',
     );
 

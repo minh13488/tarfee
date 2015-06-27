@@ -5,7 +5,7 @@ class Advgroup_Form_Member_Cancel extends Engine_Form
   {
     $this
       ->setTitle('Cancel Group Membership Request')
-      ->setDescription('Would you like to cancel your request for membership in this group?')
+      ->setDescription('Would you like to cancel your request for membership in this club?')
       ->setMethod('POST')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()));
 

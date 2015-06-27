@@ -17,19 +17,19 @@
             </div>
             <div class="groups_options">
               <?php if( $group->isOwner($this->viewer()) ): ?>
-                <?php echo $this->htmlLink(array('route' => 'group_specific', 'action' => 'edit', 'group_id' => $group->getIdentity()), $this->translate('Edit Group'), array(
+                <?php echo $this->htmlLink(array('route' => 'group_specific', 'action' => 'edit', 'group_id' => $group->getIdentity()), $this->translate('Edit Club'), array(
                   'class' => 'buttonlink icon_group_edit'
                 )) ?>
-                <?php echo $this->htmlLink(array('route' => 'group_specific', 'action' => 'delete', 'group_id' => $group->getIdentity(), 'format' => 'smoothbox'), $this->translate('Delete Group'), array(
+                <?php echo $this->htmlLink(array('route' => 'group_specific', 'action' => 'delete', 'group_id' => $group->getIdentity(), 'format' => 'smoothbox'), $this->translate('Delete Club'), array(
                           'class' => 'buttonlink smoothbox icon_group_delete'
                         ));
                 ?>
               <?php elseif( !$group->membership()->isMember($this->viewer(), null) ): ?>
-                <?php echo $this->htmlLink(array('route' => 'group_extended', 'controller' => 'member', 'action' => 'join', 'group_id' => $group->getIdentity()), $this->translate('Join Group'), array(
+                <?php echo $this->htmlLink(array('route' => 'group_extended', 'controller' => 'member', 'action' => 'join', 'group_id' => $group->getIdentity()), $this->translate('Join Club'), array(
                   'class' => 'buttonlink smoothbox icon_group_join'
                 )) ?>
               <?php elseif( $group->membership()->isMember($this->viewer(), true) && !$group->isOwner($this->viewer()) ): ?>
-                <?php echo $this->htmlLink(array('route' => 'group_extended', 'controller' => 'member', 'action' => 'leave', 'group_id' => $group->getIdentity()), $this->translate('Leave Group'), array(
+                <?php echo $this->htmlLink(array('route' => 'group_extended', 'controller' => 'member', 'action' => 'leave', 'group_id' => $group->getIdentity()), $this->translate('Leave Club'), array(
                   'class' => 'buttonlink smoothbox icon_group_leave'
                 )) ?>
               <?php endif; ?>
@@ -61,7 +61,7 @@
     <?php else: ?>
       <div class="tip">
         <span>
-        <?php echo $this->translate('You have not joined any groups yet.') ?>
+        <?php echo $this->translate('You have not joined any clubs yet.') ?>
         <?php if( $this->canCreate): ?>
           <?php echo $this->translate('Why don\'t you %1$screate one%2$s?',
             '<a href="'.$this->url(array('action' => 'create'), 'group_general').'">', '</a>') ?>

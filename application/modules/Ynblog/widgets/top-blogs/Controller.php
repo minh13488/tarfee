@@ -7,7 +7,7 @@ class Ynblog_Widget_TopBlogsController extends Engine_Content_Widget_Abstract
     if($this->_getParam('max') != '' && $this->_getParam('max') >= 0){
        $limit = $this->_getParam('max');
     }else{
-       $limit = 8;
+       $limit = 5;
     }
 
     //Select blogs
@@ -26,7 +26,10 @@ class Ynblog_Widget_TopBlogsController extends Engine_Content_Widget_Abstract
                      ->order("Count(resource_id) DESC")
                      ->limit($limit);
 
-    $this->view->blogs = $btable->fetchAll($select);
-    $this->view->limit = $limit;
+    $this->view->blogs = $blogs = $btable->fetchAll($select);
+	if(count($blogs) <= 0)
+	{
+		return $this -> setNoRender();
+	}
   }
 }

@@ -4,7 +4,7 @@
 </h2>
 
 <div class="group_discussions_options" style="background-color: #E9F4FA">
-  <?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity()), $this->translate('Back to Group'), array(
+  <?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity()), $this->translate('Back to Club'), array(
     'class' => 'buttonlink icon_back'
   )) ?>
   <?php
@@ -60,7 +60,7 @@ if($session -> mobile)
 <?php else:?>
   <div class="tip">
     <span>
-      <?php echo $this->translate('No links have been added in this group yet.');?>
+      <?php echo $this->translate('No links have been added in this club yet.');?>
     </span>
   </div>
 <?php endif; ?>

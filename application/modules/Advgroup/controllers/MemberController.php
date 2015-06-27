@@ -1449,7 +1449,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 				}
 				else {
 					return $this -> _forward('success', 'utility', 'core', array(
-					'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Group invite canceled.')),
+					'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Club invite canceled.')),
 					'layout' => 'default-simple',
 					'parentRefresh' => true,));
 				}
@@ -1581,7 +1581,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 				}
 				$db -> commit();
 				return $this -> _forward('success', 'utility', 'core', array(
-				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Group request approved')),
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Club request approved')),
 				'layout' => 'default-simple',
 				'parentRefresh' => true,
 				));
@@ -1907,7 +1907,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 				throw $e;
 			}
 			return $this -> _forward('success', 'utility', 'core', array(
-				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Group invite canceled.')),
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Club invite canceled.')),
 				'layout' => 'default-simple',
 				'parentRefresh' => true,
 			));

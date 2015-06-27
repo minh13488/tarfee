@@ -11,7 +11,7 @@ class Advgroup_Form_Member_Subgroup extends Engine_Form
 	{
 		$this
 		->setTitle('Add Member To SubGroup')
-		->setDescription('Are you sure you want to add member(s) to sub group?')
+		->setDescription('Are you sure you want to add member(s) to sub club?')
 		;
 
 		$this->addElement('Button', 'promote', array(

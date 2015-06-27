@@ -87,7 +87,7 @@
       'defaults' => array(
         'module' => 'ynblog',
         'controller' => 'index',
-        'action' => 'index',
+        'action' => 'listing',
       ),
       'reqs' => array(
         'action' => '(index|create|manage|listing|style|tag|upload-photo|rss|become|favorite-ajax|un-favorite-ajax|favorite)',

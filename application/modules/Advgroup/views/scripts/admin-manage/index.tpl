@@ -176,7 +176,7 @@ function group_good(group_id){
 <?php else: ?>
   <div class="tip">
     <span>
-      <?php echo $this->translate("There are no groups posted by your members yet.") ?>
+      <?php echo $this->translate("There are no clubs posted by your members yet.") ?>
     </span>
   </div>
 <?php endif; ?>

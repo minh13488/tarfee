@@ -25,6 +25,7 @@ class Ynblog_Widget_ProfileBlogsController extends Engine_Content_Widget_Abstrac
                                       'is_approved' => '1',
                                       'visible' => '1',
                                       'user_id' =>  $subject->getIdentity(),
+                                      'parent_type' => $subject->getType()
                                       
                                 ));
     $paginator->setCurrentPageNumber(1);

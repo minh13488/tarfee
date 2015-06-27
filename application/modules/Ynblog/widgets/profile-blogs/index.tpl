@@ -13,6 +13,19 @@
           <?php echo $item->getDescription(); ?>
         </p>
       </div>
+      <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($item)) :?>
+		<div>
+			<?php
+				echo $this->htmlLink(array(
+		            'route' => 'user_general',
+		            'action' => 'transfer-item',
+					'subject' => $item -> getGuid(),
+		        ), '<i class="fa fa-exchange"></i>', array(
+		            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to club')
+		        ));
+			?>
+		</div>
+		<?php endif;?>
     </li>
   <?php endforeach; ?>
 </ul>

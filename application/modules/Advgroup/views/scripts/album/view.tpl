@@ -34,7 +34,7 @@
          <?php if($this->group->isOwner($this->viewer) || $this->group->isOfficer()):?>
         <p id="nocaptions_photo_<?php echo $photo->getIdentity()?>">
         	<a style="font-size: 10px" id="nocaptions_photo_slideshow_<?php echo $photo->getIdentity()?>" class="buttonlink <?php if($photo->is_featured) echo 'icon_event_delete'; else echo 'icon_event_slideshow';?>" onclick="return slideshow(<?php echo $photo->getIdentity()?>)" href="javascript:void();" ><?php if($photo->is_featured) echo $this->translate("Remove from Slideshow"); else echo $this->translate("Add to Slideshow");?></a>
-        	<a style="font-size: 10px"  id="nocaptions_photo_remofile_<?php echo $photo->getIdentity()?>" class="buttonlink icon_event_delete" onclick="return removeFile(<?php echo $photo->getIdentity()?>)" href="javascript:void();" ><?php echo $this->translate("Remove from Group")?></a>
+        	<a style="font-size: 10px"  id="nocaptions_photo_remofile_<?php echo $photo->getIdentity()?>" class="buttonlink icon_event_delete" onclick="return removeFile(<?php echo $photo->getIdentity()?>)" href="javascript:void();" ><?php echo $this->translate("Remove from Club")?></a>
         </p>
         <?php endif;?>
       </li>

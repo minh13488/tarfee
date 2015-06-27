@@ -380,7 +380,7 @@
 "Please choose a member you want to transfer the owner role to:";"Please choose a member you want to transfer the owner role to:"
 "Event Owner Transfer";"Event Owner Transfer"
 
-"ACTIVITY_TYPE_EVENT_IMPORT_BLOG";"When I import blog into event."
+"ACTIVITY_TYPE_EVENT_IMPORT_BLOG";"When I import talk into event."
 "ACTIVITY_TYPE_FRIEND_HOST";"When your friend is become host in event."
 "ADMIN_ACTIVITY_TYPE_YNEVENT_CREATE";"When a user (subject) creates a new event (object)."
 "ADMIN_ACTIVITY_TYPE_YNEVENT_JOIN";"When a user (subject) joins an event (object)."

@@ -3,13 +3,13 @@ class Advgroup_Form_Member_Leave extends Engine_Form
 {
   public function init()
   {
-    $this->setTitle('Leave Group')
-      ->setDescription('Are you sure you want to leave this group?');
+    $this->setTitle('Leave Club')
+      ->setDescription('Are you sure you want to leave this club?');
 
     //$this->addElement('Hash', 'token');
 
     $this->addElement('Button', 'submit', array(
-      'label' => 'Leave Group',
+      'label' => 'Leave Club',
       'ignore' => true,
       'decorators' => array('ViewHelper'),
       'type' => 'submit'

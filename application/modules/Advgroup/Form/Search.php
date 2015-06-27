@@ -21,8 +21,8 @@ class Advgroup_Form_Search extends Engine_Form
     ));
       //Search Text Field.
     $this->addElement('Text', 'text', array(
-      'label' => 'Search Groups:',
-      'alt' => $translate -> translate('Search groups')
+      'label' => 'Search Clubs:',
+      'alt' => $translate -> translate('Search clubs')
     ));
     
       //Category Field.
@@ -39,8 +39,8 @@ class Advgroup_Form_Search extends Engine_Form
     $this->addElement('Select', 'view', array(
       'label' => 'View:',
       'multiOptions' => array(
-        '0' => 'Everyone\'s Groups',
-        '1' => 'Only My Followers\' Groups',
+        '0' => 'Everyone\'s Clubs',
+        '1' => 'Only My Followers\' Clubs',
       ),
       
     ));

@@ -3,10 +3,10 @@
     <div>
       <div>
         <h3>
-          <?php echo $this->translate('Delete Group Sponsor?');?>
+          <?php echo $this->translate('Delete Club Sponsor?');?>
         </h3>
         <p>
-          <?php echo $this->translate('Are you sure that you want to delete the group sponsor? It will not be recoverable after being deleted.'); ?>
+          <?php echo $this->translate('Are you sure that you want to delete the club sponsor? It will not be recoverable after being deleted.'); ?>
         </p>
         <br />
         <p>

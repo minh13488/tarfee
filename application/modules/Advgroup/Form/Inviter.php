@@ -15,7 +15,7 @@ class Advgroup_Form_Inviter extends Engine_Form
 		$translate = Zend_Registry::get('Zend_Translate');
 
 		// Init form
-		$this -> setTitle('Invite Your Friends') -> setDescription('Invite your friends to join! Enter email addresses separated by commas in the recipients box below. If your friends decide to sign up, they will be automatically added to your group.') -> setLegend('');
+		$this -> setTitle('Invite Your Friends') -> setDescription('Invite your friends to join! Enter email addresses separated by commas in the recipients box below. If your friends decide to sign up, they will be automatically added to your club.') -> setLegend('');
 
 		// Init recipients
 		$this -> addElement('Textarea', 'recipients', array(

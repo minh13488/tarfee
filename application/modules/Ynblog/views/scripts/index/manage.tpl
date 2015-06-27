@@ -7,21 +7,10 @@
 
 <div class='layout_right'>
   <?php echo $this->form->render($this) ?>
-
-  <?php if( count($this->quickNavigation) > 0 ): ?>
-    <div class="quicklinks">
-      <?php
-        /*---- Render the menu ----*/
-        echo $this->navigation()
-          ->menu()
-          ->setContainer($this->quickNavigation)
-          ->render();
-      ?>
-    </div>
-  <?php endif; ?>
 </div>
 
 <div class='layout_middle'>
+	<h3><?php echo $this -> translate("My Talks")?></h3>
   <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
     <ul class="ynblogs_browse">
       <?php foreach( $this->paginator as $item ): ?>
@@ -36,7 +25,7 @@
               'action' => 'edit',
               'blog_id' => $item->getIdentity(),
               'reset' => true,
-            ), $this->translate('Edit Entry'), array(
+            ), $this->translate('Edit'), array(
               'class' => 'buttonlink icon_ynblog_edit',
             ));?>
             <?php
@@ -45,7 +34,7 @@
                 'action' => 'delete',
                 'blog_id' => $item->getIdentity(),
                 'format' => 'smoothbox'
-                ), $this->translate('Delete Entry'), array(
+                ), $this->translate('Delete'), array(
               'class' => 'buttonlink smoothbox icon_ynblog_delete'
             ));?>
           </div>
@@ -75,13 +64,13 @@
   <?php elseif($this->search): ?>
     <div class="tip">
       <span>
-        <?php echo $this->translate('You do not have any blog entries that match your search criteria.');?>
+        <?php echo $this->translate('You do not have any talk entries that match your search criteria.');?>
       </span>
     </div>
   <?php else: ?>
     <div class="tip">
       <span>
-        <?php echo $this->translate('You do not have any blog entries.');?>
+        <?php echo $this->translate('You do not have any talk entries.');?>
         <?php if( $this->canCreate ): ?>
           <?php echo $this->translate('Get started by %1$swriting%2$s a new entry.', '<a href="'.$this->url(array('action' => 'create'), 'blog_general').'">', '</a>'); ?>
         <?php endif; ?>

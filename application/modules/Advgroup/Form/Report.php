@@ -12,8 +12,8 @@ class Advgroup_Form_Report extends Engine_Form
   public function init()
   {
     $this
-      ->setTitle('Report Group')
-      ->setDescription('Report wrong activities of group to admin')
+      ->setTitle('Report Club')
+      ->setDescription('Report wrong activities of club to admin')
       ->setMethod('POST')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()))
       ;
