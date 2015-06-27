@@ -1,4 +1,4 @@
-<h2><?php echo $this->translate("Groups Plugin") ?></h2>
+<h2><?php echo $this->translate("Clubs Plugin") ?></h2>
 
 <?php if( count($this->navigation) ): ?>
   <div class='tabs'>
@@ -14,7 +14,7 @@
     <div class='settings'>
     <form class="global_form">
       <div>
-        <h3> <?php echo $this->translate("Group Categories") ?> </h3>
+        <h3> <?php echo $this->translate("Club Categories") ?> </h3>
         <p class="description">
           <?php echo $this->translate("GROUP_VIEWS_SCRIPTS_ADMINSETTINGS_CATEGORIES_DESCRIPTION") ?>
         </p>

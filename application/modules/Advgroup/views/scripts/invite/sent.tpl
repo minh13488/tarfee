@@ -8,8 +8,8 @@
 </p>
 <?php else :?>
 <p>
-  <?php echo $this->translate(array('If the person you invited decide to join, he/she will be automatically added to your group.',
-                                    'If the persons you invited decide to join, they will be automatically added to your group.',
+  <?php echo $this->translate(array('If the person you invited decide to join, he/she will be automatically added to your club.',
+                                    'If the persons you invited decide to join, they will be automatically added to your club.',
                                     $this->emails_sent)) ?>
 </p>
 <br/>

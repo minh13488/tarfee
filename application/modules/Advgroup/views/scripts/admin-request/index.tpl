@@ -14,7 +14,7 @@
 </script>
 
 <h2>
-  <?php echo $this->translate("Groups Plugin") ?>
+  <?php echo $this->translate("Clubs Plugin") ?>
 </h2>
 
 <?php if( count($this->navigation) ): ?>

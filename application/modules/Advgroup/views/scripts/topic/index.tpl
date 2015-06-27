@@ -19,7 +19,7 @@
 	<div class="generic_layout_container layout_middle">
 		<!-- Menu Bar -->
 		<div class="group_discussions_options">
-			<?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity()), $this->translate('Back to Group'), array(
+			<?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity()), $this->translate('Back to Club'), array(
 				'class' => 'buttonlink icon_back'
 			)) ?>
 			<?php if ($this->can_post) {

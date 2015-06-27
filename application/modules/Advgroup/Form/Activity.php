@@ -12,7 +12,7 @@ class Advgroup_Form_Activity extends Engine_Form
 {
 	public function init()
 	{
-		$this -> setTitle('Public Activities') -> setDescription('Choose the activity action types that you want to public on the group activity.') -> setAttrib('id', 'group_form_activity');
+		$this -> setTitle('Public Activities') -> setDescription('Choose the activity action types that you want to public on the club activity.') -> setAttrib('id', 'group_form_activity');
 
 		$this -> addElement('Checkbox', 'all', array(
 			'id' => 'selectall',

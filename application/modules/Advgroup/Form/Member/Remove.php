@@ -18,9 +18,9 @@ class Advgroup_Form_Member_Remove extends Engine_Form
 		
 		$this->setTitle('Remove Member');
 		if($this->_ftitle == 1)	
-			$this->setDescription("Are you sure you want to remove this member from the group? It will remove this member from all it 's sub-groups too.");
+			$this->setDescription("Are you sure you want to remove this member from the club? It will remove this member from all it 's sub-clubs too.");
 		elseif($this->_ftitle == 2)
-			$this->setDescription("Are you sure you want to remove this member from the group?");
+			$this->setDescription("Are you sure you want to remove this member from the club?");
 		else
 			$this->setDescription("None");
 		//$this->addElement('Hash', 'token');

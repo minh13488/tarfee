@@ -29,10 +29,10 @@ class Advgroup_Form_Admin_Search extends Engine_Form {
       'label' => 'Filter By',
       'multiOptions' => array(
         ''  => '',
-        '0' => 'Only Featured Groups',
-        '1' => 'Only Not Featured Groups',
-        '2' => 'Only Sub Groups',
-        '3' => 'Only Parent Groups',
+        '0' => 'Only Featured Clubs',
+        '1' => 'Only Not Featured Clubs',
+        '2' => 'Only Sub Clubs',
+        '3' => 'Only Parent Clubs',
     ),
       'value' => '',
     ));

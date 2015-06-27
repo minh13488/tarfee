@@ -1,6 +1,6 @@
 <div class="headline">
   <h2>
-    <?php echo $this->translate("Groups");?>
+    <?php echo $this->translate("Clubs");?>
   </h2>
   <?php if( count($this->navigation) > 0 ): ?>
     <div class="tabs">

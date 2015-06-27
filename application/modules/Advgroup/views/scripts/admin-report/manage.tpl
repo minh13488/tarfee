@@ -48,7 +48,7 @@ function actionSelected(actionType){
       <tr>
         <th class='admin_table_short'><input type='checkbox' class='checkbox' /></th>
         <th><?php echo $this->translate("ID") ?></th>
-        <th><?php echo $this->translate("Group Title") ?></th>
+        <th><?php echo $this->translate("Club Title") ?></th>
         <th><?php echo $this->translate("Topic Title") ?></th>
         <th><?php echo $this->translate("Post ID")?> </th>
         <th><?php echo $this->translate("Reporter") ?></th>

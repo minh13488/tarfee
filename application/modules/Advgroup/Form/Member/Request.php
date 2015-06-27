@@ -4,8 +4,8 @@ class Advgroup_Form_Member_Request extends Engine_Form
   public function init()
   {
     $this
-      ->setTitle('Request Group Membership')
-      ->setDescription('Would you like to request membership in this group?')
+      ->setTitle('Request Club Membership')
+      ->setDescription('Would you like to request membership in this club?')
       ->setMethod('POST')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()));
 

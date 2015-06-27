@@ -18,14 +18,13 @@
 	<div class="generic_layout_container layout_middle">
 		<!-- Menu Bar -->
 		<div class="group_discussions_options">
-			<?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity()), $this->translate('Back to Group'), array(
+			<?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity()), $this->translate('Back to Club'), array(
 				'class' => 'buttonlink icon_back'
 			)) ?>
 			<?php if( $this->canCreate ): ?>
 				<?php echo $this->htmlLink(array(
 					'route' => 'ynwiki_general',
 					'action' => 'create',
-					'parent_type' =>'group',
 					'subject_id' =>  $this->group->group_id,
 				  ), $this->translate('Create New Space'), array(
 					'class' => 'buttonlink icon_group_wiki_new'
