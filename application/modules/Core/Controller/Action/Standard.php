@@ -59,7 +59,7 @@ abstract class Core_Controller_Action_Standard extends Engine_Controller_Action
 	$controller = $request -> getControllerName();
 	$action = $request -> getActionName();
 	$page_id = $module."_".$controller."_".$action;
-	if (!Engine_Api::_() -> user() -> getViewer() -> getIdentity() && $page_id != 'core_index_index' && !in_array($module, array('user', 'social-connect')))
+	if (!Engine_Api::_() -> user() -> getViewer() -> getIdentity() && $page_id != 'core_index_index' && !in_array($module, array('user', 'social-connect','payment')))
 	{
 		$this -> _helper -> redirector -> gotoRoute(array(), 'default', true);
 	}
