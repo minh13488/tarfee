@@ -14,5 +14,9 @@ class Tfcampaign_Widget_MySubmissionsController extends Engine_Content_Widget_Ab
 				
 		//get campaigns that user has submited his players
 		$this -> view -> submitCampaignIds = $submitCampaignIds = $submissionTable -> getCampaignIdsSubmitted($viewer);
+		
+		if(!count($submitCampaignIds)) {
+			return $this -> setNoRender();
+		}
 	}
 }

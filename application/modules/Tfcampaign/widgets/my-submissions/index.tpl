@@ -5,6 +5,23 @@
 		<?php $campaign = Engine_Api::_() -> getItem('tfcampaign_campaign', $campaign_id);?>
 		<?php if($campaign) :?>
 			<?php echo $campaign;?>
+			<?php 
+				$startDateObj = null;
+				if (!is_null($campaign->start_date) && !empty($campaign->start_date) && $campaign->start_date) 
+				{
+					$startDateObj = new Zend_Date(strtotime($campaign->start_date));	
+				}
+				if( $this->viewer() && $this->viewer()->getIdentity() ) {
+					$tz = $this->viewer()->timezone;
+					if (!is_null($startDateObj))
+					{
+						$startDateObj->setTimezone($tz);
+					}
+			    }
+			?>
+			<?php if(!empty($startDateObj)) :?>
+				<?php echo (!is_null($startDateObj)) ?  date('M d Y ', $startDateObj -> getTimestamp()).$this -> translate('at').date(' g:ia', $startDateObj -> getTimestamp()) : ''; ?>
+			<?php endif;?>
 			<?php if($this -> viewer() -> getIdentity()) :?>
 				<?php $url = $this -> url(array(
 				    'module' => 'activity',
@@ -16,9 +33,7 @@
 				;?>
 				<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('share')?></button></a>
 				<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'list-withdraw', 'campaign_id' => $campaign->getIdentity()), 'tfcampaign_specific' , true)?>'><button><?php echo $this->translate('withdraw')?></button></a>
-				<?php if($campaign -> isEditable()) :?>
-					<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'edit', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("remove");?></button></a>
-				<?php endif;?>
+				<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'list-edit', 'campaign_id' => $campaign->getIdentity()), 'tfcampaign_specific' , true)?>'><button><?php echo $this->translate('edit')?></button></a>
 			<?php endif;?>
 		<?php endif;?>
 	<?php endforeach;?>
