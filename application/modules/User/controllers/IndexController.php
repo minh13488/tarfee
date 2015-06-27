@@ -798,4 +798,30 @@ class User_IndexController extends Core_Controller_Action_Standard
             'messages' => $message
         ));
 	}
+
+	public function transferItemAction() {
+		// In smoothbox
+		$this -> _helper -> layout -> setLayout('default-simple');
+		
+		if(!Engine_Api::_()->core()->hasSubject()) 
+		{
+	    	return $this->_helper->requireSubject()->forward();
+		}	
+	    $item = Engine_Api::_()->core()->getSubject();
+		
+		if (!Engine_Api::_()->user()->canTransfer($item)) {
+			return $this->_helper->requireAuth()->forward();
+		}
+		
+		$result = Engine_Api::_()->user()->transfer($item);
+		
+		$message = ($result) ? $this->view->translate('Transfer successfully!') : $this->view->translate('Can not transfer this item.');
+		
+		$this -> _forward('success', 'utility', 'core', array(
+			'smoothboxClose' => true,
+			'parentRefresh' => true,
+			'format' => 'smoothbox',
+			'messages' => array($message)
+		));
+	}
 }
