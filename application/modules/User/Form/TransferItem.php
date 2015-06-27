@@ -1,5 +1,5 @@
 <?php
-class User_Form_Settings_TransferItem extends Engine_Form {
+class User_Form_TransferItem extends Engine_Form {
 	protected $_item;
 	
 	public function getItem() {
@@ -14,7 +14,7 @@ class User_Form_Settings_TransferItem extends Engine_Form {
   	
 	$item = $this->getItem();
 	$view = Zend_Registry::get('Zend_View');
-	$label = ($tem->parent_type == 'user') ? $viewS->translate('club') : $view->translate('user profile');
+	$label = ($item->parent_type == 'user') ? $view->translate('club') : $view->translate('user profile');
 	$title = $view->translate('Transfer item to %s', $label);
 	$description = $view->translate('Are you sure you want to transfer this item to %s ?', $label);
     $this
@@ -42,7 +42,7 @@ class User_Form_Settings_TransferItem extends Engine_Form {
     // Element: cancel
     $this->addElement('Cancel', 'cancel', array(
       'label' => 'cancel',
-      'onlcick' => 'parent.Smoothbox.close()',
+      'onclick' => 'parent.Smoothbox.close()',
       'prependText' => ' or ',
       'decorators' => array(
         'ViewHelper',
