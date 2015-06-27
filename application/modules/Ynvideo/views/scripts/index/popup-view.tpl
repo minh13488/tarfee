@@ -137,6 +137,7 @@ endif;
 </script>
 
 <div style="width: 1170px;">
+	<div class="ynvideo_popup_close"><i class="fa fa-times"></i></div>
 	<div class="ynvideo_video_view_headline">
         <div class="ynvideo_author">
             <?php echo $this->translate('Posted by') ?>
@@ -279,6 +280,9 @@ endif;
 			            <?php if($this -> viewer() -> getIdentity() 
 			            		&& $this -> video -> canAddRatings()
 			            		&& $this -> video -> parent_type == "user_playercard") :?>
+							
+							<?php echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video)); ?>
+
 				            <?php 
 				    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
 								$rating_types = $tableRatingType -> getAllRatingTypes();
@@ -290,8 +294,10 @@ endif;
 						<?php endif ?>
 						<!-- if player video -->
 						<?php if( $this -> video -> parent_type == "user_playercard"):?>
+
 							<!-- view ratings for user not in professional and club-->
 							<?php if($this -> viewer() -> getIdentity() && !$this -> video -> canAddRatings()) :?>
+								<?php echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video)); ?>
 							<?php 
 				    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
 								$rating_types = $tableRatingType -> getAllRatingTypes();
@@ -303,6 +309,8 @@ endif;
 							<?php endif;?>
 							<!-- view ratings for guest-->
 							<?php if(!$this -> viewer() -> getIdentity()):?>
+								<?php echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video)); ?>
+
 								<?php 
 					    			$tableRatingType = Engine_Api::_() -> getItemTable('ynvideo_ratingtype');
 									$rating_types = $tableRatingType -> getAllRatingTypes();
@@ -356,9 +364,9 @@ endif;
 	    </div>
 	    
 	    <div class="ynvideo_popup_right">
-	    	<div class="suggest_videos">
-	    		<?php echo $this->content()->renderWidget('ynvideo.show-same-poster'); ?>
-	    	</div>
+	    	<!-- <div class="suggest_videos" style="display: none">
+	    		<?php //echo $this->content()->renderWidget('ynvideo.show-same-poster'); ?>
+	    	</div> -->
 	    	<div class="related_videos">
 	    	<?php echo $this->content()->renderWidget('ynvideo.show-same-categories'); ?>
 	    	</div>
