@@ -64,13 +64,13 @@
   <?php elseif($this->search): ?>
     <div class="tip">
       <span>
-        <?php echo $this->translate('You do not have any blog entries that match your search criteria.');?>
+        <?php echo $this->translate('You do not have any talk entries that match your search criteria.');?>
       </span>
     </div>
   <?php else: ?>
     <div class="tip">
       <span>
-        <?php echo $this->translate('You do not have any blog entries.');?>
+        <?php echo $this->translate('You do not have any talk entries.');?>
         <?php if( $this->canCreate ): ?>
           <?php echo $this->translate('Get started by %1$swriting%2$s a new entry.', '<a href="'.$this->url(array('action' => 'create'), 'blog_general').'">', '</a>'); ?>
         <?php endif; ?>
