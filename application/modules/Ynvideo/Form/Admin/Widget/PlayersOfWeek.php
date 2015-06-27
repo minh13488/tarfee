@@ -86,10 +86,10 @@ class Ynvideo_Form_Admin_Widget_PlayersOfWeek extends Core_Form_Admin_Widget_Sta
             'value' => -1
 		));
 		
-		$this->addElement('Integer', 'unsure', array(
-			'label' => 'Point for each unsure',
-            'value' => 0
-		));
+		// $this->addElement('Integer', 'unsure', array(
+			// 'label' => 'Point for each unsure',
+            // 'value' => 0
+		// ));
 				
 		$view = Zend_Registry::get('Zend_View');
 		$view -> headScript() -> appendFile($view -> baseUrl() . '/application/modules/Ynvideo/externals/scripts/players_of_week.js');		

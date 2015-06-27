@@ -48,14 +48,6 @@ class Ynvideo_Plugin_Core
 	
 	public function onItemCreateAfter($event) {
 		$payload = $event -> getPayload();
-		if ($payload->getType() == 'activity_action' && $payload->object_type == 'video' && $payload->type == 'share') {
-			$id = $payload->object_id;
-            $video = Engine_Api::_()->getItem('video', $id);
-            if ($video) {
-                $video->share_count = $video->share_count + 1;
-                $video->save();
-            }
-		}
 	}
 	
 	public function onItemDeleteBefore($event) {

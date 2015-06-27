@@ -126,6 +126,20 @@
 									        ));
 										?>
 									</li>
+									
+									<?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($player)) :?>
+									<li>
+										<?php
+											echo $this->htmlLink(array(
+									            'route' => 'user_general',
+									            'action' => 'transfer-item',
+			    								'subject' => $player -> getGuid(),
+									        ), '<i class="fa fa-exchange"></i>', array(
+									            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to club')
+									        ));
+										?>
+									</li>
+									<?php endif;?>	
 
 									<li class="setting" onclick="showOptions(<?php echo $player->playercard_id ?>, this)">
 										<a href="javascript:void(0)"><i class="fa fa-plus"></i></a>

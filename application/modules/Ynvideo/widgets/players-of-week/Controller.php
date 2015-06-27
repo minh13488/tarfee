@@ -36,7 +36,7 @@ class Ynvideo_Widget_PlayersOfWeekController extends Engine_Content_Widget_Abstr
 		$comment_point = $this->_getParam('comment', 2);
 		$view_point = $this->_getParam('view', 1);
 		$dislike_point = $this->_getParam('dislike', -1);
-		$unsure_point = $this->_getParam('unsure', 0);	
+	//	$unsure_point = $this->_getParam('unsure', 0);	
 		
 		$table = Engine_Api::_()->getItemTable('video');
 		$tableName = $table->info('name');
@@ -50,8 +50,8 @@ class Ynvideo_Widget_PlayersOfWeekController extends Engine_Content_Widget_Abstr
 		$viewTblName = $viewTbl->info('name');
 		$dislikeTbl = Engine_Api::_()->getDbTable('dislikes', 'yncomment');
 		$dislikeTblName = $dislikeTbl->info('name');
-		$unsureTbl = Engine_Api::_()->getDbTable('unsures', 'yncomment');
-		$unsureTblName = $unsureTbl->info('name');
+		// $unsureTbl = Engine_Api::_()->getDbTable('unsures', 'yncomment');
+		// $unsureTblName = $unsureTbl->info('name');
 		$select = $table->select()
 			->from($tableName, "$tableName.*,(count($actionTblName.action_id)*$share_point + count($likeTblName.like_id)*$like_point + count($commentTblName.comment_id)*$comment_point + count($viewTblName.view_id)*$view_point + count($dislikeTblName.dislike_id)*$dislike_point + count($unsureTblName.unsure_id)*$unsure_point) as total_point")
 			->setIntegrityCheck(false);
@@ -68,7 +68,7 @@ class Ynvideo_Widget_PlayersOfWeekController extends Engine_Content_Widget_Abstr
 		
 		$select->joinLeft($dislikeTblName, "$dislikeTblName.resource_type = 'video' AND $dislikeTblName.resource_id = $tableName.video_id AND $dislikeTblName.creation_date >= '$from_time' AND $dislikeTblName.creation_date <= '$to_time'", "");
 		
-		$select->joinLeft($unsureTblName, "$unsureTblName.resource_type = 'video' AND $unsureTblName.resource_id = $tableName.video_id AND $unsureTblName.creation_date >= '$from_time' AND $unsureTblName.creation_date <= '$to_time'", "");
+		// $select->joinLeft($unsureTblName, "$unsureTblName.resource_type = 'video' AND $unsureTblName.resource_id = $tableName.video_id AND $unsureTblName.creation_date >= '$from_time' AND $unsureTblName.creation_date <= '$to_time'", "");
 		
 		$select->group("$tableName.parent_id");
 		
