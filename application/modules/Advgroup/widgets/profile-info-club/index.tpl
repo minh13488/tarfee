@@ -5,6 +5,24 @@
 	<div class="club-title">
 		<?php echo $this->group->getTitle()?>
 	</div>
+	<?php if ($this->group->getCountry()) :?>
+	<div class="club-country">
+		<?php echo $this->group->getCountry()->getTitle()?>
+	</div>
+	<?php endif;?>
+	
+	<?php if ($this->group->getProvince()) :?>
+	<div class="club-province">
+		<?php echo $this->group->getProvince()->getTitle()?>
+	</div>
+	<?php endif;?>
+	
+	<?php if ($this->group->getCity()) :?>
+	<div class="club-city">
+		<?php echo $this->group->getCity()->getTitle()?>
+	</div>
+	<?php endif;?>
+	
 	<div class="club-like-count">
 		<i class="fa fa-heart"></i>
 		<span class="like-count"><?php echo number_format($this->group->likes()->getLikeCount())?></span>
