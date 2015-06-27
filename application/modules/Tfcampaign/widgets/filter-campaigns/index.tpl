@@ -11,56 +11,72 @@
   		 ->appendFile($staticBaseUrl . 'application/modules/Tfcampaign/externals/scripts/jquery-ui.min.js')	
 		;	
 ?>
-<div id="form-search-wrapper" style="display:none">
+<div id="form-search-wrapper" class="tf_layout_campain_filter" style="display:none">
 <form id="fiter-campaign" method="get" action="">
 
 <input id="campaign-sort" value="campaign.creation_date" type="hidden" name="sort">
 
-<input type="text" name="title" id="title" placeholder="<?php echo $this -> translate("Search Campaigns...");?>">
-
-<?php if( Engine_Api::_()->authorization()->isAllowed('group', $this -> viewer(), 'create')) :?>
-<a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>"><?php echo $this -> translate("Add Campaign");?></a>
-<?php endif;?>
-
-<br/>
-<?php echo $this -> translate("By age");?>
-
-<div id="w">
-  <div id="content">       
-    <input type="hidden" value="17" name="from_age" id="from_age">
-    <input type="hidden" value="29" name="to_age" id="to_age">
-    <div id="display-from-age">17 <?php echo $this -> translate('yrs') ;?></div>
-    <div id="display-to-age">29 <?php echo $this -> translate('yrs') ;?></div>
-    <div id="rangeslider"></div>
-  </div>
+<div class="tf_boxsearch_campaign">
+	<input type="text" name="title" id="title" placeholder="<?php echo $this -> translate("Search Campaigns...");?>">
 </div>
 
-<?php echo $this -> translate("By date");?>
+<?php if( Engine_Api::_()->authorization()->isAllowed('group', $this -> viewer(), 'create')) :?>
+<a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>" class="btn-add-campaign"><?php echo $this -> translate("Add Campaign");?><i class="fa fa-plus"></i></a>
+<?php endif;?>
 
-<p><?php echo $this -> translate('From ');?>  <input type="text" name="start_date_from" id="start_date_from"></p>
-<br/>
-<p><?php echo $this -> translate('To ');?>  <input type="text" name="start_date_to" id="start_date_to"></p>
+<div class="tf_box_filter_campaign">
+<div class="ybo_headline"><h3>Filters</h3></div>
 
+<div class="tf_campaign_filter_age">
+	<h5 class="tf_campaign_filter_title"><?php echo $this -> translate("By age");?></h5>
 
-<?php echo $this -> translate("Location");?>
+  	<div id="content">       
+	    <input type="hidden" value="17" name="from_age" id="from_age">
+	    <input type="hidden" value="29" name="to_age" id="to_age">
+	    <div id="display-from-age">17 <?php echo $this -> translate('yrs') ;?></div>
+	    <div id="display-to-age">29 <?php echo $this -> translate('yrs') ;?></div>
+	    <div id="rangeslider"></div>
+	</div>
+</div>
 
-<?php
-	$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
-	$countriesAssoc = array('0'=>$this -> translate('All')) + $countriesAssoc;
-?>
+<div class="tf_campaign_filter_age">
+	<h5 class="tf_campaign_filter_title"><?php echo $this -> translate("By date");?></h5>
 
-<select id="country_id" name="country_id">
-	<?php foreach ($countriesAssoc as $key => $value) :?>
-		<option value="<?php echo $key;?>"><?php echo $value;?></option>
-	<?php endforeach;?>
-</select>
+	<div class="box-date">
+		<p>
+			<span><?php echo $this -> translate('From ');?></span>
+			<input type="text" name="start_date_from" id="start_date_from">
+		</p>
+		<p>
+			<span><?php echo $this -> translate('To ');?></span>
+			<input type="text" name="start_date_to" id="start_date_to">
+		</p>
+	</div>
+</div>
 
-<select id="province_id" name="province_id"></select>
-<select id="city_id" name="city_id"></select>
+<div class="tf_campaign_filter_age">
+	<h5 class="tf_campaign_filter_title"><?php echo $this -> translate("Location");?></h5>
+	
+	<div class="campaign_location">
+		<?php
+			$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
+			$countriesAssoc = array('0'=>$this -> translate('All')) + $countriesAssoc;
+		?>
 
-<button type="submit"><?php echo $this -> translate('Filter');?></button>
+		<select id="country_id" name="country_id">
+			<?php foreach ($countriesAssoc as $key => $value) :?>
+				<option value="<?php echo $key;?>"><?php echo $value;?></option>
+			<?php endforeach;?>
+		</select>
 
+		<select id="province_id" name="province_id"></select>
+		<select id="city_id" name="city_id"></select>
+
+		<button type="submit" class="btn-filter"><?php echo $this -> translate('Filter');?></button>
+		</div>
+</div>
 </form>
+</div>
 </div>
 <script type="text/javascript">
 

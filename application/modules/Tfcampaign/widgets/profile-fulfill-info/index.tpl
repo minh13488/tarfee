@@ -9,7 +9,7 @@
 
 <!-- type == age  -->
 <?php if($type == "age") :?>
-	<?php echo $this -> translate("Please choose the age limitation");?>
+	<h6><?php echo $this -> translate("Please choose the age limitation");?></h6>
 	<label for="from_age"><?php echo $this->translate('From')?></label>
     <select id="from_age" name="from_age">
         <option value=""></option>
