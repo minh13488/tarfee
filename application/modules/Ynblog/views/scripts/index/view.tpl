@@ -13,31 +13,54 @@ pre {
 white-space: normal;
 }
 </style>
-<h2>
+<h2 style="padding: 0 10px;margin:0;">
   <?php echo $this->blog->getTitle() ?>
 </h2>
 <ul class='ynblogs_entrylist'>
   <li>
-    <div class="ynblog_entrylist_entry_date">
-      <?php echo $this->translate('Posted by');?> <?php echo $this->htmlLink($this->owner->getHref(), $this->owner->getTitle()) ?>
-      <?php echo $this->timestamp($this->blog->creation_date) ?>
-      <?php if( $this->category ): ?>
-        -
-        <?php echo $this->translate('Filed in') ?>
-        <a href='<?php echo $this->url(array('user_id'=>$this->blog->owner_id,'category'=>$this->category->category_id,'sort'=>'recent'),'blog_view',true);?>'><?php echo $this->translate($this->category->category_name) ?></a>
-      <?php endif; ?>
-      <?php if (count($this->blogTags )):?>
-        -
-        <?php foreach ($this->blogTags as $tag): ?>
-          <a href='javascript:void(0);' onclick='javascript:tagAction(<?php echo $tag->getTag()->tag_id; ?>);'>#<?php echo $tag->getTag()->text?></a>&nbsp;
-        <?php endforeach; ?>
-      <?php endif; ?>
-      -
-      <?php echo $this->translate(array('%s view', '%s views', $this->blog->view_count), $this->locale()->toNumber($this->blog->view_count)) ?>
-    </div>
-    <div class="ynblog_entrylist_entry_body rich_content_body">
-		 <?php echo $this->blog->body ?>
-    </div>
+
+      
+
+      <?php $category = Engine_Api::_ ()->getItemTable ( 'blog_category' )->find ( $this->blog->category_id )->current (); ?>
+      <?php if($category): ?>
+
+        <div class="ynblog_category">
+          <a href='<?php echo $this->url(array('user_id'=>$this->blog->owner_id,'category'=>$this->category->category_id,'sort'=>'recent'),'blog_view',true);?>'><?php echo $this->translate($this->category->category_name) ?></a>
+        </div>
+        <?php endif; ?>
+
+      <div class="ynblog_entrylist_entry_body rich_content_body">
+        <?php echo $this->blog->body ?>
+      </div>
+      
+      <div style="padding-left:10px;margin-top: 5px;">
+        <?php if (count($this->blogTags )):?>
+          <?php foreach ($this->blogTags as $tag): ?>
+            <a href='javascript:void(0);' onclick='javascript:tagAction(<?php echo $tag->getTag()->tag_id; ?>);'>#<?php echo $tag->getTag()->text?></a>&nbsp;
+          <?php endforeach; ?>
+        <?php endif; ?>
+      </div>
+
+      <div class="ynblog_entrylist_entry_date">
+          <?php echo $this->translate('Posted by');?> <?php echo $this->htmlLink($this->owner->getHref(), $this->owner->getTitle()) ?>
+
+          <span>&nbsp;-&nbsp;<?php echo $this->timestamp($this->blog->creation_date) ?></span>
+      </div>
+
+      <div class="ynblog_statistics">
+        <?php $likeCount = $this->blog ->likes()->getLikeCount(); ?>
+        <span><?php echo $this->translate(array('%s like','%s likes', $likeCount), $likeCount)?></span>
+
+        <?php $disLikeCount = Engine_Api::_()->getDbtable('dislikes', 'yncomment') -> getDislikeCount($this->blog); ?>
+        <span><?php echo $this->translate(array('%s dislike','%s dislikes', $disLikeCount), $disLikeCount)?></span>
+
+        <span><?php echo $this->translate(array('%s comment','%s comments', $this->blog -> comment_count), $this->blog -> comment_count)?></span>
+          <span>
+            <?php echo $this->translate(array('%s view', '%s views', $this->blog->view_count), $this->locale()->toNumber($this->blog->view_count)) ?>
+          </span>
+      </div>
+
+
   </li>
 </ul>
 <br/>
@@ -71,7 +94,7 @@ white-space: normal;
 </span>
 
 <!-- favourite-->
-<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this->blog->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this->blog->getGuid()),'default', true);?>
 <a href="javascript:;" onclick="openPopup('<?php echo $url?>')"><i class="fa fa-flag"></i> <?php echo $this->translate("Report")?></a>
 </div>
 

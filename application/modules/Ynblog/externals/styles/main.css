@@ -151,7 +151,6 @@ ul.ynblogs_entrylist h3{
     font-weight: bold;
     font-size: 14px;
     padding: 10px;
-    margin-bottom: 10px;
 
     a{
         color: $theme_font_color;
@@ -170,7 +169,16 @@ ul.ynblogs_entrylist h3{
 .ynblog_category{
     padding-left: 10px;
     font-weight: bold;
+
+    a{
+      color: $theme_font_color_light !important;
+
+      &:hover{
+        color: $theme_link_color !important;
+      }
+    }
 }
+
 ul.ynblogs_entrylist,
 ul.generic_list_widget .stats
 {
@@ -182,7 +190,8 @@ ul.ynblogs_entrylist .ynblog_entrylist_entry_body
 {
   line-height: 1.5em;
   text-align: justify;
-  padding: 5px 10px 10px 10px;
+  padding-bottom: 0;
+  padding: 10px;
   padding-bottom: 0;
   p{
     margin: 0;
