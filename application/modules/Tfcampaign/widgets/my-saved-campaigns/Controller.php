@@ -14,5 +14,9 @@ class Tfcampaign_Widget_MySavedCampaignsController extends Engine_Content_Widget
 				
 		//get saved campaigns
 		$this -> view -> saveRows = $saveRows = $saveTable -> getSavedCampaigns($viewer -> getIdentity());
+		
+		if(!count($saveRows)) {
+			return $this -> setNoRender();
+		}
 	}
 }

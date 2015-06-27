@@ -1,5 +1,5 @@
 <?php
-class Tfcampaign_Form_WithDrawList extends Engine_Form
+class Tfcampaign_Form_EditList extends Engine_Form
 {
   protected $_campaign;
   
@@ -16,9 +16,9 @@ class Tfcampaign_Form_WithDrawList extends Engine_Form
   	$settings = Engine_Api::_()->getApi('settings', 'core');
 	$view = Zend_Registry::get("Zend_View");
 	$viewer = Engine_Api::_() -> user() -> getViewer();
-    $this -> setTitle('Withdraw Player');
+    $this -> setTitle('Edit Player Submission');
 	$this -> setAttrib('class', 'global_form_popup');
-	$this -> setDescription("Choose player that you want to withdraw");
+	$this -> setDescription("Choose the player that you want to edit");
 	
 	$submissionIds = $this ->_campaign -> getSubmissionByUser($viewer);
 	$arrValues = array();
@@ -33,26 +33,16 @@ class Tfcampaign_Form_WithDrawList extends Engine_Form
 			}
 		}
 	}
-    $this->addElement('Multiselect', 'submission_ids', array(
+    $this->addElement('Select', 'submission_id', array(
       'label' => 'Submission List',
       'multiOptions' => $arrValues,
       'allowEmpty' => false,
       'required' => true,
     ));
 	
-	 // Buttons
-    $this->addElement('Button', 'submit', array(
-      'label' => 'Withdraw',
-      'type' => 'submit',
-      'ignore' => true,
-      'decorators' => array(
-        'ViewHelper',
-      ),
-    ));
-	
     // Buttons
     $this->addElement('Button', 'submit', array(
-      'label' => 'Withdraw',
+      'label' => 'Choose',
       'type' => 'submit',
       'ignore' => true,
       'decorators' => array(
