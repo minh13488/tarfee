@@ -55,7 +55,12 @@
 			<p><?php echo $this -> translate("Note");?>: <?php echo $submissionPlayer -> getTitle();?></p>
 			<hr>
 			<p><?php echo $this -> translate("Description");?>: <?php echo $submissionPlayer -> getDescription();?></p>
-
+			<?php $reason = $submissionPlayer -> getReason();?>
+			<?php if($reason) :?>
+			<p>
+				<?php echo $this -> translate('Reason');?>: <?php echo $this -> translate($reason -> title);?>
+			</p>
+			<?php endif;?>	
 		</div>
 
 		<div class="tf_submission_btn">
@@ -63,13 +68,7 @@
 			<?php if($this -> viewer() -> isSelf($campaign -> getOwner())) :?>
 				<li>
 			<?php echo $this -> htmlLink($this -> url(array('action' => 'unhide', 'campaign_id' => $campaign -> getIdentity(), 'id' => $submissionPlayer -> getIdentity()), 'tfcampaign_specific', true), $this -> translate("unhide"), array('class' => 'smoothbox')) ?>
-		</li><?php endif;?>
-				<?php $reason = $submissionPlayer -> getReason();?>
-		<?php if($reason) :?>
-			<li>
-			<?php echo $this -> translate('Reason');?>:<?php echo $this -> translate($reason -> title);?>
-			</li>
-		<?php endif;?>
+			</li><?php endif;?>
 			</ul>
 		</div>
 		
