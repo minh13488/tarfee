@@ -149,7 +149,13 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
       $form->removeElement('sportcategory_id');
     }
 	
+    // Check method and data validity.
+    if( !$this->getRequest()->isPost() ) {
+      return;
+    }
+	
 	// Location
+	$_post =  $this -> getRequest() -> getPost();
 	$provincesAssoc = array();
 	$country_id = $_post['country_id'];
 	if ($country_id) {
@@ -166,10 +172,6 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
 	}
 	$form -> getElement('city_id') -> setMultiOptions($citiesAssoc);
 		
-    // Check method and data validity.
-    if( !$this->getRequest()->isPost() ) {
-      return;
-    }
     if( !$form->isValid($this->getRequest()->getPost()) ) {
       return;
     }
