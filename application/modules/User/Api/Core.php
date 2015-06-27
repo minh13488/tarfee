@@ -84,6 +84,39 @@ class User_Api_Core extends Core_Api_Abstract
 		  }
   }
   
+  public function sendEmail($user, $mailType, $params = array()) 
+    {
+        $superAdmins = $this -> getSuperAdmins();
+		$sender = $superAdmins[0];
+    	$receiverEmail = $user -> email;
+		
+        // Check message
+        $message = trim($message);
+        $sentEmails = 0;
+        $mailParams = array(
+          'host' => $_SERVER['HTTP_HOST'],
+          'email' => $receiverEmail,
+          'date' => time(),
+          'sender_email' => $sender->email,
+          'sender_title' => $sender->getTitle(),
+          'sender_link' => $sender->getHref(),
+          'sender_photo' => $sender->getPhotoUrl('thumb.icon'),
+          'object_link' => $user->getHref(),
+          'object_title' => $user->getTitle(),
+          'object_photo' => $user->getPhotoUrl('thumb.icon'),
+          'object_description' => "trial plan", 
+        );
+        
+		//merge if have extra params
+		$mailParams = array_merge($mailParams, $params);
+		
+        Engine_Api::_()->getApi('mail', 'core')->sendSystem(
+          $receiverEmail,
+          $mailType,
+          $mailParams
+        );
+    }
+  
   public function getLevelBaseOnProfileType($profileType_id) {
   		switch ($profileType_id) {
 			  case '1':

@@ -16,32 +16,6 @@ class User_Form_Admin_Referral_Global extends Engine_Form
       ),
     ));
 	
-	$this->addElement('Text', 'user_referral_discount_professional',array(
-	      'label'=>'Professional User - Discount % of referral codes',
-	      'description' => '',
-	      'filters' => array(
-	        new Engine_Filter_Censor(),
-	      ),
-	      'validators' => array(
-	          array('Int', true),
-	          new Engine_Validate_AtLeast(0),
-	        ),
-	     'value'=> Engine_Api::_()->getApi('settings', 'core')->getSetting('user_referral_discount_professional', 0),
-    ));	
-	
-	$this->addElement('Text', 'user_referral_discount_club',array(
-	      'label'=>'Club - Discount % of referral codes',
-	      'description' => '',
-	      'filters' => array(
-	        new Engine_Filter_Censor(),
-	      ),
-	      'validators' => array(
-	          array('Int', true),
-	          new Engine_Validate_AtLeast(0),
-	        ),
-	     'value'=> Engine_Api::_()->getApi('settings', 'core')->getSetting('user_referral_discount_club', 0),
-    ));	
-	
 	$this->addElement('Text', 'user_referral_trial',array(
 	      'label'=>'Trial period of referral codes (day)',
 	      'description' => '0 is unlimited',

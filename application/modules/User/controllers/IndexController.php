@@ -18,6 +18,62 @@
  */
 class User_IndexController extends Core_Controller_Action_Standard
 {
+	public function confirmTrialAction() {
+		$subscription_id = $this ->_getParam('id');
+		$subscription = Engine_Api::_() -> getItem('payment_subscription', $subscription_id);
+		if($subscription) {
+			//save tracking
+			$trialPlanTable = Engine_Api::_() -> getDbTable('trialplans', 'user');
+			$trialRow = $trialPlanTable -> getRow($subscription -> user_id, $subscription -> package_id);
+			if(isset($trialRow)) {
+				return $this->_helper->requireSubject()->forward();
+			} else {
+				$trialRow = $trialPlanTable -> createRow();
+				$trialRow -> package_id = $subscription -> package_id;
+				$trialRow -> user_id = $subscription -> user_id;
+				$trialRow -> save();
+			}
+			
+			$this->view->verified = true;
+			$this->view->approved =  true;
+			$subscription -> status = 'active';
+			$subscription -> save();
+			$subscription -> onTrialPaymentSuccess();
+			//set login for viewer
+			Zend_Auth::getInstance()->getStorage()->write($subscription -> user_id);
+			Engine_Api::_()->user()->setViewer();
+			$this -> view -> viewer_id = $subscription -> user_id;
+		}
+	}
+	
+	public function usingTrialAction() {
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(true);
+		
+		$subscription_id = $this ->_getParam('subscription_id');
+		$subscription = Engine_Api::_() -> getItem('payment_subscription', $subscription_id);
+		$package = Engine_Api::_() -> getItem('payment_package', $subscription -> package_id);
+		$user = Engine_Api::_() -> getItem('user', $subscription -> user_id);
+		if($user -> getIdentity()) {
+			$link = 'http';
+			if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
+			{
+			   $link .= "s";
+			}
+			$link .= "://";
+			$link .= $_SERVER["SERVER_NAME"] . $_SERVER["REQUEST_URI"] . "?id=" . $subscription_id;
+			$link  = str_replace("using-trial","confirm-trial", $link);
+						
+			$params = array(
+				'link' => "<a target='_blank' href='".$link."'>".$this -> view -> translate("Trial Plan Confirmation")."</a>",
+				'plan' => $package -> getTitle()."(".$package -> getPackageDescription().")",
+			);			
+			$mailType = "user_email_trial_confirm";
+			Engine_Api::_() -> user() -> sendEmail($user, $mailType, $params);
+		}
+				
+	}
+	
 	public function indexAction()
 	{
 

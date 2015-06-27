@@ -54,6 +54,18 @@
                   <?php echo $this->translate('Pay with %1$s', $this->translate($gateway->title)) ?>
                 </button>
               <?php endforeach; ?>
+              <?php if($this->package->trial_duration > 0):?>
+              	 <?php
+              	 	$trialPlanTable = Engine_Api::_() -> getDbTable('trialplans', 'user');
+					$trialRow = $trialPlanTable -> getRow($this -> subscription -> user_id, $this -> subscription -> package_id);
+              	 ?>
+              	 <?php if(!isset($trialRow)) :?>
+	               	<?php echo $this -> translate('or');?>
+	                <button type="button" onclick="callTrial('<?php echo $this->subscription->subscription_id;?>')">
+	                    <?php echo $this -> translate(array("Using trial with %s day", "Using trial with %s days", $this->package->trial_duration), $this->package->trial_duration);?>
+	                </button>
+	             <?php endif;?>   
+          	  <?php endif;?>
           </div>
         </div>
       </div>
@@ -62,3 +74,18 @@
   </form>
 
 <?php endif; ?>
+
+<script type="text/javascript">
+	<?php if($this->package->trial_duration > 0):?>
+		function callTrial(subscription_id) {
+			var url = '<?php echo $this -> url(array('action' => 'using-trial'), 'user_general', true) ?>';
+			new Request.JSON({
+		        url: url,
+		        data: {
+		            'subscription_id': subscription_id,
+		        },
+		    }).send();
+		    location.href='<?php echo $this -> url(array(), 'user_general', true);?>';
+		}
+	<?php endif;?>
+</script>
