@@ -1035,4 +1035,8 @@ class User_Model_User extends Core_Model_Item_Abstract
 		$row->creation_date = date('Y-m-d H:i:s');
 		$row->save();
 	}
+	
+	public function getClub() {
+		return Engine_Api::_()->advgroup()->getGroupUser($this);
+	}
 }

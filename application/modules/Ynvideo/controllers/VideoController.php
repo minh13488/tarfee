@@ -97,6 +97,7 @@ class Ynvideo_VideoController extends Core_Controller_Action_Standard
 		{
 			$video -> view_count++;
 			$video -> save();
+			Engine_Api::_()->getDbTable('views', 'ynvideo')->addView($video);
 			$embedded = $video -> getRichContent(true);
 		}
 

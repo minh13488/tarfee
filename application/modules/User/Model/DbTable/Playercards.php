@@ -8,11 +8,14 @@ class User_Model_DbTable_Playercards extends Engine_Db_Table
 		return $this -> fetchAll($select);
 	}
 	
-	public function getPlayersPaginator($user_id = 0)
+	public function getPlayersPaginator($user_id = 0, $onlyUser = false)
 	{
 		$select = $this -> select();
 		$select -> where('user_id = ?', $user_id)
 				-> order('creation_date DESC');
+		if ($onlyUser) {
+			$select -> where('parent_type = ?', 'user');
+		}
 		$paginator = Zend_Paginator::factory($select);
 	    if( !empty($params['page']) )
 	    {

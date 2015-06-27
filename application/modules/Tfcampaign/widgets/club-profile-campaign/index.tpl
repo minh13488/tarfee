@@ -11,6 +11,16 @@
 			<?php echo $campaign -> getDescription();?>
 		</div>
 		
+		<?php if($this->subject->isOwner($this->viewer())) :?>
+			<?php $url = $this -> url(array(
+			    'action' => 'create',
+			    'club_id' => $this->subject->getIdentity(),
+			    ),'tfcampaign_general', true)
+			;?>
+			
+			<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('Add more campaign')?></button></a>
+		<?php endif;?>
+		
 		<?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($campaign)) :?>
 			<?php $url = $this -> url(array(
 			    'action' => 'transfer-item',

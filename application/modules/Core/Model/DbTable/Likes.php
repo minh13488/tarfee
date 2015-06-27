@@ -55,6 +55,7 @@ class Core_Model_DbTable_Likes extends Engine_Db_Table
     $row->resource_id = $resource->getIdentity();
     $row->poster_type = $poster->getType();
     $row->poster_id = $poster->getIdentity();
+	$row->date = date('Y-m-d H:i:s');
     $row->save();
 
     if( isset($resource->like_count) )
