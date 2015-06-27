@@ -373,3 +373,7 @@ endif;
 	    </div>
 	</div>
 </div>
+
+<script type="text/javascript">
+	$$('.ynvideo_popup_close').addEvent('click',function(){parent.Smoothbox.close()});	
+</script>
