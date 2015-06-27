@@ -79,7 +79,7 @@
 
 				<?php if($this -> viewer() -> isSelf($submissionPlayer -> getOwner())) :?>
 				<li>
-					<?php echo $this -> htmlLink($this -> url(array('action' => 'withdraw', 'campaign_id' => $campaign -> getIdentity(), 'id' => $submissionPlayer -> getIdentity()), 'tfcampaign_specific', true), $this -> translate("withdraw"), array('class' => 'smoothbox')) ?>
+					<?php echo $this -> htmlLink($this -> url(array('action' => 'withdraw', 'campaign_id' => $campaign -> getIdentity(), 'id' => $submissionPlayer -> getIdentity()), 'tfcampaign_specific', true), $this -> translate("withdraw").'&nbsp;&nbsp;&nbsp;<i class="fa fa-times"></i>', array('class' => 'smoothbox')) ?>
 				</li>
 				<?php endif;?>
 

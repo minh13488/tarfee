@@ -79,6 +79,10 @@ a.btn-add-campaign{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 
+	&:focus{
+		color: #fff;
+	}
+
 	i.fa{
 		float: right;
 		position: relative;

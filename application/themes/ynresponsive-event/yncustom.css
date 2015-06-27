@@ -2099,7 +2099,10 @@ body#global_page_user-profile-index {
 }
 
 
-.layout_ynblog_recent_blogs{
+.layout_ynblog_recent_blogs,
+.layout_ynblog_favorite_blogs,
+.layout_ynblog_my_blogs,
+.layout_ynblog_top_blogs{
 	background: #fff;
 	overflow: hidden;
 	border-radius:5px;
@@ -2115,21 +2118,16 @@ body#global_page_user-profile-index {
 }
 
 .tf_list_talk{
-   padding: 15px;
    background: #fff;
 	border-radius: 0 0 5px 5px;
 	-webkit-border-radius:0 0 5px 5px;
 	-moz-border-radius: 0 0 5px 5px;
 
    & > li{
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      margin-bottom: 10px;
-      border-bottom: 1px solid $theme_border_medium_color;
+	padding: 15px;
+  	border-bottom: 1px solid $theme_border_medium_color;
 
       &:last-child{
-      	margin-bottom: 0;
-      	padding-bottom: 0;
       	border-bottom: 0;
       }
    
