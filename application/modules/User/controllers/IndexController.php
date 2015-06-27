@@ -37,6 +37,7 @@ class User_IndexController extends Core_Controller_Action_Standard
 			$this->view->verified = true;
 			$this->view->approved =  true;
 			$subscription -> status = 'active';
+			$subscription -> active = true;
 			$subscription -> save();
 			$subscription -> onTrialPaymentSuccess();
 			//set login for viewer
