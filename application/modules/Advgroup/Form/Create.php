@@ -6,10 +6,10 @@ class Advgroup_Form_Create extends Engine_Form
     $user = Engine_Api::_()->user()->getViewer();
 
     $this
-      ->setTitle('Create New Group');
+      ->setTitle('Create New Club');
 
     $this->addElement('Text', 'title', array(
-      'label' => 'Group Name',
+      'label' => 'Club Name',
       'allowEmpty' => false,
       'required' => true,
       'validators' => array(
@@ -131,7 +131,7 @@ class Advgroup_Form_Create extends Engine_Form
 
     $this->addElement('Radio', 'approval', array(
       'label' => 'Approve members?',
-      'description' => ' When people try to join this group, should they be allowed '.
+      'description' => ' When people try to join this club, should they be allowed '.
         'to join immediately, or should they be forced to wait for approval?',
       'multiOptions' => array(
         '0' => 'New members can join immediately.',
@@ -160,7 +160,7 @@ class Advgroup_Form_Create extends Engine_Form
     $availableLabels = array(
       'everyone' => 'Everyone',
       'registered' => 'Registered Members',
-      'member' => 'All Group Members',
+      'member' => 'All Club Members',
       'officer' => 'Officers and Owner Only',
       'owner' => 'Owner Only',
     );
@@ -179,7 +179,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_view', array(
             'label' => 'View Privacy',
-            'description' => 'Who may see this group?',
+            'description' => 'Who may see this club?',
             'multiOptions' => $viewOptions,
             'value' => key($viewOptions),
         ));
@@ -199,7 +199,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_comment', array(
             'label' => 'Comment Privacy',
-            'description' => 'Who may post on this group\'s wall?',
+            'description' => 'Who may post on this club\'s wall?',
             'multiOptions' => $commentOptions,
             'value' => key($commentOptions),
         ));
@@ -219,7 +219,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_photo', array(
             'label' => 'Photo - Album Creation',
-            'description' => 'Who may upload photos/albums to this group?',
+            'description' => 'Who may upload photos/albums to this club?',
             'multiOptions' => $photoOptions,
             'value' => key($photoOptions),
         ));
@@ -239,7 +239,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_event', array(
             'label' => 'Event Creation',
-           'description' => 'Who may create events for this group?',
+           'description' => 'Who may create events for this club?',
             'multiOptions' => $eventOptions,
             'value' => key($eventOptions),
         ));
@@ -258,7 +258,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_poll', array(
             'label' => 'Poll Creation',
-           'description' => 'Who may create polls for this group?',
+           'description' => 'Who may create polls for this club?',
             'multiOptions' => $pollOptions,
             'value' => key($pollOptions),
         ));
@@ -277,8 +277,8 @@ class Advgroup_Form_Create extends Engine_Form
       // Make select box
       } else {
         $this->addElement('Select', 'auth_sub_group', array(
-            'label' => 'Sub Group Creation',
-           'description' => 'Who may create sub group for this group?',
+            'label' => 'Sub Club Creation',
+           'description' => 'Who may create sub club for this club?',
             'multiOptions' => $subGroupOptions,
             'value' => key($subGroupOptions),
         ));
@@ -298,7 +298,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_video', array(
             'label' => 'Video Creation',
-            'description' => 'Who may create videos for this group?',
+            'description' => 'Who may create videos for this club?',
             'multiOptions' => $videoOptions,
             'value' => key($videoOptions),
         ));
@@ -318,7 +318,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_wiki', array(
             'label' => 'Wiki Page Creation',
-           'description' => 'Who may create wiki pages for this group?',
+           'description' => 'Who may create wiki pages for this club?',
             'multiOptions' => $wikiOptions,
             'value' => key($wikiOptions),
         ));
@@ -338,7 +338,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_music', array(
             'label' => 'Music Creation',
-           'description' => 'Who may create music albums for this group?',
+           'description' => 'Who may create music albums for this club?',
             'multiOptions' => $musicOptions,
             'value' => key($musicOptions),
         ));
@@ -358,7 +358,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_folder', array(
             'label' => 'Folder Creation',
-           'description' => 'Who may create folder for this group?',
+           'description' => 'Who may create folder for this club?',
             'multiOptions' => $folderOptions,
             'value' => key($folderOptions),
         ));
@@ -378,7 +378,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_file_upload', array(
             'label' => 'File Uploading',
-           'description' => 'Who may upload file on this group?',
+           'description' => 'Who may upload file on this club?',
             'multiOptions' => $fileuploadOptions,
             'value' => key($fileuploadOptions),
         ));
@@ -398,7 +398,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_file_down', array(
             'label' => 'File Downloading',
-           'description' => 'Who may download file from this group?',
+           'description' => 'Who may download file from this club?',
             'multiOptions' => $filedownloadOptions,
             'value' => key($filedownloadOptions),
         ));
@@ -418,7 +418,7 @@ class Advgroup_Form_Create extends Engine_Form
       } else {
         $this->addElement('Select', 'auth_listing', array(
             'label' => 'Listing Creation',
-            'description' => 'Who may create listings for this group?',
+            'description' => 'Who may create listings for this club?',
             'multiOptions' => $listingOptions,
             'value' => key($listingOptions),
         ));

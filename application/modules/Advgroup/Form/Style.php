@@ -4,7 +4,7 @@ class Advgroup_Form_Style extends Engine_Form
   public function init()
   {
     $this
-      ->setTitle('Group Styles')
+      ->setTitle('Club Styles')
       ->setMethod('post')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()))
       ->setAttrib('class', 'global_form_popup')
@@ -13,8 +13,8 @@ class Advgroup_Form_Style extends Engine_Form
     $this->removeDecorator('FormWrapper');
 
     $this->addElement('Textarea', 'style', array(
-      'label' => 'Custom Group Styles',
-      'description' => 'You can change the colors, fonts, and styles of your group by adding CSS code below. The contents of the text area below will be output between <style> tags on your group.'
+      'label' => 'Custom Club Styles',
+      'description' => 'You can change the colors, fonts, and styles of your club by adding CSS code below. The contents of the text area below will be output between <style> tags on your club.'
     ));
     $this->style->getDecorator('Description')->setOption('placement', 'APPEND');
 

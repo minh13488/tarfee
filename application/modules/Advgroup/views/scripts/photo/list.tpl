@@ -3,7 +3,7 @@
   <?php echo $this->translate('&#187; Photos');?>
 </h2>
   <div class="group_discussions_options">
-    <?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity()), $this->translate('Back to Group'), array(
+    <?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity()), $this->translate('Back to Club'), array(
             'class' => 'buttonlink icon_back'
     )) ?>
 

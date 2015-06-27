@@ -1,6 +1,6 @@
 <form method="post" class="global_form_popup" action="<?php echo $this->url(array()) ?>">
   <div>
-    <h3><?php echo $this->translate("Accept Verify Group?") ?></h3>
+    <h3><?php echo $this->translate("Accept Verify Club?") ?></h3>
     <p>
       <?php echo $this->translate("Are you sure that you want to verify this club?") ?>
     </p>

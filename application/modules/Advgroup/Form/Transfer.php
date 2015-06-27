@@ -3,7 +3,7 @@ class Advgroup_Form_Transfer extends Engine_Form
 {
 	public function init()
 	{
-		$this -> setTitle('Group Owner Transfer') -> setDescription('Please choose a member you want to transfer the owner role to:') -> setAttrib('class', 'global_form_popup') -> setMethod('post') -> setAttrib('id', 'advgroup_transfer');
+		$this -> setTitle('Club Owner Transfer') -> setDescription('Please choose a member you want to transfer the owner role to:') -> setAttrib('class', 'global_form_popup') -> setMethod('post') -> setAttrib('id', 'advgroup_transfer');
 
 		$this -> addElement('Text', 'to', array('autocomplete' => 'off'));
 		Engine_Form::addDefaultDecorators($this -> to);

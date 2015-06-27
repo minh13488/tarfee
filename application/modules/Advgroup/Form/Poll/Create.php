@@ -38,7 +38,7 @@ public function init()
     $availableLabels = array(
         'everyone'      => 'Everyone',
         'registered'    => 'All Registered Members',
-        'parent_member' => 'Group Members',
+        'parent_member' => 'Club Members',
         'owner'         => 'Just Me',
     );
   

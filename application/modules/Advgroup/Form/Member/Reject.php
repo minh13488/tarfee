@@ -3,8 +3,8 @@ class Advgroup_Form_Member_Reject extends Engine_Form
 {
 	public function init()
 	{
-		$this -> setTitle('Reject Group Invitation') 
-		-> setDescription('Would you like to reject the invitation to this group?') 
+		$this -> setTitle('Reject Club Invitation') 
+		-> setDescription('Would you like to reject the invitation to this club?') 
 		-> setAttrib('class', 'global_form_popup') 
 		-> setMethod('POST') 
 		-> setAction(Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array()));

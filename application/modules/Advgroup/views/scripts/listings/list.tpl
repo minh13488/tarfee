@@ -23,7 +23,7 @@
         <div class="advgroup-profile-module-header">
             <!-- Menu Bar -->
             <div class="advgroup-profile-header-right">
-                <?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity(), 'slug' => $this->group-> getSlug(), 'tab' => $this -> tab), '<i class="fa fa-arrow-left"></i>'.$this->translate('Back to Group'), array(
+                <?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity(), 'slug' => $this->group-> getSlug(), 'tab' => $this -> tab), '<i class="fa fa-arrow-left"></i>'.$this->translate('Back to Club'), array(
                 'class' => 'buttonlink'
                 )) ?>
                 <?php if ($this->canCreate):?>
@@ -158,7 +158,7 @@
                             'group_id' => $this->group->getIdentity(),
                             'type' => 'ynlistings_listing',
                         ),
-                        '<i class="fa fa-times"></i>'.$this->translate('Remove Listing To Group'),
+                        '<i class="fa fa-times"></i>'.$this->translate('Remove Listing To Club'),
                         array('class'=>'buttonlink smoothbox'))
                         ?>
                     <?php endif; ?> 

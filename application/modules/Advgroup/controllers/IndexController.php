@@ -393,8 +393,8 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
     $search_form->addElement('Select', 'view', array(
       'label' => 'View:',
       'multiOptions' => array(
-        '0' => 'All My Groups',
-        '2' => 'Only Groups I Lead',
+        '0' => 'All My Clubs',
+        '2' => 'Only Clubs I Lead',
       ),
       'onchange' => '$(this).getParent("form").submit();',
     ));

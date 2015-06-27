@@ -3,7 +3,7 @@ class Advgroup_Form_Invite extends Engine_Form
 {
 	public function init()
 	{
-		$this -> setTitle('Invite Members') -> setDescription('Choose the people you want to invite to this group.') -> setAttrib('id', 'group_form_friends_invite') -> setAttrib('action', 'javascript:;');
+		$this -> setTitle('Invite Members') -> setDescription('Choose the people you want to invite to this club.') -> setAttrib('id', 'group_form_friends_invite') -> setAttrib('action', 'javascript:;');
 
 		$this -> addElement('Text', 'friends_search', array(
 			'description' => '(filter the search box and press Enter to search)',

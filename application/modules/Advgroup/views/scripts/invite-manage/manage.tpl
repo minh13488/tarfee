@@ -32,7 +32,7 @@ function actionSelected(actionType){
 
 <!-- Menu Bar-->
 <div class="group_discussions_options">
-<?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity()), $this->translate('Back to Group'), array(
+<?php echo $this->htmlLink(array('route' => 'group_profile', 'id' => $this->group->getIdentity()), $this->translate('Back to Club'), array(
     'class' => 'buttonlink icon_back'
   )) ?>
 </div>
@@ -42,8 +42,8 @@ function actionSelected(actionType){
     <div class="group_members_info">
         <div class="group_members_total">
           <?php echo $this->translate(
-                    array('This group has %s invitation waiting for resend.',
-                          'This group has %s invitations waiting for resend.',
+                    array('This club has %s invitation waiting for resend.',
+                          'This club has %s invitations waiting for resend.',
                           $this->waitingMembers->getTotalItemCount()),
                           $this->locale()->toNumber($this->waitingMembers->getTotalItemCount()
                     )); ?>
@@ -138,6 +138,6 @@ function actionSelected(actionType){
 <?php else:?>
    <br />
    <div class="tip">
-          <span> <?php echo $this->translate("This group don't have any invitations.");?> </span>
+          <span> <?php echo $this->translate("This club don't have any invitations.");?> </span>
    </div>
  <?php endif;?>
