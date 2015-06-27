@@ -17,9 +17,19 @@ class User_Form_Library_MoveToPlayer extends Engine_Form
 	foreach($players as $player) {
 		$arrValue[$player -> getIdentity()] = $player -> getTitle();
 	}
+	
+	$move_type = array('player' => 'Player');
+	if (Engine_Api::_()->user()->canTransfer()) {
+		$move_type['group'] = 'Club';
+	}
+	
+	$this->addElement('Select', 'move_type', array(
+		'label' => 'Move To',
+	));
+	
 	 $this->addElement('Select', 'move_to', array(
 	  'required' => true,
-      'label' => 'To Player',
+      'label' => 'Player',
       'multiOptions' => $arrValue,
     ));
 		

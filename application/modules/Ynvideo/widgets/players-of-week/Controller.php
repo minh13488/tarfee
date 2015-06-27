@@ -53,7 +53,7 @@ class Ynvideo_Widget_PlayersOfWeekController extends Engine_Content_Widget_Abstr
 		// $unsureTbl = Engine_Api::_()->getDbTable('unsures', 'yncomment');
 		// $unsureTblName = $unsureTbl->info('name');
 		$select = $table->select()
-			->from($tableName, "$tableName.*,(count($actionTblName.action_id)*$share_point + count($likeTblName.like_id)*$like_point + count($commentTblName.comment_id)*$comment_point + count($viewTblName.view_id)*$view_point + count($dislikeTblName.dislike_id)*$dislike_point + count($unsureTblName.unsure_id)*$unsure_point) as total_point")
+			->from($tableName, "$tableName.*,(count($actionTblName.action_id)*$share_point + count($likeTblName.like_id)*$like_point + count($commentTblName.comment_id)*$comment_point + count($viewTblName.view_id)*$view_point + count($dislikeTblName.dislike_id)*$dislike_point) as total_point")
 			->setIntegrityCheck(false);
 			
 		$select->where("parent_type = ?", 'user_playercard');
