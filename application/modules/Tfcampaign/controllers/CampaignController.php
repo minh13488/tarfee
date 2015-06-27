@@ -10,6 +10,77 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		$this -> _helper -> requireSubject('tfcampaign_campaign');
 	}
 	
+	public function editSubmissionAction() {
+		
+		$this -> _helper -> layout -> setLayout('default-simple');
+		
+		// Return if guest try to access to create link.
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
+		$campaign = Engine_Api::_() -> core() -> getSubject();
+		$submission = Engine_Api::_() -> getItem('tfcampaign_submission', $this ->_getParam('submission_id'));
+		$this -> view -> form = $form = new Tfcampaign_Form_EditSubmit(array('campaign' => $campaign));
+		
+		$form -> populate($submission -> toArray());
+		
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		$posts = $this -> getRequest() -> getPost();
+		//check valid form
+		if (!$form -> isValid($posts)) {
+			return;
+		}
+		
+		$values = $form -> getValues();
+		$db = $campaign -> getTable() -> getAdapter();
+		$db -> beginTransaction();
+		try
+		{
+			$submission -> setFromArray($values);
+			$submission -> save();
+			
+			// Set photo
+			if (!empty($values['photo']))
+			{
+				$submission -> setPhoto($form -> photo);
+			}
+			
+			$db -> commit();
+		}
+		catch (Exception $e)
+		{
+			$db -> rollBack();
+			throw $e;
+		}
+		
+		// Redirect
+		return $this -> _forward('success', 'utility', 'core', array(
+			'parentRefresh' => true,
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Please wait...'))
+		));
+	}
+	
+	public function listEditAction() {
+		$campaign = Engine_Api::_() -> core() -> getSubject();
+		// Return if guest try to access to create link.
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
+		$this -> view -> form = $form = new Tfcampaign_Form_EditList(array('campaign' => $campaign));
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		$posts = $this -> getRequest() -> getPost();
+		if (!$form -> isValid($posts)) {
+			return;
+		}
+		
+		$values = $form -> getValues();
+		$submission_id = $values['submission_id'];
+					
+		 return $this->_helper->redirector->gotoRoute(array('action' => 'edit-submission', 'campaign_id' => $campaign -> getIdentity(), 'submission_id' => $submission_id), 'tfcampaign_specific', true);
+	}
+	
 	public function listWithdrawAction() {
 		$campaign = Engine_Api::_() -> core() -> getSubject();
 		// Return if guest try to access to create link.

@@ -56,9 +56,9 @@
  		</div>
         <?php endif;?>
 
-        	<?php// $sport = $player->getSport();?>
+        	<!--?php// $sport = $player->getSport();?-->
             <?php if ($sport):?>    
-                <?php //echo ' - '.$sport->title ?>
+                <!--?php //echo ' - '.$sport->title ?-->
             <?php endif;?>
     </div>
 </div>

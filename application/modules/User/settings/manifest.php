@@ -150,7 +150,6 @@ return array(
       'defaults' => array(
         'module' => 'user',
         'controller' => 'library',
-        'action' => 'create-sub-library'
       ),
       'reqs' => array(
         'action' => '(create-sub-library|edit|delete|move-to-sub|move-to-main|move-to-player)',

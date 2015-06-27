@@ -14,5 +14,10 @@ class Tfcampaign_Widget_MyCampaignsController extends Engine_Content_Widget_Abst
 				
 		//get all campaigns user own
 		$this -> view -> ownCampaigns = $ownCampaigns = $campaignTable -> getCampaignsByUser($viewer);
+		
+		if(!count($ownCampaigns)) {
+			return $this -> setNoRender();
+		}
+		
 	}
 }

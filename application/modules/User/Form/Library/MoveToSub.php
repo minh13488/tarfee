@@ -37,9 +37,19 @@ class User_Form_Library_MoveToSub extends Engine_Form
 		$arrValue[$sub -> getIdentity()] = $view -> translate($sub -> getTitle());
 	}
 	
+	$move_type = array('library' => 'Library');
+	if (Engine_Api::_()->user()->canTransfer()) {
+		$move_type['group'] = 'Club';
+	}
+	
+	$this->addElement('Select', 'move_type', array(
+		'label' => 'Move To',
+		'multiOptions' => $move_type
+	));
+	
 	 $this->addElement('Select', 'move_to', array(
 	  'required' => true,
-      'label' => 'To Library',
+      'label' => 'Library',
       'multiOptions' => $arrValue,
     ));
 		

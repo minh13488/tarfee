@@ -3,6 +3,34 @@
 class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 {
 	
+	public function removeSaveAction() {
+				
+		if (!$this -> _helper -> requireUser -> isValid())
+			return;
+		
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		$saveTbl = Engine_Api::_() -> getDbTable("saves", "tfcampaign");
+		$campaign_id =  $this ->_getParam('campaign_id');
+		
+		$this -> view -> form = $form = new Tfcampaign_Form_RemoveSave();
+		if (!$this -> getRequest() -> isPost()) {
+			return;
+		}
+		
+		$saveRow = $saveTbl -> getSaveRow($viewer -> getIdentity(), $campaign_id);
+		if ($saveRow) {
+			//existing row
+			$saveRow -> active = 1 - $saveRow -> active;
+			$saveRow -> save();
+		}
+		
+		// Redirect
+		return $this -> _forward('success', 'utility', 'core', array(
+			'parentRefresh' => true,
+			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Please wait...'))
+		));
+	}
+	
 	public function saveAction() {
 		$this -> _helper -> layout -> disableLayout();
 		$this -> _helper -> viewRenderer -> setNoRender(true);
@@ -225,7 +253,7 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 			
 			// Redirect
 			return $this -> _forward('success', 'utility', 'core', array(
-				'parentRedirect' => $viewer -> getHref(),
+				'parentRedirect' => $campaign -> getHref(),
 				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Please wait...'))
 			));
 		}

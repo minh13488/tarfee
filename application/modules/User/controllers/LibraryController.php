@@ -27,6 +27,13 @@ class User_LibraryController extends Core_Controller_Action_Standard
 		}
 		
 		$values = $form -> getValues();
+		
+		$video = Engine_Api::_() -> getItem('video', $videoID);
+		
+		if ($values['move_type'] == 'group') {
+			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'transfer-item', 'subject' => $video->getGuid()),'user_general', true);
+		}
+		
 		$move_to = $values['move_to'];
 		$mappingTable = Engine_Api::_() -> getDbTable('mappings', 'user');
 		$db = $mappingTable -> getAdapter();
@@ -43,7 +50,6 @@ class User_LibraryController extends Core_Controller_Action_Standard
 				$mappingRow -> owner_type = $player -> getType();
 				$mappingRow -> save();
 				
-				$video = Engine_Api::_() -> getItem('video', $videoID);
 				if($video) {
 					$video -> parent_type = $player -> getType();
 					$video -> parent_id = $move_to;
@@ -86,6 +92,14 @@ class User_LibraryController extends Core_Controller_Action_Standard
 			return;
 		}
 		
+		$values = $form -> getValues();
+		
+		$video = Engine_Api::_() -> getItem('video', $videoID);
+		
+		if ($values['move_type'] == 'group') {
+			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'transfer-item', 'subject' => $video->getGuid()),'user_general', true);
+		}
+		
 		$mappingTable = Engine_Api::_() -> getDbTable('mappings', 'user');
 		$db = $mappingTable -> getAdapter();
 		$db -> beginTransaction();
@@ -100,7 +114,6 @@ class User_LibraryController extends Core_Controller_Action_Standard
 				$mappingRow -> owner_type = 'user_library';
 				$mappingRow -> save();
 				
-				$video = Engine_Api::_() -> getItem('video', $videoID);
 				if($video) {
 					$video -> parent_type = $mainLibrary -> getType();
 					$video -> parent_id = $mainLibrary -> getIdentity();
@@ -143,6 +156,13 @@ class User_LibraryController extends Core_Controller_Action_Standard
 		}
 		
 		$values = $form -> getValues();
+		
+		$video = Engine_Api::_() -> getItem('video', $videoID);
+		
+		if ($values['move_type'] == 'group') {
+			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'transfer-item', 'subject' => $video->getGuid()),'user_general', true);
+		}
+		
 		$move_to = $values['move_to'];
 		$mappingTable = Engine_Api::_() -> getDbTable('mappings', 'user');
 		$db = $mappingTable -> getAdapter();

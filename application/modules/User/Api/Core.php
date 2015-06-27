@@ -768,16 +768,24 @@ class User_Api_Core extends Core_Api_Abstract
     }
   }
 	
-	public function canTransfer($item) {
+	public function canTransfer($item = null) {
+		if (is_null($item)) {
+			$viewer = Engine_Api::_()->user()->getViewer();
+			if (!$viewer->getIdentity()) return false;
+			$club = $viewer->getClub();
+			if ($club) return true;
+			else return false;
+		}
 		if (!empty($item->parent_type)) {
 			$parentType = $item->parent_type;
-			$user = Engine_Api::_()->getItem('user', $item->user_id);
+			$user_id = $item->getOwner()->getIdentity();
+			$user = Engine_Api::_()->getItem('user', $user_id);
 			if ($parentType == 'group') {
 				if ($user) {
 					return true;
 				}
 			}
-			else if ($parentType == 'user') {
+			else {
 				$club = $user->getClub();
 				if ($club) return true;
 			}
@@ -788,16 +796,24 @@ class User_Api_Core extends Core_Api_Abstract
 	public function transfer($item) {
 		if (!empty($item->parent_type)) {
 			$parentType = $item->parent_type;
-			$user = Engine_Api::_()->getItem('user', $item->user_id);
+			$user_id = $item->getOwner()->getIdentity();
+			$user = Engine_Api::_()->getItem('user', $user_id);
 			if ($parentType == 'group') {
 				if ($user) {
 					$item->parent_type = 'user';
 					$item->parent_id = $user->getIdentity();
+					
+					if ($item->getType() == 'video') {
+						$lib = $user->getMainLibrary();
+						$item->parent_type = $lib->getType();
+						$item->parent_id = $lib->getIdentity();	
+					}
+					
 					$item->save();
 					return true;
 				}
 			}
-			else if ($parentType == 'user') {
+			else {
 				$club = $user->getClub();
 				if ($club) {
 					$item->parent_type = 'group';
