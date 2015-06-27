@@ -129,7 +129,8 @@ ul.ynblogs_entrylist
 }
 ul.ynblogs_entrylist > li
 {
-  padding-bottom: 10px;
+  background: #fff;
+  border-radius: 5px;
   border-bottom-width: 1px;
   margin-bottom: 10px
 }
@@ -589,10 +590,7 @@ body#global_page_ynblog-index-listing{
         background-color: #dadada;
     }
     .layout_core_content{
-        background: #fff;
-        border-radius: 5px;
-        -webkit-border-radius: 5px;
-        -moz-border-radius: 5px;
+
     }
     .layout_right{
         width: 320px;
