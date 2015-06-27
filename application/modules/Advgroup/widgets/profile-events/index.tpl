@@ -75,6 +75,19 @@
             <?php echo Engine_Api::_()->advgroup()->subPhrase($event->description,250);?>
           </p>
         </div>
+        <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($event)) :?>
+		<div>
+			<?php
+				echo $this->htmlLink(array(
+		            'route' => 'user_general',
+		            'action' => 'transfer-item',
+					'subject' => $event -> getGuid(),
+		        ), '<i class="fa fa-exchange"></i>', array(
+		            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to user profile')
+		        ));
+			?>
+		</div>
+		<?php endif;?>
       </li>
     <?php endforeach;?>
   </ul>

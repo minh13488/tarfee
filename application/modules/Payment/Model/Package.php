@@ -309,9 +309,17 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
   	  $referCode = null;
   	  if(isset($_SESSION['ref_code']))
 	  	$referCode = $_SESSION['ref_code'];
-	  $isEnabled = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1);
-	  $discount = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_discount', 0);
-	  $period = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_trial ', 0);
+	  $isEnabled = Engine_Api::_()->getApi('settings', 'core')->getSetting('user_referral_enable', 1);
+	  $discount = 0;
+	  switch ($this -> level_id) {
+		  case '6':
+			  $discount = Engine_Api::_()->getApi('settings', 'core')->getSetting('user_referral_discount_professional', 0);
+			  break;
+		  case '7':
+			  $discount = Engine_Api::_()->getApi('settings', 'core')->getSetting('user_referral_discount_club', 0);
+			  break;
+	  }
+	  $period = Engine_Api::_()->getApi('settings', 'core')->getSetting('user_referral_trial', 0);
 	  $now =  date("Y-m-d H:i:s");
 	  
 	  $invite = null;
