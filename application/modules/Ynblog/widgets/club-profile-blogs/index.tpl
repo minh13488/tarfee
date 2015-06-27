@@ -21,7 +21,7 @@
 		            'action' => 'transfer-item',
 					'subject' => $item -> getGuid(),
 		        ), '<i class="fa fa-exchange"></i>', array(
-		            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to club')
+		            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to user profile')
 		        ));
 			?>
 		</div>

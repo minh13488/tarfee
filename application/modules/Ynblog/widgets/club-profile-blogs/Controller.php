@@ -1,5 +1,5 @@
 <?php
-class Ynblog_Widget_ProfileBlogsController extends Engine_Content_Widget_Abstract
+class Ynblog_Widget_ClubProfileBlogsController extends Engine_Content_Widget_Abstract
 {
   protected $_childCount;
   
@@ -13,8 +13,8 @@ class Ynblog_Widget_ProfileBlogsController extends Engine_Content_Widget_Abstrac
     }
 
     // Get subject and check authorization
-    $subject = Engine_Api::_()->core()->getSubject();
-    if( !$subject->authorization()->isAllowed($viewer, 'view') ) {
+    $subject = Engine_Api::_()->core()->getSubject('group');
+    if( !$subject || !$subject->authorization()->isAllowed($viewer, 'view') ) {
       return $this->setNoRender();
     }
 
@@ -24,7 +24,7 @@ class Ynblog_Widget_ProfileBlogsController extends Engine_Content_Widget_Abstrac
                                       'draft'  => '0',
                                       'is_approved' => '1',
                                       'visible' => '1',
-                                      'user_id' =>  $subject->getIdentity(),
+                                      'parent_id' =>  $subject->getIdentity(),
                                       'parent_type' => $subject->getType()
                                       
                                 ));

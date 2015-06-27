@@ -123,6 +123,14 @@ class Ynblog_Api_Core extends Core_Api_Abstract {
 		if (!empty($params['user_id']) && is_numeric($params['user_id'])) {
 			$select -> where($blog_name . '.owner_id = ?', $params['user_id']);
 		}
+		
+		if (!empty($params['parent_type'])) {
+			$select -> where($blog_name . '.parent_type = ?', $params['parent_type']);
+		}
+		
+		if (!empty($params['parent_id']) && is_numeric($params['parent_id'])) {
+			$select -> where($blog_name . '.parent_id = ?', $params['parent_id']);
+		}
 
 		// Show type filter
 		if ((!empty($params['show']) && $params['show'] == 2) || (!empty($params['by_authors']) && !in_array('all', $params['by_authors']))) 
