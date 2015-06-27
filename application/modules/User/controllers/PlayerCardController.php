@@ -181,9 +181,10 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			}
 			$pageURL .= "://";
 			
+			$player = Engine_Api::_()->getItem($player_card->getType(), $player_card->getIdentity());
 			$url = $pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref().'/view/tab/'.$tab;
-			if ($player_card->parent_type == 'group') {
-				$club = Engine_Api::_()->getItem('group', $player_card->parent_id);
+			if ($player->parent_type == 'group') {
+				$club = Engine_Api::_()->getItem('group', $player->parent_id);
 				if ($club) $url = $pageURL . $_SERVER['HTTP_HOST'] . $club -> getHref();
 			}
 			return $this -> _helper -> redirector -> gotoUrl($url);
