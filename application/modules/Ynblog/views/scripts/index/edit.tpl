@@ -34,7 +34,7 @@
 if(!$session -> mobile){?>
 			  <div class="headline">
 			  <h2>
-			    <?php echo $this->translate('Blogs');?>
+			    <?php echo $this->translate('Talks');?>
 			  </h2>
 			  <div class="tabs">
 			    <?php

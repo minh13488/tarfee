@@ -31,7 +31,7 @@
 
 <?php
 if ($this->maximum_reach)
-	echo 	"<div class='tip'><span >" . $this->translate("Sorry! Maximum number of allowed blogs is: %s blog(s)",$this->maximum_blogs) . "</span></div>";
+	echo 	"<div class='tip'><span >" . $this->translate("Sorry! Maximum number of allowed talss is: %s talk(s)",$this->maximum_blogs) . "</span></div>";
 else
 	echo $this->form->render($this);
 ?>
