@@ -109,7 +109,20 @@ class Advgroup_Form_Create extends Engine_Form
             'order' => '99'
         ));
     
-    
+    $countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
+	$countriesAssoc = array('0'=>'') + $countriesAssoc;
+	$this->addElement('Select', 'country_id', array(
+		'label' => 'Country',
+		'multiOptions' => $countriesAssoc,
+	));
+
+	$this->addElement('Select', 'province_id', array(
+		'label' => 'Province/State',
+	));
+
+	$this->addElement('Select', 'city_id', array(
+		'label' => 'City',
+	));
 
     $this->addElement('Radio', 'search', array(
       'label' => 'Include in search results?',

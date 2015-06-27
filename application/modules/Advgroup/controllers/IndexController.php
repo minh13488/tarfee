@@ -149,6 +149,23 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
       $form->removeElement('sportcategory_id');
     }
 	
+	// Location
+	$provincesAssoc = array();
+	$country_id = $_post['country_id'];
+	if ($country_id) {
+		$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
+		$provincesAssoc = array('0'=>'') + $provincesAssoc;
+	}
+	$form -> getElement('province_id') -> setMultiOptions($provincesAssoc);
+	
+	$citiesAssoc = array();
+	$province_id = $_post['province_id'];
+	if ($province_id) {
+		$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
+		$citiesAssoc = array('0'=>'') + $citiesAssoc;
+	}
+	$form -> getElement('city_id') -> setMultiOptions($citiesAssoc);
+		
     // Check method and data validity.
     if( !$this->getRequest()->isPost() ) {
       return;
