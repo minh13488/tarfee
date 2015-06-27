@@ -38,9 +38,10 @@ class Advgroup_Widget_ProfileVideosByFansController extends Engine_Content_Widge
 	    $params['limit'] = $max;
 		
 		$ids = array();
-	    $list = $group->getOfficerList();
-	    foreach( $list->getAll() as $listiteminfo ) {
-	      	$ids[] = $listiteminfo->child_id;
+	    $members = $subject->membership()->getMembersInfo();
+	    foreach( $members as $member ) {
+	    	if ($member->user_id != $subject->user_id)
+	      		$ids[] = $member->user_id;
 	    }
 		
 		$params['user_ids'] = (empty($ids)) ? array(0) : $ids;

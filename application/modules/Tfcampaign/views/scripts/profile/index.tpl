@@ -110,28 +110,13 @@
 		<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'edit', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("edit");?></button></a>
 	<?php endif;?>
 	
-	<?php if($campaign -> allow_submit) :?>
-		<?php
-			$startDate = date_create($campaign->start_date);
-			$endDate = date_create($campaign->end_date);
-	        $nowDate = date_create($now);
-	        if ($nowDate <= $endDate && $nowDate >= $startDate) :
-		?>
-			<?php echo $this->htmlLink(
-			    array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
-			    "<button>".$this->translate('apply')."</button>", 
-			array('class' => 'smoothbox')) ?>
-		<?php endif;?>
-	<?php endif;?>
-	
 <?php endif;?>
 
 <?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
 	<?php 
 		$submissionIds = $campaign -> getSubmissionByUser($this -> viewer(), $campaign);
 	?>
-	<?php if(!count($submissionIds)) :?>
-		<?php if($campaign -> allow_submit) :?>
+	<?php if($campaign -> allow_submit) :?>
 			<?php
 				$startDate = date_create($campaign->start_date);
 				$endDate = date_create($campaign->end_date);
@@ -144,8 +129,8 @@
 				array('class' => 'smoothbox')) ?>
 			<?php endif;?>
 		<?php endif;?>
-	<?php else :?>
-		<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'list-withdraw', 'campaign_id' => $campaign->getIdentity()), 'tfcampaign_specific' , true)?>'><button><?php echo $this->translate('withdraw')?></button></a>
+	<?php if(count($submissionIds)) :?>
+		<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'list-withdraw', 'campaign_id' => $campaign->getIdentity()), 'tfcampaign_specific' , true)?>'><button class="withdraw"><?php echo $this->translate('withdraw')?> &nbsp;&nbsp;&nbsp;<i class="fa fa-times"></i></button></a>
 	<?php endif;?>	
 	
 	<a href="javascript:void(0)">

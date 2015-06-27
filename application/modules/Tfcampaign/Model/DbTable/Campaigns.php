@@ -77,23 +77,18 @@ class Tfcampaign_Model_DbTable_Campaigns extends Engine_Db_Table {
     		$select->where('user.displayname LIKE ?', '%'.$params['owner'].'%');
     	}
     	
-		if (isset($params['from_age']) && $params['from_age'] != '') 
-    	{
-			if(is_numeric($params['from_age'])) {
-				$select->where('campaign.from_age >= '.$params['from_age']);			
+		if (isset($params['from_age']) && $params['from_age'] != '' && isset($params['to_age']) && $params['to_age'] != '') {
+			if(is_numeric($params['to_age']) && is_numeric($params['from_age'])) {
+				$sql = "			
+	    			campaign.from_age between '".$params['from_age']."' and '".$params['to_age']."'
+	    			OR campaign.to_age between '".$params['from_age']."' and '".$params['to_age']."'
+					OR  (campaign.from_age < '".$params['from_age']."' AND campaign.to_age > '".$params['to_age']."')
+				";
+				$select -> where($sql);
 			} else {
 				$select -> where("1 = 0");
 			}
-    	}
-
-		if (isset($params['to_age']) && $params['to_age'] != '') 
-    	{
-			if(is_numeric($params['to_age'])) {
-				$select->where('campaign.to_age <= '.$params['to_age']);
-			} else {
-				$select -> where("1 = 0");
-			}
-    	}
+		}
 		
 		$sysTimezone = date_default_timezone_get();
         if (isset($params['start_date_from']) && $params['start_date_from'] != '') 
