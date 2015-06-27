@@ -342,8 +342,9 @@ h5.tf_campaign_filter_title{
 
 			& > li{
 				float: left;
-				width: 33%;
-				min-height: 60px;
+				width: 30%;
+				margin-right: 3%;
+				min-height: 140px;
 
 				span{
 					display: block;
