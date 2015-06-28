@@ -1791,7 +1791,12 @@ body#global_page_user-profile-index {
 
                 .rating_star_generic{
                 	font-size: 12px;
+                	cursor: pointer;
+
                 }
+            	i.fa{
+            		cursor: pointer !important;
+            	}
             }
         }
 
@@ -2298,6 +2303,10 @@ body#global_page_user-profile-index {
 			margin-bottom: 10px;
 			position: relative;
 
+			i.fa{
+				cursor: pointer;
+			}
+
 			&:after{
 				content:"";
 				height: 1px;
@@ -2407,6 +2416,7 @@ body#global_page_user-profile-index {
 			margin-bottom: 5px;
 			font-size: 12px;
 			height: 20px;
+			display: none;
 			line-height: 20px;
 		}
 
@@ -2416,6 +2426,8 @@ body#global_page_user-profile-index {
 			margin-top: 15px;
 			border-top: 1px solid $theme_border_medium_color;
 			clear: both;
+			overflow: hidden;
+			
 
 			.player-photo{
 				margin-right: 10px;
