@@ -7,7 +7,7 @@
 ?>  
 <div class="tf_club_search">
     <div id = "show_result_club" style="display: none; color: red"><?php echo $this -> translate("Your changes have been saved.")?></div>
-    <input type="text" name="group" id="group" value="" autocomplete="off">
+    <input type="text" name="group" id="group" value="" autocomplete="off" placeholder="<?php echo $this -> translate("Clubs...") ?>">
     <div id="group_ids-wrapper" class="form-wrapper">
     	<div id="group_ids-element" class="form-element">
     		<input type="hidden" name="group_ids" value="" id="group_ids">
