@@ -343,20 +343,14 @@ endif;
 							        <div class="player-title">
 							            <?php echo $player?>
 							        </div>
-							        <div class="player-position">
 							        <?php $position = $player->getPosition()?>
 							        <?php if ($position) : ?>
-							            <?php //echo $position?>
-							
-							        <?php echo substr($position,0, 2)?>
-							
+							        	<div class="player-position">
+								        <?php 
+								    		preg_match_all('/[A-Z]/', $position, $matches);
+											echo implode($matches[0]);?>
+										 </div>
 							        <?php endif;?>
-							
-							        <?php $sport = $player->getSport();?>
-							            <?php if ($sport):?>    
-							                <?php //echo ' - '.$sport->title ?>
-							            <?php endif;?>
-							        </div>
 							    </div>
 							</div>
 						<?php endif;?>
@@ -370,9 +364,6 @@ endif;
 	    </div>
 	    
 	    <div class="ynvideo_popup_right">
-	    	<!-- <div class="suggest_videos" style="display: none">
-	    		<?php //echo $this->content()->renderWidget('ynvideo.show-same-poster'); ?>
-	    	</div> -->
 	    	<div class="related_videos">
 	    	<?php echo $this->content()->renderWidget('ynvideo.show-same-categories'); ?>
 	    	</div>
