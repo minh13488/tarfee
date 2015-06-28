@@ -6,7 +6,7 @@
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Request.js');
 ?>
 <div class="tf_club_search">
-    <div id = "show_result" style="display: none; color: red"><?php echo $this -> translate("Your changes have been saved.")?></div>
+    <div id = "show_result_sport" style="display: none; color: red"><?php echo $this -> translate("Your changes have been saved.")?></div>
     <input type="text" name="sport" id="sport" value="" autocomplete="off">
     <div id="sport_ids-wrapper" class="form-wrapper">
     	<div id="sport_ids-element" class="form-element">
@@ -26,33 +26,33 @@
         document.getElementById(hideLoc).value = toValueArray.join();
      }
 	
-	 function removeFromToValue(id, hideLoc, elem) {
+	 function sportRemoveFromToValue(id) {
         // code to change the values in the hidden field to have updated values
         // when recipients are removed.
-        var toValues = document.getElementById(hideLoc).value;
+        var toValues = document.getElementById('sport_ids').value;
         var toValueArray = toValues.split(",");
         var toValueIndex = "";
 
-        var checkMulti = id.search(/,/);
+        var checkMulti = id.toString().search(/,/);
 
         // check if we are removing multiple recipients
         if (checkMulti!=-1){
             var recipientsArray = id.split(",");
             for (var i = 0; i < recipientsArray.length; i++){
-                removeToValue(recipientsArray[i], toValueArray, hideLoc);
+                removeToValue(recipientsArray[i], toValueArray, 'sport_ids');
             }
         }
         else{
-            removeToValue(id, toValueArray, hideLoc);
+            removeToValue(id, toValueArray, 'sport_ids');
         }
 
         // hide the wrapper for usernames if it is empty
-        if (document.getElementById(hideLoc).value==""){
-            document.getElementById(hideLoc+'-wrapper').style.height = '0';
-            document.getElementById(hideLoc+'-wrapper').hide();
+        if (document.getElementById('sport_ids').value==""){
+            document.getElementById('sport_ids'+'-wrapper').style.height = '0';
+            document.getElementById('sport_ids'+'-wrapper').hide();
         }
 
-        document.getElementById(elem).style.display = 'block';
+        document.getElementById('sport').style.display = 'block';
     }
     
     // Populate data
@@ -80,7 +80,7 @@
                 {
                 	if(responseJSON[0].status == "true") 
                 	{
-                		$('show_result').style.display = 'block';
+                		$('show_result_sport').style.display = 'block';
                 	}
                 }
         	})).send();
@@ -99,7 +99,7 @@
             'tokenValueKey' : 'label',
             'injectChoice': function(token)
             {
-            	$('show_result').style.display = 'none';
+            	$('show_result_sport').style.display = 'none';
                 if(token.type == 'sport')
                 {
                     var choice = new Element('li', {
@@ -133,7 +133,7 @@
         var myElement = new Element("span", {
             'id' : 'sport_ids_tospan_' + '<?php echo $sport->getIdentity()?>',
             'class': 'sport_tag',
-            'html' :  '<?php echo $this->itemPhoto($sport, 'thumb.icon')?><?php echo $sport->getTitle()?>' + "<a class = 'sport_preferred_remove' href='javascript:void(0);' onclick='this.parentNode.destroy();removeFromToValue(\"<?php echo $sport->getIdentity()?>\", \"sport_ids\",\"sport\");'><i class="fa fa-times"></i></a>"
+            'html' :  '<?php echo $this->itemPhoto($sport, 'thumb.icon').$sport->getTitle().'<a class = "sport_preferred_remove" href="javascript:void(0);" onclick="this.parentNode.destroy();sportRemoveFromToValue('.$sport->getIdentity().');"><i class="fa fa-times"></i></a>';?>'
         });
         document.getElementById('sport_ids-element').appendChild(myElement);
         document.getElementById('sport_ids-wrapper').show();
