@@ -349,9 +349,6 @@ if ($this->event->cover_photo)
             </div>
         </div>
         <div class="info-bottom ynclearfix">
-        	<!-- Add addthis share-->
-        	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
-			<div class="addthis_sharing_toolbox"></div>
             
             <div class="ynevent-detail-contact">
             	<?php if($this->event->email) :?>
@@ -397,6 +394,9 @@ if ($this->event->cover_photo)
 				    <?php endif;?>
 				</div>
             </div>
+        	<!-- Add addthis share-->
+        	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
+			<div style="float: right" class="addthis_sharing_toolbox"></div>
         </div>
     </div>
 </div>
