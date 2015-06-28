@@ -104,7 +104,7 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 		}
 		else {
 			$params = array_merge(array(
-				'route' => 'video_view',
+				'route' => 'video_popup_view',
 				'reset' => true,
 				'user_id' => $this -> owner_id,
 				'video_id' => $this -> video_id,
