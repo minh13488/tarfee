@@ -83,9 +83,6 @@
 </div>
 
 <div class="tfcampaign_boxbutton">
-	<!-- Add addthis share-->
-		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
-		<div class="addthis_sharing_toolbox"></div>
 	<?php if($this -> viewer() -> getIdentity()) :?>
 		<!--
 		<?php $url = $this -> url(array(
@@ -104,8 +101,10 @@
 		<?php if($campaign -> isEditable()) :?>
 			<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'edit', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("edit");?></button></a>
 		<?php endif;?>
-		
 	<?php endif;?>
+	<!-- Add addthis share-->
+		<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
+		<div class="addthis_sharing_toolbox"></div>
 
 <?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
 	<?php 
