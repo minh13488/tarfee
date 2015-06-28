@@ -31,6 +31,10 @@ class User_IndexController extends Core_Controller_Action_Standard
 				$trialRow = $trialPlanTable -> createRow();
 				$trialRow -> package_id = $subscription -> package_id;
 				$trialRow -> user_id = $subscription -> user_id;
+				$trialRow -> active = true;
+				$package = $subscription -> getPackage();
+				if(isset($package))
+					$trialRow -> level_id = $package -> level_id;
 				$trialRow -> save();
 			}
 			

@@ -11,4 +11,15 @@ class User_Model_DbTable_Trialplans extends Engine_Db_Table {
         
 		return $this->fetchRow($select);
     }
+	
+	public function getUserIdsActive() {
+		$userIds = array();
+		$select = $this->select()
+        		->where('active = 1');
+		$rows = $this->fetchAll($select);
+		foreach($rows as $row) {
+			$userIds[] = $row -> user_id;
+		}
+		return $userIds;
+	}
 }

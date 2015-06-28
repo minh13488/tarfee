@@ -23,9 +23,6 @@ class User_AdminManageController extends Core_Controller_Action_Admin
     $this->view->formFilter = $formFilter = new User_Form_Admin_Manage_Filter();
     $page = $this->_getParam('page', 1);
 
-    $table = Engine_Api::_()->getDbtable('users', 'user');
-    $select = $table->select();
-
     // Process form
     $values = array();
     if( $formFilter->isValid($this->_getAllParams()) ) {
@@ -44,7 +41,29 @@ class User_AdminManageController extends Core_Controller_Action_Admin
     ), $values);
     
     $this->view->assign($values);
-
+	
+	// filter trial
+	if( !empty($values['trial_type']) ) {
+		$trialPlanTable = Engine_Api::_() -> getDbTable('trialplans', 'user');
+		switch ($values['trial_type']) {
+			case 'used_no_renew':
+				$userTbl = Engine_Api::_() -> getDbtable('users', 'user');
+		    	$userTblName = $userTbl -> info('name');
+		    	$trialTblName = $trialPlanTable -> info('name');
+				$select = $userTbl -> select();
+				$select -> from("$userTblName as user", "user.*");
+				$select -> joinLeft("$trialTblName as trial", "user.user_id = trial.user_id", "");
+				break;
+			default:
+				$table = Engine_Api::_()->getDbtable('users', 'user');
+    	 		$select = $table->select();
+				break;
+		}
+	} else {
+		 $table = Engine_Api::_()->getDbtable('users', 'user');
+    	 $select = $table->select();
+	}
+	
     // Set up select info
     $select->order(( !empty($values['order']) ? $values['order'] : 'user_id' ) . ' ' . ( !empty($values['order_direction']) ? $values['order_direction'] : 'DESC' ));
 
@@ -67,13 +86,32 @@ class User_AdminManageController extends Core_Controller_Action_Admin
       $select->where('user_id = ?', (int) $values['user_id']);
     }
     
+	// filter trial
+	if( !empty($values['trial_type']) ) {
+		$trialPlanTable = Engine_Api::_() -> getDbTable('trialplans', 'user');
+		switch ($values['trial_type']) {
+			case 'active':
+				$userIds = $trialPlanTable -> getUserIdsActive();
+				if(count($userIds)  > 0) {
+					$select->where('user_id IN (?)', $userIds);
+				} else {
+					$select->where('1 = 0');
+				}
+				break;
+			case 'used_no_renew':
+				$select -> where("user.level_id <> trial.level_id");
+				$select -> where("trial.active = 0");
+				break;
+		}
+	}
+	
     // Filter out junk
     $valuesCopy = array_filter($values);
     // Reset enabled bit
     if( isset($values['enabled']) && $values['enabled'] == 0 ) {
       $valuesCopy['enabled'] = 0;
     }
-    
+
     // Make paginator
     $this->view->paginator = $paginator = Zend_Paginator::factory($select);
     $this->view->paginator = $paginator->setCurrentPageNumber( $page );
