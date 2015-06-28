@@ -69,6 +69,7 @@ white-space: normal;
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
 <div class="addthis_sharing_toolbox"></div>
  <!-- Add-This Button END -->
+ <br>
 <div class="ynblogs_browse_options">
 <span class="blog_favorite" id = "favourite_id">
 	<?php if(!$this -> blog -> checkFavourite()):?>
