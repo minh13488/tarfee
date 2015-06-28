@@ -2294,6 +2294,7 @@ body#global_page_user-profile-index {
 		.tf_video_rating{
 			text-align: right;
 			font-size: 28px;
+			cursor: pointer;
 			margin-bottom: 10px;
 			position: relative;
 
@@ -2350,6 +2351,7 @@ body#global_page_user-profile-index {
 		}
 
 		.video-statistic{
+			margin-bottom: 10px;
 
 			& > span{
 				font-size: 12px;
