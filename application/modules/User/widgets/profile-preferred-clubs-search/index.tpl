@@ -4,16 +4,18 @@
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/AutocompleterExtend.js')
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Local.js')
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Request.js');
-?>
-<div id = "show_result" style="display: none; color: red"><?php echo $this -> translate("Your changes have been saved.")?></div>
-<input type="text" name="group" id="group" value="" autocomplete="off">
-<div id="group_ids-wrapper" class="form-wrapper">
-	<div id="group_ids-element" class="form-element">
-		<input type="hidden" name="group_ids" value="" id="group_ids">
-	</div>
-</div>
+?>  
+<div class="tf_club_search">
+    <div id = "show_result" style="display: none; color: red"><?php echo $this -> translate("Your changes have been saved.")?></div>
+    <input type="text" name="group" id="group" value="" autocomplete="off">
+    <div id="group_ids-wrapper" class="form-wrapper">
+    	<div id="group_ids-element" class="form-element">
+    		<input type="hidden" name="group_ids" value="" id="group_ids">
+    	</div>
+    </div>
 
-<button id="preferred-clubs-save-btn"><?php echo $this -> translate('Save');?></button>
+    <button id="preferred-clubs-save-btn"><?php echo $this -> translate('Save');?></button>
+</div>
 <script type="text/javascript">
 	 function removeToValue(id, toValueArray, hideLoc){
         for (var i = 0; i < toValueArray.length; i++){
@@ -131,7 +133,7 @@
         var myElement = new Element("span", {
             'id' : 'group_ids_tospan_' + '<?php echo $group->getIdentity()?>',
             'class': 'user_tag',
-            'html' :  "<a target='_blank' href='<?php echo $group->getHref()?>'>" + '<?php echo $this->itemPhoto($group, 'thumb.icon')?><?php echo $group->getTitle()?>' + "</a> <a class = 'club_preferred_remove' href='javascript:void(0);' onclick='this.parentNode.destroy();removeFromToValue(\"<?php echo $group->getIdentity()?>\", \"group_ids\",\"group\");'>x</a>"
+            'html' :  "<a target='_blank' href='<?php echo $group->getHref()?>'>" + '<?php echo $this->itemPhoto($group, 'thumb.icon')?><?php echo $group->getTitle()?>' + "</a> <a class = 'club_preferred_remove' href='javascript:void(0);' onclick='this.parentNode.destroy();removeFromToValue(\"<?php echo $group->getIdentity()?>\", \"group_ids\",\"group\");'><i class="fa fa-times"></i></a>"
         });
         document.getElementById('group_ids-element').appendChild(myElement);
         document.getElementById('group_ids-wrapper').show();

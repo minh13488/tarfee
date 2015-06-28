@@ -2477,6 +2477,28 @@ body#global_page_user-profile-index {
 		.video_thumb_wrapper{
 			margin-right: 0;
 			width: auto;
+
+			a{
+
+				&:after{
+					content: "";
+					background-image: url(/tarfee/application/modules/Ynvideo/externals/images/icon_play_video.png?c=34);
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					display: block;
+					background-position: center;
+					background-repeat: no-repeat;
+					background-color: rgba(0, 0, 0, 0.4);
+				}
+
+				img{
+					padding: 0 !important;
+				}
+			}
+
 		}
 		
 		.ynvideo_title{
@@ -2509,4 +2531,21 @@ body#global_page_user-profile-index {
 			}
 		}
 	}
+}
+
+
+.layout_advgroup_group_create_link{
+    background-color: red;
+    a{
+        button{
+            display: block;
+            width: 100%;
+            background: $theme_link_color;
+            font-weight: bold;
+
+            &:hover{
+                background: $theme_link_color_hover;
+            }
+        }
+    }
 }

@@ -5,15 +5,17 @@
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Local.js')
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Request.js');
 ?>
-<div id = "show_result" style="display: none; color: red"><?php echo $this -> translate("Your changes have been saved.")?></div>
-<input type="text" name="sport" id="sport" value="" autocomplete="off">
-<div id="sport_ids-wrapper" class="form-wrapper">
-	<div id="sport_ids-element" class="form-element">
-		<input type="hidden" name="sport_ids" value="" id="sport_ids">
-	</div>
-</div>
+<div class="tf_club_search">
+    <div id = "show_result" style="display: none; color: red"><?php echo $this -> translate("Your changes have been saved.")?></div>
+    <input type="text" name="sport" id="sport" value="" autocomplete="off">
+    <div id="sport_ids-wrapper" class="form-wrapper">
+    	<div id="sport_ids-element" class="form-element">
+    		<input type="hidden" name="sport_ids" value="" id="sport_ids">
+    	</div>
+    </div>
 
-<button id="preferred-sports-save-btn"><?php echo $this -> translate('Save');?></button>
+    <button id="preferred-sports-save-btn"><?php echo $this -> translate('Save');?></button>
+</div>
 <script type="text/javascript">
 	 function removeToValue(id, toValueArray, hideLoc){
         for (var i = 0; i < toValueArray.length; i++){
@@ -131,7 +133,7 @@
         var myElement = new Element("span", {
             'id' : 'sport_ids_tospan_' + '<?php echo $sport->getIdentity()?>',
             'class': 'sport_tag',
-            'html' :  '<?php echo $this->itemPhoto($sport, 'thumb.icon')?><?php echo $sport->getTitle()?>' + "<a class = 'sport_preferred_remove' href='javascript:void(0);' onclick='this.parentNode.destroy();removeFromToValue(\"<?php echo $sport->getIdentity()?>\", \"sport_ids\",\"sport\");'>x</a>"
+            'html' :  '<?php echo $this->itemPhoto($sport, 'thumb.icon')?><?php echo $sport->getTitle()?>' + "<a class = 'sport_preferred_remove' href='javascript:void(0);' onclick='this.parentNode.destroy();removeFromToValue(\"<?php echo $sport->getIdentity()?>\", \"sport_ids\",\"sport\");'><i class="fa fa-times"></i></a>"
         });
         document.getElementById('sport_ids-element').appendChild(myElement);
         document.getElementById('sport_ids-wrapper').show();
