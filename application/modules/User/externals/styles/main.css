@@ -2654,9 +2654,10 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
             a:first-child{
                 float: left;
                 position: static;
+                color: $theme_font_color;
                 width: 100%;
                 text-align: left;
-                background: $theme_link_color_hover;
+                background: #fff;
                 font-size: 16px;
 
                 img{
@@ -2671,15 +2672,15 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
             border-radius: 5px;
             width: 100%;
             overflow: hidden;
-            background-color: $theme_link_color_hover;
             display: block;
             margin-right: 10px;
             font-weight: bold;
-            color: #fff;
+            color: $theme_font_color;
             height: 48px;
             line-height: 48px;
             font-size: 16px;
             margin-bottom: 10px;
+            border: 2px solid $theme_border_medium_color;
 
             img{
                 margin-right: 10px;
