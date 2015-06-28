@@ -343,14 +343,14 @@ endif;
 							        <div class="player-title">
 							            <?php echo $player?>
 							        </div>
-							        <div class="player-position">
 							        <?php $position = $player->getPosition()?>
 							        <?php if ($position) : ?>
+							        	<div class="player-position">
 								        <?php 
 								    		preg_match_all('/[A-Z]/', $position, $matches);
 											echo implode($matches[0]);?>
+										 </div>
 							        <?php endif;?>
-							        </div>
 							    </div>
 							</div>
 						<?php endif;?>
@@ -364,9 +364,6 @@ endif;
 	    </div>
 	    
 	    <div class="ynvideo_popup_right">
-	    	<!-- <div class="suggest_videos" style="display: none">
-	    		<?php //echo $this->content()->renderWidget('ynvideo.show-same-poster'); ?>
-	    	</div> -->
 	    	<div class="related_videos">
 	    	<?php echo $this->content()->renderWidget('ynvideo.show-same-categories'); ?>
 	    	</div>
