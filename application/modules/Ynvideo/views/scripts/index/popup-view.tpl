@@ -346,16 +346,10 @@ endif;
 							        <div class="player-position">
 							        <?php $position = $player->getPosition()?>
 							        <?php if ($position) : ?>
-							            <?php //echo $position?>
-							
-							        <?php echo substr($position,0, 2)?>
-							
+								        <?php 
+								    		preg_match_all('/[A-Z]/', $position, $matches);
+											echo implode($matches[0]);?>
 							        <?php endif;?>
-							
-							        <?php $sport = $player->getSport();?>
-							            <?php if ($sport):?>    
-							                <?php //echo ' - '.$sport->title ?>
-							            <?php endif;?>
 							        </div>
 							    </div>
 							</div>
