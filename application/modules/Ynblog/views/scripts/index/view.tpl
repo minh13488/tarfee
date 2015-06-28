@@ -32,7 +32,14 @@ white-space: normal;
       <div class="ynblog_entrylist_entry_body rich_content_body">
         <?php echo $this->blog->body ?>
       </div>
-      
+      <!-- Google Translation -->
+		<div style="padding: 10px" id="google_translate_element"></div>
+		<script type="text/javascript">
+			function googleTranslateElementInit() {
+			  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, 'google_translate_element');
+			}
+		</script>
+		<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
       <div style="padding-left:10px;margin-top: 5px;">
         <?php if (count($this->blogTags )):?>
           <?php foreach ($this->blogTags as $tag): ?>
@@ -59,19 +66,8 @@ white-space: normal;
             <?php echo $this->translate(array('%s view', '%s views', $this->blog->view_count), $this->locale()->toNumber($this->blog->view_count)) ?>
           </span>
       </div>
-
-
   </li>
 </ul>
-<br/>
-<!-- Google Translation -->
-<div id="google_translate_element"></div>
-<script type="text/javascript">
-	function googleTranslateElementInit() {
-	  new google.translate.TranslateElement({pageLanguage: 'en', layout: google.translate.TranslateElement.InlineLayout.SIMPLE, multilanguagePage: true}, 'google_translate_element');
-	}
-</script>
-<script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 <br/>
  <!-- Add-This Button BEGIN -->
 <div class="addthis_toolbox addthis_default_style">
