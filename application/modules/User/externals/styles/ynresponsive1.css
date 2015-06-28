@@ -577,6 +577,7 @@
     .layout_right{
         width: 430px;
 		margin-left: 15px;
+		margin-top: 15px;
 
         .generic_layout_container{
         	position: relative;
@@ -586,6 +587,7 @@
         }
         .layout_profile_completeness_profile_completeness{
         	background: transparent;
+        	margin-top: 0;
         }
     }
 }
