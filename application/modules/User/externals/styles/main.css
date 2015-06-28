@@ -2621,3 +2621,88 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
 
     }
 }
+
+/*tf_club_search*/
+.layout_user_profile_preferred_sports_search,
+.layout_user_profile_preferred_clubs_search{
+    overflow: visible !important;
+}
+.tf_club_search{
+    padding: 0 10px 10px 10px;
+
+    input#group,
+    input#sport{
+        width: 100%;
+        max-width: 100%;
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        margin-bottom: 10px;
+    }
+
+    div#show_result{
+        margin-bottom: 10px;
+        color: $theme_link_color;
+    }
+
+    .form-wrapper{
+        margin-top: 5px;
+        margin-bottom: 10px;
+
+        span.sport_tag,
+        span.user_tag{
+            position: relative;
+            border-radius: 5px;
+            width: 100%;
+            overflow: hidden;
+            background-color: $theme_link_color_hover;
+            display: block;
+            margin-right: 10px;
+            font-weight: bold;
+            color: #fff;
+            height: 48px;
+            line-height: 48px;
+            font-size: 16px;
+            margin-bottom: 10px;
+
+            img{
+                margin-right: 10px;
+                display: block;
+                float: left;
+            }
+            a{
+                height: 48px;
+                width: 48px;
+                line-height: 48px;
+                text-align: center;
+                color: #fff;
+                display: block;
+                position: absolute;
+                top: 0;
+                right: 0;
+                font-weight: bold;
+                font-size: 20px;
+                background: $theme_link_color;
+
+            }
+        }
+    }
+
+    button#preferred-clubs-save-btn,
+    button#preferred-sports-save-btn{
+        border-radius: 5px;
+        -webkit-border-radius: 5px;
+        -moz-border-radius: 5px;
+        -ms-border-radius: 5px;
+        font-weight: bold;
+        outline: 0;
+        padding: 10px 15px;
+        text-transform: lowercase;
+        background: $theme_link_color;
+
+        &:hover{
+            background: $theme_link_color_hover;
+        }
+    }
+}
