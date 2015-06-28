@@ -1,32 +1,38 @@
 <div id="club-profile-info-widget">
-	<div class="club-photo">
-		<?php echo $this->itemPhoto($this->group, 'thumb.profile')?>
+	<?php $photoUrl = ($this ->group -> getPhotoUrl('thumb.main')) ? $this ->group->getPhotoUrl('thumb.main') : "application/modules/Advgroup/externals/images/nophoto_group_thumb_profile.png" ?>
+
+	<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)">
+
 	</div>
-	<div class="club-title">
-		<?php echo $this->group->getTitle()?>
-	</div>
-	<?php if ($this->group->getCountry()) :?>
-	<div class="club-country">
-		<?php echo $this->group->getCountry()->getTitle()?>
-	</div>
-	<?php endif;?>
 	
-	<?php if ($this->group->getProvince()) :?>
-	<div class="club-province">
-		<?php echo $this->group->getProvince()->getTitle()?>
+	<div class="club-info-general">
+		<div class="club-title">
+			<?php echo $this->group->getTitle()?>
+		</div>
+		<?php if ($this->group->getCountry()) :?>
+		<div class="club-country">
+			<?php echo $this->group->getCountry()->getTitle()?>
+		</div>
+		<?php endif;?>
+		
+		<?php if ($this->group->getProvince()) :?>
+		<div class="club-province">
+			<?php echo $this->group->getProvince()->getTitle()?>
+		</div>
+		<?php endif;?>
+		
+		<?php if ($this->group->getCity()) :?>
+		<div class="club-city">
+			<?php echo $this->group->getCity()->getTitle()?>
+		</div>
+		<?php endif;?>
+		
+		<div class="club-like-count">
+			<i class="fa fa-heart"></i>
+			<span class="like-count"><?php echo number_format($this->group->likes()->getLikeCount())?></span>
+		</div>
 	</div>
-	<?php endif;?>
-	
-	<?php if ($this->group->getCity()) :?>
-	<div class="club-city">
-		<?php echo $this->group->getCity()->getTitle()?>
-	</div>
-	<?php endif;?>
-	
-	<div class="club-like-count">
-		<i class="fa fa-heart"></i>
-		<span class="like-count"><?php echo number_format($this->group->likes()->getLikeCount())?></span>
-	</div>
+
 	<?php if ($this->viewer()->getIdentity()): ?>
     	<a id="club_info_follow" href="javascript:void(0)" onclick="<?php echo ($this->follow) ? "setFollowClub(0);" : "setFollowClub(1);"; ?>"><?php echo ($this->follow) ? $this -> translate("Followed") : $this -> translate("Follow")?></a>
     <?php endif;?>

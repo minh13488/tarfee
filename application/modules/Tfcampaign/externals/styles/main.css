@@ -370,6 +370,12 @@ h5.tf_campaign_filter_title{
 		padding: 20px;
 		text-align: center;
 
+		.addthis_sharing_toolbox{
+			display: inline-block;
+			position: relative;
+			top: 8px;
+		}
+
 		a{
 			display: inline-block;
 			width: 22%;
