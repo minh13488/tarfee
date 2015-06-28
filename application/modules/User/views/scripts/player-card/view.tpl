@@ -86,6 +86,10 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	        ));
 			?>
 			<?php endif;?>
+			<!-- Add addthis share-->
+			<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
+			<div class="addthis_sharing_toolbox"></div>
+			<!--
 			<?php echo $this->htmlLink(array(
 	            'route' => 'default',
 	            'module' => 'activity',
@@ -97,6 +101,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	            'class' => 'smoothbox'
 	        ));
 			?>
+			-->
 		</div>
 		 <div class="playercard_options">
 	    	<?php 

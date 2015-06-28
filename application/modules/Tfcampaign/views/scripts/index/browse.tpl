@@ -99,9 +99,7 @@
 						<?php endif;?>
 					</ul>
 				</div>
-
-				<div class="tfcampaign_boxbutton">
-
+					<!--
 					<?php if($this -> viewer() -> getIdentity()) :?>
 						<?php $url = $this -> url(array(
 						    'module' => 'activity',
@@ -111,12 +109,12 @@
 						    'id' => $campaign -> getIdentity(),
 						    ),'default', true)
 						;?>
-						
 						<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('share')?></button></a>
 						
 					<?php endif;?>
-							
+					-->		
 					<?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
+						<div class="tfcampaign_boxbutton">
 						<?php 
 							$submissionIds = $campaign -> getSubmissionByUser($this -> viewer(), $campaign);
 						?>
@@ -142,10 +140,8 @@
 							<?php echo ($campaign -> isSaved())? $this -> translate('saved') : $this -> translate('save for later'); ?>
 							</button>
 						</a>
-
+					</div>
 					<?php endif;?>
-				</div>
-				
 			</li>
 	    <?php endforeach; ?>
 		</ul>
