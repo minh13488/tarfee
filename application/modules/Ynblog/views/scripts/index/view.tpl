@@ -18,9 +18,6 @@ white-space: normal;
 </h2>
 <ul class='ynblogs_entrylist'>
   <li>
-
-      
-
       <?php $category = Engine_Api::_ ()->getItemTable ( 'blog_category' )->find ( $this->blog->category_id )->current (); ?>
       <?php if($category): ?>
 
@@ -68,18 +65,10 @@ white-space: normal;
       </div>
   </li>
 </ul>
-<br/>
  <!-- Add-This Button BEGIN -->
-<div class="addthis_toolbox addthis_default_style">
-   <a class="addthis_button_google_plusone addthis_32x32_style"></a>
-   <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-   <a class="addthis_counter addthis_pill_style"></a>
-</div>
-<?php $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";?>
- <script type="text/javascript">var addthis_config = {"data_track_clickback":true};</script>
- <script type="text/javascript" src="<?php echo $protocol?>s7.addthis.com/js/250/addthis_widget.js#pubid=<?php echo Engine_Api::_()->getApi('settings', 'core')->getSetting('ynblog.pubid');?>"></script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
+<div class="addthis_sharing_toolbox"></div>
  <!-- Add-This Button END -->
- <br>
 <div class="ynblogs_browse_options">
 <span class="blog_favorite" id = "favourite_id">
 	<?php if(!$this -> blog -> checkFavourite()):?>
