@@ -2206,6 +2206,13 @@ body#global_page_user-profile-index {
 
 /*Style popup videos*/
 #global_page_ynvideo-index-popup-view{
+
+	.addthis_sharing_toolbox{
+		float: right;
+		margin-right: 10px;
+		margin-top: 7px;
+	}
+
 	.ynvideo_popup_close {
 		position: absolute;
 		right: 4px;

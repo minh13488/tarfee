@@ -158,8 +158,6 @@ endif;
 			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Share"); ?></a></div>
 			-->
 			<!-- Add addthis share-->
-			<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
-			<div class="addthis_sharing_toolbox"></div>
 			
 			<div id="favorite_<?php echo $this->video -> getIdentity()?>" class="yn_video_popup_btn">
 				<?php if($this->video -> hasFavorite()):?>
@@ -206,6 +204,8 @@ endif;
 			        request.send();  
 			   }
 			</script>   
+			<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
+			<div class="addthis_sharing_toolbox"></div>
 		<?php endif; ?>
 	</div>
 	<div class="video_view video_view_container">

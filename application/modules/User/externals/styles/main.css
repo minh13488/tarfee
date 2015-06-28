@@ -2649,6 +2649,21 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
     .form-wrapper{
         margin-top: 5px;
         margin-bottom: 10px;
+        
+        span.user_tag{
+            a:first-child{
+                float: left;
+                position: static;
+                width: 100%;
+                text-align: left;
+                background: $theme_link_color_hover;
+                font-size: 16px;
+
+                img{
+
+                }
+            }
+        }
 
         span.sport_tag,
         span.user_tag{
