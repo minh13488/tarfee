@@ -4,16 +4,18 @@
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/AutocompleterExtend.js')
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Local.js')
     ->appendFile($this->layout()->staticBaseUrl . 'application/modules/User/externals/scripts/Autocompleter.Request.js');
-?>
-<div id = "show_result" style="display: none; color: red"><?php echo $this -> translate("Your changes have been saved.")?></div>
-<input type="text" name="group" id="group" value="" autocomplete="off">
-<div id="group_ids-wrapper" class="form-wrapper">
-	<div id="group_ids-element" class="form-element">
-		<input type="hidden" name="group_ids" value="" id="group_ids">
-	</div>
-</div>
+?>  
+<div class="tf_club_search">
+    <div id = "show_result_club" style="display: none; color: red"><?php echo $this -> translate("Your changes have been saved.")?></div>
+    <input type="text" name="group" id="group" value="" autocomplete="off" placeholder="<?php echo $this -> translate("Clubs...") ?>">
+    <div id="group_ids-wrapper" class="form-wrapper">
+    	<div id="group_ids-element" class="form-element">
+    		<input type="hidden" name="group_ids" value="" id="group_ids">
+    	</div>
+    </div>
 
-<button id="preferred-clubs-save-btn"><?php echo $this -> translate('Save');?></button>
+    <button id="preferred-clubs-save-btn"><?php echo $this -> translate('Save');?></button>
+</div>
 <script type="text/javascript">
 	 function removeToValue(id, toValueArray, hideLoc){
         for (var i = 0; i < toValueArray.length; i++){
@@ -24,33 +26,33 @@
         document.getElementById(hideLoc).value = toValueArray.join();
      }
 	
-	 function removeFromToValue(id, hideLoc, elem) {
+	 function groupRemoveFromToValue(id) {
         // code to change the values in the hidden field to have updated values
         // when recipients are removed.
-        var toValues = document.getElementById(hideLoc).value;
+        var toValues = document.getElementById('group_ids').value;
         var toValueArray = toValues.split(",");
         var toValueIndex = "";
 
-        var checkMulti = id.search(/,/);
+        var checkMulti = id.toString().search(/,/);
 
         // check if we are removing multiple recipients
         if (checkMulti!=-1){
             var recipientsArray = id.split(",");
             for (var i = 0; i < recipientsArray.length; i++){
-                removeToValue(recipientsArray[i], toValueArray, hideLoc);
+                removeToValue(recipientsArray[i], toValueArray, 'group_ids');
             }
         }
         else{
-            removeToValue(id, toValueArray, hideLoc);
+            removeToValue(id, toValueArray, 'group_ids');
         }
 
         // hide the wrapper for usernames if it is empty
-        if (document.getElementById(hideLoc).value==""){
-            document.getElementById(hideLoc+'-wrapper').style.height = '0';
-            document.getElementById(hideLoc+'-wrapper').hide();
+        if (document.getElementById('group_ids').value==""){
+            document.getElementById('group_ids'+'-wrapper').style.height = '0';
+            document.getElementById('group_ids'+'-wrapper').hide();
         }
 
-        document.getElementById(elem).style.display = 'block';
+        document.getElementById('group').style.display = 'block';
     }
     
     // Populate data
@@ -78,7 +80,7 @@
                 {
                 	if(responseJSON[0].status == "true") 
                 	{
-                		$('show_result').style.display = 'block';
+                		$('show_result_club').style.display = 'block';
                 	}
                 }
         	})).send();
@@ -97,7 +99,7 @@
             'tokenValueKey' : 'label',
             'injectChoice': function(token)
             {
-            	$('show_result').style.display = 'none';
+            	$('show_result_club').style.display = 'none';
                 if(token.type == 'user')
                 {
                     var choice = new Element('li', {
@@ -120,23 +122,22 @@
             }
         });
         <?php foreach ($this->groups as $group) : ?>
-        var value = $('group_ids').get('value');
-        if(value.trim() == ""){
-        	value += '<?php echo $group->getIdentity()?>';
-        } else {
-        	value += ','+'<?php echo $group->getIdentity()?>';
-        }
-        $('group_ids').set('value', value);
-        
-        var myElement = new Element("span", {
-            'id' : 'group_ids_tospan_' + '<?php echo $group->getIdentity()?>',
-            'class': 'user_tag',
-            'html' :  "<a target='_blank' href='<?php echo $group->getHref()?>'>" + '<?php echo $this->itemPhoto($group, 'thumb.icon')?><?php echo $group->getTitle()?>' + "</a> <a class = 'club_preferred_remove' href='javascript:void(0);' onclick='this.parentNode.destroy();removeFromToValue(\"<?php echo $group->getIdentity()?>\", \"group_ids\",\"group\");'>x</a>"
-        });
-        document.getElementById('group_ids-element').appendChild(myElement);
-        document.getElementById('group_ids-wrapper').show();
-        document.getElementById('group_ids-wrapper').style.height = 'auto';
-        <?php endforeach; ?>
+	        var value = $('group_ids').get('value');
+	        if(value.trim() == ""){
+	        	value += '<?php echo $group->getIdentity()?>';
+	        } else {
+	        	value += ','+'<?php echo $group->getIdentity()?>';
+	        }
+	        $('group_ids').set('value', value);
+	        var myElement = new Element("span", {
+	            'id' : 'group_ids_tospan_' + '<?php echo $group->getIdentity()?>',
+	            'class': 'user_tag',
+	            'html' :  '<?php echo '<a target="_blank" href="'. $group->getHref().'">'.$this->itemPhoto($group, 'thumb.icon').$group->getTitle().'</a> <a class = "club_preferred_remove" href="javascript:void(0);" onclick="this.parentNode.destroy();groupRemoveFromToValue('.$group->getIdentity().');"><i class="fa fa-times"></i></a>';?>'
+	        });
+	        document.getElementById('group_ids-element').appendChild(myElement);
+	        document.getElementById('group_ids-wrapper').show();
+	        document.getElementById('group_ids-wrapper').style.height = 'auto';
+	        <?php endforeach; ?>
         
         <?php if ($this->max_club > 0 && count($this->groups) >= $this->max_club) :?>
         document.getElementById('sport').style.display = 'none';

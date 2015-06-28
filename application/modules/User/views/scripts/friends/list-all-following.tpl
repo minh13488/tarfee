@@ -5,16 +5,13 @@
  var url = en4.core.baseUrl + 'user/friends/list-all-following';
 
  var paginateFollowing = function(page) {
-		var search_value = $('like_members_search_input').value;
-		if (search_value == '') {
-			search_value = '';
-		}
 		var request = new Request.HTML({
 		'url' : url,
 			'data' : {
 				'format' : 'html',
 				'page' : page,
 				'is_ajax':1,
+				'user_id': <?php echo $this -> subject() -> getIdentity()?>
 			},
 			onSuccess : function(responseTree, responseElements, responseHTML, responseJavaScript) {
 				document.getElementById('following_popup_content').innerHTML = responseHTML;
@@ -39,7 +36,7 @@
 	</div>
 	<div class="following_members_popup_content" id="following_popup_content">
 		<?php } ?>
-    <?php if( !empty($this->following) && count($this->following) > 1 ): ?>
+    <?php if( !empty($this->following) && count($this->following) > 0 ): ?>
 				<?php if( $this->paginator->getCurrentPageNumber() > 1 ): ?>
 					<div class="following_members_popup_paging">
 						<div id="user_following_previous" class="paginator_previous">

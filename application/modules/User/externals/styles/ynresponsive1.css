@@ -577,6 +577,7 @@
     .layout_right{
         width: 430px;
 		margin-left: 15px;
+		margin-top: 15px;
 
         .generic_layout_container{
         	position: relative;
@@ -586,6 +587,7 @@
         }
         .layout_profile_completeness_profile_completeness{
         	background: transparent;
+        	margin-top: 0;
         }
     }
 }
@@ -649,6 +651,23 @@ ul.tfcampaign_list{
 
 		.tfcampaign_title{
 			font-weight: bold;
+		}
+
+		a{
+			button{
+				border-radius: 5px;
+				-webkit-border-radius: 5px;
+				-moz-border-radius: 5px;
+				-ms-border-radius: 5px;
+				font-weight: bold;
+				padding: 10px 15px;
+				text-transform: lowercase;
+				background: $theme_link_color;
+
+				&:hover{
+					background: $theme_link_color_hover;
+				}
+			}
 		}
 	}
 }

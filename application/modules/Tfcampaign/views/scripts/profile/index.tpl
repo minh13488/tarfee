@@ -82,37 +82,27 @@
 	</ul>
 </div>
 
-
-
-		
-
-
-
-
-
 <div class="tfcampaign_boxbutton">
-<?php if($this -> viewer() -> getIdentity()) :?>
-	<?php $url = $this -> url(array(
-	    'module' => 'activity',
-	    'controller' => 'index',
-	    'action' => 'share',
-	    'type' => $campaign -> getType(),
-	    'id' => $campaign -> getIdentity(),
-	    ),'default', true)
-	;?>
-	
-	<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('share')?></button></a>
-	
-	<?php if($campaign -> isDeletable()) :?>
-		<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'delete', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("remove");?></button></a>
+	<?php if($this -> viewer() -> getIdentity()) :?>
+		<!--
+		<?php $url = $this -> url(array(
+		    'module' => 'activity',
+		    'controller' => 'index',
+		    'action' => 'share',
+		    'type' => $campaign -> getType(),
+		    'id' => $campaign -> getIdentity(),
+		    ),'default', true)
+		;?>
+		<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('share')?></button></a>
+		-->
+		<?php if($campaign -> isDeletable()) :?>
+			<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'delete', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("remove");?></button></a>
+		<?php endif;?>
+		<?php if($campaign -> isEditable()) :?>
+			<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'edit', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("edit");?></button></a>
+		<?php endif;?>
 	<?php endif;?>
-	<?php if($campaign -> isEditable()) :?>
-		<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'edit', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("edit");?></button></a>
-	<?php endif;?>
-	
-<?php endif;?>
-
-<?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
+	<?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
 	<?php 
 		$submissionIds = $campaign -> getSubmissionByUser($this -> viewer(), $campaign);
 	?>
@@ -138,9 +128,10 @@
 			<?php echo ($campaign -> isSaved())? $this -> translate('saved') : $this -> translate('save for later'); ?>
 		</button>
 	</a>
-	
-	
-<?php endif;?>
+	<?php endif;?>
+	<!-- Add addthis share-->
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
+	<div class="addthis_sharing_toolbox"></div>
 </div>
 
 <div class="tf_campaign_metadata">

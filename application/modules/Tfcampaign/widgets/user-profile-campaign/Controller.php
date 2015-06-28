@@ -20,7 +20,7 @@ class Tfcampaign_Widget_UserProfileCampaignController extends Engine_Content_Wid
 		$campaignTable = Engine_Api::_() -> getItemTable('tfcampaign_campaign');
 		$this -> view -> campaigns = $campaigns = $campaignTable -> getCampaignsByUser($subject, $this -> _getParam('itemCountPerPage', 5), true);
 		$this -> view -> total = count($campaigns);
-		if(count($campaigns) <= 0 && !$viewer -> isSelf($subject))
+		if(count($campaigns) <= 0)
 		{
 			return $this -> setNoRender();
 		}

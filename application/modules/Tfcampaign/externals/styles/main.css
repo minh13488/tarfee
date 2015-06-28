@@ -79,6 +79,10 @@ a.btn-add-campaign{
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
 
+	&:focus{
+		color: #fff;
+	}
+
 	i.fa{
 		float: right;
 		position: relative;
@@ -365,6 +369,16 @@ h5.tf_campaign_filter_title{
 	.tfcampaign_boxbutton{
 		padding: 20px;
 		text-align: center;
+
+		.addthis_sharing_toolbox{
+			display: inline-block;
+			position: relative;
+			top: 10px;
+
+			a{
+				margin: 0 2px !important;
+			}
+		}
 
 		a{
 			display: inline-block;
