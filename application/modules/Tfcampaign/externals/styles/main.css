@@ -373,7 +373,11 @@ h5.tf_campaign_filter_title{
 		.addthis_sharing_toolbox{
 			display: inline-block;
 			position: relative;
-			top: 8px;
+			top: 10px;
+
+			a{
+				margin: 0 2px !important;
+			}
 		}
 
 		a{
