@@ -12,7 +12,7 @@
 
 <div class="player-info-author">
 	<?php $player = $this->video->getParent();?>
-	<?php if ($player):?>
+	<?php if ($player && $player->getType() == 'user_playercard'):?>
 	<div class="player-info">
 	    <div class="player-photo">
 	        <?php echo $this->itemPhoto($player, 'thumb.icon')?>
