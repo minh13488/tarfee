@@ -324,10 +324,6 @@ img#compose-yncomment-photo-loading-image {
 .yncomment_replies > form {
 	width: 100%;
 }
-.layout_yncomment_comments
-{
-	min-height: 200px;
-}
 .layout_yncomment_comments .yncomment_replies_info form {
 	display: inline-block !important;
 	position: relative;

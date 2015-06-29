@@ -87,7 +87,22 @@ class User_Form_Admin_Manage_Filter extends Engine_Form
         '1' => 'Approved',
       ))
       ->setValue('-1');
-
+	
+	$trialMultiOptions = array(
+		'0' => '',
+		"active" => "Active",
+		"used_no_renew" => "Used And No Renew",
+	);
+	
+	$trial_type = new Zend_Form_Element_Select('trial_type');
+    $trial_type
+      ->setLabel('Trial Filter')
+      ->clearDecorators()
+      ->addDecorator('ViewHelper')
+      ->addDecorator('Label', array('tag' => null, 'placement' => 'PREPEND'))
+      ->addDecorator('HtmlTag', array('tag' => 'div'))
+      ->setMultiOptions($trialMultiOptions);
+	
     $submit = new Zend_Form_Element_Button('search', array('type' => 'submit'));
     $submit
       ->setLabel('Search')
@@ -115,6 +130,7 @@ class User_Form_Admin_Manage_Filter extends Engine_Form
       $email,
       $level_id,
       $enabled,
+      $trial_type,
       $submit,
     ));
 

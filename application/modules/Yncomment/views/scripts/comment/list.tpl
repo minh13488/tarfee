@@ -121,6 +121,7 @@
             $this->commentsCount), $this->locale()->toNumber($this->commentsCount))?>
           </span>
           
+          <?php if ($this->comments->getTotalItemCount() > 0): ?>
 	          <div class="yncomment_replies_filter fright" id="yncomment_replies_filter">
 	            <div class="mright5" id="filter_<?php echo $this->nested_comment_id; ?>" style="display:none;"></div>
 	            <div class="yncomment_replies_pulldown yncomment_pulldown">
@@ -141,6 +142,7 @@
 	              <?php endif;?>
 	            </div>
 	          </div> 
+          <?php endif;?>
           <?php if ($this->comments->getTotalItemCount() > 1): // REPLIES ------- ?>
               <div class="yncomment_replies_sorting fright" id="yncomment_replies_sorting">
                 <div class="mright5" id="sort_<?php echo $this->nested_comment_id; ?>" style="display:none;"></div>

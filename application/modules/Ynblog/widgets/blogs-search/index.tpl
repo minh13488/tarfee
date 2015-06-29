@@ -15,7 +15,7 @@
               	<?php foreach($cat_arrays as $key => $value):?>
                     <div>
                   		<label><?php echo $value?></label>
-                  		<input type="checkbox" name="categories[]" value="<?php echo $key?>" <?php if(in_array($key, $this -> categories)):?>  checked="checked" <?php endif;?>/>
+                  		<input type="checkbox" name="categories[]" value="<?php echo $value?>" <?php if(in_array($value, $this -> categories)):?>  checked="checked" <?php endif;?>/>
                     </div>
             	<?php endforeach; ?>
             </div>

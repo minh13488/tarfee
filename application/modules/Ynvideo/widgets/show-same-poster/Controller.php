@@ -29,7 +29,7 @@ class Ynvideo_Widget_ShowSamePosterController extends Engine_Content_Widget_Abst
 		$parent_type = $subject->parent_type;
         $select = $itemTable->select()
                 ->from($itemTable)
-                ->where('video_id <> ?', $subject->getIdentity())
+                ->where('video_id != ?', $subject->getIdentity())
                 ->where('search = ?', true) // ?
                 ->order('rating DESC')
 				->order('video_id DESC')

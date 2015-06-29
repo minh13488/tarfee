@@ -52,6 +52,15 @@ class Payment_Plugin_Task_Cleanup extends Core_Plugin_Task_Abstract
             Zend_Controller_Front::getInstance()->getRouter()->assemble(array(), 'user_login', true),
         ));
       }
+	  
+	    //set trial active to false if have
+	    $trialPlanTable = Engine_Api::_() -> getDbTable('trialplans', 'user');
+		$trialRow = $trialPlanTable -> getRow($subscription -> user_id, $subscription -> package_id);
+		if(isset($trialRow)) {
+			$trialRow -> active = false;
+			$trialRow -> save();
+		}
+	  
     }
 
     
