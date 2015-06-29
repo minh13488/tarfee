@@ -2923,6 +2923,11 @@ body#global_page_advgroup-profile-index{
 }
 
 /*layout_advgroup_profile_events*/
+.btn-exchange{
+	display: inline-block;
+	float: right;
+	margin: 0;
+}
 .layout_advgroup_profile_events{
 	background: #fff;
 	overflow: hidden;
@@ -2969,6 +2974,15 @@ body#global_page_advgroup-profile-index{
 			}
 			.groups_info{
 				margin-left: 0;
+			}
+			.groups_members{
+				font-size: 13px;
+				color: $theme_font_color_light;
+
+				a{
+					color: $theme_link_color;
+					font-weight: bold;
+				}
 			}
 		}
 	}

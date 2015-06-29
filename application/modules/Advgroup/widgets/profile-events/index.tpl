@@ -70,18 +70,19 @@
           <span class="groups_members">
             <?php echo $this->timestamp($event->creation_date) ?>
           </span>
+          
           <p class="groups_desc" style="text-align: justify;">
             <?php echo Engine_Api::_()->advgroup()->subPhrase($event->description,250);?>
           </p>
         </div>
         <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($event)) :?>
-		<div class="group_button_action">
+		<div class="group_button_action btn-exchange">
 			<?php
 				echo $this->htmlLink(array(
 		            'route' => 'user_general',
 		            'action' => 'transfer-item',
 					'subject' => $event -> getGuid(),
-		        ), '<i class="fa fa-exchange"></i>', array(
+		        ), '<i class="fa fa-exchange fa-lg"></i>', array(
 		            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to user profile')
 		        ));
 			?>
