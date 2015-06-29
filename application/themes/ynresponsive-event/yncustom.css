@@ -2211,7 +2211,30 @@ body#global_page_user-profile-index {
 
 /*Style popup videos*/
 #global_page_ynvideo-index-popup-view{
+	.yncomment_emoticons .adv_post_smile {
+		position: absolute;
+		bottom: 5px;
+		font-size: 20px;
+		margin-right: 10px;
+		float: right;
+		cursor: pointer;
+		right: 0px;
+	}
 
+	.layout_yncomment_comments .yncomment_emoticons .adv_post_smile {
+		font-size: 20px;
+		position: absolute;
+		margin-left: 5px;
+		right: 10px;
+	}
+	.yncomment_replies_wrapper .compose-container .overTxtLabel, .yncomment_feed .compose-container .overTxtLabel {
+		padding: 10px 0 0 10px;
+		font-weight: normal;
+		opacity: 1 !important;
+	}
+	.yncomment_emoticons {
+		position: relative;
+	}
 	.addthis_sharing_toolbox{
 		float: right;
 		margin-right: 10px;
@@ -2563,6 +2586,13 @@ body#global_page_user-profile-index {
             width: 100%;
             background: $theme_link_color;
             font-weight: bold;
+            text-align: left;
+
+            i.fa{
+            	float: right;
+            	position: relative;
+            	top: 3px;
+            }
 
             &:hover{
                 background: $theme_link_color_hover;
@@ -2889,5 +2919,57 @@ body#global_page_advgroup-profile-index{
                 }
             }
         }
+	}
+}
+
+/*layout_advgroup_profile_events*/
+.layout_advgroup_profile_events{
+	background: #fff;
+	overflow: hidden;
+	+border-radius(5px);
+
+	.group_button_action{
+		a{
+			display: inline-block;
+		}
+	}
+	.group_album_options,
+	.group_button_action{
+		a{
+			text-align: center;
+			display: block;
+			color: #fff !important;
+			font-weight: 700;
+			background-color: $theme_link_color;
+			padding: .5em .8em;
+			+border-radius(5px);
+			margin: 10px;
+
+			&:hover{
+				background-color: $theme_link_color_hover;
+			}
+		}
+	}
+
+	#profile_groups_events{
+		& > li{
+			padding: 10px;
+			border-bottom: 1px solid $theme_border_medium_color;
+
+			&:last-child{
+				border-bottom: none;
+			}
+			.groups_photo{
+				border: none;
+				margin-right: 10px;
+				img{
+					width: 100% !important;
+					height: 100% !important;
+				}
+			}
+			.groups_info{
+				margin-left: 0;
+			}
+		}
 	}
 }
