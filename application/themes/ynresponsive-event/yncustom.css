@@ -5,7 +5,17 @@
 	z-index: 9;
 }
 
-
+=border-radius($radius){
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+}
+=tarfee_background_image{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
 .ynresponsive-event #TB_window{
 	border: 2px solid #ccc;
@@ -1588,7 +1598,7 @@ body#global_page_user-profile-index {
         		font-weight: bold;
         		text-transform: lowercase;
         		color: $theme_font_color;
-        		padding: 10px 14px;
+        		padding: 10px 27px;
 				border-radius: 5px;
 				-webkit-border-radius: 5px;
 				-moz-border-radius: 5px;        		
@@ -1781,7 +1791,12 @@ body#global_page_user-profile-index {
 
                 .rating_star_generic{
                 	font-size: 12px;
+                	cursor: pointer;
+
                 }
+            	i.fa{
+            		cursor: pointer !important;
+            	}
             }
         }
 
@@ -1871,12 +1886,11 @@ body#global_page_user-profile-index {
 }
 
 .layout_tfcampaign_recent_campaign,
-.layout_ynevent_recent_events{
+.layout_ynevent_recent_events,
+.layout_user_club_profile_players{
 	background: #fff;
 	overflow: hidden;
-	border-radius:5px;
-	-webkit-border-radius:5px;
-	-moz-border-radius: 5px;
+	+border-radius(5px);
 	.ybo_headline{
 		margin-bottom: 0;
 		border-bottom: 1px solid $theme_border_medium_color;
@@ -2099,12 +2113,14 @@ body#global_page_user-profile-index {
 }
 
 
-.layout_ynblog_recent_blogs{
+.layout_ynblog_recent_blogs,
+.layout_ynblog_favorite_blogs,
+.layout_ynblog_my_blogs,
+.layout_ynblog_top_blogs{
 	background: #fff;
 	overflow: hidden;
-	border-radius:5px;
-	-webkit-border-radius:5px;
-	-moz-border-radius: 5px;
+	+border-radius(5px);
+
 	.ybo_headline{
 		margin-bottom: 0;
 		border-bottom: 1px solid #e9e9e9;
@@ -2115,21 +2131,16 @@ body#global_page_user-profile-index {
 }
 
 .tf_list_talk{
-   padding: 15px;
    background: #fff;
 	border-radius: 0 0 5px 5px;
 	-webkit-border-radius:0 0 5px 5px;
 	-moz-border-radius: 0 0 5px 5px;
 
    & > li{
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      margin-bottom: 10px;
-      border-bottom: 1px solid $theme_border_medium_color;
+	padding: 15px;
+  	border-bottom: 1px solid $theme_border_medium_color;
 
       &:last-child{
-      	margin-bottom: 0;
-      	padding-bottom: 0;
       	border-bottom: 0;
       }
    
@@ -2146,9 +2157,7 @@ body#global_page_user-profile-index {
 			& > img{
 				width: 50px;
 				height: 50px;
-				border-radius: 4px;
-				-webkit-border-radius: 4px;
-				-moz-border-radius: 4px;
+				+border-radius(4px);
 			}
 		}
 		.members_info{
@@ -2158,9 +2167,7 @@ body#global_page_user-profile-index {
 				margin-right: 10px;
 				overflow: hidden;
 				float: left;
-				border-radius: 4px;
-				-webkit-border-radius: 4px;
-				-moz-border-radius: 4px;
+				+border-radius(4px);
 				font-weight: bold;
 				color: $theme_font_color;
 			}
@@ -2204,7 +2211,6 @@ body#global_page_user-profile-index {
 
 /*Style popup videos*/
 #global_page_ynvideo-index-popup-view{
-
 	.yncomment_emoticons .adv_post_smile {
 		position: absolute;
 		bottom: 5px;
@@ -2234,7 +2240,6 @@ body#global_page_user-profile-index {
 		margin-right: 10px;
 		margin-top: 7px;
 	}
-
 
 	.ynvideo_popup_close {
 		position: absolute;
@@ -2296,9 +2301,7 @@ body#global_page_user-profile-index {
 				text-transform: lowercase;
 				color: #555;
 				padding: 10px 14px;
-				border-radius: 5px;
-				-webkit-border-radius: 5px;
-				-moz-border-radius: 5px;
+				+border-radius(5px);
 				border: 2px solid #e9e9e9;
 				margin: 0 2px;
 				text-decoration: none;
@@ -2319,8 +2322,13 @@ body#global_page_user-profile-index {
 		.tf_video_rating{
 			text-align: right;
 			font-size: 28px;
+			cursor: pointer;
 			margin-bottom: 10px;
 			position: relative;
+
+			i.fa{
+				cursor: pointer;
+			}
 
 			&:after{
 				content:"";
@@ -2375,6 +2383,7 @@ body#global_page_user-profile-index {
 		}
 
 		.video-statistic{
+			margin-bottom: 10px;
 
 			& > span{
 				font-size: 12px;
@@ -2430,6 +2439,7 @@ body#global_page_user-profile-index {
 			margin-bottom: 5px;
 			font-size: 12px;
 			height: 20px;
+			display: none;
 			line-height: 20px;
 		}
 
@@ -2439,14 +2449,14 @@ body#global_page_user-profile-index {
 			margin-top: 15px;
 			border-top: 1px solid $theme_border_medium_color;
 			clear: both;
+			overflow: hidden;
+			
 
 			.player-photo{
 				margin-right: 10px;
 				overflow: hidden;
 				float: left;
-				border-radius: 4px;
-				-webkit-border-radius: 4px;
-				-moz-border-radius: 4px;
+				+border-radius(4px);
 				font-weight: bold;
 				color: #555;
 			}
@@ -2511,6 +2521,28 @@ body#global_page_user-profile-index {
 		.video_thumb_wrapper{
 			margin-right: 0;
 			width: auto;
+
+			a{
+
+				&:after{
+					content: "";
+					background-image: url(~/application/modules/Ynvideo/externals/images/icon_play_video.png);
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					display: block;
+					background-position: center;
+					background-repeat: no-repeat;
+					background-color: rgba(0, 0, 0, 0.4);
+				}
+
+				img{
+					padding: 0 !important;
+				}
+			}
+
 		}
 		
 		.ynvideo_title{
@@ -2543,7 +2575,6 @@ body#global_page_user-profile-index {
 			}
 		}
 	}
-<<<<<<< HEAD
 }
 
 
@@ -2941,6 +2972,4 @@ body#global_page_advgroup-profile-index{
 			}
 		}
 	}
-=======
->>>>>>> 58cf9906be738431a9bc9b70e47237d96f421bd7
 }
