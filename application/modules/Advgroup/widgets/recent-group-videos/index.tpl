@@ -78,16 +78,10 @@
 		?>
             <li <?php echo isset($this->marginLeft)?'style="margin-left:' . $this->marginLeft . 'px"':''?>>
                 <?php
-                echo $this->partial('_video_listing.tpl', 'advgroup', array(
-                    'video' => $item,
-                    'recentCol' => $this->recentCol
-                ));
-                ?>
-                <div class="ynvideo_title">
-                     <?php if($row->highlight) :?>
-                   			<strong style="color: red;"><?php echo " - " . $this->translate("highlighted"); ?></strong> 
-                    <?php endif;?>
-               </div>
+	        		echo $this->partial('_players_of_week.tpl', 'ynvideo', array(
+	        			'video' => $item
+	        		));
+	            ?>
                
                <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($item)) :?>
 				<div>
