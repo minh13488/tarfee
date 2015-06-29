@@ -358,7 +358,7 @@ endif;
 		        
 		    </div>
 	        <?php 
-		        $json = '{"taggingContent":["friends"],"showComposerOptions":["addLink","addSmilies"],"showAsNested":"1","showAsLike":"0","showDislikeUsers":"1","showLikeWithoutIcon":"0","showLikeWithoutIconInReplies":"0","commentsorder":"1","loaded_by_ajax":"0","name":"yncomment.comments","nomobile":"0","notablet":"0","nofullsite":"0"}';
+		        $json = '{"taggingContent":["friends"],"showComposerOptions":["addLink","addSmilies","addPhoto"],"showAsNested":"1","showAsLike":"0","showDislikeUsers":"1","showLikeWithoutIcon":"0","showLikeWithoutIconInReplies":"0","commentsorder":"1","loaded_by_ajax":"0","name":"yncomment.comments","nomobile":"0","notablet":"0","nofullsite":"0"}';
 				echo $this->content()->renderWidget('yncomment.comments', (array)json_decode($json));
 			?>
 	    </div>
