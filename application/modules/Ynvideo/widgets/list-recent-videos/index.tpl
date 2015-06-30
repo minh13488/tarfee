@@ -54,14 +54,13 @@
 
     <ul class="generic_list_widget ynvideo_widget videos_browse ynvideo_frame ynvideo_list" id="ynvideo_recent_videos">
         <?php foreach ($this->paginator as $item) : ?>
-            <li <?php echo isset($this->marginLeft)?'style="margin-left:' . $this->marginLeft . 'px"':''?>>
-            <?php
-        		echo $this->partial('_video_listing.tpl', 'ynvideo', array(
-        			'video'     => $item,
-        			'recentCol' => $this->recentCol
-        		));
-            ?>
-            </li>
+            <li class="video-item">
+				<?php
+		        		echo $this->partial('_players_of_week.tpl', 'ynvideo', array(
+		        			'video' => $item
+		        		));
+		            ?>
+			</li>
         <?php endforeach; ?>        
     </ul>
 	

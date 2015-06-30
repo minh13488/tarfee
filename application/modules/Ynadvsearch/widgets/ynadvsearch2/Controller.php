@@ -148,6 +148,6 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 	
 		$viewer = Engine_Api::_()->user()->getViewer();
 		$level_id = ($viewer->getIdentity()) ? $viewer->level_id : 5;
-		$this->view->isPro = $isPro = ($level_id == 6 || $level_id == 7) ? true : false;
+		$this->view->isPro = $isPro = ($level_id == 6 || $level_id == 7 || $viewer->isAdmin()) ? true : false;
 	}
 }

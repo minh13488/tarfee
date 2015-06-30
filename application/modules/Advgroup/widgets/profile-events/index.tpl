@@ -44,16 +44,15 @@
         'parent_type'=> 'group',
         'subject_id' => $this->subject()->getIdentity(),
       ), $this->translate('Add Events'), array(
-        'class' => 'buttonlink icon_group_event_new'
+        'class' => 'tf_button_action'
     )) ?>
   <?php endif; ?>
 </div>
-<br/>
 <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
 
   <ul id="profile_groups_events">
     <?php foreach( $this->paginator as $event ): ?>
-      <li class="events_item">
+      <li>
         <div class='groups_photo'>
           <?php echo $this->htmlLink($event->getHref(), $this->itemPhoto($event, 'thumb.normal')) ?>
         </div>
@@ -71,18 +70,19 @@
           <span class="groups_members">
             <?php echo $this->timestamp($event->creation_date) ?>
           </span>
+          
           <p class="groups_desc" style="text-align: justify;">
             <?php echo Engine_Api::_()->advgroup()->subPhrase($event->description,250);?>
           </p>
         </div>
         <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($event)) :?>
-		<div>
+		<div class="group_button_action btn-exchange">
 			<?php
 				echo $this->htmlLink(array(
 		            'route' => 'user_general',
 		            'action' => 'transfer-item',
 					'subject' => $event -> getGuid(),
-		        ), '<i class="fa fa-exchange"></i>', array(
+		        ), '<i class="fa fa-exchange fa-lg"></i>', array(
 		            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to user profile')
 		        ));
 			?>
@@ -92,7 +92,7 @@
     <?php endforeach;?>
   </ul>
 
-    <div>
+    <div >
       <div id="profile_groups_events_previous" class="paginator_previous">
         <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Previous'), array(
           'onclick' => '',

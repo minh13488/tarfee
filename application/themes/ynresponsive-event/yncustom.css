@@ -1887,7 +1887,10 @@ body#global_page_user-profile-index {
 
 .layout_tfcampaign_recent_campaign,
 .layout_ynevent_recent_events,
+.layout_user_club_profile_players,
+.layout_advgroup_recent_group_videos,
 .layout_user_club_profile_players{
+
 	background: #fff;
 	overflow: hidden;
 	+border-radius(5px);
@@ -2212,6 +2215,31 @@ body#global_page_user-profile-index {
 /*Style popup videos*/
 #global_page_ynvideo-index-popup-view{
 
+	.yncomment_emoticons .adv_post_smile {
+		position: absolute;
+		bottom: 5px;
+		font-size: 20px;
+		margin-right: 10px;
+		float: right;
+		cursor: pointer;
+		right: 0px;
+	}
+
+	.layout_yncomment_comments .yncomment_emoticons .adv_post_smile {
+		font-size: 20px;
+		position: absolute;
+		margin-left: 5px;
+		right: 10px;
+	}
+	.yncomment_replies_wrapper .compose-container .overTxtLabel, .yncomment_feed .compose-container .overTxtLabel {
+		padding: 10px 0 0 10px;
+		font-weight: normal;
+		opacity: 1 !important;
+	}
+	.yncomment_emoticons {
+		position: relative;
+	}
+	
 	.addthis_sharing_toolbox{
 		float: right;
 		margin-right: 10px;
@@ -2563,6 +2591,13 @@ body#global_page_user-profile-index {
             width: 100%;
             background: $theme_link_color;
             font-weight: bold;
+            text-align: left;
+
+            i.fa{
+            	float: right;
+            	position: relative;
+            	top: 3px;
+            }
 
             &:hover{
                 background: $theme_link_color_hover;
@@ -2889,5 +2924,239 @@ body#global_page_advgroup-profile-index{
                 }
             }
         }
+	}
+}
+
+/*layout_advgroup_profile_events*/
+
+.group_album_options,
+.group_button_action{
+	a{
+		text-align: center;
+		display: block;
+		color: #fff !important;
+		font-weight: 700;
+		background-color: $theme_link_color;
+		padding: .5em .8em;
+		+border-radius(5px);
+		margin: 10px;
+
+		&:hover{
+			background-color: $theme_link_color_hover;
+		}
+	}
+}
+
+.btn-exchange{
+	display: inline-block;
+	float: right;
+	margin: 0;
+}
+.layout_user_club_profile_players{
+	.tip{
+		margin: 10px;
+	}
+
+}
+
+.layout_advgroup_profile_events{
+	background: #fff;
+	overflow: hidden;
+	+border-radius(5px);
+
+	.group_button_action{
+		a{
+			display: inline-block;
+		}
+	}
+	.tip{
+		margin: 10px;
+	}
+
+
+	#profile_groups_events{
+		& > li{
+			padding: 10px;
+			border-bottom: 1px solid $theme_border_medium_color;
+
+			&:last-child{
+				border-bottom: none;
+			}
+			.groups_photo{
+				border: none;
+				margin-right: 10px;
+				img{
+					width: 100% !important;
+					height: 100% !important;
+				}
+			}
+			.groups_info{
+				margin-left: 0;
+			}
+			.groups_members{
+				font-size: 13px;
+				color: $theme_font_color_light;
+
+				a{
+					color: $theme_link_color;
+					font-weight: bold;
+				}
+			}
+		}
+	}
+}
+
+/*layout_advgroup_recent_group_videos*/
+.layout_advgroup_recent_group_videos{
+	+border-radius(5px);
+	background: #fff;
+	overflow: hidden;
+	ul.videos_browse{
+		padding: 15px !important;
+		background: #fff !important;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+		& > li{
+			padding-bottom: 15px;
+			margin-bottom: 15px;
+			height: auto;
+			border-bottom: 1px solid #e9e9e9;
+			width: 100%;
+			max-width: 100%;
+			display: block;
+
+			&:last-child{
+				padding-bottom: 0;
+				margin-bottom: 0;
+				border-bottom: none;
+			}
+			.ynvideo_thumb_wrapper{
+				width: 100%;
+				padding: 0;
+				height: 180px;
+				margin: 0;
+
+				a{
+					height: 100%;
+
+					&:before{
+						content: "";
+						background-image: url(~/application/themes/ynresponsive-event/images/icon-play-large.png);
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						display: block;
+						background-position: center;
+						background-repeat: no-repeat;
+						background-color: rgba(0, 0, 0, 0.4);
+					}
+				}
+				img{
+					width: 100%;
+					max-width: 100%;
+					height: 100%;
+				}
+			}
+			.player-info-author{
+				clear: both;
+				display: block;
+				overflow: hidden;
+				padding: 15px 0px;
+				border-bottom: 1px solid #e9e9e9;
+			}
+			.video_author{
+				font-weight: bold;
+
+				img{
+					margin-right: 10px;
+					overflow: hidden;
+					float: left;
+					border-radius: 4px;
+					-webkit-border-radius: 4px;
+					-moz-border-radius: 4px;
+					font-weight: bold;
+					color: #555;
+				}
+
+				a{
+					white-space: nowrap;
+					text-overflow: ellipsis;
+					overflow: hidden;
+					color: #555;
+					font-weight: bold;
+					display: inherit;
+					padding-top: 4px;
+				}
+				span{
+					color: #999;
+					font-size: 12px;
+					font-weight: normal;
+				}
+			}
+
+			.video-title{
+				padding: 10px 0;
+				a{
+					font-weight: bold;
+					white-space: nowrap;
+					overflow: hidden;
+					width: 100%;
+					display: block;
+					text-overflow: ellipsis;
+					color: #555;
+					text-decoration: none;
+				}
+			}
+			.video-statistic-rating{
+	  			overflow: hidden;
+				.video-statistic{
+					width: 50%;
+					float: left;
+					span{
+						font-size: 12px;
+						color: #999;
+						margin-right: 10px;
+					}
+				}
+				.video-rating{
+					width: 50%;
+					float: right;
+
+					.tf_video_rating{
+						text-align: right;
+					}	
+				}
+			}
+
+			.btn-exchange {
+				background-color: $theme_link_color;
+				color: #fff !important;
+				padding: 10px 15px;
+				+border-radius(5px);
+				margin-top: 10px;
+
+				&:hover{
+					background-color: $theme_link_color_hover;
+				}
+			}
+		}
+	}
+	a.tf_button_action{
+		background-color: $theme_link_color;
+		color: #fff !important;
+		padding: 10px 15px;
+		text-transform: lowercase;
+		margin: 0 10px;
+		text-align: center;
+		+border-radius(5px);
+		display: block;
+		&:hover{
+			background-color: $theme_link_color_hover;
+		}
+	}
+	.tip{
+		margin: 10px;
 	}
 }
