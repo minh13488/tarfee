@@ -51,7 +51,7 @@
 				'parent_type' =>'group',
 				'subject_id' =>  $this->group->group_id,
 			), $this->translate('Create New Video'), array(
-			'class' => 'buttonlink icon_group_video_new'
+			'class' => 'tf_button_action'
 			)) ;
 		}
 		else
@@ -62,14 +62,14 @@
 				'parent_type' =>'group',
 				'subject_id' =>  $this->group->getGuid(),
 			), $this->translate('Create New Video'), array(
-			'class' => 'buttonlink icon_group_video_new'
+			'class' => 'tf_button_action'
 			)) ;
 		}
 	?>
 <?php endif; ?>
 
 <?php if(count($this->paginator)>0):?>
-    <ul class="generic_list_widget ynvideo_widget videos_browse ynvideo_frame ynvideo_list" id="ynvideo_recent_videos" style="padding-bottom:0px;">
+    <ul class="videos_browse" id="ynvideo_recent_videos">
         <?php foreach ($this->paginator as $item): ?>
         <?php
              $table = Engine_Api::_() -> getDbTable('highlights', 'advgroup');
@@ -90,8 +90,8 @@
 				            'route' => 'user_general',
 				            'action' => 'transfer-item',
 							'subject' => $item -> getGuid(),
-				        ), '<i class="fa fa-exchange"></i>', array(
-				            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to user profile')
+				        ), '<i class="fa fa-exchange fa-lg"></i>', array(
+				            'class' => 'smoothbox btn-exchange', 'title' => $this -> translate('Transfer to user profile')
 				        ));
 					?>
 				</div>
