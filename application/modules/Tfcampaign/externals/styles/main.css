@@ -306,6 +306,13 @@ h5.tf_campaign_filter_title{
 		clear: both;
 		border-bottom: 1px solid $theme_border_medium_color;
 
+		.tfcampaign_author{
+			color: $theme_font_color_light;
+			a{
+				font-weight: bold;
+			}
+		}
+
 		& > img{
 			border-radius: 50%;
 			width: 35px;
@@ -314,7 +321,7 @@ h5.tf_campaign_filter_title{
 			height: 35px;
 		}
 
-		a{
+		& > a{
 			font-size: 24px;
 			font-weight: bold;
 			color: $theme_font_color;

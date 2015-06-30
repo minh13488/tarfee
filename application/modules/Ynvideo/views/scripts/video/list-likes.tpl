@@ -3,7 +3,7 @@
 		<i class="fa fa-thumbs-up"></i> 
 	</a>
 <?php else:?>
-	<a id="unlike_video_<?php echo $this->video->getIdentity() ?>" title="<?php echo $this->translate('Like') ?>" style=" background: #2A6496" href="javascript:void(0);" onclick="video_like('<?php echo $this->video->getIdentity() ?>', 'unlike')">
+	<a id="unlike_video_<?php echo $this->video->getIdentity() ?>" title="<?php echo $this->translate('Like') ?>" style=" background: #ff6633;color:#fff" href="javascript:void(0);" onclick="video_like('<?php echo $this->video->getIdentity() ?>', 'unlike')">
 		<i class="fa fa-thumbs-up"></i> 
 	</a>
 <?php endif;?>
@@ -19,7 +19,7 @@
 	<?php endif;?>
 -->
 <?php if(Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislike($this->video, $this->viewer())):?>
-<a id="undislike_video_<?php echo $this->video->getIdentity() ?>" title="<?php echo $this->translate('Dislike') ?>" style="background: #2A6496" href="javascript:void(0);" onclick="video_like('<?php echo $this->video->getIdentity() ?>', 'undislike')">
+<a id="undislike_video_<?php echo $this->video->getIdentity() ?>" title="<?php echo $this->translate('Dislike') ?>" style="background: #ff6633; color: #fff" href="javascript:void(0);" onclick="video_like('<?php echo $this->video->getIdentity() ?>', 'undislike')">
 	<i class="fa fa-thumbs-down"></i> 
 	</a>
 <?php else :?>

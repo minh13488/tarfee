@@ -18,7 +18,7 @@
     <?php if($this -> viewer() -> getIdentity()):?>
     <div id="favorite_<?php echo $this->video -> getIdentity()?>">
         <?php if($this->video -> hasFavorite()):?>
-            <a href="javascript:;" title="<?php echo $this->translate('Unfavorite')?>" style="background:#2A6496" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)">
+            <a href="javascript:;" title="<?php echo $this->translate('Unfavorite')?>" style="background:#ff6633;color: #fff" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)">
                 <i class="fa fa-heart"></i>
             </a>
         <?php else:?>   

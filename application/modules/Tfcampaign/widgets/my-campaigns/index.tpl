@@ -1,5 +1,3 @@
-<h3><?php echo $this -> translate("My Scouts");?></h3>
-
 <?php if(count($this -> ownCampaigns)) :?>
 	<ul>
 	<?php foreach($this -> ownCampaigns as $campaign) :?>

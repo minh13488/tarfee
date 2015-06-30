@@ -1,5 +1,3 @@
-<h3><?php echo $this -> translate("My submissions");?></h3>
-
 <?php if(count($this -> submitCampaignIds)) :?>
 	<ul>
 	<?php foreach($this -> submitCampaignIds as $campaign_id) :?>

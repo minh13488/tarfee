@@ -19,7 +19,7 @@
 	<?php $count++;?>
 <?php endforeach;?>
 </ul>
-<?php if (count($this->results) > $this->limit && !$this->reachLimit):?>
+<?php if ($this-> count > $this->limit && !$this->reachLimit):?>
 <a id="video-viewmore-btn" href="javascript:void(0)" onclick="showMore(<?php echo ($this->limit + $this->from)?>)"><?php echo $this->translate('View more result') ?></a>
 <div id="video-loading" style="display: none;">
 	<img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;' />
@@ -32,6 +32,7 @@ function showMore(from){
     var params = {};
     params.format = 'html';
     params.from = from;
+    params.strIds = '<?php echo $this -> strIds;?>';
     var request = new Request.HTML({
       	url : url,
       	data : params,
@@ -58,7 +59,7 @@ function showMore(from){
    var unfavorite_video = function(videoId)
    {
    	   var obj = document.getElementById('favorite_' + videoId);
-   	   obj.innerHTML = '<a href="javascript:;" style="background:#2A6496"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
+   	   obj.innerHTML = '<a href="javascript:;" style="background:#ff6633; color: #fff"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
    	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
        var request = new Request.JSON({
             'method' : 'post',
@@ -86,7 +87,7 @@ function showMore(from){
             },
             'onComplete':function(responseObject)
             {  
-                obj.innerHTML = '<a href="javascript:;" style="background:#2A6496" title="<?php echo $this->translate("Unfavourite")?>" onclick="unfavorite_video('+videoId+')">' + '<i class="fa fa-heart"></i>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;" style="background:#ff6633;color: #fff" title="<?php echo $this->translate("Unfavourite")?>" onclick="unfavorite_video('+videoId+')">' + '<i class="fa fa-heart"></i>' + '</a>';
             }
         });
         request.send();  
