@@ -68,7 +68,22 @@ class Payment_Plugin_Signup1_Subscription extends Core_Plugin_FormSequence_Abstr
       throw new Engine_Exception('No subscription plan');
     }
 
-
+	if($package -> getIdentity() != Engine_Api::_() -> user() -> getDefaultPackageId()) {
+		//if not free plan set code is used
+	    // Get codes
+        $referCode = $_SESSION['ref_code'];
+		if(isset($referCode) && !is_null($referCode) && !empty($referCode))
+	    {
+			$isValid = Engine_Api::_() -> payment() -> checkValidCode($referCode);
+		    if($isValid) {
+				$inviteRow = Engine_Api::_() -> invite() -> getRowCode($referCode);
+				if($inviteRow) {
+					$inviteRow -> discount_used = true;
+					$inviteRow -> save(); 
+				}
+		    }
+		}
+	}
 
 
 
