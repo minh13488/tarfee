@@ -376,4 +376,9 @@ endif;
 
 <script type="text/javascript">
 	$$('.ynvideo_popup_close').addEvent('click',function(){parent.Smoothbox.close()});	
+	    jQuery.noConflict();
+    jQuery('.tf_video_rating').click(function() {
+        jQuery('.ynvideo_rating_player').slideToggle(400);
+    });
+
 </script>
