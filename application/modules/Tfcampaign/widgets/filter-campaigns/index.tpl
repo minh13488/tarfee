@@ -17,11 +17,11 @@
 <input id="campaign-sort" value="campaign.creation_date" type="hidden" name="sort">
 
 <div class="tf_boxsearch_campaign">
-	<input type="text" name="title" id="title" placeholder="<?php echo $this -> translate("Search Campaigns...");?>">
+	<input type="text" name="title" id="title" placeholder="<?php echo $this -> translate("Search Scouts...");?>">
 </div>
 
 <?php if( Engine_Api::_()->authorization()->isAllowed('group', $this -> viewer(), 'create')) :?>
-<a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>" class="btn-add-campaign"><?php echo $this -> translate("Add Campaign");?><i class="fa fa-plus"></i></a>
+<a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>" class="btn-add-campaign"><?php echo $this -> translate("Add Scout");?><i class="fa fa-plus"></i></a>
 <?php endif;?>
 
 <div class="tf_box_filter_campaign">
@@ -130,7 +130,7 @@ jQuery( document ).ready(function() {
 				<?php foreach($provincesAssoc as $key => $value) :?>
 					jQuery('#province_id').append(jQuery('<option>', {
 					    value: '<?php echo $key;?>',
-					    text: '<?php echo $value;?>'
+					    text: '<?php echo str_replace("'","\'", $value);?>'
 					}));
 				<?php endforeach;?>
 				<?php if (!empty($params['province_id'])):?>
@@ -150,7 +150,7 @@ jQuery( document ).ready(function() {
 				<?php foreach($citiesAssoc as $key => $value) :?>
 					jQuery('#city_id').append(jQuery('<option>', {
 					    value: '<?php echo $key;?>',
-					    text: '<?php echo $value;?>'
+					    text: '<?php echo str_replace("'","\'", $value);?>'
 					}));
 				<?php endforeach;?>
 				<?php if (!empty($params['city_id'])):?>

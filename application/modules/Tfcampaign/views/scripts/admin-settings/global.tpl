@@ -1,4 +1,4 @@
-<h2><?php echo $this -> translate('Campaigns Plugin');?></h2>
+<h2><?php echo $this -> translate('Scout Plugin');?></h2>
 <?php if( count($this->navigation) ): ?>
 <div class='tabs'>
     <?php

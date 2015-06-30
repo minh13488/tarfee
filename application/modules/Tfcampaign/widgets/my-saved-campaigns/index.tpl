@@ -1,4 +1,4 @@
-<h3><?php echo $this -> translate("Saved campaigns");?></h3>
+<h3><?php echo $this -> translate("Saved Scouts");?></h3>
 
 <?php if(count($this -> saveRows)) :?>
 	<ul>

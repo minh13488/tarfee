@@ -2214,6 +2214,7 @@ body#global_page_user-profile-index {
 
 /*Style popup videos*/
 #global_page_ynvideo-index-popup-view{
+
 	.yncomment_emoticons .adv_post_smile {
 		position: absolute;
 		bottom: 5px;
@@ -2238,6 +2239,7 @@ body#global_page_user-profile-index {
 	.yncomment_emoticons {
 		position: relative;
 	}
+	
 	.addthis_sharing_toolbox{
 		float: right;
 		margin-right: 10px;

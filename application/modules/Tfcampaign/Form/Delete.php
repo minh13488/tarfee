@@ -2,8 +2,8 @@
 class Tfcampaign_Form_Delete extends Engine_Form {
 
     public function init() {
-        $this->setTitle('Delete Campaign')
-            ->setDescription('Are you sure you want to delete this campaign? All of the information of this campaign will be erased.')
+        $this->setTitle('Delete Scout')
+            ->setDescription('Are you sure you want to delete this scout? All of the information of this scout will be erased.')
             ->setAttrib('class', 'global_form_popup')
             ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()))
             ->setMethod('POST');
