@@ -3160,3 +3160,17 @@ body#global_page_advgroup-profile-index{
 		margin: 10px;
 	}
 }
+
+
+#global_page_advgroup-profile-index{
+	#activity-feed{
+		margin-top: 0;
+
+		& > li{
+			background: #fff;
+			+border-radius(5px);
+			margin-bottom: 15px;
+			border: 0;
+		}
+	}
+}
