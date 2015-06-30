@@ -5,7 +5,17 @@
 	z-index: 9;
 }
 
-
+=border-radius($radius){
+	border-radius: $radius;
+	-webkit-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-ms-border-radius: $radius;
+}
+=tarfee_background_image{
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+}
 
 .ynresponsive-event #TB_window{
 	border: 2px solid #ccc;
@@ -1588,7 +1598,7 @@ body#global_page_user-profile-index {
         		font-weight: bold;
         		text-transform: lowercase;
         		color: $theme_font_color;
-        		padding: 10px 14px;
+        		padding: 10px 27px;
 				border-radius: 5px;
 				-webkit-border-radius: 5px;
 				-moz-border-radius: 5px;        		
@@ -1781,7 +1791,12 @@ body#global_page_user-profile-index {
 
                 .rating_star_generic{
                 	font-size: 12px;
+                	cursor: pointer;
+
                 }
+            	i.fa{
+            		cursor: pointer !important;
+            	}
             }
         }
 
@@ -1871,12 +1886,11 @@ body#global_page_user-profile-index {
 }
 
 .layout_tfcampaign_recent_campaign,
-.layout_ynevent_recent_events{
+.layout_ynevent_recent_events,
+.layout_user_club_profile_players{
 	background: #fff;
 	overflow: hidden;
-	border-radius:5px;
-	-webkit-border-radius:5px;
-	-moz-border-radius: 5px;
+	+border-radius(5px);
 	.ybo_headline{
 		margin-bottom: 0;
 		border-bottom: 1px solid $theme_border_medium_color;
@@ -2099,12 +2113,14 @@ body#global_page_user-profile-index {
 }
 
 
-.layout_ynblog_recent_blogs{
+.layout_ynblog_recent_blogs,
+.layout_ynblog_favorite_blogs,
+.layout_ynblog_my_blogs,
+.layout_ynblog_top_blogs{
 	background: #fff;
 	overflow: hidden;
-	border-radius:5px;
-	-webkit-border-radius:5px;
-	-moz-border-radius: 5px;
+	+border-radius(5px);
+
 	.ybo_headline{
 		margin-bottom: 0;
 		border-bottom: 1px solid #e9e9e9;
@@ -2115,21 +2131,16 @@ body#global_page_user-profile-index {
 }
 
 .tf_list_talk{
-   padding: 15px;
    background: #fff;
 	border-radius: 0 0 5px 5px;
 	-webkit-border-radius:0 0 5px 5px;
 	-moz-border-radius: 0 0 5px 5px;
 
    & > li{
-      margin-bottom: 15px;
-      padding-bottom: 15px;
-      margin-bottom: 10px;
-      border-bottom: 1px solid $theme_border_medium_color;
+	padding: 15px;
+  	border-bottom: 1px solid $theme_border_medium_color;
 
       &:last-child{
-      	margin-bottom: 0;
-      	padding-bottom: 0;
       	border-bottom: 0;
       }
    
@@ -2146,9 +2157,7 @@ body#global_page_user-profile-index {
 			& > img{
 				width: 50px;
 				height: 50px;
-				border-radius: 4px;
-				-webkit-border-radius: 4px;
-				-moz-border-radius: 4px;
+				+border-radius(4px);
 			}
 		}
 		.members_info{
@@ -2158,9 +2167,7 @@ body#global_page_user-profile-index {
 				margin-right: 10px;
 				overflow: hidden;
 				float: left;
-				border-radius: 4px;
-				-webkit-border-radius: 4px;
-				-moz-border-radius: 4px;
+				+border-radius(4px);
 				font-weight: bold;
 				color: $theme_font_color;
 			}
@@ -2204,6 +2211,13 @@ body#global_page_user-profile-index {
 
 /*Style popup videos*/
 #global_page_ynvideo-index-popup-view{
+
+	.addthis_sharing_toolbox{
+		float: right;
+		margin-right: 10px;
+		margin-top: 7px;
+	}
+
 	.ynvideo_popup_close {
 		position: absolute;
 		right: 4px;
@@ -2264,9 +2278,7 @@ body#global_page_user-profile-index {
 				text-transform: lowercase;
 				color: #555;
 				padding: 10px 14px;
-				border-radius: 5px;
-				-webkit-border-radius: 5px;
-				-moz-border-radius: 5px;
+				+border-radius(5px);
 				border: 2px solid #e9e9e9;
 				margin: 0 2px;
 				text-decoration: none;
@@ -2287,8 +2299,13 @@ body#global_page_user-profile-index {
 		.tf_video_rating{
 			text-align: right;
 			font-size: 28px;
+			cursor: pointer;
 			margin-bottom: 10px;
 			position: relative;
+
+			i.fa{
+				cursor: pointer;
+			}
 
 			&:after{
 				content:"";
@@ -2343,6 +2360,7 @@ body#global_page_user-profile-index {
 		}
 
 		.video-statistic{
+			margin-bottom: 10px;
 
 			& > span{
 				font-size: 12px;
@@ -2398,6 +2416,7 @@ body#global_page_user-profile-index {
 			margin-bottom: 5px;
 			font-size: 12px;
 			height: 20px;
+			display: none;
 			line-height: 20px;
 		}
 
@@ -2407,14 +2426,14 @@ body#global_page_user-profile-index {
 			margin-top: 15px;
 			border-top: 1px solid $theme_border_medium_color;
 			clear: both;
+			overflow: hidden;
+			
 
 			.player-photo{
 				margin-right: 10px;
 				overflow: hidden;
 				float: left;
-				border-radius: 4px;
-				-webkit-border-radius: 4px;
-				-moz-border-radius: 4px;
+				+border-radius(4px);
 				font-weight: bold;
 				color: #555;
 			}
@@ -2479,6 +2498,28 @@ body#global_page_user-profile-index {
 		.video_thumb_wrapper{
 			margin-right: 0;
 			width: auto;
+
+			a{
+
+				&:after{
+					content: "";
+					background-image: url(~/application/modules/Ynvideo/externals/images/icon_play_video.png);
+					position: absolute;
+					top: 0;
+					left: 0;
+					width: 100%;
+					height: 100%;
+					display: block;
+					background-position: center;
+					background-repeat: no-repeat;
+					background-color: rgba(0, 0, 0, 0.4);
+				}
+
+				img{
+					padding: 0 !important;
+				}
+			}
+
 		}
 		
 		.ynvideo_title{
@@ -2510,5 +2551,343 @@ body#global_page_user-profile-index {
 				max-width: 100%
 			}
 		}
+	}
+}
+
+
+.layout_advgroup_group_create_link{
+    background-color: red;
+    a{
+        button{
+            display: block;
+            width: 100%;
+            background: $theme_link_color;
+            font-weight: bold;
+
+            &:hover{
+                background: $theme_link_color_hover;
+            }
+        }
+    }
+}
+
+/*Style Club*/
+body#global_page_advgroup-profile-index{
+	#global_wrapper{
+		background: #dadada;
+
+		.layout_main{
+			padding-left: 0;
+			padding-right: 0;
+		}
+
+		.layout_left{
+			width: 	240px;
+			margin-right: 15px;
+		}
+		.layout_right{
+			margin-left: 15px;
+			width: 320px;
+		}
+	}
+}
+
+.layout_advgroup_profile_info_club{
+	background: #fff;
+	+border-radius(5px);
+	overflow: hidden;
+
+	.club-photo{
+		width: 100%;	
+		height: 222px;
+		display: block;
+		clear: both;
+		background-position: center;
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
+	.club-info-general{
+		padding: 20px 15px 10px 15px;
+
+		& > div{
+			font-size: 12px;
+			color: $theme_font_color_light;
+		}
+
+		.club-title{
+			text-transform: uppercase;
+			display: block;
+			font-weight: bold;
+			color: $theme_font_color;
+			font-size: 15px;
+			margin-bottom: 10px;
+		}
+
+		.club-like-count{
+			font-weight: bold;
+			color: $theme_link_color;
+			font-size: 16px;
+			margin-top: 10px;
+
+			i.fa{
+				margin-right: 10px;
+			}
+		}
+	}
+	a#club_info_follow{
+		display: block;
+		text-align: center;
+		background: $theme_link_color;
+		color: #fff;
+		font-weight: bold;
+		padding: 10px;
+
+		&:hover{
+			background: $theme_link_color_hover;
+			color: #fff;
+		}
+	}
+}
+
+/*Player of club profile*/
+.layout_user_club_profile_players{
+
+	.player_contents{
+        ul.players_browse{
+            > li {
+                float: left;
+                margin-bottom: 10px;
+                width: 100%;
+                overflow: hidden;
+
+                #profile_photo {
+                    background: #fff;
+
+                    .thumb_profile {
+                        height: 240px;
+                        width: 100%;
+                        display: block;
+                        background-color: #eaeaea;
+                        +tarfee_background_image;
+                        position: relative;
+
+                        .tarfee_sport_type_position {
+                            position: absolute;
+                            bottom: 0;
+                            width: 100%;
+                            color: #fff;
+                            font-weight: bold;
+                            font-size: 16px;
+                            padding: 15px;
+                            height: 49px;
+                            background: url(~/application/modules/User/externals/images/bg-gradient-player-card.png) repeat-x bottom;
+
+                            img{
+                                width: 23px;
+                                height: 23px;
+                                float: left;
+                                margin-right: 5px;
+                            }
+                            span.player-position{
+                                float: right;
+                                width: 35%;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-align: right;
+                                text-overflow: ellipsis;
+                            }
+                            span.player-title{
+                                display: block;
+                                width: 45%;
+                                white-space: nowrap;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                float: left;
+                            }
+                        }
+
+                        .avatar-box-hover{
+                            display: block;
+                            width: 100%;
+                            height: 100%;
+                            background: rgba(0,0,0,0.5);
+                            overflow: hidden;
+                            opacity: 0;
+                            -webkit-transition: all 30ms;
+                            -o-transition: all 30ms;
+                            transition: all 30ms;
+                            cursor: pointer;
+    
+                            &:hover{
+                                opacity: 1;
+                            }
+                            
+
+                            ul.actions {
+                                text-align: center;
+                                overflow: hidden;
+                                margin-top: 25px;
+                                li{
+                                    display: inline-block;
+                                    margin-bottom: 6px;
+                                    
+                                    a{
+                                        padding: 3px 20px;
+                                        margin-left: 2px;
+                                        font-size: 24px;
+                                        background: $theme_body_background_color;
+                                        border-radius: 5px;
+                                        -webkit-border-radius: 5px;
+                                        -moz-border-radius: 5px;
+                                        color: $theme_font_color;
+                                        display: block;
+
+                                        &:hover{
+                                            background: $theme_link_color_hover;
+                                            color: #fff;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }/*thumb_profile*/
+
+                    .tarfee_gender_player_name{
+                        background: #a0b74f;
+                        height: 40px;
+                        line-height: 40px;
+
+                        .gender_player{
+                            color: #fff;
+                            float: left;
+                            margin-right: 15px;
+                            background: #8fa048;
+                            width: 40px;
+                            height: 40px;
+                            display: inline-block;
+                            text-align: center;
+                            line-height: 40px;
+                        }
+
+                        a{
+                            text-transform: uppercase;
+                            font-size: 18px;
+                            color: #fff;
+                            white-space: nowrap;
+                            overflow: hidden;
+                            text-align: center;
+                            text-overflow: ellipsis;
+                            width: 70%;
+                            display: inline-block;
+                        }
+                    }
+
+                    .tarfee_count{
+                        text-align: center;
+                        padding: 10px;
+                        border-top: 1px solid $theme_border_color;
+                        border-bottom: 1px solid $theme_border_color;
+
+                        li{
+                            display: inline-block;
+
+                            &:nth-child(1){
+                                float: left;
+                            }
+
+                            &:nth-child(2){
+                                float: right;
+                            }
+
+                            a{
+                                color: $theme_font_color;
+                            }
+                        }
+
+                        span.tarfee-count-number{
+                            font-size: 25px;
+                            font-weight: bold;
+                            display: block;
+                        }
+                    }
+
+                    .nickname{
+                        padding: 10px 15px;
+                        overflow: hidden;
+                        a{  
+                            margin-right: 10px;
+                            overflow: hidden;
+                            float: left;
+                            +border-radius(4px);
+                            font-weight: bold;
+                            color: $theme_font_color;
+                        }
+
+                        .members_info{
+                            float: left;
+                            padding-top: 5px;
+                        }
+
+                        .members_date{
+                            text-align: left;
+                            font-size: 13px;
+                            color: $theme_font_color_light;
+                        }
+                    }
+
+                    .user_rating{
+                        margin-top: 5px;
+                        text-align: center;
+
+                        .rating_star_generic{
+                            font-size: 20px;
+                        }
+                    }
+
+                    .tarfee_infomation_player{
+                        text-align: center;
+                        min-height: 85px;
+                    }
+
+                    .options {
+                        height: 26px;
+                    }
+                    .options span {
+                        background-image: url(~/application/modules/User/externals/images/tarfee_profile_icon.png);
+                        height: 25px;
+                        width: 25px;
+                        float: right;
+                        margin-right: 5px;
+                        background-position: 36px 2px;
+                    }
+                    
+
+                    hr {
+                        margin-top: 4px;
+                        margin-bottom: 6px;
+                        border: 0;
+                        border-top: 1px solid #EEE;
+                    }
+                    
+
+                    /*--------------------------------------*/
+                    .setting-list {
+                        position: absolute;
+                        font-size: 12px;
+                        text-align: left;
+                        z-index: 100;
+                        text-align: center;
+
+                        li{
+                            padding: 0;
+                            a{
+                                text-transform: lowercase;
+                                font-size: 18px !important;
+                            }
+                        }
+                    }
+                }
+            }
+        }
 	}
 }
