@@ -6,6 +6,16 @@
 <div class="tfcampaign_title">
 	<?php echo $this -> itemPhoto($campaign);?>
 	<?php echo $campaign;?>
+	<div class="tfcampaign_author">
+        <?php echo $this->translate('Posted by') ?>
+
+        <?php
+        $poster = $campaign->getOwner();
+            if ($poster) {
+                echo $this->htmlLink($poster, $poster->getTitle());
+            }
+        ?>
+    </div>
 </div>
 
 <div class="tfcampaign_desc">
@@ -14,72 +24,75 @@
 
 
 <div class="tfcampaign_infomation">
-	<ul class="tfcampaign_infomation_item">
-		<li>
-			<span><?php echo $this -> translate("Position") ;?></span>
-			<?php $position = $campaign -> getPosition();?>
-			<?php if($position) :?>
-				<p><?php echo $position -> getTitle();?></p>
-			<?php endif;?>
-		</li>
+	<div class="tfcampaign_infomation_item">
+
+		<ul class="block-first">
+			<li>
+				<span><?php echo $this -> translate("Location");?></span>
+				<p><?php echo $campaign -> getLocation();?></p>
+			</li>
+
+			<li>
+				<span><?php echo $this -> translate("Position") ;?></span>
+				<?php $position = $campaign -> getPosition();?>
+				<?php if($position) :?>
+					<p><?php echo $position -> getTitle();?></p>
+				<?php endif;?>
+			</li>
+		</ul>
 		
-		<li>
-			<span><?php echo $this -> translate("Location");?></span>
-			<p><?php echo $campaign -> getLocation();?></p>
-		</li>
 
-		<li>
-			<span><?php echo $this -> translate("Gender") ;?></span>
-			<p><?php echo $campaign -> getGender();?></p>
-		</li>
+		<ul class="block-second">
+			<li>
+				<span><?php echo $this -> translate("Gender") ;?></span>
+				<p><?php echo $campaign -> getGender();?></p>
+			</li>
 
-		<li>
-			<span><?php echo $this -> translate("Age") ;?></span>
-			<p><?php echo $this -> translate("%s - %s YRS", $campaign -> from_age, $campaign -> to_age);?></p>
-		</li>
+			<li>
+				<span><?php echo $this -> translate("Age") ;?></span>
+				<p><?php echo $this -> translate("%s - %s YRS", $campaign -> from_age, $campaign -> to_age);?></p>
+			</li>
 
-		<?php 
-			$endDateObj = null;
-			$startDateObj = null;
-			if (!is_null($campaign->start_date) && !empty($campaign->start_date) && $campaign->start_date) 
-			{
-				$startDateObj = new Zend_Date(strtotime($campaign->start_date));	
-			}
-			if (!is_null($campaign->end_date) && !empty($campaign->end_date) && $campaign->end_date) 
-			{
-				$endDateObj = new Zend_Date(strtotime($campaign->end_date));	
-			}
-			if( $this->viewer() && $this->viewer()->getIdentity() ) {
-				$tz = $this->viewer()->timezone;
-				if (!is_null($endDateObj))
-				{
-					$endDateObj->setTimezone($tz);
-				}
-				if (!is_null($startDateObj))
-				{
-					$startDateObj->setTimezone($tz);
-				}
-		    }
-		?>
-	
-	<?php if(!empty($startDateObj)) :?>
-		<li>
-			<span><?php echo $this -> translate('Start Date') ;?></span>
-			<p><?php echo (!is_null($startDateObj)) ?  date('M d Y', $startDateObj -> getTimestamp()) : ''; ?></p>
 			
-		</li>
-	<?php endif;?>
-
-
-
-	<?php if(!empty($endDateObj)) :?>
-		<li>
-			<span><?php echo $this -> translate('Closing Date') ;?></span>
-			<p><?php echo (!is_null($endDateObj)) ?  date('M d Y', $endDateObj -> getTimestamp()) : ''; ?></p>
 			
-		</li>
-	<?php endif;?>
-	</ul>
+			<?php 
+				$endDateObj = null;
+				$startDateObj = null;
+				if (!is_null($campaign->start_date) && !empty($campaign->start_date) && $campaign->start_date) 
+				{
+					$startDateObj = new Zend_Date(strtotime($campaign->start_date));	
+				}
+				if (!is_null($campaign->end_date) && !empty($campaign->end_date) && $campaign->end_date) 
+				{
+					$endDateObj = new Zend_Date(strtotime($campaign->end_date));	
+				}
+				if( $this->viewer() && $this->viewer()->getIdentity() ) {
+					$tz = $this->viewer()->timezone;
+					if (!is_null($endDateObj))
+					{
+						$endDateObj->setTimezone($tz);
+					}
+					if (!is_null($startDateObj))
+					{
+						$startDateObj->setTimezone($tz);
+					}
+			    }
+				?>
+				<?php if(!empty($startDateObj)) :?>
+				<li>
+					<span><?php echo $this -> translate('Start Date') ;?></span>
+					<p><?php echo (!is_null($startDateObj)) ?  date('M d Y', $startDateObj -> getTimestamp()) : ''; ?></p>
+				</li>
+				<?php endif;?>
+
+				<?php if(!empty($endDateObj)) :?>
+				<li>
+					<span><?php echo $this -> translate('Closing Date') ;?></span>
+					<p><?php echo (!is_null($endDateObj)) ?  date('M d Y', $endDateObj -> getTimestamp()) : ''; ?></p>
+				</li>
+		</ul>
+		<?php endif;?>
+	</div>
 </div>
 
 <div class="tfcampaign_boxbutton">

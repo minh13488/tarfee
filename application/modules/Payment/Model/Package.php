@@ -356,48 +356,16 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
   	  $referCode = null;
   	  if(isset($_SESSION['ref_code']))
 	  	$referCode = $_SESSION['ref_code'];
-	  $isEnabled = Engine_Api::_()->getApi('settings', 'core')->getSetting('user_referral_enable', 1);
-	  $period = Engine_Api::_()->getApi('settings', 'core')->getSetting('user_referral_trial', 0);
-	  $discount = $this -> discount;
-	  $now =  date("Y-m-d H:i:s");
 	  
-	  $invite = null;
-	  
+	  $isValid = false;
 	  if(isset($referCode) && !is_null($referCode) && !empty($referCode))
 	  {
-	  	 $invite = Engine_Api::_() -> invite() -> getRowCode($referCode);
+	  	 $isValid = Engine_Api::_() -> payment() -> checkValidCode($referCode);
 	  }
-	  if($isEnabled && $invite)
-	  {
-	  	  //if exist code then get expire date
-		  if($period == 1)
-		  {
-				$type = 'day';
-	      }
-		  else 
-		  {
-				$type = 'days';
-		  }
-		  $expiration_date = date_add(date_create($invite->timestamp),date_interval_create_from_date_string($period." ".$type));
-		  
-		  $nowDate = date_create($now);
-		  
-	  	  if($period != 0) 
-	  	  {
-	  	  	  if ($nowDate >= $expirationDate) 
-			  {
-			  	//check if code not expire
-			  	return $this -> price*(1 - $discount/100);
-			  }
-	  	  }
-		  else 
-		  {
-		  	   //if code never expired
-	  	   		return $this -> price*(1 - $discount/100);
-		  }
+	  if($isValid) {
+   		return $this -> price*(1 - $discount/100);
 	  }
-	  else 
-	  {
+	  else {
 	  	 return $this -> price;
 	  }
   }
