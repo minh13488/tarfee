@@ -100,20 +100,20 @@
 									}
 							    }
 								?>
-								<?php if(!empty($startDateObj)) :?>
 								<li>
+								<?php if(!empty($startDateObj)) :?>
 									<span><?php echo $this -> translate('Start Date') ;?></span>
 									<p><?php echo (!is_null($startDateObj)) ?  date('M d Y', $startDateObj -> getTimestamp()) : ''; ?></p>
-								</li>
 								<?php endif;?>
+								</li>
 
-								<?php if(!empty($endDateObj)) :?>
 								<li>
+								<?php if(!empty($endDateObj)) :?>
 									<span><?php echo $this -> translate('Closing Date') ;?></span>
 									<p><?php echo (!is_null($endDateObj)) ?  date('M d Y', $endDateObj -> getTimestamp()) : ''; ?></p>
+								<?php endif;?>
 								</li>
 						</ul>
-						<?php endif;?>
 					</div>
 				</div>
 					<!--

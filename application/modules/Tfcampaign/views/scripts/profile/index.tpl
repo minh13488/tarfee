@@ -34,13 +34,12 @@
 					<p><?php echo $position -> getTitle();?></p>
 				<?php endif;?>
 			</li>
+			
 			<li>
 				<span><?php echo $this -> translate("Location");?></span>
 				<p><?php echo $campaign -> getLocation();?></p>
 			</li>
-
 		</ul>
-		
 
 		<ul class="block-second">
 			<li>
@@ -53,8 +52,6 @@
 				<p><?php echo $this -> translate("%s - %s YRS", $campaign -> from_age, $campaign -> to_age);?></p>
 			</li>
 
-			
-			
 			<?php 
 				$endDateObj = null;
 				$startDateObj = null;
@@ -77,21 +74,22 @@
 						$startDateObj->setTimezone($tz);
 					}
 			    }
-				?>
-				<?php if(!empty($startDateObj)) :?>
-				<li>
+			?>
+			<li>
+			<?php if(!empty($startDateObj)) :?>
 					<span><?php echo $this -> translate('Start Date') ;?></span>
 					<p><?php echo (!is_null($startDateObj)) ?  date('M d Y', $startDateObj -> getTimestamp()) : ''; ?></p>
-				</li>
-				<?php endif;?>
+			<?php endif;?>
+			</li>
 
-				<?php if(!empty($endDateObj)) :?>
-				<li>
-					<span><?php echo $this -> translate('Closing Date') ;?></span>
-					<p><?php echo (!is_null($endDateObj)) ?  date('M d Y', $endDateObj -> getTimestamp()) : ''; ?></p>
-				</li>
+
+			<li>
+			<?php if(!empty($endDateObj)) :?>
+				<span><?php echo $this -> translate('Closing Date') ;?></span>
+				<p><?php echo (!is_null($endDateObj)) ?  date('M d Y', $endDateObj -> getTimestamp()) : ''; ?></p>
+			<?php endif;?>
+			</li>
 		</ul>
-		<?php endif;?>
 	</div>
 </div>
 

@@ -359,7 +359,10 @@ h5.tf_campaign_filter_title{
 				margin-bottom: 20px;
 				overflow: hidden;
 				li{
-					width: 48%;
+					&:first-child{
+						width: 46%;
+					}
+					width: 50%;
 					margin-right: 4%;
 					float: left;
 
