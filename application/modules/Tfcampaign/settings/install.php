@@ -21,9 +21,9 @@ class Tfcampaign_Installer extends Engine_Package_Installer_Module {
         if(!$page_id) {
             $db->insert('engine4_core_pages', array(
                 'name' => 'tfcampaign_index_browse',
-                'displayname' => 'Campaign Browse Page',
-                'title' => 'Campaign Browse Page',
-                'description' => 'Campaign Browse Page',
+                'displayname' => 'Scout Browse Page',
+                'title' => 'Scout Browse Page',
+                'description' => 'Scout Browse Page',
                 'custom' => 0
             ));
             $page_id = $db->lastInsertId();
@@ -89,9 +89,9 @@ class Tfcampaign_Installer extends Engine_Package_Installer_Module {
         if(!$page_id) {
             $db->insert('engine4_core_pages', array(
                 'name' => 'tfcampaign_profile_index',
-                'displayname' => 'Campaign Detail Page',
-                'title' => 'Campaign Detail Page',
-                'description' => 'Campaign Detail Page',
+                'displayname' => 'Scout Detail Page',
+                'title' => 'Scout Detail Page',
+                'description' => 'Scout Detail Page',
                 'custom' => 0
             ));
             $page_id = $db->lastInsertId();
@@ -157,9 +157,9 @@ class Tfcampaign_Installer extends Engine_Package_Installer_Module {
         if(!$page_id) {
             $db->insert('engine4_core_pages', array(
                 'name' => 'tfcampaign_campaign_edit',
-                'displayname' => 'Campaign Edit Page',
-                'title' => 'Campaign Edit Page',
-                'description' => 'Campaign Edit Page',
+                'displayname' => 'Scout Edit Page',
+                'title' => 'Scout Edit Page',
+                'description' => 'Scout Edit Page',
                 'custom' => 0
             ));
             $page_id = $db->lastInsertId();
@@ -225,9 +225,9 @@ class Tfcampaign_Installer extends Engine_Package_Installer_Module {
         if(!$page_id) {
             $db->insert('engine4_core_pages', array(
                 'name' => 'tfcampaign_index_create',
-                'displayname' => 'Campaign Create Page',
-                'title' => 'Campaign Create Page',
-                'description' => 'Campaign Create Page',
+                'displayname' => 'Scout Create Page',
+                'title' => 'Scout Create Page',
+                'description' => 'Scout Create Page',
                 'custom' => 0
             ));
             $page_id = $db->lastInsertId();
