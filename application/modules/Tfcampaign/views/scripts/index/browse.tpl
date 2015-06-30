@@ -28,6 +28,17 @@
 	    		<div class="tfcampaign_title">
 			    	<?php echo $this -> itemPhoto($campaign);?>
 					<?php echo $campaign;?>
+
+					<div class="tfcampaign_author">
+			            <?php echo $this->translate('Posted by') ?>
+
+			            <?php
+			            $poster = $campaign->getOwner();
+				            if ($poster) {
+				                echo $this->htmlLink($poster, $poster->getTitle());
+				            }
+			            ?>
+			        </div>
 	    		</div>
 				
 				<div class="tfcampaign_desc">

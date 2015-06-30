@@ -1678,10 +1678,10 @@ body#global_page_user-profile-index {
         		display: inline-block;
 
         		& > a{
-					color: #fff;
+					color: $theme_font_color;
 					width: 50px;
 					font-size: 18px;
-					background: $theme_link_color;
+					border:2px solid $theme_link_color;
 					border-radius: 5px;
 					-webkit-border-radius: 5px;
 					-moz-border-radius: 5px;
@@ -3144,6 +3144,7 @@ body#global_page_advgroup-profile-index{
 		}
 	}
 	a.tf_button_action{
+		margin-top: 10px;
 		background-color: $theme_link_color;
 		color: #fff !important;
 		padding: 10px 15px;
