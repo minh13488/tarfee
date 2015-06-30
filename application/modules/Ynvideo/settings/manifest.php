@@ -57,6 +57,7 @@ return array(
         'ynvideo_playlistassoc',
         'video_category',
 	    'ynvideo_ratingtype',
+	    'ynvideo_review_rating',
     ),
     // Compose
     'composer' => array(

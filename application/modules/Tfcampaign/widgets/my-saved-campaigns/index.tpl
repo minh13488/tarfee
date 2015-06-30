@@ -1,5 +1,3 @@
-<h3><?php echo $this -> translate("Saved Scouts");?></h3>
-
 <?php if(count($this -> saveRows)) :?>
 	<ul>
 	<?php foreach($this -> saveRows as $saveRow) :?>
