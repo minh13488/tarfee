@@ -19,7 +19,7 @@
 	<?php $count++;?>
 <?php endforeach;?>
 </ul>
-<?php if (count($this->results) > $this->limit && !$this->reachLimit):?>
+<?php if ($this-> count > $this->limit && !$this->reachLimit):?>
 <a id="video-viewmore-btn" href="javascript:void(0)" onclick="showMore(<?php echo ($this->limit + $this->from)?>)"><?php echo $this->translate('View more result') ?></a>
 <div id="video-loading" style="display: none;">
 	<img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;' />
@@ -32,6 +32,7 @@ function showMore(from){
     var params = {};
     params.format = 'html';
     params.from = from;
+    params.strIds = '<?php echo $this -> strIds;?>';
     var request = new Request.HTML({
       	url : url,
       	data : params,
