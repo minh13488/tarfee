@@ -149,24 +149,28 @@ endif;
 	            }
             ?>
         </div>
-
+        
 	    <?php if($this -> viewer() -> getIdentity()):?>
 	    	<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this -> video ->getGuid()),'default', true);?>
 			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
-			<?php $url = $this->url(array('module'=> 'activity', 'controller' => 'index', 'action' => 'share', 'type' => 'video', 'id' => $this->video->getIdentity(),),'default', true);?>
+			<!--
+			<?php $url = $this->url(array('module'=> 'socialpublisher', 'controller' => 'index', 'action' => 'share', 'resource_type' => $this->video-> getType(), 'resource_id' => $this->video->getIdentity(),),'default', true);?>
 			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Share"); ?></a></div>
+			-->
+			<!-- Add addthis share-->
+			
 			<div id="favorite_<?php echo $this->video -> getIdentity()?>" class="yn_video_popup_btn">
 				<?php if($this->video -> hasFavorite()):?>
-					<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
+					<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo '<i class="fa fa-heart-o"></i>&nbsp;'.$this->translate('unfavorite')?></a>
 				<?php else:?>	
-					<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
+					<a href="javascript:;" style="background:#ff6633; color: #fff" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo '<i class="fa fa-heart"></i>&nbsp;'.$this->translate('favorite')?></a>
 				<?php endif;?>	
 			</div>
 			<script type="text/javascript">
 			   var unfavorite_video = function(videoId)
 			   {
 			   	   var obj = document.getElementById('favorite_' + videoId);
-			   	   obj.innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			   	   obj.innerHTML = '<a herf="javascript:void(0);"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
 			   	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
 			       var request = new Request.JSON({
 			            'method' : 'post',
@@ -176,7 +180,7 @@ endif;
 			            },
 			            'onComplete':function(responseObject)
 			            {  
-			                obj.innerHTML = '<a href="javascript:;" onclick="favorite_video('+videoId+')">' + '<?php echo $this->translate("favourite")?>' + '</a>';
+			                obj.innerHTML = '<a href="javascript:;" style="background:#ff6633;color:#fff" onclick="favorite_video('+videoId+')">' + '<?php echo '<i class="fa fa-heart"></i>&nbsp;'.$this->translate("favourite")?>' + '</a>';
 			            }
 			        });
 			        request.send();  
@@ -184,7 +188,7 @@ endif;
 			   var favorite_video = function(videoId)
 			   {
 			   	   var obj = document.getElementById('favorite_' + videoId);
-			   	   obj.innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			   	   obj.innerHTML = '<a href="javascript:void(0);"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
 			   	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
 			       var request = new Request.JSON({
 			            'method' : 'post',
@@ -194,12 +198,14 @@ endif;
 			            },
 			            'onComplete':function(responseObject)
 			            {  
-			                obj.innerHTML = '<a href="javascript:;" onclick="unfavorite_video('+videoId+')">' + '<?php echo $this->translate("unfavourite")?>' + '</a>';
+			                obj.innerHTML = '<a href="javascript:;" onclick="unfavorite_video('+videoId+')">' + '<?php echo '<i class="fa fa-heart-o"></i>&nbsp;'.$this->translate("unfavourite")?>' + '</a>';
 			            }
 			        });
 			        request.send();  
 			   }
 			</script>   
+			<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
+			<div class="addthis_sharing_toolbox"></div>
 		<?php endif; ?>
 	</div>
 	<div class="video_view video_view_container">
@@ -337,20 +343,14 @@ endif;
 							        <div class="player-title">
 							            <?php echo $player?>
 							        </div>
-							        <div class="player-position">
 							        <?php $position = $player->getPosition()?>
 							        <?php if ($position) : ?>
-							            <?php //echo $position?>
-							
-							        <?php echo substr($position,0, 2)?>
-							
+							        	<div class="player-position">
+								        <?php 
+								    		preg_match_all('/[A-Z]/', $position, $matches);
+											echo implode($matches[0]);?>
+										 </div>
 							        <?php endif;?>
-							
-							        <?php $sport = $player->getSport();?>
-							            <?php if ($sport):?>    
-							                <?php //echo ' - '.$sport->title ?>
-							            <?php endif;?>
-							        </div>
 							    </div>
 							</div>
 						<?php endif;?>
@@ -364,9 +364,6 @@ endif;
 	    </div>
 	    
 	    <div class="ynvideo_popup_right">
-	    	<!-- <div class="suggest_videos" style="display: none">
-	    		<?php //echo $this->content()->renderWidget('ynvideo.show-same-poster'); ?>
-	    	</div> -->
 	    	<div class="related_videos">
 	    	<?php echo $this->content()->renderWidget('ynvideo.show-same-categories'); ?>
 	    	</div>
@@ -376,4 +373,9 @@ endif;
 
 <script type="text/javascript">
 	$$('.ynvideo_popup_close').addEvent('click',function(){parent.Smoothbox.close()});	
+
+	jQuery.noConflict();
+	jQuery('.tf_video_rating').click(function() {
+		jQuery('.ynvideo_rating_player').slideToggle(400);
+	});
 </script>
