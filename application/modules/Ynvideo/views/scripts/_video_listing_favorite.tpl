@@ -42,7 +42,9 @@
 		<div class="player-position">
 		<?php $position = $player->getPosition()?>
 		<?php if ($position) : ?>
-			<?php echo $position?>
+			<?php 
+    		preg_match_all('/[A-Z]/', $position, $matches);
+			echo implode($matches[0]);?>
 		<?php endif;?>
 
 		<?php $sport = $player->getSport();?>

@@ -18,16 +18,16 @@ class Tfcampaign_Form_Admin_Settings_Global extends Engine_Form {
         ));
 		
 		$this->addElement('Text', 'tfcampaign_max_period', array(
-            'label' => 'Maximum Period (days) Allowed To Have A Campaign',
+            'label' => 'Maximum Period (days) Allowed To Have A Scout',
             'value' => $settings->getSetting('tfcampaign_max_period', "20"),
         ));
 		
 		$this->addElement('Radio', 'tfcampaign_private_allow', array(
-	      'label' => 'Allow private campaigns?',
+	      'label' => 'Allow private scout?',
 	      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('tfcampaign_private_allow', 1),
 	      'multiOptions' => array(
-	        '1' => 'Yes, allow private campaigns.',
-	        '0' => 'No, disallow private campaigns.',
+	        '1' => 'Yes, allow private scouts.',
+	        '0' => 'No, disallow private scouts.',
 	      ),
 	    ));
 		

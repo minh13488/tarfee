@@ -1,4 +1,4 @@
-<h3><?php echo $this -> translate("My campaigns");?></h3>
+<h3><?php echo $this -> translate("My Scouts");?></h3>
 
 <?php if(count($this -> ownCampaigns)) :?>
 	<ul>

@@ -164,7 +164,7 @@
 			$percentageMatch = 0;
 		}
 		echo "<p>";
-		echo $this -> translate("%s of submitted player cards that match the campaign preferences", $percentageMatch."%");
+		echo $this -> translate("%s of submitted player cards that match the scout preferences", $percentageMatch."%");
 		echo "</p>";
 	?>
 
@@ -186,7 +186,7 @@
 			$percentageMatch = 0;
 		}
 		echo "<p>";
-		echo $this -> translate("%s of player cards that match the campaign preferences", $percentageMatch."%");
+		echo $this -> translate("%s of player cards that match the scout preferences", $percentageMatch."%");
 		echo "</p>";
 
 	?>
