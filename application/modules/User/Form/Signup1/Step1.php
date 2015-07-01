@@ -46,7 +46,9 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
 	        'label' => 'Invite Code',
 	        'description' => 'Enter referral code if you have',
 	     ));
-		 $this -> code -> setAttrib('required', true);
+		 $codeValidator = new Engine_Validate_Callback(array($this, 'checkInviteCode'), $emailElement);
+      	 $codeValidator->setMessage("This invite code is invalid or does not match the selected email address");
+		 $this->code->addValidator($codeValidator);
     }
 	
     // Element: email
@@ -142,6 +144,8 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
     $select = $inviteTable->select()
       ->from($inviteTable->info('name'), 'COUNT(*)')
       ->where('code = ?', $value)
+	  ->where('active = 1')
+	  ->where('new_user_id = 0')
       ;
       
     if( Engine_Api::_()->getApi('settings', 'core')->getSetting('user.signup.checkemail') ) {

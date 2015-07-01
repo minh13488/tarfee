@@ -738,7 +738,11 @@ class User_SettingsController extends Core_Controller_Action_User {
 		$available_codes = array();
 		foreach($availableCodes as $availableCode)
 		{
-			$available_codes[] = $availableCode -> code;
+			if($availableCode -> active) {
+				$available_codes[] = "<span style='color:green'>".$availableCode -> code."</span>";
+			} else {
+				$available_codes[] = "<span style='color:red'>".$availableCode -> code."</span>";
+			}
 		}
 		$this -> view -> available_codes = implode(', ', $available_codes);
 		
@@ -759,4 +763,85 @@ class User_SettingsController extends Core_Controller_Action_User {
 		$this -> view -> total_used = count($usedCodes);
 		$this -> view -> total_available = count($availableCodes);
 	}
+	
+	public function emailToFriendAction() {
+		$this -> _helper -> content
+		-> setEnabled(false);
+		$this -> _helper -> layout -> setLayout('default-simple');
+        if (!$this -> _helper -> requireUser() -> isValid())
+            return;
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+		
+        $this->view->form = $form = new User_Form_EmailToFriend();
+		
+        if (!$this -> getRequest() -> isPost()) {
+            return;
+        }
+        
+        if (!$form -> isValid($this -> getRequest() -> getPost())) {
+            return;
+        }
+        $values = $form -> getValues();
+		$email = $values['email'];
+		if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+			$form -> addError($this -> view -> translate("Invalid Email"));
+			return;
+		}
+		if(isset($email)) {
+        	$sentEmails = $viewer -> sendEmailToFriend($email, @$values['message']);
+		}
+		
+        $message = Zend_Registry::get('Zend_Translate') -> _("Email have been sent.");
+        return $this -> _forward('success', 'utility', 'core', array(
+            'parentRefresh' => false,
+            'smoothboxClose' => true,
+            'messages' => $message
+        ));
+    }
+
+	
+	public function manageCodeAction() {
+		$this -> _helper -> content
+		-> setEnabled(false);
+		$this -> _helper -> layout -> setLayout('default-simple');
+        if (!$this -> _helper -> requireUser() -> isValid())
+            return;
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+		
+		// Get codes
+		$inviteTable = Engine_Api::_()->getDbtable('invites', 'invite');
+    	$select = $inviteTable->select()
+	      ->from($inviteTable->info('name'))
+	      ->where('user_id = ?', $viewer -> getIdentity());
+		
+		$select = $select -> where('new_user_id = 0');
+		$availableCodes = $inviteTable -> fetchAll($select);
+		$this -> view -> available_codes = $availableCodes;
+		
+		 if ($this -> getRequest() -> isPost()) {
+		 	
+			$posts = $this -> getRequest() -> getParams();
+			unset($posts['controller']);
+			unset($posts['action']);
+			unset($posts['format']);
+			unset($posts['module']);
+			unset($posts['rewrite']);
+			
+			foreach($availableCodes as $code) {
+				if(isset($posts[$code -> code])) {
+					$code -> active = true;
+				} else {
+					$code -> active = false;
+				}
+				$code -> save();
+			}
+			
+			return $this -> _forward('success', 'utility', 'core', array(
+	            'parentRefresh' => true,
+	            'smoothboxClose' => true,
+	            'messages' => $this -> view -> translate("Your chanages have been saved.")
+	        ));
+		 }
+			
+    }
 }

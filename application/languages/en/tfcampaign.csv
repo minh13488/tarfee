@@ -1,9 +1,9 @@
 # notify_tfcampaign_alert_player
-"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_TITLE";"New Matching Campaign"
-"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_DESCRIPTION";"Your player matchs with new campaign"
-"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_SUBJECT";"New Matching Campaign"
+"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_TITLE";"New Matching Scout"
+"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_DESCRIPTION";"Your player matchs with new scout"
+"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_SUBJECT";"New Matching Scout"
 "_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_BODY";"
-Your player card [sender_title] is matched the campaign [object_title]
+Your player card [sender_title] is matched the scout [object_title]
 
 Click on the following link for more details:
 

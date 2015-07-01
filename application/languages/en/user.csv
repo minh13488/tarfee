@@ -709,3 +709,13 @@ Please confirm by clicking the link below:
 [link]
 
 [footer]"
+
+# user_email_to_friend
+"_EMAIL_USER_EMAIL_TO_FRIEND_TITLE";"Email To Friend"
+"_EMAIL_USER_EMAIL_TO_FRIEND_DESCRIPTION";"This is the email that gets sent when user wants to send message to friends."
+"_EMAIL_USER_EMAIL_TO_FRIEND_SUBJECT";"You have received a message from your friend [sender_title]"
+"_EMAIL_USER_EMAIL_TO_FRIEND_BODY";"[header]
+
+[message]
+
+[footer]"
