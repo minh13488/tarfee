@@ -39,7 +39,7 @@
     ?>
 </div>
 
-<p><?php echo $this->video->description; ?></p>
+<p class="video_description"><?php echo $this->video->description; ?></p>
 
 <div class="video_author">
     <?php $user = $this->video->getOwner() ?>

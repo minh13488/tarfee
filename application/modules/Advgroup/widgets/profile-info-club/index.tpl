@@ -49,7 +49,7 @@
 				$action = $this->aJoinButton['params']['action'];
 			}
 			?>
-			<div class="">
+			<div class="tf_btn_action">
             	<a href="<?php echo $this->url($this->aJoinButton['params'], $this->aJoinButton['route'], array());?>" class="<?php echo $this->aJoinButton['class'];?>" title="<?php echo $this->aJoinButton['label']; ?>">
             		<?php echo $this -> translate($action);?>
             	</a>
