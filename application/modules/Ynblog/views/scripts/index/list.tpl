@@ -40,14 +40,14 @@
 <?php elseif( $this->category || $this->tag ): ?>
   <div class="tip">
     <span>
-      <?php echo $this->translate('%1$s has not published a talk entry with that criteria.', $this->owner->getTitle()); ?>
+      <?php echo $this->translate('%1$s has not published a blog entry with that criteria.', $this->owner->getTitle()); ?>
     </span>
   </div>
 
 <?php else: ?>
   <div class="tip">
     <span>
-      <?php echo $this->translate('%1$s has not written a talk entry yet.', $this->owner->getTitle()); ?>
+      <?php echo $this->translate('%1$s has not written a blog entry yet.', $this->owner->getTitle()); ?>
     </span>
   </div>
 <?php endif; ?>

@@ -14,11 +14,7 @@
                 </div>
             </div>
       </div>
-		<!--
-      <div class="photo" style="display:none">
-        <?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'thumb.icon'), array('class' => 'thumb')) ?>
-      </div>
-     -->
+
       <div class="tf_talk_info">
           <div class="talk_title">
                 <?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>

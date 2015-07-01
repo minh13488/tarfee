@@ -1,11 +1,3 @@
-<?php
- $title = $this->translate('View All');
- $createTitle = $this -> translate("add more event");
- if($this -> type == 1)
- {
-	$createTitle = $this -> translate("add more tryout");
- }
-?>
 <ul id="profile_events_<?php echo $this->identity?>" class="ynevents_profile_tab">
     <?php foreach( $this->paginator as $event ): ?>
 
