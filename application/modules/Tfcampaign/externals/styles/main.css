@@ -360,10 +360,10 @@ h5.tf_campaign_filter_title{
 				overflow: hidden;
 				li{
 					&:first-child{
-						width: 46%;
+						width: 22%;
 					}
-					width: 50%;
-					margin-right: 4%;
+					width: 75%;
+					margin-right: 3%;
 					float: left;
 
 					&:last-child{

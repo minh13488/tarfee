@@ -65,15 +65,23 @@
 
     <?php if ($this->paginator->count() > 1): ?>
     <?php
-    	echo $this->paginationControl($this->paginator, null, null, array(
-	    'query' => array('view' => $this->view, 'text' => $this->text)
-	    ));
+    echo $this->paginationControl($this->paginator, null, null, array(
+    'query' => array('view' => $this->view, 'text' => $this->text)
+    ));
     ?>
     <?php endif; ?>
 	<?php else: ?>
 <div class="tip">
     <span>
-		<?php echo $this->translate('You have not follow any events yet.'); ?>
+    	<?php if ($this->view == '2'): ?>
+    		<?php echo $this->translate('You have not led any events yet.'); ?>
+    	<?php else: ?>
+        	<?php echo $this->translate('You have not joined any events yet.'); ?>
+        <?php endif;?>
+        
+        <?php if ($this->canCreate): ?>
+        <?php echo $this->translate('Why don\'t you %1$screate one%2$s?', '<a href="' . $this->url(array('action' => 'create'), 'event_general') . '">', '</a>') ?>
+        <?php endif; ?>
     </span>
 </div>
 <?php endif; ?>

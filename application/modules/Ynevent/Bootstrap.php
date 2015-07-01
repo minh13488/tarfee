@@ -1,4 +1,4 @@
-<?php
+<?php 
 class Ynevent_Bootstrap extends Engine_Application_Bootstrap_Abstract {
 	public function __construct($application) {
 		parent::__construct($application);
@@ -16,3 +16,4 @@ class Ynevent_Bootstrap extends Engine_Application_Bootstrap_Abstract {
 		$front -> registerPlugin(new Ynevent_Controller_Plugin_Dispatch);
 	}
 }
+ ?>

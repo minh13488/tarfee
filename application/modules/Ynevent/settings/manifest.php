@@ -156,11 +156,11 @@
       array (
         'module' => 'ynevent',
         'controller' => 'index',
-        'action' => 'browse',
+        'action' => 'listing',
       ),
       'reqs' => 
       array (
-        'action' => '(index|browse|create|delete|list|manage|edit|calendar|add-location|event-badge|promote-calendar|calendar-badge|view-more|display-map-view|get-my-location|display-map-view-time)',
+        'action' => '(listing|index|browse|create|delete|list|manage|edit|calendar|add-location|event-badge|promote-calendar|calendar-badge|view-more|display-map-view|get-my-location|display-map-view-time)',
       ),
     ),
     'event_specific' => 
@@ -238,16 +238,6 @@
         'controller' => 'index',
         'action' => 'past',
         'filter' => 'past',
-      ),
-    ),
-    'event_listing' => 
-    array (
-      'route' => 'events/listing/*',
-      'defaults' => 
-      array (
-        'module' => 'ynevent',
-        'controller' => 'index',
-        'action' => 'listing',
       ),
     ),
     'event_following' => 

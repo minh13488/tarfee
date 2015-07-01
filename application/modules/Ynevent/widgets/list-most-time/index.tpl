@@ -111,16 +111,16 @@
 					        eventIds =  '<?php echo $this -> eventIdsUpcoming ?>';
 					        break;
 					    case 'tab_events_today_'+id:
-					        eventIds =  '<?php echo $this -> eventIdsToday ?>';
+					        eventIds =  '<?php echo $this -> $eventIdsToday ?>';
 					        break;
 					    case 'tab_events_week_'+id:
-					        eventIds =  '<?php echo $this -> eventIdsWeek ?>';
+					        eventIds =  '<?php echo $this -> $eventIdsWeek ?>';
 					        break;
 					    case 'tab_events_month_'+id:
-					        eventIds =  '<?php echo $this -> eventIdsMonth ?>';
+					        eventIds =  '<?php echo $this -> $eventIdsMonth ?>';
 					        break;
 					    default:
-					        eventIds =  '<?php echo $this -> ventIdsUpcoming ?>';
+					        eventIds =  '<?php echo $this -> eventIdsUpcoming ?>';
 					}
 				}       			
        		});

@@ -208,19 +208,6 @@ if ($this->event->cover_photo)
 					<?php endif;?>                
                 <?php endif;?>
 		
-                <?php if ($this->viewer() -> getIdentity()):
-	                $url = $this -> url(array(
-						'module' => 'activity',
-						'controller' => 'index',
-						'action' => 'share',
-						'type' => $this->event -> getType(),
-						'id' => $this->event -> getIdentity(),
-						'format' => 'smoothbox'),'default', true)
-				;?>
-	               <div class="">
-	               		<a href="javascript:void(0);" onclick="checkOpenPopup('<?php echo $url?>')"><i class="ynicon-shared" title="<?php echo $this -> translate("Share this event")?>"></i></a>
-				   </div>
-                <?php endif;?>
                 <?php if ($this->viewer()->getIdentity()): ?>
                 	<div id="ynevent_widget_cover_settings"><i class="ynicon-setting" title="<?php echo $this -> translate("Event options")?>"></i></div>
                 <?php endif;?>
@@ -349,6 +336,7 @@ if ($this->event->cover_photo)
             </div>
         </div>
         <div class="info-bottom ynclearfix">
+            
             <div class="ynevent-detail-contact">
             	<?php if($this->event->email) :?>
             		<div class=""><span><i class="ynicon-email"></i></span><a href="mailto:<?php echo $this->event->email; ?>"><?php echo $this -> translate("Contact Us"); ?></a></div>
@@ -393,6 +381,9 @@ if ($this->event->cover_photo)
 				    <?php endif;?>
 				</div>
             </div>
+        	<!-- Add addthis share-->
+        	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
+			<div style="float: right" class="addthis_sharing_toolbox"></div>
         </div>
     </div>
 </div>
