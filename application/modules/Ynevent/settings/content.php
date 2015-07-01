@@ -1165,5 +1165,15 @@ return array(
 		           'subject' => 'ynevent',
         	),
     	),
+    	array(
+		        'title' => 'Event Listing',
+		        'description' => 'Event listing.',
+		        'category' => 'Advanced Events',
+		        'type' => 'widget',
+		        'name' => 'ynevent.listing-events',
+		        'isPaginated' => true,
+		        'defaultParams' => array(
+		        ),
+    	),
 )
 ?>

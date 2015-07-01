@@ -1,4 +1,4 @@
-<?php if( count($this->paginator) > 0 ): ?>
+<?php if($this -> paginator->getTotalItemCount() > 0 ):?>
 <ul id="profile_events_<?php echo $this->identity?>" class="ynevents_profile_tab">
     <?php foreach( $this->paginator as $event ): ?>
     <li>
