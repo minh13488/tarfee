@@ -189,10 +189,10 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 			}
 
 			// prepare the thumbnail
-			$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.video.activity');
+			$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.main');
 			if ($this -> photo_id)
 			{
-				$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.video.activity');
+				$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.main');
 			}
 			else
 			{
@@ -223,7 +223,7 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 				$class_html5 = 'html5_player';
 			}
 
-			$videoEmbedded = $thumb . '<div id="video_object_' . $this -> video_id . '" class="video_object ' . $class_html5 . '">' . $videoEmbedded . '</div><div class="video_info">' .$title . $description . '</div>';
+			$videoEmbedded = '<div class="video_info">' .$title . $description . '</div>'.$thumb . '<div id="video_object_' . $this -> video_id . '" class="video_object ' . $class_html5 . '">' . $videoEmbedded . '</div>';
 		}
 
 		return $videoEmbedded;
