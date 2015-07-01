@@ -206,6 +206,16 @@
         'action' => '(invite-groups|ajax-groups)',
       ),
     ),
+    'event_listing' => 
+    array (
+      'route' => 'events/listing/*',
+      'defaults' => 
+      array (
+        'module' => 'ynevent',
+        'controller' => 'index',
+        'action' => 'listing',
+      ),
+    ),
     'event_upcoming' => 
     array (
       'route' => 'events/upcoming/*',
@@ -238,16 +248,6 @@
         'controller' => 'index',
         'action' => 'past',
         'filter' => 'past',
-      ),
-    ),
-    'event_listing' => 
-    array (
-      'route' => 'events/listing/*',
-      'defaults' => 
-      array (
-        'module' => 'ynevent',
-        'controller' => 'index',
-        'action' => 'listing',
       ),
     ),
     'event_following' => 

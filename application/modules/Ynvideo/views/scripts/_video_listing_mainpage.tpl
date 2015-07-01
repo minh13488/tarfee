@@ -34,9 +34,6 @@
     <?php endif;?>
 </div>
 
-
-
-
 <?php if ($this->video->parent_type == 'user_playercard') :?>
 <?php $player = $this->video->getParent();?>
 <?php if ($player):?>
@@ -89,3 +86,6 @@
     ?>
     <?php } ?>
 </div>
+<?php 
+Engine_Api::_() -> core() -> clearSubject();
+?>
