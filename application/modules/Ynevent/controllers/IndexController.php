@@ -733,11 +733,8 @@ class Ynevent_IndexController extends Core_Controller_Action_Standard
 			if ($values['parent_type'] == 'group')
 			{
 				return $this -> _helper -> redirector -> gotoRoute(array(
-					'module' => 'advgroup',
-					'controller' => 'event',
-					'action' => 'manage',
-					'subject' => 'group_' . $this -> _getParam('subject_id')
-				), 'default', true);
+				'id' => $this -> _getParam('subject_id')
+				), 'group_profile', true);
 			}
 			else
 			{

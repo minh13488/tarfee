@@ -280,9 +280,6 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 				$owner = $video -> getOwner();
 				if ($parent_type == 'group')
 				{
-					$item = Engine_Api::_()->getItem($parent_type, $parent_id);
-					if ($item)
-						$action = Engine_Api::_() -> getDbtable('actions', 'activity') -> addActivity($owner, $item, 'advgroup_video_create');
 				}
 				elseif ($parent_type == 'event')
 				{
@@ -322,11 +319,8 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		if ($parent_type == 'group')
 		{
 			return $this -> _helper -> redirector -> gotoRoute(array(
-				'module' => 'advgroup',
-				'controller' => 'video',
-				'action' => 'manage',
-				'subject' => 'group_' . $this -> _getParam('subject_id')
-			), 'default', true);
+				'id' => $this -> _getParam('subject_id')
+			), 'group_profile', true);
 		}
 		else
 		{
