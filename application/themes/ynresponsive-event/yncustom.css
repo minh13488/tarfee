@@ -1598,7 +1598,7 @@ body#global_page_user-profile-index {
         		font-weight: bold;
         		text-transform: lowercase;
         		color: $theme_font_color;
-        		padding: 10px 27px;
+        		padding: 10px 15px;
 				border-radius: 5px;
 				-webkit-border-radius: 5px;
 				-moz-border-radius: 5px;        		
@@ -1889,8 +1889,8 @@ body#global_page_user-profile-index {
 .layout_ynevent_recent_events,
 .layout_user_club_profile_players,
 .layout_advgroup_recent_group_videos,
-.layout_user_club_profile_players{
-
+.layout_user_club_profile_players,
+.layout_advgroup_profile_videos_by_fans{
 	background: #fff;
 	overflow: hidden;
 	+border-radius(5px);
@@ -3144,7 +3144,6 @@ body#global_page_advgroup-profile-index{
 		}
 	}
 	a.tf_button_action{
-		margin-top: 10px;
 		background-color: $theme_link_color;
 		color: #fff !important;
 		padding: 10px 15px;
@@ -3152,6 +3151,7 @@ body#global_page_advgroup-profile-index{
 		margin: 0 10px;
 		text-align: center;
 		+border-radius(5px);
+		margin-top: 10px;
 		display: block;
 		&:hover{
 			background-color: $theme_link_color_hover;
@@ -3172,6 +3172,59 @@ body#global_page_advgroup-profile-index{
 			+border-radius(5px);
 			margin-bottom: 15px;
 			border: 0;
+		}
+	}
+}
+
+/*By Fans*/
+.layout_advgroup_profile_videos_by_fans{
+	.tfvideo-by-fans{
+		& > li {
+			margin-bottom: 15px;
+			padding: 5px;
+			clear: both;
+			border-bottom: 1px solid $theme_border_medium_color;
+			height: auto;
+
+			&:last-child{
+				border-bottom: 0;
+				margin-bottom: 0;
+			}
+
+			.video_length{
+				display: none;
+			}
+			.ynvideo_thumb_wrapper{
+				width: 100%;
+				height: auto;
+				max-width: 100%;
+				margin: 0;
+				clear: both;
+				margin-bottom: 5px;
+
+				a{
+					width: 100%;
+					max-width: 100%;
+
+					img{
+						width: 100%;
+						max-width: 100%;
+						height: 160px;
+					}
+				}
+			}
+
+			.ynvideo_title{
+				color: $theme_font_color;
+
+				&:hover{
+					color: $theme_link_color;
+				}
+			}
+			.video_button_add_to_area,
+			.video_author{
+				display: none;
+			}
 		}
 	}
 }
