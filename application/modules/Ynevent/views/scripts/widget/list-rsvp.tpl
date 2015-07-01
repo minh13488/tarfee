@@ -24,11 +24,3 @@ if($row):
 		<?php echo $action;?>
 	</a>
 <?php endif;?>
-<!--
-<?php $url = $this -> url(array(
-		'module' => 'socialpublisher',
-		'controller' => 'index',
-		'action' => 'share',
-		'resource_type' => $this->event -> getType(),
-		'resource_id' => $this->event -> getIdentity()),'default', true)?>
-		<a class="smoothbox" href="<?php echo $url?>"><?php echo $this->translate('share'); ?></a> -->

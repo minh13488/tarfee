@@ -36,26 +36,8 @@ class Ynevent_IndexController extends Core_Controller_Action_Standard
 	// Search events pages (listing page)
 	public function listingAction()
 	{
-		// Prepare
-		$viewer = Engine_Api::_() -> user() -> getViewer();
-		$values = $this -> _getAllParams();
-
-		// Get paginator
-		$this -> view -> paginator = $paginator = Engine_Api::_() -> getItemTable('event') -> getEventPaginator($values);
-		$paginator -> setCurrentPageNumber($this -> _getParam('page'));
-		
-		$eventIds = array();
-		foreach ($paginator as $e){
-			$eventIds[] = $e -> getIdentity();
-		}
-		$this->view->eventIds = implode("_", $eventIds);
-		
 		// Render
-		$this -> _helper -> content -> setEnabled();
-		
-		$search = $this->_getParam('is_search');
-		$selected_day =  $this->_getParam('selected_day');
-		$tag =  $this->_getParam('tag');
+		$this->_helper->content->setNoRender ()->setEnabled ();
 	}
 
 	public function followingAction()
