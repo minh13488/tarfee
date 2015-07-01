@@ -12,11 +12,11 @@
         <?php echo $this->partial('_video_duration.tpl', 'ynvideo', array('video' => $this->video)) ?>
     <?php endif ?>
     <?php
-    if ($this->video->photo_id) {
-        echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.normal'));
-    } else {
-        echo '<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">';
-    }
+	    if ($this->video->photo_id) {
+	        echo $this->htmlLink($this->video->getPopupHref(), $this->itemPhoto($this->video, 'thumb.large'), array('class'=>'smoothbox'));
+	    } else {
+	        echo $this->htmlLink($this->video->getPopupHref(),'<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">', array('class'=>'smoothbox'));;
+	    }
     ?>
     <span class="video_button_add_to_area">
         <button class="ynvideo_uix_button ynvideo_add_button" id="ynvideo_btn_video_<?php echo $this->video->getIdentity()?>" 
@@ -26,9 +26,9 @@
     </span>
 </div>
 <?php 
-    echo $this->htmlLink($this->video->getHref(), 
+    echo $this->htmlLink($this->video->getPopupHref(), 
             $this->string()->truncate($this->video->getTitle(), 30), 
-            array('class' => 'ynvideo_title', 'title' => $this->video->getTitle())) 
+            array('class' => 'ynvideo_title smoothbox', 'title' => $this->video->getTitle())) 
 ?>
 
 <div class="video_author">
