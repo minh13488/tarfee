@@ -213,7 +213,7 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 			}
 
 			// prepare title and description
-			$title = "<a href='" . $this -> getHref($params) . "'>". $this-> getTitle()."</a>";
+			$title = "<a class='smoothbox' href='" . $this -> getPopupHref($params) . "'>". $this-> getTitle()."</a>";
 			$tmpBody = strip_tags($this -> description);
 			$description = "<div class='video_desc'>" . (Engine_String::strlen($tmpBody) > 255 ? Engine_String::substr($tmpBody, 0, 255) . '...' : $tmpBody) . "</div>";
 
