@@ -97,6 +97,34 @@ if($this->paginator -> getTotalItemCount()):?>
 					?>
 				</div>
 				<?php endif;?>
+				<div>
+				<?php
+					echo $this->htmlLink(array(
+						'route' => 'default',
+						'module' => 'video',
+						'controller' => 'index',
+						'action' => 'edit',
+						'video_id' => $item->video_id,
+						'parent_type' =>'group',
+						'subject_id' =>  $this->group->getIdentity(),
+				    ), '<i class="fa fa-pencil-square-o"></i>', array('class' => 'buttonlink'));
+				?>
+			    </div>
+			    <div>
+				<?php
+					echo $this->htmlLink(array(
+				 	        'route' => 'default', 
+				         	'module' => 'video', 
+				         	'controller' => 'index', 
+				         	'action' => 'delete', 
+				         	'video_id' => $item->video_id, 
+				         	'subject_id' =>  $this->group->getIdentity(),
+				        	'parent_type' => 'group',
+				         	'format' => 'smoothbox'), 
+				         	'<i class="fa fa-trash-o"></i>', array('class' => 'buttonlink smoothbox'
+				     ));
+				?>
+				</div>
             </li>
             
         <?php endforeach; ?>
