@@ -41,7 +41,7 @@
 <?php
 	 $ynvideo_enable = Engine_Api::_() -> advgroup() ->checkYouNetPlugin('ynvideo');
  ?>
-<?php if( $this->canCreate ): ?>
+<?php if($this->subject()->isOwner($this->viewer())) :?>
 	<?php 
 		if($ynvideo_enable)
 		{

@@ -35,7 +35,7 @@
 </script>
 
 <div class="group_album_options">
-  <?php if( $this->canAdd ): ?>
+<?php if($this->subject()->isOwner($this->viewer())) :?>
     <?php echo $this->htmlLink(array(
         'route' => 'event_general',
         'controller' => 'event',
