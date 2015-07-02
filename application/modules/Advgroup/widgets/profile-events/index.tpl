@@ -1,6 +1,5 @@
 <script type="text/javascript">
   en4.core.runonce.add(function(){
-
     <?php if( !$this->renderOne ): ?>
     var anchor = $('profile_groups_events').getParent();
     $('profile_groups_events_previous').style.display = '<?php echo ( $this->paginator->getCurrentPageNumber() == 1 ? 'none' : '' ) ?>';
