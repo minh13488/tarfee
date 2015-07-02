@@ -1175,5 +1175,27 @@ return array(
 		        'defaultParams' => array(
 		        ),
     	),
+    	array(
+		        'title' => 'Attended Events',
+		        'description' => 'Attended Events.',
+		        'category' => 'Advanced Events',
+		        'type' => 'widget',
+		        'name' => 'ynevent.attended-events',
+		        'isPaginated' => true,
+		        'defaultParams' => array(
+		        	'title' => 'My up-comming activities',
+		        ),
+    	),
+    	array(
+		        'title' => 'My Events',
+		        'description' => 'My Events.',
+		        'category' => 'Advanced Events',
+		        'type' => 'widget',
+		        'name' => 'ynevent.my-events',
+		        'isPaginated' => true,
+		        'defaultParams' => array(
+		        	'title' => 'My events & tryouts',
+		        ),
+    	),
 )
 ?>

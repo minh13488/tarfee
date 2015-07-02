@@ -50,7 +50,7 @@
 				'action' => 'create',
 				'parent_type' =>'group',
 				'subject_id' =>  $this->group->group_id,
-			), $this->translate('Create New Video'), array(
+			), $this->translate('Add Video'), array(
 			'class' => 'tf_button_action'
 			)) ;
 		}
@@ -61,7 +61,7 @@
 				'action' => 'create',
 				'parent_type' =>'group',
 				'subject_id' =>  $this->group->getGuid(),
-			), $this->translate('Create New Video'), array(
+			), $this->translate('Add Video'), array(
 			'class' => 'tf_button_action'
 			)) ;
 		}
@@ -85,7 +85,7 @@ if($this->paginator -> getTotalItemCount()):?>
 	            ?>
                
                <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($item)) :?>
-				<div>
+				<div class="tf_btn_action">
 					<?php
 						echo $this->htmlLink(array(
 				            'route' => 'user_general',
@@ -97,6 +97,34 @@ if($this->paginator -> getTotalItemCount()):?>
 					?>
 				</div>
 				<?php endif;?>
+				<div class="tf_btn_action">
+				<?php
+					echo $this->htmlLink(array(
+						'route' => 'default',
+						'module' => 'video',
+						'controller' => 'index',
+						'action' => 'edit',
+						'video_id' => $item->video_id,
+						'parent_type' =>'group',
+						'subject_id' =>  $this->group->getIdentity(),
+				    ), '<i class="fa fa-pencil-square-o fa-lg"></i>', array('class' => 'tf_button_action'));
+				?>
+			    </div>
+			    <div class="tf_btn_action">
+				<?php
+					echo $this->htmlLink(array(
+				 	        'route' => 'default', 
+				         	'module' => 'video', 
+				         	'controller' => 'index', 
+				         	'action' => 'delete', 
+				         	'video_id' => $item->video_id, 
+				         	'subject_id' =>  $this->group->getIdentity(),
+				        	'parent_type' => 'group',
+				         	'format' => 'smoothbox'), 
+				         	'<i class="fa fa-trash-o fa-lg"></i>', array('class' => 'tf_button_action smoothbox'
+				     ));
+				?>
+				</div>
             </li>
             
         <?php endforeach; ?>
