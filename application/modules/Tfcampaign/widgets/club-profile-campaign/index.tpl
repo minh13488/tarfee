@@ -4,7 +4,9 @@
 	    'club_id' => $this->subject->getIdentity(),
 	    ),'tfcampaign_general', true)
 	;?>
-	<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('Add Scout')?></button></a>
+	<div class="group_album_options">
+		<a class="smoothbox tf_button_action" href='<?php echo $url?>'><?php echo $this->translate('Add Scout')?></a>
+	</div>
 <?php endif;?>
 <ul class="tfcampaign_list">
 <?php foreach($this -> campaigns as $campaign) :?>

@@ -1894,7 +1894,8 @@ body#global_page_user-profile-index {
 .layout_user_club_profile_players,
 .layout_advgroup_recent_group_videos,
 .layout_user_club_profile_players,
-.layout_advgroup_profile_videos_by_fans{
+.layout_advgroup_profile_videos_by_fans,
+.layout_tfcampaign_club_profile_campaign{
 	background: #fff;
 	overflow: hidden;
 	+border-radius(5px);
@@ -3026,6 +3027,7 @@ body#global_page_advgroup-profile-index{
 		background-color: $theme_link_color;
 		padding: .5em .8em;
 		+border-radius(5px);
+		text-transform: lowercase;
 		margin: 10px;
 
 		&:hover{
