@@ -401,7 +401,7 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 		$('.advsearch-form button[type="submit"]').text('<?php echo $this->translate('Try the professional account for free')?>');
 		$('.advsearch-form button[type="submit"]').on('click', function(e) {
 			e.preventDefault();
-			var url = '';
+			var url = '<?php echo $this->url(array('controller' => 'settings','action' => 'index','module' => 'payment'), 'default', true); ?>';
 			window.location.href = url;
 		});
 		<?php endif;?>
