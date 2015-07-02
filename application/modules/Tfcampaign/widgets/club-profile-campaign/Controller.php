@@ -17,8 +17,5 @@ class Tfcampaign_Widget_ClubProfileCampaignController extends Engine_Content_Wid
 
 		$campaignTable = Engine_Api::_() -> getItemTable('tfcampaign_campaign');
 		$this -> view -> campaigns = $campaigns = $campaignTable -> getCampaignsByClub($subject, $this -> _getParam('itemCountPerPage', 5));
-		if(count($campaigns) <= 0) {
-			return $this -> setNoRender();
-		}
 	}
 }

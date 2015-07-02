@@ -142,7 +142,7 @@
     <?php if($this->onViewPage): $actionBaseId="view-".$action->action_id; else:$actionBaseId=$action->action_id;endif;?>
     <?php $this->commentForm->setActionIdentity($actionBaseId);
     $this->commentForm->action_id->setValue($action->action_id);?>
-  <?php if( !$this->noList ): ?><li id="activity-item-<?php echo $action->action_id ?>" data-activity-feed-item="<?php echo $action->action_id ?>"><?php endif; ?>
+  <?php if( !$this->noList ): ?><li class="clearfix" id="activity-item-<?php echo $action->action_id ?>" data-activity-feed-item="<?php echo $action->action_id ?>"><?php endif; ?>
     <script type="text/javascript">
         show_all_comments[<?php echo $action->action_id?>] = '<?php echo $this -> viewAllComments?>';
         comment_like_box_show[<?php echo $action->action_id?>] = '<?php echo $this->ynfeed_comment_like_box_show?>';
@@ -281,7 +281,13 @@
       <?php // Main Content ?>
       <span class="<?php echo ( empty($action->getTypeInfo()->is_generated) ? 'feed_item_posted' : 'feed_item_generated' ) ?>">
         <?php 
-            echo @$action->getContent();
+        if($this -> subject() && $this -> subject() -> getType() == 'group')
+		{
+			 echo $this -> subject() -> getOwner();
+		}
+		else {
+			 echo @$action->getContent();
+		}
         $mdash = false;
         $str_content = '<span class = "ynfeed_with_checkin">';
         $feedApiCore = Engine_Api::_ ()->ynfeed ();

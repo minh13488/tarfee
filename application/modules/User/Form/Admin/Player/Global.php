@@ -16,6 +16,11 @@ class User_Form_Admin_Player_Global extends Engine_Form
       ),
     ));
 	
+	$this->addElement('Text', 'user_min_year', array(
+      'label' => 'Minimum year displayed',
+      'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('user.min_year', 1985),
+    ));
+	
 	$this->addElement('Text', 'user_max_year', array(
       'label' => 'Maximum year displayed',
       'value' => Engine_Api::_()->getApi('settings', 'core')->getSetting('user.max_year', 2003),

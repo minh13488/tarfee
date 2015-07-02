@@ -1080,7 +1080,12 @@ http://[host][object_link]
 "GROUP_VIEWS_SCRIPTS_ADMINREQUEST_DESCRIPTION";"This page lists all the verification requests of club owners."
 "ADVGROUP_FORM_REQUEST_DESCRIPTION";"Please type your verification request message to Admin."
 
-
+"ACTIVITY_TYPE_ADVGROUP_FOLLOW_EDIT";"When someone edit a club I followed."
+"ACTIVITY_TYPE_ADVGROUP_GROUP_UNVERIFIED";"When my club is unverified."
+"ACTIVITY_TYPE_ADVGROUP_GROUP_VERIFIED";"When my club is verified."
+"ACTIVITY_TYPE_ADVGROUP_REQUEST_ACCEPTED";"When my request is accepted."
+"ACTIVITY_TYPE_ADVGROUP_REQUEST_DENIED";"When my request is denied."
+"ACTIVITY_TYPE_ADVGROUP_REQUEST_SENT";"When my request is sent."
 
 # notify_advgroup_group_verified
 "_EMAIL_NOTIFY_ADVGROUP_GROUP_VERIFIED_TITLE";"Group Verification"

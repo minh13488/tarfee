@@ -34,9 +34,6 @@ class Advgroup_Widget_ProfileEventsController extends Engine_Content_Widget_Abst
       return $this->setNoRender();
     }
 
-    // Just remove the title decorator
-    $this->getElement()->removeDecorator('Title');
-
     // Get paginator
     $this->view->paginator = $paginator = $group->getEventsPaginator();
 

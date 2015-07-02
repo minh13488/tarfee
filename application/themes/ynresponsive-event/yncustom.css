@@ -1503,7 +1503,11 @@ body#global_page_user-profile-index {
 
 
 /*Style profile event*/
-.ynevents_profile_tab{
+#profile_groups_events li .ynevents_info .ynevents_desc{
+	max-height: 54px !important;
+}
+.ynevents_profile_tab,
+#profile_groups_events{
 	background: #fff;
 	border-radius: 0 0 5px 5px;
 	-webkit-border-radius: 0 0 5px 5px;
@@ -2215,6 +2219,64 @@ body#global_page_user-profile-index {
 /*Style popup videos*/
 #global_page_ynvideo-index-popup-view{
 
+	.yncomment_comment_tips_wrap {
+		position: relative;
+		display: inline-block;
+	}
+	.yncomment_replies_author .yncomment_replies_author_photo_tooltip {
+		display: none;
+	}
+	.yncomment_replies_author_photo_tooltip:before {
+		content: "";
+		width: 29px;
+		height: 24px;
+		position: absolute;
+		left: -29px;
+		top: 5px;
+		background: url(~/application/modules/Yncomment/externals/images/arrow-popup.png);
+	}
+	.tip_main_photo {
+	  float: left;
+	}
+	.yncomment_replies_author_photo_tooltip .tip_main_body {
+  max-width: 100%;
+  display: block;
+  width: 100%;
+}
+.tip_main_photo .item_photo_user {
+  width: 33px;
+  height: 33px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+}
+	.info_tip_content_wrapper {
+		-moz-box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.3);
+		-webkit-box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.3);
+		box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.3);
+	}
+	.yncomment_replies_author_photo_tooltip {
+		position: absolute;
+		min-width: 325px;
+		max-width: 365px;
+		z-index: 200;
+		background-color: #fff;
+		padding: 15px;
+		border-radius: 7px;
+		border: 3px solid #ccc;
+		top: -10px;
+		left: 125%;
+	}
+	.yncomment_replies_author .yncomment_comment_tips_wrap:hover .yncomment_replies_author_photo_tooltip {
+		display: block;
+	}
+	.yncomment_replies .yncomment_replies_author a {
+		font-weight: bold;
+		font-size: 14px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		word-break: break-word;
+	}
 	.yncomment_emoticons .adv_post_smile {
 		position: absolute;
 		bottom: 5px;
@@ -2625,7 +2687,9 @@ body#global_page_advgroup-profile-index{
 			width: 320px;
 		}
 	}
+	.ynfeed_pulldown_btn{display: none !important;}
 }
+
 
 .layout_advgroup_profile_info_club{
 	background: #fff;
@@ -2713,7 +2777,8 @@ body#global_page_advgroup-profile-index{
         ul.players_browse{
             > li {
                 float: left;
-                margin-bottom: 10px;
+                /*margin-bottom: 10px;*/
+                border-bottom: 10px solid #dadada;
                 width: 100%;
                 overflow: hidden;
 
@@ -3172,6 +3237,7 @@ body#global_page_advgroup-profile-index{
 		text-transform: lowercase;
 		margin: 0 10px;
 		text-align: center;
+		font-weight: bold;
 		+border-radius(5px);
 		margin-top: 10px;
 		display: block;
@@ -3194,6 +3260,8 @@ body#global_page_advgroup-profile-index{
 			+border-radius(5px);
 			margin-bottom: 15px;
 			border: 0;
+			overflow: visible !important;
+			position: relative;  
 		}
 	}
 }
@@ -3228,6 +3296,20 @@ body#global_page_advgroup-profile-index{
 					width: 100%;
 					max-width: 100%;
 
+					&:before{
+						content: "";
+						background-image: url(~/application/themes/ynresponsive-event/images/icon-play-large.png);
+						position: absolute;
+						top: 0;
+						left: 0;
+						width: 100%;
+						height: 100%;
+						display: block;
+						background-position: center;
+						background-repeat: no-repeat;
+						background-color: rgba(0, 0, 0, 0.4);
+					}
+
 					img{
 						width: 100%;
 						max-width: 100%;
@@ -3259,6 +3341,23 @@ body#global_page_advgroup-profile-index{
 #global_page_advgroup-profile-index {
 	ul.feed div.feed_item_date > ul > li.feed_item_option_share{
 		display: none !important;
+	}
+	/*.feed_item_option_like,
+	.feed_item_option_unlike{
+		display: none !important;
+	}
+	.comment-likes-activity-item{display: none;}*/
+	.tfvideo_statistics{
+		clear: both;
+		padding-left: 15px;
+		display: none;
+		margin-bottom: 5px;
+
+		span{
+			color: $theme_font_color;
+			font-size: 12px;
+			margin-right: 15px;
+		}
 	}
 	#activity-feed{
 		& > li{position: relative;}
@@ -3299,8 +3398,9 @@ body#global_page_advgroup-profile-index{
 	}
 	.feed_item_generated a{
 		color: $theme_font_color;
+		font-weight: bold;
 		&:hover{
-			color: $theme_link_color_hover;
+			color: $theme_link_color;
 		}
 	}
 	.video_length{display: none}
@@ -3320,6 +3420,21 @@ body#global_page_advgroup-profile-index{
 		max-width: 100%;
 		margin-bottom: 15px;
 		height: 325px;
+		margin-right: 0;
+
+		&:after{
+			content: "";
+			background-image: url(~/application/themes/ynresponsive-event/images/icon-play-large.png);
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			display: block;
+			background-position: center;
+			background-repeat: no-repeat;
+			background-color: rgba(0, 0, 0, 0.4);
+		}
 
 		img{
 			width: 100%;

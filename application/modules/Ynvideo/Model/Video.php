@@ -189,10 +189,10 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 			}
 
 			// prepare the thumbnail
-			$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.main');
+			$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.large');
 			if ($this -> photo_id)
 			{
-				$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.main');
+				$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.large');
 			}
 			else
 			{
@@ -222,8 +222,17 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 			{
 				$class_html5 = 'html5_player';
 			}
-
+			$totalLike = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($this) -> getLikeCount();
+          	$totalDislike = Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> getDislikeCount($this);
+			
 			$videoEmbedded = '<div class="video_info">' .$title . $description . '</div>'.$thumb . '<div id="video_object_' . $this -> video_id . '" class="video_object ' . $class_html5 . '">' . $videoEmbedded . '</div>';
+			
+			$view = Zend_Registry::get('Zend_View');  
+			$videoEmbedded .= '<div class="tfvideo_statistics">
+          	<span>'. $view->translate(array('%s like', '%s likes', $totalLike), $totalLike). '</span>
+          	<span>'. $view->translate(array('%s dislike', '%s dislikes', $totalDislike), $totalDislike). '</span>
+          	<span>'. $view->translate(array('%s comment', '%s comments', $this -> comment_count), $this -> comment_count).'</span>
+      		</div>';
 		}
 
 		return $videoEmbedded;
@@ -331,12 +340,12 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 
 					$image = Engine_Image::factory();
 
-					$width = 240;
-					$height = 120;
+					$width = 300;
+					$height = 150;
 					if ($type == 'large')
 					{
-						$width = 480;
-						$height = 360;
+						$width = 600;
+						$height = 400;
 					}
 					$image -> open($tmp_file) -> resize($height, $width) -> write($thumb_file) -> destroy();
 

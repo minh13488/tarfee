@@ -41,7 +41,7 @@
 <?php
 	 $ynvideo_enable = Engine_Api::_() -> advgroup() ->checkYouNetPlugin('ynvideo');
  ?>
-<?php if( $this->canCreate ): ?>
+<?php if($this->subject()->isOwner($this->viewer())) :?>
 	<?php 
 		if($ynvideo_enable)
 		{
@@ -68,7 +68,8 @@
 	?>
 <?php endif; ?>
 
-<?php if(count($this->paginator)>0):?>
+<?php
+if($this->paginator -> getTotalItemCount()):?>
     <ul class="videos_browse" id="ynvideo_recent_videos">
         <?php foreach ($this->paginator as $item): ?>
         <?php
@@ -100,7 +101,6 @@
             
         <?php endforeach; ?>
     </ul>
-
 <?php else:?>
   <div class="tip">
     <span>

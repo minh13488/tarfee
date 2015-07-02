@@ -1,6 +1,5 @@
 <?php
 class Advgroup_Widget_RecentGroupVideosController extends Engine_Content_Widget_Abstract{
-	protected $_childCount;
   public function indexAction(){
      // Don't render this if not authorized
     $this->view->viewer = $viewer = Engine_Api::_()->user()->getViewer();
@@ -41,7 +40,7 @@ class Advgroup_Widget_RecentGroupVideosController extends Engine_Content_Widget_
     $params['orderby'] = 'creation_date';
     $params['page'] = $this->_getParam('page',1);
     $params['limit'] = $max;
-	$params['user_id'] = $subject->user_id;
+	//$params['user_id'] = $subject->user_id;
 	
 	//Get data from table Mappings
 	$tableMapping = Engine_Api::_()->getItemTable('advgroup_mapping');
@@ -67,6 +66,7 @@ class Advgroup_Widget_RecentGroupVideosController extends Engine_Content_Widget_
 			$params['ids'][] = $video_id -> video_id;
 		}
 	}
+
     $this->view->paginator = $paginator = $subject -> getVideosPaginator($params);
 
 	$canCreate = $subject -> authorization() -> isAllowed($viewer, 'video');
@@ -77,16 +77,7 @@ class Advgroup_Widget_RecentGroupVideosController extends Engine_Content_Widget_
       } else {
         $this -> view -> canCreate = false;
       }
-  
-	// Add count to title if configured
-    if( $this->_getParam('titleCount', false) && $paginator->getTotalItemCount() > 0 ) {
-      $this->_childCount = $paginator->getTotalItemCount();
-    }
   }
 	 
-  public function getChildCount()
-  {
-    return $this->_childCount;
-  }
 }
 ?>
