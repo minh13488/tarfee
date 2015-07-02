@@ -2215,6 +2215,64 @@ body#global_page_user-profile-index {
 /*Style popup videos*/
 #global_page_ynvideo-index-popup-view{
 
+	.yncomment_comment_tips_wrap {
+		position: relative;
+		display: inline-block;
+	}
+	.yncomment_replies_author .yncomment_replies_author_photo_tooltip {
+		display: none;
+	}
+	.yncomment_replies_author_photo_tooltip:before {
+		content: "";
+		width: 29px;
+		height: 24px;
+		position: absolute;
+		left: -29px;
+		top: 5px;
+		background: url(~/application/modules/Yncomment/externals/images/arrow-popup.png);
+	}
+	.tip_main_photo {
+	  float: left;
+	}
+	.yncomment_replies_author_photo_tooltip .tip_main_body {
+  max-width: 100%;
+  display: block;
+  width: 100%;
+}
+.tip_main_photo .item_photo_user {
+  width: 33px;
+  height: 33px;
+  margin-right: 10px;
+  border: none;
+  border-radius: 5px;
+}
+	.info_tip_content_wrapper {
+		-moz-box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.3);
+		-webkit-box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.3);
+		box-shadow: 0 3px 8px 0 rgba(0, 0, 0, 0.3);
+	}
+	.yncomment_replies_author_photo_tooltip {
+		position: absolute;
+		min-width: 325px;
+		max-width: 365px;
+		z-index: 200;
+		background-color: #fff;
+		padding: 15px;
+		border-radius: 7px;
+		border: 3px solid #ccc;
+		top: -10px;
+		left: 125%;
+	}
+	.yncomment_replies_author .yncomment_comment_tips_wrap:hover .yncomment_replies_author_photo_tooltip {
+		display: block;
+	}
+	.yncomment_replies .yncomment_replies_author a {
+		font-weight: bold;
+		font-size: 14px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		word-break: break-word;
+	}
 	.yncomment_emoticons .adv_post_smile {
 		position: absolute;
 		bottom: 5px;
