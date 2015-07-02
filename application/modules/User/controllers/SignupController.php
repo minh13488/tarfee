@@ -414,6 +414,9 @@ class User_SignupController extends Core_Controller_Action_Standard
 
   public function confirmAction()
   {
+  	//clear session code if have
+  	unset($_SESSION['ref_code']);
+	
     $confirmSession = new Zend_Session_Namespace('Signup_Confirm');
 	$this->view->viewer_id = $viewer_id = $confirmSession->viewer_id;
     $this->view->approved = $this->_getParam('approved', $confirmSession->approved);
