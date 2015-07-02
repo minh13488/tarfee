@@ -3342,16 +3342,15 @@ body#global_page_advgroup-profile-index{
 	ul.feed div.feed_item_date > ul > li.feed_item_option_share{
 		display: none !important;
 	}
-	.feed_item_option_like,
+	/*.feed_item_option_like,
 	.feed_item_option_unlike{
 		display: none !important;
 	}
-	/*.comment-likes-activity-item{display: none;}*/
+	.comment-likes-activity-item{display: none;}*/
 	.tfvideo_statistics{
-		display: block;
 		clear: both;
 		padding-left: 15px;
-		display: block;
+		display: none;
 		margin-bottom: 5px;
 
 		span{
