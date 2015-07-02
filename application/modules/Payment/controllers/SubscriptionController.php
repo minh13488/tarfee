@@ -378,6 +378,9 @@ class Payment_SubscriptionController extends Core_Controller_Action_Standard
 
   public function finishAction()
   {
+  	//clear session code if have
+  	unset($_SESSION['ref_code']);
+	
     $this->view->status = $status = $this->_getParam('state');
     $this->view->error = $this->_session->errorMessage;
   }

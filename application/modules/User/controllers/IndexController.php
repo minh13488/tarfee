@@ -40,7 +40,7 @@ class User_IndexController extends Core_Controller_Action_Standard
 			
 			$this->view->verified = true;
 			$this->view->approved =  true;
-			$subscription -> status = 'active';
+			$subscription -> status = 'pending';
 			$subscription -> active = true;
 			$subscription -> save();
 			$subscription -> onTrialPaymentSuccess();
@@ -49,6 +49,34 @@ class User_IndexController extends Core_Controller_Action_Standard
 			Engine_Api::_()->user()->setViewer();
 			$this -> view -> viewer_id = $subscription -> user_id;
 		}
+	}
+	
+	public function checkDiscountCode($code)
+    {
+    	$viewer = Engine_Api::_() -> user() -> getViewer();
+	    $inviteTable = Engine_Api::_()->getDbtable('invites', 'invite');
+	    $select = $inviteTable->select()
+	      ->from($inviteTable->info('name'), 'COUNT(*)')
+	      ->where('code = ?', trim($code))
+		  ->where('active = 1')
+		  ->where('discount_used = 0')
+		  ->where('new_user_id = ?', $viewer -> getIdentity())
+	      ;
+	    return (bool) $select->query()->fetchColumn(0);
+    }
+	
+	public function checkCodeAction() {
+		$this -> _helper -> layout -> disableLayout();
+		$this -> _helper -> viewRenderer -> setNoRender(true);
+		$code = $this ->_getParam('code');
+		if(isset($code) && $this -> checkDiscountCode($code)) {
+			echo Zend_Json::encode(array('error' => 0));
+			exit ;
+		} else {
+			echo Zend_Json::encode(array('error' => 1));
+			exit ;
+		}
+				
 	}
 	
 	public function usingTrialAction() {
@@ -68,6 +96,8 @@ class User_IndexController extends Core_Controller_Action_Standard
 					$invite -> discount_used = false;
 					$invite -> save();
 				}
+				//clear session code if have
+  				unset($_SESSION['ref_code']);
 			}
 			
 			$link = 'http';
