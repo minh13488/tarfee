@@ -1,9 +1,3 @@
-<script type="text/javascript">
-  var pageAction =function(page){
-    $('page').value = page;
-    $('ynblog_filter_form').submit();
-  }
-</script>
 <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
   <ul class='ynblogs_entrylist'>
   <?php foreach ($this->paginator as $item):
@@ -49,12 +43,5 @@
     </li>
   <?php endif; endforeach; ?>
   </ul>
-
-<?php else: ?>
-  <div class="tip">
-    <span>
-      <?php echo $this->translate('No one has not published any talks with that criteria.'); ?>
-    </span>
-  </div>
 <?php endif; ?>
 <?php echo $this->paginationControl($this->paginator,null, array("pagination/pagination.tpl","ynblog"));?>

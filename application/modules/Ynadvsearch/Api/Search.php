@@ -206,19 +206,16 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				break;
 				
 			case 'organization':
-				$table = Engine_Api::_()->getItemTable('user');
+				$table = Engine_Api::_()->getItemTable('group');
 				$select = $table->select();
-				$select->where('level_id = ?', '7');
 				if (!empty($params['keyword'])) {
-					$select->where('username LIKE ? or displayname LIKE ?', '%'.$params['keyword'].'%');
+					$select->where('title LIKE ? or description LIKE ?', '%'.$params['keyword'].'%');
 				}
 				if (isset($params['displayname'])) {
-					$select->where('displayname LIKE ?', '%'.$params['displayname'].'%');
+					$select->where('title LIKE ?', '%'.$params['displayname'].'%');
 				}
 				if (!empty($params['sport'])) {
-					$user_ids = Engine_Api::_()->getDbTable('sportmaps', 'user')->getAllUserHaveSport($params['sport']);
-					if (empty($user_ids)) $user_ids = array(0);
-					$select->where('user_id IN (?)', $user_ids);
+					$select->where('sportcategory_id = ?', $params['sport']);
 				}
 				if (!empty($params['continent'])) {
 					$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesAssocByContinent($params['continent']);

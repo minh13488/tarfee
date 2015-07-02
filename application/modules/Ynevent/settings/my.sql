@@ -48,7 +48,7 @@ INSERT IGNORE INTO `engine4_activity_notificationtypes` (`type`, `module`, `body
 ('ynevent_discussion_response', 'ynevent', '{item:$subject} has {item:$object:posted} on a {itemParent:$object::event topic} you created.', 0, '', 1),
 ('ynevent_invite', 'ynevent', '{item:$subject} has invited you to the event {item:$object}.', 1, 'ynevent.widget.request-event', 1),
 ('ynevent_invite_message', 'ynevent', '{item:$subject} has invited you to the event {item:$object}.', 1, '', 1),
-('ynevent_remind', 'ynevent', 'Reminder: the event {item:$object} will start in the next 24 hours.', 0, '', 1),
+('ynevent_remind', 'ynevent', 'Reminder: the event {item:$object} will start at {item:$object:$label}.', 0, '', 1),
 ('ynevent_notify_start', 'ynevent', 'The event {item:$object} already started.', 0, '', 1),
 ('ynevent_notify_end', 'ynevent', 'The event {item:$object} almost ended.', 0, '', 1);
 

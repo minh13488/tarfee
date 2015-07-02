@@ -308,6 +308,9 @@ h5.tf_campaign_filter_title{
 
 		.tfcampaign_author{
 			color: $theme_font_color_light;
+			display: block;
+			clear: both;
+			padding-left: 50px;
 			a{
 				font-weight: bold;
 			}
@@ -349,13 +352,41 @@ h5.tf_campaign_filter_title{
 		padding: 0 20px 20px 20px;
 		overflow: hidden;
 		
-		ul.tfcampaign_infomation_item{
+		.tfcampaign_infomation_item{
 
-			& > li{
-				float: left;
-				width: 30%;
-				margin-right: 3%;
-				min-height: 140px;
+			
+			ul.block-first{
+				margin-bottom: 20px;
+				overflow: hidden;
+				li{
+					&:first-child{
+						width: 22%;
+					}
+					width: 75%;
+					margin-right: 3%;
+					float: left;
+
+					&:last-child{
+						margin-right: 0;
+					}
+				}
+			}
+			
+			ul.block-second{
+				overflow: hidden;
+				li{
+					width: 22%;
+					float: left;
+					margin-right: 3%;
+
+					&:last-child{
+						margin-right: 0;
+					}
+				}
+			}
+
+			
+			 li{
 
 				span{
 					display: block;
@@ -368,6 +399,7 @@ h5.tf_campaign_filter_title{
 					font-weight: bold;
 					color: $theme_link_color;
 					text-transform: uppercase;
+					word-break: break-word;
 				}
 			}
 		}

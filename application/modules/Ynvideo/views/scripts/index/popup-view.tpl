@@ -153,8 +153,6 @@ endif;
 	    <?php if($this -> viewer() -> getIdentity()):?>
 	    	<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this -> video ->getGuid()),'default', true);?>
 			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
-			<?php $url = $this->url(array('module'=> 'activity', 'controller' => 'index', 'action' => 'share', 'type' => 'video', 'id' => $this->video->getIdentity(),),'default', true);?>
-			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Share"); ?></a></div>
 			<div id="favorite_<?php echo $this->video -> getIdentity()?>" class="yn_video_popup_btn">
 				<?php if($this->video -> hasFavorite()):?>
 					<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
@@ -162,6 +160,9 @@ endif;
 					<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
 				<?php endif;?>	
 			</div>
+			<!-- Add addthis share-->
+        	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
+			<div style="float: right" class="addthis_sharing_toolbox"></div>
 			<script type="text/javascript">
 			   var unfavorite_video = function(videoId)
 			   {

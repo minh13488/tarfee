@@ -46,18 +46,15 @@
 <?php if ($this->viewer()->getIdentity()):?>
 <div id="advanced-search-filter" style="display:none; position: absolute">
 	<ul id="advanced-search-tab" class="advanced-search-tab">
-		<?php if ($this->isPro) :?>
 		<li class="search-tab-item"><?php echo $this->translate('Player')?></li>	
 		<li class="search-tab-item"><?php echo $this->translate('Professional')?></li>
 		<li class="search-tab-item"><?php echo $this->translate('Organization')?></li>
 		<li class="search-tab-item"><?php echo $this->translate('Event/Tryout')?></li>
-		<?php endif; ?>
 		<li class="search-tab-item"><?php echo $this->translate('Campaign')?></li>
 	</ul>
 	<div class="search-form" id="advsearch-form">
 		<?php $url = $this->url(array(),'ynadvsearch_search',true)?>
 		
-		<?php if ($this->isPro) :?>
 		<div class="search-form-item active" id="player-advanced-search">
 			<form class="advsearch-form" method="post" action="<?php echo $url?>">
 				<input name="advsearch" value="player" type="hidden"/>
@@ -324,7 +321,6 @@
 				<button type="submit"><?php echo $this->translate('Search')?></button>
 			</form>
 		</div>
-		<?php endif; ?>
 		
 		<div class="search-form-item" id="campaign-advanced-search">
 			<form class="advsearch-form" method="post" action="<?php echo $url?>">
@@ -398,6 +394,18 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 		});
 		
 		<?php if ($this->viewer()->getIdentity()):?>
+		
+		<?php if (!$this->isPro) :?>
+		$('.advsearch-form input').prop('disabled', true);
+		$('.advsearch-form select').prop('disabled', true);
+		$('.advsearch-form button[type="submit"]').text('<?php echo $this->translate('Try the professional account for free')?>');
+		$('.advsearch-form button[type="submit"]').on('click', function(e) {
+			e.preventDefault();
+			var url = '<?php echo $this->url(array('controller' => 'settings','action' => 'index','module' => 'payment'), 'default', true); ?>';
+			window.location.href = url;
+		});
+		<?php endif;?>
+		
 		$('.search-tab-item:first-child').addClass('active');
 		$('.search-form-item:first-child').addClass('active');
 		$('.search-tab-item').on('click', function() {

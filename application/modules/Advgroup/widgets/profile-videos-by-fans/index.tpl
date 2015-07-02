@@ -1,4 +1,4 @@
-<ul class="generic_list_widget ynvideo_widget videos_browse ynvideo_frame ynvideo_list" id="group-videos-by-fans">
+<ul class="tfvideo-by-fans" id="group-videos-by-fans">
     <?php foreach ($this->paginator as $item): ?>
     <li>
         <?php

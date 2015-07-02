@@ -13,7 +13,7 @@
     <?php endif ?>
     <?php
     if ($this->video->photo_id) {
-        echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.normal'));
+        echo $this->htmlLink($this->video->getHref(), $this->itemPhoto($this->video, 'thumb.large'));
     } else {
         echo '<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">';
     }
@@ -30,11 +30,16 @@
 	    </span>
     <?php endif ;?>
 </div>
-<?php 
-    echo $this->htmlLink($this->video->getHref(), 
-            $this->string()->truncate($this->video->getTitle(), 30), 
-            array('class' => 'ynvideo_title', 'title' => $this->video->getTitle())) 
-?>
+
+<div>
+    <?php 
+        echo $this->htmlLink($this->video->getHref(), 
+                $this->string()->truncate($this->video->getTitle(), 30), 
+                array('class' => 'ynvideo_title', 'title' => $this->video->getTitle())) 
+    ?>
+</div>
+
+<p class="video_description"><?php echo $this->video->description; ?></p>
 
 <div class="video_author">
     <?php $user = $this->video->getOwner() ?>

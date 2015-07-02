@@ -35,7 +35,6 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 		$tags_table = Engine_Api::_()->getDbtable('TagMaps', 'core');
         $tags_name = $tags_table->info('name');
 		
-		
 		$select = $table -> select();
 		$userTable = Engine_Api::_() -> getDbTable("users", "user");
 		$userTableName = $userTable -> info('name');
@@ -92,7 +91,6 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 		if (isset($params['users']) && is_array($params['users']))
 		{
 			$users = array();
-
 			foreach ($params['users'] as $user_id)
 			{
 				if (is_int($user_id) && $user_id > 0)
@@ -131,7 +129,6 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 				$select -> where("1 = 0");
 			}
 		}
-
 		// Category
 		if (isset($params['arrayCat']) && !empty($params['arrayCat']))
 		{
@@ -148,6 +145,14 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 				$select -> where("category_id IN (?)", $categories);
 			}
 		}
+		else if (isset($params['categories']) && !empty($params['categories']))
+		{
+			$categories = $params['categories'];
+			if (!empty($categories))
+			{
+				$select -> where("category_id IN (?)", $categories);
+			}
+		}
 		else
 		{
 			if (isset($params['category_id']) && !empty($params['category_id']))
@@ -155,7 +160,6 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 				$select -> where('category_id = ?', $params['category_id']);
 			}
 		}
-
 		// Endtime
 		if(empty($params['tag']))
 		{
@@ -303,6 +307,7 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 		{
 			$select -> where('parent_id = ?', $params['parent_id']);
 		}
+		
 		return $select;
 	}
 
