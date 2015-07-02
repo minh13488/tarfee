@@ -62,6 +62,28 @@
               'membership plan. Please choose one now below.') ?>
         </p>
       <?php endif; ?>
+      
+      <!-- discount -->
+      <?php if(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1)) :?>
+      <div class="form-elements">
+      	<div id="discount-wrapper" class="form-wrapper">
+            <div id="discount-element" class="form-element">
+              <div class="discount-container">
+                <label class="package-label" >
+                  <?php echo $this->translate("Discount Code") ?>
+                </label>
+                <p class="discount-description">
+                  <input value="<?php echo (isset($_SESSION['ref_code']))? $_SESSION['ref_code']: " ";?>" type="text" name="discount" id="discount">
+                  <i id="in_valid_code" title="<?php echo $this -> translate("Invalid Code");?>" style="float:right; color:red; display:none" class="fa fa-exclamation"></i>
+                  <i id="valid_code"    title="<?php echo $this -> translate("Valid Code");?>"   style="float:right; color:green; display:none" class="fa fa-check"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+      </div>
+      <?php endif;?>
+      <!-- end discount -->
+      
       <div class="form-elements">
         <?php $count = 0; ?>
         <?php foreach( $this->packages as $package ):
@@ -101,3 +123,30 @@
     </div>
   </div>
 </form>
+
+<script type="text/javascript">
+	window.addEvent('domready', function(){
+		if($('discount')) {
+			$('discount').addEvent('change', function(){
+				$('valid_code').setStyle("display", "none");
+				$('in_valid_code').setStyle("display", "none");
+				var code = this.get('value');
+				var url = '<?php echo $this -> url(array('action' => 'check-code'), 'user_general', true) ?>';
+				new Request.JSON({
+			        url: url,
+			        data: {
+			            'code': code,
+			        },
+			        onSuccess : function(responseJSON, responseText)
+			        {
+			        	if(responseJSON.error == "0") {
+			        		$('valid_code').setStyle("display", "block");
+			        	} else {
+			        		$('in_valid_code').setStyle("display", "block");
+			        	}
+			        }
+			    }).send();
+			});
+		}
+	});
+</script>

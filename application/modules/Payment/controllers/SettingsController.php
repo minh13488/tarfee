@@ -77,7 +77,21 @@ class Payment_SettingsController extends Core_Controller_Action_User
 
     // Get current gateway?
   }
-
+  
+ public function checkDiscountCode($code)
+ {
+    	$viewer = Engine_Api::_() -> user() -> getViewer();
+	    $inviteTable = Engine_Api::_()->getDbtable('invites', 'invite');
+	    $select = $inviteTable->select()
+	      ->from($inviteTable->info('name'), 'COUNT(*)')
+	      ->where('code = ?', trim($code))
+		  ->where('active = 1')
+		  ->where('discount_used = 0')
+		  ->where('new_user_id = ?', $viewer -> getIdentity())
+	      ;
+	    return (bool) $select->query()->fetchColumn(0);
+ }
+  
   public function confirmAction()
   {
     // Process
@@ -89,7 +103,19 @@ class Payment_SettingsController extends Core_Controller_Action_User
       'enabled = ?' => 1,
       'package_id = ?' => (int) $this->_getParam('package_id'),
     ));
-
+	
+	//check discount code
+	$code = $this ->_getParam('discount');
+	if(isset($code) && $this -> checkDiscountCode($code)) {
+		//update discount for invite code
+		$inviteCode = Engine_Api::_() -> invite() -> getRowCode(trim($code));
+		if($inviteCode) {
+			$_SESSION['ref_code'] = trim($code);
+			$inviteCode -> discount_used = true;
+			$inviteCode -> save();
+		}
+	}
+	
     // Check if it exists
     if( !$package ) {
       return $this->_helper->redirector->gotoRoute(array('action' => 'index'));
