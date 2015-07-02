@@ -28,7 +28,9 @@
 		
 		<div class="club-like-count">
 			<i class="fa fa-heart"></i>
-			<span class="like-count"><?php echo number_format($this->group->likes()->getLikeCount())?></span>
+			<span class="like-count"><?php $followTable = Engine_Api::_()->getDbTable('follow', 'advgroup');
+        	$rows = $followTable->getUserFollow($this->group->getIdentity());
+			echo count($rows)?></span>
 		</div>
 	</div>
 	<?php if($this->aJoinButton && is_array($this->aJoinButton)):?>
