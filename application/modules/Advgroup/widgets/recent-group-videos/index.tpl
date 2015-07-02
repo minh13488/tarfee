@@ -50,7 +50,7 @@
 				'action' => 'create',
 				'parent_type' =>'group',
 				'subject_id' =>  $this->group->group_id,
-			), $this->translate('Create New Video'), array(
+			), $this->translate('Add Video'), array(
 			'class' => 'tf_button_action'
 			)) ;
 		}
@@ -61,7 +61,7 @@
 				'action' => 'create',
 				'parent_type' =>'group',
 				'subject_id' =>  $this->group->getGuid(),
-			), $this->translate('Create New Video'), array(
+			), $this->translate('Add Video'), array(
 			'class' => 'tf_button_action'
 			)) ;
 		}

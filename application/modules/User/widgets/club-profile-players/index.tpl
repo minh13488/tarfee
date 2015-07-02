@@ -1,4 +1,40 @@
 <div class="player_contents">
+	<div class="tarfee-profile-module-header">
+	    <!-- Menu Bar -->
+	    <?php
+	    if($this -> viewer() -> getIdentity()):
+			 $max_player_card = Engine_Api::_()->authorization()->getPermission($this -> viewer(), 'user_playercard', 'max_player_card', 5);
+	         if($max_player_card == "")
+	         {
+	            $mtable  = Engine_Api::_()->getDbtable('permissions', 'authorization');
+	             $maselect = $mtable->select()
+	                ->where("type = 'user_playercard'")
+	                ->where("level_id = ?",$this -> viewer() -> level_id)
+	                ->where("name = 'max_player_card'");
+	              $mallow_a = $mtable->fetchRow($maselect);          
+	              if (!empty($mallow_a))
+	                $max_player_card = $mallow_a['value'];
+	              else
+	                 $max_player_card = 5;
+	         }
+		    
+			if($this->paginator->getTotalItemCount() < $max_player_card && $this -> viewer() -> isSelf($this -> subject())):
+		    ?>
+		    <div class="tarfee-profile-header-right">
+		        <?php echo $this->htmlLink(array(
+		            'route' => 'user_extended',
+		            'controller' => 'player-card',
+		            'action' => 'create',
+		            'tab' => 724,
+		        ), '<i class="fa fa-plus-square fa-lg"></i>&nbsp;&nbsp;'.$this->translate('Add Player'), array(
+		            'class' => ''
+		        ))
+		        ?>
+		    </div>    
+		    <?php endif;?>  
+		<?php endif;?>
+	</div>
+	
 	<div class="tarfee_list" id="players">
 	    <!-- Content -->
 	    <?php if( $this->paginator->getTotalItemCount() > 0 ): ?>
