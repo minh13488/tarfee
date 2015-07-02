@@ -1503,7 +1503,11 @@ body#global_page_user-profile-index {
 
 
 /*Style profile event*/
-.ynevents_profile_tab{
+#profile_groups_events li .ynevents_info .ynevents_desc{
+	max-height: 54px !important;
+}
+.ynevents_profile_tab,
+#profile_groups_events{
 	background: #fff;
 	border-radius: 0 0 5px 5px;
 	-webkit-border-radius: 0 0 5px 5px;
@@ -3233,6 +3237,7 @@ body#global_page_advgroup-profile-index{
 		text-transform: lowercase;
 		margin: 0 10px;
 		text-align: center;
+		font-weight: bold;
 		+border-radius(5px);
 		margin-top: 10px;
 		display: block;
@@ -3337,11 +3342,16 @@ body#global_page_advgroup-profile-index{
 	ul.feed div.feed_item_date > ul > li.feed_item_option_share{
 		display: none !important;
 	}
+	.feed_item_option_like,
+	.feed_item_option_unlike{
+		display: none !important;
+	}
+	/*.comment-likes-activity-item{display: none;}*/
 	.tfvideo_statistics{
 		display: block;
 		clear: both;
 		padding-left: 15px;
-		display: none;
+		display: block;
 		margin-bottom: 5px;
 
 		span{
@@ -3391,7 +3401,7 @@ body#global_page_advgroup-profile-index{
 		color: $theme_font_color;
 		font-weight: bold;
 		&:hover{
-			color: $theme_link_color_hover;
+			color: $theme_link_color;
 		}
 	}
 	.video_length{display: none}
