@@ -1506,6 +1506,9 @@ body#global_page_user-profile-index {
 #profile_groups_events li .ynevents_info .ynevents_desc{
 	max-height: 54px !important;
 }
+#profile_groups_events li .ynevents_button a {
+	padding: 10px 10px !important;
+}
 .ynevents_profile_tab,
 #profile_groups_events{
 	background: #fff;
@@ -3025,7 +3028,7 @@ body#global_page_advgroup-profile-index{
 		color: #fff !important;
 		font-weight: 700;
 		background-color: $theme_link_color;
-		padding: .5em .8em;
+		padding: 10px 15px;
 		+border-radius(5px);
 		text-transform: lowercase;
 		margin: 10px;
@@ -3218,7 +3221,15 @@ body#global_page_advgroup-profile-index{
 					}	
 				}
 			}
-
+			
+			.tf_btn_action{
+				display: inline-block;
+				margin-top: 10px;
+				margin-right: 5px;
+				a{
+					margin: 0 !important;
+				}
+			}
 			.btn-exchange {
 				background-color: $theme_link_color;
 				color: #fff !important;
@@ -3475,3 +3486,4 @@ body#global_page_advgroup-profile-index{
 	  height: 325px;
 	}
 }
+
