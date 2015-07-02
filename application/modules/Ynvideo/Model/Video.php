@@ -189,10 +189,10 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 			}
 
 			// prepare the thumbnail
-			$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.main');
+			$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.large');
 			if ($this -> photo_id)
 			{
-				$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.main');
+				$thumb = Zend_Registry::get('Zend_View') -> itemPhoto($this, 'thumb.large');
 			}
 			else
 			{

@@ -100,6 +100,7 @@ class User_Form_Playercard_Create extends Engine_Form
     $birthday->setAllowEmpty(false);
 	$birthday -> setRequired(true);
 	$birthday -> setYearMax(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.max_year', 2003));
+	$birthday -> setYearMin(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.min_year', 1985));
     $this->addElement($birthday);
 	$birthday -> setAttrib('required', true);
 	
