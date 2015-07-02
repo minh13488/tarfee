@@ -88,7 +88,7 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 			$select -> where("$eventTableName.user_id = ?", $params['user_id']);
 		}
 		else
-		if (isset($params['users']) && is_array($params['users']))
+		if (isset($params['users']) && is_array($params['users']) && $params['users'])
 		{
 			$users = array();
 			foreach ($params['users'] as $user_id)
