@@ -144,7 +144,6 @@ class Ynblog_Api_Core extends Core_Api_Abstract {
 			$str = (string)(is_array($params['categories']) ? "'" . join("', '", $params['categories']) . "'" : $params['categories']);
 			$select -> where($blog_name . '.category_id in (?)', new Zend_Db_Expr($str));
 		}
-
 		//Tag filter
 		if (!empty($params['tag'])) {
 			$select -> setIntegrityCheck(false) -> joinLeft($tags_name, "$tags_name.resource_id = $blog_name.blog_id", "") -> where($tags_name . '.resource_type = ?', 'blog') -> where($tags_name . '.tag_id = ?', $params['tag']);
