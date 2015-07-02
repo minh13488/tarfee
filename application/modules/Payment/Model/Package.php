@@ -363,6 +363,7 @@ class Payment_Model_Package extends Core_Model_Item_Abstract
 	  	 $isValid = Engine_Api::_() -> payment() -> checkValidCode($referCode);
 	  }
 	  if($isValid) {
+	  	$discount = $this -> discount;
    		return $this -> price*(1 - $discount/100);
 	  }
 	  else {

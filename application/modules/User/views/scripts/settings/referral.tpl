@@ -8,6 +8,14 @@
 <div class="tip">
     <span><?php echo $this->translate("Maximum number of allowed referral codes:"); echo ' '.$max_referral;?> </span>
 </div> 
+<?php if(!empty($this -> total_available)) :?>
+<div style="margin-top: 8px;" class="tip">
+	<span>
+		<span style='color:green'><?php echo $this -> translate("Active");?></span>
+		-
+		<span style='color:red'><?php echo $this -> translate("Deactive");?></span>
+	</span>
+</div>
 <div class="tf_referral_codes_used">
 	<span class="referral_lable"><?php echo $this -> translate("Used Codes").' ('.$this -> total_used.')'?></span>
 	<span class="referral_codes"><?php echo $this -> used_codes;?></span>
@@ -16,14 +24,40 @@
 	<span class="referral_lable"><?php echo $this -> translate("Available Codes").' ('.$this -> total_available.')'?></span>
 	<span class="referral_codes"><?php echo $this -> available_codes;?></span>
 </div>
-<?php if($this -> totalCodes < $max_referral):?>
+
+<?php endif;?>
+
 <div style="padding-top:20px">
 	<form action="" method="post">
+		<?php if($this -> totalCodes < $max_referral):?>
 		<input type="hidden" name="get_code" />
-		<button><?php echo $this -> translate("Get New Code")?></button>
+			<button><?php echo $this -> translate("Get New Code")?></button>
+		<?php endif;?>
+		<?php echo $this->htmlLink(
+	        array(
+	            'route' => 'user_extended',
+	            'controller' => 'settings',
+	            'action' => 'email-to-friend',
+	        ),
+	        "<button>".$this->translate('Email to Friend')."</button>",
+	        array(
+	            'class' => 'smoothbox'
+	        )
+	    );?>
+	    <?php echo $this->htmlLink(
+	        array(
+	            'route' => 'user_extended',
+	            'controller' => 'settings',
+	            'action' => 'manage-code',
+	        ),
+	        "<button>".$this->translate('Active/Deactivate Code')."</button>",
+	        array(
+	            'class' => 'smoothbox'
+	        )
+	    );?>
 	</form>
 </div>
-<?php endif;?>
+
 <style type="text/css">
 	.referral_code_success
 	{

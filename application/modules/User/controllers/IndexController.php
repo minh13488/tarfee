@@ -60,6 +60,16 @@ class User_IndexController extends Core_Controller_Action_Standard
 		$package = Engine_Api::_() -> getItem('payment_package', $subscription -> package_id);
 		$user = Engine_Api::_() -> getItem('user', $subscription -> user_id);
 		if($user -> getIdentity()) {
+			
+			//set code discount used to false since using trial
+			if(isset($_SESSION['ref_code'])) {
+				$invite = Engine_Api::_() -> invite() -> getRowCode($_SESSION['ref_code']);
+				if(isset($invite)) {
+					$invite -> discount_used = false;
+					$invite -> save();
+				}
+			}
+			
 			$link = 'http';
 			if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
 			{

@@ -1039,4 +1039,30 @@ class User_Model_User extends Core_Model_Item_Abstract
 	public function getClub() {
 		return Engine_Api::_()->advgroup()->getGroupUser($this);
 	}
+	
+	public function sendEmailToFriend($recipient, $message) 
+    {
+        $viewer = Engine_Api::_() -> user() -> getViewer();
+    
+        // Check message
+        $message = trim($message);
+        $mailType = 'user_email_to_friend';
+		
+        $mailParams = array(
+          'host' => $_SERVER['HTTP_HOST'],
+          'email' => $recipient,
+          'date' => time(),
+          'sender_email' => $this->email,
+          'sender_title' => $this->getTitle(),
+          'sender_link' => $this->getHref(),
+          'sender_photo' => $this->getPhotoUrl('thumb.icon'),
+          'message' => $message,
+        );
+        
+        Engine_Api::_()->getApi('mail', 'core')->sendSystem(
+          $recipient,
+          $mailType,
+          $mailParams
+        );
+    }
 }

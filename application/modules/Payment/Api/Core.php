@@ -26,6 +26,11 @@ class Payment_Api_Core extends Core_Api_Abstract
 	  
   	  $invite = Engine_Api::_() -> invite() -> getRowCode($referCode);
 	  
+	  //check invite code active
+	  if(isset($invite) && !$invite -> active) {
+	  	 return false;	
+	  }
+	  
 	  if($isEnabled && $invite)
 	  {
 	  	  //if exist code then get expire date
