@@ -815,11 +815,9 @@ class Advgroup_Model_Group extends Core_Model_Item_Abstract
                 ->joinRight($sName, $sName . '.id=' . $rName . '.video_id', null)
                 ->where($sName . '.type = ?', 'video')
                 ->where($sName . '.title LIKE ?', "%{$params['text']}%")
-            //->where(new Zend_Db_Expr($db->quoteInto('MATCH(' . $sName . '.`title`, ' . $sName . '.`description`, ' . $sName . '.`keywords`, ' . $sName . '.`hidden`) AGAINST (? IN BOOLEAN MODE)', $params['text'])))
-            //->order(new Zend_Db_Expr($db->quoteInto('MATCH(' . $sName . '.`title`, ' . $sName . '.`description`, ' . $sName . '.`keywords`, ' . $sName . '.`hidden`) AGAINST (?) DESC', $params['text'])))
             ;
         }
-
+		
         if (!empty($params['title'])) {
             $select->where("$rName.title LIKE ?", "%{$params['title']}%");
         }
@@ -884,7 +882,6 @@ class Advgroup_Model_Group extends Core_Model_Item_Abstract
                 $select->order("{$params['fieldOrder']} {$params['order']}");
             }
         }
-
         return $select;
     }
 

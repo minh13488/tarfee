@@ -1,6 +1,5 @@
 <script type="text/javascript">
   en4.core.runonce.add(function(){
-
     <?php if( !$this->renderOne ): ?>
     var anchor = $('profile_groups_events').getParent();
     $('profile_groups_events_previous').style.display = '<?php echo ( $this->paginator->getCurrentPageNumber() == 1 ? 'none' : '' ) ?>';
@@ -53,28 +52,46 @@
   <ul id="profile_groups_events">
     <?php foreach( $this->paginator as $event ): ?>
       <li>
-        <div class='groups_photo'>
-          <?php echo $this->htmlLink($event->getHref(), $this->itemPhoto($event, 'thumb.normal')) ?>
+        <div class="ynevents_photo">
+            <?php echo $this->htmlLink($event, $this->itemPhoto($event, 'thumb.normal')) ?>
         </div>
-        <div class='groups_info'>
-          <div class="groups_title">
-            <?php $event_name = Engine_Api::_()->advgroup()->subPhrase($event->getTitle() , 50);
-                  echo $this->htmlLink($event->getHref(),"<b>".$event_name."</b>") ?>
-          </div>
-          <span class="groups_members">
-            <?php echo $this->translate('By');?>
-            <?php $owner_name = Engine_Api::_()->advgroup()->subPhrase($event->getOwner()->getTitle(),25);
-                    echo $this->htmlLink($event->getOwner()->getHref(), $owner_name) ?>
-          </span>
-          -
-          <span class="groups_members">
-            <?php echo $this->timestamp($event->creation_date) ?>
-          </span>
-          
-          <p class="groups_desc" style="text-align: justify;">
-            <?php echo Engine_Api::_()->advgroup()->subPhrase($event->description,250);?>
-          </p>
+
+        <div class="ynevents_info">
+            <div class="ynevents_title">
+                <?php echo $this->htmlLink($event->getHref(), $event->getTitle()) ?>
+            </div>
+            <div class="ynevents_desc">
+                <?php echo $event->getDescription() ?>
+            </div>
+
         </div>
+
+        <div class="ynevents_members">
+            <?php echo '<i class="fa fa-user"></i> &nbsp;&nbsp;'.$this->translate(array('%s guest', '%s guests', $event->member_count),$this->locale()->toNumber($event->member_count)) ?>
+        </div>
+
+        <div class="ynevents_time_place_rating">
+            <div class="ynevents_time_place">
+                <span>
+                    <?php echo $this->locale()->toDate($event->starttime, array('size' => 'long')) ?>
+                </span>
+                <span>
+                    <?php echo $event->address;?>
+                </span>
+            </div>
+
+            <div class="ynevents_rating">
+                
+            </div>
+        </div>
+
+        <?php 
+        if($this -> viewer() -> getIdentity()):
+            ?>
+            <div class="ynevents_button" id = "ynevent_rsvp_<?php echo $event -> getIdentity()?>">
+               <?php echo $this -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $event -> getIdentity()));?>
+            </div>
+        <?php endif;?>
         <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($event)) :?>
 		<div class="group_button_action btn-exchange">
 			<?php
@@ -91,7 +108,6 @@
       </li>
     <?php endforeach;?>
   </ul>
-
     <div >
       <div id="profile_groups_events_previous" class="paginator_previous">
         <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Previous'), array(
@@ -106,13 +122,40 @@
         )); ?>
       </div>
     </div>
-
 <?php else: ?>
 
   <div class="tip">
     <span>
-      <?php echo $this->translate('No events have been added to this group yet.');?>
+      <?php echo $this->translate('No events have been added to this club yet.');?>
     </span>
   </div>
-
 <?php endif; ?>
+<?php if($this -> viewer() -> getIdentity()):?>
+<script type="text/javascript">
+ var tempChange = 0;
+   var changeRsvp = function(id, option)
+   {
+        if (tempChange == 0) 
+        {
+            tempChange = 1;
+            if ($('rsvp_option_' + id + '_' + option)) {
+                $('rsvp_option_' + id + '_' + option).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+            }
+            var url = en4.core.baseUrl + 'ynevent/widget/rsvp';
+            en4.core.request.send(new Request.JSON({
+                url : url,
+                data : {
+                    format : 'json',
+                    id : id,
+                    option_id: option
+                },
+                onComplete : function(e) {
+                    tempChange = 0;
+                }
+            }), {
+                'element' : $('ynevent_rsvp_' + id)
+            });
+        }
+   }
+</script>
+<?php endif;?>

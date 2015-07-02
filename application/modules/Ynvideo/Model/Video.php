@@ -340,12 +340,12 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 
 					$image = Engine_Image::factory();
 
-					$width = 240;
-					$height = 120;
+					$width = 300;
+					$height = 150;
 					if ($type == 'large')
 					{
-						$width = 480;
-						$height = 360;
+						$width = 600;
+						$height = 400;
 					}
 					$image -> open($tmp_file) -> resize($height, $width) -> write($thumb_file) -> destroy();
 

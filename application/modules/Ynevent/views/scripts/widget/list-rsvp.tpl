@@ -7,22 +7,29 @@ if($row):
 	<a id="rsvp_option_<?php echo $this->event -> getIdentity();?>_0" <?php if($rsvp == 0):?> class="active" <?php else:?> onclick="changeRsvp('<?php echo $this->event -> getIdentity();?>', 0);" <?php endif;?> href="javascript:;"><?php echo $this->translate('not attending'); ?></a>
 	<a id="rsvp_option_<?php echo $this->event -> getIdentity();?>_1" <?php if($rsvp == 1):?> class="active" <?php else:?> onclick="changeRsvp('<?php echo $this->event -> getIdentity();?>', 1);" <?php endif;?> href="javascript:;"><?php echo $this->translate('maybe'); ?></a>
 <?php else:
-	Engine_Api::_()->core()->clearSubject();
-	Engine_Api::_()->core()->setSubject($this->event);
-	$menu = new Ynevent_Plugin_Menus();
-    $aJoinButton = $menu->onMenuInitialize_YneventProfileMember();
-	Engine_Api::_()->core()->clearSubject();
-	?>
-	<?php 
-	$action = 'join';
-	if (isset($aJoinButton['params']['action'])) 
+	$param = array();
+	if ($this->event -> membership() -> isResourceApprovalRequired())
 	{
-		$action = $aJoinButton['params']['action'];
+		$param = array(
+			'label' => 'request invite',
+			'controller' => 'member',
+			'action' => 'request',
+		);
+	}  
+	else
+	{
+		$param = array(
+			'label' => 'join',
+			'controller' => 'member',
+			'action' => 'join',
+		);
 	}
-	?>
-	<a href="<?php echo $this->url($aJoinButton['params'], $aJoinButton['route'], array());?>" class="<?php echo $aJoinButton['class'];?>" title="<?php echo $this -> translate($aJoinButton['label']); ?>">
-		<?php echo $action;?>
-	</a>
+	if($param):
+		?>
+		<a href="<?php echo $this->url($param, 'event_extended', true);?>" class="" title="<?php echo $this -> translate($param['label']); ?>">
+			<?php echo  $this -> translate($param['label']);?>
+		</a>
+	<?php endif;?>
 <?php endif;?>
 <!--
 <?php $url = $this -> url(array(
