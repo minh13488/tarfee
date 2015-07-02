@@ -3355,6 +3355,7 @@ body#global_page_advgroup-profile-index{
 	ul.feed div.feed_item_date > ul > li.feed_item_option_share{
 		display: none !important;
 	}
+
 	/*.feed_item_option_like,
 	.feed_item_option_unlike{
 		display: none !important;
@@ -3457,6 +3458,11 @@ body#global_page_advgroup-profile-index{
 
 	li[class*=feed_item_option]{
 		margin-left: 10px;
+		& > span{
+			display: none;
+		}
+	}
+	.yncomment_wrap{
 		& > span{
 			display: none;
 		}
