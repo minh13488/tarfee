@@ -29,13 +29,13 @@
 		<h3><?php echo $this->translate('Sport')?></h3>
 		<ul>
 			<li>
-				<input id="sport-all" type="checkbox" name="sport[]" <?php if (in_array('all', $this->sport)) echo 'checked'?> class="type-checkbox" value="all"/>
+				<input id="sport-all" type="checkbox" name="sport[]" <?php if (in_array('all', $this->sport)) echo 'checked'?> class="sport-type-checkbox type-checkbox" value="all"/>
 				<label for="sport-all"><?php echo $this->translate('All Sport')?></label>
 			</li>
 			<?php $sports = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1();?>
 			<?php foreach($sports as $sport):?>
 			<li>
-				<input id="sport-<?php echo $sport->getIdentity()?>" type="checkbox" name="sport[]" <?php if (in_array($sport->getIdentity(), $this->sport)) echo 'checked'?> class="type-checkbox" value="<?php echo $sport->getIdentity()?>"/>
+				<input id="sport-<?php echo $sport->getIdentity()?>" type="checkbox" name="sport[]" <?php if (in_array($sport->getIdentity(), $this->sport)) echo 'checked'?> class="sport-type-checkbox type-checkbox" value="<?php echo $sport->getIdentity()?>"/>
 				<label for="sport-<?php echo $sport->getIdentity()?>"><?php echo $this->translate($sport->getTitle())?></label>
 			</li>
 			<?php endforeach; ?>
@@ -379,11 +379,14 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 (function($) { 
 	$(document).ready(function () {
 		
-		$('.type-checkbox').on('click', function() {
+		$('.sport-type-checkbox').on('click', function() {
 			var id = $(this).attr('id');
 			if (id == 'sport-all') {
 				if ($(this).is(':checked')) {
-					$('.type-checkbox').prop('checked', true);
+					$('.sport-type-checkbox').prop('checked', true);
+				}
+				else {
+					$('.sport-type-checkbox').prop('checked', false);
 				}
 			}
 			else {
