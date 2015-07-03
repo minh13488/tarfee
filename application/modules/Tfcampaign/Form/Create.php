@@ -121,7 +121,8 @@ class Tfcampaign_Form_Create extends Engine_Form
    $languages = Engine_Api::_()->getDbTable('languages', 'user')->getLanguagesArray();
 	$this->addElement('MultiCheckbox', 'languages', array(
       'label' => 'Languages',
-      'allowEmpty' => false,
+      'required' => false,
+      'allowEmpty' => true,
       'multiOptions' => $languages,
       'filters' => array(
         'StripTags',
