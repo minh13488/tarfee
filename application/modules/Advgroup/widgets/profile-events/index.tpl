@@ -79,9 +79,7 @@
                     <?php echo $event->address;?>
                 </span>
             </div>
-
             <div class="ynevents_rating">
-                
             </div>
         </div>
 
@@ -105,6 +103,30 @@
 			?>
 		</div>
 		<?php endif;?>
+		<?php if($event -> isOwner($this->viewer())) :?>
+			<div class="tf_btn_action">
+			<?php
+				echo $this->htmlLink(array(
+					'route' => 'event_specific',
+					'action' => 'edit',
+					'event_id' => $event->event_id,
+					'parent_type' =>'group',
+					'subject_id' =>  $this->subject()->getIdentity(),
+			    ), '<i class="fa fa-pencil-square-o fa-lg"></i>', array('class' => 'tf_button_action'));
+			?>
+		    </div>
+		    <div class="tf_btn_action">
+			<?php
+				echo $this->htmlLink(array(
+			 	        'route' => 'event_specific', 
+			         	'action' => 'delete', 
+			         	'event_id' => $event->event_id, 
+			         	'format' => 'smoothbox'), 
+			         	'<i class="fa fa-trash-o fa-lg"></i>', array('class' => 'tf_button_action smoothbox'
+			     ));
+			?>
+			</div>
+			<?php endif;?>
       </li>
     <?php endforeach;?>
   </ul>

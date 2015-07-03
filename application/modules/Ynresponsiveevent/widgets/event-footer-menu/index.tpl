@@ -48,7 +48,7 @@ $viewer = $this -> viewer();
             <?php if(Engine_Api::_() -> authorization() -> isAllowed('event', null, 'create')):?>
             	<li><a href="<?php echo $this->url(array('action' => 'create'), 'event_general')?>"><i class="fa fa-calendar"></i><?php echo $this -> translate("Add Event/Tryout")?></a></li>
             <?php endif;?>
-            <li><a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>"><i class="fa fa-rocket"></i><?php echo $this -> translate("Add Campaign")?></a></li>
+            <li><a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>"><i class="fa fa-rocket"></i><?php echo $this -> translate("Add Scout")?></a></li>
             <li><a href="<?php echo $this->url(array('action' => 'create'), 'blog_general')?>"><i class="fa fa-comments-o"></i><?php echo $this -> translate("Add Talk")?></a></li>
             <li><a href="contactimporter/import"><i class="fa fa-search"></i><?php echo $this -> translate("Find/Invite Friend")?></a></li>
          </ul>
