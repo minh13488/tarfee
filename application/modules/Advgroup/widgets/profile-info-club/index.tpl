@@ -28,8 +28,8 @@
 		
 		<div class="club-like-count">
 			<i class="fa fa-heart"></i>
-			<span class="like-count"><?php $followTable = Engine_Api::_()->getDbTable('follow', 'advgroup');
-        	$rows = $followTable->getUserFollow($this->group->getIdentity());
+			<span class="like-count"><?php
+        	$rows = $this -> group -> membership() ->getMembers();
 			echo count($rows)?></span>
 		</div>
 	</div>
@@ -37,55 +37,25 @@
         <?php if (count($this->aJoinButton) == '2'):?>
 			<div id="advgroup_widget_cover_invitation_proceed">               				
 				<a title="<?php echo $this->aJoinButton[0]['label']; ?>" class='smoothbox <?php echo $this->aJoinButton[0]['class'];?>' href="<?php echo $this->url($this->aJoinButton[0]['params'], $this->aJoinButton[0]['route'], array());?>">
-					<i class="ynicon-joining"></i>
+					<?php echo $this -> translate($this->aJoinButton[0]['label']);?>
 				</a>
 			</div>
 			<div id="advgroup_widget_cover_invitation_proceed">               				
 				<a title="<?php echo $this->aJoinButton[1]['label']; ?>" class='smoothbox <?php echo $this->aJoinButton[1]['class'];?>' href="<?php echo $this->url($this->aJoinButton[1]['params'], $this->aJoinButton[1]['route'], array());?>">
-					<i class="ynicon-cancel"></i>
+					<?php echo $this -> translate($this->aJoinButton[0]['label']);?>
 				</a>
 			</div>
 		<?php else:?>
-			<?php if (isset($this->aJoinButton['params']['action'])) 
-			{
-				$action = $this->aJoinButton['params']['action'];
-			}
-			?>
 			<div class="tf_btn_action">
             	<a href="<?php echo $this->url($this->aJoinButton['params'], $this->aJoinButton['route'], array());?>" class="<?php echo $this->aJoinButton['class'];?>" title="<?php echo $this->aJoinButton['label']; ?>">
-            		<?php echo $this -> translate($action);?>
+            		<?php echo $this -> translate($this->aJoinButton['label']);?>
             	</a>
 			</div>
 		<?php endif;?>                
     <?php endif;?>
-	<?php if ($this->viewer()->getIdentity()): ?>
-    	<a id="club_info_follow" href="javascript:void(0)" onclick="<?php echo ($this->follow) ? "setFollowClub(0);" : "setFollowClub(1);"; ?>"><?php echo ($this->follow) ? $this -> translate("Followed") : $this -> translate("Follow")?></a>
-    <?php endif;?>
+    <?php if($this -> group -> isOwner($this -> viewer())):?>
+    	 <?php echo $this->htmlLink(array('route' => 'group_specific', 'action' => 'edit', 'group_id' => $this -> group->getIdentity()), $this->translate('Edit'), array(
+                  'class' => ''
+                )) ?>
+	<?php endif;?>
 </div>
-
-<script type="text/javascript">
-function setFollowClub(option_id) {
-	new Request.JSON({
-        url: '<?php echo $this->url(array('action' => 'follow'), 'group_general', true); ?>',
-        method: 'post',
-        data : {
-        	format: 'json',
-            'group_id': <?php echo $this->subject()->group_id ?>,
-            'option_id' : option_id
-        },
-        onComplete: function(responseJSON, responseText) {
-            if (option_id == '0')
-            {
-            	$("club_info_follow").set("text", '<?php echo $this -> translate("Follow") ?>');
-            	$("club_info_follow").set("onclick", "setFollowClub(1)");
-            }
-            else if (option_id == '1')
-            {
-            	$("club_info_follow").set("text", '<?php echo $this -> translate("Followed") ?>');
-            	$("club_info_follow").set("onclick", "setFollowClub(0)");
-            }
-            
-        }
-    }).send();
-}
-</script>

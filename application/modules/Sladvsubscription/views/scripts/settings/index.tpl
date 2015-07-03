@@ -85,6 +85,28 @@
               'sembership plan. Please choose one now below.') ?>
         </p>
       <?php endif; ?>
+	  
+	   <!-- discount -->
+      <?php if(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1)) :?>
+      <div class="form-elements">
+      	<div id="discount-wrapper" class="form-wrapper">
+            <div id="discount-element" class="form-element">
+              <div class="discount-container">
+                <label class="package-label" >
+                  <?php echo $this->translate("Discount Code") ?>
+                </label>
+                <p class="discount-description">
+                  <input value="<?php echo (isset($_SESSION['ref_code']))? $_SESSION['ref_code']: " ";?>" type="text" name="discount-text" id="discount-text">
+                  <i id="in_valid_code" title="<?php echo $this -> translate("Invalid Code");?>" style="float:right; color:red; display:none" class="fa fa-exclamation"></i>
+                  <i id="valid_code"    title="<?php echo $this -> translate("Valid Code");?>"   style="float:right; color:green; display:none" class="fa fa-check"></i>
+                </p>
+              </div>
+            </div>
+          </div>
+      </div>
+      <?php endif;?>
+      <!-- end discount -->
+	  
       <div class="plan">
 			<div class="plan-table">
 				<table cellpadding="0" cellspacing="1px">
@@ -119,9 +141,10 @@
 					<?php endforeach;?>
 					<tr>
 						<td class="no-border">&nbsp;</td>
-						<?php foreach ($levels as $id=>$level):?>
+						<?php foreach ($levels as $id=>$level):?>						
 							<td>
 								<form method="get" action="<?php echo $this->baseUrl();?>/payment/settings/confirm">
+									<input class="discount-input" type="hidden" value="<?php echo (isset($_SESSION['ref_code']))? $_SESSION['ref_code']: " ";?>" id="discount" name="discount">
 									<?php if (isset($level_plans[$id])):?>
 										<select name="package_id" onchange="changePackage(this);" style="<?php if (count($level_plans[$id])<2) echo "display:none;"; ?>">
 											<?php foreach ($level_plans[$id] as $plan):?>
@@ -156,6 +179,36 @@
 					e.hide();
 			});
 		}
+		</script>
+		<script type="text/javascript">
+			window.addEvent('domready', function(){
+				if($('discount-text')) {
+					$('discount-text').addEvent('change', function(){
+						$('valid_code').setStyle("display", "none");
+						$('in_valid_code').setStyle("display", "none");
+						var code = this.get('value');
+						var url = '<?php echo $this -> url(array('action' => 'check-code'), 'user_general', true) ?>';
+						new Request.JSON({
+							url: url,
+							data: {
+								'code': code,
+							},
+							onSuccess : function(responseJSON, responseText)
+							{
+								if(responseJSON.error == "0") {
+									$('valid_code').setStyle("display", "block");
+									$$('.discount-input').each(function(el) {
+										el.set('value', code.trim())
+									});
+									
+								} else {
+									$('in_valid_code').setStyle("display", "block");
+								}
+							}
+						}).send();
+					});
+				}
+			});
 		</script>
     </div>
   </div>
