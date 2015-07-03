@@ -91,14 +91,14 @@
             </div>
         <?php endif;?>
         <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($event)) :?>
-		<div class="group_button_action btn-exchange">
+		<div class="tf_btn_action">
 			<?php
 				echo $this->htmlLink(array(
 		            'route' => 'user_general',
 		            'action' => 'transfer-item',
 					'subject' => $event -> getGuid(),
 		        ), '<i class="fa fa-exchange fa-lg"></i>', array(
-		            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to user profile')
+		            'class' => 'smoothbox tf_button_action', 'title' => $this -> translate('Transfer to user profile')
 		        ));
 			?>
 		</div>

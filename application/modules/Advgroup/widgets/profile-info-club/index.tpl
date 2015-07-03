@@ -55,7 +55,7 @@
     <?php endif;?>
     <?php if($this -> group -> isOwner($this -> viewer())):?>
     	 <?php echo $this->htmlLink(array('route' => 'group_specific', 'action' => 'edit', 'group_id' => $this -> group->getIdentity()), $this->translate('Edit'), array(
-                  'class' => ''
+                  'class' => 'club_info_edit'
                 )) ?>
 	<?php endif;?>
 </div>
