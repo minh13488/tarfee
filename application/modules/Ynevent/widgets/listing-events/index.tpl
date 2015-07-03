@@ -46,8 +46,8 @@
         </div>
         <?php 
         if($this -> viewer() -> getIdentity()):?>
-            <div class="ynevents_button" id = "ynevent_rsvp_<?php echo $event -> getIdentity()?>">
-               <?php echo $this -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $event -> getIdentity()));?>
+            <div class="ynevents_button" id = "ynevent_rsvp_listing_<?php echo $event -> getIdentity()?>">
+               <?php echo $this -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $event -> getIdentity(), 'widget' => 'changeRsvpListing'));?>
             </div>
             <?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $event ->getGuid()),'default', true);?>
 			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
@@ -60,13 +60,13 @@
 <?php if($this -> viewer() -> getIdentity()):?>
 <script type="text/javascript">
  var tempChange = 0;
-   var changeRsvp = function(id, option)
+   var changeRsvpListing = function(id, option)
    {
         if (tempChange == 0) 
         {
             tempChange = 1;
-            if ($('rsvp_option_' + id + '_' + option)) {
-                $('rsvp_option_' + id + '_' + option).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+            if ($('rsvp_option_changeRsvpListing_' + id + '_' + option)) {
+                $('rsvp_option_changeRsvpListing_' + id + '_' + option).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
             }
             var url = en4.core.baseUrl + 'ynevent/widget/rsvp';
             en4.core.request.send(new Request.JSON({
@@ -74,13 +74,14 @@
                 data : {
                     format : 'json',
                     id : id,
+                    widget: 'changeRsvpListing',
                     option_id: option
                 },
                 onComplete : function(e) {
                     tempChange = 0;
                 }
             }), {
-                'element' : $('ynevent_rsvp_' + id)
+                'element' : $('ynevent_rsvp_listing_' + id)
             });
         }
    }
