@@ -3055,6 +3055,7 @@ body#global_page_advgroup-profile-index{
 .layout_advgroup_profile_events{
 	background: #fff;
 	overflow: hidden;
+	text-align: center;
 	+border-radius(5px);
 
 	.group_button_action{
@@ -3098,6 +3099,44 @@ body#global_page_advgroup-profile-index{
 		}
 	}
 }
+
+	.tf_btn_action{
+		display: inline-block;
+		margin-top: 10px;
+		overflow: hidden;
+		margin-right: 5px;
+		a{
+			margin: 0 !important;
+		}
+	}
+	.btn-exchange {
+		background-color: $theme_link_color;
+		color: #fff !important;
+		padding: 10px 15px;
+		+border-radius(5px);
+		margin-top: 10px;
+
+		&:hover{
+			background-color: $theme_link_color_hover;
+		}
+	}
+
+	a.tf_button_action{
+		background-color: $theme_link_color;
+		color: #fff !important;
+		padding: 10px 15px;
+		text-transform: lowercase;
+		margin: 0 10px;
+		text-align: center;
+		font-weight: bold;
+		+border-radius(5px);
+		margin-top: 10px;
+		display: block;
+		&:hover{
+			background-color: $theme_link_color_hover;
+		}
+	}
+
 
 /*layout_advgroup_recent_group_videos*/
 .layout_advgroup_recent_group_videos{
