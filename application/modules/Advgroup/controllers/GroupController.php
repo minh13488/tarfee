@@ -428,17 +428,7 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
 		Engine_Api::_() -> advgroup() -> sendFollowNotify($group, 'advgroup_follow_edit');
 		
         // Redirect
-        if ($this -> _getParam('ref') === 'profile')
-        {
-            $this -> _redirectCustom($group);
-        }
-        else
-        {
-            $this -> _redirectCustom(array(
-                'route' => 'group_general',
-                'action' => 'manage'
-            ));
-        }
+        $this -> _redirectCustom($group);
     }
 
     public function deleteAction()

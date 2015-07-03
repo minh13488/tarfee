@@ -1241,7 +1241,13 @@ class Ynevent_EventController extends Core_Controller_Action_Standard
 		if ($this -> _getParam('ref') === 'profile' && $redirectEvent != NULL) {
 			$this -> _redirectCustom($redirectEvent);
 
-		} else {
+		}
+		if ($event -> parent_type == 'group')
+		{
+			$group = $event -> getParent('group');
+			$this -> _redirectCustom($group);
+		} 
+		else {
 			$this -> _redirectCustom(array('route' => 'event_general', 'action' => 'manage'));
 		}
 	}

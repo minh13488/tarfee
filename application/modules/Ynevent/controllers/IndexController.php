@@ -126,7 +126,6 @@ class Ynevent_IndexController extends Core_Controller_Action_Standard
 
 	public function createAction()
 	{
-
 		if (!$this -> _helper -> requireUser -> isValid())
 			return;
 		if (!$this -> _helper -> requireAuth() -> setAuthParams('event', null, 'create') -> isValid())
@@ -585,11 +584,10 @@ class Ynevent_IndexController extends Core_Controller_Action_Standard
 			$db -> commit();
 
 			// Redirect
-			if ($values['parent_type'] == 'group')
+			if ($event -> parent_type == 'group')
 			{
-				return $this -> _helper -> redirector -> gotoRoute(array(
-				'id' => $this -> _getParam('subject_id')
-				), 'group_profile', true);
+				$group = $event -> getParent('group');
+				$this -> _redirectCustom($group);
 			}
 			else
 			{

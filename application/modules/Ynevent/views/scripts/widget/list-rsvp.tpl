@@ -1,11 +1,18 @@
 <?php 
 $row = $this->event->membership()->getRow($this -> viewer());
+$functionName = 'changeRsvp';
+$optionName = "";
+if($this -> widget)
+{
+	$functionName = $this -> widget;
+	$optionName = '_'.$functionName;
+}
 if($row):
 	$rsvp = $row -> rsvp;
 	?>
-	<a id="rsvp_option_<?php echo $this->event -> getIdentity();?>_2" <?php if($rsvp == 2):?> class="active" <?php else:?> onclick="changeRsvp('<?php echo $this->event -> getIdentity();?>', 2);" <?php endif;?> href="javascript:;"><?php echo $this->translate('attending'); ?></a>
-	<a id="rsvp_option_<?php echo $this->event -> getIdentity();?>_0" <?php if($rsvp == 0):?> class="active" <?php else:?> onclick="changeRsvp('<?php echo $this->event -> getIdentity();?>', 0);" <?php endif;?> href="javascript:;"><?php echo $this->translate('not attending'); ?></a>
-	<a id="rsvp_option_<?php echo $this->event -> getIdentity();?>_1" <?php if($rsvp == 1):?> class="active" <?php else:?> onclick="changeRsvp('<?php echo $this->event -> getIdentity();?>', 1);" <?php endif;?> href="javascript:;"><?php echo $this->translate('maybe'); ?></a>
+	<a id="rsvp_option<?php echo $optionName?>_<?php echo $this->event -> getIdentity();?>_2" <?php if($rsvp == 2):?> class="active" <?php else:?> onclick="<?php echo $functionName?>('<?php echo $this->event -> getIdentity();?>', 2);" <?php endif;?> href="javascript:;"><?php echo $this->translate('attending'); ?></a>
+	<a id="rsvp_option<?php echo $optionName?>_<?php echo $this->event -> getIdentity();?>_0" <?php if($rsvp == 0):?> class="active" <?php else:?> onclick="<?php echo $functionName?>('<?php echo $this->event -> getIdentity();?>', 0);" <?php endif;?> href="javascript:;"><?php echo $this->translate('not attending'); ?></a>
+	<a id="rsvp_option<?php echo $optionName?>_<?php echo $this->event -> getIdentity();?>_1" <?php if($rsvp == 1):?> class="active" <?php else:?> onclick="<?php echo $functionName?>('<?php echo $this->event -> getIdentity();?>', 1);" <?php endif;?> href="javascript:;"><?php echo $this->translate('maybe'); ?></a>
 <?php else:
 	$param = array();
 	if ($this->event -> membership() -> isResourceApprovalRequired())
@@ -31,11 +38,3 @@ if($row):
 		</a>
 	<?php endif;?>
 <?php endif;?>
-<!--
-<?php $url = $this -> url(array(
-		'module' => 'socialpublisher',
-		'controller' => 'index',
-		'action' => 'share',
-		'resource_type' => $this->event -> getType(),
-		'resource_id' => $this->event -> getIdentity()),'default', true)?>
-		<a class="smoothbox" href="<?php echo $url?>"><?php echo $this->translate('share'); ?></a> -->

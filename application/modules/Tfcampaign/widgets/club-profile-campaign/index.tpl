@@ -25,9 +25,23 @@
 			    'subject' => $campaign -> getGuid(),
 			    ),'user_general', true)
 			;?>
-			
-			<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('transfer')?></button></a>
+			<div class="tf_btn_action">
+				<a class="smoothbox tf_button_action" href='<?php echo $url?>'><i class="fa fa-exchange fa-lg"></i></a>
+			</div>
 		<?php endif;?>	
+		<?php if($this -> viewer() -> getIdentity()) :?>
+			<?php if($campaign -> isEditable()) :?>
+				<div class="tf_btn_action">
+					<a class="smoothbox tf_button_action" href="<?php echo $this -> url(array('action' => 'edit', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><i class="fa fa-pencil-square-o fa-lg"></i></a>
+				</div>
+			<?php endif;?>
+			<?php if($campaign -> isDeletable()) :?>
+				<div class="tf_btn_action">
+					<a class="smoothbox tf_button_action" href="<?php echo $this -> url(array('action' => 'delete', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><i class="fa fa-trash-o fa-lg"></i></a>
+				</div>
+				<?php endif;?>
+				
+		<?php endif;?>
 	</li>
 <?php endforeach;?>
 </ul>

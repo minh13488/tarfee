@@ -57,12 +57,15 @@ class Advgroup_Widget_ProfileVideosByFansController extends Engine_Content_Widge
 		-> where('parent_type = "group"') 
 		-> where('parent_id = ?', $subject -> getIdentity());
 		$video_ids = $tableVideo -> fetchAll($select);
-	
+		
+		$params['ids'] = array();
 		//Merge ids
-		foreach($mapping_ids as $mapping_id) {
+		foreach($mapping_ids as $mapping_id) 
+		{
 			$params['ids'][] = $mapping_id -> item_id;
 		}
-		foreach($video_ids as $video_id) {
+		foreach($video_ids as $video_id) 
+		{
 			if(!in_array($video_id -> video_id, $params['ids'])) {
 				$params['ids'][] = $video_id -> video_id;
 			}

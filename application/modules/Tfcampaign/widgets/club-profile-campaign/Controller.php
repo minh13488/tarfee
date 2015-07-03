@@ -9,7 +9,6 @@ class Tfcampaign_Widget_ClubProfileCampaignController extends Engine_Content_Wid
 		}
 		// Get subject
 		$this -> view -> subject = $subject = Engine_Api::_() -> core() -> getSubject('group');
-
 		if (!$subject)
 		{
 			return $this -> setNoRender();

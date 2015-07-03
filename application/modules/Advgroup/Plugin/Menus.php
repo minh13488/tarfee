@@ -258,7 +258,6 @@ class Advgroup_Plugin_Menus
 		// Get viewer and group
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		$subject = Engine_Api::_() -> core() -> getSubject();
-
 		//Must be a group
 		if ($subject -> getType() !== 'group')
 		{
@@ -271,7 +270,6 @@ class Advgroup_Plugin_Menus
 		}
 
 		$row = $subject -> membership() -> getRow($viewer);
-
 		// Not yet associated at all
 		if (null === $row || $row -> rejected_ignored)
 		{
@@ -282,7 +280,7 @@ class Advgroup_Plugin_Menus
 				if ($parent_group -> membership() -> isResourceApprovalRequired())
 				{
 					return array(
-						'label' => 'Request Membership',
+						'label' => 'Request Follow',
 						'icon' => 'application/modules/Advgroup/externals/images/member/join.png',
 						'class' => 'smoothbox',
 						'route' => 'group_extended',
@@ -296,7 +294,7 @@ class Advgroup_Plugin_Menus
 				elseif ($subject -> membership() -> isResourceApprovalRequired())
 				{
 					return array(
-						'label' => 'Request Membership',
+						'label' => 'Request Follow',
 						'icon' => 'application/modules/Advgroup/externals/images/member/join.png',
 						'class' => 'smoothbox',
 						'route' => 'group_extended',
@@ -310,7 +308,7 @@ class Advgroup_Plugin_Menus
 				else
 				{
 					return array(
-						'label' => 'Join Group',
+						'label' => 'Follow',
 						'icon' => 'application/modules/Advgroup/externals/images/member/join.png',
 						'class' => 'smoothbox',
 						'route' => 'group_extended',
@@ -329,7 +327,7 @@ class Advgroup_Plugin_Menus
 				{
 
 					return array(
-						'label' => 'Request Membership',
+						'label' => 'Request Follow',
 						'icon' => 'application/modules/Advgroup/externals/images/member/join.png',
 						'class' => 'smoothbox',
 						'route' => 'group_extended',
@@ -343,7 +341,7 @@ class Advgroup_Plugin_Menus
 				else
 				{
 					return array(
-						'label' => 'Join Group',
+						'label' => 'Follow',
 						'icon' => 'application/modules/Advgroup/externals/images/member/join.png',
 						'class' => 'smoothbox',
 						'route' => 'group_extended',
@@ -365,7 +363,7 @@ class Advgroup_Plugin_Menus
 			if (!$subject -> isOwner($viewer) && !$subject -> isParentGroupOwner($viewer))
 			{
 				return array(
-					'label' => 'Leave Group',
+					'label' => 'Unfollow',
 					'icon' => 'application/modules/Advgroup/externals/images/member/leave.png',
 					'class' => 'smoothbox',
 					'route' => 'group_extended',
@@ -397,7 +395,7 @@ else
 		if (!$row -> resource_approved && $row -> user_approved)
 		{
 			return array(
-				'label' => 'Cancel Membership Request',
+				'label' => 'Cancel Follow Request',
 				'icon' => 'application/modules/Advgroup/externals/images/member/cancel.png',
 				'class' => 'smoothbox',
 				'route' => 'group_extended',
@@ -414,7 +412,7 @@ else
 		{
 			return array(
 				array(
-					'label' => 'Accept Membership Request',
+					'label' => 'Accept Follow Request',
 					'icon' => 'application/modules/Advgroup/externals/images/member/accept.png',
 					'class' => 'smoothbox',
 					'route' => 'group_extended',
@@ -425,7 +423,7 @@ else
 					),
 				),
 				array(
-					'label' => 'Ignore Membership Request',
+					'label' => 'Ignore Follow Request',
 					'icon' => 'application/modules/Advgroup/externals/images/member/reject.png',
 					'class' => 'smoothbox',
 					'route' => 'group_extended',

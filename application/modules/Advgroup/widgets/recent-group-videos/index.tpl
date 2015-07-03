@@ -97,12 +97,11 @@ if($this->paginator -> getTotalItemCount()):?>
 					?>
 				</div>
 				<?php endif;?>
+				<?php if($item -> isOwner($this->viewer())) :?>
 				<div class="tf_btn_action">
 				<?php
 					echo $this->htmlLink(array(
-						'route' => 'default',
-						'module' => 'video',
-						'controller' => 'index',
+						'route' => 'video_general',
 						'action' => 'edit',
 						'video_id' => $item->video_id,
 						'parent_type' =>'group',
@@ -113,18 +112,15 @@ if($this->paginator -> getTotalItemCount()):?>
 			    <div class="tf_btn_action">
 				<?php
 					echo $this->htmlLink(array(
-				 	        'route' => 'default', 
-				         	'module' => 'video', 
-				         	'controller' => 'index', 
+				 	        'route' => 'video_general', 
 				         	'action' => 'delete', 
 				         	'video_id' => $item->video_id, 
-				         	'subject_id' =>  $this->group->getIdentity(),
-				        	'parent_type' => 'group',
 				         	'format' => 'smoothbox'), 
 				         	'<i class="fa fa-trash-o fa-lg"></i>', array('class' => 'tf_button_action smoothbox'
 				     ));
 				?>
 				</div>
+				<?php endif;?>
             </li>
             
         <?php endforeach; ?>

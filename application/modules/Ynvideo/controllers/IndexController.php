@@ -316,15 +316,13 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'manage'), 'video_general', true);
 		}
 		else
-		if ($parent_type == 'group')
+		if ($video -> parent_type == 'group')
 		{
-			return $this -> _helper -> redirector -> gotoRoute(array(
-				'id' => $this -> _getParam('subject_id')
-			), 'group_profile', true);
+			$group = $video -> getParent('group');
+			$this -> _redirectCustom($group);
 		}
 		else
 		{
-
 			return $this -> _helper -> redirector -> gotoRoute(array(
 				'user_id' => $viewer -> getIdentity(),
 				'video_id' => $video -> getIdentity()
@@ -804,6 +802,11 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		{
 			$db -> rollBack();
 			throw $e;
+		}
+		if($video -> parent_type == 'group')
+		{
+			$group = $video -> getParent('group');
+			$this -> _redirectCustom($group);
 		}
 
 		return $this -> _helper -> redirector -> gotoRoute(array('action' => 'manage'), 'video_general', true);

@@ -105,6 +105,7 @@ class Ynevent_WidgetController extends Core_Controller_Action_Standard {
 	{
 		$event = Engine_Api::_() -> getItem('event', $this -> _getParam('id'));
 		$this -> view -> event = $event;
+		$this -> view -> widget = $this -> _getParam('widget', '');
 		$this -> renderScript('widget/list-rsvp.tpl');
 	}
 	public function rsvpAction()
@@ -128,7 +129,7 @@ class Ynevent_WidgetController extends Core_Controller_Action_Standard {
             $table->setOptionFollowEvent($event->getIdentity(), $viewer->getIdentity(), 1);
         }
 		$this -> view -> status = true;
-        $this -> view -> body = $this -> view -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $event -> getIdentity(), 'format' => 'html'));
+        $this -> view -> body = $this -> view -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $event -> getIdentity(), 'widget' => $this -> _getParam('widget', ''), 'format' => 'html'));
         $this -> _helper -> contextSwitch -> initContext();
 	}
 }
