@@ -113,9 +113,9 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label"><?php echo $this->translate('Age: ')?><span id="age-rangeval">17 - 29</span></label>
-					<input type="hidden" class="form-element search-element" value="17" id="player_age_from" name="age_from"/>
-					<input type="hidden" class="form-element search-element" value="29" id="player_age_to" name="age_to"/>
+					<label class="form-label search-label"><?php echo $this->translate('Age: ')?><span id="age-rangeval"><?php echo $this->age_from?> - <?php echo $this->age_to?></span></label>
+					<input type="hidden" class="form-element search-element" value="<?php echo $this->age_from?>" id="player_age_from" name="age_from"/>
+					<input type="hidden" class="form-element search-element" value="<?php echo $this->age_to?>" id="player_age_to" name="age_to"/>
 					<div id="age-rangeslider"></div>
 				</div>
 				<div class="form-wrapper search-wrapper">
@@ -511,9 +511,9 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 		if ($('#age-rangeslider')) {
 			$('#age-rangeslider').slider({
 			    range: true,
-			    min: 17,
-			    max: 29,
-			    values: [ 17, 29 ],
+			    min: <?php echo $this->age_from?>,
+			    max: <?php echo $this->age_to?>,
+			    values: [ <?php echo $this->age_from?>, <?php echo $this->age_to?> ],
 			    slide: function( event, ui ) {
 			      	$('#age-rangeval').html(ui.values[0]+" - "+ui.values[1]);
 			      	$('#player_age_from').val(ui.values[0]);

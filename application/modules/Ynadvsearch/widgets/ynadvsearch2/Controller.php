@@ -149,5 +149,14 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 		$viewer = Engine_Api::_()->user()->getViewer();
 		$level_id = ($viewer->getIdentity()) ? $viewer->level_id : 5;
 		$this->view->isPro = $isPro = ($level_id == 6 || $level_id == 7 || $viewer->isAdmin()) ? true : false;
+		
+		$to = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.min_year', 1985);
+		$to = intval(date('Y')) - intval($to);‏
+		$from = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.max_year', 2003);
+		$from = intval(date('Y')) - intval($to);
+		
+		$this->view->age_from = $from;
+		$this->view->age_to = $to;
+			
 	}
 }

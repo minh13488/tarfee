@@ -265,7 +265,7 @@
 				          <?php echo $this->htmlLink($item -> getOwner()->getHref(), $item -> getOwner() ->getTitle()) ?>
 			        </div>
 			        <div class='members_date'>
-			          <?php echo $this->timestamp($item -> getOwner() -> creation_date) ?>
+			          <?php echo $this->timestamp($item -> creation_date) ?>
 			        </div>
 		      	</div>
 	     	</div><!-- nickname-->

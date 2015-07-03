@@ -150,7 +150,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				}
 
 				if (isset($params['rating_to']) && is_numeric($params['rating_to'])) {
-					$select->where('rating >= ?', $params['rating_to']);
+					$select->where('rating <= ?', $params['rating_to']);
 				}
 
 				if (!empty($params['country_id'])) {
