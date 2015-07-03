@@ -57,30 +57,32 @@
 	      		<?php echo (count($usedCodes) + count($availableCodes)) ;?>
 	      	</td>
 	      	<td>
-	      		<table class='admin_table ynsocial_table' style="width: 100%">
-	      			<tr>
-		      			<td>
-	      					<?php echo $this -> translate("Code");?>
-	      				</td>	
-	      				<td>
-	      					 <?php echo $this -> translate("User");?>
-	      				</td>
-      				</tr>
-		      		<?php foreach($usedCodes as $usedCode) :?>
-		      			<?php $inviteCode = Engine_Api::_() -> invite() -> getRowCode($usedCode -> code); ?>
-		      			<?php if($inviteCode) :?>
-		      				<?php $used_user = Engine_Api::_() -> getItem('user', $inviteCode -> new_user_id);?>
-		      				<tr>
-			      				<td>
-			      					<?php echo $usedCode -> code;?>
-			      				</td>	
-			      				<td>
-			      					 <?php echo $used_user;?>
-			      				</td>
-		      				</tr>
-	      				<?php endif;?>
-		      		<?php endforeach;?>
-	      		</table>
+	      		<?php if(count($usedCodes)) :?>
+		      		<table class='admin_table ynsocial_table' style="width: 100%">
+		      			<tr>
+			      			<td>
+		      					<?php echo $this -> translate("Code");?>
+		      				</td>	
+		      				<td>
+		      					 <?php echo $this -> translate("User");?>
+		      				</td>
+	      				</tr>
+			      		<?php foreach($usedCodes as $usedCode) :?>
+			      			<?php $inviteCode = Engine_Api::_() -> invite() -> getRowCode($usedCode -> code); ?>
+			      			<?php if($inviteCode) :?>
+			      				<?php $used_user = Engine_Api::_() -> getItem('user', $inviteCode -> new_user_id);?>
+			      				<tr>
+				      				<td>
+				      					<?php echo $usedCode -> code;?>
+				      				</td>	
+				      				<td>
+				      					 <?php echo $used_user;?>
+				      				</td>
+			      				</tr>
+		      				<?php endif;?>
+			      		<?php endforeach;?>
+		      		</table>
+	      		<?php endif;?>
 	      	</td>
 	      </tr>
       <?php endif;?>
