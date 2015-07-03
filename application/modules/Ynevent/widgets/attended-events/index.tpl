@@ -1,40 +1,18 @@
 <ul id="profile_events_<?php echo $this->identity?>" class="ynevents_profile_tab">
     <?php foreach( $this->paginator as $event ): ?>
-
     <li>
-        <div class="ynevents_photo">
-            <?php echo $this->htmlLink($event, $this->itemPhoto($event, 'thumb.normal')) ?>
-        </div>
-
         <div class="ynevents_info">
             <div class="ynevents_title">
                 <?php echo $this->htmlLink($event->getHref(), $event->getTitle()) ?>
             </div>
-            <div class="ynevents_desc">
-                <?php echo $event->getDescription() ?>
-            </div>
-
         </div>
-
-        <div class="ynevents_members">
-            <?php echo '<i class="fa fa-user"></i> &nbsp;&nbsp;'.$this->translate(array('%s guest', '%s guests', $event->member_count),$this->locale()->toNumber($event->member_count)) ?>
-        </div>
-
         <div class="ynevents_time_place_rating">
             <div class="ynevents_time_place">
                 <span>
                     <?php echo $this->locale()->toDate($event->starttime, array('size' => 'long')) ?>
                 </span>
-                <span>
-                    <?php echo $event->address;?>
-                </span>
-            </div>
-
-            <div class="ynevents_rating">
-                
             </div>
         </div>
-
         <?php 
         if($this -> viewer() -> getIdentity()):
             ?>
@@ -43,12 +21,10 @@
             </div>
         <?php endif;?>
     </li>
-
     <?php endforeach; ?>
 </ul>
-
 <?php if($this->paginator->getTotalItemCount() > $this->items_per_page):?>
-  <?php echo $this->htmlLink($this->url(array(), 'event_general'), $title, array('class' => 'icon_event_viewall')) ?>
+  <?php echo $this->htmlLink($this->url(array('action' => 'manage'), 'event_general'), $title, array('class' => 'icon_event_viewall')) ?>
 <?php endif;?>
 
 <?php if($this -> viewer() -> getIdentity()):?>

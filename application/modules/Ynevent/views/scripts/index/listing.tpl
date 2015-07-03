@@ -46,8 +46,8 @@
         </div>
         <?php 
         if($this -> viewer() -> getIdentity()):?>
-            <div class="ynevents_button" id = "ynevent_rsvp_<?php echo $event -> getIdentity()?>">
-               <?php echo $this -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $event -> getIdentity()));?>
+            <div class="ynevents_button" id = "ynevent_rsvp_listing_<?php echo $event -> getIdentity()?>">
+               <?php echo $this -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $event -> getIdentity(), 'widget' => 'changeRsvpListing'));?>
             </div>
             <?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $event ->getGuid()),'default', true);?>
 			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
@@ -60,7 +60,7 @@
 <?php if($this -> viewer() -> getIdentity()):?>
 <script type="text/javascript">
  var tempChange = 0;
-   var changeRsvp = function(id, option)
+   var changeRsvpListing = function(id, option)
    {
         if (tempChange == 0) 
         {
@@ -80,7 +80,7 @@
                     tempChange = 0;
                 }
             }), {
-                'element' : $('ynevent_rsvp_' + id)
+                'element' : $('ynevent_rsvp_listing_' + id)
             });
         }
    }

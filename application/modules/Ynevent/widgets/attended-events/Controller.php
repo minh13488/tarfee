@@ -8,11 +8,11 @@ class Ynevent_Widget_AttendedEventsController extends Engine_Content_Widget_Abst
   {
     // Don't render this if not authorized
     $viewer = Engine_Api::_()->user()->getViewer();
-	$type = $this -> _getParam('type', 0);
-
+	
+	$membership = Engine_Api::_() -> getDbtable('membership', 'ynevent');
+	$select = $membership -> getMembershipsOfSelect($viewer);
     // Get paginator
-    $eventTb = Engine_Api::_()->getDbtable('events', 'ynevent');
-    $this->view->paginator = $paginator = Zend_Paginator::factory($eventTb -> select() -> where('type_id = ?', $type) ->order('creation_date DESC'));
+    $this->view->paginator = $paginator = Zend_Paginator::factory($select);
 
     // Set item count per page and current page number
     $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 5));
