@@ -25,7 +25,7 @@
 <?php endif;?>
 
 <div class="tf_box_filter_campaign">
-<div class="ybo_headline"><h3>Filters</h3></div>
+<div class="ybo_headline"><h3><?php echo $this -> translate("Filters")?></h3></div>
 
 <div class="tf_campaign_filter_age">
 	<h5 class="tf_campaign_filter_title"><?php echo $this -> translate("By age");?></h5>
@@ -60,7 +60,7 @@
 	<div class="campaign_location">
 		<?php
 			$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
-			$countriesAssoc = array('0'=>$this -> translate('All')) + $countriesAssoc;
+			$countriesAssoc = array('0'=>$this -> translate('Any')) + $countriesAssoc;
 		?>
 
 		<select id="country_id" name="country_id">
@@ -190,7 +190,7 @@ jQuery( document ).ready(function() {
                   	if(options.length > 0) {
                   		var option = new Element('option', {
 							'value': '0',
-							'text': ''
+							'text': '<?php echo $this->translate('Any')?>'
 						})  
                     	$('province_id').empty();
                     	$('province_id').grab(option);  
@@ -219,7 +219,7 @@ jQuery( document ).ready(function() {
                   	if(options.length > 0) {
                   		var option = new Element('option', {
 							'value': '0',
-							'text': ''
+							'text': '<?php echo $this->translate('Any')?>'
 						})  
                     	$('city_id').empty();
                     	$('city_id').grab(option);
