@@ -113,7 +113,7 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label"><?php echo $this->translate('Age: ')?><span id="age-rangeval"><?php echo $this->age_from?> - <?php echo $this->age_to?></span></label>
+					<label class="form-label search-label"><?php echo $this->translate('Age: ')?><span id="age-rangeval"><?php echo $this->age_from?> (<?php echo (intval(date('Y')) - intval($this->age_from))?>) - <?php echo $this->age_to?> (<?php echo (intval(date('Y')) - intval($this->age_to))?>)</span></label>
 					<input type="hidden" class="form-element search-element" value="<?php echo $this->age_from?>" id="player_age_from" name="age_from"/>
 					<input type="hidden" class="form-element search-element" value="<?php echo $this->age_to?>" id="player_age_to" name="age_to"/>
 					<div id="age-rangeslider"></div>
@@ -516,7 +516,9 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 			    max: <?php echo $this->max_age_to?>,
 			    values: [ <?php echo $this->age_from?>, <?php echo $this->age_to?> ],
 			    slide: function( event, ui ) {
-			      	$('#age-rangeval').html(ui.values[0]+" - "+ui.values[1]);
+			    	var yearFrom = parseInt(<?php echo date('Y')?>) - parseInt(ui.values[0]);
+			    	var yearTo = parseInt(<?php echo date('Y')?>) - parseInt(ui.values[1]);
+			      	$('#age-rangeval').html(ui.values[0]+" ("+yearFrom+")"+" - "+ui.values[1]+" ("+yearTo+")");
 			      	$('#player_age_from').val(ui.values[0]);
 			      	$('#player_age_to').val(ui.values[1]);
 			    }
