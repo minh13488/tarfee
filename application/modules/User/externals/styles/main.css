@@ -681,6 +681,13 @@ form.
     clear: both;
     text-align: left;
 }
+#global_page_user-edit-photo-popup
+{
+	#EditPhoto .form-label, #EditPhoto .form-element, #SignupForm .form-label, #SignupForm .form-element {
+	    float: left;
+	    clear: none;
+	}
+}
 #EditPhoto .form-label, #SignupForm .form-label {
     margin-bottom: 4px;
 }

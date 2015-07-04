@@ -1,15 +1,4 @@
-<?php
-/**
- * SocialEngine
- *
- * @category   Application_Core
- * @package    User
- * @copyright  Copyright 2006-2010 Webligo Developments
- * @license    http://www.socialengine.com/license/
- * @version    $Id: _formEditImage.tpl 9747 2012-07-26 02:08:08Z john $
- * @author     John
- */
-?>
+
 <?php if( $this->subject()->photo_id !== null ): ?>
 
   <?php
@@ -18,7 +7,7 @@
       ->appendFile($this->layout()->staticBaseUrl . 'externals/moolasso/Lasso.Crop.js')
   ?>
   <div>
-    <?php echo $this->itemPhoto($this->subject(), 'thumb.profile', "", array('id' => 'lassoImg')) ?>
+    <?php echo $this->itemPhoto($this->subject(), 'thumb.main', "", array('id' => 'lassoImg')) ?>
   </div>
   <br />
   <div id="preview-thumbnail" class="preview-thumbnail">
@@ -56,8 +45,8 @@
       
       lassoCrop = new Lasso.Crop('lassoImg', {
 	  ratio : [1, 1],
-	  preset : [10,10,58,58],
-	  min : [48,48],
+	  preset : [10,10,118,118],
+	  min : [100,100],
 	  handleSize : 8,
 	  opacity : .6,
 	  color : '#7389AE',
@@ -67,9 +56,8 @@
 	      });
 	
 	      $('previewimage').src = $('lassoImg').src;
-	      //$('preview-thumbnail').innerHTML = '<img id="previewimage" src="'+sourceImg+'"/>';
 	      $('thumbnail-controller').innerHTML = '<a href="javascript:void(0);" onclick="lassoEnd();"><?php echo $this->translate('Apply Changes');?></a> <?php echo $this->translate('or');?> <a href="javascript:void(0);" onclick="lassoCancel();"><?php echo $this->translate('cancel');?></a>';
-	      $('coordinates').value = 10 + ':' + 10 + ':' + 58+ ':' + 58;
+	      $('coordinates').value = 10 + ':' + 10 + ':' + 118+ ':' + 118;
 	    }
 	
 	    var lassoEnd = function() {
@@ -91,6 +79,7 @@
 	      $('Filedata-wrapper').innerHTML = "";
 	      $('url-wrapper').innerHTML = "";
 	    }
+	    window.addEvent('domready', function(){lassoStart();});
   </script>
 
 <?php endif; ?>

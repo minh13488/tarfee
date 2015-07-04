@@ -79,7 +79,7 @@
 	        <?php if($player -> isViewable()) :?>
 	        	<li id="player-item-<?php echo $player->playercard_id ?>">
 	           	<div id='profile_photo'>
-					<?php $photoUrl = ($player -> getPhotoUrl('thumb.main')) ? $player->getPhotoUrl('thumb.main') : "application/modules/User/externals/images/nophoto_playercard_thumb_profile.png" ?>
+					<?php $photoUrl = ($player -> getPhotoUrl('thumb.profile')) ? $player->getPhotoUrl('thumb.profile') : "application/modules/User/externals/images/nophoto_playercard_thumb_profile.png" ?>
 					<div class="avatar">
 						<div class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)">
 							
