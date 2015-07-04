@@ -72,8 +72,21 @@
 		<select id="province_id" name="province_id"></select>
 		<select id="city_id" name="city_id"></select>
 
-		<button type="submit" class="btn-filter"><?php echo $this -> translate('Filter');?></button>
 		</div>
+</div>
+
+<div class="tf_campaign_filter_age">
+	<h5 class="tf_campaign_filter_title"><?php echo $this -> translate("Gender");?></h5>
+	
+	<div class="campaign_location">
+		<select id="gender" name="gender">
+			<option value="0"><?php echo $this->translate('Any')?></option>
+			<option value="1"><?php echo $this->translate('Male')?></option>
+			<option value="2"><?php echo $this->translate('Female')?></option>
+		</select>
+		
+		<button type="submit" class="btn-filter"><?php echo $this -> translate('Filter');?></button>
+	</div>
 </div>
 </form>
 </div>
@@ -102,6 +115,10 @@ jQuery( document ).ready(function() {
 		 
 		 <?php if(!empty($params['start_date_to'])) :?>
 		 	jQuery("#start_date_to").val('<?php echo $params['start_date_to'];?>');
+		 <?php endif;?>
+		 
+		 <?php if(!empty($params['gender'])) :?>
+		 	jQuery("#gender").val('<?php echo $params['gender'];?>');
 		 <?php endif;?>
 		 
 		 jQuery("#form-search-wrapper").css("display", "block");
