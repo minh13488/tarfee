@@ -21,6 +21,32 @@
 			<form id="global_search_form" action="<?php echo $this->url(array('controller' => 'search'), 'default', true) ?>" method="get">
 			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100'/>                       
 			</form>
+		   <span class="ynresponsive_languges">
+	         <?php if( 1 !== count($ßthis->languageNameList) ):?>
+	            <form id="form_language" method="post" action="<?php echo $this->url(array('controller' => 'utility', 'action' => 'locale'), 'default', true) ?>" style="display:inline-block">
+		            <?php $selectedLanguage = $this->translate()->getLocale() ?>
+		            <div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown">
+		            	<b class="ficon icon-earth"></b><span><font><font><?php echo strtoupper(substr($selectedLanguage, 0, 2))?></font></font></span>
+		            	<ul>
+		            		<?php foreach($this->languageNameList as $key => $language):?>
+		            		<li>
+		            			<a onclick="changeLanguages('<?php echo $key?>')" data-locale="<?php echo $key?>" class="locale old-app"><font><font><?php echo strtoupper(substr($key,0, 2))?></font></font></a>
+		            		</li>
+		            		<?php endforeach;?>
+		            	</ul>
+		            </div>
+		            <?php echo $this->formHidden('language', $selectedLanguage);?>
+		            <?php echo $this->formHidden('return', $this->url()) ?>
+	            </form>
+	            <script type="text/javascript">
+	            var changeLanguages = function(lang)
+	            {
+	            	$('language').value = lang;
+	            	$('form_language').submit();
+	            }
+	            </script>
+	         <?php endif; ?>
+      		</span>
 		</div>
 	<?php endif;?>
     <div class="group-mini-menu">
