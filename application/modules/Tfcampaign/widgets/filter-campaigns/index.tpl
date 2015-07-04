@@ -228,7 +228,7 @@ jQuery(function ()
 	    range: true,
 	    min: <?php echo $this->max_age_from?>,
 	    max: <?php echo $this->max_age_to?>,
-	    values: [ <?php echo $this->age_from?>, <?php echo $this->age_from?> ],
+	    values: [ <?php echo $this->age_from?>, <?php echo $this->age_to?> ],
 	    slide: function( event, ui ) {
     		var yearFrom = parseInt(<?php echo date('Y')?>) - parseInt(ui.values[0]);
 	    	var yearTo = parseInt(<?php echo date('Y')?>) - parseInt(ui.values[1]);
