@@ -27,15 +27,6 @@
 				</div>	
 
 				<?php if($this -> viewer() -> getIdentity()) :?>
-					<?php $url = $this -> url(array(
-					    'module' => 'activity',
-					    'controller' => 'index',
-					    'action' => 'share',
-					    'type' => $campaign -> getType(),
-					    'id' => $campaign -> getIdentity(),
-					    ),'default', true)
-					;?>
-					<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('share')?></button></a>
 					<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'list-withdraw', 'campaign_id' => $campaign->getIdentity()), 'tfcampaign_specific' , true)?>'><button><?php echo $this->translate('withdraw')?></button></a>
 					<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'list-edit', 'campaign_id' => $campaign->getIdentity()), 'tfcampaign_specific' , true)?>'><button><?php echo $this->translate('edit')?></button></a>
 				<?php endif;?>
