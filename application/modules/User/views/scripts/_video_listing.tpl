@@ -51,9 +51,9 @@
    			<?php if($this -> viewer() -> getIdentity()):?>
 				<li id="favorite_<?php echo $this->video -> getIdentity()?>">
 					<?php if($this->video -> hasFavorite()):?>
-						<a href="javascript:;" onclick="unfavorite_video_lib(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
+						<a href="javascript:;" onclick="unfavorite_video_lib(<?php echo $this->video -> getIdentity()?>)"><i class="fa fa-heart"></i></a>
 					<?php else:?>	
-						<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
+						<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><i class="fa fa-heart-o"></i></a>
 					<?php endif;?>	
 			    </li>
 			<?php endif;?>
@@ -122,8 +122,9 @@
 		</ul>
 	<?php endif;?>
 	<?php if(isset($this -> main) && $this -> main) :?>
-	<div class="tf_sublibrary_author">
-		<?php echo $this -> translate("by");?> <span><?php echo $this -> video -> getOwner()?></span>
-	</div>
+		<div class="nickname">
+		<?php echo $this->translate('By') ?>
+	    <?php echo $this->htmlLink($this -> video -> getOwner()->getHref(), htmlspecialchars ($this->string()->truncate($this -> video -> getOwner()->getTitle(), 25)), array('title' => $this -> video -> getOwner()->getTitle())) ?>
+    </div>
 	<?php endif;?>
 </li>

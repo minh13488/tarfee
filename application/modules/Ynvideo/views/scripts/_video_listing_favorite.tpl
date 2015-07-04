@@ -9,8 +9,6 @@
     
 </div>
 
-
-
 <div class="video-title">
 	<?php echo $this->htmlLink($this->video->getPopupHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
 </div>
@@ -28,41 +26,39 @@
 </div>
 
 <?php if ($this->video->parent_type == 'user_playercard') :?>
-<?php $player = $this->video->getParent();?>
-<?php if ($player):?>
-
-<div class="player-info">
-	<div class="player-photo">
-		<?php echo $this->itemPhoto($player, 'thumb.icon')?>
-	</div>
-	<div class="player_info_detail">
-		<div class="player-title">
-			<?php echo $player?>
+	<?php $player = $this->video->getParent();?>
+	<?php if ($player):?>
+	
+	<div class="player-info">
+		<div class="player-photo">
+			<?php echo $this->itemPhoto($player, 'thumb.icon')?>
 		</div>
-		<div class="player-position">
-		<?php $position = $player->getPosition()?>
-		<?php if ($position) : ?>
-			<?php 
-    		preg_match_all('/[A-Z]/', $position, $matches);
-			echo implode($matches[0]);?>
-		<?php endif;?>
-
-		<?php $sport = $player->getSport();?>
-			<?php if ($sport):?>	
-				<?php echo ' - '.$sport->title ?>
-		<?php endif;?>
+		<div class="player_info_detail">
+			<div class="player-title">
+				<?php echo $player?>
+			</div>
+			<div class="player-position">
+			<?php $position = $player->getPosition()?>
+			<?php if ($position) : ?>
+				<?php 
+	    		preg_match_all('/[A-Z]/', $position, $matches);
+				echo implode($matches[0]);?>
+			<?php endif;?>
+	
+			<?php $sport = $player->getSport();?>
+				<?php if ($sport):?>	
+					<?php echo ' - '.$sport->title ?>
+			<?php endif;?>
+			</div>
 		</div>
 	</div>
-</div>
-<?php endif;?>
+	<?php endif;?>
 <?php endif;?>
 <?php $user = $this->video->getOwner() ?>
 <?php if ($user) : ?>
 	<div class="nickname">
 		<?php echo $this->translate('By') ?>
 	    <?php echo $this->htmlLink($user->getHref(), htmlspecialchars ($this->string()->truncate($user->getTitle(), 25)), array('title' => $user->getTitle())) ?>
-    </div>
-
     </div>
 <?php endif; ?>
 

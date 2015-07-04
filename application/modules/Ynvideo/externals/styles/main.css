@@ -1204,7 +1204,9 @@ div.video_object
 
 
 /*Style widget profile favorite videos*/
-#ynvideo_favorite_videos{
+#ynvideo_favorite_videos,
+.tf_library_videos
+{
     overflow: hidden;
     position: relative;
     li{
