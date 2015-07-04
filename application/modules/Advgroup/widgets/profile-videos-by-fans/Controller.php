@@ -37,23 +37,23 @@ class Advgroup_Widget_ProfileVideosByFansController extends Engine_Content_Widge
 	      		$ids[] = $member->user_id;
 	    }
 		
-		$params['user_ids'] = (empty($ids)) ? array(0) : $ids;
-		
+		if (empty($ids)) $ids = array(0);
 		
 		//Get data from table video
 		$tableVideo = Engine_Api::_()->getItemTable('video');
 		$tagTbl = Engine_Api::_()->getDbTable('tags', 'core');
 		$tagTblName = $tagTbl->info('name');
-		$tagmapTbl = Engine_Api::_()->getDbTable('tagmaps', 'core');
+		$tagmapTbl = Engine_Api::_()->getDbTable('tagMaps', 'core');
 		$tagmapTblName = $tagmapTbl->info('name');
-		$tagSelect = $tagmapTblName -> select()->setIntegrityCheck(false) -> from($tagmapTblName);
-		$tagSelect->joinLeft($tagTblName, "$tagTblName.tag_id = $tagTblName.tag_id","");
+		$tagSelect = $tagTbl -> select() -> from($tagTblName) -> setIntegrityCheck(false);
+		$tagSelect->joinLeft($tagmapTblName, "$tagmapTblName.tag_id = $tagTblName.tag_id","$tagmapTblName.resource_id as resource_id");
 		$tagSelect
-			->where('resource_type = ?', 'video')
-			->where('tagger_type = ?', 'user')
-			->where('tagger_id IN (?)', $ids)
+			->where("$tagmapTblName.resource_type = ?", 'video')
+			->where("$tagmapTblName.tagger_type = ?", 'user')
+			->where("$tagmapTblName.tagger_id IN (?)", $ids)
 			->where("$tagTblName.text LIKE ?", $subject->getTitle());
-		$tags = $tagmapTbl->fetchAll($tagSelect);
+		$video_ids = array();
+		$tags = $tagTbl->fetchAll($tagSelect); 
 		$video_ids = array();
 		foreach ($tags as $tag) {
 			$video_ids[] = $tag->resource_id;
@@ -67,7 +67,7 @@ class Advgroup_Widget_ProfileVideosByFansController extends Engine_Content_Widge
 		-> order('creation_date DESC')
 		-> limit($max);
     
-    	$this->view->paginator = Zend_Paginator::factory($select);
+    	$this->view->paginator = $paginator = Zend_Paginator::factory($select);
   		if (!$paginator->getTotalItemCount()) {
   			return $this->setNoRender();
   		}
