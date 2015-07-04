@@ -59,22 +59,15 @@
 <?php $user = $this->video->getOwner() ?>
 <?php if ($user) : ?>
 	<div class="nickname">
-    <?php echo $this->htmlLink($user->getHref(),$this->itemPhoto($user, 'thumb.icon'));?>
-
-	    <div class="members_info">
-		    <div class="members_name">
-		    <?php echo $this->htmlLink($user->getHref(), htmlspecialchars ($this->string()->truncate($user->getTitle(), 25)), array('title' => $user->getTitle())) ?>
-		    </div>
-	    	<div class="members_date">
-				<?php echo $this->timestamp($user->creation_date);?>				    
-			</div>
-	    </div>
+		<?php echo $this->translate('By') ?>
+	    <?php echo $this->htmlLink($user->getHref(), htmlspecialchars ($this->string()->truncate($user->getTitle(), 25)), array('title' => $user->getTitle())) ?>
+    </div>
 
     </div>
 <?php endif; ?>
 
 <?php if($this -> viewer() -> getIdentity()):?>
-	<span class="tf_video_action">
-		<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('remove')?></a>
+	<span class="tf_btn_action">
+		<a href="javascript:;" class="tf_button_action" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('remove')?></a>
 	</span>
 <?php endif;?>

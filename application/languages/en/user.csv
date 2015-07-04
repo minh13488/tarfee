@@ -719,3 +719,13 @@ Please confirm by clicking the link below:
 [message]
 
 [footer]"
+
+# user_reject_request
+"_EMAIL_USER_REJECT_REQUEST_TITLE";Reject request for invitation"
+"_EMAIL_USER_REJECT_REQUEST_DESCRIPTION";"This is the email that gets sent when your request for invitation is rejected."
+"_EMAIL_USER_REJECT_REQUEST_SUBJECT";"You have received an email from [host]!"
+"_EMAIL_USER_REJECT_REQUEST_BODY";"[header]
+
+[message]
+
+[footer]"

@@ -1300,7 +1300,18 @@ div.video_object
         .player-info{
             border-bottom: 1px solid $theme_border_medium_color;
         }
-        .nickname,
+        .nickname{
+            padding: 10px 15px;
+            overflow: hidden;
+            text-align: center;
+            font-size: 12px;
+            color: $theme_font_color_light;
+            a{  
+                margin-right: 10px;
+                overflow: hidden;
+                font-weight: bold;
+            }
+        }
         .player-info{
             padding: 10px 15px;
             overflow: hidden;
