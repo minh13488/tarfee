@@ -1647,6 +1647,12 @@ body#global_page_user-profile-index {
 
 /*Style video main page*/
 .layout_ynvideo_main_page_videos{
+	text-align: center;
+	
+	.tf_button_action{
+		display: inline-block !important;
+	}
+
 	#main-page-videos{
 		overflow: hidden;
 		position: relative;
