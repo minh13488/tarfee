@@ -50,7 +50,7 @@
 		<li class="search-tab-item"><?php echo $this->translate('Professional')?></li>
 		<li class="search-tab-item"><?php echo $this->translate('Organization')?></li>
 		<li class="search-tab-item"><?php echo $this->translate('Event/Tryout')?></li>
-		<li class="search-tab-item"><?php echo $this->translate('Campaign')?></li>
+		<li class="search-tab-item"><?php echo $this->translate('Scout')?></li>
 	</ul>
 	<div class="search-form" id="advsearch-form">
 		<?php $url = $this->url(array(),'ynadvsearch_search',true)?>

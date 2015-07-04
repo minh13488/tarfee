@@ -5,7 +5,7 @@ class Ynadvsearch_Api_Core extends  Core_Api_Abstract {
 		'user' => 'Member',
 		'user_playercard' => 'Player',
 		'group' => 'Club',
-		'tfcampaign_campaign' => 'Campaign',
+		'tfcampaign_campaign' => 'Scout',
 		'video' => 'Video',
 		'event' => 'Tryout/Event',
 		'blog' => 'Talk'
