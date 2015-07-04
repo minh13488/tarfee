@@ -313,3 +313,6 @@ ALTER TABLE `engine4_blog_blogs` ADD `parent_id` INT(11) NOT NULL ;
 ALTER TABLE `engine4_group_groups` ADD `country_id` INT(11) NOT NULL DEFAULT '0' ;
 ALTER TABLE `engine4_group_groups` ADD `province_id` INT(11) NOT NULL DEFAULT '0' ;
 ALTER TABLE `engine4_group_groups` ADD `city_id` INT(11) NOT NULL DEFAULT '0' ;
+
+INSERT IGNORE INTO `engine4_core_mailtemplates` (`type`, `module`, `vars`) VALUES
+('user_reject_request', 'user', '[host],[email],[date],[sender_title],[sender_link],[message]');
