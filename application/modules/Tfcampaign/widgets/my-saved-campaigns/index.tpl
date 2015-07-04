@@ -31,16 +31,6 @@
 				<?php echo $this -> translate(array("%s submission", "%s submissions", $campaign -> getTotalSubmission()), $campaign -> getTotalSubmission());?>
 			</div>
 			<?php if($this -> viewer() -> getIdentity()) :?>
-				<?php $url = $this -> url(array(
-				    'module' => 'activity',
-				    'controller' => 'index',
-				    'action' => 'share',
-				    'type' => $campaign -> getType(),
-				    'id' => $campaign -> getIdentity(),
-				    ),'default', true)
-				;?>
-				
-				<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('share')?></button></a>
 				<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'remove-save', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_general' , true);?>'><button><?php echo $this->translate('remove')?></button></a>
 			<?php endif;?>
 		<?php endif;?>
