@@ -30,13 +30,6 @@ class Advgroup_Widget_ProfileVideosByFansController extends Engine_Content_Widge
     	$max = $this->_getParam('itemCountPerPage');
     	if(!is_numeric($max) | $max <=0) $max = 5;
 
-	    $params = array();
-	    $params['parent_type'] = 'group';
-	    $params['parent_id'] = $subject->getIdentity();
-	    $params['orderby'] = 'creation_date';
-	    $params['page'] = $this->_getParam('page',1);
-	    $params['limit'] = $max;
-		
 		$ids = array();
 	    $members = $subject->membership()->getMembersInfo();
 	    foreach( $members as $member ) {
@@ -46,32 +39,35 @@ class Advgroup_Widget_ProfileVideosByFansController extends Engine_Content_Widge
 		
 		$params['user_ids'] = (empty($ids)) ? array(0) : $ids;
 		
-		//Get data from table Mappings
-		$tableMapping = Engine_Api::_()->getItemTable('advgroup_mapping');
-		$mapping_ids = $tableMapping -> getVideoIdsMapping($subject -> getIdentity());
-	
+		
 		//Get data from table video
 		$tableVideo = Engine_Api::_()->getItemTable('video');
-		$select = $tableVideo -> select() 
-		-> from($tableVideo->info('name'), new Zend_Db_Expr("`video_id`"))
-		-> where('parent_type = "group"') 
-		-> where('parent_id = ?', $subject -> getIdentity());
-		$video_ids = $tableVideo -> fetchAll($select);
+		$tagTbl = Engine_Api::_()->getDbTable('tags', 'core');
+		$tagTblName = $tagTbl->info('name');
+		$tagmapTbl = Engine_Api::_()->getDbTable('tagmaps', 'core');
+		$tagmapTblName = $tagmapTbl->info('name');
+		$tagSelect = $tagmapTblName -> select()->setIntegrityCheck(false) -> from($tagmapTblName);
+		$tagSelect->joinLeft($tagTblName, "$tagTblName.tag_id = $tagTblName.tag_id","");
+		$tagSelect
+			->where('resource_type = ?', 'video')
+			->where('tagger_type = ?', 'user')
+			->where('tagger_id IN (?)', $ids)
+			->where("$tagTblName.text LIKE ?", $subject->getTitle());
+		$tags = $tagmapTbl->fetchAll($tagSelect);
+		$video_ids = array();
+		foreach ($tags as $tag) {
+			$video_ids[] = $tag->resource_id;
+		}
+		if (empty($video_ids)) $video_ids = array(0);
+		$video_ids = array_unique($video_ids);
 		
-		$params['ids'] = array();
-		//Merge ids
-		foreach($mapping_ids as $mapping_id) 
-		{
-			$params['ids'][] = $mapping_id -> item_id;
-		}
-		foreach($video_ids as $video_id) 
-		{
-			if(!in_array($video_id -> video_id, $params['ids'])) {
-				$params['ids'][] = $video_id -> video_id;
-			}
-		}
+		$select = $tableVideo -> select()
+		-> where('video_id IN (?)', $video_ids)
+		-> where('owner_id IN (?)', $ids)
+		-> order('creation_date DESC')
+		-> limit($max);
     
-    	$this->view->paginator = $paginator = $subject -> getVideosPaginator($params);
+    	$this->view->paginator = Zend_Paginator::factory($select);
   		if (!$paginator->getTotalItemCount()) {
   			return $this->setNoRender();
   		}
