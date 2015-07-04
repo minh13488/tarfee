@@ -22,7 +22,7 @@
 			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100'/>                       
 			</form>
 		   <span class="ynresponsive_languges">
-	         <?php if( 1 !== count($ßthis->languageNameList) ):?>
+	         <?php if( 1 !== count($this->languageNameList) ):?>
 	            <form id="form_language" method="post" action="<?php echo $this->url(array('controller' => 'utility', 'action' => 'locale'), 'default', true) ?>" style="display:inline-block">
 		            <?php $selectedLanguage = $this->translate()->getLocale() ?>
 		            <div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown">

@@ -52,7 +52,7 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 			'tabindex' => 4,
 		));
 		
-		$content = Zend_Registry::get('Zend_Translate')->_("<span><a class = 'smoothbox' href='%s'>Forgot Password?</a></span>");
+		$content = "<span><a class = 'smoothbox' href='%s'>".Zend_Registry::get('Zend_Translate')->_("Forgot Password?")."</a></span>";
     	$content= sprintf($content, Zend_Controller_Front::getInstance()->getRouter()->assemble(array('module' => 'user', 'controller' => 'auth', 'action' => 'forgot'), 'default', true));
 		// Init forgot password link
 	    $this->addElement('Dummy', 'forgot', array(

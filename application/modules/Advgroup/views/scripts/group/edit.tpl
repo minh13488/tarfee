@@ -1,6 +1,4 @@
 <?php
-	echo $this->content()->renderWidget('advgroup.groups-menu');
-
   $this->headScript()
     ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Observer.js')
     ->appendFile($this->layout()->staticBaseUrl . 'externals/autocompleter/Autocompleter.js')
