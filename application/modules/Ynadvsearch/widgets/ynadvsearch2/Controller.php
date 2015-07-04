@@ -155,8 +155,70 @@ class Ynadvsearch_Widget_Ynadvsearch2Controller extends Engine_Content_Widget_Ab
 		$from = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.max_year', 2003);
 		$age_from = intval(date('Y')) - intval($from);
 		
-		$this->view->age_from = $age_from;
-		$this->view->age_to = $age_to;
-			
+		$this->view->age_from = $this->view->max_age_from = $age_from;
+		$this->view->age_to = $this->view->max_age_to = $age_to;
+		$this->view->rating_from = 0;
+		$this->view->rating_to = 5;
+		$this->view->params = $params = Zend_Controller_Front::getInstance ()->getRequest ()->getParams();
+		
+		if (!empty($params['age_from'])) {
+			$this->view->age_from = $params['age_from'];
+		}
+		
+		if (!empty($params['age_to'])) {
+			$this->view->age_to = $params['age_to'];
+		}
+		
+		if (!empty($params['rating_from'])) {
+			$this->view->rating_from = $params['rating_from'];
+		}
+		
+		if (!empty($params['rating_to'])) {
+			$this->view->rating_to = $params['rating_to'];
+		}
+		
+		if (!empty($params['continent'])) {
+			$countries = Engine_Api::_() -> getDbTable('locations', 'user') -> getCountriesByContinent($params['continent']);
+			$html = '';
+			foreach ($countries as $country) {
+				$html .= '<option value="' . $country -> getIdentity() . '" label="' . $country -> getTitle() . '" >' . $country -> getTitle() . '</option>';
+			}
+			$this->view->countriesOption = $html;
+		}
+		
+		if (!empty($params['country_id'])) {
+			$subLocations = Engine_Api::_() -> getDbTable('locations', 'user') -> getLocations($params['country_id']);
+			$html = '';
+			foreach ($subLocations as $subLocation) {
+				$html .= '<option value="' . $subLocation -> getIdentity() . '" label="' . $subLocation -> getTitle() . '" >' . $subLocation -> getTitle() . '</option>';
+			}
+			$this->view->provincesOption = $html;
+		}
+		
+		if (!empty($params['province_id'])) {
+			$subLocations = Engine_Api::_() -> getDbTable('locations', 'user') -> getLocations($params['province_id']);
+			$html = '';
+			foreach ($subLocations as $subLocation) {
+				$html .= '<option value="' . $subLocation -> getIdentity() . '" label="' . $subLocation -> getTitle() . '" >' . $subLocation -> getTitle() . '</option>';
+			}
+			$this->view->citiesOption = $html;
+		}
+		
+		if (!empty($params['sport']) && !empty($params['advsearch']) && ($params['advsearch'] == 'player')) {
+			$sportCattable = Engine_Api::_() -> getDbtable('sportcategories', 'user');
+			$node = $sportCattable -> getNode($params['sport']);
+			$categories = $node -> getChilren();
+			$html = '';
+			foreach ($categories as $category) {
+				$html .= '<option value="' . $category -> getIdentity() . '" label="' . $category -> title . '" >' . $category -> title . '</option>';
+				$node = $sportCattable -> getNode($category -> getIdentity());
+				$positions = $node -> getChilren();
+				foreach ($positions as $position)
+				{
+					$html .= '<option value="' . $position -> getIdentity() . '" label="-- ' . $position -> title . '" >' . '-- ' . $position -> title . '</option>';
+				}
+			}
+			$this->view->positionsOption = $html;
+		}
 	}
 }

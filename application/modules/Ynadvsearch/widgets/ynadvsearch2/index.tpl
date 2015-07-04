@@ -46,11 +46,11 @@
 <?php if ($this->viewer()->getIdentity()):?>
 <div id="advanced-search-filter" style="display:none; position: absolute">
 	<ul id="advanced-search-tab" class="advanced-search-tab">
-		<li class="search-tab-item"><?php echo $this->translate('Player')?></li>	
-		<li class="search-tab-item"><?php echo $this->translate('Professional')?></li>
-		<li class="search-tab-item"><?php echo $this->translate('Organization')?></li>
-		<li class="search-tab-item"><?php echo $this->translate('Event/Tryout')?></li>
-		<li class="search-tab-item"><?php echo $this->translate('Campaign')?></li>
+		<li class="search-tab-item active" id="search-tab-item_player"><?php echo $this->translate('Player')?></li>	
+		<li class="search-tab-item" id="search-tab-item_professional"><?php echo $this->translate('Professional')?></li>
+		<li class="search-tab-item" id="search-tab-item_organization"><?php echo $this->translate('Organization')?></li>
+		<li class="search-tab-item" id="search-tab-item_event"><?php echo $this->translate('Event/Tryout')?></li>
+		<li class="search-tab-item" id="search-tab-item_campaign"><?php echo $this->translate('Campaign')?></li>
 	</ul>
 	<div class="search-form" id="advsearch-form">
 		<?php $url = $this->url(array(),'ynadvsearch_search',true)?>
@@ -68,20 +68,20 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="player_country"><?php echo $this->translate('Country')?></label>
-					<select class="form-element search-element country_id" rel="player" id="player_country" name="country_id">
+					<label class="form-label search-label" for="player_country_id"><?php echo $this->translate('Country')?></label>
+					<select class="form-element search-element country_id" rel="player" id="player_country_id" name="country_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="player_province"><?php echo $this->translate('Province/State')?></label>
-					<select class="form-element search-element province_id" rel="player" id="player_province" name="province_id">
+					<label class="form-label search-label" for="player_province_id"><?php echo $this->translate('Province/State')?></label>
+					<select class="form-element search-element province_id" rel="player" id="player_province_id" name="province_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="player_city"><?php echo $this->translate('City')?></label>
-					<select class="form-element search-element" id="player_city" name="city_id">
+					<label class="form-label search-label" for="player_city_id"><?php echo $this->translate('City')?></label>
+					<select class="form-element search-element" id="player_city_id" name="city_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
@@ -128,9 +128,9 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label"><?php echo $this->translate('Professional Rating: ')?><span id="rating-rangeval">0 - 5</span></label>
-					<input type="hidden" class="form-element search-element" value="0" id="player_rating_from" name="rating_from"/>
-					<input type="hidden" class="form-element search-element" value="5" id="player_rating_to" name="rating_to"/>
+					<label class="form-label search-label"><?php echo $this->translate('Professional Rating: ')?><span id="rating-rangeval"><?php echo $this->rating_from?> - <?php echo $this->rating_to?></span></label>
+					<input type="hidden" class="form-element search-element" value="<?php echo $this->rating_from?>" id="player_rating_from" name="rating_from"/>
+					<input type="hidden" class="form-element search-element" value="<?php echo $this->rating_to?>" id="player_rating_to" name="rating_to"/>
 					<div id="rating-rangeslider"></div>
 				</div>
 				<button type="submit"><?php echo $this->translate('Search')?></button>
@@ -150,21 +150,21 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="professional_country"><?php echo $this->translate('Country')?></label>
-					<select class="form-element search-element country_id" rel="professional" id="professional_country" name="country_id">
+					<label class="form-label search-label" for="professional_country_id"><?php echo $this->translate('Country')?></label>
+					<select class="form-element search-element country_id" rel="professional" id="professional_country_id" name="country_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="professional_province"><?php echo $this->translate('Province/State')?></label>
-					<select class="form-element search-element province_id" rel="professional" id="professional_province" name="province_id">
+					<label class="form-label search-label" for="professional_province_id"><?php echo $this->translate('Province/State')?></label>
+					<select class="form-element search-element province_id" rel="professional" id="professional_province_id" name="province_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="professional_city"><?php echo $this->translate('City')?></label>
-					<select class="form-element search-element" id="professional_city" name="city_id">
+					<label class="form-label search-label" for="professional_city_id"><?php echo $this->translate('City')?></label>
+					<select class="form-element search-element" id="professional_city_id" name="city_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
@@ -216,20 +216,20 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="organization_country"><?php echo $this->translate('Country')?></label>
-					<select class="form-element search-element country_id" rel="organization" id="organization_country" name="country_id">
+					<label class="form-label search-label" for="organization_country_id"><?php echo $this->translate('Country')?></label>
+					<select class="form-element search-element country_id" rel="organization" id="organization_country_id" name="country_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="organization_province"><?php echo $this->translate('Province/State')?></label>
-					<select class="form-element search-element province_id" rel="organization" id="organization_province" name="province_id">
+					<label class="form-label search-label" for="organization_province_id"><?php echo $this->translate('Province/State')?></label>
+					<select class="form-element search-element province_id" rel="organization" id="organization_province_id" name="province_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="organization_city"><?php echo $this->translate('City')?></label>
-					<select class="form-element search-element" id="organization_city" name="city_id">
+					<label class="form-label search-label" for="organization_city_id"><?php echo $this->translate('City')?></label>
+					<select class="form-element search-element" id="organization_city_id" name="city_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
@@ -280,20 +280,20 @@
 				</div>
 
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="event_country"><?php echo $this->translate('Country')?></label>
-					<select class="form-element search-element country_id" rel="event" id="event_country" name="country_id">
+					<label class="form-label search-label" for="event_country_id"><?php echo $this->translate('Country')?></label>
+					<select class="form-element search-element country_id" rel="event" id="event_country_id" name="country_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="event_province"><?php echo $this->translate('Province/State')?></label>
-					<select class="form-element search-element province_id" rel="event" id="event_province" name="province_id">
+					<label class="form-label search-label" for="event_province_id"><?php echo $this->translate('Province/State')?></label>
+					<select class="form-element search-element province_id" rel="event" id="event_province_id" name="province_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="event_city"><?php echo $this->translate('City')?></label>
-					<select class="form-element search-element" id="event_city" name="city_id">
+					<label class="form-label search-label" for="event_city_id"><?php echo $this->translate('City')?></label>
+					<select class="form-element search-element" id="event_city_id" name="city_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
@@ -335,20 +335,20 @@
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="campaign_country"><?php echo $this->translate('Country')?></label>
-					<select class="form-element search-element country_id" rel="campaign" id="campaign_country" name="country_id">
+					<label class="form-label search-label" for="campaign_country_id"><?php echo $this->translate('Country')?></label>
+					<select class="form-element search-element country_id" rel="campaign" id="campaign_country_id" name="country_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="campaign_province"><?php echo $this->translate('Province/State')?></label>
-					<select class="form-element search-element province_id" rel="campaign" id="campaign_province" name="province_id">
+					<label class="form-label search-label" for="campaign_province_id"><?php echo $this->translate('Province/State')?></label>
+					<select class="form-element search-element province_id" rel="campaign" id="campaign_province_id" name="province_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
 				<div class="form-wrapper search-wrapper">
-					<label class="form-label search-label" for="campaign_city"><?php echo $this->translate('City')?></label>
-					<select class="form-element search-element" id="campaign_city" name="city_id">
+					<label class="form-label search-label" for="campaign_city_id"><?php echo $this->translate('City')?></label>
+					<select class="form-element search-element" id="campaign_city_id" name="city_id">
 						<option value="0"><?php echo $this -> translate('any')?></option>
 					</select>
 				</div>
@@ -409,8 +409,6 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 		});
 		<?php endif;?>
 		
-		$('.search-tab-item:first-child').addClass('active');
-		$('.search-form-item:first-child').addClass('active');
 		$('.search-tab-item').on('click', function() {
 			var index = $('#advanced-search-tab').children('li.search-tab-item').index($(this));
 			$('.search-tab-item').removeClass('active');
@@ -433,13 +431,13 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 						'text': '<?php echo $this -> translate('any')?>'
 					});
 	              	if(respone.length > 0) {
-	                	$('#'+type+'_country').empty();
-	                	$('#'+type+'_country').append(option);
-	                	$('#'+type+'_country').append(respone);
+	                	$('#'+type+'_country_id').empty();
+	                	$('#'+type+'_country_id').append(option);
+	                	$('#'+type+'_country_id').append(respone);
 	  				}
 	  				else {
-	  					$('#'+type+'_country').empty();
-	  					$('#'+type+'_country').append(option);
+	  					$('#'+type+'_country_id').empty();
+	  					$('#'+type+'_country_id').append(option);
 	  				}
 	  			}
 	  		});
@@ -457,13 +455,13 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 						'text': '<?php echo $this -> translate('any')?>'
 					});
 	              	if(respone.length > 0) {
-	                	$('#'+type+'_province').empty();
-	                	$('#'+type+'_province').append(option);
-	                	$('#'+type+'_province').append(respone);
+	                	$('#'+type+'_province_id').empty();
+	                	$('#'+type+'_province_id').append(option);
+	                	$('#'+type+'_province_id').append(respone);
 	  				}
 	  				else {
-	  					$('#'+type+'_province').empty();
-	  					$('#'+type+'_province').append(option);
+	  					$('#'+type+'_province_id').empty();
+	  					$('#'+type+'_province_id').append(option);
 	  				}
 	  			}
 	  		});
@@ -481,13 +479,13 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 						'text': '<?php echo $this -> translate('any')?>'
 					});
 	              	if(respone.length > 0) {
-	                	$('#'+type+'_city').empty();
-	                	$('#'+type+'_city').append(option);
-	                	$('#'+type+'_city').append(respone);
+	                	$('#'+type+'_city_id').empty();
+	                	$('#'+type+'_city_id').append(option);
+	                	$('#'+type+'_city_id').append(respone);
 	  				}
 	  				else {
-	  					$('#'+type+'_city').empty();
-	  					$('#'+type+'_city').append(option);
+	  					$('#'+type+'_city_id').empty();
+	  					$('#'+type+'_city_id').append(option);
 	  				}
 	  			}
 	  		})
@@ -514,8 +512,8 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 		if ($('#age-rangeslider')) {
 			$('#age-rangeslider').slider({
 			    range: true,
-			    min: <?php echo $this->age_from?>,
-			    max: <?php echo $this->age_to?>,
+			    min: <?php echo $this->max_age_from?>,
+			    max: <?php echo $this->max_age_to?>,
 			    values: [ <?php echo $this->age_from?>, <?php echo $this->age_to?> ],
 			    slide: function( event, ui ) {
 			      	$('#age-rangeval').html(ui.values[0]+" - "+ui.values[1]);
@@ -531,7 +529,7 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 			    min: 0,
 			    max: 5,
 			    step: 0.1,
-			    values: [ 0, 5 ],
+			    values: [ <?php echo $this->rating_from?>, <?php echo $this->rating_to?> ],
 			    slide: function( event, ui ) {
 			      	$('#rating-rangeval').html(ui.values[0]+" - "+ui.values[1]);
 			      	$('#player_rating_from').val(ui.values[0]);
@@ -539,6 +537,43 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 			    }
 		  	});
 		}
+		
+		//populate adv search
+		<?php if(!empty($this->params['advsearch'])) :?>
+		var advsearch = '<?php echo $this->params['advsearch']?>';
+		
+		<?php if ($this->countriesOption) :?>
+		var options = $('<select />', {}).html('<?php echo $this->string()->escapeJavascript($this->countriesOption) ?>').text();
+		var field = advsearch+'_country_id';
+		$('#'+field).append(options);
+		<?php endif;?>
+		
+		<?php if ($this->provincesOption) :?>
+		var options = $('<select />', {}).html('<?php echo $this->string()->escapeJavascript($this->provincesOption) ?>').text();
+		var field = advsearch+'_province_id';
+		$('#'+field).append(options);
+		<?php endif;?>
+		
+		<?php if ($this->citiesOption) :?>
+		var options = $('<select />', {}).html('<?php echo $this->string()->escapeJavascript($this->citiesOption) ?>').text();
+		var field = advsearch+'_city_id';
+		$('#'+field).append(options);
+		<?php endif;?>
+		
+		<?php if ($this->positionsOption) :?>
+		var options = $('<select />', {}).html('<?php echo $this->string()->escapeJavascript($this->positionsOption) ?>').text();
+		$('#player_position_id').append(options);
+		<?php endif;?>
+		
+		<?php foreach ($this->params as $key => $value) :?>
+		var field = advsearch+'_<?php echo $key;?>';
+		if ($('#'+field)) {
+			$('#'+field).val('<?php echo $value?>');
+		} 
+		<?php endforeach;?>
+		
+		$('#search-tab-item_'+advsearch).click();
+		<?php endif;?>
 		
 		var options =  {
             theme: "facebook"
