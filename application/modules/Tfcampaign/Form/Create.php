@@ -77,7 +77,7 @@ class Tfcampaign_Form_Create extends Engine_Form
 	
 	
 	$arrAge = array();
-	$arrAge[] = "";
+	$arrAge[] = "Any";
     for ($i = 1; $i <= 100; $i++) 
     {
     	$arrAge[] = $i;
@@ -97,13 +97,13 @@ class Tfcampaign_Form_Create extends Engine_Form
 	$gender = new Engine_Form_Element_Select('gender');
     $gender->setLabel("Gender");
     $gender->setAllowEmpty(false);
-	$gender->setMultiOptions(array('0' => '', '1' => 'Male', '2' => 'Female'));
+	$gender->setMultiOptions(array('0' => 'Any', '1' => 'Male', '2' => 'Female'));
 	$gender -> setRequired(true);
     $this->addElement($gender);
 	
 	
 	$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
-	$countriesAssoc = array('0'=>'') + $countriesAssoc;
+	$countriesAssoc = array('0'=>'Any') + $countriesAssoc;
 
 	$this->addElement('Select', 'country_id', array(
 		'label' => 'Country',
@@ -162,15 +162,6 @@ class Tfcampaign_Form_Create extends Engine_Form
 			'100' => '100%',
 		),
         'value' => 25,
-    ));
-	
-	$this->addElement('Radio', 'allow_submit', array(
-      'label' => 'Allow users to submit their player',
-      'multiOptions' => array(
-        1 => 'Yes, allow users to submit their players.',
-        0 => 'No, do not allow users to submit their players.'
-      ),
-      'value' => 1,
     ));
 	
 	// View for specific users

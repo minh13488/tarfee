@@ -32,14 +32,19 @@ class Tfcampaign_Form_Submit extends Engine_Form
 	}
 	//get players available
 	$players = Engine_Api::_() -> getItemTable('user_playercard') -> getAllPlayerCard($viewer -> getIdentity());
-	foreach($players as $player) {
-		if(!in_array($player -> getIdentity(), $arrSubmission)) {
-			if($this ->_campaign -> category_id != 0) {
-				if($this ->_campaign -> category_id == $player -> category_id) {
+	foreach($players as $player) 
+	{
+		if(!in_array($player -> getIdentity(), $arrSubmission)) 
+		{
+			if($player -> countPercentMatching($this ->_campaign) >= $this ->_campaign -> percentage)
+			{
+				if($this ->_campaign -> category_id != 0) {
+					if($this ->_campaign -> category_id == $player -> category_id) {
+						$arrValue[$player -> getIdentity()] = $player -> getTitle();
+					}	
+				} else {
 					$arrValue[$player -> getIdentity()] = $player -> getTitle();
-				}	
-			} else {
-				$arrValue[$player -> getIdentity()] = $player -> getTitle();
+				}
 			}
 		}
 	}

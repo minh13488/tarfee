@@ -98,10 +98,23 @@ class Tfcampaign_Model_Submission extends Core_Model_Item_Abstract {
 			//language matching
 			$player_languages = json_decode($player->languages);
 			$campaign_languages = json_decode($campaign->languages);
-			if(!empty($campaign_languages)) {
-				//country matching
+			if(!empty($campaign_languages)) 
+			{
+				$countMatchingTotal++;
+				$countMLanguage = 0;
+				foreach ($campaign_languages as $value) {
+					if(in_array($value, $player_languages))
+					{
+						$countMLanguage ++;
+					}
+				}
+				if($countMLanguage == count($campaign_languages))
+				{
+					$countMatching++;
+				}
 			}
-			if($countMatchingTotal > 0){
+			if($countMatchingTotal > 0)
+			{
 				return round(($countMatching/$countMatchingTotal), 2) * 100;
 			}	
 		}
