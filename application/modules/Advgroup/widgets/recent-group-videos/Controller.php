@@ -25,10 +25,6 @@ class Advgroup_Widget_RecentGroupVideosController extends Engine_Content_Widget_
     else if( !$subject->authorization()->isAllowed($viewer, 'view') ) {
       return $this->setNoRender();
     }
-    //Get number of videos display
-    $max = $this->_getParam('itemCountPerPage');
-    if(!is_numeric($max) | $max <=0) $max = 5;
-
     $marginLeft = $this->_getParam('marginLeft', '');
         if (!empty($marginLeft)) {
             $this->view->marginLeft = $marginLeft;
@@ -38,9 +34,6 @@ class Advgroup_Widget_RecentGroupVideosController extends Engine_Content_Widget_
     $params['parent_type'] = 'group';
     $params['parent_id'] = $subject->getIdentity();
     $params['orderby'] = 'creation_date';
-    $params['page'] = $this->_getParam('page',1);
-    $params['limit'] = $max;
-	//$params['user_id'] = $subject->user_id;
 	
 	//Get data from table Mappings
 	$tableMapping = Engine_Api::_()->getItemTable('advgroup_mapping');
@@ -66,9 +59,12 @@ class Advgroup_Widget_RecentGroupVideosController extends Engine_Content_Widget_
 			$params['ids'][] = $video_id -> video_id;
 		}
 	}
-
+	
     $this->view->paginator = $paginator = $subject -> getVideosPaginator($params);
-
+	$paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 3));
+    $paginator->setCurrentPageNumber($this->_getParam('page', 1));
+	$this -> view -> itemCountPerPage = $this->_getParam('itemCountPerPage', 3);
+	
 	$canCreate = $subject -> authorization() -> isAllowed($viewer, 'video');
     $levelCreate = Engine_Api::_() -> authorization() -> getAdapter('levels') -> getAllowed('group', $viewer, 'video');
    

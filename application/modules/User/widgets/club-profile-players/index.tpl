@@ -301,8 +301,9 @@
 			<?php endif;?>
         	<?php endforeach; ?>             
 	    </ul>  
-	    
-	   
+	    <?php if($this->paginator->getTotalItemCount() > $this->itemCountPerPage):?>
+	  		<?php echo $this->htmlLink($this -> url(array(), 'default', true).'search?query=&type%5B%5D=user_playercard', $this -> translate('View all'), array('class' => 'icon_event_viewall')) ?>
+		<?php endif;?>
 	    <?php else: ?>
 	    <div class="tip">
 	        <span>

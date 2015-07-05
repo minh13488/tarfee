@@ -1,43 +1,6 @@
 <?php
 	$this->headScript()-> appendScript('jQuery.noConflict();'); 
 ?>
-<script type="text/javascript">
-    en4.core.runonce.add(function(){
-        addEventForButtonAddTo();
-        <?php if (!$this->renderOne): ?>
-            var anchor = $('ynvideo_recent_videos').getParent();
-            $('ynvideo_videos_previous').style.display = '<?php echo ( $this->paginator->getCurrentPageNumber() == 1 ? 'none' : '' ) ?>';
-            $('ynvideo_videos_next').style.display = '<?php echo ( $this->paginator->count() == $this->paginator->getCurrentPageNumber() ? 'none' : '' ) ?>';
-
-            $('ynvideo_videos_previous').removeEvents('click').addEvent('click', function(){
-                en4.core.request.send(new Request.HTML({
-                    url : en4.core.baseUrl + 'widget/index/content_id/' + <?php echo sprintf('%d', $this->identity) ?>,
-                    data : {
-                        format : 'html',
-                        subject : en4.core.subject.guid,
-                        page : <?php echo sprintf('%d', $this->paginator->getCurrentPageNumber() - 1) ?>
-                    }
-                }), {
-                    'element' : anchor
-                })
-            });
-
-            $('ynvideo_videos_next').removeEvents('click').addEvent('click', function(){
-                en4.core.request.send(new Request.HTML({
-                    url : en4.core.baseUrl + 'widget/index/content_id/' + <?php echo sprintf('%d', $this->identity) ?>,
-                    data : {
-                        format : 'html',
-                        subject : en4.core.subject.guid,
-                        page : <?php echo sprintf('%d', $this->paginator->getCurrentPageNumber() + 1) ?>
-                    }
-                }), {
-                    'element' : anchor
-                })
-            });
-        <?php endif; ?>
-    });
-</script>
-
 <?php
 	 $ynvideo_enable = Engine_Api::_() -> advgroup() ->checkYouNetPlugin('ynvideo');
  ?>
@@ -125,6 +88,9 @@ if($this->paginator -> getTotalItemCount()):?>
             
         <?php endforeach; ?>
     </ul>
+    <?php if($this->paginator->getTotalItemCount() > $this->itemCountPerPage):?>
+	  <?php echo $this->htmlLink($this -> url(array(), 'default', true).'search?query=&type%5B%5D=video', $this -> translate('View all'), array('class' => 'icon_event_viewall')) ?>
+	<?php endif;?>
 <?php else:?>
   <div class="tip">
     <span>

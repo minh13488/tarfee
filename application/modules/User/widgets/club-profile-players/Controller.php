@@ -21,7 +21,8 @@ class User_Widget_ClubProfilePlayersController extends Engine_Content_Widget_Abs
     	$this->view->paginator = $paginator = Engine_Api::_() -> getDbTable('playercards', 'user') -> getClubPlayersPaginator($subject);
 
     	// Set item count per page and current page number
-    	$paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 6));
+    	$paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 3));
     	$paginator->setCurrentPageNumber($this->_getParam('page', 1));
+		$this -> view -> itemCountPerPage = $this->_getParam('itemCountPerPage', 3);
   	}
 }

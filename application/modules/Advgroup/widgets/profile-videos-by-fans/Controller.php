@@ -26,10 +26,6 @@ class Advgroup_Widget_ProfileVideosByFansController extends Engine_Content_Widge
       		return $this->setNoRender();
     	}
     
-    	//Get number of videos display
-    	$max = $this->_getParam('itemCountPerPage');
-    	if(!is_numeric($max) | $max <=0) $max = 5;
-
 		$ids = array();
 	    $members = $subject->membership()->getMembersInfo();
 	    foreach( $members as $member ) {
@@ -64,10 +60,13 @@ class Advgroup_Widget_ProfileVideosByFansController extends Engine_Content_Widge
 		$select = $tableVideo -> select()
 		-> where('video_id IN (?)', $video_ids)
 		-> where('owner_id IN (?)', $ids)
-		-> order('creation_date DESC')
-		-> limit($max);
+		-> order('creation_date DESC');
     
     	$this->view->paginator = $paginator = Zend_Paginator::factory($select);
+		$paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 3));
+    	$paginator->setCurrentPageNumber($this->_getParam('page', 1));
+		$this -> view -> itemCountPerPage = $this->_getParam('itemCountPerPage', 5);
+		
   		if (!$paginator->getTotalItemCount()) {
   			return $this->setNoRender();
   		}
