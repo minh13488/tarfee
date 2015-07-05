@@ -66,11 +66,13 @@ class Ynvideo_Form_Video extends Engine_Form
 				new Engine_Filter_EnableLinks(),
 			),
 		));
-
+		
+		/*
 		$this -> addElement('Select', 'category_id', array(
 			'label' => 'Category',
 			'onchange' => "updateSubCategories(this.value)",
 		));
+		
 
 		$this -> addElement('Select', 'subcategory_id', array('label' => 'Sub Category'));
 
@@ -79,7 +81,7 @@ class Ynvideo_Form_Video extends Engine_Form
 			'label' => "Show this video in search results",
 			'value' => 1,
 		));
-
+ 		*/
 		// View
 
 		if ($this -> _parent_type == 'group')
@@ -87,7 +89,7 @@ class Ynvideo_Form_Video extends Engine_Form
 			$this -> _roles = array(
 				'everyone' => 'Everyone',
 				'registered' => 'All Registered Members',
-				'parent_member' => 'Group Members',
+				'parent_member' => 'Fans Club',
 				'owner' => 'Just Me',
 			);
 		}
@@ -150,7 +152,7 @@ class Ynvideo_Form_Video extends Engine_Form
 		}
 		
 		$this->addElement('File', 'photo', array(
-	      'label' => 'Artwork image'
+	      'label' => 'Cover Photo'
 	    ));
 	    $this->photo->addValidator('Extension', false, 'jpg,png,gif,jpeg');
 		
