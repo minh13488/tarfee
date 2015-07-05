@@ -17,7 +17,9 @@
             ?>
 	</li>
 	<?php $count++;?>
-<?php endforeach;?>
+<?php endforeach;
+Engine_Api::_() -> core() -> clearSubject();
+?>
 </ul>
 <?php if ($this-> count > $this->limit && !$this->reachLimit):?>
 
