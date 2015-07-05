@@ -749,7 +749,7 @@ class User_EditController extends Core_Controller_Action_User
 		if($isClose)
 		{
 			return $this -> _forward('success', 'utility', 'core', array(
-				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Upload new photo successful!')),
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Closed!')),
 				'format' => 'smoothbox',
 				'smoothboxClose' => true,
 				'parentRefresh' => true,

@@ -683,9 +683,9 @@ form.
 }
 #global_page_user-edit-photo-popup
 {
-	#EditPhoto .form-label, #EditPhoto .form-element, #SignupForm .form-label, #SignupForm .form-element {
-	    float: left;
-	    clear: none;
+	.global_form div.form-element 
+	{
+	    max-width: none!important;
 	}
 }
 #EditPhoto .form-label, #SignupForm .form-label {

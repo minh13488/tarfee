@@ -7,7 +7,9 @@
       ->appendFile($this->layout()->staticBaseUrl . 'externals/moolasso/Lasso.Crop.js')
   ?>
   <div>
-    <?php echo $this->itemPhoto($this->subject(), 'thumb.main', "", array('id' => 'lassoImg')) ?>
+    <?php 
+    if($this->subject() -> photo_id)
+    	echo $this->itemPhoto($this->subject(), 'thumb.main', "", array('id' => 'lassoImg')); ?>
   </div>
   <br />
   <div id="preview-thumbnail" class="preview-thumbnail">
@@ -79,7 +81,7 @@
 	      $('Filedata-wrapper').innerHTML = "";
 	      $('url-wrapper').innerHTML = "";
 	    }
-	    window.addEvent('domready', function(){lassoStart();});
+	    //window.addEvent('domready', function(){lassoStart();});
   </script>
 
 <?php endif; ?>

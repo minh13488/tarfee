@@ -24,7 +24,6 @@ class User_Form_Edit_PhotoPopup extends Engine_Form
       'multiFile' => 1,
       'validators' => array(
         array('Count', false, 1),
-        // array('Size', false, 612000),
         array('Extension', false, 'jpg,jpeg,png,gif'),
       ),
       'onchange'=>'javascript:uploadSignupPhoto();'
@@ -45,27 +44,28 @@ class User_Form_Edit_PhotoPopup extends Engine_Form
         'HtmlEntities',
       )
     ));
-
     $this->addElement('Button', 'done', array(
-      'label' => 'Save Photo',
+      'label' => 'Close',
       'type' => 'submit',
       'decorators' => array(
         'ViewHelper'
       ),
     ));
-
-    $this->addElement('Cancel', 'cancel', array(
-          'label' => 'cancel',
-          'link' => true,
-          'prependText' => ' or ',
-          'href' => '',
-          'onclick' => 'parent.Smoothbox.close();',
-          'decorators' => array(
-            'ViewHelper'
-          )
-        ));
-        
-    $this->addDisplayGroup(array('done', 'cancel'), 'buttons');
+	
+	$this->addElement('Cancel', 'remove', array(
+      'label' => 'remove photo',
+      'link' => true,
+      'prependText' => ' or ',
+      'href' => Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
+          'action' => 'remove-photo',
+      )),
+      'onclick' => null,
+      'class' => 'smoothbox',
+      'decorators' => array(
+        'ViewHelper'
+      ),
+    ));
+    $this->addDisplayGroup(array('done', 'remove'), 'buttons');
     
   }
 }
