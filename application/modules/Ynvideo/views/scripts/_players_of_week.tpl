@@ -36,9 +36,13 @@
 	<div class="video_author">
 	    <?php $user = $this->video->getOwner() ?>
 	    <?php $user = ($user) ? $user : $this->translate('Unknown')?>
-        <?php echo $this->itemPhoto($user, 'thumb.icon')?>
-	    <?php echo $this->translate('%s', $user);?>
-	    <?php echo $this->timestamp($user -> getOwner() -> creation_date);?>
+		
+		<?php echo $this->translate('by') ?>
+		<?php echo $user ?>
+
+        <?php// echo $this->itemPhoto($user, 'thumb.icon')?>
+	    <?php// echo $this->translate('%s', $user);?>
+	    <?php //echo $this->timestamp($user -> getOwner() -> creation_date);?>
 	</div>
 </div>
 <div class="video-title">
