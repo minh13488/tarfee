@@ -1647,6 +1647,12 @@ body#global_page_user-profile-index {
 
 /*Style video main page*/
 .layout_ynvideo_main_page_videos{
+	text-align: center;
+	
+	.tf_button_action{
+		display: inline-block !important;
+	}
+
 	#main-page-videos{
 		overflow: hidden;
 		position: relative;
@@ -2042,8 +2048,10 @@ body#global_page_user-profile-index {
 					width: 50%;
 					float: right;
 					font-weight: bold;
+					text-align: center;
+					padding-top: 15px;
 
-					.item_photo_user{
+					/*.item_photo_user{
 						margin-right: 10px;
 						overflow: hidden;
 						float: left;
@@ -2052,25 +2060,21 @@ body#global_page_user-profile-index {
 						-moz-border-radius: 4px;
 						font-weight: bold;
 						color: #555;
-					}
+					}*/
 					a{
 						white-space: nowrap;
 						text-overflow: ellipsis;
 						overflow: hidden;
-						color: $theme_font_color;
 						font-weight: bold;
 						display: inherit;
 						padding-top: 4px;
-
-						&:hover{
-							color: $theme_link_color;
-						}
+						display: inline;
 					}
-					span{
+					/*span{
 						color: $theme_font_color_light;
 						font-size: 12px;
 						font-weight: normal;
-					}
+					}*/
 				}
 			}
 
