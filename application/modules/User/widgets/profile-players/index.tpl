@@ -201,7 +201,7 @@
 												</a>
 											</li>
 										
-											<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+											<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid()),'default', true);?>
 											<li title="<?php echo $this -> translate('Report')?>">
 												<a class="actions_generic smoothbox" href="<?php echo $url?>">
 													<span>
