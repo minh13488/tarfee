@@ -122,7 +122,7 @@
 							$submissionIds = $campaign -> getSubmissionByUser($this -> viewer(), $campaign);
 							$startDate = date_create($campaign->start_date);
 							$endDate = date_create($campaign->end_date);
-				            $nowDate = date_create($now);
+				            $nowDate = date_create('now');
 				            if ($nowDate <= $endDate && $nowDate >= $startDate) :
 						?>
 							<?php 

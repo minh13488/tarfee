@@ -81,8 +81,6 @@
 					<p><?php echo (!is_null($startDateObj)) ?  date('M d Y', $startDateObj -> getTimestamp()) : ''; ?></p>
 			<?php endif;?>
 			</li>
-
-
 			<li>
 			<?php if(!empty($endDateObj)) :?>
 				<span><?php echo $this -> translate('Closing Date') ;?></span>
@@ -109,33 +107,32 @@
 	<?php
 		$startDate = date_create($campaign->start_date);
 		$endDate = date_create($campaign->end_date);
-        $nowDate = date_create($now);
+        $nowDate = date_create("now");
         if ($nowDate <= $endDate && $nowDate >= $startDate) :
-	?>
-		<?php 
-		$userPlayers = Engine_Api::_() -> getItemTable('user_playercard') -> getAllPlayerCard($this -> viewer() -> getIdentity());
-		$totalPlayerMatch = 0;
-		$submissionPlayers = $campaign -> getSubmissionPlayers();
-		$arrSubmission = array();
-		foreach($submissionPlayers as $submissionPlayer) {
-			$arrSubmission[] = $submissionPlayer -> player_id;
-		}
-		foreach ($userPlayers as $player) 
-		{
-			if(!in_array($player -> getIdentity(), $arrSubmission)) 
+			
+			$userPlayers = Engine_Api::_() -> getItemTable('user_playercard') -> getAllPlayerCard($this -> viewer() -> getIdentity());
+			$totalPlayerMatch = 0;
+			$submissionPlayers = $campaign -> getSubmissionPlayers();
+			$arrSubmission = array();
+			foreach($submissionPlayers as $submissionPlayer) {
+				$arrSubmission[] = $submissionPlayer -> player_id;
+			}
+			foreach ($userPlayers as $player) 
 			{
-				if($player -> countPercentMatching($campaign) >= $campaign -> percentage){
-					$totalPlayerMatch++;
+				if(!in_array($player -> getIdentity(), $arrSubmission)) 
+				{
+					if($player -> countPercentMatching($campaign) >= $campaign -> percentage){
+						$totalPlayerMatch++;
+					}
 				}
 			}
-		}
-		if($totalPlayerMatch > 0):
-			echo $this->htmlLink(
-			    array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
-			    "<button>".$this->translate('apply')."</button>", 
-			array('class' => 'smoothbox'));?>
+			if($totalPlayerMatch > 0):
+				echo $this->htmlLink(
+				    array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
+				    "<button>".$this->translate('apply')."</button>", 
+				array('class' => 'smoothbox'));?>
+			<?php endif;?>
 		<?php endif;?>
-	<?php endif;?>
 	<?php if(count($submissionIds)) :?>
 		<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'list-withdraw', 'campaign_id' => $campaign->getIdentity()), 'tfcampaign_specific' , true)?>'><button class="withdraw"><?php echo $this->translate('withdraw')?> &nbsp;&nbsp;&nbsp;<i class="fa fa-times"></i></button></a>
 	<?php endif;?>	

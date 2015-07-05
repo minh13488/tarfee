@@ -92,7 +92,7 @@
 					$aReportButton  = $menuUser -> onMenuInitialize_UserProfileReport();
 					$aMessageButton = $menuMessage -> onMenuInitialize_UserProfileMessage();
 				?>
-				<?php if($aFollowButton) :?>
+				<?php if($aFollowButton && !empty($aFollowButton['params'])) :?>
 				<li>
 					<a class='<?php if(isset($aFollowButton['class'])) echo $aFollowButton['class']; ?>' href="<?php echo $this -> url($aFollowButton['params'], $aFollowButton['route'], array()); ?>" > 
 						<?php echo $this -> translate($aFollowButton['label']) ?>
@@ -100,10 +100,10 @@
 				</li>
 				<?php endif;?>
 
-				<?php if($aReportButton) :?>
+				<?php if($aReportButton) : unset($aReportButton['params']['format'])?>
 				<li>
 					<a class='<?php if(isset($aReportButton['class'])) echo $aReportButton['class']; ?>' href="<?php echo $this -> url($aReportButton['params'], $aReportButton['route'], array()); ?>" > 
-							<?php echo $this -> translate($aReportButton['label']) ?>
+						<?php echo $this -> translate($aReportButton['label']) ?>
 					</a>
 				</li>
 				<?php endif;?>
