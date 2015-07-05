@@ -987,6 +987,10 @@ iframe.wysihtml5-sandbox {
 	position: relative;
 	min-height: 90px;
   	box-shadow: 1px -4px 7px 3px #333;
+
+  	#global_search_form{
+  		display: inline-block;
+  	}
 }
 
 
@@ -3536,3 +3540,85 @@ body#global_page_advgroup-profile-index{
 	}
 }
 
+
+/*Style Language on Header*/
+
+.ynresponsive_languges{
+	display: inline-block;
+	position: relative;
+	top: -14px;
+}
+.language-dropdown{
+	display: block;
+	color: #818181;
+	background: #434343;
+	border-radius: 4px;
+	text-transform: uppercase;
+	font-size: 11px;
+	cursor: default;
+	padding: 2px 5px;
+	border: 1px solid transparent;
+
+	ul{
+		display: none;
+		list-style: none;
+		color: #CCC;
+		border-radius: 0 0 4px 4px;
+		margin: 0;
+		overflow: hidden;
+		background: inherit;
+		position: absolute;
+		top: 20px;
+		z-index: 3;
+		width: 100%;
+		border: 1px solid rgba(255,255,255,0.2);
+		border-top: 0;
+		left: 0px;
+
+		li{a{  
+			color: inherit;
+			display: block;
+		  	padding: 5px 0 5px 28px;
+		  	cursor: pointer;
+
+		  	&:hover{
+		  		background: $theme_link_color;
+		  		color: #fff;
+		  	}
+		}}
+	}
+
+	&:hover{
+		border: 1px solid rgba(255,255,255,0.2);
+		border-bottom: 0;
+
+		ul{
+			display: block;
+		}
+	}
+
+	i.fa{
+		font-size: 17px;
+		margin-right: 5px;
+	}
+	
+	& > span{
+		position: relative;
+		bottom: 2px;
+
+		&:after{
+			content: "\\f0d7";
+			display: inline-block;
+			font: normal normal normal 14px/1 FontAwesome;
+			font-size: inherit;
+			font-size: 14px;
+			margin-left: 4px;
+			position: relative;
+			top: 1px;
+			text-rendering: auto;
+			-webkit-font-smoothing: antialiased;
+			-moz-osx-font-smoothing: grayscale;
+			transform: translate(0, 0);
+		}
+	}
+}
