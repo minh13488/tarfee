@@ -618,7 +618,7 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 			});
 			form.append(button);
 			
-			form.attr('method', 'POST');
+			//form.attr('method', 'POST');
 			var filter = $('<div />', {
 				id: 'search-filter',
 				'class': 'box-search_form_filter'

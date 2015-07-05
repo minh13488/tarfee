@@ -95,7 +95,7 @@
     <?php endforeach;?>
   </ul>
   	<?php if($this->paginator->getTotalItemCount() > $this->itemCountPerPage):?>
-	  <?php echo $this->htmlLink($this -> url(array(), 'default', true).'search?query=&type%5B%5D=event', $this -> translate('View all'), array('class' => 'icon_event_viewall')) ?>
+	  <?php echo $this->htmlLink($this -> url(array(), 'default', true).'search?type%5B%5D=event&parent_type=group&parent_id='.$this->subject()->getIdentity(), $this -> translate('View all'), array('class' => 'icon_event_viewall')) ?>
 	<?php endif;?>
 <?php else: ?>
 

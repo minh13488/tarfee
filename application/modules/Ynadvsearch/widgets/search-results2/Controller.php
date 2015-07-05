@@ -37,10 +37,10 @@ class Ynadvsearch_Widget_SearchResults2Controller extends Engine_Content_Widget_
 			$sport = array_keys(Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1Assoc());
 			$sport[] = 'all';
 			$this->view->sport = $sport = $request->getParam('sport', $sport);
-			$results = Engine_Api::_()->getApi('search', 'ynadvsearch')->getResults2( $text, $type, $sport, $from, $limit );
-	        
-			$params[type] = $type;
-			$params[sport] = $sport;
+			$results = Engine_Api::_()->getApi('search', 'ynadvsearch')->getBasicResults( $text, $type, $sport, $from, $limit, $params );
+			
+			$params['type'] = $type;
+			$params['sport'] = $sport;
 		}
 		else {
 			$this->view->text = '';

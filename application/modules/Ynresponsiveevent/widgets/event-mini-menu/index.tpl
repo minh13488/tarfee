@@ -18,7 +18,10 @@
 	</div>
     <?php if($this->search_check):?>
 		<div id="global_search_form_container">
-			<form id="global_search_form" action="<?php echo $this->url(array('controller' => 'search'), 'default', true) ?>" method="get">
+			<?php $url = $this->url(array('controller' => 'search'), 'default', true) ;
+			if(strpos($_SERVER['REQUEST_URI'], 'search?type'))
+				$url = $_SERVER['REQUEST_URI'];?>
+			<form id="global_search_form" action="<?php echo $url?>" method="get">
 			  <input type='text' class='text suggested' name='query' id='global_search_field' size='20' maxlength='100'/>                       
 			</form>
 		   <span class="ynresponsive_languges">
