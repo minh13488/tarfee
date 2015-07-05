@@ -239,7 +239,6 @@ $this->headScript()
         }
         
         // Run stuff
-        updateSubCategories();
         updateTextFields();
         ynvideo.attach();
 
@@ -262,8 +261,6 @@ $this->headScript()
         });
     });
 </script>
-<?php echo $this->partial('_categories_script.tpl', array('categories' => $this->categories)) ?>
-
 <?php if (($this->current_count >= $this->quota) && !empty($this->quota)): ?>
     <div class="tip">
         <span>

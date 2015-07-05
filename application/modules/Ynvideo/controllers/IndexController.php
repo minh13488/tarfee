@@ -77,7 +77,7 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			'parent_type' => $parent_type,
 			'parent_id' => $parent_id
 		));
-
+		/*
 		$categoryElement = $form -> getElement('category_id');
 		$categoryElement -> addMultiOption(0, '');
 		foreach ($categories as $category)
@@ -90,6 +90,8 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 
 		$subCategoryElement = $form -> getElement('subcategory_id');
 		$subCategoryElement -> setRegisterInArrayValidator(false);
+		 * 
+		 */
 
 		if ($this -> _getParam('type', false))
 		{
