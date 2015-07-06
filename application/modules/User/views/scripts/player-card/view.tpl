@@ -90,6 +90,11 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 					echo implode(' | ', $arr_tmp);
 				?>
 			</p>
+			
+			<div class="nickname">
+			 	<?php echo $this->translate('By') ?>
+	        	<?php echo $this->htmlLink($player -> getOwner()->getHref(), $player -> getOwner() ->getTitle()) ?>
+	     	</div>
 		</div>
 		<div class="playercard_statistics">
 			<ul>
