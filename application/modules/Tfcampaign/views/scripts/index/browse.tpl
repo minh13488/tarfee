@@ -19,8 +19,6 @@
 				<option value="campaign.view_count"><?php echo $this -> translate('Sort by view count');?></option>
 		</select>
 	</div>
-
-
 	<?php if( count($this->paginator) > 0 ): ?>
 		<ul class="tfcampaign_list_browse">
 	    <?php foreach( $this->paginator as $campaign): ?>
@@ -30,7 +28,7 @@
 					<?php echo $campaign;?>
 
 					<div class="tfcampaign_author">
-			            <?php echo $this->translate('Posted by') ?>
+			            <?php echo $this->translate('by') ?>
 
 			            <?php
 			            $poster = $campaign->getOwner();
@@ -62,21 +60,15 @@
 							</li>
 
 						</ul>
-						
-
 						<ul class="block-second">
 							<li>
 								<span><?php echo $this -> translate("Gender") ;?></span>
 								<p><?php echo $campaign -> getGender();?></p>
 							</li>
-
 							<li>
 								<span><?php echo $this -> translate("Age") ;?></span>
 								<p><?php echo $this -> translate("%s - %s YRS", $campaign -> from_age, $campaign -> to_age);?></p>
 							</li>
-
-							
-							
 							<?php 
 								$endDateObj = null;
 								$startDateObj = null;

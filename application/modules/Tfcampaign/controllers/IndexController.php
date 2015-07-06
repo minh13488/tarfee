@@ -75,7 +75,7 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 		}
 		$this -> view -> paginator = $paginator = Engine_Api::_() -> getItemTable('tfcampaign_campaign') -> getCampaignsPaginator($params);
 		$paginator -> setCurrentPageNumber($this -> _getParam('page', 1));
-		$paginator -> setItemCountPerPage(3);
+		$paginator -> setItemCountPerPage(5);
 		$this -> view -> formValues = $params;
 	}
 	

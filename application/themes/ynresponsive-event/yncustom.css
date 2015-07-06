@@ -1951,7 +1951,6 @@ body#global_page_user-profile-index {
 		border-bottom-left-radius: 5px;		
 
 		& > li{
-			padding-bottom: 15px;
 			margin-bottom: 15px;
 			border-bottom: 1px solid $theme_border_medium_color;
 
@@ -1991,6 +1990,12 @@ body#global_page_user-profile-index {
 					height: 100%;
 				}
 			}
+			.player_info_detail img
+			{
+				margin-left:3px;
+				width: 23px;
+				height: 23px;
+			}
 			
 			.player-title a{
 				white-space: nowrap;
@@ -2023,9 +2028,7 @@ body#global_page_user-profile-index {
 				clear: both;
 				display: block;
 				overflow: hidden;
-				padding: 15px 0px;
-				border-bottom: 1px solid $theme_border_medium_color;
-
+				padding: 10px 0px;
 				.player-info{
 					float: left;
 					width: 50%;
@@ -2049,11 +2052,10 @@ body#global_page_user-profile-index {
 
 
 				.video_author{
-					width: 50%;
 					float: right;
 					font-weight: bold;
 					text-align: center;
-					padding-top: 15px;
+					padding-top: 5px;
 
 					/*.item_photo_user{
 						margin-right: 10px;
@@ -2106,8 +2108,7 @@ body#global_page_user-profile-index {
 			}
 
 			.video-statistic{
-				width: 50%;
-				float: left;
+				float: right;
 				& > span{
 					font-size: 12px;
 					color: $theme_font_color_light;
@@ -2115,9 +2116,6 @@ body#global_page_user-profile-index {
 				}
 			}
 			.video-rating{
-				width: 50%;
-				float: right;
-				
 				.tf_video_rating{
 					text-align: right;
 

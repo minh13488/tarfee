@@ -311,7 +311,7 @@ html[dir="rtl"] .yncomment_dropdown_btn {
 	position: absolute;
 	top: 20px;
 	z-index: 9999;
-	/*display: none;*/
+	display: none;
 }
 html[dir="rtl"] .yncomment_dropdown_menu_wrapper {
 	left: 0px;

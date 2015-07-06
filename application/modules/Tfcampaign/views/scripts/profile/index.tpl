@@ -7,7 +7,7 @@
 	<?php echo $this -> itemPhoto($campaign);?>
 	<?php echo $campaign;?>
 	<div class="tfcampaign_author">
-        <?php echo $this->translate('Posted by') ?>
+        <?php echo $this->translate('by') ?>
 
         <?php
         $poster = $campaign->getOwner();
@@ -21,8 +21,6 @@
 <div class="tfcampaign_desc">
 	<?php echo $this->viewMore($campaign -> getDescription());?>
 </div>
-
-
 <div class="tfcampaign_infomation">
 	<div class="tfcampaign_infomation_item">
 
