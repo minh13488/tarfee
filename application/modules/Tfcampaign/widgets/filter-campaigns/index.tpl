@@ -25,16 +25,16 @@
 <?php endif;?>
 
 <div class="tf_box_filter_campaign">
-<div class="ybo_headline"><h3>Filters</h3></div>
+<div class="ybo_headline"><h3><?php echo $this -> translate("Filters")?></h3></div>
 
 <div class="tf_campaign_filter_age">
 	<h5 class="tf_campaign_filter_title"><?php echo $this -> translate("By age");?></h5>
 
   	<div id="content">       
-	    <input type="hidden" value="17" name="from_age" id="from_age">
-	    <input type="hidden" value="29" name="to_age" id="to_age">
-	    <div id="display-from-age">17 <?php echo $this -> translate('yrs') ;?></div>
-	    <div id="display-to-age">29 <?php echo $this -> translate('yrs') ;?></div>
+	    <input type="hidden" value="<?php echo $this->age_from?>" name="from_age" id="from_age">
+	    <input type="hidden" value="<?php echo $this->age_to?>" name="to_age" id="to_age">
+	    <div id="display-from-age"><?php echo $this->age_from?> (<?php echo (intval(date('Y')) - intval($this->age_from))?>)</div>
+	    <div id="display-to-age"><?php echo $this->age_to?> (<?php echo (intval(date('Y')) - intval($this->age_to))?>)</div>
 	    <div id="rangeslider"></div>
 	</div>
 </div>
@@ -60,7 +60,7 @@
 	<div class="campaign_location">
 		<?php
 			$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
-			$countriesAssoc = array('0'=>$this -> translate('All')) + $countriesAssoc;
+			$countriesAssoc = array('0'=>$this -> translate('Any')) + $countriesAssoc;
 		?>
 
 		<select id="country_id" name="country_id">
@@ -72,8 +72,21 @@
 		<select id="province_id" name="province_id"></select>
 		<select id="city_id" name="city_id"></select>
 
-		<button type="submit" class="btn-filter"><?php echo $this -> translate('Filter');?></button>
 		</div>
+</div>
+
+<div class="tf_campaign_filter_age">
+	<h5 class="tf_campaign_filter_title"><?php echo $this -> translate("Gender");?></h5>
+	
+	<div class="campaign_location">
+		<select id="gender" name="gender">
+			<option value="0"><?php echo $this->translate('Any')?></option>
+			<option value="1"><?php echo $this->translate('Male')?></option>
+			<option value="2"><?php echo $this->translate('Female')?></option>
+		</select>
+		
+		<button type="submit" class="btn-filter"><?php echo $this -> translate('Filter');?></button>
+	</div>
 </div>
 </form>
 </div>
@@ -104,14 +117,8 @@ jQuery( document ).ready(function() {
 		 	jQuery("#start_date_to").val('<?php echo $params['start_date_to'];?>');
 		 <?php endif;?>
 		 
-		 <?php if(!empty($params['from_age'])) :?>
-		 	jQuery("#from_age").val('<?php echo $params['from_age'];?>');
-		 	jQuery('#display-from-age').html('<?php echo $params['from_age']." ".$this -> translate('yrs') ;?>');
-		 <?php endif;?>
-		 
-		 <?php if(!empty($params['to_age'])) :?>
-		 	jQuery("#to_age").val('<?php echo $params['to_age'];?>');
-		 	jQuery('#display-to-age').html('<?php echo $params['to_age']." ".$this -> translate('yrs') ;?>');
+		 <?php if(!empty($params['gender'])) :?>
+		 	jQuery("#gender").val('<?php echo $params['gender'];?>');
 		 <?php endif;?>
 		 
 		 jQuery("#form-search-wrapper").css("display", "block");
@@ -183,7 +190,7 @@ jQuery( document ).ready(function() {
                   	if(options.length > 0) {
                   		var option = new Element('option', {
 							'value': '0',
-							'text': ''
+							'text': '<?php echo $this->translate('Any')?>'
 						})  
                     	$('province_id').empty();
                     	$('province_id').grab(option);  
@@ -212,7 +219,7 @@ jQuery( document ).ready(function() {
                   	if(options.length > 0) {
                   		var option = new Element('option', {
 							'value': '0',
-							'text': ''
+							'text': '<?php echo $this->translate('Any')?>'
 						})  
                     	$('city_id').empty();
                     	$('city_id').grab(option);
@@ -232,34 +239,20 @@ jQuery( document ).ready(function() {
 
 jQuery(function () 
 {
-	  var fromValue = 17;
-	  var toValue = 29;
-	  
-	  <?php if(!empty($this -> params)) :?>
-		 <?php $params = $this -> params;?>
-		 
-		 <?php if(!empty($params['from_age'])) :?>
-		 	fromValue = '<?php echo $params['from_age'];?>';
-		 <?php endif;?>
-		 
-		 <?php if(!empty($params['to_age'])) :?>
-		 	toValue = '<?php echo $params['to_age'];?>';
-		 <?php endif;?>
-		 
-	  <?php endif;?>
-	  
       jQuery( "#start_date_from" ).datepicker();
 	  jQuery( "#start_date_to" ).datepicker();
 	  jQuery('#rangeslider').slider({
 	    range: true,
-	    min: 17,
-	    max: 29,
-	    values: [ fromValue, toValue ],
+	    min: <?php echo $this->max_age_from?>,
+	    max: <?php echo $this->max_age_to?>,
+	    values: [ <?php echo $this->age_from?>, <?php echo $this->age_to?> ],
 	    slide: function( event, ui ) {
+    		var yearFrom = parseInt(<?php echo date('Y')?>) - parseInt(ui.values[0]);
+	    	var yearTo = parseInt(<?php echo date('Y')?>) - parseInt(ui.values[1]);
 	      jQuery('#from_age').val(ui.values[0]);
 	      jQuery('#to_age').val( ui.values[1]);
-	      jQuery('#display-from-age').html( ui.values[0] + '<?php echo $this -> translate('yrs') ;?>');
-	      jQuery('#display-to-age').html(   ui.values[1] + '<?php echo $this -> translate('yrs') ;?>');
+	      jQuery('#display-from-age').html(ui.values[0]+" ("+yearFrom+")");
+	      jQuery('#display-to-age').html(ui.values[1]+" ("+yearTo+")");
 	    }
 	  });
 });

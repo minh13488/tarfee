@@ -168,7 +168,7 @@
 												</a>
 											</li>
 										
-											<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+											<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid()),'default', true);?>
 											<li title="<?php echo $this -> translate('Report')?>">
 												<a class="actions_generic smoothbox" href="<?php echo $url?>">
 													<span>
@@ -301,8 +301,9 @@
 			<?php endif;?>
         	<?php endforeach; ?>             
 	    </ul>  
-	    
-	   
+	    <?php if($this->paginator->getTotalItemCount() > $this->itemCountPerPage):?>
+	  		<?php echo $this->htmlLink($this -> url(array(), 'default', true).'search?type%5B%5D=user_playercard&parent_type=group&parent_id='.$this->subject()->getIdentity(), $this -> translate('View all'), array('class' => 'icon_event_viewall')) ?>
+		<?php endif;?>
 	    <?php else: ?>
 	    <div class="tip">
 	        <span>

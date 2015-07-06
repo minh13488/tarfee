@@ -54,7 +54,7 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 				return $view -> translate("Female");
 				break;
 			case '0':
-				return $view -> translate("Unspecified");
+				return $view -> translate("Male / Female");
 				break;	
 		}
 	}

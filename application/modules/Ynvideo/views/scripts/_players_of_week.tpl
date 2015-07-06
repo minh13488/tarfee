@@ -29,30 +29,29 @@
 					echo implode($matches[0]);?>
 			</div>
 	        <?php endif;?>
+	        <?php if($player -> getSport()):?>
+				<?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?>
+			<?php endif;?>
 	    </div>
 	</div>
 	<?php endif;?>
-
+	<div class="video-statistic-rating">
+		<div class="video-rating">
+			<?php 
+	        	echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video));
+	    	?>
+		</div>
+		<div class="video-statistic">
+			<span><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></span>
+			<?php $commentCount = $this->video->comments()->getCommentCount(); ?>
+			<span><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></span>
+		</div>
+	</div>
 	<div class="video_author">
 	    <?php $user = $this->video->getOwner() ?>
 	    <?php $user = ($user) ? $user : $this->translate('Unknown')?>
-        <?php echo $this->itemPhoto($user, 'thumb.icon')?>
-	    <?php echo $this->translate('%s', $user);?>
-	    <?php echo $this->timestamp($user -> getOwner() -> creation_date);?>
-	</div>
-</div>
-<div class="video-title">
-	<?php echo $this->htmlLink($this->video->getPopupHref(), $this->video->getTitle(), array('class'=>'smoothbox'))?>
-</div>
-<div class="video-statistic-rating">
-	<div class="video-statistic">
-		<span><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></span>
-		<?php $commentCount = $this->video->comments()->getCommentCount(); ?>
-		<span><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></span>
-	</div>
-	<div class="video-rating">
-		<?php 
-        	echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $this->video));
-    	?>
+		
+		<?php echo $this->translate('by') ?>
+		<?php echo $user ?>
 	</div>
 </div>

@@ -697,15 +697,18 @@ class User_SettingsController extends Core_Controller_Action_User {
 		      ->from($inviteTable->info('name'), 'COUNT(*)')
 		      ->where('user_id = ?', $viewer -> getIdentity());
 		$totalCodes = $select->query()->fetchColumn(0);
-		$max_referral = 0;
-		$mtable  = Engine_Api::_()->getDbtable('permissions', 'authorization');
-	    $msselect = $mtable->select()
-	                ->where("type = 'user_referral'")
-	                ->where("level_id = ?", $viewer -> level_id)
-	                ->where("name = 'max_referral'");
-	    $mallow = $mtable->fetchRow($msselect);
-		if (!empty($mallow))
-        	$max_referral = $mallow['value'];
+		$max_referral = Engine_Api::_()->authorization()->getPermission($viewer, 'user_referral', 'max_referral', 5);
+		if($max_referral == "")
+        {
+			$mtable  = Engine_Api::_()->getDbtable('permissions', 'authorization');
+		    $msselect = $mtable->select()
+		                ->where("type = 'user_referral'")
+		                ->where("level_id = ?", $viewer -> level_id)
+		                ->where("name = 'max_referral'");
+		    $mallow = $mtable->fetchRow($msselect);
+			if (!empty($mallow))
+	        	$max_referral = $mallow['value'];
+		}
 		if ($this -> getRequest() -> isPost()) 
 		{
 			if($totalCodes < $max_referral)

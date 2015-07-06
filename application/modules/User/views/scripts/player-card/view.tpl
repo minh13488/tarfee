@@ -33,13 +33,68 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 		<div style="font-weight: bold">
 			<a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 50)?></a>
 		</div>
-		<div class="location" style="font-weight: bold">
-			<?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?>
+		<div class="tarfee_sport_type_position">
+			<?php if($player -> getSport()):?>
+				<?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?>
+				<span title="<?php echo $player -> getSport() -> getTitle();?>" class="player-title"><?php echo $player -> getSport() -> getTitle();?></span>
+			<?php endif;?>
+			<?php if($player -> getPosition()):?>
+				<span title="<?php echo $player -> getPosition() -> getTitle();?>" class="player-position">
+					<?php echo $player -> getPosition() -> getTitle();?>
+				</span>
+			<?php endif;?>
+			<!-- Gender -->
+			<?php if (($player->gender) == 1){
+					echo '<i class="fa fa-mars"></i>';
+				}else{
+					echo '<i class="fa fa-venus"></i>';
+				}
+
+				?>
+			<!-- referred_foot -->
+			<?php $referred_foot = $player -> referred_foot;
+			if($referred_foot == 1)
+			{
+				echo $this -> translate('Left');
+			}
+			elseif($referred_foot == 0) {
+				echo $this -> translate('Right');
+			}
+			else {
+				echo $this -> translate('Both');
+			}
+			?>
+			
+		</div
+		<div class="tarfee_infomation_player">
+			<p>
+				<?php echo  $this->locale()->toDate($player -> birth_date);?> 
+			</p>
+			<p>
+				<?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?>
+			</p>
+			<p>
+				<?php 
+					$laguages = json_decode($player -> languages);
+					$arr_tmp = array();
+					if($laguages)
+					{
+						foreach ($laguages as $lang_id) 
+						{
+							$langTb =  Engine_Api::_() -> getDbTable('languages', 'user');
+							$lang = $langTb -> fetchRow($langTb ->select()->where('language_id = ?', $lang_id));
+							if($lang)
+								$arr_tmp[] = $lang -> title;
+						}
+					}
+					echo implode(' | ', $arr_tmp);
+				?>
+			</p>
 		</div>
 		<div class="playercard_statistics">
 			<ul>
 				 <li>
-			        <span><?php echo $this->translate(array('%s video', '%s videos', $totalVideo), $totalComment) ?></span>
+			        <span><?php echo $this->translate(array('%s video', '%s videos', $totalVideo), $totalVideo) ?></span>
 			      </li>
 			       <li>
 			        <span><?php echo $this->translate(array('%s comment', '%s comments', $totalComment), $totalComment) ?></span>
@@ -49,9 +104,6 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 			      </li>
 			       <li>
 			        <span><?php echo $this->translate(array('%s dislike', '%s dislikes', $totalDislike), $totalDislike) ?></span>
-			      </li>
-			       <li>
-			        <span><?php echo $this->translate(array('%s unsure', '%s unsures', $totalUnsure), $totalUnsure) ?></span>
 			      </li>
 			      <li>
 			      	<?php $url = $this->url(array('action'=>'view-eye-on', 'player_id'=>$player->getIdentity()), 'user_playercard' , true)?>

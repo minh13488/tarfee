@@ -259,22 +259,27 @@ class User_EditController extends Core_Controller_Action_User
 		if ($form -> getValue('coordinates') !== '')
 		{
 			$storage = Engine_Api::_() -> storage();
-
+			
+			$iMain = $storage -> get($user -> photo_id, 'thumb.main');
 			$iProfile = $storage -> get($user -> photo_id, 'thumb.profile');
 			$iSquare = $storage -> get($user -> photo_id, 'thumb.icon');
-
+			
 			// Read into tmp file
-			$pName = $iProfile -> getStorageService() -> temporary($iProfile);
-			$iName = dirname($pName) . '/nis_' . basename($pName);
+			$mName = $iMain -> getStorageService() -> temporary($iMain);
+			$pName = dirname($mName) . '/p_' . basename($mName);
+			$iName = dirname($mName) . '/nis_' . basename($mName);
 
 			list($x, $y, $w, $h) = explode(':', $form -> getValue('coordinates'));
-
+			
 			$image = Engine_Image::factory();
-			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 48, 48) -> write($iName) -> destroy();
-
+			$image -> open($mName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 48, 48) -> write($iName) -> destroy();
 			$iSquare -> store($iName);
-
+			
+			$image -> open($mName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 200, 200) -> write($pName) -> destroy();
+			$iProfile -> store($pName);
+			
 			// Remove temp files
+			@unlink($pName);
 			@unlink($iName);
 		}
 		$form -> reset();
@@ -717,29 +722,34 @@ class User_EditController extends Core_Controller_Action_User
 		if ($form -> getValue('coordinates') !== '')
 		{
 			$storage = Engine_Api::_() -> storage();
-
+			
+			$iMain = $storage -> get($user -> photo_id, 'thumb.main');
 			$iProfile = $storage -> get($user -> photo_id, 'thumb.profile');
 			$iSquare = $storage -> get($user -> photo_id, 'thumb.icon');
-
+			
 			// Read into tmp file
-			$pName = $iProfile -> getStorageService() -> temporary($iProfile);
-			$iName = dirname($pName) . '/nis_' . basename($pName);
+			$mName = $iMain -> getStorageService() -> temporary($iMain);
+			$pName = dirname($mName) . '/p_' . basename($mName);
+			$iName = dirname($mName) . '/nis_' . basename($mName);
 
 			list($x, $y, $w, $h) = explode(':', $form -> getValue('coordinates'));
-
+			
 			$image = Engine_Image::factory();
-			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 48, 48) -> write($iName) -> destroy();
-
+			$image -> open($mName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 48, 48) -> write($iName) -> destroy();
 			$iSquare -> store($iName);
-
+			
+			$image -> open($mName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 200, 200) -> write($pName) -> destroy();
+			$iProfile -> store($pName);
+			
 			// Remove temp files
+			@unlink($pName);
 			@unlink($iName);
 		}
 		$form -> reset();
 		if($isClose)
 		{
 			return $this -> _forward('success', 'utility', 'core', array(
-				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Upload new photo successful!')),
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Closed!')),
 				'format' => 'smoothbox',
 				'smoothboxClose' => true,
 				'parentRefresh' => true,

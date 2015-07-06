@@ -681,6 +681,13 @@ form.
     clear: both;
     text-align: left;
 }
+#global_page_user-edit-photo-popup
+{
+	.global_form div.form-element 
+	{
+	    max-width: none!important;
+	}
+}
 #EditPhoto .form-label, #SignupForm .form-label {
     margin-bottom: 4px;
 }
@@ -1299,24 +1306,14 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                     .nickname{
                         padding: 10px 15px;
                         overflow: hidden;
+                        text-align: center;
+                        font-size: 12px;
+                        color: $theme_font_color_light;
                         a{  
                             margin-right: 10px;
                             overflow: hidden;
-                            float: left;
                             +tarfee_border_radius(4px);
                             font-weight: bold;
-                            color: $theme_font_color;
-                        }
-
-                        .members_info{
-                            float: left;
-                            padding-top: 5px;
-                        }
-
-                        .members_date{
-                            text-align: left;
-                            font-size: 13px;
-                            color: $theme_font_color_light;
                         }
                     }
 

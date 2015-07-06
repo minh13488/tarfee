@@ -277,7 +277,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 			}
 
 			return $this -> _forward('success', 'utility', 'core', array(
-				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('You are already a member of this group.')),
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('You are now a fan of this club.')),
 				'layout' => 'default-simple',
 				'parentRefresh' => true,
 			));
@@ -288,7 +288,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 			$parent_group = $subject -> getParentGroup();
 			if (!$parent_group -> membership() -> isMember($viewer, 1))
 			{
-				$message = Zend_Registry::get('Zend_Translate') -> _("You must be a member of group") . " <a href='" . $parent_group -> getHref() . "' target ='_top'>" . $parent_group -> getTitle() . "</a> " . Zend_Registry::get('Zend_Translate') -> _("before you can join this group.");
+				$message = Zend_Registry::get('Zend_Translate') -> _("You must be a fan of club") . " <a href='" . $parent_group -> getHref() . "' target ='_top'>" . $parent_group -> getTitle() . "</a> " . Zend_Registry::get('Zend_Translate') -> _("before you can join this club.");
 				return $this -> _forward('success', 'utility', 'core', array(
 					'messages' => array($message),
 					'layout' => 'default-simple',
@@ -334,7 +334,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 			}
 
 			return $this -> _forward('success', 'utility', 'core', array(
-				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('You are now a member of this group.')),
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('You are now a fan of this club.')),
 				'layout' => 'default-simple',
 				'parentRefresh' => true,
 			));
@@ -359,7 +359,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 			$parent_group = $subject -> getParentGroup();
 			if (!$parent_group -> membership() -> isMember($viewer, 1))
 			{
-				$message = Zend_Registry::get('Zend_Translate') -> _("You must be a member of group.") . " <a href='" . $parent_group -> getHref() . "' target ='_top'>" . $parent_group -> getTitle() . "</a> " . Zend_Registry::get('Zend_Translate') -> _("before you can join this group.");
+				$message = Zend_Registry::get('Zend_Translate') -> _("You must be a fan of club.") . " <a href='" . $parent_group -> getHref() . "' target ='_top'>" . $parent_group -> getTitle() . "</a> " . Zend_Registry::get('Zend_Translate') -> _("before you can join this club.");
 				return $this -> _forward('success', 'utility', 'core', array(
 					'messages' => array($message),
 					'layout' => 'default-simple',
@@ -396,7 +396,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 			}
 
 			return $this -> _forward('success', 'utility', 'core', array(
-				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Group membership request sent')),
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('club membership request sent')),
 				'layout' => 'default-simple',
 				'parentRefresh' => true,
 			));
@@ -442,7 +442,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 			}
 
 			return $this -> _forward('success', 'utility', 'core', array(
-				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Group membership request cancelled.')),
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Club membership request cancelled.')),
 				'layout' => 'default-simple',
 				'parentRefresh' => true,
 			));
@@ -469,7 +469,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 
 		if (!$subject -> is_subgroup && count($subject -> getAllSubGroups()) > 0)
 		{
-			$form -> setDescription('Are you sure you want to leave this group? You will leave all it\'s sub-groups too.');
+			$form -> setDescription('Are you sure you want to leave this club?');
 			if ($this -> getRequest() -> isPost() && $form -> isValid($this -> getRequest() -> getPost()))
 			{
 				$db = $subject -> membership() -> getReceiver() -> getTable() -> getAdapter();
@@ -515,7 +515,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 					throw $e;
 				}
 				return $this -> _forward('success', 'utility', 'core', array(
-					'messages' => array(Zend_Registry::get('Zend_Translate') -> _('You have successfully left this group.')),
+					'messages' => array(Zend_Registry::get('Zend_Translate') -> _('You have successfully left this club.')),
 					'layout' => 'default-simple',
 					'parentRefresh' => true,
 				));
@@ -544,7 +544,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 					throw $e;
 				}
 				return $this -> _forward('success', 'utility', 'core', array(
-					'messages' => array(Zend_Registry::get('Zend_Translate') -> _('You have successfully left this group.')),
+					'messages' => array(Zend_Registry::get('Zend_Translate') -> _('You have successfully left this club.')),
 					'layout' => 'default-simple',
 					'parentRefresh' => true,
 				));
@@ -615,7 +615,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 		$this -> view -> status = true;
 		$this -> view -> error = false;
 
-		$message = Zend_Registry::get('Zend_Translate') -> _('You have accepted the invite to the group %s');
+		$message = Zend_Registry::get('Zend_Translate') -> _('You have accepted the invite to the club %s');
 		$message = sprintf($message, $subject -> __toString());
 		$this -> view -> message = $message;
 		
@@ -698,7 +698,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 		
 		$this -> view -> status = true;
 		$this -> view -> error = false;
-		$message = Zend_Registry::get('Zend_Translate') -> _('You have ignored the invite to the group %s');
+		$message = Zend_Registry::get('Zend_Translate') -> _('You have ignored the invite to the club %s');
 		$message = sprintf($message, $subject -> __toString());
 		$this -> view -> message = $message;
 		

@@ -17,10 +17,14 @@
             ?>
 	</li>
 	<?php $count++;?>
-<?php endforeach;?>
+<?php endforeach;
+Engine_Api::_() -> core() -> clearSubject();
+?>
 </ul>
 <?php if ($this-> count > $this->limit && !$this->reachLimit):?>
-<a id="video-viewmore-btn" href="javascript:void(0)" onclick="showMore(<?php echo ($this->limit + $this->from)?>)"><?php echo $this->translate('View more result') ?></a>
+
+  <a id="video-viewmore-btn" class="tf_button_action" href="javascript:void(0)" onclick="showMore(<?php echo ($this->limit + $this->from)?>)"><?php echo $this->translate('View More') ?></a>
+
 <div id="video-loading" style="display: none;">
 	<img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;' />
 </div>
@@ -28,7 +32,7 @@
 function showMore(from){
     var url = '<?php echo $this->url(array('module' => 'core','controller' => 'widget','action' => 'index','name' => 'ynvideo.main-page-videos'), 'default', true) ?>';
     $('video-viewmore-btn').destroy();
-    $('video-loading').style.display = '';
+    $('video-loading').style.display = 'inline-block';
     var params = {};
     params.format = 'html';
     params.from = from;

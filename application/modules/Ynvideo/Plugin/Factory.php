@@ -41,7 +41,7 @@ class Ynvideo_Plugin_Factory {
             self::$_supportTypes = array(
                 1 => array('name' => 'youtube', 'title' => 'YouTube Video'),
                 2 => array('name' => 'vimeo', 'title' => 'Vimeo Video'),
-                self::$_uploadedType => array('name' => 'uploaded', 'title' => 'Upload Video'), // mean '3'
+                self::$_uploadedType => array('name' => 'uploaded', 'title' => 'My Computer'), // mean '3'
                 4 => array('name' => 'dailymotion', 'title' => 'Dailymotion Video'),
                 self::$_videoUrlType => array('name' => 'videoURL', 'title' => 'URL Video'), // mean '5'
                 6 => array('name' => 'embed', 'title' => 'Embed Video') 

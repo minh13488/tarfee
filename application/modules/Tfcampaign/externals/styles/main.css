@@ -25,7 +25,7 @@ body#global_page_tfcampaign-profile-index{
 	}
 	.layout_core_content{
 		background: #fff;
-		padding: 15px;
+		padding: 5px 5px 0px 5px;
 		border-radius: 5px;
 		-webkit-border-radius: 5px;
 		-moz-border-radius: 5px;
@@ -302,18 +302,12 @@ h5.tf_campaign_filter_title{
 	}
 	.tfcampaign_title{
 		overflow: hidden;
-		padding: 20px;
+		padding: 12px 17px 0 10px;
 		clear: both;
-		border-bottom: 1px solid $theme_border_medium_color;
-
 		.tfcampaign_author{
-			color: $theme_font_color_light;
 			display: block;
-			clear: both;
-			padding-left: 50px;
-			a{
-				font-weight: bold;
-			}
+			font-weight: bold;
+			float: right;
 		}
 
 		& > img{
@@ -325,16 +319,15 @@ h5.tf_campaign_filter_title{
 		}
 
 		& > a{
-			font-size: 24px;
+			font-size: 18px;
 			font-weight: bold;
 			color: $theme_font_color;
-			white-space: nowrap;
 			display: inline-block;
 			overflow: hidden;
 			text-overflow: ellipsis;
 			display: block;
 			float: left;
-			width: 90%;
+			width: 60%;
 
 			&:hover{
 				color: $theme_link_color;
@@ -342,21 +335,18 @@ h5.tf_campaign_filter_title{
 		}
 	}
 	.tfcampaign_desc{
-		padding: 20px;
+		padding: 10px 20px;
 		line-height: 1.5em;
 		display: block;
 		clear: both;
 	}
 	.tfcampaign_infomation{
-		border-bottom: 1px solid $theme_border_medium_color;
-		padding: 0 20px 20px 20px;
+		padding: 0 20px 0px 20px;
 		overflow: hidden;
 		
 		.tfcampaign_infomation_item{
-
-			
 			ul.block-first{
-				margin-bottom: 20px;
+				margin-bottom: 5px;
 				overflow: hidden;
 				li{
 					&:first-child{
@@ -384,8 +374,6 @@ h5.tf_campaign_filter_title{
 					}
 				}
 			}
-
-			
 			 li{
 
 				span{
@@ -395,10 +383,9 @@ h5.tf_campaign_filter_title{
 					color: $theme_font_color;
 				}
 				p{
-					font-size: 18px;
+					font-size: 14px;
 					font-weight: bold;
 					color: $theme_link_color;
-					text-transform: uppercase;
 					word-break: break-word;
 				}
 			}
@@ -406,7 +393,7 @@ h5.tf_campaign_filter_title{
 	}
 
 	.tfcampaign_boxbutton{
-		padding: 20px;
+		padding: 10px 20px;
 		text-align: center;
 
 		.addthis_sharing_toolbox{
@@ -425,7 +412,7 @@ h5.tf_campaign_filter_title{
 			margin: 0 5px;
 			button{
 				font-weight: bold;
-				color: $theme_font_color_light !important;
+				color: $theme_font_color !important;
 				padding:10px;
 				width: 100%;
 				border-radius: 5px;

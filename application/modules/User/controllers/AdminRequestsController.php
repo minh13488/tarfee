@@ -36,9 +36,27 @@ class User_AdminRequestsController extends Core_Controller_Action_Admin {
         	$table = Engine_Api::_()->getDbTable('inviterequests', 'user');
             $db = Engine_Db_Table::getDefaultAdapter();
             $db->beginTransaction();
-
+			$post =  $this->getRequest()->getPost();
             try {
-                $request = Engine_Api::_()->getItem('user_inviterequest', $id);
+            	$viewer = Engine_Api::_()->user()->getViewer();
+				$request = Engine_Api::_()->getItem('user_inviterequest', $id);
+            	$message = trim($post['message']);
+		        $mailType = 'user_reject_request';
+		        $mailParams = array(
+		          	'host' => $_SERVER['HTTP_HOST'],
+		          	'email' => $email,
+		          	'date' => time(),
+		          	'sender_email' => $request->email,
+		          	'sender_title' => $viewer->getTitle(),
+		          	'sender_link' => $viewer->getHref(),
+		          	'message' => $message,
+		        );
+		        
+		        Engine_Api::_()->getApi('mail', 'core')->sendSystem(
+		          	$request->email,
+		          	$mailType,
+		          	$mailParams
+		        );
                 $request->delete();
                 $db->commit();
             }
@@ -69,30 +87,32 @@ class User_AdminRequestsController extends Core_Controller_Action_Admin {
                 'messages' => array('Request not found.')
             ));
 		}
-		
-		$viewer = Engine_Api::_()->user()->getViewer();
-		$inviteTable = Engine_Api::_()->getDbtable('invites', 'invite');
-	    $db = $inviteTable->getAdapter();
-	    $db->beginTransaction();
-	    
-	    try {
-	    	$request->approved = 1;
-			$request->save();
-      		$emailsSent = $inviteTable->sendInvites($viewer, $request->email, '', 0);
-	      	$db->commit();
-	    } 
-	    catch( Exception $e ) {
-	      	$db->rollBack();
-	      	if( APPLICATION_ENV == 'development' ) {
-	        	throw $e;
-	      	}
-	    }
-		
-		$this->_forward('success', 'utility', 'core', array(
-            'smoothboxClose' => true,
-            'parentRefresh'=> true,
-            'messages' => array('Request has been approved.')
-        ));
+		if( $this->getRequest()->isPost()) {
+			$viewer = Engine_Api::_()->user()->getViewer();
+			$inviteTable = Engine_Api::_()->getDbtable('invites', 'invite');
+		    $db = $inviteTable->getAdapter();
+		    $db->beginTransaction();
+		    $post = $this->getRequest()->getPost();
+			$message = $post['message'];
+		    try {
+		    	$request->approved = 1;
+				$request->save();
+	      		$emailsSent = $inviteTable->sendInvites($viewer, $request->email, $message, 0);
+		      	$db->commit();
+		    } 
+		    catch( Exception $e ) {
+		      	$db->rollBack();
+		      	if( APPLICATION_ENV == 'development' ) {
+		        	throw $e;
+		      	}
+		    }
+			
+			$this->_forward('success', 'utility', 'core', array(
+	            'smoothboxClose' => true,
+	            'parentRefresh'=> true,
+	            'messages' => array('Request has been approved.')
+	        ));
+        }
     }
 	
 	public function multirejectAction() {

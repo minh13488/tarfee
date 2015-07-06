@@ -1,7 +1,7 @@
 <form method="post" class="global_form_popup">
     <div>
-        <h3><?php echo $this->translate("Reject Request?") ?></h3>
-        <p><?php echo $this->translate("Are you sure that you want to reject this request? It will not be recoverable.") ?></p>
+        <h3><?php echo $this->translate("Approve Request?") ?></h3>
+        <p><?php echo $this->translate("Are you sure that you want to approve this request?") ?></p>
         <br />
         <div class="form-wrapper">
         	<div class="form-label">
@@ -14,7 +14,7 @@
         <br />
         <p>
             <input type="hidden" name="confirm" value="<?php echo $this->request_id?>"/>
-            <button type='submit'><?php echo $this->translate("Reject") ?></button>
+            <button type='submit'><?php echo $this->translate("Approve") ?></button>
             <?php echo $this->translate(" or ") ?> 
             <a href='javascript:void(0);' onclick='javascript:parent.Smoothbox.close()'>
             <?php echo $this->translate("cancel") ?></a>

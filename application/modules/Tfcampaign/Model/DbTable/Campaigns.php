@@ -129,6 +129,10 @@ class Tfcampaign_Model_DbTable_Campaigns extends Engine_Db_Table {
     	{
     		$select->where('campaign.city_id = ?', $params['city_id']);
     	}
+
+		if (!empty($params['gender'])) {
+			$select->where('campaign.gender = ?', $params['gender']);
+		}
     	
 		$select -> where('campaign.deleted <> 1');
 		

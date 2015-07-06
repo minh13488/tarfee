@@ -32,8 +32,12 @@ class Tfcampaign_ProfileController extends Core_Controller_Action_Standard
         if (!$campaign->isViewable()) {
             return $this -> _helper -> requireAuth() -> forward();
         }
-		$campaign -> view_count++;
-		$campaign -> save();
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		if(!$campaign->isOwner($viewer))
+		{
+			$campaign -> view_count++;
+			$campaign -> save();
+		}
 		
 		$this -> view -> submissionPlayers =  $submissionPlayers = $campaign -> getSubmissionPlayers();
 		$this -> _helper -> content	-> setEnabled();

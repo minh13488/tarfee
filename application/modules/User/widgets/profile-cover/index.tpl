@@ -180,7 +180,7 @@ else {
 <div class="tarfee_profile_avatar_infomation">
     <div class="tarfee_profile_cover_has_tabs" id="siteuser_main_photo">
              
-        <?php $profileUrl = $this -> user -> getPhotoUrl('thumb.main');
+        <?php $profileUrl = $this -> user -> getPhotoUrl('thumb.profile');
             if(!$profileUrl){
                 $profileUrl = 'application/modules/User/externals/images/nophoto_user_thumb_profile.png';
             }

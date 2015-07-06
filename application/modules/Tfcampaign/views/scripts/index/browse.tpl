@@ -19,8 +19,6 @@
 				<option value="campaign.view_count"><?php echo $this -> translate('Sort by view count');?></option>
 		</select>
 	</div>
-
-
 	<?php if( count($this->paginator) > 0 ): ?>
 		<ul class="tfcampaign_list_browse">
 	    <?php foreach( $this->paginator as $campaign): ?>
@@ -30,7 +28,7 @@
 					<?php echo $campaign;?>
 
 					<div class="tfcampaign_author">
-			            <?php echo $this->translate('Posted by') ?>
+			            <?php echo $this->translate('by') ?>
 
 			            <?php
 			            $poster = $campaign->getOwner();
@@ -62,21 +60,15 @@
 							</li>
 
 						</ul>
-						
-
 						<ul class="block-second">
 							<li>
 								<span><?php echo $this -> translate("Gender") ;?></span>
 								<p><?php echo $campaign -> getGender();?></p>
 							</li>
-
 							<li>
 								<span><?php echo $this -> translate("Age") ;?></span>
 								<p><?php echo $this -> translate("%s - %s YRS", $campaign -> from_age, $campaign -> to_age);?></p>
 							</li>
-
-							
-							
 							<?php 
 								$endDateObj = null;
 								$startDateObj = null;
@@ -116,38 +108,39 @@
 						</ul>
 					</div>
 				</div>
-					<!--
 					<?php if($this -> viewer() -> getIdentity()) :?>
-						<?php $url = $this -> url(array(
-						    'module' => 'activity',
-						    'controller' => 'index',
-						    'action' => 'share',
-						    'type' => $campaign -> getType(),
-						    'id' => $campaign -> getIdentity(),
-						    ),'default', true)
-						;?>
-						<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('share')?></button></a>
-						
-					<?php endif;?>
-					-->		
-					<?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
 						<div class="tfcampaign_boxbutton">
 						<?php 
 							$submissionIds = $campaign -> getSubmissionByUser($this -> viewer(), $campaign);
+							$startDate = date_create($campaign->start_date);
+							$endDate = date_create($campaign->end_date);
+				            $nowDate = date_create('now');
+				            if ($nowDate <= $endDate && $nowDate >= $startDate) :
 						?>
-							<?php if($campaign -> allow_submit) :?>
-								<?php
-									$startDate = date_create($campaign->start_date);
-									$endDate = date_create($campaign->end_date);
-						            $nowDate = date_create($now);
-						            if ($nowDate <= $endDate && $nowDate >= $startDate) :
-								?>
-									<?php echo $this->htmlLink(
-									    array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
-									    "<button>".$this->translate('apply')."</button>", 
-									array('class' => 'smoothbox')) ?>
-								<?php endif;?>
-							<?php endif;?>
+							<?php 
+							$userPlayers = Engine_Api::_() -> getItemTable('user_playercard') -> getAllPlayerCard($this -> viewer() -> getIdentity());
+							$totalPlayerMatch = 0;
+							$submissionPlayers = $campaign -> getSubmissionPlayers();
+							$arrSubmission = array();
+							foreach($submissionPlayers as $submissionPlayer) {
+								$arrSubmission[] = $submissionPlayer -> player_id;
+							}
+							foreach ($userPlayers as $player) 
+							{
+								if(!in_array($player -> getIdentity(), $arrSubmission)) 
+								{
+									if($player -> countPercentMatching($campaign) >= $campaign -> percentage){
+										$totalPlayerMatch++;
+									}
+								}
+							}
+							if($totalPlayerMatch > 0):
+								echo $this->htmlLink(
+								    array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
+								    "<button>".$this->translate('apply')."</button>", 
+								array('class' => 'smoothbox'));
+							endif; ?>
+						<?php endif;?>
 						<?php if(count($submissionIds)) :?>
 							<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'list-withdraw', 'campaign_id' => $campaign->getIdentity()), 'tfcampaign_specific' , true)?>'><button class="withdraw"><?php echo $this->translate('withdraw')?> &nbsp;&nbsp;&nbsp;<i class="fa fa-times"></i></button></a>
 						<?php endif;?>	

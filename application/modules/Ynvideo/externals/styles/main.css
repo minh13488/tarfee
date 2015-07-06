@@ -1204,10 +1204,22 @@ div.video_object
 
 
 /*Style widget profile favorite videos*/
-#ynvideo_favorite_videos{
+#ynvideo_favorite_videos,
+.tf_library_videos
+{
     overflow: hidden;
     position: relative;
     li{
+
+        .tf_btn_action{
+            display: block !important;
+            margin-right: 0 !important;
+            
+            a{
+                border-radius: 0 !important;
+            }
+        }
+
         overflow: hidden;
         border-radius: 5px;
         -webkit-border-radius: 5px;
@@ -1300,7 +1312,18 @@ div.video_object
         .player-info{
             border-bottom: 1px solid $theme_border_medium_color;
         }
-        .nickname,
+        .nickname{
+            padding: 10px 15px;
+            overflow: hidden;
+            text-align: center;
+            font-size: 12px;
+            color: $theme_font_color_light;
+            a{  
+                margin-right: 10px;
+                overflow: hidden;
+                font-weight: bold;
+            }
+        }
         .player-info{
             padding: 10px 15px;
             overflow: hidden;

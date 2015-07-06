@@ -79,7 +79,7 @@
 	        <?php if($player -> isViewable()) :?>
 	        	<li id="player-item-<?php echo $player->playercard_id ?>">
 	           	<div id='profile_photo'>
-					<?php $photoUrl = ($player -> getPhotoUrl('thumb.main')) ? $player->getPhotoUrl('thumb.main') : "application/modules/User/externals/images/nophoto_playercard_thumb_profile.png" ?>
+					<?php $photoUrl = ($player -> getPhotoUrl('thumb.profile')) ? $player->getPhotoUrl('thumb.profile') : "application/modules/User/externals/images/nophoto_playercard_thumb_profile.png" ?>
 					<div class="avatar">
 						<div class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)">
 							
@@ -201,7 +201,7 @@
 												</a>
 											</li>
 										
-											<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid(), 'format' => 'smoothbox'),'default', true);?>
+											<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid()),'default', true);?>
 											<li title="<?php echo $this -> translate('Report')?>">
 												<a class="actions_generic smoothbox" href="<?php echo $url?>">
 													<span>
@@ -318,18 +318,11 @@
 					</ul>
 					
 					<div class="nickname">
-						<?php echo $this->htmlLink($player -> getOwner()->getHref(), $this->itemPhoto($player -> getOwner(), 'thumb.icon', $player -> getOwner()->getTitle(), array('style' => 'width: auto')), array('class' => 'members_thumb')) ?>
-						<div class='members_info'>
-					        <div class='members_name'>
-						          <?php echo $this->htmlLink($player -> getOwner()->getHref(), $player -> getOwner() ->getTitle()) ?>
-					        </div>
-					        <div class='members_date'>
-					          <?php echo $this->timestamp($player -> getOwner() -> creation_date) ?>
-					        </div>
-				      	</div>
+					 	<?php echo $this->translate('By') ?>
+			        	<?php echo $this->htmlLink($player -> getOwner()->getHref(), $player -> getOwner() ->getTitle()) ?>
 			     	</div><!-- nickname-->
 
-				</div>
+				
 	        </li>
 			<?php endif;?>
         	<?php endforeach; ?>             

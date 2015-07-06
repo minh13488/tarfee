@@ -9,53 +9,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
         return Zend_Paginator::factory($results);
     }
 
-    public function getSelect($text, $types = array(), $from = null, $limit = null)
-    {
-        $priority = array('group', 'classified', 'event', 'ynlistings_listing', 'groupbuy_deal');
-        $table = Engine_Api::_ ()->getDbtable ( 'search', 'core' );
-        $table_name = $table->info ( 'name' );
-        $db = $table->getAdapter ();
-        $select = $table->select ();
-        $text = '%' . preg_replace ( '/\s+/', '%', $text ) . '%';
-        $availableTypes = Engine_Api::_ ()->getItemTypes ();
-        $types = array_intersect ( $types, $availableTypes );
-        $types = array_diff ( $types, array (
-                "groupbuy_category",
-                "groupbuy_location",
-                "groupbuy_param",
-                "groupbuy_album",
-                "groupbuy_photo",
-                "music_playlist_song",
-                "ynshare",
-                "ynsharebutton",
-                "classified_album"
-        ) );
-        $types = "('" . implode ( "','", $types ) . "')";
-        if (!empty($priority)) {
-            $priority_str = "('" . implode ( "','", $priority ) . "')";
-            $select->from("$table_name", "$table_name.*,IF($table_name.type IN $priority_str, 1, 0) as priority");
-        }
-        $select->where ( "$table_name.type IN " . $types );
-        $select->where ( "$table_name.title like '$text' OR $table_name.description like '$text'" );
-        if (!empty($priority)) {
-            $select->order ( "priority DESC" );
-        }
-        $select->order ( "$table_name.type" );
-        $select->order ( "$table_name.id DESC" );
-        
-        // for search result page
-        if ($limit && $from != null) {
-            $select->limit ( $limit + 1, $from );
-        }
-        
-        else if ($limit) {
-            $select->limit ( $limit );
-        }
-        return $select;
-       
-    }
-	
-	public function getSelect2($text = array(), $types = array(), $sports = array(), $from = null, $limit = null)
+	public function getSelect($text = array(), $types = array(), $sports = array(), $from = null, $limit = null, $params = array())
     {
         $table = Engine_Api::_ ()->getDbtable ( 'search', 'core' );
         $table_name = $table->info ( 'name' );
@@ -74,6 +28,79 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 			$search = '%' . preg_replace ( '/\s+/', '%', $str ) . '%';
 			$select->where ( "$table_name.title like '$search' OR $table_name.description like '$search'" );
 		}
+		if(isset($params['parent_type']) && isset($params['parent_id']))
+		{
+			$parent_type = $params['parent_type'];
+			$parent_id = $params['parent_id'];
+			if(in_array('video', $types))
+			{
+				if(isset($params['video_type']) && $params['video_type'] == 'fan' && $parent_type == 'group')
+				{
+					$club = Engine_Api::_() -> getItem($parent_type, $parent_id);
+					// Get videos of fans
+					$ids = array();
+				    $members = $club->membership()->getMembersInfo();
+				    foreach( $members as $member ) {
+				    	if ($member->user_id != $club->user_id)
+				      		$ids[] = $member->user_id;
+				    }
+					
+					if (empty($ids)) $ids = array(0);
+					$tagTbl = Engine_Api::_()->getDbTable('tags', 'core');
+					$tagTblName = $tagTbl->info('name');
+					$tagmapTbl = Engine_Api::_()->getDbTable('tagMaps', 'core');
+					$tagmapTblName = $tagmapTbl->info('name');
+					$tagSelect = $tagTbl -> select() -> from($tagTblName) -> setIntegrityCheck(false);
+					$tagSelect->joinLeft($tagmapTblName, "$tagmapTblName.tag_id = $tagTblName.tag_id","$tagmapTblName.resource_id as resource_id");
+					$tagSelect
+						->where("$tagmapTblName.resource_type = ?", 'video')
+						->where("$tagmapTblName.tagger_type = ?", 'user')
+						->where("$tagmapTblName.tagger_id IN (?)", $ids)
+						->where("$tagTblName.text LIKE ?", $club->getTitle());
+					$video_ids = array();
+					$tags = $tagTbl->fetchAll($tagSelect); 
+					$video_ids = array();
+					foreach ($tags as $tag) {
+						$video_ids[] = $tag->resource_id;
+					}
+					if (empty($video_ids)) $video_ids = array(0);
+					$video_ids = array_unique($video_ids);
+					
+					$videoTable = Engine_Api::_() -> getItemTable('video');
+					$videoTbName = $videoTable -> info('name');
+					$select -> joinLeft($videoTbName, "$videoTbName.video_id = $table_name.id", "")
+							-> where("$videoTbName.video_id IN (?)", $video_ids)
+							-> where("$videoTbName.owner_id IN (?)", $ids);
+				}
+				else
+				{
+					// Get all video of parent
+					$videoTable = Engine_Api::_() -> getItemTable('video');
+					$videoTbName = $videoTable -> info('name');
+					$select -> joinLeft($videoTbName, "$videoTbName.video_id = $table_name.id", "")
+							-> where("$videoTbName.parent_type = ?", $parent_type)
+							-> where("$videoTbName.parent_id = ?", $parent_id);
+				}
+			}
+			else if(in_array('event', $types))
+			{
+				// Get all events of parent
+				$eventTable = Engine_Api::_() -> getItemTable('event');
+				$eventTbName = $eventTable -> info('name');
+				$select -> joinLeft($eventTbName, "$eventTbName.event_id = $table_name.id", "")
+						-> where("$eventTbName.parent_type = ?", $parent_type)
+						-> where("$eventTbName.parent_id = ?", $parent_id);
+			}
+			else if(in_array('user_playercard', $types))
+			{
+				// Get all players of parent
+				$playerTable = Engine_Api::_() -> getItemTable('user_playercard');
+				$playerTbName = $playerTable -> info('name');
+				$select -> joinLeft($playerTbName, "$playerTbName.playercard_id = $table_name.id", "")
+						-> where("$playerTbName.parent_type = ?", $parent_type)
+						-> where("$playerTbName.parent_id = ?", $parent_id);
+			}
+		}
         
         // for search result page
         if ($limit && $from) {
@@ -83,24 +110,14 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
         else if ($limit) {
             $select->limit ( $limit+1 );
         }
-		
         return $select;
        
     }
 
-    public function getResults($text, $types = array(), $from, $limit = null) {
+	public function getBasicResults($text = array(), $types = array(), $sports = array(), $from, $limit = null, $params = array()) {
         $table = Engine_Api::_ ()->getDbtable ( 'search', 'core' );
-        $select = $this->getSelect($text, $types, $from, $limit);
+        $select = $this->getSelect($text, $types, $sports, $from, $limit, $params);
         $results = $table->fetchAll ( $select );
-    //    $results = $this->_checkPermission($results);
-        return $results;
-    }
-	
-	public function getResults2($text = array(), $types = array(), $sports = array(), $from, $limit = null) {
-        $table = Engine_Api::_ ()->getDbtable ( 'search', 'core' );
-        $select = $this->getSelect2($text, $types, $sports, $from, $limit);
-        $results = $table->fetchAll ( $select );
-    //    $results = $this->_checkPermission($results);
         return $results;
     }
     

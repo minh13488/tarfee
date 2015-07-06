@@ -3638,9 +3638,9 @@ ul.ynevents_profile_tab>li {
 }
 
 ul.ynevents_profile_tab>li+li {
-	margin-top: 10px;
+/*	margin-top: 10px;
 	border-top-width: 1px;
-	padding-top: 10px;
+	padding-top: 10px;*/
 }
 
 ul.ynevents_profile_tab .ynevents_profile_tab_photo {

@@ -55,7 +55,7 @@ $viewer = $this -> viewer();
       </li>
     <?php endif;?>
       <li><a title="<?php echo $this -> translate("scouts")?>" href="<?php echo $this -> url(array(), 'tfcampaign_general', true);?>"><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
-      <li><a title="<?php echo $this -> translate("clubs & organizations")?>" href="<?php echo $this -> url(array(), 'group_general', true);?>"><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
+      <li><a title="<?php echo $this -> translate("clubs & organizations")?>" href="search?advsearch=organization"><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
       <li><a title="<?php echo $this -> translate("events & tryouts")?>" href="<?php echo $this -> url(array(), 'event_general', true);?>"><img src="application/themes/ynresponsive-event/images/event.png" /></a></li>
       <li><a title="<?php echo $this -> translate("talks")?>" href="<?php echo $this -> url(array(), 'blog_general', true);?>"><img src="application/themes/ynresponsive-event/images/talk.png" /></a></li>
       <li><a title="<?php echo $this -> translate("professionals")?>" href="search?advsearch=professional"><img src="application/themes/ynresponsive-event/images/professional.png" /></a></li>
@@ -82,21 +82,8 @@ $viewer = $this -> viewer();
 
          &nbsp;&nbsp; <?php echo $this->htmlLink($item->getHref(), $this->translate($item->getLabel()), $attribs) ?>
       <?php endforeach; ?>
-
-
-      <span class="ynresponsive_languges">
-         <?php if( 1 !== count($this->languageNameList) ): ?>
-            <form method="post" action="<?php echo $this->url(array('controller' => 'utility', 'action' => 'locale'), 'default', true) ?>" style="display:inline-block">
-            <?php $selectedLanguage = $this->translate()->getLocale() ?>
-            <?php echo $this->formSelect('language', $selectedLanguage, array('onchange' => '$(this).getParent(\'form\').submit();'), $this->languageNameList) ?>
-            <?php echo $this->formHidden('return', $this->url()) ?>
-            </form>
-         <?php endif; ?>
-      </span>
     </span>
 
-
-    <span class="ynresponsive_copyright">
       &copy; <?php echo $this->translate('%s tarfee', date('Y')) ?>
     </span>
     <?php if( !empty($this->affiliateCode) ): ?>

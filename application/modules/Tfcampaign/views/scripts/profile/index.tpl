@@ -7,7 +7,7 @@
 	<?php echo $this -> itemPhoto($campaign);?>
 	<?php echo $campaign;?>
 	<div class="tfcampaign_author">
-        <?php echo $this->translate('Posted by') ?>
+        <?php echo $this->translate('by') ?>
 
         <?php
         $poster = $campaign->getOwner();
@@ -21,8 +21,6 @@
 <div class="tfcampaign_desc">
 	<?php echo $this->viewMore($campaign -> getDescription());?>
 </div>
-
-
 <div class="tfcampaign_infomation">
 	<div class="tfcampaign_infomation_item">
 
@@ -81,8 +79,6 @@
 					<p><?php echo (!is_null($startDateObj)) ?  date('M d Y', $startDateObj -> getTimestamp()) : ''; ?></p>
 			<?php endif;?>
 			</li>
-
-
 			<li>
 			<?php if(!empty($endDateObj)) :?>
 				<span><?php echo $this -> translate('Closing Date') ;?></span>
@@ -94,18 +90,7 @@
 </div>
 
 <div class="tfcampaign_boxbutton">
-	<?php if($this -> viewer() -> getIdentity()) :?>
-		<!--
-		<?php $url = $this -> url(array(
-		    'module' => 'activity',
-		    'controller' => 'index',
-		    'action' => 'share',
-		    'type' => $campaign -> getType(),
-		    'id' => $campaign -> getIdentity(),
-		    ),'default', true)
-		;?>
-		<a class="smoothbox" href='<?php echo $url?>'><button><?php echo $this->translate('share')?></button></a>
-		-->
+	<?php if($this -> viewer() -> getIdentity() && $campaign -> isOwner($this -> viewer())) :?>
 		<?php if($campaign -> isDeletable()) :?>
 			<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'delete', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("remove");?></button></a>
 		<?php endif;?>
@@ -113,21 +98,37 @@
 			<a class="smoothbox" href="<?php echo $this -> url(array('action' => 'edit', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_specific' , true);?>"><button><?php echo $this -> translate("edit");?></button></a>
 		<?php endif;?>
 	<?php endif;?>
-	<?php if($this -> viewer() -> getIdentity() && !$this -> viewer() -> isSelf($campaign -> getOwner())) :?>
+	<?php if($this -> viewer() -> getIdentity()) :?>
 	<?php 
 		$submissionIds = $campaign -> getSubmissionByUser($this -> viewer(), $campaign);
 	?>
-	<?php if($campaign -> allow_submit) :?>
-			<?php
-				$startDate = date_create($campaign->start_date);
-				$endDate = date_create($campaign->end_date);
-	            $nowDate = date_create($now);
-	            if ($nowDate <= $endDate && $nowDate >= $startDate) :
-			?>
-				<?php echo $this->htmlLink(
+	<?php
+		$startDate = date_create($campaign->start_date);
+		$endDate = date_create($campaign->end_date);
+        $nowDate = date_create("now");
+        if ($nowDate <= $endDate && $nowDate >= $startDate) :
+			
+			$userPlayers = Engine_Api::_() -> getItemTable('user_playercard') -> getAllPlayerCard($this -> viewer() -> getIdentity());
+			$totalPlayerMatch = 0;
+			$submissionPlayers = $campaign -> getSubmissionPlayers();
+			$arrSubmission = array();
+			foreach($submissionPlayers as $submissionPlayer) {
+				$arrSubmission[] = $submissionPlayer -> player_id;
+			}
+			foreach ($userPlayers as $player) 
+			{
+				if(!in_array($player -> getIdentity(), $arrSubmission)) 
+				{
+					if($player -> countPercentMatching($campaign) >= $campaign -> percentage){
+						$totalPlayerMatch++;
+					}
+				}
+			}
+			if($totalPlayerMatch > 0):
+				echo $this->htmlLink(
 				    array('route' => 'tfcampaign_specific','action' => 'submit', 'campaign_id' => $campaign->getIdentity()), 
 				    "<button>".$this->translate('apply')."</button>", 
-				array('class' => 'smoothbox')) ?>
+				array('class' => 'smoothbox'));?>
 			<?php endif;?>
 		<?php endif;?>
 	<?php if(count($submissionIds)) :?>

@@ -388,7 +388,7 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		    $roles = array('owner', 'owner_member', 'owner_member_member', 'owner_network', 'registered', 'everyone');
 		    foreach( $roles as $role )
 		    {
-		      if( 1 === $auth->isAllowed($campaign, $role, 'view') )
+		      if( 1 === $auth->isAllowed($campaign, $role, 'view') && isset( $form->auth_view))
 		      {
 		        $form->auth_view->setValue($role);
 		      }
