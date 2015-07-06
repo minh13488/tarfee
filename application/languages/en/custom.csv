@@ -6688,6 +6688,17 @@ Please confirm by clicking the link below:
 [message]
 
 [footer]"
+
+# user_email_request
+"_EMAIL_USER_EMAIL_REQUEST_TITLE";"Email to requester"
+"_EMAIL_USER_EMAIL_REQUEST_DESCRIPTION";"This is the email that gets sent when admin want to send email to requester."
+"_EMAIL_USER_EMAIL_REQUEST_SUBJECT";"You have received an email from [host]!"
+"_EMAIL_USER_EMAIL_REQUEST_BODY";"[header]
+
+[message]
+
+[footer]"
+
 "Members";"Members"
 "YouNet Advanced Member Plugin";"YouNet Advanced Member Plugin"
 "YNMEMBER_GLOBAL_SETTINGS_DESCRIPTION";"General settings of Advanced Member plugins. These settings affect all members in your community."
