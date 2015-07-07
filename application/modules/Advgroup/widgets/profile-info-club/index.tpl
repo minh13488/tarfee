@@ -1,8 +1,6 @@
 <div id="club-profile-info-widget">
 	<?php $photoUrl = ($this ->group -> getPhotoUrl('thumb.main')) ? $this ->group->getPhotoUrl('thumb.main') : "application/modules/Advgroup/externals/images/nophoto_group_thumb_profile.png" ?>
-
 	<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)">
-
 	</div>
 	<div class="club-info-general">
 		<div class="club-title">

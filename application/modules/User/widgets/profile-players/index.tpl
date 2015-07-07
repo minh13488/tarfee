@@ -152,6 +152,7 @@
 													'action' => 'create',
 													'parent_type' =>'user_playercard',
 													'subject_id' =>  $player->playercard_id,
+													'tab' => 724
 												), '<i class="fa fa-video-camera"></i>&nbsp;'.$this->translate('Add Video'), array(
 												'class' => '', 'title' => $this -> translate('Add Video')
 												)) ;
@@ -165,16 +166,14 @@
 										            'controller' => 'upload',
 										            'id' => $player->playercard_id,
 										            'type' => $player->getType(),
+										            'tab' => 724
 										        ), '<i class="fa fa-camera"></i>&nbsp;'.$this->translate('Add Photos'), array(
 										            'class' => 'smoothbox', 'title' => $this -> translate('Add Photos')
 										        ));
 											?>
 											</li>
 										</ul>
-									
-									
 									<?php else: ?>
-
 										<!-- asd sa d  -->
 										<?php if ($this -> viewer() -> getIdentity()):?>
 											<li title="<?php echo $this -> translate("Eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">

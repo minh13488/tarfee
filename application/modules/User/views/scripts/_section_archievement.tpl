@@ -32,6 +32,7 @@
     }
 ?>
 
+<?php if (($manage || count($archievements) || count($trophies)) ) : ?>
 <div class="icon_section_profile"><i class="fa fa-trophy"></i><i class="fa fa-flag-checkered"></i></div>
 <table>
   <tr>
@@ -40,7 +41,7 @@
   	<th><hr></th>
   </tr>
 </table>
-<?php if (($manage || count($archievements) || count($trophies)) ) : ?>
+
 <div class="profile-section-button">
 <?php if ($manage && ($max == 0 ||  $max > (count($archievements) + count($trophies)))) :?>
 	<span class="manage-section-button">

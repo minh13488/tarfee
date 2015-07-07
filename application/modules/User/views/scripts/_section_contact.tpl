@@ -4,6 +4,7 @@
     $user = $this->user;
     $params = $this->params;
     $manage = ($viewer->getIdentity() == $user->getIdentity()) ;
+	$canView = $manage || (!empty($params['view']));
     $create = (isset($params['create'])) ? $params['create'] : false;
 	$contact_num = $user->contact_num;
 	$email1 = $user->email1;
@@ -11,7 +12,8 @@
 	$skype = $user->skype;
 ?>
 
-
+<?php if ($canView && !empty($contact_num)) : ?>
+<?php if (!empty($params['view'])) $manage = false;?>
 <div class="icon_section_profile"><i class="fa fa-phone"></i></div>
 <table>
   <tr>
@@ -20,7 +22,7 @@
   	<th><hr></th>
   </tr>
 </table>
-<?php if ($manage || !empty($contact_num)) : ?>
+
  <div class="profile-section-button">
 <?php if ($manage) :?>
 	<span class="manage-section-button">

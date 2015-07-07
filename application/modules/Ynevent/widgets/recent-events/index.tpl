@@ -1,40 +1,87 @@
 <ul id="profile_events_<?php echo $this->identity?>" class="ynevents_profile_tab">
     <?php foreach( $this->paginator as $event ): ?>
-
     <li>
-        <div class="ynevents_photo">
-            <?php echo $this->htmlLink($event, $this->itemPhoto($event, 'thumb.normal')) ?>
+        <?php if($event -> type_id == 1) :?>
+            <span class="icon-event-tryout">
+                <img src="application/modules/Ynevent/externals/images/tryout.png" alt="">
+            </span>
+            <?php else: ?>
+            <span class="icon-event-tryout">
+                <img src="application/modules/Ynevent/externals/images/event.png" alt="">
+            </span>
+        <?php endif;?>
+
+        <div class="ynevents_title">
+            <?php echo $this->htmlLink($event->getHref(), $event->getTitle()) ?>
         </div>
-
-        <div class="ynevents_info">
-            <div class="ynevents_title">
-                <?php echo $this->htmlLink($event->getHref(), $event->getTitle()) ?>
-            </div>
-            <div class="ynevents_desc">
-                <?php echo $event->getDescription() ?>
-            </div>
-
+        
+        <div class="ynevent_location">
+    	<?php 
+        	$countryName = '';
+			$provinceName = '';
+			$cityName = '';
+			if($event ->country_id && $country = Engine_Api::_() -> getItem('user_location', $event ->country_id))
+			{
+				$countryName = $country -> getTitle();
+			}
+			if($event ->province_id && $province = Engine_Api::_() -> getItem('user_location', $event ->province_id))
+			{
+				$provinceName = $province -> getTitle();
+			}
+			if($event ->city_id && $city = Engine_Api::_() -> getItem('user_location', $event ->city_id))
+			{
+				$cityName = $city -> getTitle();
+			}
+			?>
+			<span><?php echo $this -> translate("Location");?>:</span>
+			<p>
+			<?php if(!$cityName && !$provinceName && !$countryName)
+			{
+				echo $event -> address;
+			}
+			else {
+				if($cityName) 
+					echo $cityName; 
+				else 
+					echo $provinceName;
+				if($countryName) 
+				 	echo ', '.$countryName;
+			}
+			?>
+			</p>
         </div>
-
-        <div class="ynevents_members">
-            <?php echo '<i class="fa fa-user"></i> &nbsp;&nbsp;'.$this->translate(array('%s guest', '%s guests', $event->member_count),$this->locale()->toNumber($event->member_count)) ?>
+		<div class="ynevents_time_place">
+            <span>
+            	<?php 
+				$startDateObj = null;
+				if (!is_null($event->starttime) && !empty($event->starttime)) 
+				{
+					$startDateObj = new Zend_Date(strtotime($event->starttime));	
+				}
+				if( $this->viewer() && $this->viewer()->getIdentity() ) {
+					$tz = $this->viewer()->timezone;
+					if (!is_null($startDateObj))
+					{
+						$startDateObj->setTimezone($tz);
+					}
+			    }
+				if(!empty($startDateObj)) :?>
+					<span><?php echo $this -> translate('Date') ;?>:</span>
+					<p><?php echo (!is_null($startDateObj)) ?  date('d M, Y', $startDateObj -> getTimestamp()) : ''; ?></p>
+					<span><?php echo $this -> translate('Time') ;?>:</span>
+					<p><?php echo (!is_null($startDateObj)) ?  date('H:i', $startDateObj -> getTimestamp()) : ''; ?></p>
+				<?php endif; ?>
+            </span>
         </div>
-
-        <div class="ynevents_time_place_rating">
-            <div class="ynevents_time_place">
-                <span>
-                    <?php echo $this->locale()->toDate($event->starttime, array('size' => 'long')) ?>
-                </span>
-                <span>
-                    <?php echo $event->address;?>
-                </span>
-            </div>
-
-            <div class="ynevents_rating">
-                
-            </div>
-        </div>
-
+        <div class="ynevents_author">
+	        <?php echo $this->translate('by') ?>
+	        <?php
+	        	$poster = $event->getOwner();
+	            if ($poster) {
+	                echo $this->htmlLink($poster, $poster->getTitle());
+	            }
+	        ?>
+	    </div>
         <?php 
         if($this -> viewer() -> getIdentity()):
             ?>
@@ -43,7 +90,6 @@
             </div>
         <?php endif;?>
     </li>
-
     <?php endforeach; ?>
 </ul>
 

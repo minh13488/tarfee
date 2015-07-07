@@ -4,12 +4,14 @@
     $user = $this->user;
     $params = $this->params;
     $manage = ($viewer->getIdentity() == $user->getIdentity()) ;
+	$canView = $manage || (!empty($params['view']));
     $create = (isset($params['create'])) ? $params['create'] : false;
 	$this->addHelperPath(APPLICATION_PATH . '/application/modules/Fields/View/Helper', 'Fields_View_Helper');
 	$fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($user);
 	$location = $user->getLocation();
 ?>
-<?php  if( count($fieldStructure) > 1 || !empty($location) || $create) :?>
+<?php  if($canView && (count($fieldStructure) > 1 || !empty($location) || $create)) :?>
+<?php if (!empty($params['view'])) $manage = false;?>	
 <div class="icon_section_profile"><i class="fa fa-user"></i></div>
 <table>
   <tr>

@@ -9,7 +9,7 @@
 	$education = $user->getAllEducations();
 	$enable = Engine_Api::_()->user()->checkSectionEnable($user, 'education');
 ?>
-
+<?php if (($manage || count($education)) && $enable) : ?>
 <div class="icon_section_profile"><i class="fa fa-graduation-cap"></i></div>
 <table>
   <tr>
@@ -18,7 +18,7 @@
   	<th><hr></th>
   </tr>
 </table>
-<?php if (($manage || count($education)) && $enable) : ?>
+
 	<div class="profile-section-button">
 	<?php if ($manage) :?>
 		<span class="manage-section-button">

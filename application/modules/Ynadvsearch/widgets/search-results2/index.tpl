@@ -23,138 +23,6 @@
 			<?php $photoUrl = ($item -> getPhotoUrl('thumb.main')) ? $item->getPhotoUrl('thumb.main') : "application/modules/User/externals/images/nophoto_playercard_thumb_profile.png" ?>
 			<div class="avatar">
 				<div class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)">
-					
-					<div class="avatar-box-hover">
-						<ul class="actions">
-							<li><a href="<?php echo $item -> getHref()?>"><i class="fa fa-external-link"></i></a></li>
-							<?php if($this -> viewer() -> getIdentity() && $item -> getOwner() -> isSelf($this -> viewer())): ?>
-							<!-- Button Edit Crop Delete -->
-							<li class="first">
-								<?php
-					            	echo $this->htmlLink(array(
-							            'route' => 'user_extended',
-							            'controller' => 'player-card',
-							            'action' => 'edit',
-							            'id' => $item->playercard_id,
-							        ), '<i class="fa fa-pencil"></i>', array(
-							            'class' => '', 'title' => $this -> translate('Edit')
-							        ));
-								?>
-							</li>
-
-							<li class="second">
-								<?php
-					        		echo $this->htmlLink(array(
-							            'route' => 'user_extended',
-							            'controller' => 'player-card',
-							            'action' => 'crop-photo',
-							            'id' => $item->playercard_id,
-							        ), '<i class="fa fa-crop"></i>', array(
-							            'class' => 'smoothbox', 'title' => $this -> translate('Crop Photo')
-							        ));
-								?>
-							</li>
-
-							<li class="fifth">
-								<?php
-									echo $this->htmlLink(array(
-							            'route' => 'user_extended',
-							            'controller' => 'player-card',
-							            'action' => 'delete',
-							            'id' => $item->playercard_id,
-							        ), '<i class="fa fa-times"></i>', array(
-							            'class' => 'smoothbox', 'title' => $this -> translate('Delete')
-							        ));
-								?>
-							</li>
-							
-							<?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($item)) :?>
-							<li>
-								<?php
-									echo $this->htmlLink(array(
-							            'route' => 'user_general',
-							            'action' => 'transfer-item',
-	    								'subject' => $item -> getGuid(),
-							        ), '<i class="fa fa-exchange"></i>', array(
-							            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to user profile')
-							        ));
-								?>
-							</li>
-							<?php endif;?>	
-
-							<li class="setting" onclick="showOptions(<?php echo $item->playercard_id ?>, this)">
-								<a href="javascript:void(0)"><i class="fa fa-plus"></i></a>
-							</li>
-								<ul class="setting-list" style="display: none" id="setting-list_<?php echo $item->playercard_id?>">
-									<li>
-									<?php
-					        			echo $this->htmlLink(array(
-										'route' => 'video_general',
-											'action' => 'create',
-											'parent_type' =>'user_playercard',
-											'subject_id' =>  $item->playercard_id,
-										), '<i class="fa fa-video-camera"></i>&nbsp;'.$this->translate('Add Video'), array(
-										'class' => '', 'title' => $this -> translate('Add Video')
-										)) ;
-									?>
-									</li>
-
-									<li>
-									<?php
-										echo $this->htmlLink(array(
-								            'route' => 'user_photo',
-								            'controller' => 'upload',
-								            'id' => $item->playercard_id,
-								            'type' => $item->getType(),
-								        ), '<i class="fa fa-camera"></i>&nbsp;'.$this->translate('Add Photos'), array(
-								            'class' => 'smoothbox', 'title' => $this -> translate('Add Photos')
-								        ));
-									?>
-									</li>
-								</ul>
-							
-							
-							<?php else: ?>
-
-								<!-- asd sa d  -->
-								<?php if ($this -> viewer() -> getIdentity()):?>
-									<li title="<?php echo $this -> translate("Eye on")?>" id="user_eyeon_<?php echo $item -> getIdentity()?>">
-			                    		<?php if($item->isEyeOn()): ?>              
-			                        	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $item->getIdentity() ?>')">
-			                        		<span>
-			                        			<i class="fa fa-eye-slash"></i>
-		                        			</span>
-			                    		</a>
-			                    		<?php else: ?>
-			                        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $item->getIdentity() ?>')">
-			                        		<span>
-			                        			<i class="fa fa-eye"></i>
-		                        			</span>
-			                        	</a>
-			                    		<?php endif; ?>
-			                		</li>
-
-									<li title="<?php echo $this -> translate('Comment')?>">
-										<a class="actions_generic" href="<?php echo $item -> getHref()?>">
-											<span>
-												<i class="fa fa-comment"></i>
-											</span>
-										</a>
-									</li>
-								
-									<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $item->getGuid(), 'format' => 'smoothbox'),'default', true);?>
-									<li title="<?php echo $this -> translate('Report')?>">
-										<a class="actions_generic smoothbox" href="<?php echo $url?>">
-											<span>
-												<i class="fa fa-flag"></i>
-											</span>
-										</a>
-									</li>
-								<?php endif;?>
-							<?php endif; ?>
-							
-						</ul>
-					</div>
 					<div class="tarfee_sport_type_position">
 						<?php if($item -> getSport()):?>
 							<?php echo $this -> itemPhoto($item -> getSport(), 'thumb.icon');?>
@@ -166,7 +34,7 @@
 							</span>
 						<?php endif;?>
 						
-					</div><!--tarfee_sport_type_position-->
+					</div>
 				</div>
 			</div>
 			<div class="tarfee_gender_player_name">
@@ -178,7 +46,6 @@
 					}
 
 					?>
-					
 				</span>
 				<a title="<?php echo $item -> first_name.' '.$item -> last_name;?>" href="<?php echo $item -> getHref()?>" class="player_name" ><?php echo $this -> string() -> truncate($item -> first_name.' '.$item -> last_name, 20)?></a>
 			</div>
@@ -259,85 +126,157 @@
 			</ul>
 			
 			<div class="nickname">
-				<?php echo $this->htmlLink($item -> getOwner()->getHref(), $this->itemPhoto($item -> getOwner(), 'thumb.icon', $item -> getOwner()->getTitle(), array('style' => 'width: auto')), array('class' => 'members_thumb')) ?>
-				<div class='members_info'>
-			        <div class='members_name'>
-				          <?php echo $this->htmlLink($item -> getOwner()->getHref(), $item -> getOwner() ->getTitle()) ?>
-			        </div>
-			        <div class='members_date'>
-			          <?php echo $this->timestamp($item -> creation_date) ?>
-			        </div>
-		      	</div>
-	     	</div><!-- nickname-->
+				<?php echo $this->translate('By') ?>
+	        	<?php echo $this->htmlLink($item -> getOwner()->getHref(), $item -> getOwner() ->getTitle()) ?>
+	     	</div>
 
 		</div>	
 		<?php break;?>
 		
 		<?php case 'video': ?>
-			<?php
-        		echo $this->partial('_video_listing_mainpage.tpl', 'ynvideo', array(
-        			'video' => $item
-        		));
-            ?>
+			<div class="ynvideo_thumb_wrapper video_thumb_wrapper">
+			    <?php if ($item->parent_type == 'user_playercard') :?>
+			        <span class="icon-player">
+			            <img src="application\themes\ynresponsive-event\images\icon-player.png" />
+			        </span>
+			    <?php endif; ?>
+			
+			    <?php
+			    if ($item->photo_id) {
+			        echo $this->htmlLink($item->getPopupHref(), $this->itemPhoto($item, 'thumb.large'), array('class'=>'smoothbox'));
+			    } else {
+			        echo $this->htmlLink($item->getPopupHref(),'<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">', array('class'=>'smoothbox'));;
+			    }
+			    ?>
+			</div>
+			<?php if ($item->parent_type == 'user_playercard') :?>
+			<?php $player = $item->getParent();?>
+			<?php if ($player):?>
+			<div class="player-info">
+			    <div class="player-photo">
+			        <?php echo $this->itemPhoto($player, 'thumb.icon')?>
+			    </div>
+			    <div class="player_info_detail">
+			        <div class="player-title">
+			            <?php echo $player?>
+			        </div>
+			        <?php $position = $player->getPosition()?>
+			        <?php if ($position) : ?>
+					<div class="player-position">
+			    		<?php 
+			    		preg_match_all('/[A-Z]/', $position, $matches);
+						echo implode($matches[0]);?>
+			 		</div>
+			        <?php endif;?>
+			    </div>
+			</div>
+			<?php endif;?>
+			<?php endif;?>
+			<div class="video-title">
+			    <?php echo $this->htmlLink($item->getPopupHref(), $item->getTitle(), array('class'=>'smoothbox'))?>
+			</div>
+			<div class="video-statistic-rating">
+			
+			    <div class="video-statistic">
+			        <span><?php echo $this->translate(array('%s view','%s views', $item->view_count), $item->view_count)?></span>
+			        <?php $commentCount = $item->comments()->getCommentCount(); ?>
+			        <span><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></span>
+			    </div>
+			    <?php 
+			        echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $item));
+			    ?>
+			</div>
+			<div class="video_author">
+			    <?php $user = $item->getOwner() ?>
+			    <?php if ($user) : ?>
+			        <?php echo $this->translate('by') ?>
+			        <?php echo $this->htmlLink($user->getHref(), htmlspecialchars ($this->string()->truncate($user->getTitle(), 25)), array('title' => $user->getTitle())) ?>
+			    <?php endif; ?>
+			</div>
 		<?php break;?>
 		
 		<?php case 'event': ?>
-			<div class="ynevents_photo">
-	            <?php echo $this->htmlLink($item, $this->itemPhoto($item, 'thumb.normal')) ?>
-	        </div>
+			<?php if($item -> type_id == 1) :?>
+            <span class="icon-event-tryout">
+                <img src="application/modules/Ynevent/externals/images/tryout.png" alt="">
+            </span>
+            <?php else: ?>
+            <span class="icon-event-tryout">
+                <img src="application/modules/Ynevent/externals/images/event.png" alt="">
+            </span>
+	        <?php endif;?>
 	
-	        <div class="ynevents_info">
-	            <div class="ynevents_title">
-	                <?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>
-	            </div>
-	            <div class="ynevents_desc">
-	                <?php echo $item->getDescription() ?>
-	            </div>
-	
+	        <div class="ynevents_title">
+	            <?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>
 	        </div>
 	        
-	        <?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($item)) :?>
-			<div>
-				<?php
-					echo $this->htmlLink(array(
-			            'route' => 'user_general',
-			            'action' => 'transfer-item',
-						'subject' => $item -> getGuid(),
-			        ), '<i class="fa fa-exchange"></i>', array(
-			            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to club')
-			        ));
+	        <div class="ynevent_location">
+	    	<?php 
+	        	$countryName = '';
+				$provinceName = '';
+				$cityName = '';
+				if($event ->country_id && $country = Engine_Api::_() -> getItem('user_location', $item ->country_id))
+				{
+					$countryName = $country -> getTitle();
+				}
+				if($event ->province_id && $province = Engine_Api::_() -> getItem('user_location', $item ->province_id))
+				{
+					$provinceName = $province -> getTitle();
+				}
+				if($event ->city_id && $city = Engine_Api::_() -> getItem('user_location', $item ->city_id))
+				{
+					$cityName = $city -> getTitle();
+				}
 				?>
-			</div>
-			<?php endif;?>
-			
-	        <div class="ynevents_members">
-	            <?php echo '<i class="fa fa-user"></i> &nbsp;&nbsp;'.$this->translate(array('%s guest', '%s guests', $item->member_count),$this->locale()->toNumber($item->member_count)) ?>
-	        </div>
-	        <div class="ynevents_time_place_rating">
-	            <div class="ynevents_time_place">
-	                <span>
-	                    <?php echo $this->locale()->toDate($item->starttime, array('size' => 'long')) ?>
-	                </span>
-	                <span>
-	                    <?php echo $item->address;?>
-	                </span>
-	            </div>
-	
-	            <div class="ynevents_rating">
-	                
-	            </div>
-	        </div>
-			<?php 
-			if($this -> viewer() -> getIdentity()):
-				$row = $item->membership()->getRow($this -> viewer());
-				if($row):
-					$rsvp = $row -> rsvp;
+				<span><?php echo $this -> translate("Location");?>:</span>
+				<p>
+				<?php if(!$cityName && !$provinceName && !$countryName)
+				{
+					echo $item -> address;
+				}
+				else {
+					if($cityName) 
+						echo $cityName; 
+					else 
+						echo $provinceName;
+					if($countryName) 
+					 	echo ', '.$countryName;
+				}
 				?>
-		        <div class="ynevents_button" id = "ynevent_rsvp_<?php echo $item -> getIdentity()?>">
-		           <?php echo $this -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $item -> getIdentity()));?>
-		        </div>
-		        <?php endif;?>
-	        <?php endif;?>
+				</p>
+	        </div>
+			<div class="ynevents_time_place">
+	            <span>
+	            	<?php 
+					$startDateObj = null;
+					if (!is_null($item->starttime) && !empty($item->starttime)) 
+					{
+						$startDateObj = new Zend_Date(strtotime($item->starttime));	
+					}
+					if( $this->viewer() && $this->viewer()->getIdentity() ) {
+						$tz = $this->viewer()->timezone;
+						if (!is_null($startDateObj))
+						{
+							$startDateObj->setTimezone($tz);
+						}
+				    }
+					if(!empty($startDateObj)) :?>
+						<span><?php echo $this -> translate('Date') ;?>:</span>
+						<p><?php echo (!is_null($startDateObj)) ?  date('d M, Y', $startDateObj -> getTimestamp()) : ''; ?></p>
+						<span><?php echo $this -> translate('Time') ;?>:</span>
+						<p><?php echo (!is_null($startDateObj)) ?  date('H:i', $startDateObj -> getTimestamp()) : ''; ?></p>
+					<?php endif; ?>
+	            </span>
+	        </div>
+	        <div class="ynevents_author">
+		        <?php echo $this->translate('by') ?>
+		        <?php
+		        	$poster = $item->getOwner();
+		            if ($poster) {
+		                echo $this->htmlLink($poster, $poster->getTitle());
+		            }
+		        ?>
+		    </div>
 		<?php break;?>
 		
 		<?php case 'blog': ?>
@@ -352,19 +291,85 @@
 	          	<?php echo $item->getDescription(); ?>
 	        	</p>
 	      	</div>
-	      	<?php if($this -> viewer() -> getIdentity() && Engine_Api::_()->user()->canTransfer($item)) :?>
-			<div>
-				<?php
-					echo $this->htmlLink(array(
-			            'route' => 'user_general',
-			            'action' => 'transfer-item',
-						'subject' => $item -> getGuid(),
-			        ), '<i class="fa fa-exchange"></i>', array(
-			            'class' => 'smoothbox', 'title' => $this -> translate('Transfer to club')
-			        ));
-				?>
+		<?php break;?>
+		<?php case 'group': ?>
+			<?php $photoUrl = ($item -> getPhotoUrl('thumb.main')) ? $item->getPhotoUrl('thumb.main') : "application/modules/Advgroup/externals/images/nophoto_group_thumb_profile.png" ?>
+			<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)">
 			</div>
-			<?php endif;?>
+			<div class="club-info-general">
+				<div class="club-title">
+					<?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>
+				</div>
+				<?php if ($item->getCountry()) :?>
+				<div class="club-country">
+					<?php echo $item->getCountry()->getTitle()?>
+				</div>
+				<?php endif;?>
+				
+				<?php if ($item->getProvince()) :?>
+				<div class="club-province">
+					<?php echo $item->getProvince()->getTitle()?>
+				</div>
+				<?php endif;?>
+				
+				<?php if ($item->getCity()) :?>
+				<div class="club-city">
+					<?php echo $item->getCity()->getTitle()?>
+				</div>
+				<?php endif;?>
+				
+				<div class="club-like-count">
+					<i class="fa fa-heart"></i>
+					<span class="like-count"><?php
+		        	$rows = $item -> membership() ->getMembers();
+					echo count($rows)?></span>
+				</div>
+		<?php break;?>
+		<?php case 'tfcampaign_campaign	': ?>
+			<div class="tfcampaign_sport">
+			<?php 
+			if($item -> getSport())
+				echo $this -> itemPhoto($item -> getSport(), 'thumb.icon');
+			else
+				echo $this -> itemPhoto($item, 'thumb.icon');?>
+			</div>
+			<div class="tfcampaign_title"><?php echo $item;?></div>
+			<div class="tfcampaign_location">
+				<span><?php echo $this -> translate("Location");?>:</span>
+				<p><?php echo $item -> getLocation();?></p>
+			</div>
+			<div class="tfcampaign_gender">
+				<span><?php echo $this -> translate("Gender") ;?>:</span>
+				<p><?php echo $item -> getGender();?></p>
+			</div>
+			<div class="tfcampaign_closing">
+				<?php 
+					$endDateObj = null;
+					if (!is_null($item->end_date) && !empty($item->end_date) && $item->end_date) 
+					{
+						$endDateObj = new Zend_Date(strtotime($item->end_date));	
+					}
+					if( $this->viewer() && $this->viewer()->getIdentity() ) {
+						$tz = $this->viewer()->timezone;
+						if (!is_null($endDateObj))
+						{
+							$endDateObj->setTimezone($tz);
+						}
+				    }
+					if(!empty($endDateObj)) :?>
+						<span><?php echo $this -> translate('Closing Date') ;?>:</span>
+						<p><?php echo (!is_null($endDateObj)) ?  date('d M, Y', $endDateObj -> getTimestamp()) : ''; ?></p>
+				<?php endif; ?>
+			</div>
+			<div class="tfcampaign_author">
+		        <?php echo $this->translate('by') ?>
+		        <?php
+		        $poster = $item->getOwner();
+		            if ($poster) {
+		                echo $this->htmlLink($poster, $poster->getTitle());
+		            }
+		        ?>
+		    </div>
 		<?php break;?>
 		
 		<?php default: ?>
