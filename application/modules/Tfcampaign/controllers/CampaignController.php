@@ -40,12 +40,6 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 			$submission -> setFromArray($values);
 			$submission -> save();
 			
-			// Set photo
-			if (!empty($values['photo']))
-			{
-				$submission -> setPhoto($form -> photo);
-			}
-			
 			$db -> commit();
 		}
 		catch (Exception $e)
@@ -286,12 +280,6 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 			$submission =  $submissionTable -> createRow();
 			$submission -> setFromArray($values);
 			$submission -> save();
-			
-			// Set photo
-			if (!empty($values['photo']))
-			{
-				$submission -> setPhoto($form -> photo);
-			}
 			
 			$db -> commit();
 		}
