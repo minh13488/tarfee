@@ -1389,3 +1389,7 @@ div.video_object
     }
 }
 /*End style widget profile favorite videos*/
+#global_page_ynvideo-index-popup-view .yncomment_replies_options
+{
+	display: none;
+}

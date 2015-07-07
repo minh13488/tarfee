@@ -307,7 +307,6 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 		{
 			$select -> where('parent_id = ?', $params['parent_id']);
 		}
-		
 		return $select;
 	}
 
