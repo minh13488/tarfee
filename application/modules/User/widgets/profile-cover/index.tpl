@@ -263,6 +263,18 @@ else {
                         ?>
                      </li>
                      <?php endif;?>
+                     <?php if ($this->viewer()->getIdentity()) :?>
+                 	<li>
+                        <?php echo $this->htmlLink(array(
+                            'route' => 'user_general',
+                            'action' => 'view-basic',
+                            'subject' => $this -> subject() ->getGuid()
+                        ), '<span class="profile_inbox_button"><i class="fa fa-info-circle"></i></span>', array(
+                            'class' => 'smoothbox', 'title' => $this -> translate("Basic Information")
+                        ));
+                        ?>
+                     </li>
+                     	<?php endif;?>
                      <!--
                      <li>
                         <?php echo $this->htmlLink(array(
