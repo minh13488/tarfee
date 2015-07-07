@@ -310,12 +310,10 @@ class Ynevent_Plugin_Menus
 			return false;
 		}
 		$class = 'smoothbox';
-		$format = 'smoothbox';
 		$session = new Zend_Session_Namespace('mobile');
 		if ($session -> mobile)
 		{
 			$class = '';
-			$format = '';
 		}
 		if ($subject -> capacity == 0 || ($subject -> capacity != 0 && Engine_Api::_() -> ynevent() -> chkEventFollow($subject -> getIdentity()) < $subject -> capacity))
 		{
@@ -329,7 +327,6 @@ class Ynevent_Plugin_Menus
 					'controller' => 'member',
 					'action' => 'invite',
 					'event_id' => $subject -> getIdentity(),
-					'format' => $format,
 				),
 			);
 		}

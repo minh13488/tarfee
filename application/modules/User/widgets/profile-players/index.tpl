@@ -321,8 +321,6 @@
 					 	<?php echo $this->translate('By') ?>
 			        	<?php echo $this->htmlLink($player -> getOwner()->getHref(), $player -> getOwner() ->getTitle()) ?>
 			     	</div><!-- nickname-->
-
-				
 	        </li>
 			<?php endif;?>
         	<?php endforeach; ?>             

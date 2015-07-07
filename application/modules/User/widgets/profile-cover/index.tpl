@@ -239,13 +239,26 @@ else {
                         } 
                         ?>
                      </li>
-                     <li>
+                     <?php endif;?>
+                     <?php if (Engine_Api::_()->ynfbpp()->_allowMessage($this->viewer(), $this -> subject())) :?>
+                 	 <li>
                         <?php echo $this->htmlLink(array(
                             'route' => 'messages_general',
                             'action' => 'compose',
                             'to' => $this -> subject() ->getIdentity()
                         ), '<span class="profile_inbox_button"><i class="fa fa-comments"></i></span>', array(
                             'class' => 'smoothbox', 'title' => $this -> translate("Message")
+                        ));
+                        ?>
+                     </li>
+                     <?php elseif (Engine_Api::_()->ynfbpp()->_allowMail($this->viewer(), $this -> subject())) :?>
+                 	 <li>
+                        <?php echo $this->htmlLink(array(
+                            'route' => 'user_general',
+                            'action' => 'in-mail',
+                            'to' => $this -> subject() ->getIdentity()
+                        ), '<span class="profile_inbox_button"><i class="fa fa-envelope"></i></span>', array(
+                            'class' => 'smoothbox', 'title' => $this -> translate("Email")
                         ));
                         ?>
                      </li>

@@ -192,4 +192,8 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 	public function getSportId() {
 		return 'category_id‏';
 	}
+	public function getSport()
+	{
+		return Engine_Api::_() -> getItem('user_sportcategory', $this -> category_id);
+	}
 }

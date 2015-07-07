@@ -14,7 +14,17 @@
                 </div>
             </div>
             <!-- 0 -> Event or 1 => Tryout??-->
-            <?php echo $event -> type_id;?>
+            <?php //echo $event -> type_id;?>
+            <?php if($event -> type_id == 1) :?>
+                <span class="icon-event-tryout">
+                    <img src="application/modules/Ynevent/externals/images/tryout.png" alt="">
+                </span>
+                <?php else: ?>
+                <span class="icon-event-tryout">
+                    <img src="application/modules/Ynevent/externals/images/event.png" alt="">
+                </span>
+            <?php endif;?>
+
       </div>
         <div class="ynevents_info">
             <div class="ynevents_title">
@@ -48,9 +58,9 @@
         if($this -> viewer() -> getIdentity()):?>
             <div class="ynevents_button" id = "ynevent_rsvp_listing_<?php echo $event -> getIdentity()?>">
                <?php echo $this -> action('list-rsvp', 'widget', 'ynevent', array( 'id' => $event -> getIdentity(), 'widget' => 'changeRsvpListing'));?>
-            </div>
             <?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $event ->getGuid()),'default', true);?>
 			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
+            </div>
         <?php endif;?>
     </li>
     <?php endforeach; ?>
