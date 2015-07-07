@@ -263,7 +263,7 @@ else {
                         ?>
                      </li>
                      <?php endif;?>
-                     <?php if ($this->viewer()->getIdentity()) :?>
+                     <?php if ($this->viewer()->getIdentity() && ($this->viewer()->getIdentity() != $this -> subject()->getIdentity())) :?>
                  	<li>
                         <?php echo $this->htmlLink(array(
                             'route' => 'user_general',
