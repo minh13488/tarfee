@@ -16,8 +16,8 @@ class Ynevent_Widget_BrowseSearchController extends Engine_Content_Widget_Abstra
 		}
 		$this -> view -> categories = $categories;
 		$this -> view -> by_authors = $by_authors;
-		$this -> view -> search = isset($params['search'])?$params['search']:'';
-		$this -> view -> page = isset($params['search'])?$params['search']:1;
+		$this -> view -> keyword = isset($params['keyword'])?$params['keyword']:'';
+		$this -> view -> page = isset($params['page'])?$params['page']:1;
 	}
 
 }

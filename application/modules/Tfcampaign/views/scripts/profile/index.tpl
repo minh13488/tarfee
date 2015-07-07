@@ -1,10 +1,11 @@
 <?php $campaign = $this -> campaign;?>
-
 <div class="tfcampaign_detail">
-	
-
 <div class="tfcampaign_title">
-	<?php echo $this -> itemPhoto($campaign);?>
+	<?php 
+	if($campaign -> getSport())
+		echo $this -> itemPhoto($campaign -> getSport(), 'thumb.icon');
+	else
+		echo $this -> itemPhoto($campaign);?>
 	<?php echo $campaign;?>
 	<div class="tfcampaign_author">
         <?php echo $this->translate('by') ?>
@@ -46,8 +47,8 @@
 			</li>
 
 			<li>
-				<span><?php echo $this -> translate("Age") ;?></span>
-				<p><?php echo $this -> translate("%s - %s YRS", $campaign -> from_age, $campaign -> to_age);?></p>
+				<span><?php echo $this -> translate("Age (Years)") ;?></span>
+				<p><?php echo $this -> translate("%s - %s", date("Y") - $campaign -> from_age, date("Y") - $campaign -> to_age);?></p>
 			</li>
 
 			<?php 
@@ -76,13 +77,13 @@
 			<li>
 			<?php if(!empty($startDateObj)) :?>
 					<span><?php echo $this -> translate('Start Date') ;?></span>
-					<p><?php echo (!is_null($startDateObj)) ?  date('M d Y', $startDateObj -> getTimestamp()) : ''; ?></p>
+					<p><?php echo (!is_null($startDateObj)) ?  date('d M, Y', $startDateObj -> getTimestamp()) : ''; ?></p>
 			<?php endif;?>
 			</li>
 			<li>
 			<?php if(!empty($endDateObj)) :?>
 				<span><?php echo $this -> translate('Closing Date') ;?></span>
-				<p><?php echo (!is_null($endDateObj)) ?  date('M d Y', $endDateObj -> getTimestamp()) : ''; ?></p>
+				<p><?php echo (!is_null($endDateObj)) ?  date('d M, Y', $endDateObj -> getTimestamp()) : ''; ?></p>
 			<?php endif;?>
 			</li>
 		</ul>

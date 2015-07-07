@@ -11,7 +11,7 @@ class Ynevent_Widget_AttendedEventsController extends Engine_Content_Widget_Abst
 	
 	$membership = Engine_Api::_() -> getDbtable('membership', 'ynevent');
 	$select = $membership -> getMembershipsOfSelect($viewer);
-	$select -> where("`endtime` > FROM_UNIXTIME(?)", time()) -> order("starttime ASC") -> group('repeat_group');
+	$select -> where("`endtime` > FROM_UNIXTIME(?)", time()) -> where("rsvp <> 0") -> order("starttime ASC") -> group('repeat_group');
     // Get paginator
     $this->view->paginator = $paginator = Zend_Paginator::factory($select);
 

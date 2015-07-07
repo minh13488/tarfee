@@ -153,54 +153,9 @@ endif;
 	    <?php if($this -> viewer() -> getIdentity()):?>
 	    	<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this -> video ->getGuid()),'default', true);?>
 			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
-			<div id="favorite_<?php echo $this->video -> getIdentity()?>" class="yn_video_popup_btn">
-				<?php if($this->video -> hasFavorite()):?>
-					<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
-				<?php else:?>	
-					<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
-				<?php endif;?>	
-			</div>
 			<!-- Add addthis share-->
         	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
 			<div style="float: right" class="addthis_sharing_toolbox"></div>
-			<script type="text/javascript">
-			   var unfavorite_video = function(videoId)
-			   {
-			   	   var obj = document.getElementById('favorite_' + videoId);
-			   	   obj.innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
-			   	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
-			       var request = new Request.JSON({
-			            'method' : 'post',
-			            'url' :  url,
-			            'data' : {
-			                'video_id' : videoId
-			            },
-			            'onComplete':function(responseObject)
-			            {  
-			                obj.innerHTML = '<a href="javascript:;" onclick="favorite_video('+videoId+')">' + '<?php echo $this->translate("favourite")?>' + '</a>';
-			            }
-			        });
-			        request.send();  
-			   } 
-			   var favorite_video = function(videoId)
-			   {
-			   	   var obj = document.getElementById('favorite_' + videoId);
-			   	   obj.innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
-			   	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
-			       var request = new Request.JSON({
-			            'method' : 'post',
-			            'url' :  url,
-			            'data' : {
-			                'video_id' : videoId
-			            },
-			            'onComplete':function(responseObject)
-			            {  
-			                obj.innerHTML = '<a href="javascript:;" onclick="unfavorite_video('+videoId+')">' + '<?php echo $this->translate("unfavourite")?>' + '</a>';
-			            }
-			        });
-			        request.send();  
-			   }
-			</script>   
 		<?php endif; ?>
 	</div>
 	<div class="video_view video_view_container">
@@ -213,7 +168,6 @@ endif;
 						$this-> video_location1 = $this-> video_location;
 					}
 		    	?> 
-
 		      	<span class="view_html5_player">
 		      		<img class = "thumb_video" src ="<?php echo $this-> video -> getPhotoUrl("thumb.large");?>"/>
 			      	<video id="my_video" class="video-js vjs-default-skin" controls
@@ -247,23 +201,37 @@ endif;
 			            		<p><?php echo $this->video->description; ?></p>
 			        		</div>
 			            <?php endif;?>
-
-
-			            <div class="video_date" style="display: none;">
-			                <?php 
-			                echo $this->translate('Posted') ?>
-			                <?php echo $this->timestamp($this->video->creation_date) ?>
-			                 <?php echo $this->translate(array('%s favorite', '%s favorites', $this->video->favorite_count), $this->locale()->toNumber($this->video->favorite_count)) ?>
-			            </div>
 			             <div class="video-statistic">
 					        <span><?php echo $this->translate(array('%s view','%s views', $this->video->view_count), $this->video->view_count)?></span>
 					        <?php $commentCount = $this->video->comments()->getCommentCount(); ?>
 					        <span><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></span>
+					        <span><?php echo $this->translate(array('%s favorite', '%s favorites', $this->video->favorite_count), $this->locale()->toNumber($this->video->favorite_count)) ?></span>
+					   		<?php 
+					        $totalLike = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($this->video) -> getLikeCount();
+					        $totalDislike = Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> getDislikeCount($this->video);?>
+					        <span><?php echo $this->translate(array('%s like', '%s likes', $totalLike), $totalLike) ?></span>
+					        <span><?php echo $this->translate(array('%s dislike', '%s dislikes', $totalDislike), $totalDislike) ?></span>
 					    </div>
 		    		</div>
-
-
-		            
+		            <div class="button-action-video">
+					    <?php if($this -> viewer() -> getIdentity()):?>
+					    <div id="popup_favorite_<?php echo $this->video -> getIdentity()?>">
+					        <?php if($this->video -> hasFavorite()):?>
+					            <a href="javascript:;" title="<?php echo $this->translate('Unfavorite')?>" style="background:#ff6633;color: #fff" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)">
+					                <i class="fa fa-heart"></i>
+					            </a>
+					        <?php else:?>   
+					            <a href="javascript:;" title="<?php echo $this->translate('Favorite')?>" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)">
+					                <i class="fa fa-heart-o"></i>
+					            </a>
+					        <?php endif;?>  
+					    </div>
+					
+					    <div id="popup_like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
+					        <?php echo $this -> action('list-likes', 'video', 'ynvideo', array( 'id' => $this -> video -> getIdentity()));?>
+					    </div>
+					    <?php endif;?>
+					</div>
 		            <?php if($this -> video -> parent_type != "user_playercard") :?>
 		             <div id="video_rating" class="rating ynvideo_rating" onmouseout="rating_out();">
 		                <span id="rate_1" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(1);"<?php endif; ?> onmouseover="rating_over(1);"></span>
@@ -359,9 +327,6 @@ endif;
 	    </div>
 	    
 	    <div class="ynvideo_popup_right">
-	    	<!-- <div class="suggest_videos" style="display: none">
-	    		<?php //echo $this->content()->renderWidget('ynvideo.show-same-poster'); ?>
-	    	</div> -->
 	    	<div class="related_videos">
 	    	<?php echo $this->content()->renderWidget('ynvideo.show-same-categories'); ?>
 	    	</div>
@@ -375,5 +340,68 @@ endif;
     jQuery('.tf_video_rating').click(function() {
         jQuery('.ynvideo_rating_player').slideToggle(400);
     });
+</script>
 
+<script type="text/javascript">
+   var unfavorite_video = function(videoId)
+   {
+   	   var obj = document.getElementById('popup_favorite_' + videoId);
+   	   obj.innerHTML = '<a href="javascript:;" style="background:#ff6633; color: #fff"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
+   	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
+       var request = new Request.JSON({
+            'method' : 'post',
+            'url' :  url,
+            'data' : {
+                'video_id' : videoId
+            },
+            'onComplete':function(responseObject)
+            {  
+                obj.innerHTML = '<a href="javascript:;" title="<?php echo $this->translate("Favourite")?>" onclick="favorite_video('+videoId+')">' + '<i class="fa fa-heart-o"></i>' + '</a>';
+            }
+        });
+        request.send();  
+   } 
+   var favorite_video = function(videoId)
+   {
+   	   var obj = document.getElementById('popup_favorite_' + videoId);
+   	   obj.innerHTML = '<a href="javascript:;"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
+   	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
+       var request = new Request.JSON({
+            'method' : 'post',
+            'url' :  url,
+            'data' : {
+                'video_id' : videoId
+            },
+            'onComplete':function(responseObject)
+            {  
+                obj.innerHTML = '<a href="javascript:;" style="background:#ff6633;color: #fff" title="<?php echo $this->translate("Unfavourite")?>" onclick="unfavorite_video('+videoId+')">' + '<i class="fa fa-heart"></i>' + '</a>';
+            }
+        });
+        request.send();  
+   }
+   
+   var tempLike = 0;
+   var video_like = function(id, action)
+   {
+   		if (tempLike == 0) 
+   		{
+   			tempLike = 1;
+   			if ($(action + '_video_' + id)) {
+				$(action + '_video_' + id).innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
+			}
+			var url = en4.core.baseUrl + 'ynvideo/video/' + action;
+   			en4.core.request.send(new Request.JSON({
+				url : url,
+				data : {
+					format : 'json',
+					id : id
+				},
+				onComplete : function(e) {
+					tempLike = 0;
+				}
+			}), {
+				'element' : $('popup_like_unsure_dislike_' + id)
+			});
+		}
+   }
 </script>
