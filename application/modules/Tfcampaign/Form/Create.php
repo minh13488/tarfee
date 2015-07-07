@@ -144,14 +144,6 @@ class Tfcampaign_Form_Create extends Engine_Form
 	));
 	
 	
-	$this -> addElement('Checkbox', 'photo_required', array(
-        'label' => 'Photo Required',
-    )); 
-	
-	$this -> addElement('Checkbox', 'video_required', array(
-        'label' => 'Video Required',
-    )); 
-	
 	$this->addElement('Select', 'percentage', array(
         'label' => 'Matching Percentage',
         'description' => 'The minimum percentage of matching.',

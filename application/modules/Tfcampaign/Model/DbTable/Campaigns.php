@@ -120,12 +120,12 @@ class Tfcampaign_Model_DbTable_Campaigns extends Engine_Db_Table {
     		$select->where('campaign.country_id = ?', $params['country_id']);
     	}
 		
-		if(isset($params['province_id']) && $params['province_id'] != '') 
+		if(isset($params['province_id']) && $params['province_id'] != '0') 
     	{
     		$select->where('campaign.province_id = ?', $params['province_id']);
     	}
 		
-		if(isset($params['city_id']) && $params['city_id'] != '') 
+		if(isset($params['city_id']) && $params['city_id'] != '0') 
     	{
     		$select->where('campaign.city_id = ?', $params['city_id']);
     	}
