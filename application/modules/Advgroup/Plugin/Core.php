@@ -385,12 +385,7 @@ class Advgroup_Plugin_Core
 								$module_video = "video";
 							}
 							$key = 'advgroup_predispatch_url:' . $module_video . '.index.view';
-							$value = $view -> url(array(
-								'controller' => 'video',
-								'action' => 'list',
-								'group_id' => $group_id,
-							), 'group_extended', true);
-							$_SESSION[$key] = $value;
+							$_SESSION[$key] = $group -> getHref();
 							break;		
 					}
 				}

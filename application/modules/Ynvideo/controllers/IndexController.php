@@ -675,32 +675,6 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			'parent_id' => $video -> parent_id
 		));
 
-		// fill in category and subcategory for the form
-		$this -> view -> categories = $categories = Engine_Api::_() -> getDbTable('categories', 'ynvideo') -> getAllCategoriesAndSortByLevel();
-		$categoryElement = $form -> getElement('category_id');
-		$categoryElement -> addMultiOption(0, '');
-		foreach ($categories as $category)
-		{
-			if ($category -> parent_id == 0)
-			{
-				$categoryElement -> addMultiOption($category -> getIdentity(), $category -> category_name);
-			}
-		}
-
-		$subCategoryElement = $form -> getElement('subcategory_id');
-		$subCategoryElement -> setRegisterInArrayValidator(false);
-
-		if ($video -> category_id != $video -> subcategory_id)
-		{
-			foreach ($categories as $category)
-			{
-				if ($category -> parent_id != 0)
-				{
-					$subCategoryElement -> addMultiOption($category -> getIdentity(), $category -> category_name);
-				}
-			}
-		}
-
 		if (!$this -> getRequest() -> isPost())
 		{
 			$this -> view -> status = false;
@@ -809,6 +783,14 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		{
 			$group = $video -> getParent('group');
 			$this -> _redirectCustom($group);
+		}
+		elseif($video -> parent_type == 'user_playercard')
+		{
+			$user_playercard = $video -> getParent('group');
+			$this -> _redirectCustom($user_playercard);
+		}
+		elseif($video -> parent_type == 'user_library') {
+			$this -> _redirectCustom($video -> getOwner());
 		}
 
 		return $this -> _helper -> redirector -> gotoRoute(array('action' => 'manage'), 'video_general', true);

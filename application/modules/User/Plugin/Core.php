@@ -300,62 +300,62 @@ class User_Plugin_Core
 		
 		$table = Engine_Api::_() -> getDbTable('mappings', 'user');
 			
-			$subject_id = $library_id =  $request -> getParam("subject_id", null);
-			$typeOwner = $request -> getParam("parent_type", null);
-			
-			if ($typeOwner == 'user_library' || $typeOwner == 'user_playercard')
+		$subject_id = $library_id =  $request -> getParam("subject_id", null);
+		$typeOwner = $request -> getParam("parent_type", null);
+		
+		if ($typeOwner == 'user_library' || $typeOwner == 'user_playercard')
+		{
+			if ($subject_id)
 			{
-				if ($subject_id)
+				$type = $payload -> getType();
+				$viewer = Engine_Api::_() -> user() -> getViewer();
+				switch ($type) 
 				{
-					$type = $payload -> getType();
-					$viewer = Engine_Api::_() -> user() -> getViewer();
-					switch ($type) 
-					{
-						case 'video':
-							$row = $table -> createRow();
-						    $row -> setFromArray(array(
-						       'user_id' => $viewer -> getIdentity(),
-						       'item_id' => $payload -> getIdentity(),
-						       'item_type' => 'video',
-						       'owner_id' => $subject_id,				       
-			       			   'owner_type' => $typeOwner,		
-						       'creation_date' => date('Y-m-d H:i:s'),
-						       'modified_date' => date('Y-m-d H:i:s'),
-						       ));
-							$row -> save();
-							
-							// Rebuild privacy
-							$actionTable = Engine_Api::_() -> getDbtable('actions', 'activity');
-							$video = Engine_Api::_() -> getItem('video', $payload -> getIdentity());
-							foreach ($actionTable->getActionsByObject($video) as $action)
-							{
-								$actionTable -> resetActivityBindings($action);
-							}
-							
-							if(Engine_Api::_() -> hasModuleBootstrap('ynvideo'))
-							{
-								$module_video = "ynvideo";
-							}
-							else 
-							{
-								$module_video = "video";
-							}
-							
-							if($payload -> type == 0)
-                                $key = 'user_predispatch_url:' . $module_video . '.index.manage';
-                            else
-                                $key = 'user_predispatch_url:' . $module_video . '.index.view';
-							
-							$tab = $request -> getParam("tab", null);
-							if(isset($tab) && !empty($tab)) {
-								$value = $viewer -> getHref().'/view/tab/'.$tab;
-							} else {
-								$value = $viewer -> getHref();
-							}
-							$_SESSION[$key] = $value;
-							break;
-					}
+					case 'video':
+						$row = $table -> createRow();
+					    $row -> setFromArray(array(
+					       'user_id' => $viewer -> getIdentity(),
+					       'item_id' => $payload -> getIdentity(),
+					       'item_type' => 'video',
+					       'owner_id' => $subject_id,				       
+		       			   'owner_type' => $typeOwner,		
+					       'creation_date' => date('Y-m-d H:i:s'),
+					       'modified_date' => date('Y-m-d H:i:s'),
+					       ));
+						$row -> save();
+						
+						// Rebuild privacy
+						$actionTable = Engine_Api::_() -> getDbtable('actions', 'activity');
+						$video = Engine_Api::_() -> getItem('video', $payload -> getIdentity());
+						foreach ($actionTable->getActionsByObject($video) as $action)
+						{
+							$actionTable -> resetActivityBindings($action);
+						}
+						
+						if(Engine_Api::_() -> hasModuleBootstrap('ynvideo'))
+						{
+							$module_video = "ynvideo";
+						}
+						else 
+						{
+							$module_video = "video";
+						}
+						
+						if($payload -> type == 0)
+                            $key = 'user_predispatch_url:' . $module_video . '.index.manage';
+                        else
+                            $key = 'user_predispatch_url:' . $module_video . '.index.view';
+						
+						$tab = $request -> getParam("tab", null);
+						if(isset($tab) && !empty($tab)) {
+							$value = $viewer -> getHref().'/view/tab/'.$tab;
+						} else {
+							$value = $viewer -> getHref();
+						}
+						$_SESSION[$key] = $value;
+						break;
 				}
 			}
+		}
 	}
 }

@@ -232,12 +232,56 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 		<?php if(count($playercardVideos)):?>
 			<ul style="border: 5px solid #eaeaea;" class="videos_browse">
 			 <?php foreach ($playercardVideos as $item): ?>
-		            <?php
-		            echo $this->partial('_player_video_listing.tpl', 'user', array(
-		                'video' => $item,
-		                'player' => $player,
-		            ));
-		            ?>
+		           <div class="ynvideo_thumb_wrapper video_thumb_wrapper">
+					    <?php
+					    if ($item->photo_id) {
+					        echo $this->htmlLink($item->getPopupHref(), $this->itemPhoto($item, 'thumb.large'), array('class'=>'smoothbox'));
+					    } else {
+					        echo '<img alt="" src="' . $this->escape($this->layout()->staticBaseUrl) . 'application/modules/Ynvideo/externals/images/video.png">';
+					    }
+					    ?>
+					    
+					</div>
+					<div class="video-title">
+						<?php echo $this->htmlLink($item->getPopupHref(), $item->getTitle(), array('class'=>'smoothbox'))?>
+					</div>
+					<div class="video-statistic-rating">
+						<div class="video-statistic">
+							<?php echo $this->translate(array('%s view','%s views', $item->view_count), $item->view_count)?>
+							<br>
+							<?php $commentCount = $item->comments()->getCommentCount(); ?>
+							<?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?>
+						</div>
+					
+						<?php 
+					    	echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $item));
+						?>
+					</div>
+					<?php if($item -> isOwner($this->viewer())) :?>
+					<div class="tf_btn_action">
+					<?php
+						echo $this->htmlLink(array(
+							'route' => 'video_general',
+							'action' => 'edit',
+							'video_id' => $item->video_id,
+							'parent_type' =>'user_playercard',
+							'subject_id' =>  $player->playercard_id,
+							'tab' => 724
+					    ), '<i class="fa fa-pencil-square-o fa-lg"></i>', array('class' => 'tf_button_action'));
+					?>
+				    </div>
+				    <div class="tf_btn_action">
+					<?php
+						echo $this->htmlLink(array(
+					 	        'route' => 'video_general', 
+					         	'action' => 'delete', 
+					         	'video_id' => $item->video_id, 
+					         	'format' => 'smoothbox'), 
+					         	'<i class="fa fa-trash-o fa-lg"></i>', array('class' => 'tf_button_action smoothbox'
+					     ));
+					?>
+					</div>
+					<?php endif;?>
 			<?php endforeach; ?>
 			</ul>
 		<?php endif;?>

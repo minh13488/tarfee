@@ -298,7 +298,7 @@
 			</div>
 			<div class="club-info-general">
 				<div class="club-title">
-					<?php echo $item->getTitle()?>
+					<?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>
 				</div>
 				<?php if ($item->getCountry()) :?>
 				<div class="club-country">
