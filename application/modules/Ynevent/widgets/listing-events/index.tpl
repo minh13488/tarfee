@@ -10,11 +10,24 @@
                       <?php echo $this->htmlLink($event -> getOwner()->getHref(), $event -> getOwner() ->getTitle()) ?>
                 </div>
                 <div class='members_date'>
-                  <?php echo $this->timestamp($event->creation_date); ?>
+                  <?php 
+					$startDateObj = null;
+					if (!is_null($event->starttime) && !empty($event->starttime)) 
+					{
+						$startDateObj = new Zend_Date(strtotime($event->starttime));	
+					}
+					if( $this->viewer() && $this->viewer()->getIdentity() ) {
+						$tz = $this->viewer()->timezone;
+						if (!is_null($startDateObj))
+						{
+							$startDateObj->setTimezone($tz);
+						}
+				    }
+					if(!empty($startDateObj)) :?>
+						<?php echo (!is_null($startDateObj)) ?  date('d M, Y H:i', $startDateObj -> getTimestamp()) : ''; ?>
+					<?php endif; ?>
                 </div>
             </div>
-            <!-- 0 -> Event or 1 => Tryout??-->
-            <?php //echo $event -> type_id;?>
             <?php if($event -> type_id == 1) :?>
                 <span class="icon-event-tryout">
                     <img src="application/modules/Ynevent/externals/images/tryout.png" alt="">

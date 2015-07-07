@@ -5,7 +5,7 @@
 	if($campaign -> getSport())
 		echo $this -> itemPhoto($campaign -> getSport(), 'thumb.icon');
 	else
-		echo $this -> itemPhoto($campaign);?>
+		echo $this -> itemPhoto($campaign, 'thumb.icon');?>
 	<?php echo $campaign;?>
 	<div class="tfcampaign_author">
         <?php echo $this->translate('by') ?>

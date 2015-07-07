@@ -9,7 +9,22 @@
         <div class="ynevents_time_place_rating">
             <div class="ynevents_time_place">
                 <span>
-                    <?php echo $this->locale()->toDate($event->starttime, array('size' => 'long')) ?>
+                   <?php 
+					$startDateObj = null;
+					if (!is_null($event->starttime) && !empty($event->starttime)) 
+					{
+						$startDateObj = new Zend_Date(strtotime($event->starttime));	
+					}
+					if( $this->viewer() && $this->viewer()->getIdentity() ) {
+						$tz = $this->viewer()->timezone;
+						if (!is_null($startDateObj))
+						{
+							$startDateObj->setTimezone($tz);
+						}
+				    }
+					if(!empty($startDateObj)) :?>
+						<?php echo (!is_null($startDateObj)) ?  date('d M, Y H:i', $startDateObj -> getTimestamp()) : ''; ?>
+					<?php endif; ?>
                 </span>
             </div>
         </div>
