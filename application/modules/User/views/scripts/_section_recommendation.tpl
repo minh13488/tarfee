@@ -14,6 +14,7 @@
 	$request = ($manage || !$viewer->getIdentity()) ? false : $user->getRecommendation($viewer->getIdentity());
 	$canRecommendation = ($manage) ? false : ($viewer->getIdentity() && (!$request || $request->request) && $viewer->isFriend($user->getIdentity()));
 ?>
+<?php if (($manage || count($recommendations) || $canRecommendation) && $enable) : ?>
 <div class="icon_section_profile"><i class="fa fa-comments-o"></i></div>
 <table>
   <tr>
@@ -22,7 +23,6 @@
   	<th><hr></th>
   </tr>
 </table>
-<?php if (($manage || count($recommendations) || $canRecommendation) && $enable) : ?>
 <div class="profile-section-button">
 <?php if ($canAsk) :?>
 	<span class="manage-section-button">

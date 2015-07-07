@@ -931,4 +931,17 @@ class User_IndexController extends Core_Controller_Action_Standard
 			'messages' => array($message)
 		));
 	}
+	
+	public function viewBasicAction() {
+		// In smoothbox
+		if (!$this -> _helper -> requireUser() -> isValid())
+            return;
+		$this -> _helper -> layout -> setLayout('default-simple');
+		
+		if(!Engine_Api::_()->core()->hasSubject()) 
+		{
+	    	return $this->_helper->requireSubject()->forward();
+		}	
+	    $this->view->subject = $subject = Engine_Api::_()->core()->getSubject();
+	}
 }

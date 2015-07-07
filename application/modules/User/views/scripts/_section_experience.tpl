@@ -10,6 +10,7 @@
 	$enable = Engine_Api::_()->user()->checkSectionEnable($user, 'experience');
 ?>
 
+<?php if (($manage || count($experience)) && $enable) : ?>
 
 <div class="icon_section_profile"><i class="fa fa-suitcase"></i></div>
 <table>
@@ -19,7 +20,7 @@
   	<th><hr></th>
   </tr>
 </table>
-<?php if (($manage || count($experience)) && $enable) : ?>
+
 <div class="profile-section-button">
 <?php if ($manage) :?>
 	<span class="manage-section-button">

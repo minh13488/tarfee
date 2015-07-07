@@ -9,7 +9,7 @@
 	$offerServices = $user->getAllOfferServices();
 	$services = Engine_Api::_()->getDbTable('services', 'user')->getAllServices();
 ?>
-
+ <?php if (($manage || count($offerServices)) && count($services)) : ?>
 <div class="icon_section_profile"><i class="fa fa-file-text-o"></i></div>
 <table>
   <tr>
@@ -18,7 +18,6 @@
   	<th><hr></th>
   </tr>
 </table>
- <?php if (($manage || count($offerServices)) && count($services)) : ?>
 <div class="profile-section-button">
 <?php if ($manage) :?>
 	<span class="manage-section-button">
