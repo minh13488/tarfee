@@ -14,7 +14,17 @@
                 </div>
             </div>
             <!-- 0 -> Event or 1 => Tryout??-->
-            <?php echo $event -> type_id;?>
+            <?php //echo $event -> type_id;?>
+            <?php if($event -> type_id == 1) :?>
+                <span class="icon-event-tryout">
+                    <img src="application/modules/Ynevent/externals/images/tryout.png" alt="">
+                </span>
+                <?php else: ?>
+                <span class="icon-event-tryout">
+                    <img src="application/modules/Ynevent/externals/images/event.png" alt="">
+                </span>
+            <?php endif;?>
+
       </div>
         <div class="ynevents_info">
             <div class="ynevents_title">

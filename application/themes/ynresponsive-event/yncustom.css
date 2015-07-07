@@ -3727,6 +3727,8 @@ body#global_page_advgroup-profile-index{
 				display: block;
 				border-bottom: 1px solid $theme_border_medium_color;
 				padding: 15px;
+				overflow: hidden;
+				position: relative;
 
 				a.members_thumb{
 					float: left;
@@ -3757,6 +3759,12 @@ body#global_page_advgroup-profile-index{
 						}
 					}
 				}
+			}
+
+			.icon-event-tryout{
+				position: absolute;
+				right: 20px;
+				top: 30px;
 			}
 
 			.ynevents_info{
