@@ -261,7 +261,7 @@ endif;
 		    		</div>
 		            <div class="button-action-video">
 					    <?php if($this -> viewer() -> getIdentity()):?>
-					    <div id="favorite_<?php echo $this->video -> getIdentity()?>">
+					    <div id="popup_favorite_<?php echo $this->video -> getIdentity()?>">
 					        <?php if($this->video -> hasFavorite()):?>
 					            <a href="javascript:;" title="<?php echo $this->translate('Unfavorite')?>" style="background:#ff6633;color: #fff" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)">
 					                <i class="fa fa-heart"></i>
@@ -273,7 +273,7 @@ endif;
 					        <?php endif;?>  
 					    </div>
 					
-					    <div id="like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
+					    <div id="popup_like_unsure_dislike_<?php echo $this -> video -> getIdentity()?>">
 					        <?php echo $this -> action('list-likes', 'video', 'ynvideo', array( 'id' => $this -> video -> getIdentity()));?>
 					    </div>
 					    <?php endif;?>
@@ -391,7 +391,7 @@ endif;
 <script type="text/javascript">
    var unfavorite_video = function(videoId)
    {
-   	   var obj = document.getElementById('favorite_' + videoId);
+   	   var obj = document.getElementById('popup_favorite_' + videoId);
    	   obj.innerHTML = '<a href="javascript:;" style="background:#ff6633; color: #fff"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
    	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
        var request = new Request.JSON({
@@ -409,7 +409,7 @@ endif;
    } 
    var favorite_video = function(videoId)
    {
-   	   var obj = document.getElementById('favorite_' + videoId);
+   	   var obj = document.getElementById('popup_favorite_' + videoId);
    	   obj.innerHTML = '<a href="javascript:;"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
    	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
        var request = new Request.JSON({
@@ -446,7 +446,7 @@ endif;
 					tempLike = 0;
 				}
 			}), {
-				'element' : $('like_unsure_dislike_' + id)
+				'element' : $('popup_like_unsure_dislike_' + id)
 			});
 		}
    }
