@@ -74,6 +74,53 @@ class User_AdminRequestsController extends Core_Controller_Action_Admin {
         }
     }
 	
+	public function emailAction() {
+        // In smoothbox
+        $this->_helper->layout->setLayout('admin-simple');
+        $id = $this->_getParam('id');
+        $this->view->request_id = $id;
+        // Check post
+        if( $this->getRequest()->isPost()) {
+        	$table = Engine_Api::_()->getDbTable('inviterequests', 'user');
+            $db = Engine_Db_Table::getDefaultAdapter();
+            $db->beginTransaction();
+			$post =  $this->getRequest()->getPost();
+            try {
+            	$viewer = Engine_Api::_()->user()->getViewer();
+				$request = Engine_Api::_()->getItem('user_inviterequest', $id);
+            	$message = trim($post['message']);
+		        $mailType = 'user_email_request';
+		        $mailParams = array(
+		          	'host' => $_SERVER['HTTP_HOST'],
+		          	'email' => $email,
+		          	'date' => time(),
+		          	'sender_email' => $request->email,
+		          	'sender_title' => $viewer->getTitle(),
+		          	'sender_link' => $viewer->getHref(),
+		          	'message' => $message,
+		        );
+		        
+		        Engine_Api::_()->getApi('mail', 'core')->sendSystem(
+		          	$request->email,
+		          	$mailType,
+		          	$mailParams
+		        );
+                $db->commit();
+            }
+
+            catch(Exception $e) {
+                $db->rollBack();
+                throw $e;
+            }
+
+            $this->_forward('success', 'utility', 'core', array(
+                'smoothboxClose' => true,
+                'parentRefresh'=> true,
+                'messages' => array('Email has been sent to requester.')
+            ));
+        }
+    }
+
 	public function approveAction() {
         // In smoothbox
         $this->_helper->layout->setLayout('admin-simple');

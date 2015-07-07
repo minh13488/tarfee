@@ -42,7 +42,7 @@ class Ynfbpp_Api_Core
         return $model -> getAdapter() -> fetchPairs($select);
     }
 
-    protected function _allowMessage($viewer, $subject)
+    public function _allowMessage($viewer, $subject)
     {
         // Not logged in
         if (!$viewer -> getIdentity() || $viewer -> getGuid(false) === $subject -> getGuid(false))
@@ -123,7 +123,7 @@ class Ynfbpp_Api_Core
         return true;
     }
 
-	protected function _allowMail($viewer, $subject) {
+	public function _allowMail($viewer, $subject) {
         // Not logged in
         if (!$viewer -> getIdentity() || $viewer -> getGuid(false) === $subject -> getGuid(false)) {
             return false;

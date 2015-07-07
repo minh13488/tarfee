@@ -67,7 +67,13 @@ function deleteSelected(){
                     array('route' => 'admin_default', 'module' => 'user', 'controller' => 'requests', 'action' => 'reject', 'id' => $item->inviterequest_id),
                     $this->translate('reject'),
                     array('class' => 'smoothbox')
-                )?>  
+                )?>
+                  | 
+                <?php echo $this->htmlLink(
+                    array('route' => 'admin_default', 'module' => 'user', 'controller' => 'requests', 'action' => 'email', 'id' => $item->inviterequest_id),
+                    $this->translate('send mail'),
+                    array('class' => 'smoothbox')
+                )?>   
                 </td>
             </tr>
         <?php endforeach; ?>

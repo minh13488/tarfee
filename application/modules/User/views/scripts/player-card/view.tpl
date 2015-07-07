@@ -90,6 +90,11 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 					echo implode(' | ', $arr_tmp);
 				?>
 			</p>
+			
+			<div class="nickname">
+			 	<?php echo $this->translate('By') ?>
+	        	<?php echo $this->htmlLink($player -> getOwner()->getHref(), $player -> getOwner() ->getTitle()) ?>
+	     	</div>
 		</div>
 		<div class="playercard_statistics">
 			<ul>
@@ -128,32 +133,9 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 			</div>
 		</div>
 		<div style="font-weight: bold">
-			<?php if($this -> viewer() -> getIdentity()):?>
-			<?php echo $this->htmlLink(array(
-	            'route' => 'messages_general',
-	            'action' => 'compose',
-	            'to' => $player -> getOwner() ->getIdentity()
-	        ), '<i class="fa fa-envelope-o"></i>'. $this -> translate('Message'), array(
-	            'class' => 'smoothbox'
-	        ));
-			?>
-			<?php endif;?>
 			<!-- Add addthis share-->
 			<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
 			<div class="addthis_sharing_toolbox"></div>
-			<!--
-			<?php echo $this->htmlLink(array(
-	            'route' => 'default',
-	            'module' => 'activity',
-	            'controller' => 'index',
-				'action' => 'share',
-				'type' => 'user_playercard',
-				'id' => $player -> getIdentity(),
-	        ), '<i class="fa fa-share-square-o"></i>'. $this -> translate('Share'), array(
-	            'class' => 'smoothbox'
-	        ));
-			?>
-			-->
 		</div>
 		 <div class="playercard_options">
 	    	<?php 
