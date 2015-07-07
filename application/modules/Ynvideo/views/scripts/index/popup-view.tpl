@@ -153,54 +153,9 @@ endif;
 	    <?php if($this -> viewer() -> getIdentity()):?>
 	    	<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this -> video ->getGuid()),'default', true);?>
 			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
-			<div id="favorite_<?php echo $this->video -> getIdentity()?>" class="yn_video_popup_btn">
-				<?php if($this->video -> hasFavorite()):?>
-					<a href="javascript:;" onclick="unfavorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('unfavorite')?></a>
-				<?php else:?>	
-					<a href="javascript:;" onclick="favorite_video(<?php echo $this->video -> getIdentity()?>)"><?php echo $this->translate('favorite')?></a>
-				<?php endif;?>	
-			</div>
 			<!-- Add addthis share-->
         	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
 			<div style="float: right" class="addthis_sharing_toolbox"></div>
-			<script type="text/javascript">
-			   var unfavorite_video = function(videoId)
-			   {
-			   	   var obj = document.getElementById('favorite_' + videoId);
-			   	   obj.innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
-			   	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
-			       var request = new Request.JSON({
-			            'method' : 'post',
-			            'url' :  url,
-			            'data' : {
-			                'video_id' : videoId
-			            },
-			            'onComplete':function(responseObject)
-			            {  
-			                obj.innerHTML = '<a href="javascript:;" onclick="favorite_video('+videoId+')">' + '<?php echo $this->translate("favourite")?>' + '</a>';
-			            }
-			        });
-			        request.send();  
-			   } 
-			   var favorite_video = function(videoId)
-			   {
-			   	   var obj = document.getElementById('favorite_' + videoId);
-			   	   obj.innerHTML = '<img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" />';
-			   	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
-			       var request = new Request.JSON({
-			            'method' : 'post',
-			            'url' :  url,
-			            'data' : {
-			                'video_id' : videoId
-			            },
-			            'onComplete':function(responseObject)
-			            {  
-			                obj.innerHTML = '<a href="javascript:;" onclick="unfavorite_video('+videoId+')">' + '<?php echo $this->translate("unfavourite")?>' + '</a>';
-			            }
-			        });
-			        request.send();  
-			   }
-			</script>   
 		<?php endif; ?>
 	</div>
 	<div class="video_view video_view_container">
@@ -213,7 +168,6 @@ endif;
 						$this-> video_location1 = $this-> video_location;
 					}
 		    	?> 
-
 		      	<span class="view_html5_player">
 		      		<img class = "thumb_video" src ="<?php echo $this-> video -> getPhotoUrl("thumb.large");?>"/>
 			      	<video id="my_video" class="video-js vjs-default-skin" controls
