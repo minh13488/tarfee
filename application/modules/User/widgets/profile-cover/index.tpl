@@ -119,66 +119,12 @@ else {
                 <img class="cover_photo thumb_cover profile-cover-picture-span item_photo_album_photo thumb_cover" src="<?php echo $coverPhotoUrl; ?>" style="<?php if ($hasCover) echo 'top: '.$this->user->cover_top.'px'?>" />
         </div><!--tarfee_profile_cover_photo-->
 
-        <div class='status_alt status_parent'>
-            <ul id='main_tabs'>
-	           <?php $direction = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.friends.direction');
-                    if ( $direction == 0 ): ?>
-                	<li>
-                	   <?php if($this->followingCount):?>
-                	      	<a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-following', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
-                		      	<span class="number_tabs"><?php echo $this->locale()->toNumber($this->followingCount);?></span>
-                		      	<div><?php echo $this -> translate('following')?></div>
-                	        </a>
-                        <?php else:?>
-                        	<a href="javascript:void(0)">
-                        		<span class="number_tabs">0</span>
-                        	 	<div><?php echo $this -> translate('following')?></div>
-                        	 </a>
-                        <?php endif;?>
-                	</li>
-                	<li>
-                		<?php if($this->user->member_count):?>
-                	      	<a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-followers', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
-                		      	<span class="number_tabs"><?php echo $this->locale()->toNumber($this->user->member_count);?></span>
-                		      	<div><?php echo $this->translate(array('follower', 'followers', $this->user->member_count),
-                		        	$this->locale()->toNumber($this->user->member_count)) ?></div>
-                	        </a>
-                        <?php else:?>
-                        	<a href="javascript:void(0)">
-                        		<span class="number_tabs">0</span>
-                        	 	<div><?php echo $this -> translate('followers')?></div>
-                        	 </a>
-                        <?php endif;?>
-                	</li>
-                    <?php else:?>
-                    	<li>
-                    		<?php if($this->user->member_count):?>
-                    	      	<a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-friends', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
-                    		      	<span class="number_tabs"><?php echo $this->locale()->toNumber($this->user->member_count);?></span>
-                    		      	<div><?php echo $this->translate(array('friend', 'friends', $this->user->member_count),
-                    		        	$this->locale()->toNumber($this->user->member_count)) ?></div>
-                    	        </a>
-                            <?php else:?>
-                            	<a href="javascript:void(0)">
-                            		<span class="number_tabs">0</span>
-                            	 	<div><?php echo $this -> translate('friends')?></div>
-                            	 </a>
-                            <?php endif;?>
-                    	</li>
-                    <?php endif;?>
-                    <li>
-                       <a>
-                          <span class="number_tabs"><?php echo count($this->user->getEyeOns())?></span>
-                          <div><?php echo $this -> translate("eye on")?></div>
-                       </a>
-                    </li>
-            </ul>
-    	</div>
+
     </div>
 </div><!--tarfee_profile_cover_wrapper-->
 
 <div class="tarfee_profile_avatar_infomation">
-    <div class="tarfee_profile_cover_has_tabs" id="siteuser_main_photo">
+    <div class="tarfee_profile_cover_has_tabs clearfix" id="siteuser_main_photo">
              
         <?php $profileUrl = $this -> user -> getPhotoUrl('thumb.profile');
             if(!$profileUrl){
@@ -194,7 +140,42 @@ else {
 
             <div class="tarfee_profile_cover_tarfee_button">
                 <ul>
-                    <?php $viewer = Engine_Api::_()->user()->getViewer();
+                     <?php if ($this->viewer()->getIdentity() && ($this->viewer()->getIdentity() != $this -> subject()->getIdentity())) :?>
+	                 	<li>
+	                        <?php echo $this->htmlLink(array(
+	                            'route' => 'user_general',
+	                            'action' => 'view-basic',
+	                            'subject' => $this -> subject() ->getGuid()
+	                        ), '<span class="profile_info_button"><i class="fa fa-info-circle"></i></span>', array(
+	                            'class' => 'smoothbox', 'title' => $this -> translate("Basic Information")
+	                        ));
+	                        ?>
+	                     </li>
+                 	<?php endif;?>
+                     <?php if (Engine_Api::_()->ynfbpp()->_allowMessage($this->viewer(), $this -> subject())) :?>
+                 	 <li>
+                        <?php echo $this->htmlLink(array(
+                            'route' => 'messages_general',
+                            'action' => 'compose',
+                            'to' => $this -> subject() ->getIdentity()
+                        ), '<span class="profile_inbox_button"><i class="fa fa-comments"></i></span>', array(
+                            'class' => 'smoothbox', 'title' => $this -> translate("Message")
+                        ));
+                        ?>
+                     </li>
+                     <?php elseif (Engine_Api::_()->ynfbpp()->_allowMail($this->viewer(), $this -> subject())) :?>
+                 	 <li>
+                        <?php echo $this->htmlLink(array(
+                            'route' => 'user_general',
+                            'action' => 'in-mail',
+                            'to' => $this -> subject() ->getIdentity()
+                        ), '<span class="profile_inbox_button"><i class="fa fa-envelope"></i></span>', array(
+                            'class' => 'smoothbox', 'title' => $this -> translate("Email")
+                        ));
+                        ?>
+                     </li>
+                     <?php endif;?>
+                     <?php $viewer = Engine_Api::_()->user()->getViewer();
                         $subject = Engine_Api::_()->core()->getSubject();
                         if(!$viewer -> isSelf($subject)):
                      ?>
@@ -240,44 +221,6 @@ else {
                         ?>
                      </li>
                      <?php endif;?>
-                     <?php if (Engine_Api::_()->ynfbpp()->_allowMessage($this->viewer(), $this -> subject())) :?>
-                 	 <li>
-                        <?php echo $this->htmlLink(array(
-                            'route' => 'messages_general',
-                            'action' => 'compose',
-                            'to' => $this -> subject() ->getIdentity()
-                        ), '<span class="profile_inbox_button"><i class="fa fa-comments"></i></span>', array(
-                            'class' => 'smoothbox', 'title' => $this -> translate("Message")
-                        ));
-                        ?>
-                     </li>
-                     <?php elseif (Engine_Api::_()->ynfbpp()->_allowMail($this->viewer(), $this -> subject())) :?>
-                 	 <li>
-                        <?php echo $this->htmlLink(array(
-                            'route' => 'user_general',
-                            'action' => 'in-mail',
-                            'to' => $this -> subject() ->getIdentity()
-                        ), '<span class="profile_inbox_button"><i class="fa fa-envelope"></i></span>', array(
-                            'class' => 'smoothbox', 'title' => $this -> translate("Email")
-                        ));
-                        ?>
-                     </li>
-                     <?php endif;?>
-                     <!--
-                     <li>
-                        <?php echo $this->htmlLink(array(
-                            'route' => 'default',
-                            'module' => 'activity',
-                            'controller' => 'index',
-                            'action' => 'share',
-                            'type' => 'user',
-                            'id' => $this->subject() -> getIdentity(),
-                        ), '<span class="profile_share_button"><i class="fa fa-rss"></i></span>', array(
-                            'class' => 'smoothbox', 'title' => $this -> translate("Share")
-                        ));
-                        ?>
-                     </li>
-                     -->
                 </ul>
             </div>
         </div>
@@ -286,26 +229,26 @@ else {
                    <a href="<?php echo $this -> user -> getHref();?>">
                       <?php echo $this -> user -> getTitle()?>
                    </a>
-               </h2>
-
                <div class="founder_member">
                     <img src="application/modules/User/externals/images/icon_founder_memeber.png" alt="">
                     <?php echo $this->translate('founder member'); ?>
                </div>
-               <?php
+               </h2>
+
+ <?php
                 $about_me = "";
                 $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($this -> user);
                 foreach( $fieldStructure as $map ) {
-             		$field = $map->getChild();
-             		$value = $field->getValue($this -> user);
-                 	if($field->type == 'about_me') {
-                      	$about_me = $value['value'];
-                 	}
+                    $field = $map->getChild();
+                    $value = $field->getValue($this -> user);
+                    if($field->type == 'about_me') {
+                        $about_me = $value['value'];
+                    }
                 }
-         		?>
-         		<?php if ($about_me != "") :?>
-         			<p style="display: none" ><?php echo $about_me?></p>
-         		<?php endif;?>
+                ?>
+                <?php if ($about_me != "") :?>
+                    <p style="display: none" ><?php echo $about_me?></p>
+                <?php endif;?>
 
                 <div class="account_type">                  
                     <?php if(Engine_Api::_()->authorization()->isAllowed('user', $this->subject(), 'show_badge')):?>
@@ -314,29 +257,87 @@ else {
                             if($badge && strpos($badge,'public/admin') !== false): ?>
                                 <img height="26" src="<?php echo $badge?>" />
                                 <?php echo $this->translate('professional account'); ?>
-                        	<?php endif;?>
-                    	<?php endif;?>
+                            <?php endif;?>
+                        <?php endif;?>
                 </div>
 
                 <div class="verified_account">
-                	<?php if($this->src_img):?>
+                    <?php if($this->src_img):?>
                         <img height="26" src='<?php echo $this->src_img;?>'>
                         <?php echo $this -> translate("verified account");?>
                      <?php endif;?>
                      <?php $menu = new Slprofileverify_Plugin_Menus();
-						$aVerifyButton = $menu->onMenuInitialize_UserProfileVerified();
-                     	?>
+                        $aVerifyButton = $menu->onMenuInitialize_UserProfileVerified();
+                        ?>
                      <?php if($aVerifyButton):?>
-                     	<a href="<?php echo $this->url($aVerifyButton['params'], 
-		                	$aVerifyButton['route'], array());?>" 
-		                	class="<?php echo $aVerifyButton['class'];?> buttonlink"
-		                	title="<?php echo $aVerifyButton['label']; ?>"
-		                	style="background-image: url(<?php echo $aVerifyButton['icon']?>);"
-		                	target=""> 
-		                	<?php echo $aVerifyButton['label'];?>
-	                	</a>
-                 	 <?php endif;?>
+                        <a href="<?php echo $this->url($aVerifyButton['params'], 
+                            $aVerifyButton['route'], array());?>" 
+                            class="<?php echo $aVerifyButton['class'];?> buttonlink"
+                            title="<?php echo $aVerifyButton['label']; ?>"
+                            style="background-image: url(<?php echo $aVerifyButton['icon']?>);"
+                            target=""> 
+                            <?php echo $aVerifyButton['label'];?>
+                        </a>
+                     <?php endif;?>
                 </div>
+                <div class='status_alt status_parent'>
+                    <ul id='main_tabs'>
+                       <?php $direction = Engine_Api::_()->getApi('settings', 'core')->getSetting('user.friends.direction');
+                            if ( $direction == 0 ): ?>
+                            <li>
+                               <?php if($this->followingCount):?>
+                                    <a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-following', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
+                                        <span class="number_tabs"><?php echo $this->locale()->toNumber($this->followingCount);?></span>
+                                        <div><?php echo $this -> translate('following')?></div>
+                                    </a>
+                                <?php else:?>
+                                    <a href="javascript:void(0)">
+                                        <span class="number_tabs">0</span>
+                                        <div><?php echo $this -> translate('following')?></div>
+                                     </a>
+                                <?php endif;?>
+                            </li>
+                            <li>
+                                <?php if($this->user->member_count):?>
+                                    <a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-followers', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
+                                        <span class="number_tabs"><?php echo $this->locale()->toNumber($this->user->member_count);?></span>
+                                        <div><?php echo $this->translate(array('follower', 'followers', $this->user->member_count),
+                                            $this->locale()->toNumber($this->user->member_count)) ?></div>
+                                    </a>
+                                <?php else:?>
+                                    <a href="javascript:void(0)">
+                                        <span class="number_tabs">0</span>
+                                        <div><?php echo $this -> translate('followers')?></div>
+                                     </a>
+                                <?php endif;?>
+                            </li>
+                            <?php else:?>
+                                <li>
+                                    <?php if($this->user->member_count):?>
+                                        <a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-friends', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
+                                            <span class="number_tabs"><?php echo $this->locale()->toNumber($this->user->member_count);?></span>
+                                            <div><?php echo $this->translate(array('friend', 'friends', $this->user->member_count),
+                                                $this->locale()->toNumber($this->user->member_count)) ?></div>
+                                        </a>
+                                    <?php else:?>
+                                        <a href="javascript:void(0)">
+                                            <span class="number_tabs">0</span>
+                                            <div><?php echo $this -> translate('friends')?></div>
+                                         </a>
+                                    <?php endif;?>
+                                </li>
+                            <?php endif;?>
+                            <li>
+                               <a>
+                                  <span class="number_tabs"><?php echo count($this->user->getEyeOns())?></span>
+                                  <div><?php echo $this -> translate("eye on")?></div>
+                               </a>
+                            </li>
+                    </ul>
+                </div>
+
+
+              
          </div>
          <div class="tarfee_profile_club_item">
              <ul>               

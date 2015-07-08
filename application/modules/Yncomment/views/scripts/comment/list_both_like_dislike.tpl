@@ -102,9 +102,8 @@
 					<i class="fa fa-thumbs-up ynfontawesome"></i> <?php echo $this->translate('Like') ?>
 				</a>
 			<?php endif;?>
-			<!-- unsure-->
+			<!-- 
 			&nbsp;&middot;&nbsp; 
-	    		<!--WITHOUT ICON-->
 	    		<?php if($this->showLikeWithoutIcon):?>
 					<a id="unsure_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>">
 						<?php echo $this->translate('Unsure') ?>
@@ -113,7 +112,7 @@
 					<a id="unsure_comments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>">
 						<i class="fa fa-meh-o ynfontawesome"></i> <?php echo $this->translate('Unsure') ?>
 					</a>
-	    		<?php endif; ?>
+	    		<?php endif; ?> -->
 	           &nbsp;&middot;&nbsp; 
 	    		<!--WITHOUT ICON-->
 	    		<?php if($this->showLikeWithoutIcon):?>

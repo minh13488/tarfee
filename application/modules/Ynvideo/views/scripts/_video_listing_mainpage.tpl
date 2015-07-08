@@ -79,12 +79,6 @@
         <?php echo $this->translate('By') ?>
         <?php echo $this->htmlLink($user->getHref(), htmlspecialchars ($this->string()->truncate($user->getTitle(), 25)), array('title' => $user->getTitle())) ?>
     <?php endif; ?>
-    <?php 
-        $session = new Zend_Session_Namespace('mobile');
-         if(!$session -> mobile)
-         {
-    ?>
-    <?php } ?>
 </div>
 <?php 
 Engine_Api::_() -> core() -> clearSubject();
