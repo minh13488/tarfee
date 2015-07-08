@@ -12,7 +12,7 @@
 	$skype = $user->skype;
 ?>
 
-<?php if ($canView && !empty($contact_num)) : ?>
+<?php if ($manage || (!empty($contact_num) && !empty($params['view']))): ?>
 <?php if (!empty($params['view'])) $manage = false;?>
 <div class="icon_section_profile"><i class="fa fa-phone"></i></div>
 <table>

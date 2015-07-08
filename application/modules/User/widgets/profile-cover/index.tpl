@@ -140,7 +140,42 @@ else {
 
             <div class="tarfee_profile_cover_tarfee_button">
                 <ul>
-                    <?php $viewer = Engine_Api::_()->user()->getViewer();
+                     <?php if ($this->viewer()->getIdentity() && ($this->viewer()->getIdentity() != $this -> subject()->getIdentity())) :?>
+	                 	<li>
+	                        <?php echo $this->htmlLink(array(
+	                            'route' => 'user_general',
+	                            'action' => 'view-basic',
+	                            'subject' => $this -> subject() ->getGuid()
+	                        ), '<span class="profile_info_button"><i class="fa fa-info-circle"></i></span>', array(
+	                            'class' => 'smoothbox', 'title' => $this -> translate("Basic Information")
+	                        ));
+	                        ?>
+	                     </li>
+                 	<?php endif;?>
+                     <?php if (Engine_Api::_()->ynfbpp()->_allowMessage($this->viewer(), $this -> subject())) :?>
+                 	 <li>
+                        <?php echo $this->htmlLink(array(
+                            'route' => 'messages_general',
+                            'action' => 'compose',
+                            'to' => $this -> subject() ->getIdentity()
+                        ), '<span class="profile_inbox_button"><i class="fa fa-comments"></i></span>', array(
+                            'class' => 'smoothbox', 'title' => $this -> translate("Message")
+                        ));
+                        ?>
+                     </li>
+                     <?php elseif (Engine_Api::_()->ynfbpp()->_allowMail($this->viewer(), $this -> subject())) :?>
+                 	 <li>
+                        <?php echo $this->htmlLink(array(
+                            'route' => 'user_general',
+                            'action' => 'in-mail',
+                            'to' => $this -> subject() ->getIdentity()
+                        ), '<span class="profile_inbox_button"><i class="fa fa-envelope"></i></span>', array(
+                            'class' => 'smoothbox', 'title' => $this -> translate("Email")
+                        ));
+                        ?>
+                     </li>
+                     <?php endif;?>
+                     <?php $viewer = Engine_Api::_()->user()->getViewer();
                         $subject = Engine_Api::_()->core()->getSubject();
                         if(!$viewer -> isSelf($subject)):
                      ?>
@@ -186,56 +221,6 @@ else {
                         ?>
                      </li>
                      <?php endif;?>
-                     <?php if (Engine_Api::_()->ynfbpp()->_allowMessage($this->viewer(), $this -> subject())) :?>
-                 	 <li>
-                        <?php echo $this->htmlLink(array(
-                            'route' => 'messages_general',
-                            'action' => 'compose',
-                            'to' => $this -> subject() ->getIdentity()
-                        ), '<span class="profile_inbox_button"><i class="fa fa-comments"></i></span>', array(
-                            'class' => 'smoothbox', 'title' => $this -> translate("Message")
-                        ));
-                        ?>
-                     </li>
-                     <?php elseif (Engine_Api::_()->ynfbpp()->_allowMail($this->viewer(), $this -> subject())) :?>
-                 	 <li>
-                        <?php echo $this->htmlLink(array(
-                            'route' => 'user_general',
-                            'action' => 'in-mail',
-                            'to' => $this -> subject() ->getIdentity()
-                        ), '<span class="profile_inbox_button"><i class="fa fa-envelope"></i></span>', array(
-                            'class' => 'smoothbox', 'title' => $this -> translate("Email")
-                        ));
-                        ?>
-                     </li>
-                     <?php endif;?>
-                     <?php if ($this->viewer()->getIdentity() && ($this->viewer()->getIdentity() != $this -> subject()->getIdentity()) && in_array($this -> viewer() -> level, array('1','2','6','7'))) :?>
-                 	<li>
-                        <?php echo $this->htmlLink(array(
-                            'route' => 'user_general',
-                            'action' => 'view-basic',
-                            'subject' => $this -> subject() ->getGuid()
-                        ), '<span class="profile_info_button"><i class="fa fa-info-circle"></i></span>', array(
-                            'class' => 'smoothbox', 'title' => $this -> translate("Basic Information")
-                        ));
-                        ?>
-                     </li>
-                     	<?php endif;?>
-                     <!--
-                     <li>
-                        <?php echo $this->htmlLink(array(
-                            'route' => 'default',
-                            'module' => 'activity',
-                            'controller' => 'index',
-                            'action' => 'share',
-                            'type' => 'user',
-                            'id' => $this->subject() -> getIdentity(),
-                        ), '<span class="profile_share_button"><i class="fa fa-rss"></i></span>', array(
-                            'class' => 'smoothbox', 'title' => $this -> translate("Share")
-                        ));
-                        ?>
-                     </li>
-                     -->
                 </ul>
             </div>
         </div>
