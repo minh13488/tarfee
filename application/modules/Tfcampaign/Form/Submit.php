@@ -14,11 +14,13 @@ class Tfcampaign_Form_Submit extends Engine_Form
   public function init()
   {
 	$view = Zend_Registry::get('Zend_View');
+	$viewer = Engine_Api::_() -> user() -> getViewer();
 	
     $this->setTitle('Submit Player');
     $this->setAttrib('class', 'global_form_popup');
     $this->setDescription('Which player do you want to submit?');
 	
+	$isError = false;
 	$errorMessage = array();
 	$arrValue = array();
 	$arrSubmission = array();
@@ -97,7 +99,33 @@ class Tfcampaign_Form_Submit extends Engine_Form
       ),
     ));
 	
-     $this->addElement('Cancel', 'cancel', array(
+	$startDate = date_create($this ->_campaign->start_date);
+	$endDate = date_create($this ->_campaign->end_date);
+    $nowDate = date_create('now');
+    if ($nowDate < $startDate) {
+    	
+		$startDateObj = null;
+		if (!is_null($this ->_campaign->start_date) && !empty($this ->_campaign->start_date) && $this ->_campaign->start_date) 
+		{
+			$startDateObj = new Zend_Date(strtotime($this ->_campaign->start_date));	
+		}
+		if( $viewer->getIdentity() ) {
+			$tz = $viewer->timezone;
+			if (!is_null($startDateObj))
+			{
+				$startDateObj->setTimezone($tz);
+			}
+	    }
+    	$errorMessage[] = $view -> translate("Open in %s", (!is_null($startDateObj)) ?  date('d M, Y', $startDateObj -> getTimestamp()) : '');
+		$isError = true;
+    }
+	
+	if($isError) {
+		$this -> submit_button -> setAttrib("disabled", "disabled");
+		$this -> addErrors($errorMessage);
+	}
+	
+    $this->addElement('Cancel', 'cancel', array(
         'label' => 'cancel',
         'link' => true,
         'prependText' => ' or ',

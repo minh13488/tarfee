@@ -107,7 +107,7 @@
 		$startDate = date_create($campaign->start_date);
 		$endDate = date_create($campaign->end_date);
         $nowDate = date_create("now");
-        if ($nowDate <= $endDate && $nowDate >= $startDate) :
+        if ($nowDate <= $endDate) :
 			
 			$userPlayers = Engine_Api::_() -> getItemTable('user_playercard') -> getAllPlayerCard($this -> viewer() -> getIdentity());
 			$totalPlayerMatch = 0;

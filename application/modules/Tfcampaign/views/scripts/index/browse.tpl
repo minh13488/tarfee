@@ -119,7 +119,7 @@
 							$startDate = date_create($campaign->start_date);
 							$endDate = date_create($campaign->end_date);
 				            $nowDate = date_create('now');
-				            if ($nowDate <= $endDate && $nowDate >= $startDate) :
+				            if ($nowDate <= $endDate) :
 						?>
 							<?php 
 							$userPlayers = Engine_Api::_() -> getItemTable('user_playercard') -> getAllPlayerCard($this -> viewer() -> getIdentity());
@@ -167,7 +167,7 @@
 	    <?php endif; ?>
 	<?php else: ?>
 	    <div class="tip">
-	        <span><?php echo $this->translate('No campaigns found.') ?></span>
+	        <span><?php echo $this->translate('No scouts found.') ?></span>
 	    </div>
 	<?php endif; ?>
 </div>
