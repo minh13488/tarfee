@@ -263,7 +263,7 @@ else {
                         ?>
                      </li>
                      <?php endif;?>
-                     <?php if ($this->viewer()->getIdentity() && ($this->viewer()->getIdentity() != $this -> subject()->getIdentity())) :?>
+                     <?php if ($this->viewer()->getIdentity() && ($this->viewer()->getIdentity() != $this -> subject()->getIdentity()) && in_array($this -> viewer() -> level, array('1','2','6','7'))) :?>
                  	<li>
                         <?php echo $this->htmlLink(array(
                             'route' => 'user_general',

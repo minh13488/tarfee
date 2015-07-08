@@ -1992,7 +1992,8 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 }
-.layout_user_profile_sections {
+.layout_user_profile_sections,
+#global_page_user-index-view-basic {
     margin-bottom: 15px;
 
     #sections-content-items {

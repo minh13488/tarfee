@@ -16,4 +16,4 @@
         <?php endif;?>
     </ul>
 </div>
-<button onclick="parent.Smoothbox.close()"><?php echo $this->translate('Close')?></button>
+<a href="javascript:;" class="icon_event_viewall" onclick="parent.Smoothbox.close()"><?php echo $this->translate('Close')?></a>
