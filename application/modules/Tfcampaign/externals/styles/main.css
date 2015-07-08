@@ -707,3 +707,75 @@ ul.tfcampaign_list{
 		}
 	}
 }
+
+
+
+/*layout_tfcampaign_recent_campaign*/
+.layout_tfcampaign_recent_campaign,
+.layout_tfcampaign_club_profile_campaign,
+.layout_ynadvsearch_search_results2,
+.layout_tfcampaign_user_profile_campaign{
+	.tfcampaign_sport{
+		float: left;
+		margin-right: 10px;
+
+		img{
+			width: 30px;
+			height: 30px;
+		}
+	}
+	.tfcampaign_title{
+		margin-top: 0 !important;
+		padding-top: 5px;
+
+		a{
+			white-space: nowrap;
+			overflow: hidden;
+			display: inline-block;
+			color: $theme_font_color;
+			text-overflow: ellipsis;
+			width: 85%;
+
+			&:hover{
+				color: $theme_link_color;
+			}
+		}
+	}
+
+	.tfcampaign_author{
+		margin-top: 15px;
+		color: $theme_font_color_light;
+		font-size: 14px;
+		a{
+			font-weight: bold;
+			text-transform: capitalize;
+		}
+	}
+
+	.tfcampaign_location,
+	.tfcampaign_gender,
+	.tfcampaign_closing{
+		margin-top: 15px;
+		span{
+			font-weight: bold;
+		}
+		p{
+			display: inline;
+			font-weight: bold;
+			color: $theme_link_color;
+		}
+	}
+
+	.tfcampaign_gender{
+		display: block;
+		width: 40%;
+		margin-right: 0%;
+		float: left;
+	}
+	.tfcampaign_closing{
+		display: inline-block;
+		width: 50%;
+	}
+
+
+}
