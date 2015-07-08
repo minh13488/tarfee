@@ -27,16 +27,17 @@
 
 		<ul class="block-first">
 			<li>
-				<span><?php echo $this -> translate("Position") ;?></span>
 				<?php $position = $campaign -> getPosition();?>
 				<?php if($position) :?>
+					<span><?php echo $this -> translate("Position") ;?></span>
 					<p><?php echo $position -> getTitle();?></p>
 				<?php endif;?>
 			</li>
-			
 			<li>
-				<span><?php echo $this -> translate("Location");?></span>
-				<p><?php echo $campaign -> getLocation();?></p>
+				<?php if($campaign -> getLocation()) :?>
+					<span><?php echo $this -> translate("Location");?></span>
+					<p><?php echo $campaign -> getLocation();?></p>
+				<?php endif;?>
 			</li>
 		</ul>
 
@@ -107,7 +108,7 @@
 		$startDate = date_create($campaign->start_date);
 		$endDate = date_create($campaign->end_date);
         $nowDate = date_create("now");
-        if ($nowDate <= $endDate && $nowDate >= $startDate) :
+        if ($nowDate <= $endDate) :
 			
 			$userPlayers = Engine_Api::_() -> getItemTable('user_playercard') -> getAllPlayerCard($this -> viewer() -> getIdentity());
 			$totalPlayerMatch = 0;

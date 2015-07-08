@@ -52,17 +52,18 @@
 
 						<ul class="block-first">
 							<li>
-								<span><?php echo $this -> translate("Position") ;?></span>
 								<?php $position = $campaign -> getPosition();?>
 								<?php if($position) :?>
+									<span><?php echo $this -> translate("Position") ;?></span>
 									<p><?php echo $position -> getTitle();?></p>
 								<?php endif;?>
 							</li>
 							<li>
-								<span><?php echo $this -> translate("Location");?></span>
-								<p><?php echo $campaign -> getLocation();?></p>
+								<?php if($campaign -> getLocation()) :?>
+									<span><?php echo $this -> translate("Location");?></span>
+									<p><?php echo $campaign -> getLocation();?></p>
+								<?php endif;?>
 							</li>
-
 						</ul>
 						<ul class="block-second">
 							<li>
@@ -119,7 +120,7 @@
 							$startDate = date_create($campaign->start_date);
 							$endDate = date_create($campaign->end_date);
 				            $nowDate = date_create('now');
-				            if ($nowDate <= $endDate && $nowDate >= $startDate) :
+				            if ($nowDate <= $endDate) :
 						?>
 							<?php 
 							$userPlayers = Engine_Api::_() -> getItemTable('user_playercard') -> getAllPlayerCard($this -> viewer() -> getIdentity());
@@ -167,7 +168,7 @@
 	    <?php endif; ?>
 	<?php else: ?>
 	    <div class="tip">
-	        <span><?php echo $this->translate('No campaigns found.') ?></span>
+	        <span><?php echo $this->translate('No scouts found.') ?></span>
 	    </div>
 	<?php endif; ?>
 </div>

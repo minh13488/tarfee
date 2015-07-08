@@ -42,7 +42,7 @@
 		$client->setScopes('https://www.googleapis.com/auth/youtube');
 		$redirect = filter_var('http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF'],
 		    FILTER_SANITIZE_URL);
-		$redirect = str_replace("index.php", "admin/user/youtube/token", $redirect);   
+		$redirect = str_replace("index.php", "admin/user/libraries/token", $redirect);   
 		$client->setRedirectUri($redirect);
 		
     	if($token) {

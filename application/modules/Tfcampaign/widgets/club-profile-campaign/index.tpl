@@ -19,10 +19,12 @@
 				echo $this -> itemPhoto($campaign, 'thumb.icon');?>
 		</div>
 		<div class="tfcampaign_title"><?php echo $campaign;?></div>
+		<?php if($campaign -> getLocation()):?>
 		<div class="tfcampaign_location">
 			<span><?php echo $this -> translate("Location");?>:</span>
 			<p><?php echo $campaign -> getLocation();?></p>
 		</div>
+		<?php endif;?>
 		<div class="tfcampaign_gender">
 			<span><?php echo $this -> translate("Gender") ;?>:</span>
 			<p><?php echo $campaign -> getGender();?></p>
