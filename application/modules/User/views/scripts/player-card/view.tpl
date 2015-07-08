@@ -257,6 +257,19 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 					    	echo $this->partial('_video_rating_big.tpl', 'ynvideo', array('video' => $item));
 						?>
 					</div>
+					<?php if($this -> viewer() -> getIdentity()):?>
+					    <div id="favorite_<?php echo $item-> getIdentity()?>">
+					        <?php if($item-> hasFavorite()):?>
+					            <a href="javascript:;" title="<?php echo $this->translate('Unfavorite')?>" style="background:#ff6633;color: #fff" onclick="unfavorite_video(<?php echo $item-> getIdentity()?>)">
+					                <i class="fa fa-heart"></i>
+					            </a>
+					        <?php else:?>   
+					            <a href="javascript:;" title="<?php echo $this->translate('Favorite')?>" onclick="favorite_video(<?php echo $item-> getIdentity()?>)">
+					                <i class="fa fa-heart-o"></i>
+					            </a>
+					        <?php endif;?>  
+					    </div>
+					<?php endif;?>
 					<?php if($item -> isOwner($this->viewer())) :?>
 					<div class="tf_btn_action">
 					<?php
@@ -288,6 +301,43 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	</div>
 </div>
 <script type="text/javascript">
+   var unfavorite_video = function(videoId)
+   {
+   	   var obj = document.getElementById('favorite_' + videoId);
+   	   obj.innerHTML = '<a href="javascript:;" style="background:#ff6633; color: #fff"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
+   	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
+       var request = new Request.JSON({
+            'method' : 'post',
+            'url' :  url,
+            'data' : {
+                'video_id' : videoId
+            },
+            'onComplete':function(responseObject)
+            {  
+                obj.innerHTML = '<a href="javascript:;" title="<?php echo $this->translate("Favourite")?>" onclick="favorite_video('+videoId+')">' + '<i class="fa fa-heart-o"></i>' + '</a>';
+            }
+        });
+        request.send();  
+   } 
+   var favorite_video = function(videoId)
+   {
+   	   var obj = document.getElementById('favorite_' + videoId);
+   	   obj.innerHTML = '<a href="javascript:;"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
+   	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
+       var request = new Request.JSON({
+            'method' : 'post',
+            'url' :  url,
+            'data' : {
+                'video_id' : videoId
+            },
+            'onComplete':function(responseObject)
+            {  
+                obj.innerHTML = '<a href="javascript:;" style="background:#ff6633;color: #fff" title="<?php echo $this->translate("Unfavourite")?>" onclick="unfavorite_video('+videoId+')">' + '<i class="fa fa-heart"></i>' + '</a>';
+            }
+        });
+        request.send();  
+   }
+   
  function addEyeOn(itemId) 
 {
     $('user_eyeon_'+itemId).set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
