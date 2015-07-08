@@ -3774,3 +3774,65 @@ div[class^=layout_page_ynevent_index] ul.events_browse .events_members {
   	margin-top: 0;
   }
 }
+#global_page_ynevent-profile-index,
+#global_page_ynvideo-index-create,
+#global_page_user-player-card-create,
+#global_page_ynevent-index-create,
+#global_page_tfcampaign-index-create,
+#global_page_ynblog-index-create,
+#global_page_contactimporter-index-import,
+#global_page_core-help-contact,
+#global_page_messages-messages-inbox,
+#global_page_messages-messages-outbox,
+#global_page_messages-messages-compose,
+#global_page_ynresponsive1-index-notifications,
+body[id^=global_page_user-settings-],
+body[id^=global_page_user-edit-],
+#global_page_sladvsubscription-settings-index,
+#global_page_social-connect-index-account-linking,
+#global_page_socialbridge-index-index,
+#global_page_ynblog-index-view,
+#global_page_user-auth-login,
+#global_page_user-signup-index,
+#global_page_ynmember-edit-relationship,
+#global_page_ynmember-edit-place,
+#global_page_ynmember-edit-cover-photo,
+#global_page_messages-messages-view
+{
+	#global_wrapper
+	{
+		  background: #dadada;
+		  padding-top: 15px;
+		  padding-bottom: 15px;
+		  #global_content
+		  {
+		  	  background: #fff;
+			  -webkit-border-radius: 5px;
+			  -moz-border-radius: 5px;
+			  border-radius: 5px;
+			  div[class^=layout_page_user_settings],
+			  .layout_page_contactimporter_index_import,
+			  .notifications_layout
+			  {
+			  	  padding-top: 15px;
+				  max-width: 1170px;
+				  margin: auto;
+				  padding: 15px;
+			  }
+		  }
+	}
+}
+#global_page_user-player-card-create .global_form,
+body[id^=global_page_ynmember-edit-] #global_content,
+body[id^=global_page_user-edit-] #global_content
+{
+	 padding-top: 15px;
+	  max-width: 1170px;
+	  margin: auto;
+	  padding: 15px;
+	  .ynmember-container
+	  {
+	  	border: 0;
+  		padding: 0;
+	  }
+}
