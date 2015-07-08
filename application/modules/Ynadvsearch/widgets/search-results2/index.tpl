@@ -334,10 +334,12 @@
 				echo $this -> itemPhoto($item, 'thumb.icon');?>
 			</div>
 			<div class="tfcampaign_title"><?php echo $item;?></div>
+			<?php if($item -> getLocation()):?>
 			<div class="tfcampaign_location">
 				<span><?php echo $this -> translate("Location");?>:</span>
 				<p><?php echo $item -> getLocation();?></p>
 			</div>
+			<?php endif;?>
 			<div class="tfcampaign_gender">
 				<span><?php echo $this -> translate("Gender") ;?>:</span>
 				<p><?php echo $item -> getGender();?></p>
