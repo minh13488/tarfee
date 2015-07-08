@@ -98,7 +98,7 @@ endif;
 	            var remainder = Math.round(rating)-rating;
 	            if (remainder <= 0.5 && remainder !=0){
 	                var last = parseInt(rating)+1;
-	                $('rate_'+last).set('class', 'fa-star-half-o');
+	                $('rate_'+last).set('class', 'fa fa-star-half-o');
 	            }
 	        }
 	

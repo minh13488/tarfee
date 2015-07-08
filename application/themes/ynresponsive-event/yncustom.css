@@ -2353,7 +2353,8 @@ body#global_page_user-profile-index {
 		display: flex;
 		float: left;
 		width: 100%;*/
-		display: inline-block;
+		display: inline-flex;
+		position: relative;
 
 		& > div{
 			overflow: hidden;
@@ -2544,7 +2545,7 @@ body#global_page_user-profile-index {
 		.yn_video_info_left{
 			float: left;
 			width: 55%;
-			margin-right: 30px;
+			margin-right: 20px;
 		}
 
 		.tf_video_rating{
@@ -2652,6 +2653,10 @@ body#global_page_user-profile-index {
 			overflow: hidden;
 			font-size: 12px;
 			clear: none;
+			width: 200px;
+			text-align: right;
+			float: right;
+			display: inline-block;
 
 			.rating{
 				float: right;
