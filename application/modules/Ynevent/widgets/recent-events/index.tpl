@@ -35,12 +35,17 @@
 			if($cityName || $provinceName || $countryName):?>
 				<span><?php echo $this -> translate("Location");?>:</span>
 				<p>
-				<?php if($cityName) 
-						echo $cityName; 
+				<?php $city = '';
+					if($cityName) 
+						$city = $cityName; 
 					else 
-						echo $provinceName;
-					if($countryName) 
-					 	echo ', '.$countryName;?>
+						$city = $provinceName;
+					
+					if($countryName && $city) 
+					 	echo $city. ', '. $countryName;
+					 else if($countryName)
+					 	echo $countryName;
+					 ?>
 				</p>
 			<?php elseif($event -> address):?>
 				<span><?php echo $this -> translate("Location");?>:</span>
