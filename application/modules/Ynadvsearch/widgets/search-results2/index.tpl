@@ -325,7 +325,7 @@
 					echo count($rows)?></span>
 				</div>
 		<?php break;?>
-		<?php case 'tfcampaign_campaign	': ?>
+		<?php case 'tfcampaign_campaign': ?>
 			<div class="tfcampaign_sport">
 			<?php 
 			if($item -> getSport())
