@@ -75,8 +75,6 @@ CREATE TABLE IF NOT EXISTS `engine4_tfcampaign_campaigns` (
 `deleted` tinyint(1) NOT NULL default '0',
 `view_count` int(11) NOT NULL DEFAULT '0',
 `percentage` int(11) NOT NULL DEFAULT '0',
-`allow_submit` tinyint(1) NOT NULL default '0',
-
 PRIMARY KEY (`campaign_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 

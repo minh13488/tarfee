@@ -258,6 +258,10 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 		if (!$this -> _helper -> requireUser -> isValid())
 			return;
 		$campaign = Engine_Api::_() -> core() -> getSubject();
+		if (!$campaign->isViewable()) {
+            $this -> view -> errorMessage = $this -> view -> translate("You can not submit player to this campaign.");
+			return;
+        }
 		$this -> view -> form = $form = new Tfcampaign_Form_Submit(array('campaign' => $campaign));
 		
 		if (!$this -> getRequest() -> isPost()) {
