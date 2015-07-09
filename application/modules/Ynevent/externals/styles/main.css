@@ -3797,7 +3797,8 @@ body[id^=global_page_user-edit-],
 #global_page_ynmember-edit-relationship,
 #global_page_ynmember-edit-place,
 #global_page_ynmember-edit-cover-photo,
-#global_page_messages-messages-view
+#global_page_messages-messages-view,
+body[id^=global_page_ynsocialads]
 {
 	#global_wrapper
 	{
@@ -3824,7 +3825,8 @@ body[id^=global_page_user-edit-],
 }
 #global_page_user-player-card-create .global_form,
 body[id^=global_page_ynmember-edit-] #global_content,
-body[id^=global_page_user-edit-] #global_content
+body[id^=global_page_user-edit-] #global_content,
+body[id^=global_page_ynsocialads] .layout_top
 {
 	 padding-top: 15px;
 	  max-width: 1170px;
@@ -3835,4 +3837,12 @@ body[id^=global_page_user-edit-] #global_content
 	  	border: 0;
   		padding: 0;
 	  }
+}
+body[id^=global_page_ynsocialads] #global_content
+{
+	margin-bottom: 15px;
+}
+#global_page_ynsocialads-ads-create-step-one #global_content, #global_page_ynsocialads-ads-create-choose-package #global_content
+{
+	padding-top: 0!important;
 }
