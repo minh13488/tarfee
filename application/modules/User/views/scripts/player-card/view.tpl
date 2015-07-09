@@ -25,15 +25,20 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	$cityName = $city -> getTitle();
 }
 ?>
-<div style="margin-bottom: 15px; overflow: hidden">
-	<div style="width: 285px; float: left">
-		<div>
-			<?php echo $this -> itemPhoto($player, 'thumb.profile');?>
-		</div>
-		<div style="font-weight: bold">
+
+<div class="tf-player-detail">
+	<div class="tf-player-detail-info">
+	
+		<div class="tf-player-name">
 			<a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 50)?></a>
 		</div>
-		<div class="tarfee_sport_type_position">
+
+		<div class="tf-player-thumb">
+			<?php echo $this -> itemPhoto($player, 'thumb.main');?>
+		</div>
+
+
+		<div class="tf-sport-type-position">
 			<?php if($player -> getSport()):?>
 				<?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?>
 				<span title="<?php echo $player -> getSport() -> getTitle();?>" class="player-title"><?php echo $player -> getSport() -> getTitle();?></span>
@@ -64,16 +69,18 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 				echo $this -> translate('Both');
 			}
 			?>
-		</div
+		</div>
 		
-		<div class="tarfee_infomation_player">
-			<p>
+		<div class="tf-player-infomation-detail">
+			<span>
 				<?php echo date("Y", strtotime($player -> birth_date));?> 
-			</p>
-			<p>
+			</span>
+
+			<span>
 				<?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?>
-			</p>
-			<p>
+			</span>
+
+			<span>
 				<?php 
 					$laguages = json_decode($player -> languages);
 					$arr_tmp = array();
@@ -89,37 +96,39 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 					}
 					echo implode(' | ', $arr_tmp);
 				?>
-			</p>
+			</span>
 			
-			<div class="nickname">
+			<div class="tf-player-owner">
 			 	<?php echo $this->translate('By') ?>
 	        	<?php echo $this->htmlLink($player -> getOwner()->getHref(), $player -> getOwner() ->getTitle()) ?>
 	     	</div>
 		</div>
+
 		<div class="playercard_statistics">
 			<ul>
-				 <li>
+			 	<li>
 			        <span><?php echo $this->translate(array('%s video', '%s videos', $totalVideo), $totalVideo) ?></span>
-			      </li>
-			       <li>
+		      	</li>
+		       	<li>
 			        <span><?php echo $this->translate(array('%s comment', '%s comments', $totalComment), $totalComment) ?></span>
-			      </li>
-			       <li>
+		     	</li>
+			    <li>
 			        <span><?php echo $this->translate(array('%s like', '%s likes', $totalLike), $totalLike) ?></span>
-			      </li>
-			       <li>
+			    </li>
+			    <li>
 			        <span><?php echo $this->translate(array('%s dislike', '%s dislikes', $totalDislike), $totalDislike) ?></span>
-			      </li>
-			      <li>
+			    </li>
+			    <li>
 					<?php $url = $this->url(array('action'=>'view-eye-on', 'player_id'=>$player->getIdentity()), 'user_playercard' , true)?>
 					<?php if(count($eyeons)):?>	
 						<span><a href="<?php echo $url?>" class="smoothbox"><?php echo $this->translate('%s eye on', count($eyeons)) ?></a></span>	
 					<?php else:?>
 						<span><a href="javascript:;" class=""><?php echo $this->translate('%s eye on', count($eyeons)) ?></a></span>
 					<?php endif;?>
-			      </li>
+			    </li>
 			</ul>
 		</div>
+
 		<div class="user_rating">
 			<?php $overRallRating = $player -> rating;?>
 			<div class="user_rating" title="<?php echo $overRallRating;?>">
@@ -136,6 +145,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 			    <?php endif; ?>
 			</div>
 		</div>
+
 		 <?php if (Engine_Api::_()->ynfbpp()->_allowMessage($this->viewer(), $player -> getOwner())) :?>
          	 <div>
                 <?php echo $this->htmlLink(array(
@@ -159,7 +169,8 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
                 ?>
              </div>
          <?php endif;?>
-         <div title="<?php echo $this -> translate("Keep eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
+
+    	<div title="<?php echo $this -> translate("Keep eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
     		<?php if($player->isEyeOn()): ?>              
         	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
         		<span>
@@ -174,18 +185,21 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
         	</a>
     		<?php endif; ?>
 		</div>
+
 		<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid()),'default', true);?>
 		<div title="<?php echo $this -> translate('Report')?>">
 			<a class="actions_generic smoothbox" href="<?php echo $url?>">
 				<?php echo $this -> translate('Report')?>
 			</a>
 		</div>
-		<div style="font-weight: bold">
+
+		<div>
 			<!-- Add addthis share-->
 			<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
 			<div class="addthis_sharing_toolbox"></div>
 		</div>
-		 <div class="playercard_options">
+
+ 		<div class="playercard_options">
 	    	<?php 
 	    	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> getIdentity() == $this -> viewer() -> getIdentity())
 			{
@@ -225,12 +239,14 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 		    }
 			?>
 	    </div>
+
 	</div>
+
 	<div class="tfplayer_vidoes">
 		<?php $videoTable = Engine_Api::_()->getItemTable('video');
 		$playercardVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));?>
 		<?php if(count($playercardVideos)):?>
-			<ul style="border: 5px solid #eaeaea;" class="videos_browse">
+			<ul class="videos_browse">
 			 <?php foreach ($playercardVideos as $item): ?>
 		           <div class="ynvideo_thumb_wrapper video_thumb_wrapper">
 					    <?php
@@ -300,6 +316,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 		<?php endif;?>
 	</div>
 </div>
+
 <script type="text/javascript">
    var unfavorite_video = function(videoId)
    {

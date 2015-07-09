@@ -3972,3 +3972,37 @@ body#global_page_advgroup-profile-index{
 		}
 	}
 }
+
+
+/*global_page_user-player-card-view*/
+#global_page_user-player-card-view{
+	#global_wrapper{
+		background: #dadada;
+		padding-top: 15px;
+		padding-bottom: 15px;
+	}
+
+	#global_content{
+		background: #fff;
+		+border-radius(5px);
+	}
+
+	.tf-player-detail{
+		
+		.tf-player-detail-info{
+			text-align: center;
+			
+			.tf-player-name{
+				font-size: 1.5em;
+				font-weight: 700;
+				margin-bottom: 5px;
+				color: $theme_link_color;
+				text-overflow: ellipsis;
+				overflow: hidden;
+				white-space: nowrap;
+			}
+		}
+
+	}
+
+}
