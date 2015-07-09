@@ -4153,6 +4153,7 @@ body#global_page_advgroup-profile-index{
 			}
 
 			.tf-player-detail-button{
+				text-align: center;
 
 				& > div{
 					display: inline-block;
@@ -4182,6 +4183,10 @@ body#global_page_advgroup-profile-index{
 				.playercard_options{
 					position: relative;
 
+					&:hover{
+						.box-dropdown{display: block;}
+					}
+
 					span{
 						cursor: pointer;
 					}
@@ -4200,9 +4205,19 @@ body#global_page_advgroup-profile-index{
 						margin-right: 5px;
 					}
 				}
+				.tf-player-dropdown{
+					margin: 0;
+				}
 				.box-dropdown{
 					position: absolute;
-
+					background: #fff;
+					border: 2px solid $theme_font_color_light;
+					width: 150px;
+					z-index: 10;
+					border-radius: 5px;
+					margin-top: -2px;
+					display: none;
+					padding: 5px 10px;
 				}
 			}
 
