@@ -54,7 +54,7 @@
 	        
 	    	if((Math.round(rating)-rating)>0) {
 	    		var nextIndex = parseInt(indexStar)+1;
-	    		$('rate_'+nextIndex+'_'+id).set('class', 'fa-star-half-o');
+	    		$('rate_'+nextIndex+'_'+id).set('class', 'fa fa-star-half-o');
 	    		indexStar = nextIndex;
 	    	}
 	        

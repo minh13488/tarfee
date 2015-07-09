@@ -32,23 +32,27 @@
 			{
 				$cityName = $city -> getTitle();
 			}
-			?>
-			<span><?php echo $this -> translate("Location");?>:</span>
-			<p>
-			<?php if(!$cityName && !$provinceName && !$countryName)
-			{
-				echo $event -> address;
-			}
-			else {
-				if($cityName) 
-					echo $cityName; 
-				else 
-					echo $provinceName;
-				if($countryName) 
-				 	echo ', '.$countryName;
-			}
-			?>
-			</p>
+			if($cityName || $provinceName || $countryName):?>
+				<span><?php echo $this -> translate("Location");?>:</span>
+				<p>
+				<?php $city = '';
+					if($cityName) 
+						$city = $cityName; 
+					else 
+						$city = $provinceName;
+					
+					if($countryName && $city) 
+					 	echo $city. ', '. $countryName;
+					 else if($countryName)
+					 	echo $countryName;
+					 ?>
+				</p>
+			<?php elseif($event -> address):?>
+				<span><?php echo $this -> translate("Location");?>:</span>
+				<p>
+					<?php echo $event -> address;?>
+				</p>
+			<?php endif;?>
         </div>
 		<div class="ynevents_time_place">
             <span>

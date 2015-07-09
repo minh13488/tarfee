@@ -18,10 +18,11 @@ class User_Model_DbTable_Eyeons extends Engine_Db_Table {
 		$userIds = array();
 		foreach($rows as $row)
 		{
-			$userIds[] = $row -> user_id;
+			$userIds[] = $row['user_id'];
 		}
 		if (empty($userIds)) 
 			return array();
+		
 		return Engine_Api::_()->user()->getUserMulti($userIds);
 	}
 }

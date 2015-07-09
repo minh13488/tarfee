@@ -227,23 +227,27 @@
 				{
 					$cityName = $city -> getTitle();
 				}
-				?>
+				if($cityName || $provinceName || $countryName):?>
 				<span><?php echo $this -> translate("Location");?>:</span>
 				<p>
-				<?php if(!$cityName && !$provinceName && !$countryName)
-				{
-					echo $item -> address;
-				}
-				else {
+				<?php $city = '';
 					if($cityName) 
-						echo $cityName; 
+						$city = $cityName; 
 					else 
-						echo $provinceName;
-					if($countryName) 
-					 	echo ', '.$countryName;
-				}
-				?>
+						$city = $provinceName;
+					
+					if($countryName && $city) 
+					 	echo $city. ', '. $countryName;
+					 else if($countryName)
+					 	echo $countryName;
+					 ?>
 				</p>
+			<?php elseif($event -> address):?>
+				<span><?php echo $this -> translate("Location");?>:</span>
+				<p>
+					<?php echo $event -> address;?>
+				</p>
+			<?php endif;?>
 	        </div>
 			<div class="ynevents_time_place">
 	            <span>
@@ -325,7 +329,7 @@
 					echo count($rows)?></span>
 				</div>
 		<?php break;?>
-		<?php case 'tfcampaign_campaign	': ?>
+		<?php case 'tfcampaign_campaign': ?>
 			<div class="tfcampaign_sport">
 			<?php 
 			if($item -> getSport())
@@ -334,10 +338,12 @@
 				echo $this -> itemPhoto($item, 'thumb.icon');?>
 			</div>
 			<div class="tfcampaign_title"><?php echo $item;?></div>
+			<?php if($item -> getLocation()):?>
 			<div class="tfcampaign_location">
 				<span><?php echo $this -> translate("Location");?>:</span>
 				<p><?php echo $item -> getLocation();?></p>
 			</div>
+			<?php endif;?>
 			<div class="tfcampaign_gender">
 				<span><?php echo $this -> translate("Gender") ;?>:</span>
 				<p><?php echo $item -> getGender();?></p>

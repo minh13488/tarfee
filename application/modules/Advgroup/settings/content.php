@@ -2,9 +2,9 @@
 return array(
 	
 	array(
-	    'title' => 'Group Create Link',
-	    'description' => 'Displays group create link on user profile page.',
-	    'category' => 'Advanced Groups',
+	    'title' => 'Club Create Link',
+	    'description' => 'Displays club create link on user profile page.',
+	    'category' => 'Clubs',
 	    'type' => 'widget',
 	    'name' => 'advgroup.group-create-link',
 	    'requirements' => array(
@@ -15,7 +15,7 @@ return array(
   array(
     'title' => 'Most Active Groups',
     'description' => 'Displays a list groups that have the most number of topics.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.list-most-active-groups',
     'isPaginated' => true,
@@ -46,7 +46,7 @@ return array(
   array(
     'title' => 'Group Directory',
     'description' => 'Displays all existing groups',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.groups-directory',
     'isPaginated' => true,
@@ -57,7 +57,7 @@ return array(
   array(
     'title' => 'Group Quick Navigation',
     'description' => 'Display quick navagation',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.groups-quick-navigation',
     'isPaginated' => true,
@@ -69,7 +69,7 @@ return array(
   array(
                 'title' => 'Group Profile Cover',
                 'description' => 'Displays a advanced group\'s cover and information on it\'s profile.',
-                'category' => 'Advanced Groups',
+                'category' => 'Clubs',
                 'type' => 'widget',
                 'name' => 'advgroup.profile-cover',
                 'requirements' => array(
@@ -80,7 +80,7 @@ return array(
   array(
                 'title' => 'Advanced Group Profile Sponsors',
                 'description' => 'Displays a advanced group\'s sponsors on it\'s profile.',
-                'category' => 'Advanced Groups',
+                'category' => 'Clubs',
                 'type' => 'widget',
                 'name' => 'advgroup.profile-sponsors',
                 'isPaginated' => false,
@@ -117,7 +117,7 @@ return array(
   array(
                 'title' => 'Advanced Group Hightlight Video',
                 'description' => 'Displays highlight video on group profile.',
-                'category' => 'Advanced Groups',
+                'category' => 'Clubs',
                 'type' => 'widget',
                 'name' => 'advgroup.profile-video',
                 'isPaginated' => false,
@@ -133,7 +133,7 @@ return array(
     array(
                 'title' => 'Advanced Group May-like Group',
                 'description' => 'Displays related groups on group profile.',
-                'category' => 'Advanced Groups',
+                'category' => 'Clubs',
                 'type' => 'widget',
                 'name' => 'advgroup.list-maylike-groups',
                 'defaultParams' => array(
@@ -147,21 +147,21 @@ return array(
   array(
     'title' => 'Groups Menu',
     'description' => 'Displays groups menu on the group Homepage.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.groups-menu',
   ),
   array(
     'title' => 'Groups Search',
     'description' => 'Displays group search form on selected page.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.groups-search',
   ),
   array(
     'title' => 'Groups Listing',
     'description' => 'Displays groups listing on groups listing page.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.groups-listing',
     'isPaginated' => true,
@@ -243,7 +243,7 @@ return array(
   array(
     'title' => 'Featured Groups',
     'description' => 'Displays featured groups on groups home page.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.featured-groups',
     'defaultParams' => array(
@@ -256,7 +256,7 @@ return array(
         array(
                 'title' => 'Activity Feed',
                 'description' => 'Displays activity feed on groups profile page.',
-                'category' => 'Advanced Groups',
+                'category' => 'Clubs',
                 'type' => 'widget',
                 'name' => 'advgroup.feed',
                 'defaultParams' => array(
@@ -269,7 +269,7 @@ return array(
   array(
     'title' => 'Top Posters',
     'description' => 'Displays top posters of a group on groups profile page.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.groups-top-posters',
     'defaultParams' => array(
@@ -279,7 +279,7 @@ return array(
   array(
     'title' => 'Popular Groups',
     'description' => 'Displays a list of groups that have the most number of members or number of views( According to the option set).',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.list-popular-groups',
     'isPaginated' => true,
@@ -309,7 +309,7 @@ return array(
   array(
     'title' => 'New Groups',
     'description' => 'Displays a list of recently created groups.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.list-recent-groups',
     'isPaginated' => true,
@@ -339,7 +339,7 @@ return array(
   array(
     'title' => 'Active Groups',
     'description' => 'Displays a list groups that have the most number of topics.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.list-active-groups',
     'isPaginated' => true,
@@ -355,7 +355,7 @@ return array(
   array(
     'title' => 'Profile Groups',
     'description' => 'Displays a member\'s groups on their profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-groups',
     'isPaginated' => true,
@@ -370,7 +370,7 @@ return array(
   array(
     'title' => 'Group Profile Discussions',
     'description' => 'Displays a group\'s discussions on its profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-discussions',
     'isPaginated' => true,
@@ -385,7 +385,7 @@ return array(
   array(
     'title' => 'Group Profile Info',
     'description' => 'Displays a group\'s info (creation date, member count, leader, officers, etc) on its profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-info',
     'requirements' => array(
@@ -408,7 +408,7 @@ return array(
    array(
     'title' => 'Group Profile Members',
     'description' => 'Displays a group\'s members on its profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-members',
     'isPaginated' => true,
@@ -423,7 +423,7 @@ return array(
   array(
     'title' => 'Group Profile Followers',
     'description' => 'Displays a group\'s followers on its profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-followers',
     'isPaginated' => true,
@@ -438,7 +438,7 @@ return array(
   array(
     'title' => 'Group Profile Options',
     'description' => 'Displays a menu of actions (edit, report, join, invite, etc) that can be performed on a group on its profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-options',
     'requirements' => array(
@@ -448,7 +448,7 @@ return array(
   array(
     'title' => 'Group Profile Photo',
     'description' => 'Displays a group\'s photo on its profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-photo',
     'requirements' => array(
@@ -458,7 +458,7 @@ return array(
   array(
     'title' => 'Group Profile Photos',
     'description' => 'Displays a group\'s photos on its profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-photos',
     'isPaginated' => true,
@@ -473,7 +473,7 @@ return array(
   array(
     'title' => 'Group Profile Status',
     'description' => 'Displays a group\'s title on its profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-status',
     'requirements' => array(
@@ -483,7 +483,7 @@ return array(
   array(
     'title'=> 'Group Profile Events',
     'description' => 'Displays a group\'s events on its profile',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-events',
     'isPaginated' => true,
@@ -498,7 +498,7 @@ return array(
   array(
     'title'=> 'Group Profile Musics',
     'description' => 'Displays a group\'s musics on its profile',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-musics',
     'isPaginated' => true,
@@ -513,7 +513,7 @@ return array(
   array(
     'title'=> 'Group Profile Mp3Musics',
     'description' => 'Displays a group\'s mp3musics on its profile',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-mp3musics',
     'isPaginated' => true,
@@ -529,7 +529,7 @@ return array(
     array(
         'title'=> 'Group Profile Listings',
         'description' => 'Displays a group\'s listings on its profile',
-        'category' => 'Advanced Groups',
+        'category' => 'Clubs',
         'type' => 'widget',
         'name' => 'advgroup.profile-listings',
         'isPaginated' => true,
@@ -545,7 +545,7 @@ return array(
    array(
     'title'=> 'Group Profile FileSharing',
     'description' => 'Displays a group\'s filesharing on its profile',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-filesharing',
     'isPaginated' => true,
@@ -560,7 +560,7 @@ return array(
   array(
     'title' => 'Profile Useful Links',
     'description' => 'Display useful links for group member on group profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-useful-links',
     'defaultParams' => array(
@@ -571,7 +571,7 @@ return array(
   array(
     'title' => 'Group Profile Albums',
     'description' => 'Displays a group\'s albums on its profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-albums',
     'isPaginated' => true,
@@ -586,7 +586,7 @@ return array(
  array(
     'title' => 'Group Profile Announcements',
     'description' => 'Displays recent announcements.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-group-announcements',
     'requirements' => array(
@@ -596,7 +596,7 @@ return array(
  array(
     'title' => 'Overall Statistic',
     'description' => 'Displays overall statistic of groups on group home page.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.overall-statistic',
     'defaultParams' => array(
@@ -606,7 +606,7 @@ return array(
  array(
     'title'=> 'Group Profile Polls',
     'description' => 'Displays a group\'s polls on its profile',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-polls',
     'isPaginated' => true,
@@ -621,7 +621,7 @@ return array(
 array(
     'title' => 'Group Profile Statistic',
     'description' => 'Displays statistic of a group on that group profile page.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-statistic',
     'defaultParams' => array(
@@ -631,7 +631,7 @@ array(
 array(
     'title' => 'Group Suggested Poll',
     'description' => 'Displays a random group\'s poll on its profile.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.suggested-poll',
     'requirements' => array(
@@ -642,7 +642,7 @@ array(
 array(
     'title' => 'Group Categories',
     'description' => 'Displays group categories on group browse page.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.groups-category-search',
     'defaultParams' => array(
@@ -652,7 +652,7 @@ array(
 array(
     'title' => 'Sub Groups',
     'description' => 'Displays sub groups list on group profile page.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.sub-groups',
     'isPaginated' => true,
@@ -691,7 +691,7 @@ array(
   array(
                 'title' => 'Advanced Group Profile Slideshow Photos',
                 'description' => 'Displays a advanced group\'s photos on it\'s profile.',
-                'category' => 'Advanced Groups',
+                'category' => 'Clubs',
                 'type' => 'widget',
                 'name' => 'advgroup.profile-slideshow-photos',
                 'isPaginated' => true,
@@ -735,7 +735,7 @@ array(
  array(
     'title'=> 'Group Profile Wikis',
     'description' => 'Displays a group\'s wiki pages on its profile',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.profile-wikis',
     'isPaginated' => true,
@@ -750,7 +750,7 @@ array(
   array(
     'title' => 'Group Tags',
     'description' => 'Displays groups tags on group home page.',
-    'category' => 'Advanced Groups',
+    'category' => 'Clubs',
     'type' => 'widget',
     'name' => 'advgroup.groups-tags',
       'defaultParams' => array(
@@ -760,7 +760,7 @@ array(
   array(
         'title' => 'Groups Activities',
         'description' => 'Listing the public groups activities.',
-        'category' => 'Advanced Groups',
+        'category' => 'Clubs',
         'type' => 'widget',
         'name' => 'advgroup.group-activity',
         'isPaginated' => true,
@@ -787,7 +787,7 @@ array(
   array(
         'title' => 'Most Active Members',
         'description' => 'Listing the most active group members',
-        'category' => 'Advanced Groups',
+        'category' => 'Clubs',
         'type' => 'widget',
         'name' => 'advgroup.group-top-members',
         'defaultParams' => array(
@@ -814,7 +814,7 @@ array(
     array(
             'title' => 'Most Groups',
             'description' => 'Displays a most groups in group landing page.',
-            'category' => 'Advanced Groups',
+            'category' => 'Clubs',
             'type' => 'widget',
             'name' => 'advgroup.list-most-items',
             'isPaginated' => true,
