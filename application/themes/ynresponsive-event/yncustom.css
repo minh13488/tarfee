@@ -2815,7 +2815,9 @@ body#global_page_user-profile-index {
 }
 
 
-.layout_advgroup_group_create_link{
+.layout_advgroup_group_create_link,
+.layout_ynsocialads_manage_link
+{
     background-color: red;
     a{
         button{
@@ -2836,6 +2838,16 @@ body#global_page_user-profile-index {
             }
         }
     }
+}
+.layout_ynsocialads_manage_link
+{
+	position: relative;
+	  background: #fff;
+	  border-radius: 4px;
+	  -webkit-border-radius: 4px;
+	  -moz-border-radius: 4px;
+	  -ms-border-radius: 4px;
+	  overflow: hidden;
 }
 
 /*Style Club*/

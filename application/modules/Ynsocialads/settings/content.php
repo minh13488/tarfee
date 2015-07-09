@@ -23,4 +23,14 @@ return array(
 		),
 		'requirements' => array('subject' => 'user', ),
 	),
+	array(
+	    'title' => 'Club Ads Management Link',
+	    'description' => 'Displays club ads management link on club profile page.',
+	    'category' => 'YN Social Ads',
+	    'type' => 'widget',
+	    'name' => 'ynsocialads.manage-link',
+	    'requirements' => array(
+	      'subject' => 'group',
+	    ),
+    ),
 );
