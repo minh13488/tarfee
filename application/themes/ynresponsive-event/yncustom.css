@@ -3318,7 +3318,8 @@ body#global_page_advgroup-profile-index{
 
 
 /*layout_advgroup_recent_group_videos*/
-.layout_advgroup_recent_group_videos{
+.layout_advgroup_recent_group_videos,
+.tfplayer_videos{
 	+border-radius(5px);
 	background: #fff;
 	overflow: hidden;
@@ -3376,12 +3377,17 @@ body#global_page_advgroup-profile-index{
 				clear: both;
 				display: block;
 				overflow: hidden;
-				padding: 15px 0px;
+				padding: 15px 0px 0px 0px;
 				/*border-bottom: 1px solid #e9e9e9;*/
 			}
 			.video_author{
-				font-weight: bold;
+				margin-top: 5px;
 				text-align: center;
+				color: $theme_font_color_light;
+				a{
+					font-weight: bold;
+					text-transform: lowercase;
+				}
 
 				img{
 					margin-right: 10px;
@@ -4223,6 +4229,38 @@ body#global_page_advgroup-profile-index{
 
 		}
 
+	}
+
+	.tf-player-detail-list-video{
+		li{
+			width: 24%;
+			margin-left: 1.3%;
+			margin-bottom: 1.3%;
+			border-bottom: 0;
+			border:2px solid $theme_border_color;
+			padding-bottom: 10px;
+			+border-radius(5px);
+
+			&:nth-child(4n+1){
+				margin-left: 0;
+			}
+
+			.video-title,
+			.video-statistic-rating{
+				padding: 10px 10px;
+				padding-bottom: 0;
+
+				.video-statistic{
+					width: 60%;
+				}
+			}
+
+			.video-title{
+				margin-top: 10px;
+				display: block;
+				clear: both;
+			}
+		}
 	}
 
 }

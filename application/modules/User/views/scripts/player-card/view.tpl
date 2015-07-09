@@ -258,6 +258,18 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 						), '<i class="fa fa-plus-square"></i>'.$this->translate('Add Video'), array(
 						'class' => 'tf-icon-dropdown'
 						)) ;
+
+						echo $this->htmlLink(array(
+							'route' => 'user_photo',
+							'controller' => 'upload',
+							'id' => $player->playercard_id,
+							'type' => $player->getType(),
+							'tab' => 724
+						), '<i class="fa fa-camera"></i>'.$this->translate('Add Photos'), array(
+						'class' => 'tf-icon-dropdown smoothbox', 'title' => $this -> translate('Add Photos')
+						));
+
+
 						echo $this->htmlLink(array(
 				            'route' => 'user_extended',
 				            'controller' => 'player-card',
@@ -282,12 +294,13 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 
 	</div>
 
-	<div class="tfplayer_vidoes">
+	<div class="tfplayer_videos">
 		<?php $videoTable = Engine_Api::_()->getItemTable('video');
 		$playercardVideos = $videoTable -> fetchAll($mappingTable -> getVideosSelect($params));?>
 		<?php if(count($playercardVideos)):?>
-			<ul class="videos_browse">
-			 <?php foreach ($playercardVideos as $item): ?>
+			<ul class="videos_browse tf-player-detail-list-video">
+		 	<?php foreach ($playercardVideos as $item): ?>
+				<li>
 		           <div class="ynvideo_thumb_wrapper video_thumb_wrapper">
 					    <?php
 					    if ($item->photo_id) {
@@ -303,10 +316,13 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 					</div>
 					<div class="video-statistic-rating">
 						<div class="video-statistic">
-							<?php echo $this->translate(array('%s view','%s views', $item->view_count), $item->view_count)?>
-							<br>
+							<span> 
+								<?php echo $this->translate(array('%s view','%s views', $item->view_count), $item->view_count)?>
+							</span>
+							
 							<?php $commentCount = $item->comments()->getCommentCount(); ?>
-							<?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?>
+							<span><?php echo $this->translate(array('%s comment','%s comments', $commentCount), $commentCount)?></span>
+							
 						</div>
 					
 						<?php 
@@ -314,14 +330,14 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 						?>
 					</div>
 					<?php if($this -> viewer() -> getIdentity()):?>
-					    <div id="favorite_<?php echo $item-> getIdentity()?>">
+					    <div id="favorite_<?php echo $item-> getIdentity()?>" class="tf_btn_action">
 					        <?php if($item-> hasFavorite()):?>
-					            <a href="javascript:;" title="<?php echo $this->translate('Unfavorite')?>" style="background:#ff6633;color: #fff" onclick="unfavorite_video(<?php echo $item-> getIdentity()?>)">
-					                <i class="fa fa-heart"></i>
+					            <a href="javascript:;" class="tf_button_action" title="<?php echo $this->translate('Unfavorite')?>" style="background:#ff6633;color: #fff" onclick="unfavorite_video(<?php echo $item-> getIdentity()?>)">
+					                <i class="fa fa-heart fa-lg"></i>
 					            </a>
 					        <?php else:?>   
-					            <a href="javascript:;" title="<?php echo $this->translate('Favorite')?>" onclick="favorite_video(<?php echo $item-> getIdentity()?>)">
-					                <i class="fa fa-heart-o"></i>
+					            <a href="javascript:;" class="tf_button_action" title="<?php echo $this->translate('Favorite')?>" onclick="favorite_video(<?php echo $item-> getIdentity()?>)">
+					                <i class="fa fa-heart-o fa-lg"></i>
 					            </a>
 					        <?php endif;?>  
 					    </div>
@@ -351,6 +367,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 					?>
 					</div>
 					<?php endif;?>
+				</li>
 			<?php endforeach; ?>
 			</ul>
 		<?php endif;?>
@@ -361,7 +378,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
    var unfavorite_video = function(videoId)
    {
    	   var obj = document.getElementById('favorite_' + videoId);
-   	   obj.innerHTML = '<a href="javascript:;" style="background:#ff6633; color: #fff"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
+   	   obj.innerHTML = '<a href="javascript:;" class="tf_button_action" style="background:#ff6633; color: #fff"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
    	   var url = '<?php echo $this -> url(array('action' => 'remove-favorite'), 'video_favorite', true)?>';
        var request = new Request.JSON({
             'method' : 'post',
@@ -371,7 +388,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
             },
             'onComplete':function(responseObject)
             {  
-                obj.innerHTML = '<a href="javascript:;" title="<?php echo $this->translate("Favourite")?>" onclick="favorite_video('+videoId+')">' + '<i class="fa fa-heart-o"></i>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;" class="tf_button_action" title="<?php echo $this->translate("Favourite")?>" onclick="favorite_video('+videoId+')">' + '<i class="fa fa-heart-o"></i>' + '</a>';
             }
         });
         request.send();  
@@ -379,7 +396,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
    var favorite_video = function(videoId)
    {
    	   var obj = document.getElementById('favorite_' + videoId);
-   	   obj.innerHTML = '<a href="javascript:;"><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
+   	   obj.innerHTML = '<a href="javascript:;" class="tf_button_action" ><img width="16" src="application/modules/Yncomment/externals/images/loading.gif" alt="Loading" /></a>';
    	   var url = '<?php echo $this -> url(array('action' => 'add-favorite'), 'video_favorite', true)?>';
        var request = new Request.JSON({
             'method' : 'post',
@@ -389,7 +406,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
             },
             'onComplete':function(responseObject)
             {  
-                obj.innerHTML = '<a href="javascript:;" style="background:#ff6633;color: #fff" title="<?php echo $this->translate("Unfavourite")?>" onclick="unfavorite_video('+videoId+')">' + '<i class="fa fa-heart"></i>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;" class="tf_button_action" style="background:#ff6633;color: #fff" title="<?php echo $this->translate("Unfavourite")?>" onclick="unfavorite_video('+videoId+')">' + '<i class="fa fa-heart"></i>' + '</a>';
             }
         });
         request.send();  
