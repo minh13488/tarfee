@@ -4003,16 +4003,209 @@ body#global_page_advgroup-profile-index{
 		
 		.tf-player-detail-info{
 			text-align: center;
+			position: relative;
 			
 			.tf-player-name{
 				font-size: 1.5em;
 				font-weight: 700;
 				margin-bottom: 5px;
 				color: $theme_link_color;
+				text-align: center;
 				text-overflow: ellipsis;
 				overflow: hidden;
 				white-space: nowrap;
 			}
+			.tf-player-thumb{
+				width: 190px;
+				height: 190px;
+				position: absolute;
+				left: 50%;
+				margin-left: -95px;
+				top: 85px;
+
+				span{
+					display: block;
+					width: 190px;
+					height: 190px;
+					border: 5px solid $theme_link_color;
+					background-color: #fff;
+					+border-radius(50%);
+					-webkit-box-sizing: border-box;
+					-moz-box-sizing: border-box;
+					box-sizing: border-box;
+					position: relative;
+					z-index: 1;
+					+tarfee_background_image;				
+				}
+			}
+
+			.user_rating {
+				text-align: center;
+				font-size: 26px;
+			}
+
+			.tf-player-content{
+				margin-top: 50px;
+			}
+			
+			.tf-player-description{
+				position: relative;
+				display: block;
+				width: 50%;
+				min-height: 60px;
+				float: left;
+				margin-top: 0 !important;
+				padding: 10px 0;
+
+				span.label{
+					display: block;
+					color: $theme_font_color_light;
+					font-weight: bold;
+					text-align: inherit;
+					font-size: 0.8em;
+					margin: 0;
+					padding: 0;
+				}
+				span.value{
+					font-weight: bold;
+					color: $theme_link_color;
+					margin-top: 7px;
+					display: block;
+					white-space: nowrap;
+					overflow: hidden;
+					text-overflow: ellipsis;
+					width: 100%;
+				}
+
+				&:nth-child(n+3){
+					border-top: 1px solid $theme_border_medium_color;
+				}
+
+				&:nth-child(odd){
+					text-align: right;
+					padding-right: 135px
+				}
+				&:nth-child(even){
+					padding-left: 135px;
+				}
+			}
+			
+			.tf-sport-type-position{
+				margin-top: 50px;
+				text-align: center;
+
+				img{
+					width: 30px;
+					height: 30px;
+				}
+
+				& > span{
+					display: inline-block;
+					margin-bottom: 15px;
+				}
+
+				.player-position,
+				.player-foot{
+					margin-right: 10px;
+					color: $theme_font_color_light;
+					text-transform: lowercase;
+				}
+
+				.player-title{
+					font-size: 22px;
+					margin-left: 5px;
+					display: block;
+					position: relative;
+					top: 3px;
+					font-weight: bold;
+					color: $theme_font_color_light;
+				}
+
+			}
+
+			.tf-player-owner{
+				text-align: center;
+				color: $theme_font_color_light;
+				text-transform: lowercase;
+
+				a{
+					text-transform: capitalize;
+					font-weight: bold;
+				}
+			}
+
+			.playercard_statistics{
+				margin-top: 10px;
+
+				li{
+					display: inline-block;
+					margin-right: 10px;
+
+					span{
+						color: $theme_font_color_light;
+						font-size: 12px;
+						
+						a{
+							color: $theme_font_color_light;
+						}
+					}
+				}
+			}
+
+			.tf-player-detail-button{
+
+				& > div{
+					display: inline-block;
+				}
+
+				.actions_generic{
+					display: block;
+					margin-bottom: 8px;
+					font-size: 13px;
+					text-align: center;
+					padding: 7px;
+					+border-radius(5px);
+					font-weight: bold;
+					border: 2px solid $theme_font_color_light;
+					color: $theme_font_color_light;
+
+					&:hover{
+						border: 2px solid $theme_link_color;
+						color: $theme_link_color;
+					}
+				}
+
+				.tf-addthis{
+					position: relative;
+					top: 12px;
+				}
+				.playercard_options{
+					position: relative;
+
+					span{
+						cursor: pointer;
+					}
+				}
+				.tf-icon-dropdown{
+					display: block;
+					text-transform: lowercase;
+					color: $theme_font_color_light;
+					margin-bottom: 5px;
+					cursor: pointer;
+
+					&:hover{
+						color: $theme_link_color;
+					}
+					i.fa{
+						margin-right: 5px;
+					}
+				}
+				.box-dropdown{
+					position: absolute;
+
+				}
+			}
+
 		}
 
 	}
