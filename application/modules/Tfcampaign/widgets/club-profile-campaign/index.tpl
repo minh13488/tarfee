@@ -8,6 +8,7 @@
 		<a class="smoothbox tf_button_action" href='<?php echo $url?>'><?php echo $this->translate('Add Scout')?></a>
 	</div>
 <?php endif;?>
+<?php if( count($this -> campaigns) > 0 ): ?>
 <ul class="tfcampaign_list">
 <?php foreach($this -> campaigns as $campaign) :?>
 	<li>
@@ -82,3 +83,10 @@
 	</li>
 <?php endforeach;?>
 </ul>
+<?php else: ?>
+  <div class="tip" style="margin: 10px">
+    <span>
+      <?php echo $this->translate('No scouts have been added to this club yet.');?>
+    </span>
+  </div>
+<?php endif; ?>

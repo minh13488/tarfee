@@ -3798,7 +3798,8 @@ body[id^=global_page_user-edit-],
 #global_page_ynmember-edit-place,
 #global_page_ynmember-edit-cover-photo,
 #global_page_messages-messages-view,
-body[id^=global_page_ynsocialads]
+body[id^=global_page_ynsocialads],
+#global_page_user-player-card-edit
 {
 	#global_wrapper
 	{
@@ -3824,6 +3825,7 @@ body[id^=global_page_ynsocialads]
 	}
 }
 #global_page_user-player-card-create .global_form,
+#global_page_user-player-card-edit .global_form,
 body[id^=global_page_ynmember-edit-] #global_content,
 body[id^=global_page_user-edit-] #global_content,
 body[id^=global_page_ynsocialads] .layout_top

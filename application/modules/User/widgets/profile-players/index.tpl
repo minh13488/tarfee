@@ -163,10 +163,8 @@
 											<?php
 												echo $this->htmlLink(array(
 										            'route' => 'user_photo',
-										            'controller' => 'upload',
 										            'id' => $player->playercard_id,
 										            'type' => $player->getType(),
-										            'tab' => 724
 										        ), '<i class="fa fa-camera"></i>&nbsp;'.$this->translate('Add Photos'), array(
 										            'class' => 'smoothbox', 'title' => $this -> translate('Add Photos')
 										        ));

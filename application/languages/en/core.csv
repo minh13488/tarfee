@@ -4944,7 +4944,8 @@ http://[host][object_link]
 "_EMAIL_NOTIFY_ADVGROUP_GROUP_VERIFIED_TITLE";"Group Verification"
 "_EMAIL_NOTIFY_ADVGROUP_GROUP_VERIFIED_DESCRIPTION";"This email is sent to group owner."
 "_EMAIL_NOTIFY_ADVGROUP_GROUP_VERIFIED_SUBJECT";"Group Verification"
-"_EMAIL_NOTIFY_ADVGROUP_GROUP_VERIFIED_BODY";"
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_VERIFIED_BODY";"[header]
+
 Your group [object_title] has been verified. 
 
 Click on the following link for more details:
@@ -4957,7 +4958,8 @@ http://[host][object_link]
 "_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_TITLE";"Club Un-Verification"
 "_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_DESCRIPTION";"This email is sent to club owner."
 "_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_SUBJECT";"Club Un-Verification"
-"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_BODY";"
+"_EMAIL_NOTIFY_ADVGROUP_GROUP_UNVERIFIED_BODY";"[header]
+
 Your club [object_title] has been un-verified. 
 
 Click on the following link for more details:
@@ -4970,7 +4972,8 @@ http://[host][object_link]
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_TITLE";"Club Verification Request Accepted"
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_DESCRIPTION";"This email is sent to club owner."
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_SUBJECT";"Club Verification Request Accepted"
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_BODY";"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_ACCEPTED_BODY";"[header]
+
 Your verification request for club [object_title] has been accepted. 
 
 Click on the following link for more details:
@@ -4983,7 +4986,8 @@ http://[host][object_link]
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_TITLE";"Club Verification Request Denied"
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_DESCRIPTION";"This email is sent to club owner."
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_SUBJECT";"Club Verification Request Denied"
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_BODY";"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_DENIED_BODY";"[header]
+
 Your verification request for club [object_title] has been denied. 
 
 Click on the following link for more details:
@@ -4997,7 +5001,8 @@ http://[host][object_link]
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_TITLE";"Club Verification Request Sent"
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_DESCRIPTION";"This email is sent to club owner."
 "_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_SUBJECT";"Club Verification Request Sent"
-"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_BODY";"
+"_EMAIL_NOTIFY_ADVGROUP_REQUEST_SENT_BODY";"[header]
+
 Your verification request for club [object_title] has been sent to admin. 
 
 Click on the following link for more details:
@@ -5944,13 +5949,12 @@ CDN that uses FTP or SCP."
 # notify_tfcampaign_alert_player
 "_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_TITLE";"New Matching Scout"
 "_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_DESCRIPTION";"Your player matchs with new scout"
-"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_SUBJECT";"New Matching Scout"
-"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_BODY";"
-Your player card [sender_title] is matched the scout [object_title]
+"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_SUBJECT";"New Campaign for ([sender_title])"
+"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_BODY";"[header]
 
-Click on the following link for more details:
+Your player card [sender_title] is matching a new campaign ([object_title]).
 
-http://[host][object_link]
+Click on the following link for more details: http://[host][object_link].
 
 [footer]"
 "ACTIVITY_TYPE_TFCAMPAIGN_ALERT_PLAYER";"When my player is matched."
@@ -9449,9 +9453,3 @@ Event: ""[object_title]""&nbsp;<br> <br>http://[host][object_link]<br> <br> [foo
 "%s video";"%s video";"%s videos"
 "View More";"View More"
 "Male / Female";"Male / Female"
-"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_SUBJECT";"New Matching Scout"
-"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_BODYHTML";"[header]
-Your player card [sender_title] is matched the scout [object_title]
-Click on the following link for more details:
-http://[host][object_link]
-[footer]"

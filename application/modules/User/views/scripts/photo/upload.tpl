@@ -16,6 +16,10 @@
       document.getElementById("submit-wrapper").style.display = "none";
   }
 </script>
+<div class="tarfee-popup-close"><i class="fa fa-times fa-lg"></i></div>
+<script type="text/javascript">
+	$$('.tarfee-popup-close').addEvent('click',function(){parent.Smoothbox.close()});	
+</script>
 <?php echo $this->form->render($this) ?>
   <script type="text/javascript">
     //<!--
