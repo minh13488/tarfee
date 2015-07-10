@@ -156,6 +156,9 @@ class SocialConnect_Api_Core
 
 		$table = Engine_Api::_() -> getDbtable('Accounts', 'SocialConnect');
 		$table -> delete("user_id='{$userId}'");
+		
+		$tokenTable = Engine_Api::_() -> getDbtable('tokens', 'socialbridge');
+		$tokenTable -> delete("user_id = '{$userId}'");
 
 		if (class_exists('User_Model_DbTable_Facebook'))
 		{
@@ -211,7 +214,7 @@ class SocialConnect_Api_Core
 				$user = Engine_Api::_() -> getItemTable('user') -> find($account -> user_id) -> current();
 			}
 		}
-
+		/*
 		if (!$user && $service == 'facebook')
 		{
 			if (class_exists('User_Model_DbTable_Facebook'))
@@ -238,7 +241,7 @@ class SocialConnect_Api_Core
 				}
 			}
 		}
-
+		*/
 		return $user;
 	}
 

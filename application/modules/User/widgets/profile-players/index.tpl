@@ -140,9 +140,20 @@
 										?>
 									</li>
 									<?php endif;?>	
-
-									<li class="setting" onclick="showOptions(<?php echo $player->playercard_id ?>, this)">
-										<a href="javascript:void(0)"><i class="fa fa-plus"></i></a>
+									<!--<li class="setting" onclick="showOptions(<?php echo $player->playercard_id ?>, this)">--></li>
+									<li class="setting"">
+										<?php
+						        			echo $this->htmlLink(array(
+												'route' => 'video_general',
+													'action' => 'create',
+													'parent_type' =>'user_playercard',
+													'subject_id' =>  $player->playercard_id,
+													'tab' => 724
+												), '<i class="fa fa-video-camera"></i>&nbsp;', array(
+												'class' => '', 'title' => $this -> translate('Add Video')
+												)) ;
+											?>
+										<!--<a href="javascript:void(0)"><i class="fa fa-plus"></i></a> -->
 									</li>
 										<ul class="setting-list" style="display: none" id="setting-list_<?php echo $player->playercard_id?>">
 											<li>
@@ -158,7 +169,6 @@
 												)) ;
 											?>
 											</li>
-
 											<li>
 											<?php
 												echo $this->htmlLink(array(

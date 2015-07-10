@@ -8,7 +8,7 @@
 <div class="tip">
     <span><?php echo $this->translate("Maximum number of allowed referral codes:"); echo ' '.$max_referral;?> </span>
 </div> 
-<?php if(!empty($this -> total_available)) :?>
+<?php //if(!empty($this -> total_available)) :?>
 <div style="margin-top: 8px;" class="tip">
 	<span>
 		<span style='color:green'><?php echo $this -> translate("Active");?></span>
@@ -25,7 +25,7 @@
 	<span class="referral_codes"><?php echo $this -> available_codes;?></span>
 </div>
 
-<?php endif;?>
+<?php //endif;?>
 
 <div style="padding-top:20px">
 	<form action="" method="post">

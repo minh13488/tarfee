@@ -503,7 +503,7 @@ class User_IndexController extends Core_Controller_Action_Standard
 		{
 			$select -> where('`' . $table -> info('name') . '`.`title` LIKE ?', '%' . $text . '%');
 		}
-		
+		/*
 		//query with sport type
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		$sportMapsTable = Engine_Api::_() -> getDbTable('sportmaps', 'user');
@@ -517,7 +517,7 @@ class User_IndexController extends Core_Controller_Action_Standard
 		} else {
 			$select -> where("1 = 0");
 		}
-		
+		*/
 		$select -> limit($limit);
 
 		// Retv data

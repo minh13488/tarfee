@@ -255,7 +255,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 						), '<i class="fa fa-plus-square"></i>'.$this->translate('Add Video'), array(
 						'class' => 'tf-icon-dropdown'
 						)) ;
-
+						/*
 						echo $this->htmlLink(array(
 							'route' => 'user_photo',
 							'id' => $player->playercard_id,
@@ -263,7 +263,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 						), '<i class="fa fa-camera"></i>'.$this->translate('Add Photos'), array(
 						'class' => 'tf-icon-dropdown smoothbox', 'title' => $this -> translate('Add Photos')
 						));
-
+						*/
 
 						echo $this->htmlLink(array(
 				            'route' => 'user_extended',

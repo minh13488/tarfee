@@ -903,17 +903,28 @@ class User_FriendsController extends Core_Controller_Action_User
 		    $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 5));
 		    $paginator->setCurrentPageNumber($this->_getParam('page', 1));
 		    // Get stuff
-		    $ids = array();
+		    $friendUsers = array();
 		    foreach( $paginator as $friend ) {
-		      $ids[] = $friend->resource_id;
+		    	if(Engine_Api::_() -> getItem('user', $friend->resource_id))
+		      		$friendUsers[] = Engine_Api::_() -> getItem('user', $friend->resource_id);
 		    }
-		
-		    // Get the items
-		    $friendUsers = Engine_Api::_()->getItemTable('user')->find($ids);
+			
+			// get all clubs following
+			$memTable = Engine_Api::_() -> getDbTable('membership', 'advgroup');
+			$select = $memTable -> select() -> from($memTable -> info ("name")) -> where('user_id = ?', $user_id) -> where('active = 1');
+			$clubs = Zend_Paginator::factory($select);
+			// Set item count per page and current page number
+		    $clubs->setItemCountPerPage($this->_getParam('itemCountPerPage', 5));
+		    $clubs->setCurrentPageNumber($this->_getParam('page', 1));
+		    foreach( $clubs as $club ) 
+		    {
+		    	if(Engine_Api::_() -> getItem('group', $club->resource_id))
+		    		$friendUsers[] = Engine_Api::_() -> getItem('group', $club->resource_id);
+		    }
 			$check_object_result = count($friendUsers);
 	
 	        $this->view->following = array();
-	        if (!empty($check_object_result)) {
+	        if (!empty($check_object_result) || !empty($clubCount)) {
 	            $this->view->following = $friendUsers;
 	        } else {
 	            $this->view->no_result_msg = $this->view->translate('No following were found.');

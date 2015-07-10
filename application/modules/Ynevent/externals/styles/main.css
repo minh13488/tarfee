@@ -3828,12 +3828,14 @@ body[id^=global_page_ynsocialads],
 #global_page_user-player-card-edit .global_form,
 body[id^=global_page_ynmember-edit-] #global_content,
 body[id^=global_page_user-edit-] #global_content,
-body[id^=global_page_ynsocialads] .layout_top
+body[id^=global_page_ynsocialads] .layout_top,
+#global_page_social-connect-index-account-linking #global_content,
+#global_page_socialbridge-index-index #global_content
 {
-	 padding-top: 15px;
-	  max-width: 1170px;
-	  margin: auto;
-	  padding: 15px;
+		 padding-top: 15px;
+		  max-width: 1170px;
+		  margin: auto;
+		  padding: 15px;
 	  .ynmember-container
 	  {
 	  	border: 0;

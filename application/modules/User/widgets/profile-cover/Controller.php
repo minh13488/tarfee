@@ -38,7 +38,12 @@ class User_Widget_ProfileCoverController extends Engine_Content_Widget_Abstract
 		// Following count
 	    $select = $subject->membership()->getMembersOfSelect();
 		$paginator = Zend_Paginator::factory($select);
-		$this -> view -> followingCount = $paginator -> getTotalItemCount();
+		
+		$memTable = Engine_Api::_() -> getDbTable('membership', 'advgroup');
+		$select = $memTable -> select() -> from($memTable -> info ("name")) -> where('user_id = ?', $subject -> getIdentity()) -> where('active = 1');
+		$clubs = Zend_Paginator::factory($select);
+			
+		$this -> view -> followingCount = $paginator -> getTotalItemCount() + $clubs -> getTotalItemCount();
 		
 		// Get professional user verified
 		$slverifyTbl = Engine_Api::_()->getItemTable('slprofileverify_slprofileverify');
@@ -52,7 +57,7 @@ class User_Widget_ProfileCoverController extends Engine_Content_Widget_Abstract
 
 		// get preferred clubs
 		$userGroupMappingTable = Engine_Api::_() -> getDbTable('groupmappings', 'user');
-		$groupMappings = $userGroupMappingTable -> getGroupByUser($subject -> getIdentity(), 2);
+		$groupMappings = $userGroupMappingTable -> getGroupByUser($subject -> getIdentity(), 10);
 		
 		$groups = array();
 		foreach($groupMappings as $groupMapping){

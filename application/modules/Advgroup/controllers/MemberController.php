@@ -313,6 +313,19 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 				{
 					$subject -> membership() -> addMember($viewer) -> setUserApproved($viewer);
 				}
+				
+				$user_id = $viewer -> getIdentity();
+				$group_id = $subject -> getIdentity();
+				$userGroupMappingTable = Engine_Api::_() -> getDbTable('groupmappings', 'user');
+				$row = $userGroupMappingTable -> getRow($user_id, $group_id);
+				if (!isset($row) && empty($row))
+				{
+					$row = $userGroupMappingTable -> createRow();
+					$row -> user_id = $user_id;
+					$row -> group_id = $group_id;
+					$row -> save();
+				}
+				
 				// Set the request as handled
 				$notification = Engine_Api::_() -> getDbtable('notifications', 'activity') -> getNotificationByObjectAndType($viewer, $subject, 'advgroup_invite');
 				if ($notification)

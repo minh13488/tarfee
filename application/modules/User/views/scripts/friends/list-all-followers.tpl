@@ -20,9 +20,9 @@
 		request.send();
   }
 </script>
-<div style="width: 700px">
+<div style="width: 700px; height: 500px">
 <?php  if(empty($this->is_ajax)) { ?>
-<div class="followers_members_popup">
+<div class="followers_members_popup" style="min-height: 450px">
 	<div class="top">
 		<?php
             $title = $this->translate('Followers who following you');
@@ -40,7 +40,7 @@
 					<div class="followers_members_popup_paging">
 						<div id="user_followers_previous" class="paginator_previous">
 							<?php echo $this->htmlLink('javascript:void(0);', $this->translate('Previous'), array(
-								'onclick' => 'paginateFollowers(likeMemberPage - 1)'
+								'onclick' => 'paginateFollowers(likeMemberPage - 1)', 'class' => 'tf_button_action'
 							)); ?>
 						</div>
 					</div>
@@ -115,11 +115,11 @@
 			<?php } ?>
 			<?php 
 				if(!empty($this->followers) && $this->paginator->count() > 1 ): ?>
-					<?php if( $this->paginator->getCurrentPageNumber() < $this->followers->count() ): ?>
+					<?php if( $this->paginator->getCurrentPageNumber() < $this->paginator->count() ): ?>
 						<div class="ynfeed_members_popup_paging">
-							<div id="user_like_members_next" class="paginator_next" style="border-top-width:1px;">
+							<div id="user_like_members_next" class="paginator_previous" style="border-top-width:1px;">
 								<?php echo $this->htmlLink('javascript:void(0);', $this->translate('Next') , array(
-									'onclick' => 'paginateFollowers(likeMemberPage + 1)'
+									'onclick' => 'paginateFollowers(likeMemberPage + 1)', 'class' => 'tf_button_action'
 								)); ?>
 							</div>
 						</div>

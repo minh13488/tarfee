@@ -4063,7 +4063,7 @@ Event [object_title] that you have been joined, was deleted .
 "View:";"View:"
 
 "Accept Group Invitation";"Accept Group Invitation"
-"Would you like to join this group?";"Would you like to join this group?"
+"Would you like to follow this club?";"Would you like to follow this club?"
 "Join Group";"Join Group"
 "Cancel";"Cancel"
 
@@ -4083,8 +4083,8 @@ Event [object_title] that you have been joined, was deleted .
 "Title";"Title"
 "Save Changes";"Save Changes"
 
-"Join Group";"Join Group"
-"Would you like to join this group?";"Would you like to join this group?"
+"Follow Club";"Follow Club"
+"Would you like to follow this club?";"Would you like to follow this club?"
 
 "Leave Group";"Leave Group"
 "Are you sure you want to leave this group?";"Are you sure you want to leave this group?"
