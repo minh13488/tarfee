@@ -160,12 +160,12 @@ class Tfcampaign_Form_Create extends Engine_Form
     $this -> addElement('Text', 'user', array(
         'label' => 'Allow view for',
         'autocomplete' => 'off',
-        'order' => '20'
+        'order' => '17'
     ));
     
     $this -> addElement('Hidden', 'user_ids', array(
         'filters' => array('HtmlEntities'),
-        'order' => '21'
+        'order' => '18'
     ));
     Engine_Form::addDefaultDecorators($this -> user_ids);
 	
