@@ -209,8 +209,8 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 
 	    	<div title="<?php echo $this -> translate("Keep eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
 	    		<?php if($player->isEyeOn()): ?>              
-	        	<a class="actions_generic" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
-	        		<?php echo $this->translate("keep eye on") ?>
+	        	<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
+	        		<?php echo $this->translate("eye on") ?>
 	    		</a>
 	    		<?php else: ?>
 	        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
@@ -261,10 +261,8 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 
 						echo $this->htmlLink(array(
 							'route' => 'user_photo',
-							'controller' => 'upload',
 							'id' => $player->playercard_id,
-							'type' => $player->getType(),
-							'tab' => 724
+							'type' => $player->getType()
 						), '<i class="fa fa-camera"></i>'.$this->translate('Add Photos'), array(
 						'class' => 'tf-icon-dropdown smoothbox', 'title' => $this -> translate('Add Photos')
 						));
@@ -350,8 +348,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 							'action' => 'edit',
 							'video_id' => $item->video_id,
 							'parent_type' =>'user_playercard',
-							'subject_id' =>  $player->playercard_id,
-							'tab' => 724
+							'subject_id' =>  $player->playercard_id
 					    ), '<i class="fa fa-pencil-square-o fa-lg"></i>', array('class' => 'tf_button_action'));
 					?>
 				    </div>
@@ -423,7 +420,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
         },
         'onSuccess': function(responseJSON, responseText) {
             if (responseJSON.status == true) {
-                html = '<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('+itemId+')"><span><i class="fa fa-eye-slash"></i></span></a>';
+                html = '<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('+itemId+')"><span>'+'<?php echo $this->translate('eye on') ?>'+'</span></a>';
                 $('user_eyeon_'+itemId).set('html', html);
             }
             else {
@@ -443,7 +440,7 @@ function removeEyeOn(itemId){
         },
         'onSuccess': function(responseJSON, responseText) {
             if (responseJSON.status == true) {
-                html = '<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
+                html = '<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('+itemId+')">'+'<?php echo $this->translate('keep eye on') ?>'+'</a>';
                 $('user_eyeon_'+itemId).set('html', html);
             }
             else {

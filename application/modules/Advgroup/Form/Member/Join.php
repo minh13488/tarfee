@@ -3,13 +3,13 @@ class Advgroup_Form_Member_Join extends Engine_Form
 {
   public function init()
   {
-    $this->setTitle('Join Club')
-      ->setDescription('Would you like to join this club?');
+    $this->setTitle('Follow Club')
+      ->setDescription('Would you like to follow this club?');
 
     //$this->addElement('Hash', 'token');
 
     $this->addElement('Button', 'submit', array(
-      'label' => 'Join Club',
+      'label' => 'Follow Club',
       'ignore' => true,
       'decorators' => array('ViewHelper'),
       'type' => 'submit'

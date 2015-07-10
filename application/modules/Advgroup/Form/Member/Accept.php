@@ -4,7 +4,7 @@ class Advgroup_Form_Member_Accept extends Engine_Form
   public function init()
   {
     $this->setTitle('Accept Club Invitation')
-      ->setDescription('Would you like to join this club?')
+      ->setDescription('Would you like to follow this club?')
       ->setMethod('POST')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()))
       ;
