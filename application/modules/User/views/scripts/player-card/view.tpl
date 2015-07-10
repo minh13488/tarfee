@@ -206,7 +206,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	                ?>
 	             </div>
 	         <?php endif;?>
-
+			<?php if($this -> viewer() -> getIdentity()):?>
 	    	<div title="<?php echo $this -> translate("Keep eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
 	    		<?php if($player->isEyeOn()): ?>              
 	        	<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
@@ -225,15 +225,12 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 					<?php echo $this -> translate('report')?>
 				</a>
 			</div>
-
+			<?php endif;?>
+			<?php if($this -> viewer() -> getIdentity() && $player -> isOwner($this -> viewer())): ?>
 	 		<div class="playercard_options">
 	 			<span class="tf-player-dropdown actions_generic"><?php echo $this->translate("settings") ?></span>
-
 	 			<div class="box-dropdown">
-			    	<?php 
-			    	if($this -> viewer() -> getIdentity() && $player -> getOwner() -> getIdentity() == $this -> viewer() -> getIdentity())
-					{
-			        	echo $this->htmlLink(array(
+			        <?php echo $this->htmlLink(array(
 				            'route' => 'user_extended',
 				            'controller' => 'player-card',
 				            'action' => 'edit',
@@ -276,20 +273,16 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 				        ), '<i class="fa fa-trash-o"></i>'.$this->translate('Delete'), array(
 				            'class' => 'tf-icon-dropdown smoothbox'
 				        ));
-				    }
 					?>
 				</div>
 		    </div>
-
+			<?php endif;?>
 			<div class="tf-addthis"> 
 				<!-- Add addthis share-->
 				<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
 				<div class="addthis_sharing_toolbox"></div>
 			</div>
-
 		</div>
-
-
 	</div>
 
 	<div class="tfplayer_videos">
