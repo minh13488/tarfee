@@ -995,12 +995,18 @@ class User_Model_User extends Core_Model_Item_Abstract
 		return Engine_Api::_()->getItem('user_location', $this->city_id);
 	}
 	
-	public function getLocation() {;
+	public function getLocation() {
 		$location = array();
 		if ($this->getCity()) $location[] = $this->getCity()->getTitle();
 		if ($this->getProvince()) $location[] = $this->getProvince()->getTitle();
 		if ($this->getCountry()) $location[] = $this->getCountry()->getTitle();
 		return $location;
+	}
+	public function getDescription()
+	{
+		if($this -> getLocation())
+			return implode(', ', $this -> getLocation());
+		return null;
 	}
 	
 	public function getEyeOns() {
