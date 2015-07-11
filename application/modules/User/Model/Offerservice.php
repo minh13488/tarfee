@@ -6,9 +6,14 @@ class User_Model_Offerservice extends Core_Model_Item_Abstract {
 	
 	public function getTitle() {
 		$view = Zend_Registry::get('Zend_View');
+		if($this -> title && $this -> service_id == 9)
+		{
+			return $view->translate($this -> title);
+		}
 		$service = Engine_Api::_()->getItem('user_service', $this->service_id);
-		if ($service) {
-			return $service->getTitle();
+		if ($service) 
+		{
+			return $view->translate($service->getTitle());
 		}
 		return $view->translate('Unknown Service');
 	}
