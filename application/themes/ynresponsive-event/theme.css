@@ -272,6 +272,7 @@ MAIN CONTENT AREA
 #global_content
 {
 	margin: 0px auto;
+	min-height: 550px;
 }
 #global_content_simple ul.form-options-wrapper > li
 {
