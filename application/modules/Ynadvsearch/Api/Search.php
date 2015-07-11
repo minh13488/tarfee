@@ -110,6 +110,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
         else if ($limit) {
             $select->limit ( $limit+1 );
         }
+		$select -> order("$table_name.title");
         return $select;
        
     }
@@ -181,6 +182,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				if (!empty($params['city_id'])) {
 					$select->where('city_id = ?', $params['city_id']);
 				}
+				$select -> order('first_name');
 				break;
 				
 			case 'professional':
@@ -220,6 +222,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				if (!empty($params['city_id'])) {
 					$select->where('city_id = ?', $params['city_id']);
 				}
+				$select -> order('displayname');
 				break;
 				
 			case 'organization':
@@ -254,6 +257,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				if (!empty($params['city_id'])) {
 					$select->where('city_id = ?', $params['city_id']);
 				}
+				$select -> order('title');
 				break;
 				
 			case 'event':
@@ -288,6 +292,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				if (!empty($params['city_id'])) {
 					$select->where('city_id = ?', $params['city_id']);
 				}
+				$select -> order('title');
 				break;
 				
 			case 'campaign':
@@ -319,6 +324,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				if (!empty($params['city_id'])) {
 					$select->where('city_id = ?', $params['city_id']);
 				}
+				$select -> order('title');
 				break;
 		}
 		

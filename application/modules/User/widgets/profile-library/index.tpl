@@ -28,27 +28,22 @@
 
 </div>
 <?php endif;?>
-
-
-<?php if(count($this -> mainVideos)) :?>
-	<ul class="videos_browse tf_library_videos">
- 	<?php foreach ($this->mainVideos as $item): ?>
-        <?php
-        echo $this->partial('_video_listing.tpl', 'user', array(
-            'video' => $item,
-            'library' => $this->library,
-            'main' => true,
-            'tab_id' => $this->identity,
-        ));
-        ?>
-	<?php endforeach; ?>
-	</ul>
-<?php endif;?>
-
-<!-- get sub libraries -->
-<?php $subLibraries = $this -> library -> getSubLibrary(); ?>
-<ul class="tf_list_sublibrary">
-<?php foreach($subLibraries as $subLibrary) :
+<ul class="videos_browse tf_library_videos tf_list_sublibrary">
+	<?php if(count($this -> mainVideos)) :?>
+	 	<?php foreach ($this->mainVideos as $item): ?>
+	        <?php
+	        echo $this->partial('_video_listing.tpl', 'user', array(
+	            'video' => $item,
+	            'library' => $this->library,
+	            'main' => true,
+	            'tab_id' => $this->identity,
+	        ));
+	        ?>
+		<?php endforeach; ?>
+	<?php endif;?>
+	<!-- get sub libraries -->
+	<?php $subLibraries = $this -> library -> getSubLibrary(); ?>
+	<?php foreach($subLibraries as $subLibrary) :
 	$totalVideo = $subLibrary -> getTotalVideo();
 	$totalVideoView = $subLibrary -> getTotalVideoView();
 	$totalVideoComment = $subLibrary -> getTotalVideoComment();
@@ -142,7 +137,7 @@
 		</div><!-- show video of sub library -->
 	</li><!-- end item sublibrary -->
 	<?php endif;?>
-<?php endforeach; ?>
+	<?php endforeach; ?>
 </ul><!--tf_list_sublibrary-->
 
 <script type="text/javascript">

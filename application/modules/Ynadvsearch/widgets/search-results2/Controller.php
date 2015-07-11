@@ -7,7 +7,7 @@ class Ynadvsearch_Widget_SearchResults2Controller extends Engine_Content_Widget_
 		$from = $request-> getParam('from', 0);
 		$from = intval($from);
 		
-		$limit = 12;
+		$limit = 24;
 		
 		$viewer = Engine_Api::_()->user()->getViewer();
 		$level_id = ($viewer->getIdentity()) ? $viewer->level_id : 5;

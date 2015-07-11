@@ -14,23 +14,23 @@
 	<?php $player = $this->video->getParent();?>
 	<?php if ($player && $player->getType() == 'user_playercard'):?>
 	<div class="player-info">
-	    <div class="player-photo">
+	    <div class="player-photo" title="<?php echo $player -> getTitle();?>">
 	        <?php echo $this->itemPhoto($player, 'thumb.icon')?>
 	    </div>
 	    <div class="player_info_detail">
-	        <div class="player-title">
+	        <div class="player-title" title="<?php echo $player -> getTitle();?>">
 	            <?php echo $player?>
 	        </div>
 	        <?php $position = $player->getPosition()?>
 	        <?php if ($position) : ?>
-			<div class="player-position">
+			<div class="player-position" title="<?php echo $this -> translate($position);?>">
 	        	<?php 
 		    		preg_match_all('/[A-Z]/', $position, $matches);
 					echo implode($matches[0]);?>
 			</div>
 	        <?php endif;?>
 	        <?php if($player -> getSport()):?>
-				<?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?>
+				<span title="<?php echo $this -> translate($player -> getSport());?>"><?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?></span>
 			<?php endif;?>
 	    </div>
 	</div>

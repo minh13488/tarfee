@@ -7,7 +7,6 @@
 
 <script type="text/javascript">    
     en4.core.runonce.add(function(){
-        addEventForButtonAddTo();
         <?php if (!$this->renderOne): ?>
             var anchor = $('ynvideo_favorite_videos').getParent();
             $('ynvideo_fav_videos_previous').style.display = '<?php echo ( $this->paginator->getCurrentPageNumber() == 1 ? 'none' : '' ) ?>';
@@ -20,10 +19,12 @@
                         format : 'html',
                         subject : en4.core.subject.guid,
                         page : <?php echo sprintf('%d', $this->paginator->getCurrentPageNumber() - 1) ?>
+                    },
+                    onSuccess : function(responseTree, responseElements, responseHTML, responseJavaScript) {
+                    	anchor.innerHTML = responseHTML;
+                    	setPin();
                     }
-                }), {
-                    'element' : anchor
-                })
+                }))
             });
 
             $('ynvideo_fav_videos_next').removeEvents('click').addEvent('click', function(){
@@ -33,10 +34,12 @@
                         format : 'html',
                         subject : en4.core.subject.guid,
                         page : <?php echo sprintf('%d', $this->paginator->getCurrentPageNumber() + 1) ?>
+                    },
+                    onSuccess : function(responseTree, responseElements, responseHTML, responseJavaScript) {
+                    	anchor.innerHTML = responseHTML;
+                    	setPin();
                     }
-                }), {
-                    'element' : anchor
-                })
+                }))
             });
         <?php endif; ?>
     });
@@ -53,7 +56,6 @@
 </ul>
 
 <script type="text/javascript">
-
     function setPin(){
         jQuery.noConflict();
         (function (jQuery){
@@ -74,6 +76,10 @@
     $$('.tab_layout_ynvideo_profile_favorite_videos').addEvent('click',function(){
         setPin();
     })
+    window.addEvent('domready', function()
+    {
+    	setPin();
+    });
 
 </script>
 
@@ -96,7 +102,7 @@
         request.send();  
    } 
 </script>
-<div>
+<div class="ynvideofa-paginator" style="margin-top: 10px">
     <div id="ynvideo_fav_videos_previous" class="paginator_previous">
         <?php
         echo $this->htmlLink('javascript:void(0);', $this->translate('Previous'), array(
@@ -109,7 +115,8 @@
         <?php
         echo $this->htmlLink('javascript:void(0);', $this->translate('Next'), array(
             'onclick' => '',
-            'class' => 'buttonlink_right icon_next'
+            'class' => 'buttonlink_right icon_next',
+            'style' => 'display: initial'
         ));
         ?>
     </div>

@@ -1393,3 +1393,16 @@ div.video_object
 {
 	display: none;
 }
+.layout_ynadvsearch_search_results2 .ynadvsearch_searchresult li.video-item .ynvideo_thumb_wrapper
+{
+	height: 150px;
+	img
+	{
+		height: 150px;
+	}
+}
+.layout_ynvideo_main_page_videos ul.video-items li.video-item .video-title,
+.layout_ynvideo_profile_favorite_videos #ynvideo_favorite_videos li .video-title
+{
+	height: auto;
+}
