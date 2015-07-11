@@ -2878,7 +2878,7 @@ body#global_page_advgroup-profile-index{
 .layout_ynadvsearch_search_results2 .ynadvsearch_searchresult li.result-search-item{
 	background: #fff;
 	+border-radius(5px);
-	overflow: hidden;
+	/*overflow: hidden;*/
 
 	.club-photo{
 		width: 100%;	
@@ -3349,7 +3349,7 @@ body#global_page_advgroup-profile-index{
 			.ynvideo_thumb_wrapper{
 				width: 100%;
 				padding: 0;
-				height: 180px;
+				height: 150px;
 				margin: 0;
 
 				a{
@@ -4357,6 +4357,9 @@ body#global_page_advgroup-profile-index{
 
 /*Style result advsearch*/
 #global_page_ynadvsearch-search-index{
+	.layout_middle{
+		overflow: visible !important;
+	}
 	#global_wrapper{
 		background: #dadada;
 		/*padding-top: 10px;*/
@@ -4393,6 +4396,33 @@ body#global_page_advgroup-profile-index{
 
 .ynadvsearch_searchresult{
 	position: relative;
+
+	
+	li.user_playercard-item,
+	li.tfcampaign_campaign-item,
+	li.blog-item,
+	li.video-item,
+	li.user-item,
+	li.event-item{
+		overflow: visible !important;
+		&:before{
+			content: "";
+			width: 25px;
+			height: 25px;
+			background-color: $theme_link_color;
+			display: block;
+			position: absolute;
+			top: -10px;
+			+border-radius(50%);
+			left: -10px;
+			background-size: 15px 15px;
+			background-position: center;
+			z-index: 11;
+			background-repeat: no-repeat;
+		}
+	}
+
+
 	li.result-search-item{
 		float: left;
 	}
@@ -4400,8 +4430,13 @@ body#global_page_advgroup-profile-index{
         overflow: hidden;
         +border-radius(5px);
 
+		&:before{
+			background-image: url(~/application/themes/ynresponsive-event/images/icon-player.png);
+		}
+
         #profile_photo {
             background: #fff;
+            +border-radius(5px);
 
             .thumb_profile {
                 height: 150px;
@@ -4409,6 +4444,7 @@ body#global_page_advgroup-profile-index{
                 display: block;
                 background-color: #eaeaea;
                 +tarfee_background_image;
+        		+border-radius(5px 5px 0 0);
                 position: relative;
 
                 .tarfee_sport_type_position {
@@ -4554,7 +4590,7 @@ body#global_page_advgroup-profile-index{
                 padding: 10px 15px;
                 overflow: hidden;
                 text-align: center;
-                font-size: 12px;
+                font-size: 14px;
                 color: $theme_font_color_light;
                 a{  
                     margin-right: 10px;
@@ -4624,13 +4660,17 @@ body#global_page_advgroup-profile-index{
         padding: 10px;
         +border-radius(5px);
 
+		&:before{
+			background-image: url(~/application/themes/ynresponsive-event/images/icon-search-campaign.png);
+		}
+
         &:nth-child(4n+1){
             margin-left: 0;
         }
 
         .tfcampaign_title{
         	a{
-        		width: 80%;
+        		width: 75%;
         		font-weight: bold;
         	}
         }
@@ -4646,6 +4686,10 @@ body#global_page_advgroup-profile-index{
         padding: 10px;
         +border-radius(5px);
 
+		&:before{
+			background-image: url(~/application/themes/ynresponsive-event/images/icon-search-event.png);
+		}
+
         &:nth-child(4n+1){
             margin-left: 0;
         }
@@ -4660,7 +4704,12 @@ body#global_page_advgroup-profile-index{
 		+border-radius(5px);
 		padding: 10px;
 
+		&:before{
+			background-image: url(~/application/themes/ynresponsive-event/images/icon-search-talk.png);
+		}
+
 		.blogs_browse_info_title{
+			padding-right: 25px;
 			a{
 				font-weight: bold;
 				color: $theme_font_color;
@@ -4680,6 +4729,10 @@ body#global_page_advgroup-profile-index{
 	}
 	
 	li.user-item{
+		&:before{
+			background-image: url(~/application/themes/ynresponsive-event/images/icon-search-user.png);
+		}
+
 		padding: 10px;
 		.ynadvsearch-result-item-photo{
 			float: left;
@@ -4698,8 +4751,21 @@ body#global_page_advgroup-profile-index{
 			}
 		}
 	}
+	li.video-item {
+		&:before{
+			background-image: url(~/application/themes/ynresponsive-event/images/icon-search-video.png);
+		}
+		.video-title{
+			height: auto;
+		}
+		span.icon-player{
+			display: none !important;
+		}
+		.ynvideo_thumb_wrapper{
+			+border-radius(5px 5px 0 0);
+		}
+	}
 }
-
 
 
 
