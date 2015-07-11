@@ -9,20 +9,18 @@ $totalLike = Engine_Api::_() -> getDbtable('likes', 'yncomment') -> likes($playe
 $totalDislike = Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> getDislikeCount($player);
 $totalUnsure = Engine_Api::_() -> getDbtable('unsures', 'yncomment') -> getUnsureCount($player);
 $eyeons = $player->getEyeOns();
-$countryName = '';
-$provinceName = '';
-$cityName = '';
+$locationName = array();
 if($player ->country_id && $country = Engine_Api::_() -> getItem('user_location', $player ->country_id))
 {
-	$countryName = $country -> getTitle();
+	$locationName[] = $country -> getTitle();
 }
 if($player ->province_id && $province = Engine_Api::_() -> getItem('user_location', $player ->province_id))
 {
-	$provinceName = $province -> getTitle();
+	$locationName[] = $province -> getTitle();
 }
 if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $player ->city_id))
 {
-	$cityName = $city -> getTitle();
+	$locationName[] = $city -> getTitle();
 }
 ?>
 
@@ -55,7 +53,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 
 			<div class="tf-player-description">
 				<span class="label">Location</span>
-				<span class="value"><?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?></span>
+				<span class="value"><?php if($locationName) echo join($locationName, ',')?></span>
 			</div>
 			<div class="tf-player-description">
 				<span class="label">Gender</span>	
@@ -171,7 +169,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	                    'route' => 'messages_general',
 	                    'action' => 'compose',
 	                    'to' => $player -> getOwner() ->getIdentity()
-	                ), $this -> translate("Message"), array(
+	                ), $this -> translate("message"), array(
 	                    'class' => 'smoothbox actions_generic', 'title' => $this -> translate("Message")
 	                ));
 	                ?>
@@ -182,7 +180,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	                    'route' => 'user_general',
 	                    'action' => 'in-mail',
 	                    'to' => $player -> getOwner() ->getIdentity()
-	                ), $this -> translate("Email"), array(
+	                ), $this -> translate("email"), array(
 	                    'class' => 'smoothbox actions_generic', 'title' => $this -> translate("Email")
 	                ));
 	                ?>

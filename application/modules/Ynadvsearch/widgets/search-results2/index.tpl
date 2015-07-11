@@ -221,35 +221,23 @@
 	        
 	        <div class="ynevent_location">
 	    	<?php 
-	        	$countryName = '';
-				$provinceName = '';
-				$cityName = '';
-				if($event ->country_id && $country = Engine_Api::_() -> getItem('user_location', $item ->country_id))
+	        	$locationName = array();
+				if($item ->country_id && $country = Engine_Api::_() -> getItem('user_location', $item ->country_id))
 				{
-					$countryName = $country -> getTitle();
+					$locationName[] = $country -> getTitle();
 				}
-				if($event ->province_id && $province = Engine_Api::_() -> getItem('user_location', $item ->province_id))
+				if($item ->province_id && $province = Engine_Api::_() -> getItem('user_location', $item ->province_id))
 				{
-					$provinceName = $province -> getTitle();
+					$locationName[] = $province -> getTitle();
 				}
-				if($event ->city_id && $city = Engine_Api::_() -> getItem('user_location', $item ->city_id))
+				if($item ->city_id && $city = Engine_Api::_() -> getItem('user_location', $item ->city_id))
 				{
-					$cityName = $city -> getTitle();
+					$locationName[] = $city -> getTitle();
 				}
-				if($cityName || $provinceName || $countryName):?>
+				if($locationName):?>
 				<span><?php echo $this -> translate("Location");?>:</span>
 				<p>
-				<?php $city = '';
-					if($cityName) 
-						$city = $cityName; 
-					else 
-						$city = $provinceName;
-					
-					if($countryName && $city) 
-					 	echo $city. ', '. $countryName;
-					 else if($countryName)
-					 	echo $countryName;
-					 ?>
+				<?php echo join($locationName, ',');?>
 				</p>
 			<?php elseif($event -> address):?>
 				<span><?php echo $this -> translate("Location");?>:</span>

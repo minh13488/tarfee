@@ -984,15 +984,27 @@ class User_Model_User extends Core_Model_Item_Abstract
 	}
 
 	public function getCountry() {
-		return Engine_Api::_()->getItem('user_location', $this->country_id);
+		if(!empty($this->country_id))
+			return Engine_Api::_()->getItem('user_location', $this->country_id);
+		else {
+			return null;
+		}
 	}
 	
 	public function getProvince() {
-		return Engine_Api::_()->getItem('user_location', $this->province_id);
+		if(!empty($this->province_id))
+			return Engine_Api::_()->getItem('user_location', $this->province_id);
+			else {
+			return null;
+		}
 	}
 	
 	public function getCity() {
-		return Engine_Api::_()->getItem('user_location', $this->city_id);
+		if(!empty($this->city_id))
+			return Engine_Api::_()->getItem('user_location', $this->city_id);
+		else {
+			return null;
+		}
 	}
 	
 	public function getLocation() {
