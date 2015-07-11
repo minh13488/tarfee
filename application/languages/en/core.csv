@@ -596,47 +596,33 @@ http://[host][object_link]
 "Browse albums by:";"Browse albums by:"
 "Most Recent";"Most Recent"
 "Most Viewed";"Most Viewed"
-
 "Add New Photos";"Add New Photos"
-
 "Nobody has created an album yet.";"Nobody has created an album yet."
 "Be the first to %1$screate%2$s one!";"Be the first to %1$screate%2$s one!"
-
 "%s photo";"%s photo";"%s photos"
-
-"By";"By"
-
+"By";"by"
 "Manage Photos";"Manage Photos"
 "Edit Settings";"Edit Settings"
 "Delete Album";"Delete Album"
-
 "Add More Photos";"Add More Photos"
 "Manage Photos";"Manage Photos"
 "Edit Settings";"Edit Settings"
-
 "You do not have any albums yet.";"You do not have any albums yet."
-
 "ADD TAG";"ADD TAG"
 "Add Tag";"Add Tag"
 "Type a tag or select a name from the list.";"Type a tag or select a name from the list."
-
 "Prev";"Prev"
 "Next";"Next"
-
 "Tagged:";"Tagged:"
 "Added";"Added"
-
 "Share";"Share"
 "Report";"Report"
 "Make Profile Photo";"Make Profile Photo"
-
 "Photo %1$s of %2$s in %3$s";"Photo %1$s of %2$s in %3$s"
 "Photo";"Photo"
 "of";"of"
 "in";"in"
-
 "%1$s's Album: %2$s";"%1$s's Album: %2$s"
-
 "Are you sure you want to delete this album?";"Are you sure you want to delete this album?"
 "Cancel";"Cancel"
 
@@ -807,7 +793,6 @@ http://[host][object_link]
 "%1$s photo";"%1$s photo"
 "%1$s<br/> %2$s, %3$s";"%1$s<br/> %2$s, %3$s"
 "%2$s by %1$s<br/>%3$s, %4$s";"%2$s by %1$s<br/>%3$s, %4$s"
-"By";"By"
 "_STORAGE_UPLOAD_DESCRIPTION";"Click ""Add Photos"" to select one or more photos from your computer. After you have selected the photos, they will begin to upload right away. When your upload is finished, click the button below your photo list to save them to your album."
 "Add Photos";"Add Photos"
 "Clear List";"Clear List"
@@ -2865,7 +2850,6 @@ http://[host][object_link]
 "of";"of"
 "Prev";"Prev"
 "Next";"Next"
-"By";"By"
 "View All Events";"View All Events"
 "My Calendar";"My Calendar"
 "Advanced Event";"Advanced Event"
@@ -3928,11 +3912,8 @@ Event [object_title] that you have been joined, was deleted .
 
 "Next";"Next"
 "Prev";"Prev"
-
-"By";"By"
 "Tagged:";"Tagged:"
 "Added";"Added"
-
 "Add Tag";"Add Tag"
 
 "Quote";"Quote"
@@ -4002,8 +3983,6 @@ Event [object_title] that you have been joined, was deleted .
 "delete";"delete"
 
 "No photos have been uploaded to this group yet.";"No photos have been uploaded to this group yet."
-"By";"By"
-
 "View All Photos";"View All Photos"
 "Upload Photos";"Upload Photos"
 
@@ -4627,7 +4606,6 @@ http://[host][object_link]
 "Most Recent";"Most Recent"
 "Most Viewed";"Most Viewed"
 "Most Commented";"Most Commented"
-"By";"By"
 "Search Topics";"Search Topics"
 "Status";"Status"
 "All Topics";"All Topics"
@@ -6851,7 +6829,6 @@ Please confirm by clicking the link below:
 "No members for suggestion";"No members for suggestion"
 "View review";"View review"
 "for";"for"
-"by";"by"
 "Rating";"Rating"
 "General rating";"General rating"
 " members have reviews";" members have reviews"
@@ -7428,7 +7405,6 @@ The following member [sender_title] has changed relationship on http://[host][se
 "To upload a video from your computer, please use our <a href="%1$s">full uploader</a>.";"To upload a video from your computer, please use our <a href="%1$s">full uploader</a>."
 "Posted by ";"Posted by "
 " on ";" on "
-"By";"By"
 "Created on %1$s";"Created on %1$s"
 "By %1$s";"By %1$s"
 "Non-category";"Non-category"
@@ -7641,7 +7617,6 @@ http://[host][sender_link]
 "Views";"Views"
 "Latest Posts";"Latest Posts"
 "Posted on";"Posted on"
-"by";"by"
 "Nobody has posted a topic with that criteria.";"Nobody has posted a topic with that criteria."
 
 # forum-search widget
@@ -7672,7 +7647,6 @@ http://[host][sender_link]
 # "%s views";"%s views"
 
 # video-result widget
-"By";"By"
 "Nobody has posted a video with that criteria.";"Nobody has posted a video with that criteria."
 "Videos using the tag";"Videos using the tag"
 # "%1$s view";"%1$s view"
@@ -8257,7 +8231,6 @@ http://[host]
 "All of screenshots have been removed.";"All of screenshots have been removed."
 "Please choose at least one screenshot for removing.";"Please choose at least one screenshot for removing."
 "screenshot(s) have been removed.";"screenshot(s) have been removed."
-"by";"by"
 "Screenshots";"Screenshots"
 "View more";"View more"
 "View less";"View less"
