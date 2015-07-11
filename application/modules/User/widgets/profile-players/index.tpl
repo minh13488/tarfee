@@ -333,7 +333,7 @@
         	<?php endforeach; ?>             
 	    </ul>  
 	    
-	    <div class="players-paginator">
+	    <div class="players-paginator" style="margin-top: 10px">
 	        <div id="players_previous" class="paginator_previous">
 	            <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Previous'), array(
 	              'onclick' => '',
@@ -343,7 +343,8 @@
 	        <div id="players_next" class="paginator_next">
 	            <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Next'), array(
 	              'onclick' => '',
-	              'class' => 'buttonlink_right icon_next'
+	              'class' => 'buttonlink_right icon_next',
+	              'style' => 'display: initial'
 	            )); ?>
 	        </div>
 	    </div>
