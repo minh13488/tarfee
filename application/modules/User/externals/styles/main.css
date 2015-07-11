@@ -2137,7 +2137,7 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
                             +user-box-sizing();
                         }
                         select {
-                            max-width: 100%;
+                            max-width: 90%;
                         }
                         textarea {
                             min-height: 125px;

@@ -8,7 +8,7 @@
  * @author     YouNet Company
  */
 ?>
-<div class="tf_video_rating">
+<div class="tf_video_rating" title="<?php echo number_format($this->video->getRating(), 2);?>">
     <?php for ($x = 1; $x <= $this->video->getRating(); $x++): ?>
         <span class="rating_star_generic"><i class="fa fa-star"></i></span>
     <?php endfor; ?>

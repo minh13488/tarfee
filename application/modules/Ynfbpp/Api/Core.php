@@ -424,7 +424,7 @@ class Ynfbpp_Api_Core
         }
 
         $row = $subject -> membership() -> getRow($viewer);
-
+		/*
         $actions[] = $this -> view -> htmlLink(array(
             'module' => 'activity',
             'controller' => 'index',
@@ -438,6 +438,7 @@ class Ynfbpp_Api_Core
             'class' => 'buttonlink smoothbox',
             'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;',
         ));
+		*/
 
         // Not yet associated at all
         if (null === $row)
@@ -548,7 +549,7 @@ class Ynfbpp_Api_Core
         {
             return $actions;
         }
-
+		/*
         $actions[] = $this -> view -> htmlLink(array(
             'route' => 'default',
             'module' => 'activity',
@@ -562,6 +563,7 @@ class Ynfbpp_Api_Core
             'class' => 'buttonlink smoothbox',
             'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;'
         ));
+		 */
 
         // invite
         if ($subject -> authorization() -> isAllowed($viewer, 'invite'))
@@ -595,7 +597,7 @@ class Ynfbpp_Api_Core
                     'format' => 'smoothbox',
                     'group_id' => $subject -> getIdentity(),
                     'route' => 'group_extended'
-                ), $this->view->translate('Request Membership'), array(
+                ), $this->view->translate('Request Follow'), array(
                     'style' => "background-image: url('./application/modules/Group/externals/images/member/join.png')",
                     'class' => 'buttonlink smoothbox',
                     'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;'
@@ -611,7 +613,7 @@ class Ynfbpp_Api_Core
                     'format' => 'smoothbox',
                     'group_id' => $subject -> getIdentity(),
                     'route' => 'group_extended',
-                ), $this->view->translate('Join'), array(
+                ), $this->view->translate('Follow'), array(
                     'style' => "background-image: url('application/modules/Group/externals/images/member/join.png')",
                     'class' => 'buttonlink smoothbox',
                     'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;'
@@ -629,7 +631,7 @@ class Ynfbpp_Api_Core
                     'group_id' => $subject -> getIdentity(),
                     'format' => 'smoothbox',
                     'route' => 'group_extended'
-                ), $this->view->translate('Leave'), array(
+                ), $this->view->translate('Unfollow'), array(
                     'style' => "background-image: url('application/modules/Group/externals/images/member/leave.png')",
                     'class' => 'buttonlink smoothbox',
                     'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;'
@@ -643,7 +645,7 @@ class Ynfbpp_Api_Core
                     'group_id' => $subject -> getIdentity(),
                     'format' => 'smoothbox',
                     'route' => 'group_specific'
-                ), $this->view->translate('Delete Group'), array(
+                ), $this->view->translate('Delete Club'), array(
                     'style' => "background-image: url('application/modules/Group/externals/images/delete.png')",
                     'class' => 'buttonlink smoothbox',
                     'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;'
@@ -659,7 +661,7 @@ class Ynfbpp_Api_Core
                 'format' => 'smoothbox',
                 'group_id' => $subject -> getIdentity(),
                 'route' => 'group_extended'
-            ), $this->view->translate('Cancel Membership Request'), array(
+            ), $this->view->translate('Cancel Follow Request'), array(
                 'style' => "background-image: url('application/modules/Group/externals/images/member/cancel.png')",
                 'class' => 'buttonlink smoothbox',
                 'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;'
@@ -674,7 +676,7 @@ class Ynfbpp_Api_Core
                 'group_id' => $subject -> getIdentity(),
                 'format' => 'smoothbox',
                 'route' => 'group_extended'
-            ), $this->view->translate('Accept Membership Request'), array(
+            ), $this->view->translate('Accept Follow Request'), array(
                 'style' => "background-image: url('application/modules/Group/externals/images/member/accept.png')",
                 'class' => 'buttonlink smoothbox',
                 'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;'
@@ -686,7 +688,7 @@ class Ynfbpp_Api_Core
                 'group_id' => $subject -> getIdentity(),
                 'format' => 'smoothbox',
                 'route' => 'group_extended'
-            ), $this->view->translate('Ignore Membership Request'), array(
+            ), $this->view->translate('Ignore Follow Request'), array(
                 'style' => "background-image: url('application/modules/Group/externals/images/member/reject.png')",
                 'class' => 'buttonlink smoothbox',
                 'onclick' => 'ynfbpp.clearCached();Smoothbox.open(this);ynfbpp.closePopup();return false;'

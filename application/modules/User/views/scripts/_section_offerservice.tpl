@@ -40,17 +40,23 @@
             <?php endif; ?>
             
             <div id="offerservice-service_id-wrapper" class="profile-section-form-wrapper">                
-                <label><?php echo $this->translate('Service')?></label>
+                <label><?php echo $this->translate('*Service')?></label>
                 <div class="profile-section-form-input">
                     <select name="service_id" id="offerservice-service_id" value="<?php if ($item) echo $item->service_id?>">
                         <?php foreach ($services as $service) : ?>
-                        <option value="<?php echo $service->service_id?>" <?php if ($item && $item->service_id == $service_id->service_id) echo 'selected';?>><?php echo $this->translate($service->title)?></option>
+                        <option value="<?php echo $service->service_id?>" <?php if ($item && $item->service_id == $service->service_id) echo 'selected';?>><?php echo $this->translate($service->title)?></option>
                         <?php endforeach; ?>
                     </select>
                     <p class="error"></p>
                 </div>
             </div>
-            
+            <div id="offerservice-service-wrapper" class="profile-section-form-wrapper" <?php if (!($item && $item->service_id == 9)) echo 'style="display: none"';?>>
+                <label for="offerservice-service"></label>
+                <div class="profile-section-form-input">
+                    <input type="text" id="offerservice-service" name="title" value="<?php if ($item) echo $item->title; else echo '1'?>">
+                    <p class="error"></p>
+                </div>
+            </div>
             <div id="offerservice-location-wrapper" class="profile-section-form-wrapper">
                 <label for="offerservice-location"><?php echo $this->translate('Location')?></label>
                 <div class="profile-section-form-input profile-section-form-input-map">
@@ -60,7 +66,7 @@
                     </a>
                     <input type="hidden" id="offerservice-longitude" name="longitude" value="<?php if ($item) echo $item->longitude?>"/>
                     <input type="hidden" id="offerservice-latitude" name="latitude" value="<?php if ($item) echo $item->latitude?>"/>
-                		
+                	<p class="error"></p>	
                 </div>
             </div>
             
@@ -81,6 +87,20 @@
                 
                 initialize();
                 google.maps.event.addDomListener(window, 'load', initialize);
+                
+                $('offerservice-service_id').addEvent('change', function(){
+                   if(this.value == 9)
+                   {
+                   		$('offerservice-service-wrapper').style.display = 'block';
+                   		$('offerservice-service').value = '';
+                   }
+                   else
+                   {
+                   		
+                   		$('offerservice-service-wrapper').style.display = 'none';
+                   		$('offerservice-service').value = this.value;
+                   }
+                });
         	});
         	
         	function initialize() {

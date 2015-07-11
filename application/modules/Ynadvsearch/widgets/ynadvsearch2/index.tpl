@@ -304,7 +304,8 @@
 				</div>
 				<div class="form-wrapper search-wrapper">
 					<label class="form-label search-label" for="event_type"><?php echo $this->translate('Type')?></label>
-					<select class="form-element search-element" id="event_type" name="event_type">
+					<select class="form-element search-element" id="event_event_type" name="event_type">
+						<option value=""><?php echo $this -> translate('any')?></option>
 						<option value="0"><?php echo $this->translate('Event')?></option>
 						<option value="1"><?php echo $this->translate('Tryout')?></option>
 					</select>

@@ -287,8 +287,10 @@ function renderSection(type, params) {
                 args.push(['contact-email2', 'email', '<?php echo $this->translate('Email 2')?>']);
                 break;
         	case 'bio':
-        	case 'offerservice':
         		return true;
+        		break;
+        	case 'offerservice':
+        		args.push(['offerservice-service', 'require', '<?php echo $this->translate('Service')?>']);
         		break;
     		case 'archievement':
                 args.push(['archievement-title', 'require', '<?php echo $this->translate('Title')?>']);

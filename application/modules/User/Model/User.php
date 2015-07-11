@@ -984,23 +984,41 @@ class User_Model_User extends Core_Model_Item_Abstract
 	}
 
 	public function getCountry() {
-		return Engine_Api::_()->getItem('user_location', $this->country_id);
+		if(!empty($this->country_id))
+			return Engine_Api::_()->getItem('user_location', $this->country_id);
+		else {
+			return null;
+		}
 	}
 	
 	public function getProvince() {
-		return Engine_Api::_()->getItem('user_location', $this->province_id);
+		if(!empty($this->province_id))
+			return Engine_Api::_()->getItem('user_location', $this->province_id);
+			else {
+			return null;
+		}
 	}
 	
 	public function getCity() {
-		return Engine_Api::_()->getItem('user_location', $this->city_id);
+		if(!empty($this->city_id))
+			return Engine_Api::_()->getItem('user_location', $this->city_id);
+		else {
+			return null;
+		}
 	}
 	
-	public function getLocation() {;
+	public function getLocation() {
 		$location = array();
 		if ($this->getCity()) $location[] = $this->getCity()->getTitle();
 		if ($this->getProvince()) $location[] = $this->getProvince()->getTitle();
 		if ($this->getCountry()) $location[] = $this->getCountry()->getTitle();
 		return $location;
+	}
+	public function getDescription()
+	{
+		if($this -> getLocation())
+			return implode(', ', $this -> getLocation());
+		return null;
 	}
 	
 	public function getEyeOns() {
