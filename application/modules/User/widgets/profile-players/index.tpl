@@ -333,7 +333,7 @@
         	<?php endforeach; ?>             
 	    </ul>  
 	    
-	    <div class="players-paginator" style="margin-top: 10px">
+	    <div class="players-paginator" style="margin-top: 10px; clear: both">
 	        <div id="players_previous" class="paginator_previous">
 	            <?php echo $this->htmlLink('javascript:void(0);', $this->translate('Previous'), array(
 	              'onclick' => '',
