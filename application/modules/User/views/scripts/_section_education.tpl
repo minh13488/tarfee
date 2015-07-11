@@ -205,11 +205,11 @@
 		                	<span class="icon"><i class="fa fa-map-marker"></i></span>
 		                	<span class="location"><?php echo $item->location?></span>
 		                </div>
+			            <?php if ($manage) : ?>
+			            <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
+			            <?php endif; ?>
 		            </div>
 		            
-		            <?php if ($manage) : ?>
-		            <a href="javascript:void(0);" class="edit-btn"><i class="fa fa-pencil"></i></a>
-		            <?php endif; ?>
 		        </li>
 		        <?php endforeach;?>    
         		</ul>
