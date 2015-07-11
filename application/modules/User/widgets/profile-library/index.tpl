@@ -28,8 +28,8 @@
 
 </div>
 <?php endif;?>
-<ul class="videos_browse tf_library_videos tf_list_sublibrary">
 	<?php if(count($this -> mainVideos)) :?>
+		<ul class="videos_browse tf_library_videos">
 	 	<?php foreach ($this->mainVideos as $item): ?>
 	        <?php
 	        echo $this->partial('_video_listing.tpl', 'user', array(
@@ -40,9 +40,11 @@
 	        ));
 	        ?>
 		<?php endforeach; ?>
+		</ul>
 	<?php endif;?>
 	<!-- get sub libraries -->
 	<?php $subLibraries = $this -> library -> getSubLibrary(); ?>
+	<ul class="tf_list_sublibrary">
 	<?php foreach($subLibraries as $subLibrary) :
 	$totalVideo = $subLibrary -> getTotalVideo();
 	$totalVideoView = $subLibrary -> getTotalVideoView();
@@ -138,7 +140,7 @@
 	</li><!-- end item sublibrary -->
 	<?php endif;?>
 	<?php endforeach; ?>
-</ul><!--tf_list_sublibrary-->
+	</ul>
 
 <script type="text/javascript">
 	window.addEvent('domready', function(){
