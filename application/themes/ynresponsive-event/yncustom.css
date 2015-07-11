@@ -1762,7 +1762,8 @@ body#global_page_user-profile-index {
 
 
 /*Style video main page*/
-.layout_ynvideo_main_page_videos{
+.layout_ynvideo_main_page_videos,
+.ynadvsearch_searchresult{
 	text-align: center;
 	
 	.tf_button_action{
@@ -1773,7 +1774,7 @@ body#global_page_user-profile-index {
 		overflow: hidden;
 		position: relative;
 	}
-    li{
+    li.video-item{
         float: left;
         /*margin-bottom: 2%;*/
         width: 30%;
@@ -4377,32 +4378,33 @@ body#global_page_advgroup-profile-index{
 		width: 160px;
 		font-weight: bold;
 		text-transform: lowercase;
+		text-align: center;
+	}
+	#ynadvsearch-loading{
+		display: block;
+		text-align: center;
+		overflow: hidden;
+
+		img{
+			float: none !important;
+		}
 	}
 }
 
 .ynadvsearch_searchresult{
 	position: relative;
-	overflow: hidden;
-	height: auto !important;
 	li.result-search-item{
 		float: left;
 	}
 	li.user_playercard-item{
-        margin-bottom: 1.3%;
-        width: 24%;
-        margin-left: 1.3%;
         overflow: hidden;
         +border-radius(5px);
-
-        &:nth-child(4n+1){
-            margin-left: 0;
-        }
 
         #profile_photo {
             background: #fff;
 
             .thumb_profile {
-                height: 240px;
+                height: 150px;
                 width: 100%;
                 display: block;
                 background-color: #eaeaea;
@@ -4573,7 +4575,7 @@ body#global_page_advgroup-profile-index{
 
             .tarfee_infomation_player{
                 text-align: center;
-                min-height: 85px;
+                /*min-height: 85px;*/
             }
 
             .options {
@@ -4615,6 +4617,86 @@ body#global_page_advgroup-profile-index{
             }
         }
 
+	}
+
+	li.tfcampaign_campaign-item{
+        overflow: hidden;
+        padding: 10px;
+        +border-radius(5px);
+
+        &:nth-child(4n+1){
+            margin-left: 0;
+        }
+
+        .tfcampaign_title{
+        	a{
+        		width: 80%;
+        		font-weight: bold;
+        	}
+        }
+
+        .tfcampaign_gender,
+        .tfcampaign_closing{
+        	width: 100%;
+        }
+	}
+
+	li.event-item{
+        overflow: hidden;
+        padding: 10px;
+        +border-radius(5px);
+
+        &:nth-child(4n+1){
+            margin-left: 0;
+        }
+
+        .ynevents_time_place span p{margin-right: 15px;}
+        .ynevents_title a{width: 77%;}
+
+
+	}
+
+	li.blog-item{
+		+border-radius(5px);
+		padding: 10px;
+
+		.blogs_browse_info_title{
+			a{
+				font-weight: bold;
+				color: $theme_font_color;
+
+				&:hover{
+					color: $theme_link_color;
+				}
+			}
+		}
+		.blogs_browse_info_blurb{
+			word-break: break-word;
+		}
+        .blogs_browse_info_date{
+        	font-size: 13px;
+        	color: $theme_font_color_light;
+        }
+	}
+	
+	li.user-item{
+		padding: 10px;
+		.ynadvsearch-result-item-photo{
+			float: left;
+			margin-right: 10px;
+
+			img{
+				+border-radius(5px);
+			}
+		}
+		.search_title{
+			font-weight: bold;
+			color: $theme_font_color;
+
+			&:hover{
+				color: $theme_link_color;
+			}
+		}
 	}
 }
 

@@ -454,15 +454,15 @@ function showMore(from){
 <script type="text/javascript">
     jQuery.noConflict();
     (function (jQuery){
-        var handler = jQuery('.ynadvsearch_searchresult .group-item');
+        var handler = jQuery('.ynadvsearch_searchresult .result-search-item');
         handler.wookmark({
             // Prepare layout options.
             autoResize: true, // This will auto-update the layout when the browser window is resized.
             container: jQuery('.ynadvsearch_searchresult'), // Optional, used for some extra CSS styling
-            offset: 10, // Optional, the distance between grid items
+            offset: 15, // Optional, the distance between grid items
             outerOffset: 0, // Optional, the distance to the containers border
-            itemWidth: 200, // Optional, the width of a grid item
+            itemWidth: 245, // Optional, the width of a grid item
             flexibleWidth: '100%',
         });
-    })(jQuery);
+    })(jQuery);    
 </script>
