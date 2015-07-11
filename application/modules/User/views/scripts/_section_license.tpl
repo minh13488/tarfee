@@ -62,7 +62,7 @@
                 </div>
             </div>
             <div id="license-number-wrapper" class="profile-section-form-wrapper">
-                <label for="license-number"><?php echo $this->translate('*Number')?></label>
+                <label for="license-number"><?php echo $this->translate('Number')?></label>
                 <div class="profile-section-form-input">
                     <input type="text" id="license-number" name="number" value="<?php if ($item) echo htmlentities($item->title);?>"/>
                     <p class="error"></p>

@@ -297,7 +297,7 @@ function renderSection(type, params) {
                 break;
             case 'license':
                 args.push(['license-title', 'require', '<?php echo $this->translate('Name')?>']);
-                args.push(['license-number', 'require', '<?php echo $this->translate('Number')?>']);
+                /*args.push(['license-number', 'require', '<?php echo $this->translate('Number')?>']);*/
                 args.push(['license-year', 'require', '<?php echo $this->translate('Year')?>']);
                 args.push(['license-year', 'year', '<?php echo $this->translate('Year')?>']);
                 args.push(['license-year', 'month-year-before-current', 'license-month', '<?php echo $this->translate('Time')?>']);

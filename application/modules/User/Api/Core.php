@@ -48,7 +48,7 @@ class User_Api_Core extends Core_Api_Abstract
 		'basic' => 'Basic Information',
 		'contact' => 'Contact Information',
 		'bio' => 'Biography',
-		'offerservice' => 'Service I Offer',
+		'offerservice' => 'Service(s) I Offer',
 		'archievement' => 'Trophies & Archievements',
 		'license' => 'Licenses & Certificates',
 		'experience' => 'Work Experience',

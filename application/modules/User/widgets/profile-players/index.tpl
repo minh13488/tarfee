@@ -140,7 +140,7 @@
 										?>
 									</li>
 									<?php endif;?>	
-									<!--<li class="setting" onclick="showOptions(<?php echo $player->playercard_id ?>, this)">--></li>
+									<!--<li class="setting" onclick="showOptions(<?php echo $player->playercard_id ?>, this)"></li> -->
 									<li class="setting"">
 										<?php
 						        			echo $this->htmlLink(array(
