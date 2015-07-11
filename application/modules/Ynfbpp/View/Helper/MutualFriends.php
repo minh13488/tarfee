@@ -3,7 +3,7 @@
 class Ynfbpp_View_Helper_MutualFriends extends Zend_View_Helper_Abstract
 {
 
-    public function mutualFriends($subject, $viewer = null, $limit = 5, $mess1= '%s mutual friend', $mess2='%s mutual friends')
+    public function mutualFriends($subject, $viewer = null, $limit = 5, $mess1= '%s follower', $mess2='%s followers')
     {
         if (null === $viewer)
         {
@@ -34,8 +34,7 @@ class Ynfbpp_View_Helper_MutualFriends extends Zend_View_Helper_Abstract
     
         // Mututal friends/following mode
                
-        $sql = "SELECT `user_id` FROM `{$friendsName}` WHERE (`active`=1 and `resource_id`={$subject_id})
-        and `user_id` in (select `resource_id` from `engine4_user_membership` where (`user_id`={$viewer_id} and `active`=1))";
+        $sql = "SELECT `user_id` FROM `{$friendsName}` WHERE (`active`=1 and `resource_id`={$subject_id})";
 	
 
         $db = Engine_Db_Table::getDefaultAdapter();

@@ -39,7 +39,7 @@ $allow = $this->subject->authorization()->isAllowed($this->viewer, 'view');
 				</tr>
 				<tr>
 					<td  valign="bottom"> <?php if($allow && $settings->getSetting('ynfbpp.group.mutual',1)): ?>
-					<?php echo $this->mutualFriends($this->subject,null, $settings->getSetting('ynfbpp.group.mutuallimit',0), '%s friend joined','%s friends joined'); ?>
+					<?php echo $this->mutualFriends($this->subject,null, $settings->getSetting('ynfbpp.group.mutuallimit',0), '%s follower','%s followers'); ?>
 					<?php endif; ?> </td>
 				</tr>
 			</table>
