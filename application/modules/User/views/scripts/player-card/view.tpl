@@ -186,25 +186,25 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	                ?>
 	             </div>
 	         <?php endif;?>
-			<?php if($this -> viewer() -> getIdentity()):?>
-	    	<div title="<?php echo $this -> translate("Keep eye on")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
-	    		<?php if($player->isEyeOn()): ?>              
-	        	<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
-	        		<?php echo $this->translate("eye on") ?>
-	    		</a>
-	    		<?php else: ?>
-	        	<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
-	    			<?php echo $this->translate("keep eye on") ?>
-	        	</a>
-	    		<?php endif; ?>
-			</div>
+			<?php if($this -> viewer() -> getIdentity() && !$player -> isOwner($this -> viewer())):?>
+		    	<div title="<?php echo $this -> translate("Keep  Eye on this player card")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
+		    		<?php if($player->isEyeOn()): ?>              
+		        	<a class="actions_generic eye-on eye_on" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
+		        		<i class="fa fa-eye-slash"></i>
+		    		</a>
+		    		<?php else: ?>
+		        	<a class="actions_generic eye_on" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
+		    			<i class="fa fa-eye"></i>
+		        	</a>
+		    		<?php endif; ?>
+				</div>
 
-			<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid()),'default', true);?>
-			<div title="<?php echo $this -> translate('Report')?>">
-				<a class="actions_generic smoothbox" href="<?php echo $url?>">
-					<?php echo $this -> translate('report')?>
-				</a>
-			</div>
+				<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid()),'default', true);?>
+				<div title="<?php echo $this -> translate('Report')?>">
+					<a class="actions_generic smoothbox" href="<?php echo $url?>">
+						<?php echo $this -> translate('report')?>
+					</a>
+				</div>
 			<?php endif;?>
 			<?php if($this -> viewer() -> getIdentity() && $player -> isOwner($this -> viewer())): ?>
 	 		<div class="playercard_options">
@@ -393,7 +393,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
         },
         'onSuccess': function(responseJSON, responseText) {
             if (responseJSON.status == true) {
-                html = '<a class="actions_generic eye-on" href="javascript:void(0);" onclick="removeEyeOn('+itemId+')"><span>'+'<?php echo $this->translate('eye on') ?>'+'</span></a>';
+                html = '<a class="actions_generic eye-on eye_on" href="javascript:void(0);" onclick="removeEyeOn('+itemId+')"><span><i class="fa fa-eye-slash"></i></span></a>';
                 $('user_eyeon_'+itemId).set('html', html);
             }
             else {
@@ -413,7 +413,7 @@ function removeEyeOn(itemId){
         },
         'onSuccess': function(responseJSON, responseText) {
             if (responseJSON.status == true) {
-                html = '<a class="actions_generic" href="javascript:void(0);" onclick="addEyeOn('+itemId+')">'+'<?php echo $this->translate('keep eye on') ?>'+'</a>';
+                html = '<a class="actions_generic eye_on" href="javascript:void(0);" onclick="addEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
                 $('user_eyeon_'+itemId).set('html', html);
             }
             else {

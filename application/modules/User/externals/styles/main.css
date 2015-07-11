@@ -2720,3 +2720,7 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
         }
     }
 }
+#global_page_user-player-card-view .tf-player-detail .tf-player-detail-info .tf-player-detail-button .actions_generic.eye_on
+{
+	padding: 7px 20px;
+}

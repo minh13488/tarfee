@@ -15,8 +15,10 @@
 <div class="tf_campaign_browse">
 	<div class="tfcampaign_box_sort">
 		<select name="sort" id="tfcampaign-campaign-sort">
-				<option value="campaign.creation_date"><?php echo $this -> translate('Sort by date');?></option>
-				<option value="campaign.view_count"><?php echo $this -> translate('Sort by view count');?></option>
+				<option value="campaign.creation_date"><?php echo $this -> translate('Posting Date');?></option>
+				<option value="campaign.start_date"><?php echo $this -> translate('Starting Date');?></option>
+				<option value="campaign.end_date"><?php echo $this -> translate('Closing Date');?></option>
+				<!--<option value="campaign.view_count"><?php echo $this -> translate('Sort by view count');?></option>-->
 		</select>
 	</div>
 	<?php if( count($this->paginator) > 0 ): ?>
