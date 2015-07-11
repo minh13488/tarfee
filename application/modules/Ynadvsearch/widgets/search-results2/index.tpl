@@ -1,3 +1,10 @@
+<?php
+    $this->headScript()
+    ->appendFile($this->baseUrl() . '/application/modules/Ynvideo/externals/wookmark/jquery.min.js')
+    ->appendFile($this->baseUrl() . '/application/modules/Ynvideo/externals/wookmark/jquery.wookmark.js')
+    ->appendFile($this->baseUrl() . '/application/modules/Ynvideo/externals/wookmark/jquery.imagesloaded.js');
+?>
+
 <style>
 	.highlighted-text {
 		font-weight: bold;
@@ -440,3 +447,20 @@ function showMore(from){
 </script>
 <?php endif;?>	
 <?php endif; ?>
+
+
+<script type="text/javascript">
+    jQuery.noConflict();
+    (function (jQuery){
+        var handler = jQuery('.ynadvsearch_searchresult .group-item');
+        handler.wookmark({
+            // Prepare layout options.
+            autoResize: true, // This will auto-update the layout when the browser window is resized.
+            container: jQuery('.ynadvsearch_searchresult'), // Optional, used for some extra CSS styling
+            offset: 10, // Optional, the distance between grid items
+            outerOffset: 0, // Optional, the distance to the containers border
+            itemWidth: 200, // Optional, the width of a grid item
+            flexibleWidth: '100%',
+        });
+    })(jQuery);
+</script>
