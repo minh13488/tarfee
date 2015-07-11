@@ -28,14 +28,12 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 
 <div class="tf-player-detail">
 	<div class="tf-player-detail-info">
-	
 		<div class="tf-player-name">
-			<a href="<?php echo $player -> getHref()?>"><?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 50)?></a>
+			<?php echo $this -> string() -> truncate($player -> first_name.' '.$player -> last_name, 50)?>
 		</div>
-
 		<div class="user_rating">
 			<?php $overRallRating = $player -> rating;?>
-			<div class="user_rating" title="<?php echo $overRallRating;?>">
+			<div class="user_rating" title="<?php echo number_format($overRallRating, 2);?>">
 				<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
 			        <span class="rating_star_generic"><i class="fa fa-star"></i></span>&nbsp;
 			    <?php endfor; ?>
@@ -49,8 +47,6 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 			    <?php endif; ?>
 			</div>
 		</div>
-
-
 		<div class="tf-player-content clearfix">
 			<div class="tf-player-description">
 				<span class="label">Year of Birth</span>
@@ -61,8 +57,6 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 				<span class="label">Location</span>
 				<span class="value"><?php if($cityName) echo $cityName; else echo $provinceName; if($countryName) echo ', '.$countryName;?></span>
 			</div>
-
-
 			<div class="tf-player-description">
 				<span class="label">Gender</span>	
 
@@ -100,16 +94,11 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 				?>
 
 			</div>
-
 		</div>
-
-
 		<div class="tf-player-thumb">
 			<?php $photoUrl = ($player -> getPhotoUrl('thumb.main')) ? $player->getPhotoUrl('thumb.main') : "application/modules/User/externals/images/nophoto_playercard_thumb_profile.png" ?>
 			<span style="background-image:url(<?php echo $photoUrl; ?>)"></span>
 		</div>
-
-
 		<div class="tf-sport-type-position">
 			<?php if($player -> getSport()):?>
 
@@ -121,7 +110,6 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 				</span>
 
 			</span>
-
 			<?php endif;?>
 
 			<?php if($player -> getPosition()):?>
@@ -130,8 +118,6 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 				</span>
 			<?php endif;?>
 			<!-- Gender -->
-
-
 			<span class="player-foot">
 				<!-- referred_foot -->
 				<?php $referred_foot = $player -> referred_foot;
@@ -156,8 +142,6 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	        	<?php echo $this->htmlLink($player -> getOwner()->getHref(), $player -> getOwner() ->getTitle()) ?>
 	     	</div>
 		</div>
-
-	
 		<ul class="playercard_statistics">
 		 	<li>
 		        <span><?php echo $this->translate(array('%s video', '%s videos', $totalVideo), $totalVideo) ?></span>
@@ -180,8 +164,6 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 				<?php endif;?>
 		    </li>
 		</ul>
-
-
 		<div class="tf-player-detail-button">
 			 <?php if (Engine_Api::_()->ynfbpp()->_allowMessage($this->viewer(), $player -> getOwner())) :?>
 	         	 <div>
@@ -189,8 +171,8 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	                    'route' => 'messages_general',
 	                    'action' => 'compose',
 	                    'to' => $player -> getOwner() ->getIdentity()
-	                ), '<span class="profile_inbox_button"><i class="fa fa-comments"></i></span>', array(
-	                    'class' => 'smoothbox', 'title' => $this -> translate("Message")
+	                ), $this -> translate("Message"), array(
+	                    'class' => 'smoothbox actions_generic', 'title' => $this -> translate("Message")
 	                ));
 	                ?>
 	             </div>
@@ -200,8 +182,8 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	                    'route' => 'user_general',
 	                    'action' => 'in-mail',
 	                    'to' => $player -> getOwner() ->getIdentity()
-	                ), '<span class="profile_inbox_button"><i class="fa fa-envelope"></i></span>', array(
-	                    'class' => 'smoothbox', 'title' => $this -> translate("Email")
+	                ), $this -> translate("Email"), array(
+	                    'class' => 'smoothbox actions_generic', 'title' => $this -> translate("Email")
 	                ));
 	                ?>
 	             </div>

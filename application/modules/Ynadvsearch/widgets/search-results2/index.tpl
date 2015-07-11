@@ -60,7 +60,7 @@
 			</div>
 
 			<?php $overRallRating = $item -> rating;?>
-			<div class="user_rating" title="<?php echo $overRallRating;?>">
+			<div class="user_rating" title="<?php echo number_format($overRallRating, 2);?>">
 				<?php for ($x = 1; $x <= $overRallRating; $x++): ?>
 			        <span class="rating_star_generic"><i class="fa fa-star"></i></span>
 			    <?php endfor; ?>
