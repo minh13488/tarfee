@@ -262,7 +262,7 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 				if (!empty($params['keyword'])) {
 					$select->where('title LIKE ? or description LIKE ?', '%'.$params['keyword'].'%');
 				}
-				if (isset($params['event_type'])) {
+				if (isset($params['event_type']) && $params['event_type'] != "") {
 					$select->where('type_id = ?', $params['event_type']);
 				}
 				if (!empty($params['sport'])) {
