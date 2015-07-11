@@ -22,10 +22,12 @@
 <?php foreach( $this->results as $row): ?>
 	<?php if ($count > $this->limit) break;?>
 	<?php $item = (!empty($row->type) && !empty($row->id)) ? $this->item($row->type, $row->id): $row;?>
-	<?php if ($item) :?>
+	<?php if ($item): ?>
 	<li class="result-search-item <?php echo $item->getType()?>-item">
 	<?php switch ($item->getType()) :
-		case 'user_playercard': ?>
+		case 'user_playercard': 
+			$totalPhoto = $item -> getPhotosTotal();
+			$totalVideo = $item -> getTotalVideo();?>
 		<div id='profile_photo'>
 			<?php $photoUrl = ($item -> getPhotoUrl('thumb.main')) ? $item->getPhotoUrl('thumb.main') : "application/modules/User/externals/images/nophoto_playercard_thumb_profile.png" ?>
 			<div class="avatar">
