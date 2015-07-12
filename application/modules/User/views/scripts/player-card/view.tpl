@@ -187,7 +187,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	             </div>
 	         <?php endif;?>
 			<?php if($this -> viewer() -> getIdentity() && !$player -> isOwner($this -> viewer())):?>
-		    	<div title="<?php echo $this -> translate("Keep  Eye on this player card")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
+		    	<div title="<?php echo $this -> translate("Keep Eye on this player card")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
 		    		<?php if($player->isEyeOn()): ?>              
 		        	<a class="actions_generic eye-on eye_on" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
 		        		<i class="fa fa-eye-slash"></i>

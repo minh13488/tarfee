@@ -54,7 +54,7 @@ class Tfcampaign_Widget_ProfileSubmissionController extends Engine_Content_Widge
 		}
 		$this -> view -> filterType = $filterType;
 		$this -> view -> submissionPlayers = $submissionPlayers;
-		if(count($submissionPlayers) <= 0)
+		if(count($submissionPlayers) <= 0 || !$campaign -> isOwner($viewer))
 		{
 			return $this -> setNoRender();
 		}
