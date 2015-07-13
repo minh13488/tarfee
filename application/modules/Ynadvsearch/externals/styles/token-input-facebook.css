@@ -9,6 +9,7 @@ ul.token-input-list-facebook {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     -ms-border-radius: 5px;
+     background-color: white;
 }
 
 ul.token-input-list-facebook li input {

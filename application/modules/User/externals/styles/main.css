@@ -2720,10 +2720,6 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
         }
     }
 }
-#global_page_user-player-card-view .tf-player-detail .tf-player-detail-info .tf-player-detail-button .actions_generic.eye_on
-{
-	padding: 7px 20px;
-}
 #global_page_ynvideo-index-popup-view .ynvideo_popup_left .player-info .player_info_detail,
 .layout_ynvideo_players_of_week #players-of-week > li .player-info-author .player-info .player_info_detail
 {

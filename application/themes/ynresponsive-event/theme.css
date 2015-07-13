@@ -4513,7 +4513,6 @@ Shows the mini menu and search widget
 		}
 
     	display: inline-block;
-    	border-left:1px solid $theme_border_medium_color;
     	padding: 15px 12px 10px 20px;
     }
     div.ynadvmenu_notification div.ynadvmenu_mini_wrapper a.ynadvmenu_NotifiIcon
@@ -4529,19 +4528,6 @@ Shows the mini menu and search widget
     	margin: 0 1px;
     	-webkit-background-clip: content-box;
     	border-color: transparent;
-    }
-    
-    div.ynadvmenu_notification div.ynadvmenu_mini_wrapper a.ynadvmenu_NotifiIcon.notifyactive:after {
-        content: "";
-        display: block;
-        border-bottom: 6px solid $theme_body_background_color;
-        border-left: 6px solid transparent;
-        border-right: 6px solid transparent;
-    	width: 13px;
-        height: 13px;    	
-        position: absolute;
-    	top: 20px;
-        left: 10px;
     }
     
     /* Messages icon */
@@ -5366,7 +5352,7 @@ ul.ynevent_slideshow_pagination li a .ynevent_album_title,
 .layout_ynresponsiveevent_event_mini_menu .ybo_logo
 {
 	display: inline-block;
-	margin: 15px 0 0 0;
+	margin: 10px 0 0 0;
 
 	a{
 		position: relative;

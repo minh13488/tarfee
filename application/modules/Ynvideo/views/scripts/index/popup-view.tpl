@@ -233,6 +233,7 @@ endif;
 					    <?php endif;?>
 					</div>
 		            <?php if($this -> video -> parent_type != "user_playercard") :?>
+		            	<!--
 		             <div id="video_rating" class="rating ynvideo_rating" onmouseout="rating_out();">
 		                <span id="rate_1" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(1);"<?php endif; ?> onmouseover="rating_over(1);"></span>
 		                <span id="rate_2" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(2);"<?php endif; ?> onmouseover="rating_over(2);"></span>
@@ -241,7 +242,7 @@ endif;
 		                <span id="rate_5" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(5);"<?php endif; ?> onmouseover="rating_over(5);"></span>
 		                <span id="rating_text" class="rating_text ynvideo_rating_text"><?php echo $this->translate('click to rate'); ?></span>
 		            </div>
-		            
+		            -->
 		            <?php else :?>
 
 		            	<div class="ynvideo_rating">
@@ -349,10 +350,10 @@ endif;
 
 <script type="text/javascript">
 	$$('.ynvideo_popup_close').addEvent('click',function(){parent.Smoothbox.close()});	
-	    jQuery.noConflict();
+	 /*   jQuery.noConflict();
     jQuery('.tf_video_rating').click(function() {
         jQuery('.ynvideo_rating_player').slideToggle(400);
-    });
+    });*/
 </script>
 
 <script type="text/javascript">

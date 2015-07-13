@@ -169,7 +169,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	                    'route' => 'messages_general',
 	                    'action' => 'compose',
 	                    'to' => $player -> getOwner() ->getIdentity()
-	                ), $this -> translate("message"), array(
+	                ), '<span><i class="fa fa-comment"></i></span>', array(
 	                    'class' => 'smoothbox actions_generic', 'title' => $this -> translate("Message")
 	                ));
 	                ?>
@@ -180,7 +180,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 	                    'route' => 'user_general',
 	                    'action' => 'in-mail',
 	                    'to' => $player -> getOwner() ->getIdentity()
-	                ), $this -> translate("email"), array(
+	                ), '<span><i class="fa fa-envelope-o"></i></span>', array(
 	                    'class' => 'smoothbox actions_generic', 'title' => $this -> translate("Email")
 	                ));
 	                ?>
@@ -201,14 +201,14 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 
 				<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $player->getGuid()),'default', true);?>
 				<div title="<?php echo $this -> translate('Report')?>">
-					<a class="actions_generic smoothbox" href="<?php echo $url?>">
-						<?php echo $this -> translate('report')?>
+					<a class="actions_generic smoothbox" title="<?php echo $this -> translate('report')?>" href="<?php echo $url?>">
+						<i class="fa fa-flag"></i>
 					</a>
 				</div>
 			<?php endif;?>
 			<?php if($this -> viewer() -> getIdentity() && $player -> isOwner($this -> viewer())): ?>
 	 		<div class="playercard_options">
-	 			<span class="tf-player-dropdown actions_generic"><?php echo $this->translate("settings") ?></span>
+	 			<span class="tf-player-dropdown actions_generic" title="<?php echo $this->translate("settings") ?>"><i class="fa fa-cog"></i></span>
 	 			<div class="box-dropdown">
 			        <?php echo $this->htmlLink(array(
 				            'route' => 'user_extended',
