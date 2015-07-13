@@ -48,13 +48,13 @@ $viewer = $this -> viewer();
             <?php if(Engine_Api::_() -> authorization() -> isAllowed('event', null, 'create')):?>
             	<li><a href="<?php echo $this->url(array('action' => 'create'), 'event_general')?>"><i class="fa fa-calendar"></i><?php echo $this -> translate("Add Event/Tryout")?></a></li>
             <?php endif;?>
-            <li><a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>"><i class="fa fa-rocket"></i><?php echo $this -> translate("Add Scout")?></a></li>
+            <li><a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>"><i class="fa fa-rocket"></i><?php echo $this -> translate("Add Campaign")?></a></li>
             <li><a href="<?php echo $this->url(array('action' => 'create'), 'blog_general')?>"><i class="fa fa-comments-o"></i><?php echo $this -> translate("Add Talk")?></a></li>
             <li><a href="contactimporter/import"><i class="fa fa-search"></i><?php echo $this -> translate("Find/Invite Friend")?></a></li>
          </ul>
       </li>
     <?php endif;?>
-      <li><a title="<?php echo $this -> translate("scouts")?>" href="<?php echo $this -> url(array(), 'tfcampaign_general', true);?>"><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
+      <li><a title="<?php echo $this -> translate("campaigns")?>" href="<?php echo $this -> url(array(), 'tfcampaign_general', true);?>"><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
       <li><a title="<?php echo $this -> translate("clubs & organizations")?>" href="search?advsearch=organization"><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
       <li><a title="<?php echo $this -> translate("events & tryouts")?>" href="<?php echo $this -> url(array(), 'event_general', true);?>"><img src="application/themes/ynresponsive-event/images/event.png" /></a></li>
       <li><a title="<?php echo $this -> translate("talks")?>" href="<?php echo $this -> url(array(), 'blog_general', true);?>"><img src="application/themes/ynresponsive-event/images/talk.png" /></a></li>

@@ -170,7 +170,7 @@
 	    <?php endif; ?>
 	<?php else: ?>
 	    <div class="tip">
-	        <span><?php echo $this->translate('No scouts found.') ?></span>
+	        <span><?php echo $this->translate('No campaigns found.') ?></span>
 	    </div>
 	<?php endif; ?>
 </div>

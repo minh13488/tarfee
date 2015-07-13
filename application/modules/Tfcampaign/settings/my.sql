@@ -104,10 +104,10 @@ INSERT IGNORE INTO `engine4_core_mailtemplates` (`type`, `module`, `vars`) VALUE
 --
 
 INSERT IGNORE INTO `engine4_core_menus` (`name`, `type`, `title`, `order`) VALUES
-('tfcampaign_main', 'standard', 'Scout Main Navigation Menu', 999);
+('tfcampaign_main', 'standard', 'Campaign Main Navigation Menu', 999);
 
 INSERT IGNORE INTO `engine4_core_menuitems` (`name`, `module`, `label`, `plugin`, `params`, `menu`, `submenu`, `order`) VALUES
-('core_admin_main_plugins_tfcampaign', 'tfcampaign', 'Scouts', '', '{"route":"admin_default","module":"tfcampaign","controller":"settings", "action":"global"}', 'core_admin_main_plugins', '', 999),
+('core_admin_main_plugins_tfcampaign', 'tfcampaign', 'Campaigns', '', '{"route":"admin_default","module":"tfcampaign","controller":"settings", "action":"global"}', 'core_admin_main_plugins', '', 999),
 ('tfcampaign_admin_settings_global', 'tfcampaign', 'Global Settings', '', '{"route":"admin_default","module":"tfcampaign","controller":"settings", "action":"global"}', 'tfcampaign_admin_main', '', 1),
 ('tfcampaign_admin_settings_level', 'tfcampaign', 'Member Level Settings', '', '{"route":"admin_default","module":"tfcampaign","controller":"settings", "action":"level"}', 'tfcampaign_admin_main', '', 2),
 ('tfcampaign_admin_reasons', 'tfcampaign', 'Reasons', '', '{"route":"admin_default","module":"tfcampaign","controller":"reasons", "action":"index"}', 'tfcampaign_admin_main', '', 3);

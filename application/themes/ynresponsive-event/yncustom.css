@@ -4002,11 +4002,6 @@ body#global_page_advgroup-profile-index{
 		padding-bottom: 15px;
 	}
 
-	#global_content{
-		background: #fff;
-		+border-radius(5px);
-	}
-
 	.tf-player-detail{
 		
 		.tf-player-detail-info{

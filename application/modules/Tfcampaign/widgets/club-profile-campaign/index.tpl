@@ -5,7 +5,7 @@
 	    ),'tfcampaign_general', true)
 	;?>
 	<div class="group_album_options">
-		<a class="smoothbox tf_button_action" href='<?php echo $url?>'><?php echo $this->translate('Add Scout')?></a>
+		<a class="smoothbox tf_button_action" href='<?php echo $url?>'><?php echo $this->translate('Add Campaign')?></a>
 	</div>
 <?php endif;?>
 <?php if( count($this -> campaigns) > 0 ): ?>
@@ -86,7 +86,7 @@
 <?php else: ?>
   <div class="tip" style="margin: 10px">
     <span>
-      <?php echo $this->translate('No scouts have been added to this club yet.');?>
+      <?php echo $this->translate('No campaigns have been added to this club yet.');?>
     </span>
   </div>
 <?php endif; ?>
