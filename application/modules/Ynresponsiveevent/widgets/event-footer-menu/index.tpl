@@ -43,14 +43,14 @@ $viewer = $this -> viewer();
 						'tab' => 724,
 					), 'user_extended', true) ;
 				?>
-            	<li><a href="<?php echo $Url?>"><i class="fa fa-user-plus"></i><?php echo $this -> translate("Add Player Card")?></a></li>
+            	<li><a class="tfmenu_add_player" href="<?php echo $Url?>"><i class="fa fa-user-plus"></i><?php echo $this -> translate("Add Player Card")?></a></li>
             <?php endif;?>
             <?php if(Engine_Api::_() -> authorization() -> isAllowed('event', null, 'create')):?>
             	<li><a href="<?php echo $this->url(array('action' => 'create'), 'event_general')?>"><i class="fa fa-calendar"></i><?php echo $this -> translate("Add Event/Tryout")?></a></li>
             <?php endif;?>
-            <li><a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>"><i class="fa fa-rocket"></i><?php echo $this -> translate("Add Campaign")?></a></li>
-            <li><a href="<?php echo $this->url(array('action' => 'create'), 'blog_general')?>"><i class="fa fa-comments-o"></i><?php echo $this -> translate("Add Talk")?></a></li>
-            <li><a href="contactimporter/import"><i class="fa fa-search"></i><?php echo $this -> translate("Find/Invite Friend")?></a></li>
+            <li><a class="tfmenu_add" href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>"><i class="tfcampaing_add"></i><?php echo $this -> translate("Add Campaign")?></a></li>
+            <li><a class="tfmenu_add" href="<?php echo $this->url(array('action' => 'create'), 'blog_general')?>"><i class="tftalk_add"></i><?php echo $this -> translate("Add Talk")?></a></li>
+            <li><a class="tfmenu_add" href="contactimporter/import"><i class="tf_find_friend"></i><?php echo $this -> translate("Find/Invite Friend")?></a></li>
          </ul>
       </li>
     <?php endif;?>

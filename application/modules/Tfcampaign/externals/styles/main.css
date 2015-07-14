@@ -449,18 +449,7 @@ div[class*=layout_tfcampaign_my]{
 	border-radius: 5px;
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-
-	h3{
-		margin-bottom: 0;
-		border-bottom: 1px solid #e9e9e9;
-		border-bottom-right-radius: 0px;
-		border-bottom-left-radius: 0px;
-		position: relative;
-	}
-
 	ul{
-		
-
 		li{
  		 border-bottom: 1px solid $theme_border_medium_color;
  		 padding: 15px;
@@ -780,4 +769,58 @@ ul.tfcampaign_list{
 	}
 
 
+}
+.list-items-dropdown li .tfmenu_add
+{
+	padding-left: 35px!important;
+  	position: relative!important;
+}
+.tf_find_friend
+{
+	width: 18px;
+  	position: absolute;
+  	height: 18px;
+  	left: 10px;
+  	top: 7px;
+  	display: block;
+  	background-size: cover;
+	background-image: url(~/application/themes/ynresponsive-event/images/find_search.png);
+}
+.tf_right_menu ul.list-items ul.list-items-dropdown li a:hover .tf_find_friend
+{
+	background-image: url(~/application/themes/ynresponsive-event/images/find_search-2.png);
+}
+.tfcampaing_add
+{
+	width: 18px;
+  	position: absolute;
+  	height: 18px;
+  	left: 10px;
+  	top: 7px;
+  	display: block;
+  	background-size: cover;
+	background-image: url(~/application/themes/ynresponsive-event/images/add_campaign.png);
+}
+.tf_right_menu ul.list-items ul.list-items-dropdown li a:hover .tfcampaing_add
+{
+	background-image: url(~/application/themes/ynresponsive-event/images/add_campaign-2.png);
+}
+.tftalk_add
+{
+	width: 20px;
+  	position: absolute;
+  	height: 18px;
+  	left: 10px;
+  	top: 7px;
+  	display: block;
+  	background-size: cover;
+	background-image: url(~/application/themes/ynresponsive-event/images/add_talk-2.png);
+}
+.tf_right_menu ul.list-items ul.list-items-dropdown li a:hover .tftalk_add
+{
+	background-image: url(~/application/themes/ynresponsive-event/images/add_talk.png);
+}
+.tfmenu_add_player i
+{
+	width: 14px;
 }
