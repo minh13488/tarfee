@@ -3999,12 +3999,6 @@ body#global_page_advgroup-profile-index{
 
 /*global_page_user-player-card-view*/
 #global_page_user-player-card-view{
-	#global_wrapper{
-		background: #dadada;
-		padding-top: 15px;
-		padding-bottom: 15px;
-	}
-
 	.tf-player-detail{
 		
 		.tf-player-detail-info{
@@ -4315,7 +4309,9 @@ body#global_page_advgroup-profile-index{
 
 
 
-#global_page_user-player-card-view-eye-on, #global_page_user-index-view-eyeons{
+#global_page_user-player-card-view-eye-on, 
+#global_page_user-index-view-eyeons
+{
 	#global_content_simple{
 		padding: 10px;
 		

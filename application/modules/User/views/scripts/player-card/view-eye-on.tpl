@@ -2,11 +2,13 @@
 	<h3><?php echo $this->translate('Members who eyed on %s', $this->player)?></h3>
 	<?php $users = $this->player->getEyeOns();?>
 	<?php if (count($users)) :?>
-	<ul class="user-list user-items" style="min-height: 330px">
+	<ul class="user-list user-items" style="height: 330px; overflow: auto">
 		<?php foreach ($users as $user):?>
 		<li class="user-item">
 			<div class="user-photo"><?php echo $this->itemPhoto($user, 'thumb.icon')?></div>
-			<div class="user-title"><?php echo $user?></div>
+			<div class="user-title">
+				<?php echo $this->htmlLink($user->getHref(), $this -> string() -> truncate($user->getTitle(), 100), array('title' => $user->getTitle(), 'target' => '_parent', 'class' => '', 'rel'=> 'user'.' '.$user->getIdentity()));?>
+			</div>
 		</li>
 		<?php endforeach;?>
 	</ul>
