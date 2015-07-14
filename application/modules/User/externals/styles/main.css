@@ -2723,9 +2723,12 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
 #global_page_ynvideo-index-popup-view .ynvideo_popup_left .player-info .player_info_detail,
 .layout_ynvideo_players_of_week #players-of-week > li .player-info-author .player-info .player_info_detail
 {
+    .actions_generic{
+        border: 2px solid $theme_link_color;
+    }
 	span a
 	{
-		webkit-border-radius: 5px;
+	   webkit-border-radius: 5px;
 	  -moz-border-radius: 5px;
 	  border-radius: 5px;
 	  font-weight: 700;
@@ -2733,11 +2736,22 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
 	  padding: 0px 5px;
 	  color: $theme_font_color_light;
 	  padding-bottom: 3px;
-	  &.eye-on
-	  {
-	  	color: $theme_link_color;
-	  	 border: 2px solid $theme_link_color;
-	  }
+
+
+    &.eye-on{
+        border: 2px solid $theme_link_color !important;
+        color: $theme_font_color !important;
+        background: transparent !important;
+    }
+
+    &.eye_on{
+        color: #fff;
+        background: $theme_link_color;
+        border: 2px solid $theme_link_color;
+    }
+
+
+
 	}
 }
 #global_page_ynvideo-index-popup-view .ynvideo_popup_left .player-info .player_info_detail span a

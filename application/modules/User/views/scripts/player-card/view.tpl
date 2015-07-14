@@ -303,7 +303,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 					<?php if($this -> viewer() -> getIdentity()):?>
 					    <div id="favorite_<?php echo $item-> getIdentity()?>" class="tf_btn_action">
 					        <?php if($item-> hasFavorite()):?>
-					            <a href="javascript:;" class="tf_button_action" title="<?php echo $this->translate('Unfavorite')?>" style="background:#ff6633;color: #fff" onclick="unfavorite_video(<?php echo $item-> getIdentity()?>)">
+					            <a href="javascript:;" class="tf_button_action" title="<?php echo $this->translate('Unfavorite')?>" style="background:#ff6633;color: #fff !important" onclick="unfavorite_video(<?php echo $item-> getIdentity()?>)">
 					                <i class="fa fa-heart fa-lg"></i>
 					            </a>
 					        <?php else:?>   
@@ -358,7 +358,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
             },
             'onComplete':function(responseObject)
             {  
-                obj.innerHTML = '<a href="javascript:;" class="tf_button_action" title="<?php echo $this->translate("Favourite")?>" onclick="favorite_video('+videoId+')">' + '<i class="fa fa-heart-o"></i>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;" class="tf_button_action" title="<?php echo $this->translate("Favourite")?>" onclick="favorite_video('+videoId+')">' + '<i class="fa fa-heart-o fa-lg"></i>' + '</a>';
             }
         });
         request.send();  
@@ -376,7 +376,7 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
             },
             'onComplete':function(responseObject)
             {  
-                obj.innerHTML = '<a href="javascript:;" class="tf_button_action" style="background:#ff6633;color: #fff" title="<?php echo $this->translate("Unfavourite")?>" onclick="unfavorite_video('+videoId+')">' + '<i class="fa fa-heart"></i>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;" class="tf_button_action" style="background:#ff6633;color: #fff !important" title="<?php echo $this->translate("Unfavourite")?>" onclick="unfavorite_video('+videoId+')">' + '<i class="fa fa-heart fa-lg"></i>' + '</a>';
             }
         });
         request.send();  

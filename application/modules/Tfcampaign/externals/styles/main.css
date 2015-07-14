@@ -1,4 +1,4 @@
-.campaign-save-active {
+f.campaign-save-active {
 	background-color: blue;
 }
 body#global_page_tfcampaign-index-browse{
@@ -798,7 +798,9 @@ ul.tfcampaign_list{
   	left: 10px;
   	top: 7px;
   	display: block;
-  	background-size: cover;
+  	background-size: 16px 16px;
+  	background-repeat: no-repeat;
+  	background-position: center;
 	background-image: url(~/application/themes/ynresponsive-event/images/add_campaign.png);
 }
 .tf_right_menu ul.list-items ul.list-items-dropdown li a:hover .tfcampaing_add
@@ -813,7 +815,9 @@ ul.tfcampaign_list{
   	left: 10px;
   	top: 7px;
   	display: block;
-  	background-size: cover;
+  	background-size: 16px 16px;
+  	background-repeat: no-repeat;
+  	background-position: center;
 	background-image: url(~/application/themes/ynresponsive-event/images/add_talk-2.png);
 }
 .tf_right_menu ul.list-items ul.list-items-dropdown li a:hover .tftalk_add

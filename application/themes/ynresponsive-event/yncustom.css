@@ -2164,6 +2164,18 @@ body#global_page_user-profile-index {
 					.player_info_detail{
 						overflow: hidden;
 						padding-top: 2px;
+						
+						span a.eye-on{
+				 			border: 2px solid $theme_link_color !important;
+				 			color: $theme_font_color !important;
+				 			background: transparent !important;
+						}
+
+				 		span a.eye_on{
+				 			color: #fff;
+				 			background: $theme_link_color;
+				 			border: 2px solid $theme_link_color;
+				 		}
 					}
 				}
 
@@ -4163,16 +4175,15 @@ body#global_page_advgroup-profile-index{
 					padding: 5px 20px;
 					+border-radius(5px);
 					font-weight: bold;
-					border: 2px solid $theme_font_color_light;
-					color: $theme_font_color_light;
-
-					&:hover,
-					&.eye-on{
-						border: 2px solid $theme_link_color;
-						color: $theme_link_color;
-					}
+					border: 2px solid $theme_link_color;
+					color: $theme_font_color;
 				}
 				
+				.eye-on{
+					color: #fff;
+					background: $theme_link_color;
+					border: 2px solid $theme_link_color;
+				}
 
 				.tf-addthis{
 					position: relative;
@@ -4251,6 +4262,19 @@ body#global_page_advgroup-profile-index{
 				margin-top: 10px;
 				display: block;
 				clear: both;
+			}
+
+			.tf_btn_action{
+				.tf_button_action{
+					border: 2px solid $theme_link_color;
+					color: $theme_font_color !important;
+					background: transparent;
+					&:hover{
+						border: 2px solid $theme_link_color;
+						background: $theme_link_color;
+						color: #fff !important;
+					}
+				}
 			}
 		}
 	}
