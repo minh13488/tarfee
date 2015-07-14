@@ -328,7 +328,8 @@ else {
                                 </li>
                             <?php endif;?>
                             <li>
-                               <a>
+                            	<?php $url = $this->url(array('action'=>'view-eyeons', 'user_id'=>$this->user->getIdentity()),'user_general', true)?>
+                               <a class="smoothbox" href="<?php echo $url?>">
                                   <span class="number_tabs"><?php echo count($this->user->getEyeOns())?></span>
                                   <div><?php echo $this -> translate("eye on")?></div>
                                </a>
