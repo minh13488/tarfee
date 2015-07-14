@@ -19,6 +19,7 @@ ul.token-input-list-facebook li input {
     background-color: white;
     margin: 2px 0;
     -webkit-appearance: caret;
+    font-weight: bold;
 }
 
 ul.token-input-list-facebook li input:focus {
