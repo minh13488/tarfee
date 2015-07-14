@@ -944,4 +944,13 @@ class User_IndexController extends Core_Controller_Action_Standard
 		}	
 	    $this->view->subject = $subject = Engine_Api::_()->core()->getSubject();
 	}
+	
+	public function viewEyeonsAction() {
+		$this -> _helper -> layout -> setLayout('default-simple');
+		$user_id = $this->_getParam('user_id', 0);
+		$this->view->user = $user =  Engine_Api::_()->getItem('user', $user_id);
+		if (!$user) {
+			return $this -> _helper -> requireSubject() -> forward();
+		}
+	}
 }
