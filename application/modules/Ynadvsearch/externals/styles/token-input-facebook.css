@@ -1,7 +1,7 @@
 /* Example tokeninput style #2: Facebook style */
 ul.token-input-list-facebook {
     overflow: hidden; 
-    width: 570px;
+    width: 630px;
     border: 1px solid #ccc;
     z-index: 10;
     display: inline-block;
@@ -43,6 +43,7 @@ li.token-input-token-facebook {
     -webkit-border-radius: 5px;;
     float: left;
     white-space: nowrap;
+    font-weight: bold;
 }
 
 li.token-input-token-facebook p {

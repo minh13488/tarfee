@@ -4471,7 +4471,7 @@ Shows the mini menu and search widget
 
         #global_search_field
         {
-        	width: 570px;
+        	width: 630px;
         	outline: none;
         	border: 1px solid $theme_border_medium_color;
             color: $theme_footer_text_color;
@@ -5352,7 +5352,7 @@ ul.ynevent_slideshow_pagination li a .ynevent_album_title,
 .layout_ynresponsiveevent_event_mini_menu .ybo_logo
 {
 	display: inline-block;
-	margin: 10px 0 0 0;
+	margin: 15px 0 0 0;
 
 	a{
 		position: relative;
