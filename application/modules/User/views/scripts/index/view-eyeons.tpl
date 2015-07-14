@@ -1,12 +1,12 @@
 <div style="width: 600px; height: 400px">
-	<h3><?php echo $this->translate('Players who %s has eyed on', $this->player)?></h3>
+	<h3><?php echo $this->translate('Players who %s has eyed on', $this->user)?></h3>
 	<?php $players = $this->user->getEyeOns();?>
 	<?php if (count($players)) :?>
-	<ul class="player-list player-items" style="min-height: 330px">
+	<ul class="user-list user-items" style="min-height: 330px">
 		<?php foreach ($players as $player):?>
-		<li class="player-item">
-			<div class="player-photo"><?php echo $this->itemPhoto($player, 'thumb.icon')?></div>
-			<div class="player-title"><?php echo $player?></div>
+		<li class="user-item">
+			<div class="user-photo"><?php echo $this->itemPhoto($player, 'thumb.icon')?></div>
+			<div class="user-title"><?php echo $player?></div>
 		</li>
 		<?php endforeach;?>
 	</ul>
