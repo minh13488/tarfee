@@ -1584,9 +1584,9 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
         min-height: 300px;     
         border-radius: 5px;
 
-        .item_sublibrary{
+/*        .item_sublibrary{
             cursor: pointer;
-        }        
+        } */       
 
         /*Style for list video of sub library*/
         .videos_browse{
