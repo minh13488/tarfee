@@ -50,7 +50,7 @@
 		<li class="search-tab-item" id="search-tab-item_professional"><?php echo $this->translate('Professional')?></li>
 		<li class="search-tab-item" id="search-tab-item_organization"><?php echo $this->translate('Organization')?></li>
 		<li class="search-tab-item" id="search-tab-item_event"><?php echo $this->translate('Event/Tryout')?></li>
-		<li class="search-tab-item" id="search-tab-item_campaign"><?php echo $this->translate('Scout')?></li>
+		<li class="search-tab-item" id="search-tab-item_campaign"><?php echo $this->translate('Campaign')?></li>
 	</ul>
 	<div class="search-form" id="advsearch-form">
 		<?php $url = $this->url(array(),'ynadvsearch_search',true)?>
@@ -181,7 +181,7 @@
 					<label class="form-label search-label" for="professional_role"><?php echo $this->translate('Role')?></label>
 					<select class="form-element search-element" id="professional_role" name="role">
 						<option value="any"><?php echo $this->translate('Any')?></option>
-						<option value="scout"><?php echo $this->translate('Scout')?></option>
+						<option value="campaign"><?php echo $this->translate('Campaign')?></option>
 						<option value="agent"><?php echo $this->translate('Agent')?></option>
 						<option value="coach"><?php echo $this->translate('Coach')?></option>
 						<option value="journalist"><?php echo $this->translate('Journalist')?></option>

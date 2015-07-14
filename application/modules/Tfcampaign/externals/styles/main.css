@@ -17,11 +17,13 @@ body#global_page_tfcampaign-profile-index{
 	#global_wrapper{
 		background-color: #dadada;
 		padding-bottom: 15px;
-		padding-top: 15px;
+	}
+	.layout_page_tfcampaign_profile_index
+	{
+		padding: 15px;
 	}
 	#global_content .layout_main{
 		padding: 0;
-		margin-top: 15px;
 	}
 	.layout_core_content{
 		background: #fff;

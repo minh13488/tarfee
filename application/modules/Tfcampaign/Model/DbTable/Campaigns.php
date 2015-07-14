@@ -155,7 +155,7 @@ class Tfcampaign_Model_DbTable_Campaigns extends Engine_Db_Table {
     		}
 			else 
 			{
-				$select->order('campaign.campaign_id DESC');
+				$select->order('campaign.campaign_id ASC');
 			}
     	}
     	return $select;

@@ -7,9 +7,9 @@ class Tfcampaign_Form_RemoveSave extends Engine_Form
   	$settings = Engine_Api::_()->getApi('settings', 'core');
 	$view = Zend_Registry::get("Zend_View");
 	$viewer = Engine_Api::_() -> user() -> getViewer();
-    $this -> setTitle('Remove Saved Scout');
+    $this -> setTitle('Remove Saved Campaign');
 	$this -> setAttrib('class', 'global_form_popup');
-	$this -> setDescription("Are you sure to remove this scout?");
+	$this -> setDescription("Are you sure to remove this campaign?");
 	
 	
     // Buttons

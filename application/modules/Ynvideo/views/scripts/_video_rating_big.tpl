@@ -7,6 +7,7 @@
  * @package    Ynvideo
  * @author     YouNet Company
  */
+if($this -> video -> parent_type == 'user_playercard'):
 ?>
 <div class="tf_video_rating" title="<?php echo number_format($this->video->getRating(), 2);?>">
     <?php for ($x = 1; $x <= $this->video->getRating(); $x++): ?>
@@ -22,3 +23,4 @@
     <?php endif; ?>
     
 </div>
+<?php endif;?>

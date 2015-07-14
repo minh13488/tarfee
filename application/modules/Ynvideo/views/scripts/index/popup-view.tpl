@@ -233,6 +233,7 @@ endif;
 					    <?php endif;?>
 					</div>
 		            <?php if($this -> video -> parent_type != "user_playercard") :?>
+		            	<!--
 		             <div id="video_rating" class="rating ynvideo_rating" onmouseout="rating_out();">
 		                <span id="rate_1" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(1);"<?php endif; ?> onmouseover="rating_over(1);"></span>
 		                <span id="rate_2" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(2);"<?php endif; ?> onmouseover="rating_over(2);"></span>
@@ -241,7 +242,7 @@ endif;
 		                <span id="rate_5" class="fa fa-star" <?php if (!$this->rated && $this->viewer_id): ?>onclick="rate(5);"<?php endif; ?> onmouseover="rating_over(5);"></span>
 		                <span id="rating_text" class="rating_text ynvideo_rating_text"><?php echo $this->translate('click to rate'); ?></span>
 		            </div>
-		            
+		            -->
 		            <?php else :?>
 
 		            	<div class="ynvideo_rating">
@@ -305,6 +306,7 @@ endif;
 							    <div class="player_info_detail">
 							        <div class="player-title">
 							            <?php echo $player?>
+									<?php endif;?>
 							        </div>
 							        <?php $position = $player->getPosition()?>
 							        <?php if ($position) : ?>
@@ -314,6 +316,18 @@ endif;
 												echo implode($matches[0]);?>
 										</div>
 							        <?php endif;?>
+							        <?php if($this -> viewer() -> getIdentity() && !$player -> isOwner($this -> viewer())):?>
+								    	<span title="<?php echo $this -> translate("Keep Eye on this player card")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
+								    		<?php if($player->isEyeOn()): ?>              
+								        	<a class="actions_generic eye-on eye_on" href="javascript:void(0);" onclick="pop_removeEyeOn('<?php echo $player->getIdentity() ?>')">
+								        		<i class="fa fa-eye-slash"></i>
+								    		</a>
+								    		<?php else: ?>
+								        	<a class="actions_generic eye_on" href="javascript:void(0);" onclick="pop_addEyeOn('<?php echo $player->getIdentity() ?>')">
+								    			<i class="fa fa-eye"></i>
+								        	</a>
+								    		<?php endif; ?>
+										</span>
 							    </div>
 							</div>
 						<?php endif;?>
@@ -336,13 +350,53 @@ endif;
 
 <script type="text/javascript">
 	$$('.ynvideo_popup_close').addEvent('click',function(){parent.Smoothbox.close()});	
-	    jQuery.noConflict();
+	 /*   jQuery.noConflict();
     jQuery('.tf_video_rating').click(function() {
         jQuery('.ynvideo_rating_player').slideToggle(400);
-    });
+    });*/
 </script>
 
 <script type="text/javascript">
+function pop_addEyeOn(itemId) 
+{
+    $('user_eyeon_'+itemId).set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
+    new Request.JSON({
+        'url': '<?php echo $this->url(array('action'=>'add-eye-on'),'user_playercard', true)?>',
+        'method': 'post',
+        'data' : {
+            'id' : itemId
+        },
+        'onSuccess': function(responseJSON, responseText) {
+            if (responseJSON.status == true) {
+                html = '<a class="actions_generic eye-on eye_on" href="javascript:void(0);" onclick="pop_removeEyeOn('+itemId+')"><span><i class="fa fa-eye-slash"></i></span></a>';
+                $('user_eyeon_'+itemId).set('html', html);
+            }
+            else {
+                alert(responseJSON.message);
+            }            
+        }
+    }).send();
+}
+
+function pop_removeEyeOn(itemId){
+	$('user_eyeon_'+itemId).set('html', '<a class="actions_generic" href="javascript:void(0);"><span><i class="fa fa fa-spinner fa-pulse"></i></span></a>');
+    new Request.JSON({
+        'url': '<?php echo $this->url(array('action'=>'remove-eye-on'),'user_playercard', true)?>',
+        'method': 'post',
+        'data' : {
+            'id' : itemId
+        },
+        'onSuccess': function(responseJSON, responseText) {
+            if (responseJSON.status == true) {
+                html = '<a class="actions_generic eye_on" href="javascript:void(0);" onclick="pop_addEyeOn('+itemId+')"><span><i class="fa fa-eye"></i></span></a>';
+                $('user_eyeon_'+itemId).set('html', html);
+            }
+            else {
+                alert(responseJSON.message);
+            }            
+        }
+    }).send();
+}
    var unfavorite_video = function(videoId)
    {
    	   var obj = document.getElementById('popup_favorite_' + videoId);

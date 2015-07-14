@@ -19,20 +19,20 @@ class Tfcampaign_Form_Admin_Settings_Level extends Authorization_Form_Admin_Leve
         if( !$this->isPublic() ) {
     
             $this->addElement('Radio', 'create', array(
-                'label' => 'Allow Creation of Scout',
+                'label' => 'Allow Creation of Campaign',
                 'multiOptions' => array(
-                    1 => 'Yes, allow users to create new scout.',
-                    0 => 'No, do not allow users to create new scout.'
+                    1 => 'Yes, allow users to create new campaign.',
+                    0 => 'No, do not allow users to create new campaign.'
                 ),
                 'value' => 1,
             ));
             
             $this->addElement('Radio', 'edit', array(
-                'label' => 'Allow Editing of Scout',
+                'label' => 'Allow Editing of Campaign',
                 'multiOptions' => array(
-                    2 => 'Yes, allow users to edit all scouts.',
-                    1 => 'Yes, allow users to edit their own scouts.',
-                    0 => 'No, do not allow users to edit their own scouts.'
+                    2 => 'Yes, allow users to edit all campaigns.',
+                    1 => 'Yes, allow users to edit their own campaigns.',
+                    0 => 'No, do not allow users to edit their own campaigns.'
                 ),
                 'value' => ( $this->isModerator() ? 2 : 1 ),
             ));
@@ -41,11 +41,11 @@ class Tfcampaign_Form_Admin_Settings_Level extends Authorization_Form_Admin_Leve
 		    }
             
             $this->addElement('Radio', 'delete', array(
-                'label' => 'Allow Deletion of Scout',
+                'label' => 'Allow Deletion of Campaign',
                 'multiOptions' => array(
-                    2 => 'Yes, allow users to delete all scouts.',
-                    1 => 'Yes, allow users to delete their own scouts.',
-                    0 => 'No, do not allow users to delete their own scouts.'
+                    2 => 'Yes, allow users to delete all campaigns.',
+                    1 => 'Yes, allow users to delete their own campaigns.',
+                    0 => 'No, do not allow users to delete their own campaigns.'
                 ),
                 'value' => ( $this->isModerator() ? 2 : 1 ),
             ));
@@ -54,10 +54,10 @@ class Tfcampaign_Form_Admin_Settings_Level extends Authorization_Form_Admin_Leve
 		    }
             
             $this->addElement('Radio', 'view', array(
-                'label' => 'Allow Viewing Details of Scout',
+                'label' => 'Allow Viewing Details of Campaign',
                 'multiOptions' => array(
-                    1 => 'Yes, allow users to view scouts.',
-                    0 => 'No, do not allow users to view scouts.'
+                    1 => 'Yes, allow users to view campaigns.',
+                    0 => 'No, do not allow users to view campaigns.'
                 ),
                 'value' => 1,
             ));
@@ -84,10 +84,10 @@ class Tfcampaign_Form_Admin_Settings_Level extends Authorization_Form_Admin_Leve
         }
         else {
             $this->addElement('Radio', 'view', array(
-                'label' => 'Allow Viewing Details of scout',
+                'label' => 'Allow Viewing Details of Campaign',
                 'multiOptions' => array(
-                    1 => 'Yes, allow users to view scouts.',
-                    0 => 'No, do not allow users to view scouts.'
+                    1 => 'Yes, allow users to view campaigns.',
+                    0 => 'No, do not allow users to view campaigns.'
                 ),
                 'value' => 1,
             ));

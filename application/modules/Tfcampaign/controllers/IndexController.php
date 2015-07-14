@@ -70,7 +70,7 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 		$isSort = $params['sort'];
 		if(!empty($isSort)) {
 			$params['order'] = $isSort;
-			$params['direction'] = "DESC";
+			$params['direction'] = "ASC";
 			$this -> view -> isSort = $isSort;
 		}
 		$this -> view -> paginator = $paginator = Engine_Api::_() -> getItemTable('tfcampaign_campaign') -> getCampaignsPaginator($params);

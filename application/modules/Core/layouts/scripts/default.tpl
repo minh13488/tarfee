@@ -178,13 +178,7 @@
     }
   ?>
   <?php echo $this->headScript()->toString()."\n" ?>
-
-  
-  
   <?php echo $headIncludes ?>
-  
-  
-  
 </head>
 <body id="global_page_<?php echo $identity ?>">
   <script type="javascript/text">
@@ -200,8 +194,300 @@
   </div>
   <div id='global_wrapper'>
     <div id='global_content'>
+    	<?php
+		$module = $request->getModuleName();
+		$controller = $request->getControllerName();
+		$action = $request -> getActionName();
+		if($pageTitleKey != 'pagetitle-user-home-index' && $pageTitleKey != 'pagetitle-user-index-profile'):
+		?>
+    	<div class="layout_page_breadcrumb">
+	    	<ul id="breadcrumb" class="breadcrumb">
+	    		<li>
+	    			<a href="<?php echo $this -> url(array(), 'default', true)?>" title="<?php echo $this -> translate("Home")?>">
+	    				<img src="application/themes/ynresponsive-event/images/home.png" alt= "<?php echo $this -> translate("Home")?>" />
+	    			</a>
+	    		</li>
+	    		<?php if($module == 'tfcampaign'):?>
+		    		<li <?php if($action == 'browse') echo 'class="active"'?>>
+		    			<a href="<?php echo $this -> url(array(), 'tfcampaign_general', true)?>" title = "<?php echo $this -> translate("Campaigns")?>">
+		    				<?php echo $this -> translate("Campaigns")?>
+		    			</a>
+		    		</li>
+		    		<?php if($action == 'create'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Add new campaign")?>">
+			    				<?php echo $this -> translate("Add New Campaign")?>
+			    			</a>
+			    		</li>
+		    		<?php endif;?>
+		    	<?php elseif($module == 'ynvideo'):?>
+		    		<li>
+		    			<a href="<?php echo $this -> url(array(), 'default', true).'search?type%5B%5D=video'?>" title = "<?php echo $this -> translate("Videos")?>">
+		    				<?php echo $this -> translate("Videos")?>
+		    			</a>
+		    		</li>
+		    		<?php if($action == 'create'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Add new video")?>">
+			    				<?php echo $this -> translate("Add New Video")?>
+			    			</a>
+			    		</li>
+		    		<?php endif;?>
+		    	<?php elseif($module == 'ynblog'):?>
+		    		<li <?php if($action == 'listing') echo 'class="active"'?>>
+		    			<a href="<?php echo $this -> url(array(), 'blog_general', true)?>" title = "<?php echo $this -> translate("Talks")?>">
+		    				<?php echo $this -> translate("Talks")?>
+		    			</a>
+		    		</li>
+		    		<?php if($action == 'create'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Add new talk")?>">
+			    				<?php echo $this -> translate("Add New Talk")?>
+			    			</a>
+			    		</li>
+		    		<?php endif;?>
+		    	<?php elseif($module == 'ynevent'):?>
+		    		<li <?php if($action == 'listing') echo 'class="active"'?>>
+		    			<a href="<?php echo $this -> url(array(), 'event_general', true)?>" title = "<?php echo $this -> translate("Events")?>">
+		    				<?php echo $this -> translate("Events")?>
+		    			</a>
+		    		</li>
+		    		<?php if($action == 'create'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Add new event/tryout")?>">
+			    				<?php echo $this -> translate("Add New Event/Tryout")?>
+			    			</a>
+			    		</li>
+		    		<?php endif;?>
+		    	<?php elseif($module == 'user' && $controller == 'player-card'):?>
+		    		<li>
+		    			<a href="<?php echo $this -> url(array(), 'default', true).'search?advsearch=player'?>" title = "<?php echo $this -> translate("Player Cards")?>">
+		    				<?php echo $this -> translate("Player Cards")?>
+		    			</a>
+		    		</li>
+		    		<?php if($action == 'create'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Add new player card")?>">
+			    				<?php echo $this -> translate("Add New Player Card")?>
+			    			</a>
+			    		</li>
+			    	<?php endif;?>
+			    <?php elseif($module == 'advgroup'):?>
+		    		<li>
+		    			<a href="<?php echo $this -> url(array(), 'default', true).'search?advsearch=organization'?>" title = "<?php echo $this -> translate("Clubs")?>">
+		    				<?php echo $this -> translate("Clubs")?>
+		    			</a>
+		    		</li>
+		    		<?php if($action == 'create'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Create new club")?>">
+			    				<?php echo $this -> translate("Create New Club")?>
+			    			</a>
+			    		</li>
+			    	<?php elseif($action == 'edit'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Edit club")?>">
+			    				<?php echo $this -> translate("Edit Club")?>
+			    			</a>
+			    		</li>
+			    	<?php endif;?>
+			    <?php elseif($module == 'contactimporter'):?>
+		    		<li class="active">
+		    			<a href="#" title = "<?php echo $this -> translate("Friend inviter")?>">
+		    				<?php echo $this -> translate("Friend Inviter")?>
+		    			</a>
+		    		</li>
+		    	<?php elseif($module == 'ynresponsive1'):?>
+		    		<li class="active">
+		    			<a href="#" title = "<?php echo $this -> translate("Notifications")?>">
+		    				<?php echo $this -> translate("Notifications")?>
+		    			</a>
+		    		</li>
+		    	<?php elseif($module == 'ynadvsearch'):?>
+		    		<?php if($request -> getParam('advsearch', '')):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate($request -> getParam('advsearch', ''))?>">
+			    				<?php echo $this -> translate(ucfirst($request -> getParam('advsearch', ''))).'s';	?>
+			    			</a>
+			    		</li>
+		    		<?php else:?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Search")?>">
+			    				<?php echo $this -> translate("Search Result")?>
+			    			</a>
+			    		</li>
+		    		<?php endif;?>
+		    	<?php elseif($module == 'core'):?>
+		    		<?php if($action == 'contact'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Contact us")?>">
+			    				<?php echo $this -> translate("Contact Us")?>
+			    			</a>
+			    		</li>
+			    	<?php elseif($action == 'terms'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Terms of service")?>">
+			    				<?php echo $this -> translate("Terms of Service")?>
+			    			</a>
+			    		</li>
+		    		<?php endif;?>
+		    	<?php elseif($module == 'messages'):?>
+		    		<li>
+		    			<a href="<?php echo $this -> url(array('action' => 'inbox'), 'messages_general', true)?>" title = "<?php echo $this -> translate("Messages")?>">
+		    				<?php echo $this -> translate("Messages")?>
+		    			</a>
+		    		</li>
+		    		<?php if($action == 'inbox'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Inbox")?>">
+			    				<?php echo $this -> translate("Inbox")?>
+			    			</a>
+			    		</li>
+			    	<?php elseif($action == 'outbox'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Sent messages")?>">
+			    				<?php echo $this -> translate("Sent Messages")?>
+			    			</a>
+			    		</li>
+			    	<?php elseif($action == 'compose'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Compose messages")?>">
+			    				<?php echo $this -> translate("Compose Messages")?>
+			    			</a>
+			    		</li>
+		    		<?php endif;?>
+		    		<?php elseif($controller == 'settings'):?>
+		    		<?php if($this -> subject()):?>
+		    		<li>
+		    			<a href="<?php echo $this -> subject() -> getHref()?>">
+		    				<?php echo $this -> subject() -> getTitle();?>
+		    			</a>
+		    		</li>
+	    			<?php endif;?>
+	    			<?php if(in_array($action, array('general', 'password','delete','deactivate'))):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("General settings")?>">
+			    				<?php echo $this -> translate("General Settings")?>
+			    			</a>
+			    		</li>
+			    	<?php elseif($action == 'privacy'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Privacy settings")?>">
+			    				<?php echo $this -> translate("Privacy Settings")?>
+			    			</a>
+			    		</li>
+			    	<?php elseif($action == 'network'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Networks settings")?>">
+			    				<?php echo $this -> translate("Networks Settings")?>
+			    			</a>
+			    		</li>
+			    	<?php elseif($action == 'notifications'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Notifications settings")?>">
+			    				<?php echo $this -> translate("Notifications Settings")?>
+			    			</a>
+			    		</li>
+			    	<?php elseif($action == 'referral'):?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Referral codes")?>">
+			    				<?php echo $this -> translate("Referral Codes Generation")?>
+			    			</a>
+			    		</li>
+		    		<?php endif;?>
+		    		<?php elseif($module == 'sladvsubscription' && $controller == 'settings' && $action == 'index'):?>
+	    			<?php if($this -> subject()):?>
+		    		<li>
+		    			<a href="<?php echo $this -> subject() -> getHref()?>">
+		    				<?php echo $this -> subject() -> getTitle();?>
+		    			</a>
+		    		</li>
+	    			<?php endif;?>
+		    		<li class="active">
+		    			<a href="#" title = "<?php echo $this -> translate("Membership")?>">
+		    				<?php echo $this -> translate("Membership")?>
+		    			</a>
+		    		</li>
+			    	<?php elseif($module == 'socialbridge' && $controller == 'index' && $action == 'index'):?>
+			    		<li>
+			    			<a href="<?php echo $this -> url(array('controller' => 'settings', 'action' => 'general'), 'user_extended', true)?>"  title = "<?php echo $this -> translate("Settings")?>">
+			    				<?php echo $this -> translate("Settings")?>
+			    			</a>
+			    		</li>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Find & invite friends")?>">
+			    				<?php echo $this -> translate("Find & Invite Friends")?>
+			    			</a>
+			    		</li>
+			    	<?php elseif($module == 'social-connect' && $controller == 'index' && $action == 'account-linking'):?>
+			    		<?php if($this -> subject()):?>
+			    		<li>
+			    			<a href="<?php echo $this -> subject() -> getHref()?>">
+			    				<?php echo $this -> subject() -> getTitle();?>
+			    			</a>
+			    		</li>
+		    			<?php endif;?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Social networks")?>">
+			    				<?php echo $this -> translate("Social Networks")?>
+			    			</a>
+			    		</li>
+		    		<?php elseif($module == 'user' && $controller == 'edit'):?>
+			    		<?php if($this -> subject()):?>
+			    		<li>
+			    			<a href="<?php echo $this -> subject() -> getHref()?>">
+			    				<?php echo $this -> subject() -> getTitle();?>
+			    			</a>
+			    		</li>
+		    			<?php endif;?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Edit my profile")?>">
+			    				<?php echo $this -> translate("Edit My Profile")?>
+			    			</a>
+			    		</li>
+			    	<?php elseif($module == 'ynmember' && $controller == 'edit'):?>
+			    		<?php if($this -> subject()):?>
+			    		<li>
+			    			<a href="<?php echo $this -> subject() -> getHref()?>">
+			    				<?php echo $this -> subject() -> getTitle();?>
+			    			</a>
+			    		</li>
+		    			<?php endif;?>
+			    		<li class="active">
+			    			<a href="#" title = "<?php echo $this -> translate("Edit my profile")?>">
+			    				<?php echo $this -> translate("Edit My Profile")?>
+			    			</a>
+			    		</li>
+		    		<?php endif;?>
+		    		
+		    		<?php if($this -> subject() && !in_array($action, array('edit','account-linking')) && !in_array($controller, array('settings','edit'))):?>
+			    		<li class="active">
+			    			<a href="<?php echo $this -> subject() -> getHref()?>">
+			    				<?php echo $this -> subject() -> getTitle();?>
+			    			</a>
+			    		</li>
+	    			<?php endif;?>
+			</ul>
+		</div>
+	  <?php endif;?>
       <?php //echo $this->content('global-user', 'before') ?>
-      <?php echo $this->layout()->content ?>
+      <?php
+	  $content = $this->layout()->content;
+	  $return = str_replace('href=', 'target="_blank" href=', $content);
+	  $return = str_replace('target="_blank" href="http://localhost/Tarfee1', 'href="http://localhost/Tarfee1', $return);
+	  $return = str_replace('target="_blank" href="/', 'href="/', $return);
+	  $return = str_replace('target="_blank" href=\'/', 'href=\'/', $return);
+	  $return = str_replace('target="_blank" href="#', 'href="#', $return);
+	  $return = str_replace('target="_blank" href=\'#', 'href=\'#', $return);
+	  $return = str_replace('target="_blank" href="javascript:;', 'href="javascript:;', $return);
+	  $return = str_replace('target="_blank" href=\'javascript:;', 'href=\'javascript:;', $return);
+	  $return = str_replace('target="_blank" href="javascript:void(0);', 'href="javascript:void(0);', $return);
+	  $return = str_replace('target="_blank" href=\'javascript:void(0);', 'href=\'javascript:void(0);', $return);
+	  $return = str_replace('target="_blank" href=\'javascript: void(sopopup', 'href=\'javascript: void(sopopup', $return);
+	  $return = str_replace('target="_blank" href="javascript: void(sopopup', 'href="javascript: void(sopopup', $return);
+	  $return = str_replace(' target = "_blank">', '>', $return);
+	  echo $return;
+      ?>
       <?php //echo $this->content('global-user', 'after') ?>
     </div>
   </div>

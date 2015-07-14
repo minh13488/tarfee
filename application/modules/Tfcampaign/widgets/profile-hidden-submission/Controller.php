@@ -21,7 +21,7 @@ class Tfcampaign_Widget_ProfileHiddenSubmissionController extends Engine_Content
 		$submissionTable = Engine_Api::_() -> getItemTable('tfcampaign_submission');
 		$submissionPlayers = $submissionTable -> fetchAll($submissionTable -> getSubmissionsSelect($params));
 		$this -> view -> submissionPlayers = $submissionPlayers;
-		if(!count($submissionPlayers)) {
+		if(!count($submissionPlayers) || !$campaign -> isOwner($viewer)) {
 			return $this -> setNoRender();
 		}
 	}

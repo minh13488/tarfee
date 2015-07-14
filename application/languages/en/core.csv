@@ -5923,10 +5923,10 @@ CDN that uses FTP or SCP."
 
 # -------- End Storage -------
 
-# -------- Start Scout-------
+# -------- Start Campaign-------
 # notify_tfcampaign_alert_player
-"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_TITLE";"New Matching Scout"
-"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_DESCRIPTION";"Your player matchs with new scout"
+"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_TITLE";"New Matching Campaign"
+"_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_DESCRIPTION";"Your player matchs with new campaign"
 "_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_SUBJECT";"New Campaign for ([sender_title])"
 "_EMAIL_NOTIFY_TFCAMPAIGN_ALERT_PLAYER_BODY";"[header]
 
@@ -5936,7 +5936,7 @@ Click on the following link for more details: http://[host][object_link].
 
 [footer]"
 "ACTIVITY_TYPE_TFCAMPAIGN_ALERT_PLAYER";"When my player is matched."
-# -------- End Scout -------
+# -------- End Campaign -------
 
 # -------- Start User -------
 "User";"User"
@@ -9067,7 +9067,7 @@ Event: ""[object_title]""&nbsp;<br> <br>http://[host][object_link]<br> <br> [foo
 "Professional";"Professional"
 "Organization";"Organization"
 "Event/Tryout";"Event/Tryout"
-"Scout";"Scout"
+"Campaign";"Campaign"
 "Continent";"Continent"
 "Province/State";"Province/State"
 "Sport Position";"Sport Position"
@@ -9089,10 +9089,10 @@ Event: ""[object_title]""&nbsp;<br> <br>http://[host][object_link]<br> <br> [foo
 "Account & Settings  ";"Account & Settings  "
 "Add Player Card";"Add Player Card"
 "Add Event/Tryout";"Add Event/Tryout"
-"Add Scout";"Add Scout"
+"Add Campaign";"Add Campaign"
 "Add Talk";"Add Talk"
 "Find/Invite Friend";"Find/Invite Friend"
-"scouts";"scouts"
+"campaigns";"campaigns"
 "clubs & organizations";"clubs & organizations"
 "events & tryouts";"events & tryouts"
 "talks";"talks"
@@ -9100,7 +9100,7 @@ Event: ""[object_title]""&nbsp;<br> <br>http://[host][object_link]<br> <br> [foo
 "Help Centre";"Help Centre"
 "Suggest Idea or Feature";"Suggest Idea or Feature"
 "help";"help"
-"Scouts";"Scouts"
+"Campaigns";"Campaigns"
 "join";"join"
 "request invite";"request invite"
 "add";"add"
@@ -9154,7 +9154,7 @@ Event: ""[object_title]""&nbsp;<br> <br>http://[host][object_link]<br> <br> [foo
 "This is my card";"This is my card"
 "I am his/her Parent";"I am his/her Parent"
 "I am his brother/sister";"I am his brother/sister"
-"I am his/her Coach, Agent, Scout";"I am his/her Coach, Agent, Scout"
+"I am his/her Coach, Agent, Campaign";"I am his/her Coach, Agent, Campaign"
 "I am his/her Friend";"I am his/her Friend"
 "Players of the Week";"Players of the Week"
 "Closing Date";"Closing Date"
@@ -9162,17 +9162,17 @@ Event: ""[object_title]""&nbsp;<br> <br>http://[host][object_link]<br> <br> [foo
 "Sort by view count";"Sort by view count"
 "Meta Data";"Meta Data"
 "%s submission";"%s submission";"%s submissions"
-"%s of submitted player cards that match the scout preferences";"%s of submitted player cards that match the scout preferences"
-"%s of player cards that match the scout preferences";"%s of player cards that match the scout preferences"
-"Search Scouts...";"Search Scouts..."
+"%s of submitted player cards that match the campaign preferences";"%s of submitted player cards that match the campaign preferences"
+"%s of player cards that match the campaign preferences";"%s of player cards that match the campaign preferences"
+"Search Campaigns...";"Search Campaigns..."
 "Filters";"Filters"
 "By age";"By age"
 "By date";"By date"
 "From ";"From "
 "To ";"To "
-"Add New Scout";"Add New Scout"
+"Add New Campaign";"Add New Campaign"
 "Maximum %s characters.";"Maximum %s characters."
-"Scout Photo";"Scout Photo"
+"Campaign Photo";"Campaign Photo"
 "From Age";"From Age"
 "To Age";"To Age"
 "Matching Percentage";"Matching Percentage"
@@ -9303,8 +9303,8 @@ Event: ""[object_title]""&nbsp;<br> <br>http://[host][object_link]<br> <br> [foo
 "Edit Library";"Edit Library"
 "Library Photo";"Library Photo"
 "Who may see this library";"Who may see this library"
-"Delete Scout";"Delete Scout"
-"Are you sure you want to delete this scout? All of the information of this scout will be erased.";"Are you sure you want to delete this scout? All of the information of this scout will be erased."
+"Delete Campaign";"Delete Campaign"
+"Are you sure you want to delete this campaign? All of the information of this campaign will be erased.";"Are you sure you want to delete this campaign? All of the information of this campaign will be erased."
 "Edit Player Submission";"Edit Player Submission"
 "Choose the player that you want to edit";"Choose the player that you want to edit"
 "Submission List";"Submission List"
@@ -9318,7 +9318,7 @@ Event: ""[object_title]""&nbsp;<br> <br>http://[host][object_link]<br> <br> [foo
 "Choose player that you want to withdraw";"Choose player that you want to withdraw"
 "Submission List";"Submission List"
 "Withdraw";"Withdraw"
-"Edit Scout";"Edit Scout"
+"Edit Campaign";"Edit Campaign"
 "Upload Cover Photo";"Upload Cover Photo"
 "Reposition Cover Photo";"Reposition Cover Photo"
 "Save Position";"Save Position"
@@ -9426,3 +9426,4 @@ Event: ""[object_title]""&nbsp;<br> <br>http://[host][object_link]<br> <br> [foo
 "%s video";"%s video";"%s videos"
 "View More";"View More"
 "Male / Female";"Male / Female"
+"Keep Eye on this player card";"Keep Eye on this player card"

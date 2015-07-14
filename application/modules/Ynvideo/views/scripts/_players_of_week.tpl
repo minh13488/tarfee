@@ -19,7 +19,7 @@
 	    </div>
 	    <div class="player_info_detail">
 	        <div class="player-title" title="<?php echo $player -> getTitle();?>">
-	            <?php echo $player?>
+	            <?php echo $player;?>
 	        </div>
 	        <?php $position = $player->getPosition()?>
 	        <?php if ($position) : ?>
@@ -32,6 +32,19 @@
 	        <?php if($player -> getSport()):?>
 				<span title="<?php echo $this -> translate($player -> getSport());?>"><?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?></span>
 			<?php endif;?>
+			<?php if($this -> viewer() -> getIdentity() && !$player -> isOwner($this -> viewer())):?>
+		    	<span title="<?php echo $this -> translate("Keep Eye on this player card")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">
+		    		<?php if($player->isEyeOn()): ?>              
+		        	<a class="actions_generic eye-on eye_on" href="javascript:void(0);" onclick="removeEyeOn('<?php echo $player->getIdentity() ?>')">
+		        		<i class="fa fa-eye-slash"></i>
+		    		</a>
+		    		<?php else: ?>
+		        	<a class="actions_generic eye_on" href="javascript:void(0);" onclick="addEyeOn('<?php echo $player->getIdentity() ?>')">
+		    			<i class="fa fa-eye"></i>
+		        	</a>
+		    		<?php endif; ?>
+				</span>
+			<?php endif; ?>
 	    </div>
 	</div>
 	<?php endif;?>

@@ -17,11 +17,11 @@
 <input id="campaign-sort" value="campaign.creation_date" type="hidden" name="sort">
 
 <div class="tf_boxsearch_campaign">
-	<input type="text" name="title" id="title" placeholder="<?php echo $this -> translate("Search Scouts...");?>">
+	<input type="text" name="title" id="title" placeholder="<?php echo $this -> translate("Search Campaigns...");?>">
 </div>
 
 <?php if( Engine_Api::_()->authorization()->isAllowed('group', $this -> viewer(), 'create')) :?>
-<a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>" class="btn-add-campaign"><?php echo $this -> translate("Add Scout");?><i class="fa fa-plus"></i></a>
+<a href="<?php echo $this -> url(array('action' => 'create'), 'tfcampaign_general', true);?>" class="btn-add-campaign"><?php echo $this -> translate("Add Campaign");?><i class="fa fa-plus"></i></a>
 <?php endif;?>
 
 <div class="tf_box_filter_campaign">

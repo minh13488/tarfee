@@ -193,7 +193,23 @@
 </head>
 <body id="global_page_<?php echo $identity ?>">
   <span id="global_content_simple">
-    <?php echo $this->layout()->content ?>
+    <?php 
+      $content = $this->layout()->content;
+	  $return = str_replace('href=', 'target="_blank" href=', $content);
+	  $return = str_replace('target="_blank" href="http://localhost/Tarfee1', 'href="http://localhost/Tarfee1', $return);
+	  $return = str_replace('target="_blank" href="/', 'href="/', $return);
+	  $return = str_replace('target="_blank" href=\'/', 'href=\'/', $return);
+	  $return = str_replace('target="_blank" href="#', 'href="#', $return);
+	  $return = str_replace('target="_blank" href=\'#', 'href=\'#', $return);
+	  $return = str_replace('target="_blank" href="javascript:;', 'href="javascript:;', $return);
+	  $return = str_replace('target="_blank" href=\'javascript:;', 'href=\'javascript:;', $return);
+	  $return = str_replace('target="_blank" href="javascript:void(0);', 'href="javascript:void(0);', $return);
+	  $return = str_replace('target="_blank" href=\'javascript:void(0);', 'href=\'javascript:void(0);', $return);
+	  $return = str_replace('target="_blank" href=\'javascript: void(sopopup', 'href=\'javascript: void(sopopup', $return);
+	  $return = str_replace('target="_blank" href="javascript: void(sopopup', 'href="javascript: void(sopopup', $return);
+	  $return = str_replace(' target = "_blank">', '>', $return);
+	  echo $return;
+     ?>
   </span>
 </body>
 </html>

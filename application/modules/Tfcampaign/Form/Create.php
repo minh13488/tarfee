@@ -8,7 +8,7 @@ class Tfcampaign_Form_Create extends Engine_Form
 	
   	$user = Engine_Api::_()->user()->getViewer();
     $this
-      ->setTitle('Add New Scout');
+      ->setTitle('Add New Campaign');
 	
 	$maxCharTitle = $settings->getSetting('tfcampaign_max_title', "300");
     $this->addElement('Text', 'title', array(
@@ -69,7 +69,7 @@ class Tfcampaign_Form_Create extends Engine_Form
     $this->addElement($end);
 
 	$this->addElement('File', 'photo', array(
-      'label' => 'Scout Photo'
+      'label' => 'Campaign Photo'
     ));
 	$this -> photo -> setAllowEmpty(true);
     $this -> photo -> addValidator('Extension', false, 'jpg,png,gif,jpeg');
@@ -192,7 +192,7 @@ class Tfcampaign_Form_Create extends Engine_Form
 	      // Make select box
 	      } else {
 	        $this->addElement('Select', 'auth_view', array(
-	            'label' => 'Who may see this scout',
+	            'label' => 'Who may see this campaign',
 	            'multiOptions' => $viewOptions,
 	            'value' => key($viewOptions),
 	            'onchange' => 'privacyChange()'
