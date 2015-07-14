@@ -52,7 +52,7 @@
 	if($subLibrary -> isViewable()) :?>
 	<li class="tf_item_sublibrary">
 		<div class="item_sublibrary">
-			<div class="item_background" style="background: url(<?php echo $subLibrary -> getPhotoUrl();?>)">
+			<div class="item_background" style="background-image: url(<?php echo $subLibrary -> getPhotoUrl();?>)">
 				<?php if($this -> viewer() -> isSelf($this -> subject())) :?>
 				<div class="avatar-box-hover">
 				    <ul class="actions">
@@ -95,6 +95,7 @@
 				</div>	
 				<?php endif;?>
 			</div>
+			
 			<div class="tf_sublibrary_title">
 				<?php echo $subLibrary -> getTitle();?>
 			</div>
