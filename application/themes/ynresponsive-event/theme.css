@@ -5719,7 +5719,9 @@ body[id^=global_page_ynsocialads],
 #global_page_advgroup-group-edit,
 #global_page_advgroup-index-create,
 #global_page_user-player-card-view,
-#global_page_payment-settings-index
+#global_page_payment-settings-index,
+#global_page_sladvsubscription-settings-index,
+#global_page_slprofileverify-index-setting-verification
 {
 	#global_wrapper
 	{
@@ -5745,7 +5747,7 @@ body[id^=global_page_ynsocialads],
 			  .layout_page_user_player-card_view,
 			  .layout_page_socialbridge_index_index,
 			  .layout_page_ynblog_index_view,
-			  .layout_page_ynevent_profile_index 
+			  .layout_page_ynevent_profile_index
 			  {
 			  	  padding-top: 15px;
 				  max-width: 1170px;
@@ -5789,7 +5791,8 @@ body[id^=global_page_ynsocialads],
 #global_page_user-edit-style #global_content div.headline,
 #global_page_ynmember-edit-cover-photo #global_content div.headline,
 #global_page_ynmember-edit-place #global_content div.headline,
-#global_page_ynmember-edit-relationship #global_content div.headline
+#global_page_ynmember-edit-relationship #global_content div.headline,
+#global_page_sladvsubscription-settings-index #global_content div.headline
 {
 	background-color: white;
   	 -webkit-border-radius: 5px;
@@ -5806,6 +5809,7 @@ body[id^=global_page_ynsocialads],
 {
 	 overflow: hidden
 }
+#global_page_sladvsubscription-settings-index .payment_form_settings,
 #global_page_advgroup-group-edit #global_content .global_form,
 #global_page_advgroup-index-create #global_content .global_form,
 #global_page_user-edit-profile #global_content .global_form,
@@ -5829,7 +5833,8 @@ body[id^=global_page_ynsocialads],
 {
 	margin: 15px;
 }
-#global_page_user-edit-profile #global_content .global_form
+#global_page_user-edit-profile #global_content .global_form,
+#global_page_sladvsubscription-settings-index .payment_form_settings
 {
 	padding-top: 0;
 }
@@ -5839,9 +5844,9 @@ body[id^=global_page_ynsocialads],
 }
 #global_page_user-player-card-create .global_form,
 #global_page_user-player-card-edit .global_form,
-body[id^=global_page_ynsocialads] .layout_top
+body[id^=global_page_ynsocialads] .layout_top,
+#global_page_slprofileverify-index-setting-verification .layout_top
 {
-	  padding-top: 15px;
 	  max-width: 1170px;
 	  margin: auto;
 	  padding: 15px;
@@ -5854,6 +5859,10 @@ body[id^=global_page_ynsocialads] .layout_top
 body[id^=global_page_ynsocialads] #global_content
 {
 	margin-bottom: 15px;
+}
+#global_page_slprofileverify-index-setting-verification .layout_top
+{
+	padding-bottom: 0;
 }
 #global_page_ynsocialads-ads-create-step-one #global_content, #global_page_ynsocialads-ads-create-choose-package #global_content
 {

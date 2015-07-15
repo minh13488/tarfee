@@ -16,5 +16,5 @@
 		<span><?php echo $this->translate('No players found!')?></span>
 	</div>
 	<?php endif;?>
-	<button type="button" onclick="parent.Smoothbox.close()"><?php echo $this->translate('Close')?></button>
+	<button style="margin-top: 15px" type="button" onclick="parent.Smoothbox.close()"><?php echo $this->translate('Close')?></button>
 </div>

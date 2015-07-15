@@ -1,21 +1,28 @@
 window.addEvent('domready', function() 
-{	
-	var ads_html = new Element('li', {'html':
-	<?php echo Zend_Json::encode($this->partial('_feedRenderView.tpl', 'ynsocialads', 
-		array(
-			'ads_arr' => $this -> ads_arr, 
-		)))
-	?>
-	});
+{    
+    var ads_html = new Element('li', {'html':
+    <?php echo Zend_Json::encode($this->partial('_feedRenderView.tpl', 'ynsocialads', 
+        array(
+            'ads_arr' => $this -> ads_arr, 
+        )))
+    ?>
+    });
 
-	ads_html.set('class', 'feed_ynsocial_ads');
-
-	<?php if($this->pos > 0 ) :?>
-		ads_html.inject( $$('#activity-feed > li:nth-child(<?php echo $this->pos ?>)')[0], 'after');
-	<?php else :?>
-		ads_html.inject( $$('#activity-feed > li:nth-child(1)')[0], 'before');
-	<?php endif;?>
-	
+    ads_html.set('class', 'feed_ynsocial_ads');
+    
+    <?php if($this->pos > 0 ) :?>
+     if($$('#activity-feed > li:nth-child(<?php echo $this->pos ?>;)')[0] !== undefined)
+     {
+         ads_html.inject( $$('#activity-feed > li:nth-child(<?php echo $this->pos ?>;)')[0], 'after');
+         }
+    <?php else :?>
+     if($$('#activity-feed > li:nth-child(1)')[0] !== undefined)
+     {
+     console.log($$('#activity-feed > li:nth-child(1)')[0]);
+         ads_html.inject( $$('#activity-feed > li:nth-child(1)')[0], 'before');
+        }
+    <?php endif;?>
+    
 });
 
 window.addEvent('load', function() {
