@@ -32,9 +32,13 @@ class Core_IndexController extends Core_Controller_Action_Standard {
 		if (!Engine_Api::_() -> getApi('settings', 'core') -> core_general_portal && !$this -> _helper -> requireUser() -> isValid()) {
 			return;
 		}
+		
+		$this -> _helper -> layout -> disableLayout();
 
 		// Render
-		$this -> _helper -> content -> setNoRender() -> setEnabled();
+		//$this -> _helper -> content 
+			//-> setNoRender() 
+		//	-> setEnabled();
 	}
 
 	public function howItWorksAction() {

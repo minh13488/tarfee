@@ -5721,7 +5721,8 @@ body[id^=global_page_ynsocialads],
 #global_page_user-player-card-view,
 #global_page_payment-settings-index,
 #global_page_sladvsubscription-settings-index,
-#global_page_slprofileverify-index-setting-verification
+#global_page_slprofileverify-index-setting-verification,
+#layout_page_user_signup_index
 {
 	#global_wrapper
 	{

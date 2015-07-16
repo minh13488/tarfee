@@ -7,7 +7,6 @@
         		));
             ?>
 	</li>
-	<?php $count++;?>
 <?php endforeach;?>
 </ul>
 <script type="text/javascript">

@@ -18,7 +18,6 @@ window.addEvent('domready', function()
     <?php else :?>
      if($$('#activity-feed > li:nth-child(1)')[0] !== undefined)
      {
-     console.log($$('#activity-feed > li:nth-child(1)')[0]);
          ads_html.inject( $$('#activity-feed > li:nth-child(1)')[0], 'before');
         }
     <?php endif;?>
