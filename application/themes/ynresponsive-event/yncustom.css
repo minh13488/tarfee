@@ -2165,15 +2165,15 @@ body#global_page_user-profile-index {
 						overflow: hidden;
 						padding-top: 2px;
 						
-						span a.eye-on{
+						span a.eye_on{
 				 			border: 2px solid $theme_link_color !important;
-				 			color: $theme_font_color !important;
-				 			background: transparent !important;
+				 			color: $theme_font_color;
+				 			background: transparent;
 						}
 
-				 		span a.eye_on{
-				 			color: #fff;
-				 			background: $theme_link_color;
+				 		span a.eye-on{
+				 			color: #fff !important;
+				 			background: $theme_link_color !important;
 				 			border: 2px solid $theme_link_color;
 				 		}
 					}

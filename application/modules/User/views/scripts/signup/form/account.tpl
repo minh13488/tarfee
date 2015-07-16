@@ -9,7 +9,7 @@
 <script type="text/javascript">
 //<![CDATA[
   window.addEvent('load', function() {
-    if( $('username') && $('profile_address') ) {
+    if( $('username') && $('profile_address') && $('profile_address').length > 0) {
       $('profile_address').innerHTML = $('profile_address')
         .innerHTML
         .replace('<?php echo /*$this->translate(*/'yourname'/*)*/?>',
