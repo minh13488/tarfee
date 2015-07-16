@@ -111,7 +111,7 @@
 			<div class="plan-table">
 				<table cellpadding="0" cellspacing="1px">
 					<tr>
-						<th class="title-width"><?php echo $this->translate('Choose Plan');?></th>
+						<th class="title-width"></th>
 						<?php $index = 0;?>
 						<?php foreach ($levels as $id=>$level):?>
 							<th class="detail-width" style="background-color: <?php if ($index % 2 == 0) echo $settings['odd_header_column_color']; else echo $settings['even_header_column_color'];$index++;?>;<?php echo $api->getStyle('header');?>">
