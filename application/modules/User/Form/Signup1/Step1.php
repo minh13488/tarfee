@@ -113,7 +113,7 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
     ));
     
 	 $this->addElement('Button', 'cancel', array(
-        'label' => 'skip',
+        'label' => 'cancel',
         'link' => true,
         'href' => '',
         'onclick' => 'parent.Smoothbox.close();',
