@@ -4787,12 +4787,25 @@ body#global_page_advgroup-profile-index{
 }
 
 
+#demo-upload{
+	background-color: $theme_link_color;
+	color: #fff !important;
+	padding: 10px 15px;
+	text-transform: lowercase;
+	margin: 0 10px;
+	text-align: center;
+	font-weight: bold;
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+	margin-top: 10px;
+	display: block;
+	background-image: none !important;
+	font-size: inherit !important; 
+	width: 105px;
+	margin-left: 0;
 
-
-
-
-
-
-
-
-
+	&:hover{
+		background-color: $theme_link_color_hover;
+	}
+}

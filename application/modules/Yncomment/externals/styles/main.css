@@ -59,8 +59,19 @@ br{
 	display: inline-table;
 	margin-bottom: 5px;
 }
-.yncomment_float_left {
+.yncomment_float_left{
 	float: left;
+}
+
+.yncomment_float_left a{
+	border: 2px solid $theme_link_color;
+	color: $theme_font_color !important;
+	padding: 5px 10px;
+	border-radius: 5px;
+}
+.yncomment_float_left a:hover{
+	background: $theme_link_color;
+	color: #fff !important;
 }
 .yncomment_float_right {
 	float: right;

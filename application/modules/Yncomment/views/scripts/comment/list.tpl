@@ -27,7 +27,9 @@
 	      <?php else: ?>
 	        <a href="javascript:void(0);" onclick="en4.yncomment.yncomments.like('<?php echo
 	        $this->subject->getType() ?>', '<?php echo $this->subject->getIdentity() ?>','', '<?php echo $this->order ?>', '<?php echo $this->parent_comment_id ?>', 'parent', '<?php echo $this->taggingContent ?>', '<?php echo $this->showComposerOptions ?>', '<?php echo $this->showAsNested ?>', '<?php echo $this->showAsLike ?>', '<?php echo $this->showDislikeUsers ?>', '<?php echo $this->showLikeWithoutIcon ?>', '<?php echo $this->showLikeWithoutIconInReplies ?>');">
-	            <?php if(!$this->showLikeWithoutIcon):?><i class="fa fa-thumbs-up ynfontawesome"></i><?php endif; ?>
+	            <?php if(!$this->showLikeWithoutIcon):?>
+                <i class="fa fa-thumbs-up ynfontawesome"></i>
+              <?php endif; ?>
 	            <?php echo $this->translate('Like') ?>
 	        </a>
 	        <div id="like_comments_<?php echo $this->subject->getGuid();?>" style="display:none;"></div>
@@ -42,10 +44,9 @@
 	            <b class="yn_like_dislike"><?php echo  $this->translate('Like') ?></b>
 			<?php else:?>
 				<a id="like_comments_<?php echo $this->subject->getGuid();?>" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>">
-					<i class="fa fa-thumbs-up ynfontawesome"></i> <?php echo $this->translate('Like') ?>
+					<i class="fa fa-thumbs-up ynfontawesome"></i> <?php //echo $this->translate('Like') ?>
 				</a>
 			<?php endif;?>
-			&nbsp;&middot;&nbsp; 
     		<!--WITHOUT ICON-->
     		<?php if($this->showLikeWithoutIcon):?>
 				<a id="writecomments_<?php echo $this->subject->getGuid();?>" style="display:inline-block;" href="<?php echo $this -> url(array('return_url' => '64-' . base64_encode($_SERVER['REQUEST_URI'])), 'user_login');?>>
