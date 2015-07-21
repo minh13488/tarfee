@@ -47,11 +47,13 @@ class Ynvideo_Widget_MainPageVideosController extends Engine_Content_Widget_Abst
 		{
 			$select -> where("video_id NOT IN (?)", $arrNot);
 		}
+		$select -> where('search = ?', 1) -> where('status = ?', 1);
 		$select1 = $table->select() -> from($table -> info('name'), array("*", new Zend_Db_Expr ("'0' AS order_type")));
 		if($arrNot)
 		{
 			$select1 -> where("video_id NOT IN (?)", $arrNot);
 		}
+		$select1 -> where('search = ?', 1) -> where('status = ?', 1);
 		$selectUnion = $db -> select() -> distinct()
 		    -> union(array($select, $select1))
 		    -> order("order_type DESC")

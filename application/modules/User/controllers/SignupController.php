@@ -175,6 +175,7 @@ class User_SignupController extends Core_Controller_Action_Standard
   
   public function indexAction()
   {
+	  return $this->_helper->_redirector->gotoRoute(array(), 'default', true);
     // Render
     $this->_helper->content
         //->setNoRender()
