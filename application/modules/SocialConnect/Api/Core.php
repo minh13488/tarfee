@@ -4,7 +4,7 @@ class SocialConnect_Api_Core
 {
 	public function getCentralServiceUrl()
 	{
-		return 'http://www.tarfee.com/openid/connect/se4.php';
+		return 'http://tarfee.com/openid/connect/se4.php';
 	}
 	
 	/**

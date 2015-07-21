@@ -70,7 +70,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 					$videoTbName = $videoTable -> info('name');
 					$select -> joinLeft($videoTbName, "$videoTbName.video_id = $table_name.id", "")
 							-> where("$videoTbName.video_id IN (?)", $video_ids)
-							-> where("$videoTbName.owner_id IN (?)", $ids);
+							-> where("$videoTbName.owner_id IN (?)", $ids)
+							-> where("$videoTbName.search = ?", 1) 
+							-> where("$videoTbName.status = ?", 1);
 				}
 				else
 				{
@@ -79,7 +81,9 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 					$videoTbName = $videoTable -> info('name');
 					$select -> joinLeft($videoTbName, "$videoTbName.video_id = $table_name.id", "")
 							-> where("$videoTbName.parent_type = ?", $parent_type)
-							-> where("$videoTbName.parent_id = ?", $parent_id);
+							-> where("$videoTbName.parent_id = ?", $parent_id)
+							-> where("$videoTbName.search = ?", 1) 
+							-> where("$videoTbName.status = ?", 1);
 				}
 			}
 			else if(in_array('event', $types))
