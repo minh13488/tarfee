@@ -77,25 +77,21 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			'parent_type' => $parent_type,
 			'parent_id' => $parent_id
 		));
-		/*
-		$categoryElement = $form -> getElement('category_id');
-		$categoryElement -> addMultiOption(0, '');
-		foreach ($categories as $category)
-		{
-			if ($category -> parent_id == 0)
-			{
-				$categoryElement -> addMultiOption($category -> getIdentity(), $category -> category_name);
-			}
-		}
-
-		$subCategoryElement = $form -> getElement('subcategory_id');
-		$subCategoryElement -> setRegisterInArrayValidator(false);
-		 * 
-		 */
-
+		$this -> view -> parent_type = $parent_type;
+		
 		if ($this -> _getParam('type', false))
 		{
 			$form -> getElement('type') -> setValue($this -> _getParam('type'));
+		}
+		
+		if ($this -> _getParam('parent_type', false))
+		{
+			$form -> getElement('parent_type') -> setValue($this -> _getParam('parent_type'));
+		}
+		
+		if ($parent_id && $parent_type == 'user_playercard')
+		{
+			$form -> getElement('playercard_id') -> setValue($parent_id);
 		}
 
 		if (!$this -> getRequest() -> isPost())
@@ -106,22 +102,33 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		if (!$form -> isValid($post))
 		{
 			$values = $form -> getValues('url');
-			//$form->set = $values['url'];
-			// set title and description using getinfromation() here?
 			return;
 		}
 		// Process
 		$values = $form -> getValues();
-		$values['parent_type'] = $parent_type;
 		$values['parent_id'] = $parent_id;
+		if($values['parent_type'] == 'user_playercard')
+		{
+			$values['parent_id'] = $values['playercard_id'];
+		}
+		else if($values['parent_type'] == 'group')
+		{
+			$group = Engine_Api::_() -> advgroup() -> getGroupUser($viewer);
+			$values['parent_id'] = $group -> getIdentity();
+		}
+		else if($values['parent_type'] == 'user_library')
+		{
+			$values['parent_id'] = $viewer -> getIdentity();
+		}
+			
 		$values['owner_type'] = 'user';
 		$values['owner_id'] = $viewer -> getIdentity();
 		if ($values['subcategory_id'] == 0)
 		{
 			$values['subcategory_id'] = $values['category_id'];
 		}
-
 		$insert_action = false;
+		
 
 		$db = Engine_Api::_() -> getDbtable('videos', 'ynvideo') -> getAdapter();
 		$db -> beginTransaction();
@@ -261,10 +268,17 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 				$auth -> setAllowed($video, $role, 'comment', ($i <= $commentMax));
 			}
 			
-			
-			// Add tags
-			$tags = preg_split('/[,]+/', $values['tags']);
-			$video -> tags() -> addTagMaps($viewer, $tags);
+			if(!empty($values['clubs']))
+			{
+				$clubMapping = Engine_Api::_() -> getDbTable('mappingvideos', 'advgroup');
+				foreach($values['clubs'] as $club)
+				{
+				 	$row = $clubMapping -> createRow();
+					$row -> video_id =  $video -> getIdentity();
+					$row -> club_id =  $club;
+					$row -> save();
+				}
+			}
 
 			$db -> commit();
 		}
@@ -283,7 +297,7 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 				if ($parent_type == 'group')
 				{
 				}
-				elseif ($parent_type == 'event')
+				elseif ($video -> parent_type == 'event')
 				{
 					$item = Engine_Api::_()->getItem($parent_type, $parent_id);
 					if ($item)
@@ -313,15 +327,21 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			$db -> rollBack();
 			throw $e;
 		}
-		if ($video -> type == Ynvideo_Plugin_Factory::getUploadedType())
-		{
-			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'manage'), 'video_general', true);
-		}
-		else
+		
 		if ($video -> parent_type == 'group')
 		{
 			$group = $video -> getParent('group');
 			$this -> _redirectCustom($group);
+		}
+		else
+		if ($video -> parent_type == 'user_playercard')
+		{
+			$user_playercard = Engine_Api::_() -> getItem($video -> parent_type, $video -> parent_id);
+			$this -> _redirectCustom($user_playercard);
+		}
+		else if ($video -> type == Ynvideo_Plugin_Factory::getUploadedType())
+		{
+			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'manage'), 'video_general', true);
 		}
 		else
 		{
@@ -674,7 +694,17 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			'parent_type' => $video -> parent_type,
 			'parent_id' => $video -> parent_id
 		));
-
+		$mappingTable = Engine_Api::_() -> getDbTable('mappingvideos', 'advgroup');
+		$select = $mappingTable -> select() -> where("video_id = ?", $video_id);
+		$clubs = $mappingTable -> fetchAll($select);
+		$clubArray = array();
+		foreach($clubs as $club)
+		{
+			$clubArray[] = $club -> club_id;
+		}
+		$form -> clubs -> setValue($clubArray);
+		$form -> removeElement('parent_type');
+		$form -> removeElement('playercard_id');
 		if (!$this -> getRequest() -> isPost())
 		{
 			$this -> view -> status = false;
@@ -689,8 +719,6 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			return;
 		}
 
-		$favoriteTable = Engine_Api::_() -> getDbTable('favorites', 'ynvideo');
-		// Process
 		$db = Engine_Api::_() -> getDbtable('videos', 'ynvideo') -> getAdapter();
 		$db -> beginTransaction();
 		try
@@ -703,6 +731,20 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			if (!empty($values['photo']))
 			{
 				$video -> setPhoto($form -> photo);
+			}
+			
+			$clubMapping = Engine_Api::_() -> getDbTable('mappingvideos', 'advgroup');
+			$clubMapping -> delete(array('video_id' => $video->getIdentity()));
+			
+			if(!empty($values['clubs']))
+			{
+				foreach($values['clubs'] as $club)
+				{
+				 	$row = $clubMapping -> createRow();
+					$row -> video_id =  $video -> getIdentity();
+					$row -> club_id =  $club;
+					$row -> save();
+				}
 			}
 			
 			// CREATE AUTH STUFF HERE
@@ -786,7 +828,7 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		}
 		elseif($video -> parent_type == 'user_playercard')
 		{
-			$user_playercard = $video -> getParent('group');
+			$user_playercard = Engine_Api::_() -> getItem($video -> parent_type, $video -> parent_id);
 			$this -> _redirectCustom($user_playercard);
 		}
 		elseif($video -> parent_type == 'user_library') {
@@ -1067,11 +1109,29 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		try
 		{
 			$viewer = Engine_Api::_() -> user() -> getViewer();
+			
 			$values['owner_id'] = $viewer -> getIdentity();
-
+			$parent_id = 0;
+			$parent_type = $this -> _getParam('parent_type');
+			if($parent_type == 'user_playercard')
+			{
+				$parent_id = $this -> _getParam('playerId', 0);
+			}
+			else if($parent_type == 'group')
+			{
+				$group = Engine_Api::_() -> advgroup() -> getGroupUser($viewer);
+				$parent_id = $group -> getIdentity();
+			}
+			else if($parent_type == 'user_library')
+			{
+				$parent_id = $viewer -> getIdentity();
+			}
+			
 			$params = array(
 				'owner_type' => 'user',
-				'owner_id' => $viewer -> getIdentity()
+				'owner_id' => $viewer -> getIdentity(),
+				'parent_type' => $parent_type,
+				'parent_id' => $parent_id
 			);
 			$video = Engine_Api::_() -> ynvideo() -> createVideo($params, $_FILES['fileToUpload'], $values);
 

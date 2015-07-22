@@ -292,7 +292,7 @@ class User_Plugin_Core
 		$item = Engine_Api::_()->getItem($payload -> getType(), $payload -> getIdentity());
 		$user = Engine_Api::_()->user()->getViewer();
 		$club = $user->getClub();
-		if (in_array($payload -> getType(), $availableType) && Engine_Api::_()->user()->canTransfer($item) && ($item->parent_type != 'group')) {
+		if ($payload -> getType() != 'video' && in_array($payload -> getType(), $availableType) && Engine_Api::_()->user()->canTransfer($item) && ($item->parent_type != 'group')) {
 			$item->parent_type = 'group';
 			$item->parent_id = $club->getIdentity();
 			$item->save();
@@ -302,6 +302,12 @@ class User_Plugin_Core
 			
 		$subject_id = $library_id =  $request -> getParam("subject_id", null);
 		$typeOwner = $request -> getParam("parent_type", null);
+		
+		if($payload -> getType() == 'video')
+		{
+			$subject_id = $library_id =  $item->parent_id;
+			$typeOwner = $item->parent_type;
+		}
 		
 		if ($typeOwner == 'user_library' || $typeOwner == 'user_playercard')
 		{

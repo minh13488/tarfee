@@ -21,6 +21,7 @@
 	
     function uploadFile() 
     {
+    	
 	      var file_type = "";
 	      var file = document.getElementById('fileToUpload').files[0];
 		  if (file) {
@@ -45,6 +46,9 @@
 	      	return;
 	      }	
 	      
+	      var parent_type = $('parent_type').value;
+	      var playerId = $('playercard_id').value;
+	      
 	      jQuery('#demo-upload').fadeOut();
 	      jQuery('#posting').fadeIn();
 	      var fd = new FormData();
@@ -54,7 +58,7 @@
 	      xhr.addEventListener("load", uploadComplete, false);
 	      xhr.addEventListener("error", uploadFailed, false);
 	      xhr.addEventListener("abort", uploadCanceled, false);
-	      xhr.open("POST", "<?php echo $this->url(array('module' => 'ynvideo', 'controller' => 'index', 'action' => 'upload-video'), 'default')?>", true);
+	      xhr.open("POST", "<?php echo $this->url(array('module' => 'ynvideo', 'controller' => 'index', 'action' => 'upload-video'), 'default')?>/parent_type/"+ parent_type + "/playerId/" + playerId, true);
 	      xhr.send(fd);
     }
 
@@ -83,6 +87,8 @@
       {
           $('code').value=json.code;
           $('id').value=json.video_id;
+          $('posting').set('html', '<?php echo $this -> translate('Please wait we are encoding your video.')?>');
+          $('fileToUpload').value = '';
           $('form-upload').submit();
       } 
       else 

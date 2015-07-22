@@ -5691,6 +5691,7 @@ body[id^=global_page_ynevent] .layout_ynevent_list_most_time .tabs_alt.tabs_pare
 }
 #global_page_ynevent-profile-index,
 #global_page_ynvideo-index-create,
+#global_page_ynvideo-index-edit,
 #global_page_user-player-card-create,
 #global_page_ynevent-index-create,
 #global_page_tfcampaign-index-create,
@@ -5826,7 +5827,8 @@ body[id^=global_page_social-connect],
 #global_page_user-edit-style #global_content .global_form,
 #global_page_ynmember-edit-cover-photo #global_content .ynmember-container,
 #global_page_ynmember-edit-place #global_content .ynmember-container,
-#global_page_ynmember-edit-relationship #global_content .ynmember-container
+#global_page_ynmember-edit-relationship #global_content .ynmember-container,
+#global_page_ynvideo-index-edit #form-upload
 {
 	 padding: 15px;
 	 div

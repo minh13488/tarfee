@@ -32,6 +32,41 @@ class Ynvideo_Form_Video extends Engine_Form
 
 		$user = Engine_Api::_() -> user() -> getViewer();
 
+		$players = array();
+		$playerTable = Engine_Api::_() -> getDbTable('playercards', 'user');
+		$select = $playerTable -> select() 
+					-> where('user_id = ?', $user -> getIdentity())
+					-> order('first_name')
+					-> where('parent_type = ?', 'user');
+		foreach($playerTable -> fetchAll($select) as $player)
+		{
+			$players[$player -> playercard_id] = $player -> first_name . ' ' . $player -> last_name;
+		}
+		
+		$options['user_library'] = 'Library';
+		
+		if(Engine_Api::_() -> advgroup() -> getGroupUser($user))
+		{
+			$options['group'] = 'Club';
+		}
+		if(count($players))
+		{
+			$options['user_playercard'] = 'Player Cards';
+		}
+		
+		$this -> addElement('Select', 'parent_type', array(
+			'label' => 'Upload to',
+			'onchange' => "changeUploadTo(this.value)",
+			'multiOptions' => $options,
+			'value' => $this -> _parent_type
+		));
+		
+		
+		$this -> addElement('Select', 'playercard_id', array(
+			'label' => 'Player Card',
+			'multiOptions' => $players
+		));
+		
 		// Init name
 		$this -> addElement('Text', 'title', array(
 			'label' => 'Video Title',
@@ -44,17 +79,6 @@ class Ynvideo_Form_Video extends Engine_Form
 			'required' => (bool)Engine_Api::_()->getApi('settings', 'core')->getSetting('ynvideo.title_require', 1)
 		));
 		$this -> title -> setAttrib('required', (bool)Engine_Api::_()->getApi('settings', 'core')->getSetting('ynvideo.title_require', 1));
-		
-		// init tag
-		$this -> addElement('Text', 'tags', array(
-			'label' => 'Tags (Keywords)',
-			'description' => 'Separate tags with commas.',
-			'filters' => array(
-				'StripTags',
-				new Engine_Filter_Censor(),
-			)
-		));
-		$this -> tags -> getDecorator("Description") -> setOption("placement", "append");
 
 		// Init descriptions
 		$this -> addElement('Textarea', 'description', array(
@@ -67,21 +91,21 @@ class Ynvideo_Form_Video extends Engine_Form
 			),
 		));
 		
-		/*
-		$this -> addElement('Select', 'category_id', array(
-			'label' => 'Category',
-			'onchange' => "updateSubCategories(this.value)",
-		));
+		$clubFollowing = array();
+		$memTable = Engine_Api::_() -> getDbTable('membership', 'advgroup');
+		$select = $memTable -> select() -> from($memTable -> info ("name")) -> where('user_id = ?', $user -> getIdentity()) -> where('active = 1');
+		$clubs = $memTable -> fetchAll($select);
+		foreach ($clubs as $club) 
+		{
+			$club_id = $club -> resource_id;
+			$obClub = Engine_Api::_() -> getItem('group', $club_id);
+			$clubFollowing[$obClub -> getIdentity()] = $obClub -> getTitle();
+		}
 		
-
-		$this -> addElement('Select', 'subcategory_id', array('label' => 'Sub Category'));
-
-		// Init search
-		$this -> addElement('Checkbox', 'search', array(
-			'label' => "Show this video in search results",
-			'value' => 1,
+		$this -> addElement('Multiselect', 'clubs', array(
+			'label' => 'Club Tagging',
+			'multiOptions' => $clubFollowing
 		));
- 		*/
 		// View
 
 		if ($this -> _parent_type == 'group')
