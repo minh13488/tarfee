@@ -20,7 +20,8 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 		$select->from($table_name);
 		$select->setIntegrityCheck(false);
 		$select->joinLeft($sportmapTblName, "$sportmapTblName.item_id = $table_name.id and $sportmapTblName.item_type = $table_name.type", "");
-        $select->where ( "$table_name.type IN (?)",  $types );
+        if (!in_array('all', $types))
+        	$select->where ( "$table_name.type IN (?)",  $types );
         if (!in_array('all', $sports))
 			$select->where ( "$sportmapTblName.sport_id IN (?)",  $sports);
 		$select->group("$table_name.id");

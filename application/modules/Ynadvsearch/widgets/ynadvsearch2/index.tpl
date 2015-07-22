@@ -16,10 +16,14 @@
 	<div id="contentype-filter">
 		<h3><?php echo $this->translate('Content Type')?></h3>
 		<ul>
+			<li>
+				<input id="type-all" type="checkbox" name="type[]" <?php if (in_array('all', $this->type)) echo 'checked'?> class="type-checkbox type" value="all"/>
+				<label for="type-all"><?php echo $this->translate('all content types')?></label>
+			</li>
 			<?php $allowType = Engine_Api::_()->ynadvsearch()->getAllowSearchTypes();?>
 			<?php foreach($allowType as $key => $value):?>
 			<li>
-				<input id="type-<?php echo $key?>" type="checkbox" name="type[]" <?php if (in_array($key, $this->type)) echo 'checked'?> class="type-checkbox" value="<?php echo $key?>"/>
+				<input id="type-<?php echo $key?>" type="checkbox" name="type[]" <?php if (in_array($key, $this->type)) echo 'checked'?> class="type-checkbox type" value="<?php echo $key?>"/>
 				<label for="type-<?php echo $key?>"><?php echo $this->translate($value)?></label>
 			</li>
 			<?php endforeach; ?>
@@ -30,7 +34,7 @@
 		<ul>
 			<li>
 				<input id="sport-all" type="checkbox" name="sport[]" <?php if (in_array('all', $this->sport)) echo 'checked'?> class="sport-type-checkbox type-checkbox" value="all"/>
-				<label for="sport-all"><?php echo $this->translate('All Sport')?></label>
+				<label for="sport-all"><?php echo $this->translate('all sport types')?></label>
 			</li>
 			<?php $sports = Engine_Api::_()->getDbTable('sportcategories', 'user')->getCategoriesLevel1();?>
 			<?php foreach($sports as $sport):?>
@@ -393,6 +397,23 @@ jQuery.ui.slider.prototype.widgetEventPrefix = 'slider';
 			else {
 				if (!$(this).is(':checked')) {
 					$('#sport-all').prop('checked', false);
+				}
+			}
+		});
+		
+		$('.type-checkbox.type').on('click', function() {
+			var id = $(this).attr('id');
+			if (id == 'type-all') {
+				if ($(this).is(':checked')) {
+					$('.type-checkbox.type').prop('checked', true);
+				}
+				else {
+					$('.type-checkbox.type').prop('checked', false);
+				}
+			}
+			else {
+				if (!$(this).is(':checked')) {
+					$('#type-all').prop('checked', false);
 				}
 			}
 		});
