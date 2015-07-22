@@ -1075,7 +1075,7 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			);
 			$video = Engine_Api::_() -> ynvideo() -> createVideo($params, $_FILES['fileToUpload'], $values);
 
-			$status = true;
+			$status = 1;
 			$name = $_FILES['fileToUpload']['name'];
 			$code = $video -> code;
 			$video_id = $video -> video_id;

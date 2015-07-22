@@ -440,7 +440,6 @@ class Ynvideo_Api_Core extends Core_Api_Abstract {
                 'parent_type' => $video->getType(),
                 'user_id' => $video->owner_id,
                 ));
-						
 						// Make sure FFMPEG path is set
 						$ffmpeg_path = Engine_Api::_() -> getApi('settings', 'core') -> ynvideo_ffmpeg_path;
 						if (!$ffmpeg_path)
@@ -532,7 +531,6 @@ class Ynvideo_Api_Core extends Core_Api_Abstract {
 						 // Remove temporary file
             @unlink($file['tmp_name']);
 						@unlink($originalPath);
-						
             $video->file_id = $storageObject->file_id;
             $video->save();
 						

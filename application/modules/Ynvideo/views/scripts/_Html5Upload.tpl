@@ -45,7 +45,8 @@
 	      	return;
 	      }	
 	      
-	      document.getElementById('demo-upload').style.display = 'none';
+	      jQuery('#demo-upload').fadeOut();
+	      jQuery('#posting').fadeIn();
 	      var fd = new FormData();
 	      fd.append('fileToUpload', document.getElementById('fileToUpload').files[0]);
 	      var xhr = new XMLHttpRequest();
@@ -130,7 +131,8 @@
      		<span id="progressNumber" class="progress-text">0%</span>
      	</div>
     <div class="button_upload">
-      <a class="buttonlink" href="javascript:uploadFile();" id="demo-upload" style="display: none; background-image: url(./application/modules/Video/externals/images/new.png);">Post Video</a>
+      <p id="posting" style="display: none; color: #B4AAAA"><?php echo $this -> translate("Posting... please wait.")?></p>
+      <a class="buttonlink" href="javascript:uploadFile();" id="demo-upload" style="display: none; background-image: url(./application/modules/Video/externals/images/new.png);"><?php echo $this -> translate("Post Video")?></a>
     </div>
   </div>
  </div>
