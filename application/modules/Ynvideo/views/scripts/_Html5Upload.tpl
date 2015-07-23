@@ -21,38 +21,45 @@
 	
     function uploadFile() 
     {
-      var file_type = "";
-      var file = document.getElementById('fileToUpload').files[0];
-	  if (file) {
-	        var file_type = file.type;
-	  } else {
-	  	return;
-	  }
-      if(file_type.indexOf("video") < 0) {
-      	if(!$('error-type-video')) 
-      	{
-      		var div = new Element('div', {
-		       'html': '<?php echo $this -> translate('Invalid File Video Type');?>',
-		       'id': 'error-type-video',
-		        styles: {
-			        'color': 'red',
-			        'font-weight': 'bold',
-			    },
-		    });
-	      	$$('.select_file').grab(div,'before');
-      	}
-      	return;
-      }	
-      	
-      var fd = new FormData();
-      fd.append('fileToUpload', document.getElementById('fileToUpload').files[0]);
-      var xhr = new XMLHttpRequest();
-      xhr.upload.addEventListener("progress", uploadProgress, false);
-      xhr.addEventListener("load", uploadComplete, false);
-      xhr.addEventListener("error", uploadFailed, false);
-      xhr.addEventListener("abort", uploadCanceled, false);
-      xhr.open("POST", "<?php echo $this->url(array('module' => 'ynvideo', 'controller' => 'index', 'action' => 'upload-video'), 'default')?>", true);
-      xhr.send(fd);
+    	
+	      var file_type = "";
+	      var file = document.getElementById('fileToUpload').files[0];
+		  if (file) {
+		        var file_type = file.type;
+		  } else {
+		  	return;
+		  }
+	      if(file_type.indexOf("video") < 0) 
+	      {
+	      	if(!$('error-type-video')) 
+	      	{
+	      		var div = new Element('div', {
+			       'html': '<?php echo $this -> translate('Invalid File Video Type');?>',
+			       'id': 'error-type-video',
+			        styles: {
+				        'color': 'red',
+				        'font-weight': 'bold',
+				    },
+			    });
+		      	$$('.select_file').grab(div,'before');
+	      	}
+	      	return;
+	      }	
+	      
+	      var parent_type = $('parent_type').value;
+	      var playerId = $('playercard_id').value;
+	      
+	      jQuery('#demo-upload').fadeOut();
+	      jQuery('#posting').fadeIn();
+	      var fd = new FormData();
+	      fd.append('fileToUpload', document.getElementById('fileToUpload').files[0]);
+	      var xhr = new XMLHttpRequest();
+	      xhr.upload.addEventListener("progress", uploadProgress, false);
+	      xhr.addEventListener("load", uploadComplete, false);
+	      xhr.addEventListener("error", uploadFailed, false);
+	      xhr.addEventListener("abort", uploadCanceled, false);
+	      xhr.open("POST", "<?php echo $this->url(array('module' => 'ynvideo', 'controller' => 'index', 'action' => 'upload-video'), 'default')?>/parent_type/"+ parent_type + "/playerId/" + playerId, true);
+	      xhr.send(fd);
     }
 
     function uploadProgress(evt) 
@@ -80,6 +87,8 @@
       {
           $('code').value=json.code;
           $('id').value=json.video_id;
+          $('posting').set('html', '<?php echo $this -> translate('Please wait we are encoding your video.')?>');
+          $('fileToUpload').value = '';
           $('form-upload').submit();
       } 
       else 
@@ -127,8 +136,9 @@
 	    	<img src="./externals/fancyupload/assets/progress-bar/bar.gif" id="progress" class="progress overall-progress" title="0%" style="background-position: -400px 0px;">
      		<span id="progressNumber" class="progress-text">0%</span>
      	</div>
-    <div style="width: 100px">
-      <a class="buttonlink" href="javascript:uploadFile();" id="demo-upload" style="display: none; background-image: url(./application/modules/Video/externals/images/new.png);">Post Video</a>
+    <div class="button_upload">
+      <p id="posting" style="display: none; color: #B4AAAA"><?php echo $this -> translate("Posting... please wait.")?></p>
+      <a class="buttonlink" href="javascript:uploadFile();" id="demo-upload" style="display: none; background-image: url(./application/modules/Video/externals/images/new.png);"><?php echo $this -> translate("Post Video")?></a>
     </div>
   </div>
  </div>

@@ -5691,6 +5691,7 @@ body[id^=global_page_ynevent] .layout_ynevent_list_most_time .tabs_alt.tabs_pare
 }
 #global_page_ynevent-profile-index,
 #global_page_ynvideo-index-create,
+#global_page_ynvideo-index-edit,
 #global_page_user-player-card-create,
 #global_page_ynevent-index-create,
 #global_page_tfcampaign-index-create,
@@ -5714,6 +5715,7 @@ body[id^=global_page_user-edit-],
 #global_page_ynmember-edit-cover-photo,
 #global_page_messages-messages-view,
 body[id^=global_page_ynsocialads],
+body[id^=global_page_social-connect],
 #global_page_user-player-card-edit,
 #global_page_core-help-terms,
 #global_page_advgroup-group-edit,
@@ -5722,7 +5724,9 @@ body[id^=global_page_ynsocialads],
 #global_page_payment-settings-index,
 #global_page_sladvsubscription-settings-index,
 #global_page_slprofileverify-index-setting-verification,
-#layout_page_user_signup_index
+#layout_page_user_signup_index,
+#global_page_user-auth-forgot,
+#global_page_user-signup-confirm
 {
 	#global_wrapper
 	{
@@ -5802,6 +5806,11 @@ body[id^=global_page_ynsocialads],
   	padding: 15px;
   	margin: 15px;
 }
+#global_page_user-signup-confirm #global_content
+{
+	background-color: white;
+  	padding: 15px;
+}
 #global_page_social-connect-index-account-linking #global_content p
 {
 	display: none;
@@ -5818,7 +5827,8 @@ body[id^=global_page_ynsocialads],
 #global_page_user-edit-style #global_content .global_form,
 #global_page_ynmember-edit-cover-photo #global_content .ynmember-container,
 #global_page_ynmember-edit-place #global_content .ynmember-container,
-#global_page_ynmember-edit-relationship #global_content .ynmember-container
+#global_page_ynmember-edit-relationship #global_content .ynmember-container,
+#global_page_ynvideo-index-edit #form-upload
 {
 	 padding: 15px;
 	 div
@@ -5846,6 +5856,8 @@ body[id^=global_page_ynsocialads],
 #global_page_user-player-card-create .global_form,
 #global_page_user-player-card-edit .global_form,
 body[id^=global_page_ynsocialads] .layout_top,
+body[id^=global_page_social-connect] .layout-top,
+body[id^=global_page_social-connect] .global_form,
 #global_page_slprofileverify-index-setting-verification .layout_top
 {
 	  max-width: 1170px;
@@ -5857,7 +5869,8 @@ body[id^=global_page_ynsocialads] .layout_top,
   		padding: 0;
 	  }
 }
-body[id^=global_page_ynsocialads] #global_content
+body[id^=global_page_ynsocialads] #global_content,
+body[id^=global_page_social-connect] #global_content,
 {
 	margin-bottom: 15px;
 }

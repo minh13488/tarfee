@@ -309,7 +309,7 @@ class Ynvideo_Plugin_Job_Encode extends Core_Plugin_Job_Abstract
                     $thumbFileRowLarge = Engine_Api::_() -> storage() -> create($thumbPathLarge, $params);
                     $thumbFileRow = Engine_Api::_() -> storage() -> create($thumbPath, $params);
                 }
-
+				
                 $db -> commit();
             }
             catch (Exception $e)
@@ -342,7 +342,7 @@ class Ynvideo_Plugin_Job_Encode extends Core_Plugin_Job_Abstract
                     'message_link' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'manage'), 'video_general', true),
                 ));
 
-                throw $e;
+                //throw $e;
                 // throw
             }
 
@@ -357,6 +357,9 @@ class Ynvideo_Plugin_Job_Encode extends Core_Plugin_Job_Abstract
             $video -> duration = $duration;
             $video -> status = 1;
             $video -> save();
+			
+			// notify the owner
+            Engine_Api::_() -> getDbtable('notifications', 'activity') -> addNotification($owner, $owner, $video, 'ynvideo_processed');
 
             // delete the files from temp dir
             unlink($originalPath);
@@ -391,15 +394,12 @@ class Ynvideo_Plugin_Job_Encode extends Core_Plugin_Job_Abstract
                     $actionsTable -> attachActivity($action, $video);
                 }
 
-                // notify the owner
-                Engine_Api::_() -> getDbtable('notifications', 'activity') -> addNotification($owner, $owner, $video, 'ynvideo_processed');
-
                 $db -> commit();
             }
             catch (Exception $e)
             {
                 $db -> rollBack();
-                throw $e;
+                //throw $e;
                 // throw
             }
         }

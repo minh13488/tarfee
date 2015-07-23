@@ -65,24 +65,25 @@ white-space: normal;
       </div>
   </li>
 </ul>
+
+<div class="ynblogs_browse_options">
+<div class="blog_favorite" id = "favourite_id">
+	<?php if(!$this -> blog -> checkFavourite()):?>
+		<a href="javascript:;" onclick="favourite_blog()"><i class="fa fa-heart-o fa-lg"></i> <?php //echo $this -> translate("Favourite") ?></a>
+	<?php else:?>
+		<a href="javascript:;" style="background:#ff6633;color:#fff !important" onclick="unfavourite_blog()"><i class="fa fa-heart fa-lg"></i> <?php //echo $this->translate('Unfavourite')?></a>
+	<?php endif;?>
+</div>
+
+<!-- favourite-->
+<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this->blog->getGuid()),'default', true);?>
+<a href="javascript:;" onclick="openPopup('<?php echo $url?>')"><i class="fa fa-flag fa-lg"></i> <?php //echo $this->translate("Report")?></a>
+</div>
+
  <!-- Add-This Button BEGIN -->
 <script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
 <div class="addthis_sharing_toolbox"></div>
  <!-- Add-This Button END -->
- <br>
-<div class="ynblogs_browse_options">
-<span class="blog_favorite" id = "favourite_id">
-	<?php if(!$this -> blog -> checkFavourite()):?>
-		<a href="javascript:;" onclick="favourite_blog()"><i class="fa fa-heart-o"></i> <?php echo $this -> translate("Favourite") ?></a>
-	<?php else:?>
-		<a href="javascript:;" onclick="unfavourite_blog()"><i class="fa fa-heart"></i> <?php echo $this->translate('Unfavourite')?></a>
-	<?php endif;?>
-</span>
-
-<!-- favourite-->
-<?php $url = $this->url(array('module'=> 'core', 'controller' => 'report', 'action' => 'create', 'subject' => $this->blog->getGuid()),'default', true);?>
-<a href="javascript:;" onclick="openPopup('<?php echo $url?>')"><i class="fa fa-flag"></i> <?php echo $this->translate("Report")?></a>
-</div>
 
 <script type="text/javascript">
 	function openPopup(url)
@@ -108,7 +109,7 @@ white-space: normal;
             'onComplete':function(responseObject)
             {  
                 obj = document.getElementById('favourite_id');
-                obj.innerHTML = '<a href="javascript:;" onclick="unfavourite_blog()">' + '<i class="fa fa-heart"></i> <?php echo $this->translate("Unfavourite")?>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;"  style="background:#ff6633;color:#fff !important" onclick="unfavourite_blog()">' + '<i class="fa fa-heart fa-lg"></i>' + '</a>';
             }
         });
         request.send();  
@@ -125,7 +126,7 @@ white-space: normal;
             'onComplete':function(responseObject)
             {  
                 obj = document.getElementById('favourite_id');
-                obj.innerHTML = '<a href="javascript:;" onclick="favourite_blog()">' + '<i class="fa fa-heart-o"></i> <?php echo $this->translate("Favourite")?>' + '</a>';
+                obj.innerHTML = '<a href="javascript:;" onclick="favourite_blog()">' + '<i class="fa fa-heart-o fa-lg"></i>' + '</a>';
             }
         });
         request.send();  

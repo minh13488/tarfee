@@ -260,6 +260,23 @@ $this->headScript()
             }
         });
     });
+    var changeUploadTo = function(value)
+    {
+    	if(value == 'user_playercard')
+    	{
+    		 $('playercard_id-wrapper').show();
+    	}
+    	else
+    	{
+    		 $('playercard_id-wrapper').hide();
+    	}
+    }
+    window.addEvent('domready', function()
+    {
+    	<?php if($this -> parent_type != 'user_playercard'):?>
+        	$('playercard_id-wrapper').hide();
+        <?php endif;?>
+    });
 </script>
 <?php if (($this->current_count >= $this->quota) && !empty($this->quota)): ?>
     <div class="tip">

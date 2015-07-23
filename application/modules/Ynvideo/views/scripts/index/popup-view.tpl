@@ -145,7 +145,7 @@ endif;
             <?php
             $poster = $this->video->getOwner();
 	            if ($poster) {
-	                echo $this->htmlLink($poster, $poster->getTitle());
+	                echo $this->htmlLink($poster, $poster->getTitle(), array('target' => '_parent'));
 	            }
             ?>
         </div>
