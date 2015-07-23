@@ -141,5 +141,10 @@ class Payment_Plugin_Signup_Subscription extends Core_Plugin_FormSequence_Abstra
     $step_row = $step_table->fetchRow($step_table->select()->where('class = ?', 'Payment_Plugin_Signup_Subscription'));
     $step_row->enable = $form->getValue('enable');
     $step_row->save();
+	
+	$step_table = Engine_Api::_()->getDbtable('signup1', 'user');
+    $step_row = $step_table->fetchRow($step_table->select()->where('class = ?', 'Payment_Plugin_Signup1_Subscription'));
+    $step_row->enable = $form->getValue('enable');
+    $step_row->save();
   }
 }
