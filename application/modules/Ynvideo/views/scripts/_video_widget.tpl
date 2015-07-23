@@ -33,7 +33,7 @@
     <div class="owner">
         <?php
         $owner = $this->video->getOwner();
-        echo $this->translate('By %1$s', $this->htmlLink($owner->getHref(), $owner->getTitle()));
+        echo $this->translate('By %1$s', $this->htmlLink($owner->getHref(), $owner->getTitle(), array('target' => '_parent')));
         ?>
     </div>
     <div class="ynvideo_view_count">

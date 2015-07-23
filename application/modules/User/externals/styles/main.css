@@ -1954,7 +1954,8 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
             .avatar{
                 img{
                     width: 100%;
-                    max-width: 100%
+                    max-width: 100%;
+                    height: 100%;
                 }
             }
         }

@@ -219,6 +219,12 @@ class User_Plugin_Core
 			$view = Zend_Registry::get('Zend_View');
 			$subject_id =  $request -> getParam("subject_id", null);
 			$typeOwner = $request -> getParam("parent_type", null);
+			$item = Engine_Api::_()->getItem($payload -> getType(), $payload -> getIdentity());
+			if($payload -> getType() == 'video')
+			{
+				$subject_id = $library_id =  $item->parent_id;
+				$typeOwner = $item->parent_type;
+			}
 			
 			if ($typeOwner == 'user_library' || $typeOwner == 'user_playercard')
 			{
