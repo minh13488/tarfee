@@ -330,15 +330,22 @@ ynfbpp.pt = [
 function(href) {
 	reg = new RegExp("Tarfee1/([^\/]+)$", "i");
 	match = href.match(reg);
-	if(match != null && match != undefined) {
-		return {
-			match_id : decodeURIComponent(match[1]),
-			match_type : 'user'
+	if(match != null && match != undefined) 
+	{
+		var notAccepted = ['admin','index','groups','members','invite','videos','messages','login','logout','search','activity','annoucement','like','help','pages','report','link','tag','sitemap','utility',
+				'widget','comment','confirm','cross-domain','error','member','photo','album','post','profile','topic','signup','network','ipn','settings','subscription','upload','ajax','auth','block','edit','friends',
+				'video','events','event','talk','talks','club','clubs','campaign','campaigns'];
+		if(notAccepted.indexOf(match[1]) == -1)
+		{
+			return {
+				match_id : decodeURIComponent(match[1]),
+				match_type : 'user'
+			}
 		}
 	}
 	return false;
 },function(href) {
-	var match = href.match(/\/group\/(\d+)(\/)?/i);
+	var match = href.match(/\/club\/(\d+)(\/)?/i);
 	if(match != null && match != undefined && match[1]) {
 		return {
 			match_id : decodeURIComponent(match[1]),

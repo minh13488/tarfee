@@ -1,8 +1,8 @@
 <style type="text/css">
 .ynsc_sprite
 {
-	width: 42px;
-	height: 42px;
+	width: 38px;
+	height: 38px;
 	margin-top: <?php echo $this->margintop;?>px;
 	margin-right: <?php echo $this->marginright;?>px;
 	padding: 2px;
