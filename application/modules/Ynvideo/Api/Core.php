@@ -433,106 +433,104 @@ class Ynvideo_Api_Core extends Core_Api_Abstract {
             $video->code = $file_ext;
             $video->save();
 						
-						 // Store video in temporary storage object for ffmpeg to handle
+			// Store video in temporary storage object for ffmpeg to handle
             $storage = Engine_Api::_()->getItemTable('storage_file');
             $storageObject = $storage->createFile($file, array(
                 'parent_id' => $video->getIdentity(),
                 'parent_type' => $video->getType(),
                 'user_id' => $video->owner_id,
                 ));
+			// Make sure FFMPEG path is set
+			$ffmpeg_path = Engine_Api::_() -> getApi('settings', 'core') -> ynvideo_ffmpeg_path;
+			if (!$ffmpeg_path)
+			{
+				throw new Ynvideo_Model_Exception('Ffmpeg not configured');
+			}
+			// Make sure FFMPEG can be run
+			if (!@file_exists($ffmpeg_path) || !@is_executable($ffmpeg_path))
+			{
+				$output = null;
+				$return = null;
+				exec($ffmpeg_path . ' -version', $output, $return);
+				if ($return > 0)
+				{
+					throw new Ynvideo_Model_Exception('Ffmpeg found, but is not executable');
+				}
+			}
+	
+			// Check we can execute
+			if (!function_exists('shell_exec'))
+			{
+				throw new Ynvideo_Model_Exception('Unable to execute shell commands using shell_exec(); the function is disabled.');
+			}
+			// Check the video temporary directory
+			$tmpDir = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'temporary' . DIRECTORY_SEPARATOR . 'video';
+			if (!is_dir($tmpDir))
+			{
+				if (!mkdir($tmpDir, 0777, true))
+				{
+					throw new Ynvideo_Model_Exception('Video temporary directory did not exist and could not be created.');
+				}
+			}
+			if (!is_writable($tmpDir))
+			{
+				throw new Ynvideo_Model_Exception('Video temporary directory is not writable.');
+			}
+			$originalPath = $storageObject -> temporary();
+					
+			$ffprobe = str_replace('ffmpeg', 'ffprobe', $ffmpeg_path);
+			$cmd = $ffprobe . " " . $originalPath . " -show_streams 2>/dev/null";
+		    $result = shell_exec($cmd);
+		    $orientation = 0;
+		    if(strpos($result, 'TAG:rotate') !== FALSE) {
+		        $result = explode("\n", $result);
+		        foreach($result as $line) {
+		            if(strpos($line, 'TAG:rotate') !== FALSE) {
+		                $stream_info = explode("=", $line);
+		                $orientation = $stream_info[1];
+		            }
+		        }
+		    }
+			if($orientation)
+			{
+				$transpose = 1;	
+				switch ($orientation) 
+				{
+					case 90:
+						$transpose = 1;
+						break;
+					
+					case 180:
+						$transpose = 3;
+						break;
 						
-						// Make sure FFMPEG path is set
-						$ffmpeg_path = Engine_Api::_() -> getApi('settings', 'core') -> ynvideo_ffmpeg_path;
-						if (!$ffmpeg_path)
-						{
-							throw new Ynvideo_Model_Exception('Ffmpeg not configured');
-						}
-						// Make sure FFMPEG can be run
-						if (!@file_exists($ffmpeg_path) || !@is_executable($ffmpeg_path))
-						{
-							$output = null;
-							$return = null;
-							exec($ffmpeg_path . ' -version', $output, $return);
-							if ($return > 0)
-							{
-								throw new Ynvideo_Model_Exception('Ffmpeg found, but is not executable');
-							}
-						}
-				
-						// Check we can execute
-						if (!function_exists('shell_exec'))
-						{
-							throw new Ynvideo_Model_Exception('Unable to execute shell commands using shell_exec(); the function is disabled.');
-						}
-						// Check the video temporary directory
-						$tmpDir = APPLICATION_PATH . DIRECTORY_SEPARATOR . 'temporary' . DIRECTORY_SEPARATOR . 'video';
-						if (!is_dir($tmpDir))
-						{
-							if (!mkdir($tmpDir, 0777, true))
-							{
-								throw new Ynvideo_Model_Exception('Video temporary directory did not exist and could not be created.');
-							}
-						}
-						if (!is_writable($tmpDir))
-						{
-							throw new Ynvideo_Model_Exception('Video temporary directory is not writable.');
-						}
-						$originalPath = $storageObject -> temporary();
-								
-						$ffprobe = str_replace('ffmpeg', 'ffprobe', $ffmpeg_path);
-						$cmd = $ffprobe . " " . $originalPath . " -show_streams 2>/dev/null";
-				    $result = shell_exec($cmd);
-				    $orientation = 0;
-				    if(strpos($result, 'TAG:rotate') !== FALSE) {
-				        $result = explode("\n", $result);
-				        foreach($result as $line) {
-				            if(strpos($line, 'TAG:rotate') !== FALSE) {
-				                $stream_info = explode("=", $line);
-				                $orientation = $stream_info[1];
-				            }
-				        }
-				    }
-						if($orientation)
-						{
-							$transpose = 1;	
-							switch ($orientation) 
-							{
-								case 90:
-									$transpose = 1;
-									break;
-								
-								case 180:
-									$transpose = 3;
-									break;
-									
-								case 270:
-									$transpose = 2;
-									break;
-							}
-							$outputPath = $tmpDir . DIRECTORY_SEPARATOR . $video -> getIdentity() . '_vrotated.'.$file_ext;
-							// Check and rotate video
-							$cmd = '';
-							$h = '';
-							if(strtolower($file_ext) == '3gp')
-							{
-								$h = '-s 352x288';
-							}
-							if($transpose == 3)
-							{
-								$cmd = $ffmpeg_path .' -i ' . escapeshellarg($originalPath) . ' -vf "vflip,hflip'.'" '.$h.' -b 2000k -r 30 -acodec copy -metadata:s:v:0 rotate=0 '.escapeshellarg($outputPath);
-							}
-							else 
-							{
-								$cmd = $ffmpeg_path .' -i ' . escapeshellarg($originalPath) . ' -vf "transpose='.$transpose.'" '.$h.' -b 2000k -r 30 -acodec copy -metadata:s:v:0 rotate=0 '.escapeshellarg($outputPath);
-							}
-	    				shell_exec($cmd);
-							$storageObject -> store($outputPath);
-							@unlink($outputPath);
-						}
-						 // Remove temporary file
+					case 270:
+						$transpose = 2;
+						break;
+				}
+				$outputPath = $tmpDir . DIRECTORY_SEPARATOR . $video -> getIdentity() . '_vrotated.'.$file_ext;
+				// Check and rotate video
+				$cmd = '';
+				$h = '';
+				if(strtolower($file_ext) == '3gp')
+				{
+					$h = '-s 352x288';
+				}
+				if($transpose == 3)
+				{
+					$cmd = $ffmpeg_path .' -i ' . escapeshellarg($originalPath) . ' -vf "vflip,hflip'.'" '.$h.' -b 2000k -r 30 -acodec copy -metadata:s:v:0 rotate=0 '.escapeshellarg($outputPath);
+				}
+				else 
+				{
+					$cmd = $ffmpeg_path .' -i ' . escapeshellarg($originalPath) . ' -vf "transpose='.$transpose.'" '.$h.' -b 2000k -r 30 -acodec copy -metadata:s:v:0 rotate=0 '.escapeshellarg($outputPath);
+				}
+			shell_exec($cmd);
+				$storageObject -> store($outputPath);
+				@unlink($outputPath);
+			}
+			 // Remove temporary file
             @unlink($file['tmp_name']);
 						@unlink($originalPath);
-						
             $video->file_id = $storageObject->file_id;
             $video->save();
 						

@@ -21,6 +21,7 @@
 	
     function uploadFile() 
     {
+    	
 	      var file_type = "";
 	      var file = document.getElementById('fileToUpload').files[0];
 		  if (file) {
@@ -45,7 +46,11 @@
 	      	return;
 	      }	
 	      
-	      document.getElementById('demo-upload').style.display = 'none';
+	      var parent_type = $('parent_type').value;
+	      var playerId = $('playercard_id').value;
+	      
+	      jQuery('#demo-upload').fadeOut();
+	      jQuery('#posting').fadeIn();
 	      var fd = new FormData();
 	      fd.append('fileToUpload', document.getElementById('fileToUpload').files[0]);
 	      var xhr = new XMLHttpRequest();
@@ -53,7 +58,7 @@
 	      xhr.addEventListener("load", uploadComplete, false);
 	      xhr.addEventListener("error", uploadFailed, false);
 	      xhr.addEventListener("abort", uploadCanceled, false);
-	      xhr.open("POST", "<?php echo $this->url(array('module' => 'ynvideo', 'controller' => 'index', 'action' => 'upload-video'), 'default')?>", true);
+	      xhr.open("POST", "<?php echo $this->url(array('module' => 'ynvideo', 'controller' => 'index', 'action' => 'upload-video'), 'default')?>/parent_type/"+ parent_type + "/playerId/" + playerId, true);
 	      xhr.send(fd);
     }
 
@@ -82,6 +87,8 @@
       {
           $('code').value=json.code;
           $('id').value=json.video_id;
+          $('posting').set('html', '<?php echo $this -> translate('Please wait we are encoding your video.')?>');
+          $('fileToUpload').value = '';
           $('form-upload').submit();
       } 
       else 
@@ -130,7 +137,8 @@
      		<span id="progressNumber" class="progress-text">0%</span>
      	</div>
     <div class="button_upload">
-      <a class="buttonlink" href="javascript:uploadFile();" id="demo-upload" style="display: none; background-image: url(./application/modules/Video/externals/images/new.png);">Post Video</a>
+      <p id="posting" style="display: none; color: #B4AAAA"><?php echo $this -> translate("Posting... please wait.")?></p>
+      <a class="buttonlink" href="javascript:uploadFile();" id="demo-upload" style="display: none; background-image: url(./application/modules/Video/externals/images/new.png);"><?php echo $this -> translate("Post Video")?></a>
     </div>
   </div>
  </div>

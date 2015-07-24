@@ -19,6 +19,7 @@ class Ynvideo_Form_Edit extends Ynvideo_Form_Video {
         
         $this->populate($this->_video->toArray());
         
+		/*
         // prepare tags
         $videoTags = $this->_video->tags()->getTagMaps();
 
@@ -30,6 +31,7 @@ class Ynvideo_Form_Edit extends Ynvideo_Form_Video {
         }
 
         $this->tags->setValue($tagString);
+		 */
         
         // set view authentication and comment authentication for the two dropdownlists
         $authViewElement = $this->getElement('auth_view');
