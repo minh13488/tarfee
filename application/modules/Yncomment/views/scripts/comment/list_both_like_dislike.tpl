@@ -640,14 +640,14 @@
 				  
                   <?php if ($comment->likes()->getLikeCount() > 0 && $this->showLikeWithoutIconInReplies != 3): ?>
                        <?php if($this->canComment):?>
-							&nbsp;|&nbsp;
+							<span>&nbsp;|&nbsp;</span>
                         <?php endif;?>
                         <?php $url = $this->url(array('module' => 'yncomment', 'controller' => 'like', 'action' => 'likelist', 'resource_type' => $comment->getType(), 'resource_id' => $comment->getIdentity(), 'call_status' => 'public'), 'default', true);?>
                         <a href="javascript:void(0);" onclick="Smoothbox.open('<?php echo $url;?>')"><?php echo $this->translate(array('%s likes this.', '%s like this.', $comment->likes()->getLikeCount()), $this->locale()->toNumber($comment->likes()->getLikeCount()));?></a>
                   <?php endif ?>
                   <?php if (Engine_Api::_()->getDbtable('dislikes', 'yncomment')->getDislikeCount( $comment ) > 0 && $this->showLikeWithoutIconInReplies != 3): ?>
                         <?php if($this->canComment || $comment->likes()->getLikeCount() > 0):?>
-                        &nbsp;|&nbsp;
+                        <span>&nbsp;|&nbsp;</span>
                         <?php endif;?>
 						<?php if($this->showDislikeUsers) :?>
                             <?php $url = $this->url(array('module' => 'yncomment', 'controller' => 'like', 'action' => 'dislikelist', 'resource_type' => $comment->getType(), 'resource_id' => $comment->getIdentity(), 'call_status' => 'public'), 'default', true);?>

@@ -23,14 +23,14 @@
 	        </div>
 	        <?php $position = $player->getPosition()?>
 	        <?php if ($position) : ?>
-			<div class="player-position" title="<?php echo $this -> translate($position);?>">
+			<div class="player-position" title="<?php echo $this -> translate($position -> getTitle());?>">
 	        	<?php 
-		    		preg_match_all('/[A-Z]/', $position, $matches);
+		    		preg_match_all('/[A-Z]/', $position -> getTitle(), $matches);
 					echo implode($matches[0]);?>
 			</div>
 	        <?php endif;?>
 	        <?php if($player -> getSport()):?>
-				<span title="<?php echo $this -> translate($player -> getSport());?>"><?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?></span>
+				<span title="<?php echo $this -> translate($player -> getSport()->getTitle());?>"><?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?></span>
 			<?php endif;?>
 			<?php if($this -> viewer() -> getIdentity() && !$player -> isOwner($this -> viewer())):?>
 		    	<span title="<?php echo $this -> translate("Keep Eye on this player card")?>" id="user_eyeon_<?php echo $player -> getIdentity()?>">

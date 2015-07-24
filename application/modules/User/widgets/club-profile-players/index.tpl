@@ -183,12 +183,14 @@
 							</div>
 							<div class="tarfee_sport_type_position">
 								<?php if($player -> getSport()):?>
-									<?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?>
-									<span title="<?php echo $player -> getSport() -> getTitle();?>" class="player-title"><?php echo $player -> getSport() -> getTitle();?></span>
+									<span title="<?php echo $this -> translate($player -> getSport());?>"><?php echo $this -> itemPhoto($player -> getSport(), 'thumb.icon');?></span>
+									<!--<span title="<?php echo $player -> getSport() -> getTitle();?>" class="player-title"><?php echo $player -> getSport() -> getTitle();?></span>-->
 								<?php endif;?>
 								<?php if($player -> getPosition()):?>
-									<span title="<?php echo $player -> getPosition() -> getTitle();?>" class="player-position">
-										<?php echo $player -> getPosition() -> getTitle();?>
+									<span class="player-position" title="<?php echo $this -> translate($player -> getPosition() -> getTitle());?>">
+							        	<?php 
+								    		preg_match_all('/[A-Z]/', $player -> getPosition() -> getTitle(), $matches);
+											echo implode($matches[0]);?>
 									</span>
 								<?php endif;?>
 								
