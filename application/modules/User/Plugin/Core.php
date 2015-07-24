@@ -49,6 +49,39 @@ class User_Plugin_Core
       $db->delete('engine4_user_janrain', array(
         'user_id = ?' => $payload->getIdentity(),
       ));
+	  
+	  $mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+	  //Remove all players
+	  $playerTable = Engine_Api::_() -> getDbtable('playercards', 'user');
+	  $playerSelect = $playerTable -> select() -> where('user_id = ?', $payload -> getIdentity());
+	  foreach ($playerTable->fetchAll($playerSelect) as $player)
+	  {
+	  	  //Get all mapping
+		  $mappingSelect = $mappingTable -> select() -> where ("owner_type = ?", $player -> getType())->  where ("owner_id = ?", $player -> getIdentity());
+		  foreach ($mappingTable -> fetchAll($mappingSelect) as $item)
+		  {
+		  	 $item -> delete();
+		  }
+	  	  $player -> delete();
+	  }
+	  
+	  //Remove all libs
+	  $library = $payload -> getMainLibrary();
+	  $subLibraries = $library -> getSubLibrary(); 
+	  foreach($subLibraries as $subLibrary)
+	  {
+	  	$subLibrary -> delete();
+	  }
+	  $library -> delete();
+	  
+	  //Remove all campaigns
+	  $campaignTable = Engine_Api::_() -> getItemTable('tfcampaign_campaign');
+	  $campaignSelect = $campaignTable -> select() -> where("user_id = ?", $payload -> getIdentity());
+	  foreach ($campaignTable->fetchAll($campaignSelect) as $campaign)
+	  {
+	  	 $campaign -> delete();
+	  }
+	  
     }
   }
 
@@ -219,6 +252,11 @@ class User_Plugin_Core
 			$view = Zend_Registry::get('Zend_View');
 			$subject_id =  $request -> getParam("subject_id", null);
 			$typeOwner = $request -> getParam("parent_type", null);
+			$availableType = array('user_playercard', 'video', 'event', 'tfcampaign_campaign', 'blog');
+			if(!in_array($payload -> getType(), $availableType))
+			{
+				return;
+			}
 			$item = Engine_Api::_()->getItem($payload -> getType(), $payload -> getIdentity());
 			if($payload -> getType() == 'video')
 			{
@@ -295,6 +333,10 @@ class User_Plugin_Core
             { return;}
 			
 		$availableType = array('user_playercard', 'video', 'event', 'tfcampaign_campaign', 'blog');
+		if(!in_array($payload -> getType(), $availableType))
+		{
+			return;
+		}
 		$item = Engine_Api::_()->getItem($payload -> getType(), $payload -> getIdentity());
 		$user = Engine_Api::_()->user()->getViewer();
 		$club = $user->getClub();
