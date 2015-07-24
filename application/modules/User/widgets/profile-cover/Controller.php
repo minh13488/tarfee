@@ -33,7 +33,9 @@ class User_Widget_ProfileCoverController extends Engine_Content_Widget_Abstract
 	    }
 	    
 	    // Friend count
-	    $this->view->friendCount = $subject->membership()->getMemberCount($subject);
+	    $select = $subject->membership()->getMembersSelect();
+	    $paginator = Zend_Paginator::factory($select);
+	    $this->view->friendCount = $paginator -> getTotalItemCount();
 		
 		// Following count
 	    $select = $subject->membership()->getMembersOfSelect();

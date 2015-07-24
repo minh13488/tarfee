@@ -309,13 +309,13 @@
   // Handle ui stuff for creating an option using a smoothbox
   var uiSmoothOptionCreate = function(field_id) {
     var url = urls.option.create;
-    url += '/field_id/' + field_id + '/format/smoothbox';
+    url += '/field_id/' + field_id;
     Smoothbox.open(url);
   }
 
   var uiSmoothTopOptionCreate = function(spec) {
     var url = urls.type.create;
-    url += '/field_id/' + topLevelFieldId + '/format/smoothbox';
+    url += '/field_id/' + topLevelFieldId;
     Smoothbox.open(url);
   }
 
@@ -363,14 +363,14 @@
       uiToggleOptions(el);
     }
     var url = urls.option.edit;
-    url += '/option_id/' + option + '/format/smoothbox';
+    url += '/option_id/' + option;
     console.log(option);
     Smoothbox.open(url);
   }
 
   var uiSmoothTopOptionEdit = function(spec) {
     var url = urls.type.edit;
-    url += '/option_id/' + topLevelOptionId + '/format/smoothbox';
+    url += '/option_id/' + topLevelOptionId;
     Smoothbox.open(url);
   }
 
@@ -411,7 +411,7 @@
   var uiSmoothTopOptionDelete = function(spec) {
     if( confirm('<?php echo $this->string()->escapeJavascript($this->translate("Are you sure you want to delete the current profile type?")) ?>') ) {
       var url = urls.type.remove;
-      url += '/option_id/' + topLevelOptionId + '/format/smoothbox';
+      url += '/option_id/' + topLevelOptionId;
       var request = new Request.JSON({
         url : url,
         onComplete : function() {
@@ -455,13 +455,13 @@
     var parentEl = element.getParent('.admin_field_dependent_field_wrapper');
     var ids = readIdentifiers(parentEl.get('id'));
     var url = urls.field.create;
-    url += '/option_id/' + ids.suboption_id + '/parent_id/' + ids.parent_id + '/format/smoothbox';
+    url += '/option_id/' + ids.suboption_id + '/parent_id/' + ids.parent_id ;
     Smoothbox.open(url);
   }
 
   var uiSmoothTopFieldCreate = function(spec) {
     var url = urls.field.create;
-    url += '/option_id/' + topLevelOptionId + '/parent_id/' + topLevelFieldId + '/format/smoothbox';
+    url += '/option_id/' + topLevelOptionId + '/parent_id/' + topLevelFieldId ;
     Smoothbox.open(url);
   }
 
@@ -482,7 +482,7 @@
     var parentEl = element.getParent('.admin_field');
     var ids = readIdentifiers(parentEl.get('id'));
     var url = urls.field.edit;
-    url += '/field_id/' + ids.child_id + '/format/smoothbox';
+    url += '/field_id/' + ids.child_id ;
     Smoothbox.open(url);
   }
 
@@ -543,7 +543,7 @@
 
   var uiSmoothTopHeadingCreate = function(spec) {
     var url = urls.heading.create;
-    url += '/option_id/' + topLevelOptionId + '/parent_id/' + topLevelFieldId + '/format/smoothbox';
+    url += '/option_id/' + topLevelOptionId + '/parent_id/' + topLevelFieldId ;
     Smoothbox.open(url);
   }
 
@@ -558,7 +558,7 @@
     var parentEl = element.getParent('.admin_field');
     var ids = readIdentifiers(parentEl.get('id'));
     var url = urls.heading.edit;
-    url += '/field_id/' + ids.child_id + '/format/smoothbox';
+    url += '/field_id/' + ids.child_id ;
     Smoothbox.open(url);
   }
 

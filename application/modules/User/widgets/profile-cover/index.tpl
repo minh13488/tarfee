@@ -298,11 +298,11 @@ else {
                                 <?php endif;?>
                             </li>
                             <li>
-                                <?php if($this->user->member_count):?>
+                                <?php if($this->friendCount):?>
                                     <a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-followers', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
-                                        <span class="number_tabs"><?php echo $this->locale()->toNumber($this->user->member_count);?></span>
-                                        <div><?php echo $this->translate(array('follower', 'followers', $this->user->member_count),
-                                            $this->locale()->toNumber($this->user->member_count)) ?></div>
+                                        <span class="number_tabs"><?php echo $this->locale()->toNumber($this->friendCount);?></span>
+                                        <div><?php echo $this->translate(array('follower', 'followers', $this->friendCount),
+                                            $this->locale()->toNumber($this->friendCount)) ?></div>
                                     </a>
                                 <?php else:?>
                                     <a href="javascript:void(0)">
@@ -313,11 +313,11 @@ else {
                             </li>
                             <?php else:?>
                                 <li>
-                                    <?php if($this->user->member_count):?>
+                                    <?php if($this->friendCount):?>
                                         <a href="<?php echo $this -> url(array('controller' => 'friends', 'action' => 'list-all-friends', 'user_id' => $this->user -> getIdentity()), 'user_extended')?>" class="smoothbox">
-                                            <span class="number_tabs"><?php echo $this->locale()->toNumber($this->user->member_count);?></span>
-                                            <div><?php echo $this->translate(array('friend', 'friends', $this->user->member_count),
-                                                $this->locale()->toNumber($this->user->member_count)) ?></div>
+                                            <span class="number_tabs"><?php echo $this->locale()->toNumber($this->friendCount);?></span>
+                                            <div><?php echo $this->translate(array('friend', 'friends', $this->friendCount),
+                                                $this->locale()->toNumber($this->friendCount)) ?></div>
                                         </a>
                                     <?php else:?>
                                         <a href="javascript:void(0)">

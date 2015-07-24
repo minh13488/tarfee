@@ -375,7 +375,7 @@
 		    </div>
 		<?php break;?>
 		
-		<?php default: ?>
+		<?php case 'user': ?>
 		<div class="ynadvsearch-result-item-photo">
         	<?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'thumb.icon')) ?>
       	</div>
@@ -397,6 +397,7 @@
 	        <?php endif; ?>
         	</div>
       	</div>
+      	<?php break;?>
   	<?php endswitch; ?>
 	</li>
 	<?php endif; ?>

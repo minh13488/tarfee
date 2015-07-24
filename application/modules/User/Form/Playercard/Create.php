@@ -180,7 +180,7 @@ class User_Form_Playercard_Create extends Engine_Form
 
     // Buttons
     $this->addElement('Button', 'submit', array(
-      'label' => 'Save Changes',
+      'label' => 'Post Player Card',
       'type' => 'submit',
       'ignore' => true,
       'decorators' => array(
