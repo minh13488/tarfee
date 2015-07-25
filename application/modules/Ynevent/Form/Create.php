@@ -438,7 +438,7 @@ class Ynevent_Form_Create extends Engine_Form
 	
     // Buttons
     $this->addElement('Button', 'save_change', array(
-      'label' => 'Save Changes',
+      'label' => 'Post Event/Tryous',
       'type' => 'submit',
       'ignore' => true,
       'decorators' => array(

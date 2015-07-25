@@ -3013,11 +3013,18 @@ body#global_page_advgroup-profile-index{
                             }
                             span.player-position{
                                 float: right;
-                                width: 35%;
-                                white-space: nowrap;
-                                overflow: hidden;
-                                text-align: right;
-                                text-overflow: ellipsis;
+                                text-align: center;
+							    font-size: 10px;
+							    background: $theme_link_color;
+							    width: 23px;
+							    height: 23px;
+							    line-height: 23px;
+							    border-radius: 50%;
+							    -webkit-border-radius: 50%;
+							    -moz-border-radius: 50%;
+							    -msborder-radius: 50%;
+							    color: #fff;
+							    text-transform: uppercase;
                             }
                             span.player-title{
                                 display: block;
@@ -4484,12 +4491,19 @@ body#global_page_advgroup-profile-index{
                         margin-right: 5px;
                     }
                     span.player-position{
-                        float: right;
-                        width: 35%;
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-align: right;
-                        text-overflow: ellipsis;
+                       float: right;
+                        text-align: center;
+					    font-size: 10px;
+					    background: $theme_link_color;
+					    width: 23px;
+					    height: 23px;
+					    line-height: 23px;
+					    border-radius: 50%;
+					    -webkit-border-radius: 50%;
+					    -moz-border-radius: 50%;
+					    -msborder-radius: 50%;
+					    color: #fff;
+					    text-transform: uppercase;
                     }
                     span.player-title{
                         display: block;

@@ -105,6 +105,7 @@ return array(
     'payment_package',
     'payment_subscription',
     'payment_transaction',
+    'payment_product'
   ),
   // Routes --------------------------------------------------------------------
 );

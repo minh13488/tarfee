@@ -60,8 +60,8 @@ abstract class Core_Controller_Action_Standard extends Engine_Controller_Action
 	$action = $request -> getActionName();
 	$page_id = $module."_".$controller."_".$action;
 	if (!Engine_Api::_() -> user() -> getViewer() -> getIdentity() 
-	&& !in_array($page_id, array('core_index_index', 'core_widget_index', 'ynvideo_index_popup-view','tfcampaign_profile_index','ynblog_index_view','ynevent_profile_index','user_player-card_view','advgroup_profile_index','user_profile_index')) 
-	&& !in_array($module, array('user', 'social-connect', 'payment')))
+	&& !in_array($page_id, array('core_index_index', 'core_widget_index', 'ynvideo_index_popup-view','tfcampaign_profile_index','ynblog_index_view','ynevent_profile_index','user_player-card_view','advgroup_profile_index','user_profile_index','core_help_terms')) 
+	&& !in_array($module, array('user', 'social-connect', 'payment','sladvsubscription')))
 	{
 		if($module == "core" && in_array($controller, array("error", "utility")) && in_array($action, array("success", "error"))) 
 		{

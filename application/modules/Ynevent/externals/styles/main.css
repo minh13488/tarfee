@@ -3774,3 +3774,31 @@ div[class^=layout_page_ynevent_index] ul.events_browse .events_members {
   	margin-top: 0;
   }
 }
+#calendar_output_span_starttime-date,
+#calendar_output_span_endtime-date,
+#calendar_output_span_start_date-date,
+#calendar_output_span_end_date-date
+{
+	display: none;
+}
+div.event_calendar_container button.event_calendar
+{
+	background-repeat: no-repeat!important;
+	margin-top: 1px;
+}
+#languages-wrapper
+{
+	#languages-element
+	{
+		width: 350px;
+		ul li
+		{
+			  float: left;
+  			  width: 160px;
+  			  input[type=checkbox]
+  			  {
+  			  	clear: none;
+  			  }
+		}
+	}
+}

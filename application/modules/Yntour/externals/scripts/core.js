@@ -21,7 +21,8 @@ en4.yntour = {
     initData: {},
     arrowElement: null
 };
-en4.yntour.scrollTo = function(ele) {
+en4.yntour.scrollTo = function(ele) 
+{
 	if(en4.yntour.fx === 0) {
 		en4.yntour.fx = new Fx.Scroll(window, {
 
@@ -48,7 +49,7 @@ en4.yntour.bootstrap = function() {
 }
 en4.yntour.poptour = function() {    
     var body = document.getElementsByTagName('body')[0].id;
-	Smoothbox.open(en4.core.baseUrl + 'yntour/index/edit-tour/tour_id/' + en4.yntour.tourId + '/body/'+body);
+	Smoothbox.open(en4.core.baseUrl + 'yntour/index/edit-tour/tour_id/' + en4.yntour.tourId + '/body/'+body+'/');
 }
 
 en4.yntour.getPath = function(e) {
@@ -192,10 +193,6 @@ en4.yntour.collapse = function(){
 }
 en4.yntour.process = function(json) {
 
-	/*if($$('.layout_core_admin_menu_main').length) {
-		return;
-	}
-*/
 	en4.yntour.tourId = json.id;
 	en4.yntour.tourTotal = json.total;
 	en4.yntour.hash = json.hash;
@@ -404,40 +401,41 @@ en4.yntour.createIndex = function(pos, row, index) {
 	return span;
 }
 
-$(document).addEvent('mouseover', function(evt) {
-	if(!en4.yntour.hover) {
-		return
-	}
-	var ele = evt.target;
-	$(ele).addClass('yntour_box_hightlight');
-	en4.yntour.hoverIn = ele;
+window.addEvent('domready', function()
+{
+	$(document).addEvent('mouseover', function(evt) {
+		if(!en4.yntour.hover) {
+			return;
+		}
+		var ele = evt.target;
+		$(ele).addClass('yntour_box_hightlight');
+		en4.yntour.hoverIn = ele;
+	});
+	
+	$(document).addEvent('mouseout', function(evt) {
+		if(!en4.yntour.hover) {
+			return;
+		}
+		var ele = evt.target;
+		$(ele).removeClass('yntour_box_hightlight');
+	
+	});
+	
+	$(document).addEvent('click', function(evt) {
+		if(!en4.yntour.hover) {
+			return;
+		}
+		en4.yntour.hover = 0;
+		// process somethign else.
+		var ele = evt.target;
+		$(ele).addClass('yntour_box_hightlight');
+		en4.yntour.hoverIn = ele;
+		en4.yntour.newStep(ele);
+		evt.stop();
+		evt.stopPropagation();
+		return false;
+	});
 });
-
-$(document).addEvent('mouseout', function(evt) {
-	if(!en4.yntour.hover) {
-		return
-	}
-	var ele = evt.target;
-	$(ele).removeClass('yntour_box_hightlight');
-
-});
-
-$(document).addEvent('click', function(evt) {
-	if(!en4.yntour.hover) {
-		return
-	}
-	en4.yntour.hover = 0;
-	// process somethign else.
-	var ele = evt.target;
-	$(ele).addClass('yntour_box_hightlight');
-	en4.yntour.hoverIn = ele;
-	en4.yntour.newStep(ele);
-	evt.stop();
-	evt.stopPropagation();
-	return false;
-});
-
-
 
 en4.yntour.newStep = function(ele) {
 	en4.yntour.hidebox = false;

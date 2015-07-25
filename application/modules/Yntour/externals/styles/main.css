@@ -11,8 +11,8 @@
     position: fixed;
     width:37px;
     height: 126px;
-    top:70px;
-    right:0;
+    top:90px;
+   
     background: url(~/application/modules/Yntour/externals/images/tourguide_collapse.png) no-repeat bottom;   
     cursor:pointer; 
 }
@@ -39,8 +39,8 @@ form#tour_create .form-elements .form-wrapper ul.form-options-wrapper > li
 	background-color: #2B2B2B;
 	padding: 0.4em 0.7em;
 	position: fixed;
-	right: 30px;
-	top: 30px;
+	left: 5px;
+  	top: 155px;
 	box-shadow: 2px 2px 2px 0px rgba(128,128,128,0.5);
     z-index: 1000;
 }
@@ -105,7 +105,7 @@ form#tour_create .form-elements .form-wrapper ul.form-options-wrapper > li
 	padding: 2px 12px 10px 10px;
 	display: block;
 	float: left;
-	min-height: 13px;
+	min-height: 22px;
 }
 
 #id_yntour_pag_prev {
@@ -163,8 +163,9 @@ form#tour_create .form-elements .form-wrapper ul.form-options-wrapper > li
 	opacity: 0.7;
 	font-weight: bold;
 	font-size: 38px;
-	height: 52px;
-	width: 40px;
+	height: 56px;
+	width: 56px;
+	z-index: 1;
 }
 html[dir="rtl"] .yntour_indexs {
 	padding: 2px 15px 0 0;

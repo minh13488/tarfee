@@ -227,9 +227,9 @@
 									<!--<span title="<?php echo $player -> getSport() -> getTitle();?>" class="player-title"><?php echo $player -> getSport() -> getTitle();?></span>-->
 								<?php endif;?>
 								<?php if($player -> getPosition()):?>
-									<span class="player-position" title="<?php echo $this -> translate($player -> getPosition());?>">
+									<span class="player-position" title="<?php echo $this -> translate($player -> getPosition() -> getTitle());?>">
 							        	<?php 
-								    		preg_match_all('/[A-Z]/', $player -> getPosition(), $matches);
+								    		preg_match_all('/[A-Z]/', $player -> getPosition() -> getTitle(), $matches);
 											echo implode($matches[0]);?>
 									</span>
 								<?php endif;?>

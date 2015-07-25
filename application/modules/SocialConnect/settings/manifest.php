@@ -45,6 +45,10 @@ return array(
 			'resource' => 'SocialConnect_Plugin_Core',
 		),
 	),
+		// Items ---------------------------------------------------------------------
+	  'items' => array(
+	    'socialconnect_account',
+	  ),
 	// Routes
 	// --------------------------------------------------------------------
 	'routes' => array(

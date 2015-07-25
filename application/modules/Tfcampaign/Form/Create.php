@@ -8,7 +8,8 @@ class Tfcampaign_Form_Create extends Engine_Form
 	
   	$user = Engine_Api::_()->user()->getViewer();
     $this
-      ->setTitle('Add New Campaign');
+      ->setTitle('Add New Campaign')
+	  -> setDescription("NEW_CAMPAIGN_DESCRIPTION");
 	
 	$maxCharTitle = $settings->getSetting('tfcampaign_max_title', "300");
     $this->addElement('Text', 'title', array(
@@ -42,6 +43,18 @@ class Tfcampaign_Form_Create extends Engine_Form
     ));
 	$this -> description -> setAttrib('required', true);
 	
+	// Start time
+    $start = new Engine_Form_Element_CalendarDateTime('start_date');
+    $start->setLabel("Start Time");
+    $start->setAllowEmpty(false);
+    $this->addElement($start);
+	
+    // End time
+    $end = new Engine_Form_Element_CalendarDateTime('end_date');
+    $end->setLabel("End Time");
+    $end->setAllowEmpty(false);
+    $this->addElement($end);
+	
 	$sportCattable = Engine_Api::_() -> getDbtable('sportcategories', 'user');
 	$node = $sportCattable -> getNode(0);
 	$categories = $node -> getChilren();
@@ -55,26 +68,26 @@ class Tfcampaign_Form_Create extends Engine_Form
       'onchange' => 'subCategories()',
     ));
 	
+	$positions = $sportCattable -> getMultiOptions('--', '', FALSE);
+	array_shift($positions);
+	$this -> addElement('Select', 'position_id', array(
+		'label' => 'Position',
+		'multiOptions' => $positions,
+	));
 	
-	 // Start time
-    $start = new Engine_Form_Element_CalendarDateTime('start_date');
-    $start->setLabel("Start Time");
-    $start->setAllowEmpty(false);
-    $this->addElement($start);
+	$this -> addElement('Select', 'referred_foot', array(
+		'label' => 'Preferred Foot',
+		'multiOptions' => array('1' => 'Left', '2' => 'Right', '0' => 'Both'),
+	));
 	
-    // End time
-    $end = new Engine_Form_Element_CalendarDateTime('end_date');
-    $end->setLabel("End Time");
-    $end->setAllowEmpty(false);
-    $this->addElement($end);
-
+	/*
 	$this->addElement('File', 'photo', array(
       'label' => 'Campaign Photo'
     ));
 	$this -> photo -> setAllowEmpty(true);
     $this -> photo -> addValidator('Extension', false, 'jpg,png,gif,jpeg');
 	$this -> photo -> setAttrib('accept', 'image/*');
-	
+	*/
 	
 	$arrAge = array();
 	$arrAge[] = "Any";
@@ -131,19 +144,6 @@ class Tfcampaign_Form_Create extends Engine_Form
     ));
 	$this->languages->getDecorator("Description")->setOption("placement", "append");
 	
-	$this -> addElement('Select', 'referred_foot', array(
-		'label' => 'Preferred Foot',
-		'multiOptions' => array('1' => 'Left', '2' => 'Right', '0' => 'Both'),
-	));
-	
-	$positions = $sportCattable -> getMultiOptions('--', '', FALSE);
-	array_shift($positions);
-	$this -> addElement('Select', 'position_id', array(
-		'label' => 'Position',
-		'multiOptions' => $positions,
-	));
-	
-	
 	$this->addElement('Select', 'percentage', array(
         'label' => 'Matching Percentage',
         'description' => 'The minimum percentage of matching.',
@@ -160,7 +160,7 @@ class Tfcampaign_Form_Create extends Engine_Form
     $this -> addElement('Text', 'user', array(
         'label' => 'Allow view for',
         'autocomplete' => 'off',
-        'order' => '17'
+        'order' => '16'
     ));
     
     $this -> addElement('Hidden', 'user_ids', array(
@@ -204,7 +204,7 @@ class Tfcampaign_Form_Create extends Engine_Form
 	
     // Buttons
     $this->addElement('Button', 'submit', array(
-      'label' => 'Create',
+      'label' => 'Post Campaign ',
       'type' => 'submit',
       'ignore' => true,
       'onClick' => 'return checkValid();',

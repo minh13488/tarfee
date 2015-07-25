@@ -34,15 +34,15 @@
 				<div class="thumb_profile" style="background-image:url(<?php echo $photoUrl?>)">
 					<div class="tarfee_sport_type_position">
 						<?php if($item -> getSport()):?>
-							<?php echo $this -> itemPhoto($item -> getSport(), 'thumb.icon');?>
-							<span title="<?php echo $item -> getSport() -> getTitle();?>" class="player-title"><?php echo $item -> getSport() -> getTitle();?></span>
+							<span title="<?php echo $item -> getSport() -> getTitle();?>"><?php echo $this -> itemPhoto($item -> getSport(), 'thumb.icon');?></span>
 						<?php endif;?>
 						<?php if($item -> getPosition()):?>
 							<span title="<?php echo $item -> getPosition() -> getTitle();?>" class="player-position">
-								<?php echo $item -> getPosition() -> getTitle();?>
+								<?php 
+						    		preg_match_all('/[A-Z]/', $item -> getPosition() -> getTitle(), $matches);
+									echo implode($matches[0]);?>
 							</span>
 						<?php endif;?>
-						
 					</div>
 				</div>
 			</div>
@@ -375,7 +375,7 @@
 		    </div>
 		<?php break;?>
 		
-		<?php default: ?>
+		<?php case 'user': ?>
 		<div class="ynadvsearch-result-item-photo">
         	<?php echo $this->htmlLink($item->getHref(), $this->itemPhoto($item, 'thumb.icon')) ?>
       	</div>
@@ -397,6 +397,7 @@
 	        <?php endif; ?>
         	</div>
       	</div>
+      	<?php break;?>
   	<?php endswitch; ?>
 	</li>
 	<?php endif; ?>

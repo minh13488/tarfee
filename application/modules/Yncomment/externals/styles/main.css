@@ -184,8 +184,9 @@ img#compose-yncomment-photo-loading-image {
 }
 .yncomment_replies_date {
 	text-transform: capitalize;
-
-	a {
+	color: $theme_link_color !important;
+	a,
+	span {
 		color: $theme_font_color_light !important;
 
 		&:hover {
@@ -193,9 +194,10 @@ img#compose-yncomment-photo-loading-image {
 		}
 	}
 }
-.yn_like_dislike {
-	color: $theme_link_color;
-
+.yn_like_dislike
+{
+	font-weight: normal;
+	color: $theme_font_color;
 	&:hover {
 		color: $theme_link_color_hover;
 	}

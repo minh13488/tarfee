@@ -125,7 +125,12 @@
 					<?php $index = 0;?>
 					<?php foreach ($compares as $compare):?>				
 						<tr style="background-color: <?php if ($index % 2 == 0) echo $settings['odd_row_color']; else echo $settings['even_row_color'];$index++;?>;">
-							<td style="<?php echo $api->getStyle('row');?>"><?php echo $compare['title']?></td>
+							<td style="<?php echo $api->getStyle('row');?>">
+								<?php echo $compare['title']?>
+								<div class="tf-settings-info">
+									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione pariatur nihil, voluptatum magni voluptatem voluptate atque nobis tenetur omnis eos quisquam quis nulla animi quia sunt neque, accusamus rem officia.
+								</div>
+							</td>
 							<?php foreach ($levels as $id=>$level):?>
 								<td>
 									<?php if ($compare['package'][$id]['radio'] == '0'):?>
@@ -151,7 +156,6 @@
 												<option value="<?php echo $plan->getIdentity();?>"><?php echo $plan->getTitle();?></option>
 											<?php endforeach;?>
 										</select>
-										<br/>
 										<p class="price_title">
 											<?php $index = 0;?>
 											<?php foreach ($level_plans[$id] as $plan):?>
