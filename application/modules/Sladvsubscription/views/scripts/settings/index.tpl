@@ -122,14 +122,24 @@
 							</th>
 						<?php endforeach;?>
 					</tr>
-					<?php $index = 0;?>
+					<?php $index = 0;
+					
+					// Add Tips
+					$tips = array(
+					1 => $this -> translate('Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione pariatur nihil, voluptatum magni voluptatem voluptate atque nobis tenetur omnis eos quisquam quis nulla animi quia sunt neque, accusamus rem officia.'),
+					2 => $this -> translate('Tip for message to non follower'),
+					// add more the same with above
+					);
+					?>
 					<?php foreach ($compares as $compare):?>				
 						<tr style="background-color: <?php if ($index % 2 == 0) echo $settings['odd_row_color']; else echo $settings['even_row_color'];$index++;?>;">
 							<td style="<?php echo $api->getStyle('row');?>">
 								<?php echo $compare['title']?>
+								<?php if(!empty($tips[$index])):?>
 								<div class="tf-settings-info">
-									Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ratione pariatur nihil, voluptatum magni voluptatem voluptate atque nobis tenetur omnis eos quisquam quis nulla animi quia sunt neque, accusamus rem officia.
+									<?php echo $tips[$index];?>
 								</div>
+								<?php endif;?>
 							</td>
 							<?php foreach ($levels as $id=>$level):?>
 								<td>

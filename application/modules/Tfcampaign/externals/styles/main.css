@@ -291,6 +291,10 @@ h5.tf_campaign_filter_title{
 			background: $theme_border_medium_color;
 			border: none;
 		}
+		select#tfcampaign-campaign-sort
+		{
+			margin-right: 10px;
+		}
 	}
 
 	.tfcampaign_list_browse{

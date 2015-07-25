@@ -146,7 +146,7 @@
 			<div class="ynvideo_thumb_wrapper video_thumb_wrapper">
 			    <?php if ($item->parent_type == 'user_playercard') :?>
 			        <span class="icon-player">
-			            <img src="application\themes\ynresponsive-event\images\icon-player.png" />
+			            <img src="application/themes/ynresponsive-event/images/icon-player.png" />
 			        </span>
 			    <?php endif; ?>
 			
