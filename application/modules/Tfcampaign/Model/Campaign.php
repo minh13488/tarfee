@@ -168,7 +168,9 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 	public function isViewable() {
 		//get viewer
 		$viewer = Engine_Api::_() -> user() -> getViewer();
-		
+		if (Engine_Api::_()->user()->itemOfDeactiveUsers($this)) {
+			return false;
+		}
 		//view for specific users
 		$tableUserItemView = Engine_Api::_() -> getDbTable('userItemView', 'user');
 		$userViewRows = $tableUserItemView -> getUserByItem($this);
@@ -179,9 +181,6 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 			}
 		}
 		
-		if (Engine_Api::_()->user()->itemOfDeactiveUsers($this)) {
-			return false;
-		}
         return $this->authorization()->isAllowed(null, 'view'); 
     }
 	
