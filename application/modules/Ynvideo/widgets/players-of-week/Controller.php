@@ -69,15 +69,18 @@ class Ynvideo_Widget_PlayersOfWeekController extends Engine_Content_Widget_Abstr
 		$select->joinLeft($dislikeTblName, "$dislikeTblName.resource_type = 'video' AND $dislikeTblName.resource_id = $tableName.video_id AND $dislikeTblName.creation_date >= '$from_time' AND $dislikeTblName.creation_date <= '$to_time'", "");
 		
 		// $select->joinLeft($unsureTblName, "$unsureTblName.resource_type = 'video' AND $unsureTblName.resource_id = $tableName.video_id AND $unsureTblName.creation_date >= '$from_time' AND $unsureTblName.creation_date <= '$to_time'", "");
+		
+		
 		$select -> order('total_point DESC');
 		$select->group("$tableName.parent_id");
 		
 		$rows = $table->fetchAll($select);
 		$videos = array();
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
 		foreach ($rows as $row) {
 			if (count($videos) >= $numberOfVideos) break;
 			$player = Engine_Api::_()->getItem('user_playercard', $row->parent_id);
-			if ($player && $player->isViewable() && $row->authorization()->isAllowed(null, 'view')) {
+			if (!in_array($player->user_id, $deactiveIds) && $player && $player->isViewable() && $row->authorization()->isAllowed(null, 'view')) {
 				$videos[] = $row;
 				
 			}
