@@ -1,11 +1,14 @@
 <?php 
 $viewer = $this -> viewer();
+$request = Zend_Controller_Front::getInstance()->getRequest();
+$module = $request->getParam('module');
+$controller = $request->getParam('controller');
+$action = $request->getParam('action');
 ?>
 <div class="tf_right_menu">
    
    <span id="show-hide-list-items">
    </span>
-   
    <ul class="list-items">
    	<?php if($viewer -> getIdentity()):
 	$library =  $viewer -> getMainLibrary();
@@ -54,10 +57,10 @@ $viewer = $this -> viewer();
          </ul>
       </li>
     <?php endif;?>
-      <li><a title="<?php echo $this -> translate("campaigns")?>" href="<?php echo $this -> url(array(), 'tfcampaign_general', true);?>"><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
-      <li><a title="<?php echo $this -> translate("clubs & organizations")?>" href="search?advsearch=organization"><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
-      <li><a title="<?php echo $this -> translate("events & tryouts")?>" href="<?php echo $this -> url(array(), 'event_general', true);?>"><img src="application/themes/ynresponsive-event/images/event.png" /></a></li>
-      <li><a title="<?php echo $this -> translate("talks")?>" href="<?php echo $this -> url(array(), 'blog_general', true);?>"><img src="application/themes/ynresponsive-event/images/talk.png" /></a></li>
+      <li><a <?php if($module == 'tfcampaign') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("campaigns")?>" href="<?php echo $this -> url(array(), 'tfcampaign_general', true);?>"><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
+      <li><a <?php if($module == 'advgroup') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("clubs & organizations")?>" href="search?advsearch=organization"><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
+      <li><a <?php if($module == 'ynevent') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("events & tryouts")?>" href="<?php echo $this -> url(array(), 'event_general', true);?>"><img src="application/themes/ynresponsive-event/images/event.png" /></a></li>
+      <li><a <?php if($module == 'ynblog') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("talks")?>" href="<?php echo $this -> url(array(), 'blog_general', true);?>"><img src="application/themes/ynresponsive-event/images/talk.png" /></a></li>
       <li><a title="<?php echo $this -> translate("professionals")?>" href="search?advsearch=professional"><img src="application/themes/ynresponsive-event/images/professional.png" /></a></li>
       <li class="item-action" id="item-action-help">
          <a title="<?php echo $this -> translate("help")?>" href="javascript:void;"><img src="application/themes/ynresponsive-event/images/help.png" /></a>

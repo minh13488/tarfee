@@ -1077,8 +1077,13 @@ iframe.wysihtml5-sandbox {
 					/*height: 100%;*/
 				}
 
-				&:hover{
+				&:hover
+				{
 					background: #f1f1f1;
+				}
+				&.right_menu_active
+				{
+					background: #B1C991;
 				}
 			}
 		}
@@ -3324,7 +3329,7 @@ body#global_page_advgroup-profile-index{
 		}
 	}
 
-	a.tf_button_action{
+	span.tf_button_action{
 		background-color: $theme_link_color;
 		color: #fff !important;
 		padding: 10px 15px;
