@@ -20,6 +20,10 @@
 				<option value="campaign.end_date"><?php echo $this -> translate('Closing Date');?></option>
 				<!--<option value="campaign.view_count"><?php echo $this -> translate('Sort by view count');?></option>-->
 		</select>
+		<select name="direction" id="tfcampaign-campaign-direction">				
+				<option value="DESC">DESC</option>
+				<option value="ASC">ASC</option>
+		</select>
 	</div>
 	<?php if( count($this->paginator) > 0 ): ?>
 		<ul class="tfcampaign_list_browse">
@@ -201,6 +205,17 @@
 		
 		<?php if(!empty($this -> isSort)):?>
 			$('tfcampaign-campaign-sort').set('value', '<?php echo $this -> isSort;?>');
+			$('campaign-sort').set('value', '<?php echo $this -> isSort;?>');
+		<?php endif;?>
+		
+		$('tfcampaign-campaign-direction').addEvent('change', function (){
+			$('campaign-direction').set('value', this.get('value'));
+			$('fiter-campaign').submit();
+		});
+		
+		<?php if(!empty($this -> direction)):?>
+			$('tfcampaign-campaign-direction').set('value', '<?php echo $this -> direction;?>');
+			$('campaign-direction').set('value', '<?php echo $this -> direction;?>');
 		<?php endif;?>
 		
 	});
