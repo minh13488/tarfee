@@ -16,6 +16,8 @@
 
 <input id="campaign-sort" value="campaign.creation_date" type="hidden" name="sort">
 
+<input id="campaign-direction" value="DESC" type="hidden" name="direction">
+
 <div class="tf_boxsearch_campaign">
 	<input type="text" name="title" id="title" placeholder="<?php echo $this -> translate("Search Campaigns...");?>">
 </div>

@@ -69,16 +69,12 @@ class Tfcampaign_IndexController extends Core_Controller_Action_Standard
 		$this -> view -> params = $params;
 		$isSort = $params['sort'];
 		if(!empty($isSort)) {
-			$params['order'] = $isSort;
-			$params['direction'] = "ASC";
-			if($isSort == "campaign.creation_date")
-			{
-				$params['direction'] = "DESC";
-			}			
+			$params['order'] = $isSort;		
 			$this -> view -> isSort = $isSort;
+			$this -> view -> direction = $params['direction'];
 		} else {
 			$params['order'] = "campaign.creation_date";
-			$params['direction'] = "DESC";				
+			$params['direction'] = "DESC";						
 		}
 		$this -> view -> paginator = $paginator = Engine_Api::_() -> getItemTable('tfcampaign_campaign') -> getCampaignsPaginator($params);
 		$paginator -> setCurrentPageNumber($this -> _getParam('page', 1));
