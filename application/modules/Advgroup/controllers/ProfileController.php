@@ -40,6 +40,11 @@ public function indexAction()
   	
     if(!Engine_Api::_()->core()->hasSubject()) return $this->renderScript("_error.tpl");
     $subject = Engine_Api::_()->core()->getSubject();
+	
+	if (Engine_Api::_()->user()->itemOfDeactiveUsers($subject)) {
+		return $this->_helper->requireSubject()->forward();
+	}
+	
     $viewer = Engine_Api::_()->user()->getViewer();
 
     if($subject->is_subgroup && !$subject->isParentGroupOwner($viewer)){

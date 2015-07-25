@@ -25,7 +25,12 @@ class Ynblog_Widget_TopBlogsController extends Engine_Content_Widget_Abstract
                      ->where("is_approved = 1")
                      ->order("Count(resource_id) DESC")
                      ->limit($limit);
-
+	
+	$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+	if (!empty($deactiveIds)) {
+		$select -> where("owner_id NOT IN (?)", $deactiveIds);
+	}
+		
     $this->view->blogs = $blogs = $btable->fetchAll($select);
 	if(count($blogs) <= 0)
 	{

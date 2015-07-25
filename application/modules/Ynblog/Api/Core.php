@@ -208,6 +208,11 @@ class Ynblog_Api_Core extends Core_Api_Abstract {
 		if (isset($params['featured'])) {
 			$select -> where("$blog_name.is_featured = ?", $params['featured']);
 		}
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select -> where("$blog_name.owner_id NOT IN (?)", $deactiveIds);
+		}
 
 		//Owner in Admin Search
 		if (!empty($params['owner'])) {

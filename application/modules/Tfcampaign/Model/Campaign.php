@@ -178,6 +178,10 @@ class Tfcampaign_Model_Campaign extends Core_Model_Item_Abstract {
 				return true;
 			}
 		}
+		
+		if (Engine_Api::_()->user()->itemOfDeactiveUsers($this)) {
+			return false;
+		}
         return $this->authorization()->isAllowed(null, 'view'); 
     }
 	

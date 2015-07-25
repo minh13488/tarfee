@@ -874,4 +874,27 @@ class User_Api_Core extends Core_Api_Abstract
 		}
 		return $ids;
 	}
+	
+	public function itemOfDeactiveUsers($item) {
+		$result = false;
+		$ids = $this->getDeactiveUserIds();
+		if (empty($ids)) return $result;
+		
+		switch ($item->getType()) {
+			case 'user_playercard':
+			case 'event':
+			case 'group':
+			case 'tfcampaign_campaign':
+			case 'user':
+				if (in_array($item->user_id, $ids)) $result = true;
+				break;
+				
+			case 'video':
+			case 'blog':
+				if (in_array($item->owner_id, $ids)) $result = true;
+				break;
+		}
+		
+		return $result;
+	}
 }

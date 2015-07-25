@@ -543,6 +543,11 @@ class Ynblog_IndexController extends Core_Controller_Action_Standard {
 		if (! $this->_helper->requireSubject ()->isValid ()) {
 			return;
 		}
+		
+		if (Engine_Api::_()->user()->itemOfDeactiveUsers($blog)) {
+			return $this->_helper->requireSubject()->forward();
+		}
+		
 		if (! $this->_helper->requireAuth ()->setAuthParams ( $blog, $viewer, 'view' )->isValid ()) {
 			return;
 		}

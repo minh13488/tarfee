@@ -6,6 +6,12 @@ class User_Model_DbTable_Recommendations extends Engine_Db_Table {
         $select = $this->select()->where('receiver_id = ?', $user_id)
         ->where('approved = ?', 1)
         ->order('given_date DESC');
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select->where('receiver_id NOT IN (?)', $deactiveIds)->where('giver_id NOT IN (?)', $deactiveIds);
+		}
+		
         return $this->fetchAll($select);
     }
 	
@@ -14,11 +20,23 @@ class User_Model_DbTable_Recommendations extends Engine_Db_Table {
         ->where('approved = ?', 1)
 		->where('`show` = ?', 1)
         ->order('given_date DESC');
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select->where('receiver_id NOT IN (?)', $deactiveIds)->where('giver_id NOT IN (?)', $deactiveIds);
+		}
+		
         return $this->fetchAll($select);
     }
 
 	public function removeRecommendationsOfReceiver($receiver_id) {
 		$where = $this->getAdapter()->quoteInto('receiver_id = ?', $receiver_id);
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select->where('receiver_id NOT IN (?)', $deactiveIds)->where('giver_id NOT IN (?)', $deactiveIds);
+		}
+		
         $this->delete($where);
 	}
 	
@@ -27,6 +45,12 @@ class User_Model_DbTable_Recommendations extends Engine_Db_Table {
         ->where('request = ?', 1)
         ->where('approved = ?', 0)
         ->order('creation_date DESC');
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select->where('receiver_id NOT IN (?)', $deactiveIds)->where('giver_id NOT IN (?)', $deactiveIds);
+		}
+		
         return $this->fetchAll($select);
 	}
 	
@@ -35,12 +59,24 @@ class User_Model_DbTable_Recommendations extends Engine_Db_Table {
         ->where('request = ?', 0)
         ->where('approved = ?', 0)
         ->order('given_date DESC');
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select->where('receiver_id NOT IN (?)', $deactiveIds)->where('giver_id NOT IN (?)', $deactiveIds);
+		}
+		
         return $this->fetchAll($select);
 	}
 	
 	public function getRecommendation($receiver_id, $giver_id) {
 		$select = $this->select()->where('receiver_id = ?', $receiver_id)
 		->where('giver_id = ?', $giver_id);
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select->where('receiver_id NOT IN (?)', $deactiveIds)->where('giver_id NOT IN (?)', $deactiveIds);
+		}
+
         return $this->fetchRow($select);
 	}
 
