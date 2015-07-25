@@ -23,7 +23,7 @@ Engine_Api::_() -> core() -> clearSubject();
 </ul>
 <?php if ($this-> count > $this->limit && !$this->reachLimit):?>
 
-  <a id="video-viewmore-btn" class="tf_button_action" href="javascript:void(0)" onclick="showMore(<?php echo ($this->limit + $this->from)?>)"><?php echo $this->translate('View More') ?></a>
+  <span style="cursor:pointer" id="video-viewmore-btn" class="tf_button_action" onclick="showMore(<?php echo ($this->limit + $this->from)?>)"><?php echo $this->translate('View More') ?></span>
 
 <div id="video-loading" style="display: none;">
 	<img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;' />

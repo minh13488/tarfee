@@ -22,7 +22,8 @@
 <?php foreach( $this->results as $row): ?>
 	<?php if ($count > $this->limit) break;?>
 	<?php $item = (!empty($row->type) && !empty($row->id)) ? $this->item($row->type, $row->id): $row;?>
-	<?php if ($item && !Engine_Api::_()->user()->itemOfDeactiveUsers($item)): ?>
+	<?php if ($item && !Engine_Api::_()->user()->itemOfDeactiveUsers($item)): 
+	if(in_array($item->getType(), array('user_playercard', 'event', 'video', 'blog', 'group', 'tfcampaign_campaign', 'user'))):?>
 	<li class="result-search-item <?php echo $item->getType()?>-item">
 	<?php switch ($item->getType()) :
 		case 'user_playercard':
@@ -401,11 +402,12 @@
   	<?php endswitch; ?>
 	</li>
 	<?php endif; ?>
+	<?php endif; ?>
 	<?php $count++;?>
 <?php endforeach;?>
 </ul>
 <?php if (count($this->results) > $this->limit && !$this->reachLimit):?>
-<a id="ynadvsearch-viewmore-btn" href="javascript:void(0)" onclick="showMore(<?php echo ($this->limit + $this->from)?>)"><?php echo $this->translate('View more result') ?></a>
+<span style="cursor:pointer" id="ynadvsearch-viewmore-btn" onclick="showMore(<?php echo ($this->limit + $this->from)?>)"><?php echo $this->translate('View more result') ?></span>
 <div id="ynadvsearch-loading" style="display: none;">
 	<img src='<?php echo $this->layout()->staticBaseUrl ?>application/modules/Core/externals/images/loading.gif' style='float:left;margin-right: 5px;' />
 </div>
