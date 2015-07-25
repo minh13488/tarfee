@@ -136,6 +136,11 @@ class Tfcampaign_Model_DbTable_Campaigns extends Engine_Db_Table {
     	
 		$select -> where('campaign.deleted <> 1');
 		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select -> where('campaign.user_id NOT IN (?)', $deactiveIds);
+		}
+		
 		if (isset($params['order'])) 
     	{
     		if (isset($params['direction'])) 

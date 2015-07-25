@@ -268,7 +268,12 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 		    ) ) < {$params['mile_of']} ) ))";
 			$select -> where($whereClause);
 		}
-
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select -> where("$eventTableName.user_id NOT IN (?)", $deactiveIds);
+		}
+		
 		// Order
 		if ($base_lat && $base_lng && $target_distance && is_numeric($target_distance))
 		{
@@ -315,7 +320,12 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 
 		$tableName = $this -> info('name');
 		$select = $this -> select() -> from($tableName, "$tableName.*") -> where("$tableName.starttime between '$from' and '$to'");
-
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select -> where("$tableName.user_id NOT IN (?)", $deactiveIds);
+		}
+		
 		return $this -> fetchAll($select);
 	}
 
@@ -360,6 +370,12 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 		-> join($membershipTableName, "$eventTableName.event_id = $membershipTableName.resource_id", '') 
 		-> where("$membershipTableName.active = 1 and $membershipTableName.rsvp <> 0");
 		$select -> where("$eventTableName.starttime between '$from' and '$to' ");
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select -> where("$eventTableName.user_id NOT IN (?)", $deactiveIds);
+		}
+		
 		return $this -> fetchAll($select);
 	}
 	
@@ -376,6 +392,12 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 		-> join($membershipTableName, "$eventTableName.event_id = $membershipTableName.resource_id", '') 
 		-> where("$membershipTableName.active = 1 and $membershipTableName.rsvp <> 0");
 		$select -> where("$eventTableName.endtime between '$from' and '$to' ");
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select -> where("$eventTableName.user_id NOT IN (?)", $deactiveIds);
+		}
+		
 		return $this -> fetchAll($select);
 	}
 
@@ -568,6 +590,12 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 	{
 		$select = $this -> select();
 		$select -> where("city=?", $location);
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select -> where("user_id NOT IN (?)", $deactiveIds);
+		}
+		
 		return $this -> fetchRow($select);
 	}
 
@@ -575,6 +603,12 @@ class Ynevent_Model_DbTable_Events extends Engine_Db_Table
 	{
 		$select = $this -> select();
 		$select -> where("repeat_group=?", $repeat_groups);
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select -> where("user_id NOT IN (?)", $deactiveIds);
+		}
+		
 		return $this -> fetchAll($select);
 	}
 

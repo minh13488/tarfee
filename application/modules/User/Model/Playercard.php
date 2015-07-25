@@ -223,7 +223,9 @@ class User_Model_Playercard extends Core_Model_Item_Abstract
 	function isViewable() {
 		//get viewer
 		$viewer = Engine_Api::_() -> user() -> getViewer();
-		
+		if (Engine_Api::_()->user()->itemOfDeactiveUsers($this)) {
+			return false;
+		}
 		//view for specific users
 		$tableUserItemView = Engine_Api::_() -> getDbTable('userItemView', 'user');
 		$userViewRows = $tableUserItemView -> getUserByItem($this);

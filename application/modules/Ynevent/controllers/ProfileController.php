@@ -20,6 +20,10 @@ class Ynevent_ProfileController extends Core_Controller_Action_Standard
   {
     $subject = Engine_Api::_()->core()->getSubject();
 	
+	if (Engine_Api::_()->user()->itemOfDeactiveUsers($subject)) {
+		return $this->_helper->requireSubject()->forward();
+	}
+	
 	//add meta keyword for SEO
 	$contents = explode(',', $subject->metadata);
 	foreach($contents as $content)

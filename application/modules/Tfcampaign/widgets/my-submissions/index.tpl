@@ -3,7 +3,7 @@
 	<?php foreach($this -> submitCampaignIds as $campaign_id) :?>
 		<li>
 			<?php $campaign = Engine_Api::_() -> getItem('tfcampaign_campaign', $campaign_id);?>
-			<?php if($campaign) :?>
+			<?php if($campaign && !Engine_Api::_()->user()->itemOfDeactiveUsers($campaign)) :?>
 				<div class="title"><?php echo $campaign;?></div>
 
 				<div class="date">
