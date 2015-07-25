@@ -863,4 +863,15 @@ class User_Api_Core extends Core_Api_Abstract
 		}
 		return false;
 	}
+	
+	public function getDeactiveUserIds() {
+		$table = Engine_Api::_()->getItemTable('user');
+		$select = $table->select()->where('deactive <> ?', 0);
+		$rows = $table->fetchAll($select);
+		$ids = array();
+		foreach ($rows as $row) {
+			$ids[] = $row->deactive;
+		}
+		return $ids;
+	}
 }

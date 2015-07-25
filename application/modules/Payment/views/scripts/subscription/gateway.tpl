@@ -76,7 +76,26 @@
 <?php endif; ?>
 
 <script type="text/javascript">
+	
+	function createPopupNotice(text) {
+		var div = new Element('div', {
+		   'class': 'payment-confirm-popup' 
+		});
+		var p = new Element('p', {
+			'class': 'payment-confirm-message',
+			text: text,
+		});
+		div.grab(p);
+		Smoothbox.open(div);
+	}
+	
 	<?php if($this->package->trial_duration > 0):?>
+		
+		createPopupNotice('<?php echo $this -> translate("You have chosen the trial plan. Please check your email for confirmation.");?>');
+		setTimeout(function(){
+				//do what you need here
+		}, 2000);
+		
 		function callTrial(subscription_id) {
 			var url = '<?php echo $this -> url(array('action' => 'using-trial'), 'user_general', true) ?>';
 			new Request.JSON({

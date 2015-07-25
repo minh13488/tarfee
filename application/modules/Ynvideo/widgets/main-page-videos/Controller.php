@@ -71,12 +71,25 @@ class Ynvideo_Widget_MainPageVideosController extends Engine_Content_Widget_Abst
 		// Finally get video
 		$strIds =  join(',', $ids);
 		$this -> view -> strIds = $strIds.','. $beforeStr;
-		$results = $table -> fetchAll(
-		$table 
-			-> select() 
-			-> where('video_id IN(' . $strIds . ')')
-			-> order(new Zend_Db_Expr("FIELD(video_id,  $strIds)"))
-		);
+		
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$results = $table -> fetchAll(
+			$table 
+				-> select()
+				-> where("owner_id NOT IN (?)", $deactiveIds) 
+				-> where('video_id IN(' . $strIds . ')')
+				-> order(new Zend_Db_Expr("FIELD(video_id,  $strIds)"))
+			);
+		}
+		else {
+			$results = $table -> fetchAll(
+			$table 
+				-> select() 
+				-> where('video_id IN(' . $strIds . ')')
+				-> order(new Zend_Db_Expr("FIELD(video_id,  $strIds)"))
+			);
+		} 
 		
 		if (!count($results)) {
 			return $this->setNoRender();
