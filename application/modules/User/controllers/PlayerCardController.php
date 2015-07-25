@@ -537,6 +537,10 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		$playerCard = Engine_Api::_() -> core() -> getSubject('user_playercard');
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		
+		if (Engine_Api::_()->user()->itemOfDeactiveUsers($playerCard)) {
+			return $this->_helper->requireSubject()->forward();
+		}
+		
 		//check view auth
 		if(!$playerCard -> isViewable()) {
 			return $this -> _helper -> requireAuth() -> forward();

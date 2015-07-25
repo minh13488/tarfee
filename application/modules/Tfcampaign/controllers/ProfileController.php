@@ -28,6 +28,11 @@ class Tfcampaign_ProfileController extends Core_Controller_Action_Standard
 	    	return $this->_helper->requireSubject()->forward();
 		}	
 	    $this -> view -> campaign = $campaign = Engine_Api::_()->core()->getSubject();
+		
+		if (Engine_Api::_()->user()->itemOfDeactiveUsers($campaign)) {
+			return $this->_helper->requireSubject()->forward();
+		}
+		
         // Check authorization to view campaign.
         if (!$campaign->isViewable()) {
             return $this -> _helper -> requireAuth() -> forward();
