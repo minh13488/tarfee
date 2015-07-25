@@ -900,7 +900,7 @@ class User_FriendsController extends Core_Controller_Action_User
 		    $this->view->paginator = $paginator = Zend_Paginator::factory($select);
 		
 		    // Set item count per page and current page number
-		    $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 4));
+		    $paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 10));
 		    $paginator->setCurrentPageNumber($this->_getParam('page', 1));
 		    // Get stuff
 		    $friendUsers = array();
@@ -914,7 +914,7 @@ class User_FriendsController extends Core_Controller_Action_User
 			$select = $memTable -> select() -> from($memTable -> info ("name")) -> where('user_id = ?', $user_id) -> where('active = 1');
 			$clubs = Zend_Paginator::factory($select);
 			// Set item count per page and current page number
-		    $clubs->setItemCountPerPage($this->_getParam('itemCountPerPage', 4));
+		    $clubs->setItemCountPerPage($this->_getParam('itemCountPerPage', 10));
 		    $clubs->setCurrentPageNumber($this->_getParam('page', 1));
 		    foreach( $clubs as $club ) 
 		    {

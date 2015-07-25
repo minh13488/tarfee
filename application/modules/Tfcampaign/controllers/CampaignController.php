@@ -544,7 +544,13 @@ class Tfcampaign_CampaignController extends Core_Controller_Action_Standard
 			date_default_timezone_set($viewer -> timezone);
 			$start = strtotime($values['start_date']);
 			$end = strtotime($values['end_date']);
+			$now = date('Y-m-d H:i:s');
 			date_default_timezone_set($oldTz);
+			if ($start < $now)
+			{
+				$form -> getElement('start_time') -> addError('Start Time should be equal or greater than Current Time!');
+				return;
+			}
 			if($start >= $end) {
 				$form -> addError($this -> view -> translate("End Time must be greater than Start Time."));
 				return;

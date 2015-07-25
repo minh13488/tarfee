@@ -235,10 +235,21 @@ class User_RecommendationController extends Core_Controller_Action_Standard {
                 $select = Engine_Api::_()->getDbtable('users', 'user')->select();
                 $select->where('username <> ?',$viewer->username);
             }
-            else {
-                $select = Engine_Api::_()->user()->getViewer()->membership()->getMembersObjectSelect();          
+            else 
+            {
+            	 $table = Engine_Api::_()->getDbtable('users', 'user');
+			     $subtable = Engine_Api::_()->getDbtable('membership', 'user');
+			     $tableName = $table->info('name');
+			     $subtableName = $subtable->info('name');
+			
+			     $select = $table->select()
+				      ->from($tableName)
+				      ->joinLeft($subtableName, '`'.$subtableName.'`.`user_id` = `'.$tableName.'`.`user_id`', null)
+				      ->where('`'.$subtableName.'`.`resource_id` = ?', $viewer->getIdentity());
+			
+			      $select->where('`'.$subtableName.'`.`active` = ?', 1);
             }
-         
+			
             if( $this->_getParam('includeSelf', false) ) {
                 $data[] = array(
                     'type' => 'user',
@@ -257,7 +268,7 @@ class User_RecommendationController extends Core_Controller_Action_Standard {
             if( null !== ($text = $this->_getParam('search', $this->_getParam('value'))) ) {
                 $select->where('`'.$table->info('name').'`.`displayname` LIKE ?', '%'. $text .'%');
             }
-      
+      		
             $ids = array();
             foreach( $select->getTable()->fetchAll($select) as $friend ) {
             	$recommendation = Engine_Api::_()->getDbTable('recommendations', 'user')->getRecommendation($viewer->getIdentity(), $friend->getIdentity());
