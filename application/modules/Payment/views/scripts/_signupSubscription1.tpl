@@ -95,7 +95,7 @@
 			<div id="buttons-label" class="form-label">&nbsp;</div>
 			<div id="buttons-element" class="form-element">
 				<button name="submit" id="submit" type="submit"><?php echo $this->translate('Continue'); ?></button>
-				<button name="cancel" id="cancel" type="submit"><?php echo $this->translate('skip'); ?></button>
+				<button name="cancel" id="cancel" type="submit"><?php echo $this->translate('cancel'); ?></button>
 			</div>
 		</div>
 		
