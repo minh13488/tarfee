@@ -243,11 +243,13 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
     if (!empty($values['cover_thumb'])) {
         $group -> setCoverPhoto($form -> cover_thumb);
     }
+	 /*
       // Add fields
       $customfieldform = $form->getSubForm('fields');
       $customfieldform->setItem($group);
       $customfieldform->saveValues();
       
+	 */
       // Process privacy
       $auth = Engine_Api::_()->authorization()->context;
 
@@ -922,4 +924,19 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
         echo $this ->view -> partial('_map_view.tpl', 'advgroup',array('datas'=>Zend_Json::encode($datas), 'contents' => Zend_Json::encode($contents)));
         exit();
     }
+    public function viewFanAction() {
+		$this -> _helper -> layout -> setLayout('default-simple');
+		$this -> view-> club = $club = Engine_Api::_() -> getItem('group', $this -> _getParam('club_id', 0));
+		if (!$club) {
+			return $this -> _helper -> requireSubject() -> forward();
+		}
+	}
+
+	public function moreInfoAction() {
+		$this -> _helper -> layout -> setLayout('default-simple');
+		$this -> view-> group = $group = Engine_Api::_() -> getItem('group', $this -> _getParam('club_id', 0));
+		if (!$group) {
+			return $this -> _helper -> requireSubject() -> forward();
+		}
+	}
 }

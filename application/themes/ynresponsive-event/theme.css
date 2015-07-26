@@ -5726,7 +5726,8 @@ body[id^=global_page_social-connect],
 #global_page_slprofileverify-index-setting-verification,
 #layout_page_user_signup_index,
 #global_page_user-auth-forgot,
-#global_page_user-signup-confirm
+#global_page_user-signup-confirm,
+#global_page_payment-subscription-gateway
 {
 	#global_wrapper
 	{
@@ -5881,4 +5882,23 @@ body[id^=global_page_social-connect] #global_content,
 #global_page_ynsocialads-ads-create-step-one #global_content, #global_page_ynsocialads-ads-create-choose-package #global_content
 {
 	padding-top: 0!important;
+}
+#global_page_user-signup-account
+{
+	.payment_form_signup .form-elements .form-label
+	{
+		width: auto;
+	}
+	input[type=radio]+label
+	{
+		font-weight: bold;
+	}
+	.payment_form_signup .package-description
+	{
+		font-size: 13px;
+	}
+	#terms-wrapper #terms-label
+	{
+		display: none;
+	}
 }

@@ -295,21 +295,24 @@ class Advgroup_Model_Group extends Core_Model_Item_Abstract
 
 		// Save
 		$storage = Engine_Api::_() -> storage();
-		$exif = exif_read_data($file);
 		$angle = 0;
-		if (!empty($exif['Orientation']))
+		if(defined('exif_read_data'))
 		{
-			switch($exif['Orientation'])
+			$exif = exif_read_data($file);
+			if (!empty($exif['Orientation']))
 			{
-				case 8 :
-					$angle = 90;
-					break;
-				case 3 :
-					$angle = 180;
-					break;
-				case 6 :
-					$angle = -90;
-					break;
+				switch($exif['Orientation'])
+				{
+					case 8 :
+						$angle = 90;
+						break;
+					case 3 :
+						$angle = 180;
+						break;
+					case 6 :
+						$angle = -90;
+						break;
+				}
 			}
 		}
 		// Resize image (main)

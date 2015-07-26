@@ -296,35 +296,55 @@
 		<?php break;?>
 		<?php case 'group': ?>
 			<?php $photoUrl = ($item -> getPhotoUrl('thumb.main')) ? $item->getPhotoUrl('thumb.main') : "application/modules/Advgroup/externals/images/nophoto_group_thumb_profile.png" ?>
-			<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)">
-			</div>
+			<a href="<?php echo $item->getHref()?>">
+				<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)">
+				</div>
+			</a>
 			<div class="club-info-general">
 				<div class="club-title">
 					<?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>
 				</div>
+				<?php 
+				$establishDateObj = null;
+				if (!is_null($item->establish_date) && !empty($item->establish_date) && $item->establish_date) 
+				{
+					$establishDateObj = new Zend_Date(strtotime($item->establish_date));	
+				}
+				if( $this->viewer() && $this->viewer()->getIdentity() ) 
+				{
+					$tz = $this->viewer()->timezone;
+					if (!is_null($establishDateObj))
+					{
+						$establishDateObj->setTimezone($tz);
+					}
+			    }
+				?>
+				<?php if(!empty($establishDateObj)) :?>
+					<div class="club-establish">
+						<?php echo (!is_null($establishDateObj)) ?  date('d M, Y', $establishDateObj -> getTimestamp()) : ''; ?>
+					</div>
+				<?php endif;?>
 				<?php if ($item->getCountry()) :?>
 				<div class="club-country">
 					<?php echo $item->getCountry()->getTitle()?>
+					<?php if ($item->getCity()) :?>
+						<?php echo ", ".$item->getCity()->getTitle()?>
+					<?php endif;?>
 				</div>
 				<?php endif;?>
-				
-				<?php if ($item->getProvince()) :?>
-				<div class="club-province">
-					<?php echo $item->getProvince()->getTitle()?>
-				</div>
-				<?php endif;?>
-				
-				<?php if ($item->getCity()) :?>
-				<div class="club-city">
-					<?php echo $item->getCity()->getTitle()?>
-				</div>
-				<?php endif;?>
-				
 				<div class="club-like-count">
 					<i class="fa fa-heart"></i>
-					<span class="like-count"><?php
-		        	$rows = $item -> membership() ->getMembers();
-					echo count($rows)?></span>
+					<span class="like-count">
+						<?php $rows = $item -> membership() ->getMembers();?>
+						<?php $url = $this->url(array('controller' => 'index','action'=>'view-fan', 'club_id'=> $item->getIdentity()), 'group_extended' , true)?>
+						<?php if(count($rows)):?>		
+						<a href="<?php echo $url?>" class="smoothbox">
+							<?php echo $this -> translate("Fans")." (".count($rows).")";?>
+						</a>
+						<?php else:?>
+							<?php echo $this -> translate("Fans")." (".count($rows).")";?>
+						<?php endif;?>
+					</span>
 				</div>
 		<?php break;?>
 		<?php case 'tfcampaign_campaign': ?>

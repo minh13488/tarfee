@@ -18,6 +18,22 @@
 	 	//check empty start time & end time
 	 	var startDate = $('start_date-date').get('value');
 	 	var endDate = $('end_date-date').get('value');
+	 	
+	 	var startHour = $('start_date-hour').get('value');
+	 	var startMinute = $('start_date-minute').get('value');
+	 	if($('start_date-ampm'))
+	 	{
+	 		var startAmpm = $('start_date-ampm').get('value');
+	 		if(startAmpm == 'PM' && startHour != 12)
+	 		{
+	 			startHour = startHour + 12;
+	 		}
+	 		else if(startAmpm == 'AM' && startHour == 12)
+	 		{
+	 			startHour = 0;
+	 		}
+	 	}
+	 	
 	 	if(startDate == "") {
 	 		var message = "<?php echo $this -> translate('start date is required');?>";
 	 		var div = new Element('div', {
@@ -48,8 +64,9 @@
 	 		var startDateObject  = new Date(startDate);
 	 		var endDateObject  = new Date(endDate);
 	 		var todayObject = new Date();
+	 		
 	 		//check startDate greater than now
-	 		if(todayObject.getTime() > startDateObject.getTime())
+	 		if(todayObject.getTime() > (startDateObject.getTime() + startHour*3600*1000 + startMinute*60*1000))
 			{
 		 		var message = "<?php echo $this -> translate('start date must greater than today');?>";
 		 		var div = new Element('div', {

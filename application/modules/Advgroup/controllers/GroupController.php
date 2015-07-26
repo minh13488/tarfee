@@ -249,11 +249,14 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
             // Set group info
             $group -> setFromArray($values);
             $group -> save();
-
+			
+			/*
             //Set custom fields
             $customfieldform = $form -> getSubForm('fields');
             $customfieldform -> setItem($group);
             $customfieldform -> saveValues();
+			 * 
+			 */
 
             //Set photo
             if (!empty($values['photo']))
