@@ -73,10 +73,10 @@ class User_Api_Core extends Core_Api_Abstract
 				  return "1";
 				  break;
 			  case '6':
-				  return "4";
+				  return "12";
 				  break;
 			  case '7':
-				  return "5";
+				  return "6";
 				  break;	  
 			  default:
 				  

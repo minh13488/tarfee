@@ -7,7 +7,10 @@
 }
 .plan-table {
 	width: 100%;
-	margin-top: 50px;
+	margin-top: 0px;
+}
+.plan-table table{
+	background-color: white;
 }
 .plan-table th {
 	line-height: 55px;
@@ -41,8 +44,6 @@
 }
 .plan-table{
 	table{
-		
-
 		.tf-settings-info{
 			position: absolute;
 			width: 278px;
@@ -156,7 +157,7 @@
 					}
 
 					&:nth-child(2){
-						background: transparent !important;
+						background: #ccc !important;
 						border: none;
 					}
 
