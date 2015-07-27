@@ -469,6 +469,17 @@ class User_IndexController extends Core_Controller_Action_Standard
 					$row -> group_id = $group_id;
 					$row -> save();
 				}
+				
+				$group = Engine_Api::_() -> getItem('group', $group_id);
+				$viewer = Engine_Api::_() -> user() -> getViewer();
+				if ($group -> membership() -> isMember($viewer))
+				{
+					$group -> membership() -> setUserApproved($viewer);
+				}
+				else
+				{
+					$group -> membership() -> addMember($viewer) -> setUserApproved($viewer);
+				}
 			}
 			$status = 'true';
 			$db -> commit();

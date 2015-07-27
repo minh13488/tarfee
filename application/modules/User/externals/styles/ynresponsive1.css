@@ -171,9 +171,12 @@
 	                    background: rgba(255,255,255, 0.9);
 			            overflow: hidden;
 			            display: flex;
+			            display: -webkit-flex;
+			            display: -moz-flex;
+						display: -ms-flex;
 			            li{
 			                display: inline-block;
-			                
+			                width: 100%;
 			                a{
 			                    padding: 3px 20px;
 			                    margin-left: 2px;
