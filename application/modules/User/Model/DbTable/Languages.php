@@ -8,7 +8,7 @@ class User_Model_DbTable_Languages extends Engine_Db_Table {
 	public function getLanguagesArray()
 	{
 		$typeArray = array();
-		$select = $this -> select();
+		$select = $this -> select() -> order("title");
 		$types = $this -> fetchAll($select);
 		foreach($types as $type)
 		{

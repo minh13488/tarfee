@@ -82,8 +82,8 @@
                 <label for="archievement-type"><?php echo $this->translate('*Type')?></label>
                 <div class="profile-section-form-input">
                     <select name="type" id="archievement-type">
-                    	<option value="trophy" <?php if ($item && $item->type == 'trophy') echo 'selected';?>><?php echo $this->translate('Trophy')?></option>
                     	<option value="archievement" <?php if ($item && $item->type == 'archievement') echo 'selected';?>><?php echo $this->translate('Archievement')?></option>
+                    	<option value="trophy" <?php if ($item && $item->type == 'trophy') echo 'selected';?>><?php echo $this->translate('Trophy')?></option>
                     </select>
                     <p class="error"></p>
                 </div>

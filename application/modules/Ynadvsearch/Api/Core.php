@@ -2,22 +2,22 @@
 class Ynadvsearch_Api_Core extends  Core_Api_Abstract {
 	
 	protected $_allowSearchType = array(
+		'tfcampaign_campaign' => 'Campaign',
+		'group' => 'Club',
 		'user' => 'Member',
 		'user_playercard' => 'Player',
-		'group' => 'Club',
-		'tfcampaign_campaign' => 'Campaign',
-		'video' => 'Video',
+		'blog' => 'Talk',
 		'event' => 'Tryout/Event',
-		'blog' => 'Talk'
+		'video' => 'Video'
 	);
 	
 	protected $_continents = array(
 		'Africa' => 'Africa',
-		'North America' => 'North America',
-		'South America' => 'South America',
 		'Asia' => 'Asia',
-		'Oceania' => 'Oceania',
 		'Europe' => 'Europe',
+		'North America' => 'North America',
+		'Oceania' => 'Oceania',
+		'South America' => 'South America'
 	); 
     
 	public function getContinents() {
