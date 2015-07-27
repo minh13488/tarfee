@@ -3811,7 +3811,7 @@ body#global_page_advgroup-profile-index{
 
 	&:hover{
 		border: 1px solid rgba(255,255,255,0.2);
-		border-bottom: 0;
+		border-bottom: 1px solid transparent;
 
 		ul{
 			display: block;

@@ -54,6 +54,8 @@ class Ynresponsiveevent_Widget_EventFooterMenuController extends Engine_Content_
     $languageNameList = array_merge(array(
       $defaultLanguage => $defaultLanguage
     ), $languageNameList);
+	
+	ksort($languageNameList);
     $this->view->languageNameList = $languageNameList;	
   }
 
