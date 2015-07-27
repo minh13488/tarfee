@@ -128,7 +128,6 @@ class User_Form_Signup_Account extends Engine_Form_Email
       $this->passconf->addValidator($specialValidator);
     }
 
-	/*
     // Element: username
     if( $settings->getSetting('user.signup.username', 1) > 0 ) {
       $description = Zend_Registry::get('Zend_Translate')
@@ -163,7 +162,6 @@ class User_Form_Signup_Account extends Engine_Form_Email
       $bannedUsernameValidator->setMessage("This profile url is not available, please use another one.");
       $this->username->addValidator($bannedUsernameValidator);
     }
-	*/
 	
     // Element: profile_type
     $this->addElement('Hidden', 'profile_type', array(

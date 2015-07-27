@@ -4920,3 +4920,8 @@ body#global_page_advgroup-profile-index{
 		}
 	}
 }
+#global_page_social-connect-signup-index .tarfee-popup-close,
+#global_page_user-auth-forgot #global_wrapper .layout_page_user_auth_forgot .tarfee-popup-close
+{
+	display: none;
+}
