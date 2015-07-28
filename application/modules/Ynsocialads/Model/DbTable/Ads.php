@@ -128,6 +128,10 @@ class Ynsocialads_Model_DbTable_Ads extends Engine_Db_Table
 		$select -> setIntegrityCheck(false) -> joinLeft("$tableMappingsName as mapping", "mapping.ad_id = ads.ad_id", '');
 		$select -> where("ads.status = 'running'");
 		$select -> where("ads.ad_type <> 'feed'");
+		if(!empty($params['club_owner']))
+		{
+			$select -> where('ads.user_id = ?', $params['club_owner']);
+		}
 		if (!empty($params['content_id']))
 		{
 			$select -> where('mapping.content_id = ?', $params['content_id']);

@@ -167,7 +167,7 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email
 		if ($rs -> count())
 		{
 			$this -> addElement('Dummy', 'signin_using', array(
-				'content' => '<h4 style="margin:5px 0; padding:0;text-align:center;border:0 none;">Or Sign In Using</h4>',
+				'content' => '<h4 style="margin:5px 0; padding:0;text-align:center;border:0 none;">'.$view -> translate("Or Sign In Using").'</h4>',
 				'decorators' => array('ViewHelper'),
 			));
 		}
