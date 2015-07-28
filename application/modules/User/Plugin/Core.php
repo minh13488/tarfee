@@ -82,9 +82,14 @@ class User_Plugin_Core
 	  	 $campaign -> delete();
 	  }
 	  
+	  //Remove invite request
+	  $requestTable = Engine_Api::_()->getDbTable('inviterequests', 'user');
+	  if (!empty($payload->email)) {
+	  	$requestTable->delete(array($requestTable->getAdapter()->quoteInto('email = ?', $payload->email)));
+	  }
     }
   }
-
+	
   public function onUserEnable($event)
   {
     $user = $event->getPayload();
@@ -191,6 +196,11 @@ class User_Plugin_Core
         Engine_Api::_()->getDbtable('notificationSettings', 'activity')
           ->setEnabledNotifications($payload, $defaultNotifications);
       }
+	  
+	  $requestTable = Engine_Api::_()->getDbTable('inviterequests', 'user');
+	  if (!empty($payload->email)) {
+	  	$requestTable->delete(array($requestTable->getAdapter()->quoteInto('email = ?', $payload->email)));
+	  }
     }
   }
   
