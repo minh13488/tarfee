@@ -5,7 +5,9 @@
 		<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)"></div>
 		<?php if($this ->group -> website):?>
 		<div class="club-website">
-			<a target="_blank" href="<?php echo $this ->group -> website?>">
+			<?php $websiteURl = $this ->group -> website;
+			if((strpos($websiteURl,'http://') === false) && (strpos($websiteURl,'https://') === false)) $websiteURl = 'http://'.$websiteURl; ?>
+			<a target="_blank" href="<?php echo $websiteURl?>">
 				<?php echo $this ->group -> website?>
 			</a>
 		</div>
@@ -49,13 +51,19 @@
 			<?php endif;?>
 			<div class="club-social">
 				<?php if($this ->group -> twitter):?>
-					<a target="_blank" href="<?php echo $this ->group -> twitter?>"><img src="application/modules/SocialConnect/externals/images/twitter.png" /></a>
+					<?php $URl = $this ->group -> twitter;
+					if((strpos($URl,'http://') === false) && (strpos($URl,'https://') === false)) $URl = 'http://'.$URl; ?>
+					<a target="_blank" href="<?php echo $URl?>"><img src="application/modules/SocialConnect/externals/images/twitter.png" /></a>
 				<?php endif;?>
 				<?php if($this ->group -> facebook):?>
-					<a target="_blank"  href="<?php echo $this ->group -> facebook?>"><img src="application/modules/SocialConnect/externals/images/facebook.png" /></a>
+					<?php $URl = $this ->group -> facebook;
+					if((strpos($URl,'http://') === false) && (strpos($URl,'https://') === false)) $URl = 'http://'.$URl; ?>
+					<a target="_blank"  href="<?php echo $URl?>"><img src="application/modules/SocialConnect/externals/images/facebook.png" /></a>
 				<?php endif;?>
 				<?php if($this ->group -> google):?>
-					<a target="_blank"  href="<?php echo $this ->group -> google?>"><img src="application/modules/SocialConnect/externals/images/google.png" /></a>
+					<?php $URl = $this ->group -> google;
+					if((strpos($URl,'http://') === false) && (strpos($URl,'https://') === false)) $URl = 'http://'.$URl; ?>
+					<a target="_blank"  href="<?php echo $URl?>"><img src="application/modules/SocialConnect/externals/images/google.png" /></a>
 				<?php endif;?>
 			</div>
 		</div>

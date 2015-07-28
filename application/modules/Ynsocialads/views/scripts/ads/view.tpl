@@ -463,7 +463,7 @@
     
       $('admin_stats_offset_next').setStyle('display', (args.offset < 0 ? '' : 'none'));
       
-      var url = new URI('<?php echo 'http://' . $_SERVER['HTTP_HOST'] . $this->url(array('action' => 'chart-ad','id'=>$this->ad->ad_id)) ?>');
+      var url = new URI('<?php echo '//' . $_SERVER['HTTP_HOST'] . $this->url(array('action' => 'chart-ad','id'=>$this->ad->ad_id)) ?>');
       url.setData(args);
       new Request.JSON({
             method: 'post',
