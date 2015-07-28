@@ -112,6 +112,12 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		{
 			// Create player
 			$values['languages'] = json_encode($values['languages']);
+			if($this -> _getParam('club_parent', 0))
+			{
+				$club = Engine_Api::_()->getItem('group', $this -> _getParam('club_parent', 0));
+				$values['parent_type'] = $club -> getType();
+				$values['parent_id'] = $club -> getIdentity();
+			}
 			$table = Engine_Api::_() -> getDbtable('playercards', 'user');
 			$player_card = $table -> createRow();
 			$player_card -> setFromArray($values);
@@ -171,9 +177,13 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 
 			$db -> commit();
 			
-			$tab = $this -> _getParam('tab', '');
-
+			if ($player_card -> parent_type == 'group') {
+				$club = Engine_Api::_()->getItem('group', $player_card -> parent_id);
+				return $this -> _redirectCustom($club);
+			}
+			
 			// Redirect
+			$tab = $this -> _getParam('tab', '');
 			$pageURL = 'http';
 			if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
 			{
@@ -181,12 +191,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			}
 			$pageURL .= "://";
 			
-			$player = Engine_Api::_()->getItem($player_card->getType(), $player_card->getIdentity());
 			$url = $pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref().'/view/tab/'.$tab;
-			if ($player->parent_type == 'group') {
-				$club = Engine_Api::_()->getItem('group', $player->parent_id);
-				if ($club) $url = $pageURL . $_SERVER['HTTP_HOST'] . $club -> getHref();
-			}
 			return $this -> _helper -> redirector -> gotoUrl($url);
 		}
 		catch( Engine_Image_Exception $e )
@@ -439,14 +444,20 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			}
 			// Commit
 			$db -> commit();
+			
+			if ($player_card -> parent_type == 'group') {
+				$club = Engine_Api::_()->getItem('group', $player_card -> parent_id);
+				return $this -> _redirectCustom($club);
+			}
 			// Redirect
+			$tab = $this -> _getParam('tab', '');
 			$pageURL = 'http';
 			if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
 			{
 				$pageURL .= "s";
 			}
 			$pageURL .= "://";
-			return $this -> _helper -> redirector -> gotoUrl($pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref());
+			return $this -> _helper -> redirector -> gotoUrl($pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref().'/view/tab/'.$tab);
 		}
 		catch( Engine_Image_Exception $e )
 		{

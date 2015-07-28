@@ -2,13 +2,13 @@
 class User_Model_DbTable_Relations extends Engine_Db_Table {
 		
 	public function getAllRelations() {
-		return $this -> fetchAll($this -> select());
+		return $this -> fetchAll($this -> select() -> order("title"));
 	}
 	
 	public function getRelationArray()
 	{
 		$typeArray = array();
-		$select = $this -> select();
+		$select = $this -> select()-> order("title");
 		$types = $this -> fetchAll($select);
 		foreach($types as $type)
 		{
@@ -20,7 +20,7 @@ class User_Model_DbTable_Relations extends Engine_Db_Table {
 	public function getRelationSearchArray()
 	{
 		$typeArray = array();
-		$select = $this -> select();
+		$select = $this -> select()-> order("search_title");
 		$types = $this -> fetchAll($select);
 		foreach($types as $type)
 		{

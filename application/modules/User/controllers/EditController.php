@@ -57,7 +57,30 @@ class User_EditController extends Core_Controller_Action_User
 		$this->view->user = $user = Engine_Api::_()->core()->getSubject();
     	$this->view->viewer = $viewer = Engine_Api::_()->user()->getViewer();
 
-    
+    	//change profile base on level
+		$table = Engine_Api::_()->getApi('core', 'fields')->getTable('user', 'values');
+	    $select = $table->select();
+	    $select->where('field_id = ?', 1);
+	    $select->where('item_id = ?', $user -> getIdentity());
+	    $value_profile = $table->fetchRow($select);
+		if($value_profile)
+		{
+			$profile_id = Engine_Api::_() -> user() -> getProfileTypeBaseOnLevel($user->level_id);
+			if($value_profile -> value != $profile_id)
+			{
+				$value_profile -> value = $profile_id;
+				$value_profile -> save();
+			}
+		}
+		else {
+			$value_profile = $table -> createRow();
+			$value_profile -> field_id = 1;
+			$value_profile -> item_id = $user -> getIdentity();
+			$profile_id = Engine_Api::_() -> user() -> getProfileTypeBaseOnLevel($user->level_id);
+			$value_profile -> value = $profile_id;
+			$value_profile -> save();
+		}
+	
     	// General form w/o profile type
     	$aliasedFields = $user->fields()->getFieldsObjectsByAlias();
     	$this->view->topLevelId = $topLevelId = 0;
@@ -82,7 +105,6 @@ class User_EditController extends Core_Controller_Action_User
       		'hasPrivacy' => true,
       		'privacyValues' => $this->getRequest()->getParam('privacy'),
     	));
-    	//$form->generate();
     
 		$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
 		$countriesAssoc = array('0'=>'') + $countriesAssoc;

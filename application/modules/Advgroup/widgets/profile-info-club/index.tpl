@@ -1,34 +1,65 @@
 <div id="club-profile-info-widget">
 	<?php $photoUrl = ($this ->group -> getPhotoUrl('thumb.main')) ? $this ->group->getPhotoUrl('thumb.main') : "application/modules/Advgroup/externals/images/nophoto_group_thumb_profile.png" ?>
-	<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)">
-	</div>
+	<?php $url = $this->url(array('controller' => 'index','action'=>'more-info', 'club_id'=> $this -> group->getIdentity()), 'group_extended' , true)?>
+	<a href="<?php echo $url?>" class="smoothbox">
+		<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)"></div>
+	</a>
 	<div class="club-info-general">
 		<div class="club-title">
-			<?php echo $this->group->getTitle()?>
+			<a href="<?php echo $url?>" class="smoothbox">
+				<?php echo $this->group->getTitle()?>
+			</a>
 		</div>
+		
+		<?php 
+			$establishDateObj = null;
+			if (!is_null($this->group->establish_date) && !empty($this->group->establish_date) && $this->group->establish_date) 
+			{
+				$establishDateObj = new Zend_Date(strtotime($this->group->establish_date));	
+			}
+			if( $this->viewer() && $this->viewer()->getIdentity() ) 
+			{
+				$tz = $this->viewer()->timezone;
+				if (!is_null($establishDateObj))
+				{
+					$establishDateObj->setTimezone($tz);
+				}
+		    }
+		?>
+		<?php if(!empty($establishDateObj)) :?>
+			<div class="club-establish">
+				<?php echo (!is_null($establishDateObj)) ?  date('d M, Y', $establishDateObj -> getTimestamp()) : ''; ?>
+			</div>
+		<?php endif;?>
 		<?php if ($this->group->getCountry()) :?>
 		<div class="club-country">
 			<?php echo $this->group->getCountry()->getTitle()?>
+			<?php if ($this->group->getCity()) :?>
+				<?php echo ", ".$this->group->getCity()->getTitle()?>
+			<?php endif;?>
 		</div>
 		<?php endif;?>
-		
+		<!--
 		<?php if ($this->group->getProvince()) :?>
 		<div class="club-province">
 			<?php echo $this->group->getProvince()->getTitle()?>
 		</div>
 		<?php endif;?>
-		
-		<?php if ($this->group->getCity()) :?>
-		<div class="club-city">
-			<?php echo $this->group->getCity()->getTitle()?>
-		</div>
-		<?php endif;?>
+		-->
 		
 		<div class="club-like-count">
 			<i class="fa fa-heart"></i>
-			<span class="like-count"><?php
-        	$rows = $this -> group -> membership() ->getMembers();
-			echo count($rows)?></span>
+			<span class="like-count">
+				<?php $rows = $this -> group -> membership() ->getMembers();?>
+				<?php $url = $this->url(array('controller' => 'index','action'=>'view-fan', 'club_id'=> $this -> group->getIdentity()), 'group_extended' , true)?>
+				<?php if(count($rows)):?>		
+				<a href="<?php echo $url?>" class="smoothbox">
+					<?php echo $this -> translate("Fans")." (".count($rows).")";?>
+				</a>
+				<?php else:?>
+					<?php echo $this -> translate("Fans")." (".count($rows).")";?>
+				<?php endif;?>
+			</span>
 		</div>
 	</div>
 	<?php if($this->aJoinButton && is_array($this->aJoinButton)):?>

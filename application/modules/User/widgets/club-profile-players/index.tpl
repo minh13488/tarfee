@@ -18,16 +18,16 @@
 	                 $max_player_card = 5;
 	         }
 		    
-			if($this->paginator->getTotalItemCount() < $max_player_card && $this -> viewer() -> isSelf($this -> subject())):
+			if($this->paginator->getTotalItemCount() < $max_player_card && $this -> subject() -> isOwner($this -> viewer())):
 		    ?>
-		    <div class="tarfee-profile-header-right">
+		    <div class="group_album_options">
 		        <?php echo $this->htmlLink(array(
 		            'route' => 'user_extended',
 		            'controller' => 'player-card',
 		            'action' => 'create',
-		            'tab' => 724,
-		        ), '<i class="fa fa-plus-square fa-lg"></i>&nbsp;&nbsp;'.$this->translate('Add Player'), array(
-		            'class' => ''
+		            'club_parent' => $this -> subject() -> getIdentity(),
+		        ), $this->translate('Add Player'), array(
+		            'class' => 'tf_button_action'
 		        ))
 		        ?>
 		    </div>    

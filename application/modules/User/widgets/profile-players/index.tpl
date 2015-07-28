@@ -95,6 +95,7 @@
 									            'controller' => 'player-card',
 									            'action' => 'edit',
 									            'id' => $player->playercard_id,
+									            'tab' => 724,
 									        ), '<i class="fa fa-pencil"></i>', array(
 									            'class' => '', 'title' => $this -> translate('Edit')
 									        ));

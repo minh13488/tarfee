@@ -1,5 +1,5 @@
 <h2>
-  <?php echo $this->translate("Thanks for joining!") ?>
+  <?php echo $this->translate("Welcome to Tarfee, world's sport network.") ?>
 </h2>
 
 <p>
@@ -14,8 +14,10 @@
   ?>
 </p>
 
-<br />
+<h5>
+  <a href="<?php echo $this -> url(array('controller' => 'edit', 'action' => 'profile', 'id' => $this -> viewer_id ), 'user_extended', true);?>"><?php echo $this->translate("Take me to my profile settings.") ?></a>
+</h5>
 
-<h3>
-  <a href="<?php echo $this -> url(array('controller' => 'edit', 'action' => 'profile', 'id' => $this -> viewer_id ), 'user_extended', true);?>"><?php echo $this->translate("OK, thanks!") ?></a>
-</h3>
+<h5>
+  <a href="<?php echo $this -> url(array(), 'default', true);?>"><?php echo $this->translate("Take me to Main Page, I will update my profile later.") ?></a>
+</h5>

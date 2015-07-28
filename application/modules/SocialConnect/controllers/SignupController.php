@@ -43,6 +43,14 @@ class SocialConnect_SignupController extends Core_Controller_Action_Standard
 			{
 				$emailElement -> setValue($_SESSION['User_Plugin_Signup_Account']['data']['email']);
 			}
+			
+			if(isset($_SESSION['Payment_Plugin_Signup_Subscription']['data']['package_id']))
+			{
+				$package = Engine_Api::_()->getDbtable('packages', 'payment')->find($_SESSION['Payment_Plugin_Signup_Subscription']['data']['package_id'])->current();
+				$profile_id = Engine_Api::_() -> user() -> getProfileTypeBaseOnLevel($package->level_id);
+				$profile_type = $form -> getElement('profile_type');
+				$profile_type -> setValue($profile_id);
+			}
 		 }
 		 $form ->setAction($actionUrl);
          $formSequenceHelper->setPlugin($plugin, $row->order);

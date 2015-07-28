@@ -5,58 +5,58 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <link rel="shortcut icon" href="//tarfee.com/landing/new_landing/ico/favicon.png">
+    <link rel="shortcut icon" href="landing/new_landing/img/favicon.ico">
 
-    <title>Tarfee Inc.</title>
+    <title>Tarfee - World's Sport Network</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="//tarfee.com/landing/new_landing/css/bootstrap.min.css" rel="stylesheet">
+    <link href="landing/new_landing/css/bootstrap.min.css" rel="stylesheet">
 
 	<!-- Custom styles for bootstrap -->
-    <link href="//tarfee.com/landing/new_landing/css/overwrite.css" rel="stylesheet">
+    <link href="landing/new_landing/css/overwrite.css" rel="stylesheet">
 
 	<!-- Custom styles for fontawesome icon -->
-    <link href="//tarfee.com/landing/new_landing/css/font-awesome.css" rel="stylesheet">
+    <link href="landing/new_landing/css/font-awesome.css" rel="stylesheet">
 
     <!-- Flexslider -->
-    <link href="//tarfee.com/landing/new_landing/css/flexslider.css" rel="stylesheet">
+    <link href="landing/new_landing/css/flexslider.css" rel="stylesheet">
 
     <!-- prettyPhoto -->	
-	<link href="//tarfee.com/landing/new_landing/css/prettyPhoto.css" rel="stylesheet">	
+	<link href="landing/new_landing/css/prettyPhoto.css" rel="stylesheet">	
 
     <!-- animate -->
-    <link href="//tarfee.com/landing/new_landing/css/animate.css" rel="stylesheet">
+    <link href="landing/new_landing/css/animate.css" rel="stylesheet">
 	
     <!-- Custom styles for this template -->
-    <link href="//tarfee.com/landing/new_landing/css/style.css" rel="stylesheet">
-    <link href="//tarfee.com/landing/new_landing/css/custom.css" rel="stylesheet">
+    <link href="landing/new_landing/css/style.css" rel="stylesheet">
+    <link href="landing/new_landing/css/custom.css" rel="stylesheet">
 	
 	<!-- Font for this template -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700">
 	
 	<!-- Custom styles for template skin -->
-    <link href="//tarfee.com/landing/new_landing/skins/default/skin.css" rel="stylesheet">
+    <link href="landing/new_landing/skins/default/skin.css" rel="stylesheet">
 	
     <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="//tarfee.com/landing/new_landing/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <!--[if lt IE 9]><script src="landing/new_landing/js/ie8-responsive-file-warning.js"></script><![endif]-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="//tarfee.com/landing/new_landing/js/html5shiv.js"></script>
-      <script src="//tarfee.com/landing/new_landing/js/respond.min.js"></script>
+      <script src="landing/new_landing/js/html5shiv.js"></script>
+      <script src="landing/new_landing/js/respond.min.js"></script>
     <![endif]-->
     
     <!-- load SE css default -->
-	<link href="//tarfee.com/application/modules/Core/externals/styles/main.css" rel="stylesheet">
+	<link href="application/modules/Core/externals/styles/main.css" rel="stylesheet">
 	
 	<!-- load SE js default -->
-	<script type="text/javascript" src="//tarfee.com/externals/mootools/mootools-core-1.4.5-full-compat-nc.js"></script>
-	<script type="text/javascript" src="//tarfee.com/externals/mootools/mootools-more-1.4.0.1-full-compat-nc.js"></script>
-	<script type="text/javascript" src="//tarfee.com/externals/chootools/chootools.js"></script>
-	<script type="text/javascript" src="//tarfee.com/application/modules/Core/externals/scripts/core.js"></script>
-	<script type="text/javascript" src="//tarfee.com/application/modules/User/externals/scripts/core.js"></script>
-	<script type="text/javascript" src="//tarfee.com/externals/smoothbox/smoothbox4.js"></script>
-	<script type="text/javascript" src="//tarfee.com/application/modules/SocialConnect/externals/scripts/core.js"></script>
+	<script type="text/javascript" src="externals/mootools/mootools-core-1.4.5-full-compat-nc.js"></script>
+	<script type="text/javascript" src="externals/mootools/mootools-more-1.4.0.1-full-compat-nc.js"></script>
+	<script type="text/javascript" src="externals/chootools/chootools.js"></script>
+	<script type="text/javascript" src="application/modules/Core/externals/scripts/core.js"></script>
+	<script type="text/javascript" src="application/modules/User/externals/scripts/core.js"></script>
+	<script type="text/javascript" src="externals/smoothbox/smoothbox4.js"></script>
+	<script type="text/javascript" src="application/modules/SocialConnect/externals/scripts/core.js"></script>
 
   </head>
 
@@ -72,7 +72,7 @@
 			<div class="container">
 				<div class="row wow fadeInDown" data-wow-delay="0.2s">
 					<div class="col-md-12">
-						<a href="#home" class="logo"><img src="//tarfee.com/landing/new_landing/img/tarfee-logo.png" class="img-responsive" alt="" /></a>
+						<a href="#home" class="logo"><img src="landing/new_landing/img/tarfee-logo.png" class="img-responsive" alt="" /></a>
 					</div>
 					
 					<div class="col-md-6 col-md-offset-3 home-headline">
@@ -103,7 +103,7 @@
 						<span class="icon-bar"></span>
 						<span class="icon-bar"></span>
 					</button>
-					<a class="navbar-brand" href="#"><img src="//tarfee.com/landing/new_landing/img/tarfee-small.png" alt="" /></a>
+					<a class="navbar-brand" href="#"><img src="landing/new_landing/img/tarfee-small2.png" alt="" /></a>
 				</div>
 				<div class="collapse navbar-collapse">
 					<ul class="nav navbar-nav">
@@ -138,7 +138,7 @@
 					<a href="#testimoni" class="btn btn-default btn-lg btn-scroll">How it Works?</a>					
 				</div>
 				<div class="col-md-6 wow bounceInDown" data-wow-delay="0.6s">
-					<img src="//tarfee.com/landing/new_landing/img/player3.png" class="img-responsive pull-right" alt="" />
+					<img src="landing/new_landing/img/player3.png" class="img-responsive pull-right" alt="" />
 				</div>
 			</div>
 		</div>
@@ -165,7 +165,7 @@
 								<li>
 									<div class="testimoni-box">
 										<div class="testimoni-avatar">
-											<img src="//tarfee.com/landing/new_landing/img/tarfee4.jpg" class="img-responsive" alt="" />
+											<img src="landing/new_landing/img/tarfee4.jpg" class="img-responsive" alt="" />
 										</div>
 										<div class="testimoni-text">
 											<h3><span>Football</span> Talents</h3>
@@ -185,7 +185,7 @@
 								<li>
 									<div class="testimoni-box">
 										<div class="testimoni-avatar">
-											<img src="//tarfee.com/landing/new_landing/img/tarfee1.jpg" class="img-responsive" alt="" />
+											<img src="landing/new_landing/img/tarfee1.jpg" class="img-responsive" alt="" />
 										</div>
 										<div class="testimoni-text">
 											<h3><span>Football</span> Schools, NGOs</h3>
@@ -206,7 +206,7 @@
 								<li>
 									<div class="testimoni-box">
 										<div class="testimoni-avatar">
-											<img src="//tarfee.com/landing/new_landing/img/tarfee3.jpg" class="img-responsive" alt="" />
+											<img src="landing/new_landing/img/tarfee3.jpg" class="img-responsive" alt="" />
 										</div>
 										<div class="testimoni-text">
 											<h3><span>Football</span> Scouts, Agents</h3>
@@ -226,7 +226,7 @@
 								<li>
 									<div class="testimoni-box">
 										<div class="testimoni-avatar">
-											<img src="//tarfee.com/landing/new_landing/img/tarfee2.jpg" class="img-responsive" alt="" />
+											<img src="landing/new_landing/img/tarfee2.jpg" class="img-responsive" alt="" />
 										</div>
 										<div class="testimoni-text">
 											<h3><span>Football</span> Clubs, Universities</h3>
@@ -268,21 +268,21 @@
 									<div class="team-profile">
 										<h6>Simon</h6>
 										<p>CEO</p>
-										<a href="https://www.facebook.com/rampageforfreedom"><i class="fa fa-facebook icon-social"></i></a>
-										<a href="#"><i class="fa fa-twitter icon-social"></i></a>
-										<a href="#"><i class="fa fa-linkedin icon-social"></i></a>						
+										<!--<a href="#"><i class="fa fa-facebook icon-social"></i></a>-->
+										<a href="https://twitter.com/oabushaban" target="_blank"><i class="fa fa-twitter icon-social"></i></a>
+										<a href="https://ca.linkedin.com/in/abushaban" target="_blank"><i class="fa fa-linkedin icon-social"></i></a>						
 									</div>
-									<img src="//tarfee.com/landing/new_landing/img/team1.jpg" class="img-responsive" alt="" />
+									<img src="landing/new_landing/img/team5.jpg" class="img-responsive" alt="" />
 								</div>
 								<div class="team-box  wow bounceInDown" data-wow-delay="0.6s">
 									<div class="team-profile">
 										<h6>Abdallah</h6>
 										<p>COO</p>
-										<a href="#"><i class="fa fa-facebook icon-social"></i></a>
-										<a href="#"><i class="fa fa-twitter icon-social"></i></a>
-										<a href="#"><i class="fa fa-linkedin icon-social"></i></a>						
+										<!--<a href="#"><i class="fa fa-facebook icon-social"></i></a>-->
+										<a href="https://twitter.com/Abdulla_Sanna" target="_blank"><i class="fa fa-twitter icon-social"></i></a>
+										<a href="https://ca.linkedin.com/pub/abdallah-sunna/33/560/a09" target="_blank"><i class="fa fa-linkedin icon-social"></i></a>						
 									</div>							
-									<img src="//tarfee.com/landing/new_landing/img/team3.jpg" class="img-responsive" alt="" />
+									<img src="landing/new_landing/img/team3.jpg" class="img-responsive" alt="" />
 								</div>
 							</div>
 							<div class="team-right">
@@ -290,21 +290,21 @@
 									<div class="team-profile">
 										<h6>Vanessa</h6>
 										<p>Relationship Manager</p>
-										<a href="#"><i class="fa fa-facebook icon-social"></i></a>
-										<a href="#"><i class="fa fa-twitter icon-social"></i></a>
-										<a href="#"><i class="fa fa-linkedin icon-social"></i></a>						
+										<!--<a href="#"><i class="fa fa-facebook icon-social"></i></a>-->
+										<a href="https://twitter.com/vanecute" target="_blank"><i class="fa fa-twitter icon-social"></i></a>
+										<a href="https://ca.linkedin.com/pub/vanessa-jiménez-escudero/12/91b/212" target="_blank"><i class="fa fa-linkedin icon-social"></i></a>						
 									</div>						
-									<img src="//tarfee.com/landing/new_landing/img/team2.jpg" class="img-responsive" alt="" />
+									<img src="landing/new_landing/img/team2.jpg" target="_blank" class="img-responsive" alt="" />
 								</div>
 								<div class="team-box wow bounceInDown" data-wow-delay="1s">
 									<div class="team-profile">
 										<h6>Tommy</h6>
 										<p>CTO</p>
-										<a href="#"><i class="fa fa-facebook icon-social"></i></a>
-										<a href="#"><i class="fa fa-twitter icon-social"></i></a>
-										<a href="#"><i class="fa fa-linkedin icon-social"></i></a>						
+										<!--<a href="#"><i class="fa fa-facebook icon-social"></i></a>-->
+										<a href="https://twitter.com/ttommynguyen" target="_blank"><i class="fa fa-twitter icon-social"></i></a>
+										<a href="https://vn.linkedin.com/in/ttommynguyen" target="_blank"><i class="fa fa-linkedin icon-social"></i></a>						
 									</div>							
-									<img src="//tarfee.com/landing/new_landing/img/team/team4.png" class="img-responsive" alt="" />
+									<img src="landing/new_landing/img/team4.jpg" class="img-responsive" alt="" />
 								</div>
 							</div>
 						</div>
@@ -333,7 +333,7 @@
 								<li>
 									<div class="blog-box">
 										<div class="blog-thumbls">
-											<img src="//tarfee.com/landing/new_landing/img/press-2.jpg" class="img-responsive" alt="" />
+											<img src="landing/new_landing/img/press-2.jpg" class="img-responsive" alt="" />
 										</div>
 										<div class="artcle">
 											<div class="article-head">
@@ -356,7 +356,7 @@
 								<li>
 									<div class="blog-box">
 										<div class="blog-thumbls">
-											<img src="//tarfee.com/landing/new_landing/img/press-3.jpg" class="img-responsive" alt="" />
+											<img src="landing/new_landing/img/press-3.jpg" class="img-responsive" alt="" />
 										</div>
 										<div class="artcle">
 											<div class="article-head">
@@ -379,7 +379,7 @@
 								<li>
 									<div class="blog-box">
 										<div class="blog-thumbls">
-											<img src="//tarfee.com/landing/new_landing/img/press-4.jpg" class="img-responsive" alt="" />
+											<img src="landing/new_landing/img/press-4.jpg" class="img-responsive" alt="" />
 										</div>
 										<div class="artcle">
 											<div class="article-head">
@@ -402,7 +402,7 @@
 								<li>
 									<div class="blog-box">
 										<div class="blog-thumbls">
-											<img src="//tarfee.com/landing/new_landing/img/press-5.jpg" class="img-responsive" alt="" />
+											<img src="landing/new_landing/img/press-5.jpg" class="img-responsive" alt="" />
 										</div>
 										<div class="artcle">
 											<div class="article-head">
@@ -449,7 +449,7 @@
 						<div class="contact-body wow rotateInDownLeft" data-wow-delay="0.4s">
 							<p>
 							<strong>Address :</strong> 102 St. Patricks Building, 1125 Colonel By Dr, Ottawa, ON K1S 5B6<br />
-							<strong>Phone :</strong> +1(647)500-0800 - <strong>Email :</strong> hello@tarfee.com
+							<strong>Phone :</strong> +1 (647) 500-0800 - <strong>Email :</strong> hello@tarfee.com
 							</p>
 						</div>
 					</div>
@@ -484,33 +484,33 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="//tarfee.com/landing/new_landing/js/jquery.min.js"></script>
-    <script src="//tarfee.com/landing/new_landing/js/bootstrap.min.js"></script>
+    <script src="landing/new_landing/js/jquery.min.js"></script>
+    <script src="landing/new_landing/js/bootstrap.min.js"></script>
 
 	<!-- Fixed navigation -->
-	<script src="//tarfee.com/landing/new_landing/js/navigation/jquery.smooth-scroll.js"></script>	
-	<script src="//tarfee.com/landing/new_landing/js/navigation/navbar.js"></script>	
-	<script src="//tarfee.com/landing/new_landing/js/navigation/waypoints.min.js"></script>
+	<script src="landing/new_landing/js/navigation/jquery.smooth-scroll.js"></script>	
+	<script src="landing/new_landing/js/navigation/navbar.js"></script>	
+	<script src="landing/new_landing/js/navigation/waypoints.min.js"></script>
 	
 	<!-- WOW JavaScript -->
-	<script src="//tarfee.com/landing/new_landing/js/wow.min.js"></script>
+	<script src="landing/new_landing/js/wow.min.js"></script>
 	
 	<!-- JavaScript bgSlider slider -->
-	<script src="//tarfee.com/landing/new_landing/js/bgslider/bgSlider.js"></script>		
+	<script src="landing/new_landing/js/bgslider/bgSlider.js"></script>		
 
 	<!-- Flexslider -->
-	<script src="//tarfee.com/landing/new_landing/js/flexslider/jquery.flexslider.js"></script>
-    <script src="//tarfee.com/landing/new_landing/js/flexslider/setting.js"></script>
+	<script src="landing/new_landing/js/flexslider/jquery.flexslider.js"></script>
+    <script src="landing/new_landing/js/flexslider/setting.js"></script>
 
 	<!-- prettyPhoto -->
-	<script src="//tarfee.com/landing/new_landing/js/prettyPhoto/jquery.prettyPhoto.js"></script>
-	<script src="//tarfee.com/landing/new_landing/js/prettyPhoto/setting.js"></script>
+	<script src="landing/new_landing/js/prettyPhoto/jquery.prettyPhoto.js"></script>
+	<script src="landing/new_landing/js/prettyPhoto/setting.js"></script>
 
 	<!-- Contact validation js -->
-    <script src="//tarfee.com/landing/new_landing/js/validation.js"></script>
+    <script src="landing/new_landing/js/validation.js"></script>
 	
 	<!-- Custom JavaScript -->
-	<script src="//tarfee.com/landing/new_landing/js/custom.js"></script>
+	<script src="landing/new_landing/js/custom.js"></script>
 	
   </body>
 </html>

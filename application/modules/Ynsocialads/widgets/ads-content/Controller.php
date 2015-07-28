@@ -3,13 +3,17 @@ class Ynsocialads_Widget_AdsContentController extends Engine_Content_Widget_Abst
 	public function indexAction() {
 		$params = array();
 		$params['content_id'] = $content_id =  $this->getElement()->getIdentity();
+		$group = Engine_Api::_()->core()->getSubject('group');
+		if($group)
+			$params['club_owner'] = $group -> getOwner() -> getIdentity();
 		$this -> view -> content_id = $content_id;
 		$this -> view -> viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
 		$tableHiddens = Engine_Api::_() -> getItemTable('ynsocialads_hidden');
 		$tableAdBlock = Engine_Api::_() -> getItemTable('ynsocialads_adblock');
 		$adBlock = $tableAdBlock->fetchRow($tableAdBlock->select()->where('content_id = ?',$content_id));
 		$ads_limit = $adBlock -> ads_limit;
-		$this -> view -> is_ajax = $is_ajax = $adBlock -> ajax;
+		$this -> view -> is_ajax = $is_ajax = 0;
+		$items = array();
 		if($viewer->getIdentity())
 		{
 			$items = Engine_Api::_() -> getItemTable('ynsocialads_ad') -> getAdsRender($params, $viewer->getIdentity(), 'yes');

@@ -1,6 +1,6 @@
 <div style="width: 600px; height: 400px">
-	<h3><?php echo $this->translate('Members who eyed on %s', $this->player -> getTitle())?></h3>
-	<?php $users = $this->player->getEyeOns();?>
+	<h3><?php echo $this->translate('Members who fans of %s', $this-> club -> gettitle())?></h3>
+	<?php $users =  $this -> club -> membership() ->getMembers();?>
 	<?php if (count($users)) :?>
 	<ul class="user-list user-items" style="height: 330px; overflow: auto">
 		<?php foreach ($users as $user):?>

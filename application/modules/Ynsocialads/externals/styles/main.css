@@ -294,10 +294,6 @@
 
 /*** ynsocial_ads ***/
 .ynsocial_ads {
-	border: 5px solid $theme_border_medium_color;
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-	border-radius: 5px;
 }
 
 .ynsocial_ads_like_cont {
@@ -504,9 +500,6 @@ select.small {
 }
 
 .ynsocial_ads_item {
-	padding: 10px;
-	position: relative;
-
 	& + .ynsocial_ads_item {
 		border-top: 1px solid $theme_border_medium_color;
 	}
@@ -547,9 +540,6 @@ select.small {
 	}
 
 	.ynsocial_ads_cont_image img {
-		max-width: 100%;
-		max-height: 200px;
-		margin: 5px 0;
 	}
 }
 

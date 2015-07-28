@@ -3069,6 +3069,7 @@ These are mostly widget-specific overrides.
 .albums_manage_info h3,
 .classifieds_browse_info_title h3,
 #global_page_user-signup-confirm h3,
+#global_page_user-index-confirm-trial h3,
 .polls_browse_info h3,
 .forum_topics_title h3,
 .forum_topic_title h3,
@@ -5723,10 +5724,13 @@ body[id^=global_page_social-connect],
 #global_page_user-player-card-view,
 #global_page_payment-settings-index,
 #global_page_sladvsubscription-settings-index,
+#global_page_sladvsubscription-subscription-choose,
 #global_page_slprofileverify-index-setting-verification,
 #layout_page_user_signup_index,
 #global_page_user-auth-forgot,
-#global_page_user-signup-confirm
+#global_page_user-signup-confirm,
+#global_page_user-index-confirm-trial,
+#global_page_payment-subscription-gateway
 {
 	#global_wrapper
 	{
@@ -5797,7 +5801,10 @@ body[id^=global_page_social-connect],
 #global_page_ynmember-edit-cover-photo #global_content div.headline,
 #global_page_ynmember-edit-place #global_content div.headline,
 #global_page_ynmember-edit-relationship #global_content div.headline,
-#global_page_sladvsubscription-settings-index #global_content div.headline
+#global_page_sladvsubscription-settings-index #global_content div.headline,
+#global_page_sladvsubscription-subscription-choose #global_content div.headline,
+body[id^=global_page_ynsocialads] #global_content .layout_top,
+body[id^=global_page_ynsocialads] #global_content .layout_main
 {
 	background-color: white;
   	 -webkit-border-radius: 5px;
@@ -5806,7 +5813,19 @@ body[id^=global_page_social-connect],
   	padding: 15px;
   	margin: 15px;
 }
-#global_page_user-signup-confirm #global_content
+body[id^=global_page_ynsocialads] #global_content > div{
+	padding: 5px;
+}
+body[id^=global_page_ynsocialads] #global_content .layout_page_breadcrumb
+{
+	padding: 15px 20px 0 20px;
+}
+body[id^=global_page_ynsocialads] #global_content .layout_ynsocialads_main_menu .headline
+{
+	border-bottom: 0;
+}
+#global_page_user-signup-confirm #global_content,
+#global_page_user-index-confirm-trial #global_content
 {
 	background-color: white;
   	padding: 15px;
@@ -5828,7 +5847,8 @@ body[id^=global_page_social-connect],
 #global_page_ynmember-edit-cover-photo #global_content .ynmember-container,
 #global_page_ynmember-edit-place #global_content .ynmember-container,
 #global_page_ynmember-edit-relationship #global_content .ynmember-container,
-#global_page_ynvideo-index-edit #form-upload
+#global_page_ynvideo-index-edit #form-upload,
+#global_page_sladvsubscription-subscription-choose #global_content .plan
 {
 	 padding: 15px;
 	 div
@@ -5881,4 +5901,23 @@ body[id^=global_page_social-connect] #global_content,
 #global_page_ynsocialads-ads-create-step-one #global_content, #global_page_ynsocialads-ads-create-choose-package #global_content
 {
 	padding-top: 0!important;
+}
+#global_page_user-signup-account
+{
+	.payment_form_signup .form-elements .form-label
+	{
+		width: auto;
+	}
+	input[type=radio]+label
+	{
+		font-weight: bold;
+	}
+	.payment_form_signup .package-description
+	{
+		font-size: 13px;
+	}
+	#terms-wrapper #terms-label
+	{
+		display: none;
+	}
 }

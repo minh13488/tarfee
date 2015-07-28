@@ -100,6 +100,39 @@ class User_Form_Signup1_Step1 extends Engine_Form_Email
 	  $this->password->getDecorator('Description')->setOptions(array('placement' => 'APPEND'));
 	  $this->password->getValidator('NotEmpty')->setMessage('Please enter a valid password.', 'isEmpty');
 	 $this -> password -> setAttrib('required', true);
+	 
+	 // Element: captcha
+    if( Engine_Api::_()->getApi('settings', 'core')->core_spam_signup ) {
+      $this->addElement('captcha', 'captcha', Engine_Api::_()->core()->getCaptchaOptions(array(
+        'tabindex' => $tabIndex++,
+      )));
+    }
+    
+    if( $settings->getSetting('user.signup.terms', 1) == 1 ) {
+      // Element: terms
+      $description = Zend_Registry::get('Zend_Translate')->_('I have read and agree to the <a target="_blank" href="%s/help/terms">terms of service</a>.');
+      $description = sprintf($description, Zend_Controller_Front::getInstance()->getBaseUrl());
+
+      $this->addElement('Checkbox', 'terms', array(
+        'label' => 'Terms of Service',
+        'description' => $description,
+        'required' => true,
+        'validators' => array(
+          'notEmpty',
+          array('GreaterThan', false, array(0)),
+        ),
+        'tabindex' => $tabIndex++,
+      ));
+      $this->terms->getValidator('GreaterThan')->setMessage('You must agree to the terms of service to continue.', 'notGreaterThan');
+      //$this->terms->getDecorator('Label')->setOption('escape', false);
+
+      $this->terms->clearDecorators()
+          ->addDecorator('ViewHelper')
+          ->addDecorator('Description', array('placement' => Zend_Form_Decorator_Abstract::APPEND, 'tag' => 'label', 'class' => 'null', 'escape' => false, 'for' => 'terms'))
+          ->addDecorator('DivDivDivWrapper');
+
+      //$this->terms->setDisableTranslator(true);
+    }
 
     // Init submit
     $this->addElement('Button', 'submit', array(

@@ -35,7 +35,14 @@ class Advgroup_Form_Edit extends Engine_Form
         new Engine_Filter_Censor(),
       ),
     ));
-    
+	
+    // establish date
+    $establish = new Engine_Form_Element_Date('establish_date');
+    $establish->setLabel("Establish Date");
+    $establish->setAllowEmpty(false);
+    $this->addElement($establish);
+	
+	/*
     $this->addElement('Text', 'tags',array(
           'label'=>'Tags (Keywords)',
           'autocomplete' => 'off',
@@ -45,6 +52,7 @@ class Advgroup_Form_Edit extends Engine_Form
           ),
         ));
     $this->tags->getDecorator("Description")->setOption("placement", "append");
+    */
     
     $allowed_html = 'strong, b, em, i, u, strike, sub, sup, p, div, pre, address, h1, h2, h3, h4, h5, h6, span, ol, li, ul, a, img, embed, br, hr, object , param, iframe';
     $this->addElement('TinyMce', 'description', array(
@@ -71,16 +79,74 @@ class Advgroup_Form_Edit extends Engine_Form
         new Engine_Filter_Html(array('AllowedTags'=>$allowed_html)))
     ));
 	
+	/*
 	// Cover Photo
     $this->addElement('File', 'cover_thumb', array(
       'label' => 'Cover Photo'
     ));
     $this->cover_thumb->addValidator('Extension', false, 'jpg,png,gif,jpeg');
+	*/
 	
     $this->addElement('File', 'photo', array(
       'label' => 'Profile Photo'
     ));
     $this->photo->addValidator('Extension', false, 'jpg,png,gif,jpeg');
+	
+	$this->addElement('Text', 'website', array(
+      'label' => 'Website',
+      'allowEmpty' => true,
+      'required' => false,
+      'validators' => array(
+        array('NotEmpty', true),
+        array('StringLength', false, array(1, 64)),
+      ),
+      'filters' => array(
+        'StripTags',
+        new Engine_Filter_Censor(),
+      ),
+    ));
+	
+	$this->addElement('Text', 'twitter', array(
+      'label' => 'Twitter',
+      'allowEmpty' => true,
+      'required' => false,
+      'validators' => array(
+        array('NotEmpty', true),
+        array('StringLength', false, array(1, 64)),
+      ),
+      'filters' => array(
+        'StripTags',
+        new Engine_Filter_Censor(),
+      ),
+    ));
+	
+	$this->addElement('Text', 'facebook', array(
+      'label' => 'Facebook',
+      'allowEmpty' => true,
+      'required' => false,
+      'validators' => array(
+        array('NotEmpty', true),
+        array('StringLength', false, array(1, 64)),
+      ),
+      'filters' => array(
+        'StripTags',
+        new Engine_Filter_Censor(),
+      ),
+    ));
+	
+	$this->addElement('Text', 'google', array(
+      'label' => 'Google+',
+      'allowEmpty' => true,
+      'required' => false,
+      'validators' => array(
+        array('NotEmpty', true),
+        array('StringLength', false, array(1, 64)),
+      ),
+      'filters' => array(
+        'StripTags',
+        new Engine_Filter_Censor(),
+      ),
+    ));
 
     $this->addElement('Select', 'category_id', array(
       'label' => 'Category',
@@ -96,6 +162,7 @@ class Advgroup_Form_Edit extends Engine_Form
       ),
     ));
 	
+	/*
 	$this -> addElement('Dummy', 'location_map', array(
 			'label' => 'Location',
 			'decorators' => array( array(
@@ -121,6 +188,7 @@ class Advgroup_Form_Edit extends Engine_Form
 			'value' => '0',
 			'order' => '99'
 		));
+	*/
 	
 	$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
 	$countriesAssoc = array('0'=>'') + $countriesAssoc;
@@ -137,6 +205,7 @@ class Advgroup_Form_Edit extends Engine_Form
 		'label' => 'City',
 	));
 	
+	/*
     $this->addElement('Radio', 'search', array(
       'label' => 'Include in search results?',
       'multiOptions' => array(
@@ -181,7 +250,7 @@ class Advgroup_Form_Edit extends Engine_Form
     $this->addSubForms(array(
       'fields' => $customFields
     ));
-
+   */
     // Privacy
     $availableLabels = array(
       'everyone'    => 'Everyone',
@@ -212,6 +281,7 @@ class Advgroup_Form_Edit extends Engine_Form
       }
     }
 
+	/*
     // Comment
     $commentOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('group', $user, 'auth_comment');
     $commentOptions = array_intersect_key($availableLabels, array_flip($commentOptions));
@@ -231,7 +301,7 @@ class Advgroup_Form_Edit extends Engine_Form
         $this->auth_comment->getDecorator('Description')->setOption('placement', 'append');
       }
     }
-
+	
     // Photo
     $photoOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('group', $user, 'auth_photo');
     $photoOptions = array_intersect_key($availableLabels, array_flip($photoOptions));
@@ -310,7 +380,7 @@ class Advgroup_Form_Edit extends Engine_Form
         $this->auth_sub_group->getDecorator('Description')->setOption('placement', 'append');
       }
     }
-
+	
     //Video
     $videoOptions = (array) Engine_Api::_()->authorization()->getAdapter('levels')->getAllowed('group', $user, 'auth_video');
     $videoOptions = array_intersect_key($availableLabels, array_flip($videoOptions));
@@ -451,7 +521,7 @@ class Advgroup_Form_Edit extends Engine_Form
         $this->auth_listing->getDecorator('Description')->setOption('placement', 'append');
       }
     }
-	
+	*/
     // Buttons
     $this->addElement('Button', 'submit', array(
       'label' => 'Save Changes',

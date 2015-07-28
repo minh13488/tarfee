@@ -259,15 +259,15 @@ class linkedin_API {
         
         $errno = curl_errno($ch);
         if ($errno !== 0) {
-            throw new Exception(sprintf("Error connecting to LinkedIn: [%s] %s", $errno, curl_error($ch)), $errno);
+            //throw new Exception(sprintf("Error connecting to LinkedIn: [%s] %s", $errno, curl_error($ch)), $errno);
         }
         $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         if ($code >= 400) {
-            throw new Exception(trim(strip_tags($body)), $code);
+            //throw new Exception(trim(strip_tags($body)), $code);
         }
         $response = json_decode($body, true);
         if (isset($response['error'])) {
-            throw new Exception(sprintf("%s: %s", $response['error'], $response['error_description']), $code);
+            //throw new Exception(sprintf("%s: %s", $response['error'], $response['error_description']), $code);
         }
         return $response;
     }
