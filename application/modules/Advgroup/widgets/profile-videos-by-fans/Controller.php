@@ -51,7 +51,11 @@ class Advgroup_Widget_ProfileVideosByFansController extends Engine_Content_Widge
 			-> where('video_id IN (?)', $video_ids)
 			-> where('owner_id IN (?)', $ids)
 			-> order('creation_date DESC');
-    
+    	
+		$deactiveIds = Engine_Api::_()->user()->getDeactiveUserIds();
+		if (!empty($deactiveIds)) {
+			$select-> where("owner_id NOT IN (?)", $deactiveIds);
+		}	
     	$this->view->paginator = $paginator = Zend_Paginator::factory($select);
 		$paginator->setItemCountPerPage($this->_getParam('itemCountPerPage', 3));
     	$paginator->setCurrentPageNumber($this->_getParam('page', 1));
