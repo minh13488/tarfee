@@ -1,9 +1,19 @@
 <div id="club-profile-info-widget">
-	<?php $photoUrl = ($this ->group -> getPhotoUrl('thumb.main')) ? $this ->group->getPhotoUrl('thumb.main') : "application/modules/Advgroup/externals/images/nophoto_group_thumb_profile.png" ?>
+	<?php $photoUrl = ($this ->group -> getPhotoUrl('thumb.profile')) ? $this ->group->getPhotoUrl('thumb.profile') : "application/modules/Advgroup/externals/images/nophoto_group_thumb_profile.png" ?>
 	<?php $url = $this->url(array('controller' => 'index','action'=>'more-info', 'club_id'=> $this -> group->getIdentity()), 'group_extended' , true)?>
-	<a href="<?php echo $url?>" class="smoothbox">
-		<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)"></div>
-	</a>
+	<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)">
+		<?php if($this -> group -> isOwner($this -> viewer())):?>
+			<span class = "edit-photo-btn">
+				<?php echo $this->htmlLink(array(
+			            'route' => 'group_specific',
+			            'action' => 'crop-photo',
+			            'group_id' => $this -> group -> group_id,
+			        ), '<i class="fa fa-crop"></i> '.$this->translate('Crop Photo'), array(
+			            'class' => 'tf-icon-dropdown smoothbox'
+			        ));?>
+			</span>
+		<?php endif;?>
+	</div>
 	<div class="club-info-general">
 		<div class="club-title">
 			<a href="<?php echo $url?>" class="smoothbox">

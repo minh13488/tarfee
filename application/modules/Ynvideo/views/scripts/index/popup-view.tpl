@@ -305,8 +305,7 @@ endif;
 							    </div>
 							    <div class="player_info_detail">
 							        <div class="player-title">
-							            <?php echo $player?>
-									<?php endif;?>
+							          	<a target="_parent" href="<?php echo $player -> getHref()?>"><?php echo $player -> getTitle()?></a>
 							        </div>
 							        <?php $position = $player->getPosition()?>
 							        <?php if ($position) : ?>
@@ -328,6 +327,7 @@ endif;
 								        	</a>
 								    		<?php endif; ?>
 										</span>
+									<?php endif;?>
 							    </div>
 							</div>
 						<?php endif;?>

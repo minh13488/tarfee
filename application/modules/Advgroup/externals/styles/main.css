@@ -7322,3 +7322,26 @@ div[class*="group_videos"] > .icon_group_video_new {
 		margin-top: 0;
 	}
 }
+.layout_advgroup_profile_info_club
+{
+	span.edit-photo-btn {
+	    text-transform: lowercase;
+	    text-align: center;
+	    display: block;
+	    padding: 5px;
+	    width: 100%;
+	    background: rgba(0,0,0,0.5);
+	    opacity: 0;
+	    transition: all 300ms;
+	    -webkit-transition: all 300ms;
+	    -moz-transition: all 300ms;
+	    -ms-transition: all 300ms;
+	}
+	.club-photo:hover span.edit-photo-btn 
+	{
+	    opacity: 1;
+	}
+}
+#global_page_advgroup-group-crop-photo .global_form div.form-element {
+    max-width: none!important;
+}

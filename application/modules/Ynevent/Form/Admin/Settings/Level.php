@@ -132,7 +132,7 @@ class Ynevent_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_A
           
         )
       ));
-
+		/*
       $this->addElement('Radio', 'style', array(
         'label' => 'Allow Profile Style',
         'required' => true,
@@ -142,7 +142,7 @@ class Ynevent_Form_Admin_Settings_Level extends Authorization_Form_Admin_Level_A
         ),
         'value' => 1
       ));
-      
+      */
       
     }
   }

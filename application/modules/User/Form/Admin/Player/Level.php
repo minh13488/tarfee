@@ -15,7 +15,7 @@ class User_Form_Admin_Player_Level extends Authorization_Form_Admin_Level_Abstra
       // Element: max
       $this->addElement('Text', 'max_player_card', array(
         'label' => 'Maximum Allowed Player Cards',
-        'description' => 'Enter the maximum number of allowed player cards. The field must contain an integer, use zero for unlimited.',
+        'description' => 'Enter the maximum number of allowed player cards. The field must contain an integer.',
         'validators' => array(
           array('Int', true),
           new Engine_Validate_AtLeast(0),

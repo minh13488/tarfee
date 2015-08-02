@@ -52,6 +52,9 @@ class User_Model_DbTable_Mappings extends Engine_Db_Table
         if (isset($params['owner_id'])) {
             $select -> where("owner_id = ?", $params['owner_id']);
         }
+		if (isset($params['owner_ids'])) {
+            $select -> where("owner_id IN (?)", $params['owner_ids']);
+        }
         if (isset($params['owner_type'])) {
             $select -> where("owner_type = ?", $params['owner_type']);
         }
@@ -123,6 +126,7 @@ class User_Model_DbTable_Mappings extends Engine_Db_Table
         if (isset($params['owner_type'])) {
             $select -> where("owner_type = ?", $params['owner_type']);
         }
+		$select -> where("`item_id` IN (SELECT `video_id` FROM `engine4_video_videos`)");
 	    return $select->query()->fetchColumn(0);
 	}
 	

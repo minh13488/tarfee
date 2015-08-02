@@ -9,7 +9,6 @@
   </div>
   <script type="text/javascript">
     var originalSize;
-    var loader = new Element('img',{ src: en4.core.staticBaseUrl + 'application/modules/Core/externals/images/loading.gif'});
     var lassoCrop;
     
     var lassoSetCoords = function(coords)

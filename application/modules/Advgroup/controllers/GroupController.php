@@ -818,5 +818,49 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
 		// Output
 		$this -> renderScript('group/unverify.tpl');
 	}
-	
+	public function cropPhotoAction()
+	{
+		$this -> view -> group = $group = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
+
+		// Get form
+		$this -> view -> form = $form = new User_Form_Edit_CropPhoto();
+
+		if (!$this -> getRequest() -> isPost())
+		{
+			return;
+		}
+
+		if (!$form -> isValid($this -> getRequest() -> getPost()))
+		{
+			return;
+		}
+		// Resizing a photo
+		if ($form -> getValue('coordinates') !== '')
+		{
+			$storage = Engine_Api::_() -> storage();
+
+			$iMain = $storage -> get($group -> photo_id, 'thumb.main');
+			$iProfile = $storage -> get($group -> photo_id, 'thumb.profile');
+
+			// Read into tmp file
+			$pName = $iMain -> getStorageService() -> temporary($iMain);
+			$iName = dirname($pName) . '/nis_' . basename($pName);
+
+			list($x, $y, $w, $h) = explode(':', $form -> getValue('coordinates'));
+
+			$image = Engine_Image::factory();
+			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 200, 200) -> write($iName) -> destroy();
+
+			$iProfile -> store($iName);
+
+			// Remove temp files
+			@unlink($iName);
+		}
+		$this->_forward('success', 'utility', 'core', array(
+	      'smoothboxClose' => true,
+	      'parentRefresh' => true,
+	      'messages' => array(Zend_Registry::get('Zend_Translate')->_('Your changes have been saved.'))
+	    ));
+	}
 }

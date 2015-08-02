@@ -2,8 +2,7 @@
 $viewer = $this -> viewer();
 $request = Zend_Controller_Front::getInstance()->getRequest();
 $module = $request->getParam('module');
-$controller = $request->getParam('controller');
-$action = $request->getParam('action');
+$advsearch = $request->getParam('advsearch');
 ?>
 <div class="tf_right_menu">
    
@@ -57,11 +56,42 @@ $action = $request->getParam('action');
          </ul>
       </li>
     <?php endif;?>
-      <li><a <?php if($module == 'tfcampaign') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("campaigns")?>" href="<?php echo $this -> url(array(), 'tfcampaign_general', true);?>"><img src="application/themes/ynresponsive-event/images/campaign.png" /></a></li>
-      <li><a <?php if($module == 'advgroup') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("clubs & organizations")?>" href="search?advsearch=organization"><img src="application/themes/ynresponsive-event/images/club.png" /></a></li>
-      <li><a <?php if($module == 'ynevent') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("events & tryouts")?>" href="<?php echo $this -> url(array(), 'event_general', true);?>"><img src="application/themes/ynresponsive-event/images/event.png" /></a></li>
-      <li><a <?php if($module == 'ynblog') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("talks")?>" href="<?php echo $this -> url(array(), 'blog_general', true);?>"><img src="application/themes/ynresponsive-event/images/talk.png" /></a></li>
-      <li><a title="<?php echo $this -> translate("professionals")?>" href="search?advsearch=professional"><img src="application/themes/ynresponsive-event/images/professional.png" /></a></li>
+      <li><a <?php if($module == 'tfcampaign') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("campaigns")?>" href="<?php echo $this -> url(array(), 'tfcampaign_general', true);?>">
+      	<?php if($module == 'tfcampaign'):?>
+      		<img src="application/themes/ynresponsive-event/images/campaign_active.png" />
+  		<?php else:?>
+      		<img src="application/themes/ynresponsive-event/images/campaign.png" />
+      	<?php endif;?>
+  	  </a></li>
+      <li><a <?php if($module == 'ynadvsearch' && $advsearch == 'organization') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("clubs & organizations")?>" href="search?advsearch=organization">
+      	<?php if($module == 'ynadvsearch' && $advsearch == 'organization'):?>
+      		<img src="application/themes/ynresponsive-event/images/club_active.png" />
+  		<?php else:?>
+      		<img src="application/themes/ynresponsive-event/images/club.png" />
+      	<?php endif;?>
+      </a></li>
+      <li><a <?php if($module == 'ynevent') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("events & tryouts")?>" href="<?php echo $this -> url(array(), 'event_general', true);?>">
+      	<?php if($module == 'ynevent'):?>
+      		<img src="application/themes/ynresponsive-event/images/event_active.png" />
+  		<?php else:?>
+      		<img src="application/themes/ynresponsive-event/images/event.png" />
+      	<?php endif;?>
+      </a></li>
+      <li><a <?php if($module == 'ynblog') echo "class='right_menu_active'"?> title="<?php echo $this -> translate("talks")?>" href="<?php echo $this -> url(array(), 'blog_general', true);?>">
+      	<?php if($module == 'ynblog'):?>
+      		<img src="application/themes/ynresponsive-event/images/talk_active.png" />
+  		<?php else:?>	
+      		<img src="application/themes/ynresponsive-event/images/talk.png" />
+      	<?php endif;?>
+      </a></li>
+      <li><a <?php if($module == 'ynadvsearch' && $advsearch == 'professional') echo "class='right_menu_active'"?>  title="<?php echo $this -> translate("professionals")?>" href="search?advsearch=professional">
+      	<?php if($module == 'ynadvsearch' && $advsearch == 'professional'):?>
+      		<img src="application/themes/ynresponsive-event/images/professional_active.png" />
+  		<?php else:?>
+      		<img src="application/themes/ynresponsive-event/images/professional.png" />
+      	<?php endif;?>
+      </a></li>
+      
       <li class="item-action" id="item-action-help">
          <a title="<?php echo $this -> translate("help")?>" href="javascript:void;"><img src="application/themes/ynresponsive-event/images/help.png" /></a>
          <ul class="list-items-dropdown">

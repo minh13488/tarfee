@@ -1,9 +1,9 @@
 <?php if(count($this -> saveRows)) :?>
 	<ul>
 	<?php foreach($this -> saveRows as $saveRow) :?>
-		<li>
 		<?php $campaign = Engine_Api::_() -> getItem('tfcampaign_campaign', $saveRow -> campaign_id);?>
 		<?php if($campaign && !Engine_Api::_()->user()->itemOfDeactiveUsers($campaign)) :?>
+		<li>
 			<div class="title"><?php echo $campaign;?></div>	
 
 			<div class="date">
@@ -33,8 +33,8 @@
 			<?php if($this -> viewer() -> getIdentity()) :?>
 				<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'remove-save', 'campaign_id' => $campaign -> getIdentity()), 'tfcampaign_general' , true);?>'><button><?php echo $this->translate('remove')?></button></a>
 			<?php endif;?>
-		<?php endif;?>
 		</li>
+		<?php endif;?>
 	<?php endforeach;?>
 	</ul>
 <?php endif;?>

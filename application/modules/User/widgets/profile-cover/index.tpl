@@ -229,13 +229,17 @@ else {
                    <a href="<?php echo $this -> user -> getHref();?>">
                       <?php echo $this -> user -> getTitle()?>
                    </a>
-               <div class="founder_member">
-                    <img src="application/modules/User/externals/images/icon_founder_memeber.png" alt="">
-                    <?php echo $this->translate('founder member'); ?>
-               </div>
+                   <?php $pro_ids = Engine_Api::_() -> user() -> getProfessionalUsers();
+				   
+                   if($this -> user -> level_id == 6 && array_search($this -> user -> getIdentity(), $pro_ids) < 100):  ?>
+		               <div class="founder_member">
+		                    <img src="application/modules/User/externals/images/icon_founder_memeber.png" alt="">
+		                    <?php echo $this->translate('founder member'); ?>
+		               </div>
+	               <?php endif;?>
                </h2>
 
- <?php
+ 			<?php
                 $about_me = "";
                 $fieldStructure = Engine_Api::_()->fields()->getFieldsStructurePartial($this -> user);
                 foreach( $fieldStructure as $map ) {

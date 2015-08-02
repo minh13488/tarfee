@@ -129,10 +129,7 @@
 					<span class="tarfee-count-number"><?php  echo $totalVideo; ?></span>
 					<span><?php echo $this->translate(array('video','videos', $totalVideo)); ?></span>
 				</li>
-				<li>
-					<span class="tarfee-count-number"><?php echo $totalPhoto; ?></span>
-					<span><?php echo $this->translate(array('photo','photos', $totalPhoto));?></span>
-				</li>
+				
 			</ul>
 			
 			<div class="nickname">
@@ -295,7 +292,7 @@
 	      	</div>
 		<?php break;?>
 		<?php case 'group': ?>
-			<?php $photoUrl = ($item -> getPhotoUrl('thumb.main')) ? $item->getPhotoUrl('thumb.main') : "application/modules/Advgroup/externals/images/nophoto_group_thumb_profile.png" ?>
+			<?php $photoUrl = ($item -> getPhotoUrl('thumb.profile')) ? $item->getPhotoUrl('thumb.profile') : "application/modules/Advgroup/externals/images/nophoto_group_thumb_profile.png" ?>
 			<a href="<?php echo $item->getHref()?>">
 				<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)">
 				</div>

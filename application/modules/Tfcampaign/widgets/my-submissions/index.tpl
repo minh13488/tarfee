@@ -1,9 +1,9 @@
 <?php if(count($this -> submitCampaignIds)) :?>
 	<ul>
 	<?php foreach($this -> submitCampaignIds as $campaign_id) :?>
-		<li>
 			<?php $campaign = Engine_Api::_() -> getItem('tfcampaign_campaign', $campaign_id);?>
 			<?php if($campaign && !Engine_Api::_()->user()->itemOfDeactiveUsers($campaign)) :?>
+			<li>
 				<div class="title"><?php echo $campaign;?></div>
 
 				<div class="date">
@@ -30,8 +30,8 @@
 					<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'list-withdraw', 'campaign_id' => $campaign->getIdentity()), 'tfcampaign_specific' , true)?>'><button><?php echo $this->translate('withdraw')?></button></a>
 					<a class="smoothbox" href='<?php echo $this -> url(array('action' => 'list-edit', 'campaign_id' => $campaign->getIdentity()), 'tfcampaign_specific' , true)?>'><button><?php echo $this->translate('edit')?></button></a>
 				<?php endif;?>
+			</li>
 			<?php endif;?>
-		</li>
 	<?php endforeach;?>
 	</ul>
 <?php endif;?>

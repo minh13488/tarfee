@@ -340,7 +340,7 @@ class User_Plugin_Core
 		$item = Engine_Api::_()->getItem($payload -> getType(), $payload -> getIdentity());
 		$user = Engine_Api::_()->user()->getViewer();
 		$club = $user->getClub();
-		if ($payload -> getType() != 'video' && in_array($payload -> getType(), $availableType) && Engine_Api::_()->user()->canTransfer($item) && ($item->parent_type != 'group')) {
+		if ($club && $payload -> getType() != 'video' && in_array($payload -> getType(), $availableType) && Engine_Api::_()->user()->canTransfer($item) && ($item->parent_type != 'group')) {
 			$item->parent_type = 'group';
 			$item->parent_id = $club->getIdentity();
 			$item->save();

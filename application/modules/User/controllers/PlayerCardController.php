@@ -570,7 +570,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 
 	public function cropPhotoAction()
 	{
-		$this -> view -> user = $user = Engine_Api::_() -> core() -> getSubject();
+		$this -> view -> playerCard = $playerCard = Engine_Api::_() -> core() -> getSubject();
 		$this -> view -> viewer = $viewer = Engine_Api::_() -> user() -> getViewer();
 
 		// Get form
@@ -590,8 +590,8 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		{
 			$storage = Engine_Api::_() -> storage();
 
-			$iMain = $storage -> get($user -> photo_id, 'thumb.main');
-			$iProfile = $storage -> get($user -> photo_id, 'thumb.profile');
+			$iMain = $storage -> get($playerCard -> photo_id, 'thumb.main');
+			$iProfile = $storage -> get($playerCard -> photo_id, 'thumb.profile');
 
 			// Read into tmp file
 			$pName = $iMain -> getStorageService() -> temporary($iMain);

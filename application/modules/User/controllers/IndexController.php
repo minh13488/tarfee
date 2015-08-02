@@ -145,6 +145,7 @@ class User_IndexController extends Core_Controller_Action_Standard
 
 	public function browseAction()
 	{
+		$this -> _helper -> redirector -> gotoRoute(array(), 'default', true);
 		$require_check = Engine_Api::_() -> getApi('settings', 'core') -> getSetting('core.general.browse', 1);
 		if (!$require_check)
 		{

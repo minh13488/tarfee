@@ -8,7 +8,7 @@ class User_Form_Edit_CropPhoto extends Engine_Form
       ->setAttrib('name', 'CropPhoto');
 
     $this->addElement('Image', 'current', array(
-      'label' => 'Current Photo',
+      'label' => 'Main Photo',
       'ignore' => true,
       'decorators' => array(array('ViewScript', array(
         'viewScript' => '_formCropImage.tpl',

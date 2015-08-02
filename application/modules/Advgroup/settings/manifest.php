@@ -163,7 +163,7 @@
 								'action' => 'index',
 						),
 						'reqs' => array(
-								'action' => '(request-verify|verify-request|verify|unverify|edit|delete|join|leave|cancel|accept|invite|style|transfer|email-to-followers)',
+								'action' => '(request-verify|verify-request|verify|unverify|edit|delete|join|leave|cancel|accept|invite|style|transfer|email-to-followers|crop-photo)',
 								'group_id' => '\d+',
 						)
 				),

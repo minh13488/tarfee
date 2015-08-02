@@ -118,7 +118,8 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		}
 		else if($values['parent_type'] == 'user_library')
 		{
-			$values['parent_id'] = $viewer -> getIdentity();
+			$library = $viewer -> getMainLibrary();
+			$values['parent_id'] = $library -> getIdentity();
 		}
 			
 		$values['owner_type'] = 'user';

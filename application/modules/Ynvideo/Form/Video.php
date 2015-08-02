@@ -101,11 +101,13 @@ class Ynvideo_Form_Video extends Engine_Form
 			$obClub = Engine_Api::_() -> getItem('group', $club_id);
 			$clubFollowing[$obClub -> getIdentity()] = $obClub -> getTitle();
 		}
-		
-		$this -> addElement('Multiselect', 'clubs', array(
-			'label' => 'Club Tagging',
-			'multiOptions' => $clubFollowing
-		));
+		if(count($clubFollowing))
+		{
+			$this -> addElement('Multiselect', 'clubs', array(
+				'label' => 'Club Tagging',
+				'multiOptions' => $clubFollowing
+			));
+		}
 		// View
 
 		if ($this -> _parent_type == 'group')

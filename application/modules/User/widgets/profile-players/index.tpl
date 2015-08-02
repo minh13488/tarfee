@@ -170,6 +170,7 @@
 												)) ;
 											?>
 											</li>
+											<!--
 											<li>
 											<?php
 												echo $this->htmlLink(array(
@@ -181,6 +182,7 @@
 										        ));
 											?>
 											</li>
+											-->
 										</ul>
 									<?php else: ?>
 										<!-- asd sa d  -->
@@ -321,10 +323,12 @@
 							<span class="tarfee-count-number"><?php  echo $totalVideo; ?></span>
 							<span><?php echo $this->translate(array('video','videos', $totalVideo)); ?></span>
 						</li>
+						<!--
 						<li>
 							<span class="tarfee-count-number"><?php echo $totalPhoto; ?></span>
 							<span><?php echo $this->translate(array('photo','photos', $totalPhoto));?></span>
 						</li>
+						-->
 					</ul>
 					
 					<div class="nickname">
