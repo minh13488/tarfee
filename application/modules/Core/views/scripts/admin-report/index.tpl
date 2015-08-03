@@ -146,6 +146,8 @@ if( $settings->getSetting('user.support.links', 0) == 1 ) {
         <td class="nowrap"><?php echo $item->category ?></td>
         <td class="admin_table_options">
         	<?php $subject = Engine_Api::_() -> getItem($item->subject_type, $item->subject_id);
+			if($subject)
+			{
         	echo $this->htmlLink(array(
 			            'route' => 'messages_general',
 			            'action' => 'compose',
@@ -153,9 +155,10 @@ if( $settings->getSetting('user.support.links', 0) == 1 ) {
 			        ), $this->translate('send message'), array(
 			            'class' => 'smoothbox'
 			        ));
+			}
 	        		?>
 	       <span class="sep">|</span>
-          <?php echo $this->htmlLink(array('action' => 'action', 'id' => $item->getIdentity(), 'reset' => false, 'format' => 'smoothbox'), $this->translate("take action"), array('class' => 'smoothbox')) ?>
+          <?php echo $this->htmlLink(array('action' => 'action', 'id' => $item->getIdentity(), 'reset' => false), $this->translate("take action"), array('class' => 'smoothbox')) ?>
           <span class="sep">|</span>
           <?php if( !empty($item->subject_type) ): ?>
             <?php echo $this->htmlLink(array('action' => 'view', 'id' => $item->getIdentity(), 'reset' => false), $this->translate("view content"), array('target' => '_blank')) ?>
