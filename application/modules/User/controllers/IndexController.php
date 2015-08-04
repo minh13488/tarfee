@@ -965,4 +965,30 @@ class User_IndexController extends Core_Controller_Action_Standard
 			return $this -> _helper -> requireSubject() -> forward();
 		}
 	}
+	
+	public function signonZendeskAction()
+	{
+		if (!$this -> _helper -> requireUser() -> isValid())
+			return;
+		$secret = "WrQadaNZJSX9SHh82FgOl4jsZgnVkjPgStt1qlpCdtnXjDnF";
+		$subdomain = "tarfee";
+		$now = time();
+		$user = Engine_Api::_()->user()->getViewer();
+		$email = $user -> email;
+		$user_id = $user -> getIdentity();
+		$name = $user -> getTitle();
+		$remote_photo_url = 'https://tarfee.com/'.$user -> getPhotoUrl('thumb.profile');
+		$token = array(
+		    "jti" => md5($now . rand()),
+		    "iat" => $now,
+		    "name" => $name,
+		    "email" => $email,
+		    "external_id" => $user_id,
+		    "remote_photo_url" => $remote_photo_url,
+		);
+		$jwt = Engine_Api::_() -> getApi('Jwt' , 'User') -> encode($token, $secret);
+		$returnUrl = $this -> _getParam('return_to', '');
+		$url = "https://" . $subdomain . ".zendesk.com/access/jwt?jwt=" . $jwt.'&return_to='.$returnUrl;
+		return $this -> _helper -> redirector -> gotoUrl($url);
+	}
 }
