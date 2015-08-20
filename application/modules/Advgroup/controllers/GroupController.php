@@ -626,15 +626,6 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
         $db -> beginTransaction();
         $member = Engine_Api::_() -> user() -> getUser($values['toValues']);
 
-        if (!$group -> membership() -> isMember($member))
-        {
-            return $this -> _forward('success', 'utility', 'core', array(
-                'closeSmoothbox' => true,
-                'parentRefresh' => true,
-                'messages' => array(Zend_Registry::get('Zend_Translate') -> _('That user is not a member of this group.')),
-            ));
-        }
-
         try
         {
             $group -> user_id = $values['toValues'];

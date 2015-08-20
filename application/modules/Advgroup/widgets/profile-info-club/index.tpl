@@ -23,7 +23,7 @@
 		
 		<?php 
 			$establishDateObj = null;
-			if (!is_null($this->group->establish_date) && !empty($this->group->establish_date) && $this->group->establish_date) 
+			if (!is_null($this->group->establish_date) && !empty($this->group->establish_date) && $this->group->establish_date  != '0000-00-00') 
 			{
 				$establishDateObj = new Zend_Date(strtotime($this->group->establish_date));	
 			}

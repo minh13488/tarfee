@@ -939,4 +939,178 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
 			return $this -> _helper -> requireSubject() -> forward();
 		}
 	}
+	
+	public function importClubAction()
+	{
+		ignore_user_abort(true);
+		set_time_limit(0);
+		$path = APPLICATION_PATH. "/Clubs_Database.csv";
+		$fh = fopen($path, "r");
+		// read header of file
+		$row = fgetcsv($fh, 0, ',');
+		
+		while (($row = fgetcsv($fh, 0, ',')) != false)
+		{
+			$db = Engine_Api::_()->getDbtable('groups', 'advgroup')->getAdapter();
+		    $db->beginTransaction();
+		
+		    try {
+		      // Create group
+		      if($row[3] == 'England')
+			  {
+			  	$row[3] = 'United Kingdom';
+			  }
+		      $countryId = Engine_Api::_()->getDbtable('locations', 'user') -> getConuntyIdByName($row[3]);
+			  $city = Engine_Api::_()->getDbtable('locations', 'user') -> getCityByName($row[1]);
+		      $values = array(
+			  'user_id' => 1,
+			  'title' => $row[0],
+			  'country_id' => $countryId
+			  );
+			  if($city)
+			  {
+			  	$values['city_id'] = $city -> location_id;
+				$values['province_id'] = $city -> parent_id;
+			  }
+			  if($row[4])
+			  {
+			  	$values['establish_date'] = $row[4]."-01-01";
+			  }
+		      $table = Engine_Api::_()->getDbtable('groups', 'advgroup');
+		      $group = $table->createRow();
+		      $group->setFromArray($values);
+		      $group->save();
+				
+			  $user = Engine_Api::_() -> getItem('user', 1);
+		      // Add owner as member
+		      $group->membership()->addMember($user)
+		          ->setUserApproved($user)
+		          ->setResourceApproved($user);
+		
+		      // Set photo
+		      if( !empty($row[6]) ) {
+		        $group->setPhoto(APPLICATION_PATH.'/logos/'.$row[6]);
+		      }
+		
+		      // Process privacy
+		      $auth = Engine_Api::_()->authorization()->context;
+		      $roles = array(
+		                'owner',
+		                'officer',
+		                'member',
+		                'registered',
+		                'everyone'
+		            );
+		
+		      if( empty($values['auth_view']) ) {
+		        $values['auth_view'] = 'everyone';
+		      }
+		
+		      if( empty($values['auth_comment']) ) {
+		        $values['auth_comment'] = 'registered';
+		      }
+		
+		      if( empty($values['auth_poll']) ) {
+		        $values['auth_poll'] = 'member';
+		      }
+		
+		      if( empty($values['auth_event']) ) {
+		        $values['auth_event'] = 'registered';
+		      }
+		
+		      if( empty($values['auth_sub_group'])){
+		        $values['auth_sub_group'] = 'member';
+		      }
+		
+		      if( empty($values['auth_video'])){
+		        $values['auth_video'] = 'member';
+		      }
+		
+		      if( empty($values['auth_wiki'])){
+		        $values['auth_wiki'] = 'member';
+		      }
+		      
+		      if( empty($values['auth_music'])){
+		        $values['auth_music'] = 'member';
+		      }
+		      
+		      if( empty($values['auth_listing'])){
+		        $values['auth_listing'] = 'member';
+		      }
+		          
+		      if( empty($values['auth_folder'])){
+		        $values['auth_folder'] = 'member';
+		      }
+		
+		      if( empty($values['auth_file_upload'])){
+		        $values['auth_file_upload'] = 'member';
+		      }
+		    
+		      if( empty($values['auth_file_down'])){
+		        $values['auth_file_down'] = 'member';
+		      }
+		
+		      
+		      $viewMax = array_search($values['auth_view'], $roles);
+		      $commentMax = array_search($values['auth_comment'], $roles);
+		      $photoMax = array_search($values['auth_photo'], $roles);
+		      $groupMax = array_search($values['auth_event'], $roles);
+		      $pollMax = array_search($values['auth_poll'],$roles);
+		      $inviteMax = array_search($values['auth_invite'], $roles);
+		      $subGroupMax = array_search($values['auth_sub_group'], $roles);
+		      $videoMax = array_search($values['auth_video'], $roles);
+		      $wikiMax = array_search($values['auth_wiki'], $roles);
+		      $musicMax = array_search($values['auth_music'], $roles);
+		      $folderMax = array_search($values['auth_folder'], $roles);
+		      $fileuploadMax = array_search($values['auth_file_upload'], $roles);
+		      $filedownloadMax = array_search($values['auth_file_down'], $roles);
+		      $listingMax = array_search($values['auth_listing'], $roles);
+		    
+		      $officerList = $group->getOfficerList();
+		
+		      foreach( $roles as $i => $role ) {
+		        if( $role === 'officer' ) {
+		          $role = $officerList;
+		        }
+		        $auth->setAllowed($group, $role, 'view', ($i <= $viewMax));
+		        $auth->setAllowed($group, $role, 'comment', ($i <= $commentMax));
+		        $auth->setAllowed($group, $role, 'photo', ($i <= $photoMax));
+		        $auth->setAllowed($group, $role, 'event', ($i <= $groupMax));
+		        $auth->setAllowed($group, $role, 'poll', ($i <= $pollMax));
+		        $auth->setAllowed($group, $role, 'invite', ($i <= $inviteMax));
+		        $auth->setAllowed($group, $role, 'sub_group', ($i <= $subGroupMax));
+		        $auth->setAllowed($group, $role, 'video', ($i <= $videoMax));
+		        $auth->setAllowed($group, $role, 'wiki', ($i <= $wikiMax));
+		        $auth->setAllowed($group, $role, 'music', ($i <= $musicMax));
+		        $auth->setAllowed($group, $role, 'folder', ($i <= $folderMax));
+		        $auth->setAllowed($group, $role, 'file_upload', ($i <= $fileuploadMax));
+		        $auth->setAllowed($group, $role, 'file_down', ($i <= $filedownloadMax));
+		        $auth->setAllowed($group, $role, 'listing', ($i <= $listingMax));
+		      }
+		
+		      // Create some auth stuff for all officers
+		      $auth->setAllowed($group, $officerList, 'edit', 1);
+		      $auth->setAllowed($group, $officerList, 'style', 1);
+		      $auth->setAllowed($group, $officerList, 'photo.edit', 1);
+		      $auth->setAllowed($group, $officerList, 'announcement', 1);
+		      $auth->setAllowed($group, $officerList, 'sponsor', 1);
+		      $auth->setAllowed($group, $officerList, 'invitation', 1);
+		      $auth->setAllowed($group, $officerList, 'file.edit', 1);
+		      $auth->setAllowed($group, $officerList, 'member.edit', 1);
+		      $auth->setAllowed($group, $officerList, 'topic.edit', 1);
+		      $auth->setAllowed($group, $officerList, 'poll.edit', 1);
+		      
+		      // Add auth for invited users
+		      $auth->setAllowed($group, 'member_requested', 'view', 1);
+		      // Commit
+		      $db->commit();
+		
+		    } catch( Engine_Image_Exception $e ) 
+		    {
+		      $db->rollBack();
+		    } 
+		}
+		fclose($fh);
+		exit();
+	}
 }

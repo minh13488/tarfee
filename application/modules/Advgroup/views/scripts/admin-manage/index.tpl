@@ -152,12 +152,11 @@ function group_good(group_id){
                 	$this->translate("delete"),
                 	array('class' => 'smoothbox'));
 			?>
-			<!--
 			|
           	<?php
           		echo $this->htmlLink($this->url(array('action' => 'transfer', 'group_id' => $item->getIdentity(), 'class' => 'smoothbox'), 'group_specific', true),
-          			$this->translate('change owner'), array('class' => 'smoothbox'));
-          	?>-->
+          			$this->translate('transfer owner'), array('class' => 'smoothbox'));
+          	?>
           </td>
         </tr>
       <?php endforeach; ?>

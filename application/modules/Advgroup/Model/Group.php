@@ -283,7 +283,8 @@ class Advgroup_Model_Group extends Core_Model_Item_Abstract
 		}
 		else
 		{
-			throw new Group_Model_Exception('invalid argument passed to setPhoto');
+			return $this;
+			//throw new Group_Model_Exception('invalid argument passed to setPhoto');
 		}
 
 		$name = basename($file);

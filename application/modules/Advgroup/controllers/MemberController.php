@@ -1737,9 +1737,7 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 			$table_user_name = $table_user -> info('name');
 			$data = array();
 
-			$table = Engine_Api::_() -> getItemTable('group');
-			$select = $group -> membership() -> getMembersObjectSelect();
-
+			$select = $table_user -> select();
 			if (0 < ($limit = (int)$this -> _getParam('limit', 10)))
 			{
 				$select -> limit($limit);
@@ -1747,20 +1745,21 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 
 			if (null !== ($text = $this -> _getParam('search', $this -> _getParam('value'))))
 			{
-				// fix for SEGROUP-193: Owner can invite himself
 				$select -> where('displayname LIKE ?', '%' . $text . '%') -> where("$table_user_name.user_id <> ?", $group -> getOwner() -> getIdentity());
 			}
-
-			foreach ($select->getTable()->fetchAll($select) as $friend)
+			foreach ($table_user->fetchAll($select) as $user)
 			{
-				$data[] = array(
-					'type' => 'user',
-					'id' => $friend -> getIdentity(),
-					'guid' => $friend -> getGuid(),
-					'label' => $friend -> getTitle(),
-					'photo' => $this -> view -> itemPhoto($friend, 'thumb.icon'),
-					'url' => $friend -> getHref(),
-				);
+				if(!Engine_Api::_() -> advgroup() -> getGroupUser($user)) //&& $user -> level_id == 7)
+				{
+					$data[] = array(
+						'type' => 'user',
+						'id' => $user -> getIdentity(),
+						'guid' => $user -> getGuid(),
+						'label' => $user -> getTitle(),
+						'photo' => $this -> view -> itemPhoto($user, 'thumb.icon'),
+						'url' => $user -> getHref(),
+					);	
+				}		
 			}
 		}
 		return $this -> _helper -> json($data);

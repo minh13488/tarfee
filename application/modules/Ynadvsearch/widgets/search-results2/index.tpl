@@ -303,7 +303,7 @@
 				</div>
 				<?php 
 				$establishDateObj = null;
-				if (!is_null($item->establish_date) && !empty($item->establish_date) && $item->establish_date) 
+				if (!is_null($item->establish_date) && !empty($item->establish_date) && $item->establish_date != '0000-00-00') 
 				{
 					$establishDateObj = new Zend_Date(strtotime($item->establish_date));	
 				}

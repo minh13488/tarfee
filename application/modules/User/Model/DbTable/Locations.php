@@ -28,4 +28,22 @@ class User_Model_DbTable_Locations extends Engine_Db_Table {
 		}
 		return $arr;
 	}
+	
+	public function getConuntyIdByName($name = '')
+	{
+		$select = $this->select()->where('title LIKE ?', $name)->where('level = ?', 0)->limit(1);
+		$country = $this -> fetchRow($select);
+		if($country)
+		{
+			return $country -> location_id;
+		}
+		else {
+			return 0;
+		}
+	}
+	public function getCityByName($name = '')
+	{
+		$select = $this->select()->where('title LIKE ?', $name)->where('level = ?', 2)->limit(1);
+		return $this -> fetchRow($select);
+	}
 }
