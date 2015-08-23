@@ -158,7 +158,13 @@
 						<td class="no-border">&nbsp;</td>
 						<?php foreach ($levels as $id=>$level):?>						
 							<td>
-								<form method="get" action="<?php echo $this->baseUrl();?>/payment/settings/confirm">
+								<?php $payment_settings = Engine_Api::_()->getApi('settings', 'core')->payment;
+								$action = 'confirm';
+								if(isset($payment_settings['disableUpgrade']) && $payment_settings['disableUpgrade'] == 1)
+								{
+									$action = 'contact-us';
+								}?>
+								<form method="get" action="<?php echo $this->baseUrl();?>/payment/settings/<?php echo $action;?>">
 									<input class="discount-input" type="hidden" value="<?php echo (isset($_SESSION['ref_code']))? $_SESSION['ref_code']: " ";?>" id="discount" name="discount">
 									<?php if (isset($level_plans[$id])):?>
 										<select name="package_id" onchange="changePackage(this);" style="<?php if (count($level_plans[$id])<2) echo "display:none;"; ?>">

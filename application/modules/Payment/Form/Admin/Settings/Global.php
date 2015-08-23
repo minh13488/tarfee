@@ -67,6 +67,17 @@ class Payment_Form_Admin_Settings_Global extends Engine_Form
         'none' => 'Wait until the gateway signals that the payment has completed successfully.',
       ),
     ));
+	
+	// Element: benefit
+    $this->addElement('Radio', 'disableUpgrade', array(
+      'label' => 'Disable Upgrade Membership',
+      'description' => 'Do you want to disable upgrade membership?',
+      'multiOptions' => array(
+        1 => 'Yes',
+        0 => 'No',
+      ),
+      'value' => 1
+    ));
 
     // Element: lapse
     /*

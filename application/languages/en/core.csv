@@ -9427,3 +9427,15 @@ Event: ""[object_title]""&nbsp;<br> <br>http://[host][object_link]<br> <br> [foo
 "View More";"View More"
 "Male / Female";"Male / Female"
 "Keep Eye on this player card";"Keep Eye on this player card"
+
+# notify_admin_user_upgrade
+"_EMAIL_NOTIFY_ADMIN_USER_UPGRADE_TITLE";"Admin upgrade notification "
+"_EMAIL_NOTIFY_ADMIN_USER_UPGRADE_DESCRIPTION";"This is the email that gets sent to the admin when a member request upgrade membership."
+"_EMAIL_NOTIFY_ADMIN_USER_UPGRADE_SUBJECT";"[sender_title] has requested to upgrade membership."
+"_EMAIL_NOTIFY_ADMIN_USER_UPGRADE_BODY";"[header]
+
+[sender_title] has requested to upgrade membership. Please click the following link to view it:
+
+http://[host]/admin/user/upgrade-requests?email=[email]
+
+[footer]"

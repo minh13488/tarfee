@@ -203,4 +203,169 @@ class Payment_SettingsController extends Core_Controller_Action_User
     return $this->_helper->redirector->gotoRoute(array('controller' => 'subscription',
       'action' => 'gateway'));
   }
+
+
+  public function contactUsAction()
+  {
+    // Process
+    $user = Engine_Api::_()->core()->getSubject('user');
+	// Make form
+	$this -> view -> form = $form = new Payment_Form_Request();
+    // Get packages
+    $packagesTable = Engine_Api::_()->getDbtable('packages', 'payment');
+    $this->view->package = $package = $packagesTable->fetchRow(array(
+      'enabled = ?' => 1,
+      'package_id = ?' => (int) $this->_getParam('package_id'),
+    ));
+	
+	//check discount code
+	$code = $this ->_getParam('discount');
+	if(isset($code) && $this -> checkDiscountCode($code)) {
+		//update discount for invite code
+		$inviteCode = Engine_Api::_() -> invite() -> getRowCode(trim($code));
+		if($inviteCode) {
+			$_SESSION['ref_code'] = trim($code);
+			$inviteCode -> discount_used = true;
+			$inviteCode -> save();
+		}
+	}
+	
+    // Check if it exists
+    if( !$package ) {
+      return $this->_helper->redirector->gotoRoute(array('action' => 'index'));
+    }
+
+    // Get current subscription and package
+    $subscriptionsTable = Engine_Api::_()->getDbtable('subscriptions', 'payment');
+    $currentSubscription = $subscriptionsTable->fetchRow(array(
+      'user_id = ?' => $user->getIdentity(),
+      'active = ?' => true,
+    ));
+
+    // Get current package
+    $currentPackage = null;
+    if( $currentSubscription ) {
+      $currentPackage = $packagesTable->fetchRow(array(
+        'package_id = ?' => $currentSubscription->package_id,
+      ));
+    }
+
+    // Check if they are the same
+    if( $package->package_id == $currentPackage->package_id ) {
+      return $this->_helper->redirector->gotoRoute(array('action' => 'index'));
+    }
+	$arr_user = $user -> toArray();
+	$arr_user['emailconf'] = $arr_user['email'];
+	$displayName = $arr_user['displayname'];
+	if($displayName)
+	{
+		$arrDisplayName = explode(' ', $displayName);
+		if($arrDisplayName)
+		{
+			$arr_user['first_name'] = $arrDisplayName[0];
+			$arr_user['last_name'] = $arrDisplayName[1];
+		}
+	}
+    // Check method
+    if( !$this->getRequest()->isPost() ) 
+    {
+    	if (isset($arr_user['country_id']))
+		{
+			$provincesAssoc = array();
+			$country_id = $arr_user['country_id'];
+			if ($country_id) 
+			{
+				$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
+				$provincesAssoc = array('0'=>'') + $provincesAssoc;
+			}
+			$form -> getElement('province_id') -> setMultiOptions($provincesAssoc);
+		}
+		
+		if (isset($arr_user['province_id']))
+		{
+			$citiesAssoc = array();
+			$province_id = $arr_user['province_id'];
+			if ($province_id) {
+				$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
+				$citiesAssoc = array('0'=>'') + $citiesAssoc;
+			}
+			$form -> getElement('city_id') -> setMultiOptions($citiesAssoc);
+		}
+		$form -> populate($arr_user);
+      return;
+    }
+	
+	// submit form
+	$posts = $this -> getRequest() -> getPost();
+	$provincesAssoc = array();
+	$country_id = $posts['country_id'];
+	if ($country_id) 
+	{
+		$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
+		$provincesAssoc = array('0'=>'') + $provincesAssoc;
+	}
+	$form -> getElement('province_id') -> setMultiOptions($provincesAssoc);
+	
+	$citiesAssoc = array();
+	$province_id = $posts['province_id'];
+	if ($province_id) {
+		$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
+		$citiesAssoc = array('0'=>'') + $citiesAssoc;
+	}
+	$form -> getElement('city_id') -> setMultiOptions($citiesAssoc);
+	// Check data
+	if (!$form -> isValid($posts))
+	{
+		return;
+	}
+	
+	$values = $form -> getValues();
+	$table = Engine_Api::_()->getDbtable('membershiprequests', 'user');
+    $request = $table->fetchRow($table->select()->where('email = ?', $values['email']));
+
+    if($request) {
+      $form->addError($this->view->translate('The request with this email is exists.'));
+      return;
+	}
+	$db = $table->getAdapter();
+	$db->beginTransaction();
+    try 
+    {
+        $request = $table->createRow();
+		$values['package_id'] = $this->_getParam('package_id');
+		$values['user_id'] = $user -> getIdentity();
+        $request->setFromArray($values);
+        $request->save();
+		
+		$users_table = Engine_Api::_()->getDbtable('users', 'user');
+	  	$users_select = $users_table->select()
+  	    	->where('level_id = ?', 1)
+	    	->where('enabled >= ?', 1);
+	  	$super_admin = $users_table->fetchRow($users_select);
+		
+		$mailAdminType = 'notify_admin_user_upgrade';
+		$mailAdminParams = array(
+			'host' => $_SERVER['HTTP_HOST'],
+			'email' => $user->email,
+			'date' => date("F j, Y, g:i a"),
+			'recipient_title' => $super_admin->displayname,
+			'object_title' => $user->displayname,
+			'object_link' => $user->getHref(),
+		);
+		
+		Engine_Api::_()->getApi('mail', 'core')->sendSystem(
+	         $super_admin,
+	         $mailAdminType,
+	         $mailAdminParams
+      	);
+		
+        $db->commit();
+		$form->addNotice($this->view->translate('The request successfully!'));
+    }
+    catch( Exception $e ) {
+        $db->rollBack();
+        throw $e;
+    } 
+  }
+
 }
