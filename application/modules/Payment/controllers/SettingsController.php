@@ -321,7 +321,7 @@ class Payment_SettingsController extends Core_Controller_Action_User
 	
 	$values = $form -> getValues();
 	$table = Engine_Api::_()->getDbtable('membershiprequests', 'user');
-    $request = $table->fetchRow($table->select()->where('email = ?', $values['email']));
+    $request = $table->fetchRow($table->select()->where('email = ?', $values['email'])->where('approved = 0'));
 
     if($request) {
       $form->addError($this->view->translate('The request with this email is exists.'));
@@ -346,13 +346,13 @@ class Payment_SettingsController extends Core_Controller_Action_User
 		$mailAdminType = 'notify_admin_user_upgrade';
 		$mailAdminParams = array(
 			'host' => $_SERVER['HTTP_HOST'],
-			'email' => $user->email,
+			'sender_email' => $user->email,
 			'date' => date("F j, Y, g:i a"),
 			'recipient_title' => $super_admin->displayname,
+			'sender_title' => $user -> displayname,
 			'object_title' => $user->displayname,
 			'object_link' => $user->getHref(),
 		);
-		
 		Engine_Api::_()->getApi('mail', 'core')->sendSystem(
 	         $super_admin,
 	         $mailAdminType,
@@ -360,7 +360,7 @@ class Payment_SettingsController extends Core_Controller_Action_User
       	);
 		
         $db->commit();
-		$form->addNotice($this->view->translate('The request successfully!'));
+		$form->addNotice($this->view->translate('The request sent successfully!'));
     }
     catch( Exception $e ) {
         $db->rollBack();

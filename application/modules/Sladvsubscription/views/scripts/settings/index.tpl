@@ -85,9 +85,11 @@
               'sembership plan. Please choose one now below.') ?>
         </p>
       <?php endif; ?>
-	  
+	  <?php $payment_settings = Engine_Api::_()->getApi('settings', 'core')->payment;?>
 	   <!-- discount -->
-      <?php if(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1)) :?>
+      <?php 
+      if(isset($payment_settings['disableUpgrade']) && $payment_settings['disableUpgrade'] == 0):
+     	 if(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.referral_enable', 1)) :?>
       <div class="form-elements">
       	<div id="discount-wrapper" class="form-wrapper">
             <div id="discount-element" class="form-element">
@@ -105,6 +107,7 @@
           </div>
       </div>
       <?php endif;?>
+       <?php endif;?>
       <!-- end discount -->
 	  
       <div class="plan">
@@ -158,7 +161,7 @@
 						<td class="no-border">&nbsp;</td>
 						<?php foreach ($levels as $id=>$level):?>						
 							<td>
-								<?php $payment_settings = Engine_Api::_()->getApi('settings', 'core')->payment;
+								<?php
 								$action = 'confirm';
 								if(isset($payment_settings['disableUpgrade']) && $payment_settings['disableUpgrade'] == 1)
 								{
