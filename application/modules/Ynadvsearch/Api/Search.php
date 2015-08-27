@@ -346,7 +346,6 @@ class Ynadvsearch_Api_Search extends Core_Api_Abstract {
 		if ($table && $select) {
 			$results = $table->fetchAll($select);
 		}
-		
 		return $results;
 	}
     private function _checkPermission($search) {

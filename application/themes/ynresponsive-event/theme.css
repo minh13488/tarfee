@@ -5730,7 +5730,10 @@ body[id^=global_page_social-connect],
 #global_page_user-auth-forgot,
 #global_page_user-signup-confirm,
 #global_page_user-index-confirm-trial,
-#global_page_payment-subscription-gateway
+#global_page_payment-subscription-gateway,
+#global_page_payment-settings-contact-us,
+#global_page_payment-settings-confirm,
+#global_page_ynvideo-index-popup-view
 {
 	#global_wrapper
 	{
@@ -5804,7 +5807,10 @@ body[id^=global_page_social-connect],
 #global_page_sladvsubscription-settings-index #global_content div.headline,
 #global_page_sladvsubscription-subscription-choose #global_content div.headline,
 body[id^=global_page_ynsocialads] #global_content .layout_top,
-body[id^=global_page_ynsocialads] #global_content .layout_main
+body[id^=global_page_ynsocialads] #global_content .layout_main,
+#global_page_payment-settings-contact-us #payment_form_subscribe,
+#global_page_payment-settings-confirm form.global_form,
+#global_page_ynvideo-index-popup-view .show_on_page
 {
 	background-color: white;
   	 -webkit-border-radius: 5px;
@@ -5812,6 +5818,10 @@ body[id^=global_page_ynsocialads] #global_content .layout_main
   	border-radius: 5px;
   	padding: 15px;
   	margin: 15px;
+}
+#global_page_ynvideo-index-popup-view .show_on_page
+{
+	overflow: auto;
 }
 body[id^=global_page_ynsocialads] #global_content > div{
 	padding: 5px;
@@ -5891,8 +5901,11 @@ body[id^=global_page_social-connect] .global_form,
 }
 body[id^=global_page_ynsocialads] #global_content,
 body[id^=global_page_social-connect] #global_content,
+#global_page_payment-settings-contact-us #global_content,
+#global_page_payment-settings-confirm #global_content,
+#global_page_ynvideo-index-popup-view #global_content
 {
-	margin-bottom: 15px;
+	padding-bottom: 10px;
 }
 #global_page_slprofileverify-index-setting-verification .layout_top
 {

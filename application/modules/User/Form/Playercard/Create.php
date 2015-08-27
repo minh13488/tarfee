@@ -25,6 +25,7 @@ class User_Form_Playercard_Create extends Engine_Form
         new Engine_Filter_Censor(),
       ),
     ));
+	$this -> first_name -> setAttrib('required', true);
 	
 	$this->addElement('Text', 'last_name', array(
       'label' => 'Last Name',
@@ -39,6 +40,7 @@ class User_Form_Playercard_Create extends Engine_Form
         new Engine_Filter_Censor(),
       ),
     ));
+	$this -> last_name -> setAttrib('required', true);
 	
 	$relations = Engine_Api::_() -> getDbTable('relations','user') -> getRelationArray();
 	$relations['0'] = 'Other';
@@ -103,14 +105,17 @@ class User_Form_Playercard_Create extends Engine_Form
 	$birthday -> setYearMin(Engine_Api::_()->getApi('settings', 'core')->getSetting('user.min_year', 1985));
     $this->addElement($birthday);
 	$birthday -> setAttrib('required', true);
+	$this -> birth_date -> setAttrib('required', true);
 	
 	$countriesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc(0);
-	$countriesAssoc = array('0'=>'') + $countriesAssoc;
+	$countriesAssoc = array(''=>'') + $countriesAssoc;
 
 	$this->addElement('Select', 'country_id', array(
 		'label' => 'Country',
 		'multiOptions' => $countriesAssoc,
+		'required' => true,
 	));
+	$this -> country_id -> setAttrib('required', true);
 
 	$this->addElement('Select', 'province_id', array(
 		'label' => 'Province/State',

@@ -56,6 +56,7 @@ function deleteSelected(){
                 <th><a href="javascript:void(0);" onclick="javascript:changeOrder('first_name', 'DESC');"><?php echo $this->translate("First Name") ?></a></th>
                 <th><a href="javascript:void(0);" onclick="javascript:changeOrder('last_name', 'DESC');"><?php echo $this->translate("Last Name") ?></a></th>
                 <th><a href="javascript:void(0);" onclick="javascript:changeOrder('email', 'DESC');"><?php echo $this->translate("Email") ?></a></th>
+                <th><?php echo $this->translate("Membership") ?></th>
                 <th><a href="javascript:void(0);" onclick="javascript:changeOrder('creation_date', 'DESC');"><?php echo $this->translate("Created") ?></a></th>
                 <th><?php echo $this->translate("Options") ?></th>
             </tr>
@@ -67,6 +68,12 @@ function deleteSelected(){
                 <td><?php echo $item->first_name ?></td>
                  <td><?php echo $item->last_name ?></td>
                 <td><?php echo $item->email ?></td>
+                <?php $packagesTable = Engine_Api::_()->getDbtable('packages', 'payment');
+					$package = $packagesTable->fetchRow(array(
+				      'enabled = ?' => 1,
+				      'package_id = ?' => (int) $item -> package_id,
+				    ));?>
+                <td><?php echo $package -> title . ' - '.$package->getPackageDescription() ?></td>
                 <td><?php echo $this->locale()->toDateTime($item->creation_date) ?></td>
                 <td>
                 <?php echo $this->htmlLink(

@@ -96,7 +96,7 @@ $advsearch = $request->getParam('advsearch');
          <a title="<?php echo $this -> translate("help")?>" href="javascript:void;"><img src="application/themes/ynresponsive-event/images/help.png" /></a>
          <ul class="list-items-dropdown">
             <li><a target="_blank" href="https://tarfee.zendesk.com/access/sso?return_to=https%3A%2F%2Ftarfee.zendesk.com%2Fhc%2Fen-us"><i class="fa fa-question-circle"></i><?php echo $this -> translate("Help Centre")?></a></li>
-            <li><a target="_blank" href="https://tarfee.zendesk.com/access/sso?return_to=https%3A%2F%2Ftarfee.zendesk.com%2Fhc%2Fen-us"><i class="fa fa-info"></i><?php echo $this -> translate("Suggest Idea or Feature")?></a></li>
+            <!--<li><a target="_blank" href="https://tarfee.zendesk.com/access/sso?return_to=https%3A%2F%2Ftarfee.zendesk.com%2Fhc%2Fen-us"><i class="fa fa-info"></i><?php echo $this -> translate("Suggest Idea or Feature")?></a></li>-->
             <li><a href="help/contact"><i class="fa fa-phone"></i><?php echo $this -> translate("Contact Us")?></a></li>
          </ul>
       </li>

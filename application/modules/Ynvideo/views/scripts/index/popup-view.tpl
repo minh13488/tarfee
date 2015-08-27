@@ -136,7 +136,7 @@ endif;
     });
 </script>
 
-<div style="width: 1170px;">
+<div style="width: 1170px;" class="show_on_page">
 	<div class="ynvideo_popup_close"><i class="fa fa-times"></i></div>
 	<div class="ynvideo_video_view_headline">
         <div class="ynvideo_author">
@@ -155,7 +155,7 @@ endif;
 			<div class="yn_video_popup_btn"><a class="smoothbox" href="<?php echo $url?>"><?php echo $this -> translate("Report"); ?></a></div>
 			<!-- Add addthis share-->
         	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-558fa99deeb4735f" async="async"></script>
-			<div style="float: right" class="addthis_sharing_toolbox"></div>
+			<div style="float: right" class="addthis_sharing_toolbox" data-url="<?php echo 'http://'.$_SERVER['HTTP_HOST'].$this->video -> getHref()?>" data-title="<?php echo $this->video -> title?>"></div>
 		<?php endif; ?>
 	</div>
 	<div class="video_view video_view_container">

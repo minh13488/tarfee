@@ -28,11 +28,6 @@ class Core_IndexController extends Core_Controller_Action_Standard {
 		}
 		 */
 
-		// check public settings
-		if (!Engine_Api::_() -> getApi('settings', 'core') -> core_general_portal && !$this -> _helper -> requireUser() -> isValid()) {
-			return;
-		}
-		
 		// Languages
 	    $translate    = Zend_Registry::get('Zend_Translate');
 	    $languageList = $translate->getList();

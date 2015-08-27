@@ -25,7 +25,8 @@ body table.admin_table tbody tr.admin_logins_okay > td
 	
 }
 
-#global_page_user-admin-requests-view-detail{
+#global_page_user-admin-requests-view-detail,
+#global_page_user-admin-upgrade-requests-view-detail{
 	span#global_content_simple{
 		padding: 10px;
 

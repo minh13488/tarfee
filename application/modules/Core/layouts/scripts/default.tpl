@@ -394,20 +394,13 @@
 			    				<?php echo $this -> translate("Referral Codes Generation")?>
 			    			</a>
 			    		</li>
-		    		<?php endif;?>
-		    		<?php elseif($module == 'sladvsubscription' && $controller == 'settings' && $action == 'index'):?>
-	    			<?php if($this -> subject()):?>
-		    		<li>
-		    			<a href="<?php echo $this -> subject() -> getHref()?>">
-		    				<?php echo $this -> subject() -> getTitle();?>
-		    			</a>
-		    		</li>
-	    			<?php endif;?>
-		    		<li class="active">
-		    			<a href="#" title = "<?php echo $this -> translate("Membership")?>">
-		    				<?php echo $this -> translate("Membership")?>
-		    			</a>
-		    		</li>
+			    	<?php elseif($module == 'sladvsubscription' && $action == 'index'): ?>
+				    		<li class="active">
+				    			<a href="#" title = "<?php echo $this -> translate("Membership")?>">
+				    				<?php echo $this -> translate("Membership")?>
+				    			</a>
+				    		</li>
+			    	<?php endif;?>
 			    	<?php elseif($module == 'socialbridge' && $controller == 'index' && $action == 'index'):?>
 			    		<li>
 			    			<a href="<?php echo $this -> url(array('controller' => 'settings', 'action' => 'general'), 'user_extended', true)?>"  title = "<?php echo $this -> translate("Settings")?>">

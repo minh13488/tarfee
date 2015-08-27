@@ -1,22 +1,22 @@
 <h3><?php echo $this->translate('Request Detail')?></h3>
 <div class="request-info">
 	<div>
-		<span class="label"><?php echo $this->translate('Email')?></span>
+		<span class="label"><?php echo $this->translate('Email')?></span>:
 		<span class="value"><?php echo $this->req->email?></span>
 	</div>
 	
 	<div>
-		<span class="label"><?php echo $this->translate('Name')?></span>
+		<span class="label"><?php echo $this->translate('Name')?></span>:
 		<span class="value"><?php echo $this->req->name?></span>
 	</div>
 	
 	<div>
-		<span class="label"><?php echo $this->translate('Phone')?></span>
+		<span class="label"><?php echo $this->translate('Phone')?></span>:
 		<span class="value"><?php echo $this->req->phone?></span>
 	</div>
 	
 	<div>
-		<span class="label"><?php echo $this->translate('Message')?></span>
+		<span class="label"><?php echo $this->translate('Message')?></span>:
 		<span class="value"><?php echo $this->req->message?></span>
 	</div>
 </div>
