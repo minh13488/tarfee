@@ -118,10 +118,15 @@ $advsearch = $request->getParam('advsearch');
       <span class="ynresponsive_languges">
 	     <?php if( 1 !== count($this->languageNameList) ):?>
 	        <form id="form_language" method="post" action="<?php echo $this->url(array('controller' => 'utility', 'action' => 'locale'), 'default', true) ?>" style="display:inline-block">
-	            <?php $selectedLanguage = $this->translate()->getLocale() ?>
+	            <?php 
+	            if($this -> countryLanguage)
+			  	{
+			  		$this->translate()->setLocale($this -> countryLanguage);
+			  	}
+	            $selectedLanguage = $this->translate()->getLocale() ?>
 	            <div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown">
 	            	<i class="fa fa-globe"></i>
-	          <span><?php echo strtoupper(substr($selectedLanguage, 0, 2))?></span>
+	          		<span><?php echo strtoupper(substr($selectedLanguage, 0, 2))?></span>
 	            	<ul>
 	            		<?php foreach($this->languageNameList as $key => $language):?>
 	            		<li>
