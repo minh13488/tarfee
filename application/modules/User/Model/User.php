@@ -259,11 +259,25 @@ class User_Model_User extends Core_Model_Item_Abstract
     if( empty($this->_modifiedFields['timezone']) ) {
       $this->timezone = $settings->getSetting('core.locale.timezone', 'America/Los_Angeles');
     }
-    if( empty($this->_modifiedFields['locale']) ) {
-      $this->locale = $settings->getSetting('core.locale.locale', 'auto');
+    if( empty($this->_modifiedFields['locale']) ) 
+    {
+    	if(!empty($_COOKIE['en4_locale']))
+		{
+			$this->locale = $_COOKIE['en4_locale'];
+		}
+		else {
+			$this->locale = $settings->getSetting('core.locale.locale', 'auto');
+		}
     }
-    if( empty($this->_modifiedFields['language']) ) {
-      $this->language = $settings->getSetting('core.locale.language', 'en_US');
+    if( empty($this->_modifiedFields['language']) ) 
+    {
+    	if(!empty($_COOKIE['en4_language']))
+		{
+			$this->language = $_COOKIE['en4_language'];
+		}
+		else {
+      		$this->language = $settings->getSetting('core.locale.language', 'en_US');
+		}
     }
     
     if( 'cli' !== PHP_SAPI ) { // No CLI

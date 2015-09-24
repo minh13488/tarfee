@@ -77,34 +77,6 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 	    <div class="container">
 		<div class="row wow fadeInDown" data-wow-delay="0.2s">
 		    <div class="login-popup-box">
-			<!-- <span class="ynresponsive_languages-popup">
-			    <?php if( 1 !== count($this->languageNameList) ):?>
-			    <form id="form_language" method="post" action="<?php echo $this->url(array('controller' => 'utility', 'action' => 'locale'), 'default', true) ?>" style="display:inline-block">
-				<?php $selectedLanguage = $this->translate()->getLocale() ?>
-				<div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown">
-				    <i class="fa fa-globe"></i>
-				    <span><?php echo strtoupper(substr($selectedLanguage, 0, 2))?></span>
-				    <ul>
-					<?php foreach($this->languageNameList as $key => $language):?>
-					<li>
-					    <a onclick="changeLanguages('<?php echo $key?>')" data-locale="<?php echo $key?>" class="locale old-app"><?php echo strtoupper(substr($key,0, 2))?></a>
-					</li>
-					<?php endforeach;?>
-				    </ul>
-
-				</div>
-				<?php echo $this->formHidden('language', $selectedLanguage);?>
-				<?php echo $this->formHidden('return', $this->url()) ?>
-			    </form>
-			    <script type="text/javascript">
-				var changeLanguages = function(lang)
-				{
-				    $('#language').val(lang);
-				    $('#form_language').submit();
-				}
-			    </script>
-			    <?php endif; ?>
-			</span> -->
 			<div class="col-md-12">
 			    <a href="#home" class="logo"><img src="//<?php echo $_SERVER['HTTP_HOST']?>/landing/new_landing/img/tarfee-logo.png" class="img-responsive" alt="" /></a>
 			</div>
@@ -197,15 +169,44 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 		    </div> 
 		</div>		    
 
-	    <!--<div class="menu-footer">
+	    <div class="menu-footer">
 			<a target="_blank" href="/index.php/help/privacy"><?php echo $this -> translate('Privacy');?></a>
 			<a target="_blank"href="/index.php/help/terms"><?php echo $this -> translate('Terms of Service');?></a>
 			<a target="_blank" href="/index.php/help/contact"><?php echo $this -> translate('Contact Us');?></a>
-
-	  </div>-->
+			<span class="ynresponsive_languages-popup">
+			    <?php if( 1 !== count($this->languageNameList) ):?>
+			    <form id="form_language" method="post" action="<?php echo $this->url(array('controller' => 'utility', 'action' => 'locale'), 'default', true) ?>" style="display:inline-block">
+				<?php 
+				if($this -> countryLanguage)
+			  	{
+			  		$this->translate()->setLocale($this -> countryLanguage);
+			  	}
+				$selectedLanguage = $this->translate()->getLocale() ?>
+				<div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown">
+				    <i class="fa fa-globe"></i>
+				    <span><?php echo strtoupper(substr($selectedLanguage, 0, 2))?></span>
+				    <ul>
+					<?php foreach($this->languageNameList as $key => $language):?>
+					<li>
+					    <a onclick="changeLanguages('<?php echo $key?>')" data-locale="<?php echo $key?>" class="locale old-app"><?php echo strtoupper(substr($key,0, 2))?></a>
+					</li>
+					<?php endforeach;?>
+				    </ul>
+				</div>
+				<?php echo $this->formHidden('language', $selectedLanguage);?>
+				<?php echo $this->formHidden('return', $this->url()) ?>
+			    </form>
+			    <script type="text/javascript">
+				var changeLanguages = function(lang)
+				{
+				    $('#language').val(lang);
+				    $('#form_language').submit();
+				}
+			    </script>
+			    <?php endif; ?>
+			</span>
+	  </div>
 	</div>
-	
-	
 	
 	<!-- Start navigation -->
 <!--	<header>
