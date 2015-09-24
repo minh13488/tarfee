@@ -94,7 +94,10 @@
     <?php endif;?>
     <?php if($this -> group -> isOwner($this -> viewer())):?>
     	 <?php echo $this->htmlLink(array('route' => 'group_specific', 'action' => 'edit', 'group_id' => $this -> group->getIdentity()), $this->translate('Edit'), array(
-                  'class' => 'club_info_edit'
+                  'class' => 'club_info_edit', 'style' => 'margin-bottom:1px'
+                )) ?>
+         <?php echo $this->htmlLink(array('route' => 'group_specific', 'action' => 'delete', 'group_id' => $this -> group->getIdentity()), $this->translate('Delete'), array(
+                  'class' => 'club_info_edit smoothbox'
                 )) ?>
 	<?php endif;?>
 </div>

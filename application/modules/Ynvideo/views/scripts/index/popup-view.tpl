@@ -136,7 +136,7 @@ endif;
     });
 </script>
 
-<div style="width: 1170px;" class="show_on_page">
+<div style="width: 100%;" class="show_on_page">
 	<div class="ynvideo_popup_close"><i class="fa fa-times"></i></div>
 	<div class="ynvideo_video_view_headline">
         <div class="ynvideo_author">

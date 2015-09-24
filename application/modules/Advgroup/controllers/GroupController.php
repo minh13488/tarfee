@@ -448,7 +448,7 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
         $this -> view -> form = $form = new Advgroup_Form_Delete();
         if (!$group -> is_subgroup)
         {
-            $form -> setDescription("Are you sure you want to delete this group? All it's sub-group will also be deleted too and cannot be undone.");
+            $form -> setDescription("Are you sure you want to delete this club?");
         }
         if (!$group)
         {
@@ -486,7 +486,7 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
                 throw $e;
             }
             $this -> view -> status = true;
-            $this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('The selected group and it\'s sub-groups have been deleted.');
+            $this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('The selected club has been deleted.');
 
             return $this -> _forward('success', 'utility', 'core', array(
                 'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'manage'), 'group_general', true),
@@ -510,10 +510,10 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
             }
 
             $this -> view -> status = true;
-            $this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('The selected group has been deleted.');
+            $this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('The selected club has been deleted.');
 
             return $this -> _forward('success', 'utility', 'core', array(
-                'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'manage'), 'group_general', true),
+                'parentRedirect' => $viewer -> getHref(),
                 'messages' => Array($this -> view -> message)
             ));
         }
