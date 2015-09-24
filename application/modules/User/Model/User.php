@@ -1095,4 +1095,154 @@ class User_Model_User extends Core_Model_Item_Abstract
           $mailParams
         );
     }
+	public function getFirstName()
+	{
+		$fieldStructure = Engine_Api::_() -> fields() -> getFieldsStructurePartial($this);
+		foreach ($fieldStructure as $index => $map)
+        {
+            $field = $map -> getChild();
+			$value = $field -> getValue($this);
+			if (!$field || $field -> type == 'profile_type')
+                continue;
+			 if (!$field -> display && !$show_hidden)
+                continue;
+			// Get first value object for reference
+            $firstValue = $value;
+            if (is_array($value))
+            {
+                $firstValue = $value[0];
+            }
+			if($firstValue && $field -> type == 'first_name')
+			{
+				$value = $firstValue -> value;
+				return $value;
+			}
+		}
+		return '';
+	}
+	public function getLastName()
+	{
+		$fieldStructure = Engine_Api::_() -> fields() -> getFieldsStructurePartial($this);
+		foreach ($fieldStructure as $index => $map)
+        {
+            $field = $map -> getChild();
+			$value = $field -> getValue($this);
+			if (!$field || $field -> type == 'profile_type')
+                continue;
+			 if (!$field -> display && !$show_hidden)
+                continue;
+			// Get first value object for reference
+            $firstValue = $value;
+            if (is_array($value))
+            {
+                $firstValue = $value[0];
+            }
+			if($firstValue && $field -> type == 'last_name')
+			{
+				$value = $firstValue -> value;
+				return $value;
+			}
+		}
+		return '';
+	}
+	public function getGender()
+	{
+		$fieldStructure = Engine_Api::_() -> fields() -> getFieldsStructurePartial($this);
+		foreach ($fieldStructure as $index => $map)
+        {
+            $field = $map -> getChild();
+			$value = $field -> getValue($this);
+			if (!$field || $field -> type == 'profile_type')
+                continue;
+			 if (!$field -> display && !$show_hidden)
+                continue;
+			// Get first value object for reference
+            $firstValue = $value;
+            if (is_array($value))
+            {
+                $firstValue = $value[0];
+            }
+			if($firstValue && $field -> type == 'gender')
+			{
+				$value = $firstValue -> value;
+				return $value==2?1:2;
+			}
+		}
+		return 1;
+	}
+	public function getBirthdayDay()
+	{
+		$fieldStructure = Engine_Api::_() -> fields() -> getFieldsStructurePartial($this);
+		foreach ($fieldStructure as $index => $map)
+        {
+            $field = $map -> getChild();
+			$value = $field -> getValue($this);
+			if (!$field || $field -> type == 'profile_type')
+                continue;
+			 if (!$field -> display && !$show_hidden)
+                continue;
+			// Get first value object for reference
+            $firstValue = $value;
+            if (is_array($value))
+            {
+                $firstValue = $value[0];
+            }
+			if($firstValue && $field -> type == 'birthdate')
+			{
+				$value = $firstValue -> value;
+				return (int)date('j', strtotime($value));
+			}
+		}
+		return 0;
+	}
+	public function getBirthdayYear()
+	{
+		$fieldStructure = Engine_Api::_() -> fields() -> getFieldsStructurePartial($this);
+		foreach ($fieldStructure as $index => $map)
+        {
+            $field = $map -> getChild();
+			$value = $field -> getValue($this);
+			if (!$field || $field -> type == 'profile_type')
+                continue;
+			 if (!$field -> display && !$show_hidden)
+                continue;
+			// Get first value object for reference
+            $firstValue = $value;
+            if (is_array($value))
+            {
+                $firstValue = $value[0];
+            }
+			if($firstValue && $field -> type == 'birthdate')
+			{
+				$value = $firstValue -> value;
+				return (int)date('Y', strtotime($value));
+			}
+		}
+		return 0;
+	}
+	public function getBirthdayMonth()
+	{
+		$fieldStructure = Engine_Api::_() -> fields() -> getFieldsStructurePartial($this);
+		foreach ($fieldStructure as $index => $map)
+        {
+            $field = $map -> getChild();
+			$value = $field -> getValue($this);
+			if (!$field || $field -> type == 'profile_type')
+                continue;
+			 if (!$field -> display && !$show_hidden)
+                continue;
+			// Get first value object for reference
+            $firstValue = $value;
+            if (is_array($value))
+            {
+                $firstValue = $value[0];
+            }
+			if($firstValue && $field -> type == 'birthdate')
+			{
+				$value = $firstValue -> value;
+				return (int)date('m', strtotime($value));
+			}
+		}
+		return 0;
+	}
 }

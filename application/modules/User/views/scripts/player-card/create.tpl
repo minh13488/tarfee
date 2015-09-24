@@ -103,6 +103,18 @@
 		{
 			$('relation_other-wrapper').show();
 		}
+		else if($('relation_id').value == 1)
+		{
+			$('first_name').value = '<?php echo $this -> viewer() -> getFirstName()?>';
+			$('last_name').value = '<?php echo $this -> viewer() -> getLastName()?>';
+			$('gender').value = '<?php echo $this -> viewer() -> getGender()?>';
+			$('birth_date-day').value = '<?php echo $this -> viewer() -> getBirthdayDay(); ?>';
+			$('birth_date-month').value = '<?php echo $this -> viewer() -> getBirthdayMonth(); ?>';
+			$('birth_date-year').value = '<?php echo $this -> viewer() -> getBirthdayYear(); ?>';
+			$('country_id').value = '<?php echo $this -> viewer() -> country_id; ?>';
+			$('country_id').fireEvent('change');
+			
+		}
 		else
 		{
 			$('relation_other-wrapper').hide();
@@ -209,6 +221,8 @@
                     	$('province_id').grab(option);  
                     	$('province_id').adopt(options);
       					$('province_id-wrapper').show();
+      					$('province_id').value = '<?php echo $this -> viewer() ->province_id; ?>';
+						$('province_id').fireEvent('change');
       				}
       				else {
       					$('province_id').empty();
@@ -238,6 +252,7 @@
                     	$('city_id').grab(option);
                     	$('city_id').adopt(options);
       					$('city_id-wrapper').show();
+      					$('city_id').value = '<?php echo $this -> viewer() ->city_id; ?>';
       				}
       				else {
       					$('city_id').empty();

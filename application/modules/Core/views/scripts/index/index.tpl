@@ -63,7 +63,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 
     </head>
 
-    <body>
+    <body class="bg-blur">
 	<!-- Start home -->
 	<section id="home" class="bgslider-wrapper" style="height: 680px;">
 	    <div id="animated-bg">
@@ -159,7 +159,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					<input type="hidden" name="email" value="" id="email">
 					<input type="hidden" name="email_field" value="dlA5bmEwZ1VSRg==" id="email_field">
 					<h4 style="margin-top: 15px;">
-					    <input type="hidden" name="terms" value=""><input type="checkbox" name="terms" id="terms" value="1" tabindex="3" style="margin-right: 10px" checked="checked">
+					    <input type="hidden" name="terms" value=""><input type="checkbox" name="terms" id="terms" value="1" tabindex="3">
 					    Creating an account means you’re okay with Tarfee's  <a target="_blank" href="/index.php/help/terms">Terms of Service</a>  and Privacy Policy.
 					</h4>
 				    </div>

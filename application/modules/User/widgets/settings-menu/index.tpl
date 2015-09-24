@@ -25,3 +25,9 @@
     ?>
   </div>
 </div>
+<script type="text/javascript">
+	if($$('.custom_549').length)
+	{
+		$$('.custom_549')[0].target = '';
+	}
+</script>

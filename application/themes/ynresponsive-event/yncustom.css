@@ -2984,7 +2984,26 @@ body#global_page_advgroup-profile-index{
 	}
     }
 }
-
+#ynvideo_favorite_videos .tf_btn_action
+{
+	overflow: hidden;
+	clear: both;
+	display: block;
+	margin: 0;
+	a{
+	    font-weight: bold;
+	    display: block;
+	    padding: 10px;
+	    display: block;
+	    text-align: center;
+	    color: #fff;
+	    border-radius: 0 0 5px 5px;
+	    -webkit-border-radius: 0 0 5px 5px;
+	    -moz-border-radius: 0 0 5px 5px;
+	    background-color: $theme_link_color;
+	    outline: 0;
+	}
+}
 /*Player of club profile*/
 .layout_user_club_profile_players{
 
@@ -4361,11 +4380,22 @@ span.tf_button_action{
 
 #global_page_user-player-card-view-eye-on, 
 #global_page_user-index-view-eyeons,
-#global_page_advgroup-index-view-fan
+#global_page_advgroup-index-view-fan,
+#global_page_user-friends-list-all-followers,
+#global_page_user-friends-list-all-following
 {
-    #global_content_simple{
-	padding: 10px;
-
+    #global_content_simple
+    {
+		padding: 10px;
+		& > div
+		{
+			width: 100%!important;
+			height: 100%!important;
+		}
+		ul.user-list
+		{
+			height: 100%!important;
+		}
 	h3{
 	    margin-top: 0px;
 	}
@@ -4394,10 +4424,21 @@ span.tf_button_action{
 	button{
 	    background: $theme_link_color !important;
 	    +border-radius(5px);
-	    float: right;
-	}
+	    right: 10px;
+	    top: 0px;
+	    position: absolute;
+	    	
+		}
     }
 
+}
+#global_page_user-friends-list-all-followers #global_content_simple,
+#global_page_user-friends-list-all-following #global_content_simple
+{
+	button
+	{
+		top: 18px;
+	}
 }
 
 /*Style result advsearch*/

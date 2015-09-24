@@ -70,6 +70,9 @@ class User_Api_Core extends Core_Api_Abstract
   public function getProfileTypeBaseOnLevel($level_id) {
   		switch ($level_id) {
 			  case '4':
+			  case '3':
+			  case '2':
+		      case '1':
 				  return "1";
 				  break;
 			  case '6':
