@@ -255,7 +255,6 @@ class User_Model_User extends Core_Model_Item_Abstract
     $this->verified = (int) ($settings->getSetting('user.signup.verifyemail', 1) < 2);
     $this->enabled  = ( $this->approved && $this->verified );
     $this->search   = true;
-
     if( empty($this->_modifiedFields['timezone']) ) {
       $this->timezone = $settings->getSetting('core.locale.timezone', 'America/Los_Angeles');
     }
@@ -297,7 +296,6 @@ class User_Model_User extends Core_Model_Item_Abstract
     } else {
       $this->password = '';
     }
-
     // The hook will be called here
     parent::_insert();
   }

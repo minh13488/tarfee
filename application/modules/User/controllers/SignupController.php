@@ -100,10 +100,6 @@ class User_SignupController extends Core_Controller_Action_Standard
           Engine_Api::_()->user()->getAuth()->getStorage()->clear();
 
           if( !empty($subscriptionSession->subscription_id) ) {
-          	
-          // return $this->_helper->redirector->gotoRoute(array('module' => 'payment',
-            // 'controller' => 'subscription', 'action' => 'gateway'), 'default', true);
-			  
 				return $this -> _forward('success', 'utility', 'core', array(
 					'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('module' => 'payment',
              		'controller' => 'subscription', 'action' => 'gateway'), 'default', true),
@@ -129,9 +125,6 @@ class User_SignupController extends Core_Controller_Action_Standard
 
     // Handle email verification or pending approval
     if( !$viewer->enabled ) {
-      //Engine_Api::_()->user()->setViewer(null);
-      //Engine_Api::_()->user()->getAuth()->getStorage()->clear();
-
       $confirmSession = new Zend_Session_Namespace('Signup_Confirm');
       $confirmSession->approved = $viewer->approved;
       $confirmSession->verified = $viewer->verified;
@@ -478,8 +471,6 @@ class User_SignupController extends Core_Controller_Action_Standard
     
     $mailParams['object_link'] = Zend_Controller_Front::getInstance()->getRouter()->assemble(array(
           'action' => 'verify',
-          //'email' => $email,
-          //'verify' => $verifyRow->code
         ), 'user_signup', true)
       . '?'
       . http_build_query(array('email' => $email, 'verify' => $verifyRow->code))

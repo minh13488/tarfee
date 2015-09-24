@@ -5941,3 +5941,15 @@ body[id^=global_page_social-connect] #global_content,
 		display: none;
 	}
 }
+#global_page_user-signup-account #account_skip
+{
+	border: 0;
+	div
+	{
+		border: 0;
+		div
+		{
+			border: 0;
+		}
+	}
+}

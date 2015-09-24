@@ -56,7 +56,6 @@ class User_Plugin_Signup1_Account extends Core_Plugin_FormSequence_Abstract
     if( $random ) {
       $data['password'] = Engine_Api::_()->user()->randomPass(10);
     }
-    
     if (isset($data['language'])) {
       $data['locale'] = $data['language'];
     }
