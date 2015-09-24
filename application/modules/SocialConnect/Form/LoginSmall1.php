@@ -75,7 +75,7 @@ class SocialConnect_Form_LoginSmall1 extends Engine_Form_Email {
 	
 	//Line
 	$this->addElement('Dummy', 'line-form', array(
-		'content' => '<div class="line-bg" style="width: 45%;float: left;"><span>&nbsp;</span></div><span style="float: left;">OR</span><div style="width: 48%;float: left;" class="line-bg"><span>&nbsp;</span></div><br/>',		
+		'content' => '<span class="tf-text-or">OR</span><br/>',		
 	    ));
 	
 	$email = Zend_Registry::get('Zend_Translate')->_('Email Address');

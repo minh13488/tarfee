@@ -1,7 +1,10 @@
 /* It is recommended to place all your extra/additional CSS rules here */
 .title-box{
     margin-bottom: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
 }
+
 .title-box span{
     overflow: hidden;
     display: block;
@@ -37,26 +40,20 @@
     font-weight: bold;
 }
 .login-popup-box{
-    width: 64%;
-    min-height: 480px;
+    width: 600px;
+    min-height: 490px;
     margin: 0 auto;
-    margin-top: 10%;
-    vertical-align: top;
     display: block;
-    padding: 6px;
-    margin-bottom: 1em;
-    /*box-shadow: 0 2px 0 rgba(255, 255, 255, 0.3), inset 0 0px 4px rgba(0, 0, 0, 0.3);*/
-    background-color: #353639;
     background-color: rgba(0,0,0,0.4);
     -webkit-border-radius: 10px;
     -moz-border-radius: 10px;
     -ms-border-radius: 10px;
     -o-border-radius: 10px;
     border-radius: 10px;
-    -webkit-background-clip: padding-box;
-    -moz-background-clip: padding;
-    background-clip: padding-box;  
-    position: relative;
+    position: absolute;
+    left: 50%;
+    margin-left: -300px;
+    top: 100px;
 }
 .line-bg{
     background:url(../img/1-px.png) repeat-x center;
@@ -77,9 +74,27 @@
     transition: all .4s ease;
 }
 .login-popup-box input[type="checkbox"]{
-    height: 0;
-    width: 0;
+/*    height: 0;
+    width: 0;*/
+    margin-right: 5px !important;
+}
+.login-popup-box .register-box .form-element{
+    position: relative;
+}
 
+.login-popup-box #code-element input{
+    width: 100% !important;
+}
+
+.login-popup-box .register-box .form-element:after{
+    content: "*";
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-size: 25px;
+    background-color: #C51D25;
+    padding: 11px 15px 5px;
+    border-radius: 0 3px 3px 0;
 }
 form#user_form_login {
 
@@ -134,8 +149,11 @@ form#user_form_login #remember-element input[type=checkbox]{
 }
 #user_form_login #fieldset-buttons {
     overflow: hidden;
-    width: 90%;
+    width: 100%;
     margin: 0 auto;
+}
+#user_form_login #buttons-element:after{
+    display: none;
 }
 #user_form_login .form-label{
     height: 10px;
@@ -176,7 +194,8 @@ button#submit:focus,button#submit:visited,button#submit:active{
 }
 #user_form_login .form-elements input.text, 
 #user_form_login .form-elements input#password {
-    width: 90%;
+    width: 100%;
+    padding-right: 50px !important;
 }
 .form-elements h4 {
     color: #fff;
@@ -246,8 +265,8 @@ button#submit:focus,button#submit:visited,button#submit:active{
 .ynresponsive_languages-popup{
     position: absolute;
     z-index: 9999999;
-    top: 15px;
-    left: 15px;
+    top: -2px;
+    margin-left: 13px;
 }
 .language-dropdown
 {
@@ -266,12 +285,12 @@ button#submit:focus,button#submit:visited,button#submit:active{
     display: none;
     list-style: none;
     color: #555!important;
-    border-radius: 0px 0px 4px 4px;
+    border-radius: 4px 4px 0px 0px;
     margin: 0;
     overflow: hidden;
     background: inherit;
     position: absolute;
-    top: 24px;
+    bottom: 24px;
     z-index: 3;
     width: 100%;
     border: 1px solid rgba(255, 255, 255, 0.2);
@@ -284,7 +303,7 @@ button#submit:focus,button#submit:visited,button#submit:active{
     color: inherit!important;
     font-weight: normal!important;
     display: block;
-    padding: 5px 0 5px 28px!important;
+    padding: 5px 0 5px 8px!important;
     cursor: pointer;
     font-size: 11px!important;
     border: 0!important;
@@ -292,7 +311,7 @@ button#submit:focus,button#submit:visited,button#submit:active{
 }
 .language-dropdown ul li a:hover
 {
-    background: #ff6633!important;
+    background: #fe5d55!important;
     color: #fff!important;
 }
 
@@ -310,12 +329,14 @@ button#submit:focus,button#submit:visited,button#submit:active{
 {
     font-size: 17px;
     margin-right: 5px;
+    position: relative;
+    bottom: -2px;
 }
 
 .language-dropdown > span
 {
     position: relative;
-    bottom: 2px;
+    /*bottom: 2px;*/
 }
 
 .language-dropdown > span:after
@@ -332,4 +353,73 @@ button#submit:focus,button#submit:visited,button#submit:active{
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     transform: translate(0, 0);
+}
+
+.tf-text-or{
+    position: relative;
+    display: block;
+    width: 100%;
+}
+
+.tf-text-or:after{
+    content: "";
+    position: absolute;
+    top: 11px;
+    width: calc(50% - 20px);
+    height: 1px;
+    background: #FFF;
+    display: block;
+    right: 0;
+}
+
+.tf-text-or:before{
+    content: "";
+    position: absolute;
+    top: 11px;
+    width: calc(50% - 20px);
+    height: 1px;
+    background: #FFF;
+    display: block;
+    left: 0;
+}
+
+
+@media screen and (max-width: 768px){
+    .login-popup-box{
+        width: 90%;
+        position: static;
+        margin: 0 auto;
+        margin-top: 100px;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+
+    .home-contain{
+        position: relative;
+        overflow: visible;
+        height: auto;
+    }
+    .menu-footer{
+        position: static;
+        padding-bottom: 20px;
+    }
+    .ynresponsive_languages-popup{
+        position: relative;
+        top: 0px;
+    }
+    .button-switch-box{
+        position: static;
+        max-width: 100%;
+        padding: 0 15px;
+        display: flex;
+        -webkit-display: flex;
+        -moz-display: flex;
+    }
+    .button-switch-box button{
+        margin-right: 10px;
+    }
+    .button-switch-box button:last-child{
+        margin-right: 0px;
+    }
+
 }

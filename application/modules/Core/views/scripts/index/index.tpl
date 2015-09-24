@@ -97,7 +97,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 				<?php endif; ?>
 			</div>
 			
-			<div class="col-md-6 col-md-offset-3 home-headline">
+			<div class="col-md-8 col-md-offset-2 home-headline">
 			    <div class="login-box" style="display: none;">
 				<?php echo $this->content()->renderWidget('social-connect.login'); ?>
 			    </div>
@@ -118,13 +118,9 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					</div>
 					</div>
 					<div id="lineform-label" class="form-label">&nbsp;</div>
-					<div class="line-bg" style="width: 45%;float: left;">
-						<span>&nbsp;</span>
-					</div>
-					<span style="float: left;"><?php echo $this -> translate('OR')?></span>
-					<div style="width: 48%;float: left;" class="line-bg">
-						<span>&nbsp;</span>
-					</div>
+
+					<span class="tf-text-or"><?php echo $this -> translate('OR')?></span>
+
 						<br/>
 					<div id="vP9na0gURF-wrapper" class="form-wrapper">
 					    <div id="code-element-label" class="form-label">&nbsp;</div>
@@ -159,8 +155,8 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					<input type="hidden" name="email" value="" id="email">
 					<input type="hidden" name="email_field" value="dlA5bmEwZ1VSRg==" id="email_field">
 					<h4 style="margin-top: 15px;">
-					    <input type="hidden" name="terms" value=""><input type="checkbox" name="terms" id="terms" value="1" tabindex="3">
-					    Creating an account means you’re okay with Tarfee's  <a target="_blank" href="/index.php/help/terms">Terms of Service</a>  and Privacy Policy.
+					    <input type="hidden" name="terms" id="terms" value="1" tabindex="3" checked="checked">
+					    <?php echo $this -> translate("Creating an account means you’re okay with Tarfee's Terms of Service and Privacy Policy.");?>
 					</h4>
 				    </div>
 				</form>
