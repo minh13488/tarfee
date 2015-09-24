@@ -3,8 +3,9 @@
         <div class="tftalk_input">
   	         <input type="text" name="keyword" value="<?php echo $this -> keyword?>" placeholder="<?php echo $this -> translate("Searh Events & Tryouts")?>"/>
         </div>
-      	<a href="<?php echo $this -> url(array('action' => 'create'), 'event_general', true)?>" class="tfadd_talk"><?php echo $this -> translate("Add Events & Tryouts")?><i class="fa fa-plus"></i></a>
-        
+        <?php if($this -> canCreate):?>
+      		<a href="<?php echo $this -> url(array('action' => 'create'), 'event_general', true)?>" class="tfadd_talk"><?php echo $this -> translate("Add Events & Tryouts")?><i class="fa fa-plus"></i></a>
+        <?php endif;?>
         <div class="tffilter_box">
           	<div class="ybo_headline"><h3><?php echo $this -> translate("Filters")?></h3></div>
             

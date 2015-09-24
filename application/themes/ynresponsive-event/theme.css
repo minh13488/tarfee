@@ -5733,7 +5733,9 @@ body[id^=global_page_social-connect],
 #global_page_payment-subscription-gateway,
 #global_page_payment-settings-contact-us,
 #global_page_payment-settings-confirm,
-#global_page_ynvideo-index-popup-view
+#global_page_ynvideo-index-popup-view,
+#global_page_user-signup-account,
+#global_page_core-error-requireuser
 {
 	#global_wrapper
 	{
@@ -5810,7 +5812,9 @@ body[id^=global_page_ynsocialads] #global_content .layout_top,
 body[id^=global_page_ynsocialads] #global_content .layout_main,
 #global_page_payment-settings-contact-us #payment_form_subscribe,
 #global_page_payment-settings-confirm form.global_form,
-#global_page_ynvideo-index-popup-view .show_on_page
+#global_page_ynvideo-index-popup-view .show_on_page,
+#global_page_payment-subscription-gateway form.global_form,
+#global_page_user-signup-account form.global_form
 {
 	background-color: white;
   	 -webkit-border-radius: 5px;
@@ -5903,7 +5907,9 @@ body[id^=global_page_ynsocialads] #global_content,
 body[id^=global_page_social-connect] #global_content,
 #global_page_payment-settings-contact-us #global_content,
 #global_page_payment-settings-confirm #global_content,
-#global_page_ynvideo-index-popup-view #global_content
+#global_page_ynvideo-index-popup-view #global_content,
+#global_page_payment-subscription-gateway #global_content,
+#global_page_user-signup-account #global_content
 {
 	padding-bottom: 10px;
 }
@@ -5933,4 +5939,8 @@ body[id^=global_page_social-connect] #global_content,
 	{
 		display: none;
 	}
+}
+.yn_mini_yntour
+{
+	padding-top: 25px;
 }

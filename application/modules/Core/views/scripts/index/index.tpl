@@ -114,13 +114,14 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 			<?php
 					$settings = Engine_Api::_()->getApi('settings', 'core');
 					$enableInviteCode = $settings->getSetting('user.signup.inviteonly');
-					$enableSkipLogin = $settings->getSetting('user.signup.checkskiplogin');
+					//$enableSkipLogin = $settings->getSetting('user.signup.checkskiplogin');
+					$enableSkipLogin = Engine_Api::_() -> getApi('settings', 'core') -> getSetting('core.general.portal', 1);
 			?>
 			<div class="button-switch-box">
-			    <button onclick="switch_screen('login-box');" id="sign-in">Sign in</button>
-			    <button onclick="switch_screen('register-box');" style="display: none;" id="sign-up">Sign up</button>
+			    <button onclick="switch_screen('login-box');" id="sign-in"><?php echo $this -> translate('Sign in')?></button>
+			    <button onclick="switch_screen('register-box');" style="display: none;" id="sign-up"><?php echo $this -> translate('Sign up')?></button>
 				<?php if($enableSkipLogin):?>
-			    	<button onclick="skips_sign_in();">Skip</button>
+			    	<button onclick="skips_sign_in();"><?php echo $this -> translate('Skip')?></button>
 				<?php endif; ?>
 			</div>
 			
@@ -148,7 +149,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					<div class="line-bg" style="width: 45%;float: left;">
 						<span>&nbsp;</span>
 					</div>
-					<span style="float: left;">OR</span>
+					<span style="float: left;"><?php echo $this -> translate('OR')?></span>
 					<div style="width: 48%;float: left;" class="line-bg">
 						<span>&nbsp;</span>
 					</div>
@@ -156,13 +157,13 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					<div id="vP9na0gURF-wrapper" class="form-wrapper">
 					    <div id="code-element-label" class="form-label">&nbsp;</div>
 					    <div id="vP9na0gURF-element" class="form-element">
-						<input type="email" name="vP9na0gURF" id="vP9na0gURF" value="" class="text" autofocus="autofocus" tabindex="1" required="1" placeholder="Email address" />
+						<input type="email" name="vP9na0gURF" id="vP9na0gURF" value="" class="text" autofocus="autofocus" tabindex="1" required="1" placeholder="<?php echo $this -> translate('Email address');?>" />
 					    </div>
 					</div>
 					<div id="password-wrapper" class="form-wrapper">
 					    <div id="code-element-label" class="form-label">&nbsp;</div>
 					    <div id="password-element" class="form-element">
-						<input type="password" name="password" id="password" value="" tabindex="2" required="1" placeholder="Type password" />
+						<input type="password" name="password" id="password" value="" tabindex="2" required="1" placeholder="<?php echo $this -> translate('Type password');?>" />
 					    </div>
 					</div>		
 
@@ -170,7 +171,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 						<div id="code-wrapper" class="form-wrapper" >
 							<div id="code-element-label" class="form-label">&nbsp;</div>
 							<div id="code-element" class="form-element">
-							<input style="width:90%" type="text" name="code" id="code" value="" required="1" placeholder="Invite Code"/>
+							<input style="width:90%" type="text" name="code" id="code" value="" required="1" placeholder="<?php echo $this -> translate('Invite Code');?>"/>
 							</div>
 						</div>		
 					<?php endif;?>
@@ -179,7 +180,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					    <div id="buttons-wrapper" class="form-wrapper">							
 						<div id="code-element-label" class="form-label">&nbsp;</div>
 						<div id="buttons-element" class="form-element">
-						    <button name="submit" id="submit" type="submit" tabindex="4">Sign up</button>
+						    <button name="submit" id="submit" type="submit" tabindex="4"><?php echo $this -> translate('Sign up')?></button>
 						</div>
 					    </div>
 					</fieldset>
@@ -190,25 +191,22 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					    Creating an account means you’re okay with Tarfee's  <a target="_blank" href="/index.php/help/terms">Terms of Service</a>  and Privacy Policy.
 					</h4>
 				    </div>
-
 				</form>
 			    </div>
-			    
 			</div>
-
 		    </div> 
-
 		</div>		    
 
-	    </div>
-	    <div class="menu-footer">
-		<!--<a href="/index.php/help/privacy">Privacy</a>
-		<a href="/index.php/help/terms">Terms of Service</a>-->
-		<!--<a href="/index.php/help/contact">Contact</a>-->
-		<!--<a href="#">IOS Application</a>
-		<a href="#">Android Aplication</a> -->
-	    </div>
+	    <!--<div class="menu-footer">
+			<a target="_blank" href="/index.php/help/privacy"><?php echo $this -> translate('Privacy');?></a>
+			<a target="_blank"href="/index.php/help/terms"><?php echo $this -> translate('Terms of Service');?></a>
+			<a target="_blank" href="/index.php/help/contact"><?php echo $this -> translate('Contact Us');?></a>
+
+	  </div>-->
 	</div>
+	
+	
+	
 	<!-- Start navigation -->
 <!--	<header>
 	    <div class="navbar navbar-default" role="navigation">
@@ -582,10 +580,10 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 	<!-- End contact -->
 	<div style="display: none;">
 	    <form id="skip_form_login" enctype="application/x-www-form-urlencoded" class="global_form" action="//<?php echo $_SERVER['HTTP_HOST']?>/index.php/login" method="post">
-	    <input type="hidden" name="email" value="guest@gmail.com"/>
-	    <input type="password" name="password" value="123456"/>
-	    <input type="hidden" name="level" value="5"/>
-	</form>
+		    <input type="hidden" name="email" value="guest@gmail.com"/>
+		    <input type="password" name="password" value="123456"/>
+		    <input type="hidden" name="level" value="5"/>
+		</form>
 	</div>
 	<!-- Start footer -->
 <!--	<footer>
@@ -654,7 +652,8 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 				    }
 				}
 				function skips_sign_in() {
-				    $('#skip_form_login').submit();
+				    //$('#skip_form_login').submit();
+				    window.location.href = '<?php echo $this -> url(array('action' => 'home'), 'user_general', true)?>';
 				}
 	</script>
     </body>

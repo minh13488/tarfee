@@ -133,11 +133,13 @@ class User_IndexController extends Core_Controller_Action_Standard
 			if (!$this -> _helper -> requireUser() -> isValid())
 				return;
 		}
-
+		
+		/*
 		if (!Engine_Api::_() -> user() -> getViewer() -> getIdentity())
 		{
 			return $this -> _helper -> redirector -> gotoRoute(array(), 'default', true);
 		}
+		 */ 
 
 		// Render
 		$this -> _helper -> content -> setNoRender() -> setEnabled();

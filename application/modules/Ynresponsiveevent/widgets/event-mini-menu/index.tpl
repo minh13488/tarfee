@@ -27,13 +27,13 @@
 		</div>
 	<?php endif;?>
     <div class="group-mini-menu">
-    	<div>
     		<?php
     		$enabled  = Zend_Registry::isRegistered('YNTOUR_ENABLED')?Zend_Registry::get('YNTOUR_ENABLED'):false;
 	        if($enabled):?>
-	        	<a href="javascript:en4.yntour.startTour();" class="no-dloader menu_core_mini core_mini_yntour"><?php echo $this -> translate("Tour Guide")?></a>
+	        	<div class="yn_mini_yntour">
+	        		<a href="javascript:en4.yntour.startTour();" class="no-dloader menu_core_mini core_mini_yntour"><?php echo $this -> translate("Tour Guide")?></a>
+    			</div>
     		<?php endif;?>
-    	</div>
     	<?php
     		// Reverse the navigation order (they're floating right)
     		$count = count($this->navigation);

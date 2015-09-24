@@ -130,6 +130,17 @@ class User_Form_Admin_Signup_Account extends Engine_Form
       ),
       'value' => 1,
     ));
+	/*
+    $this->addElement('Radio', 'checkskiplogin', array(
+        'label' => 'Check Skip Login?',
+        'description' => 'Enable/Disable Button Skip Login',
+        'multiOptions' => array(
+            1 => "Yes, Enable skip login.",
+            0 => "No, Disable skip login.",
+        ),
+        'value' => 1,
+    ));
+	 */
 
     $this->getElement('inviteonly')->getDecorator('HtmlTag')
         ->setOption('style', 'max-width: 450px;');

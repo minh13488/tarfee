@@ -11,21 +11,19 @@ class Ynvideo_Widget_MainPageVideosController extends Engine_Content_Widget_Abst
 		$limit = 20;
 		
 		$viewer = Engine_Api::_()->user()->getViewer();
-		if (!$viewer || !$viewer->getIdentity()) {
-			return $this->setNoRender();
-		}
-		
 		$user_ids = array();
-		$friends = $viewer->getFriendsList();
-		foreach ($friends as $friend) {
-			$user_ids[] = $friend->getIdentity();
-		}
 		$group_ids = array();
-		$followGroups = Engine_Api::_()->getDbTable('follow', 'advgroup')->getFollowGroups($viewer->getIdentity());		
-		foreach ($followGroups as $group) {
-			$group_ids[] = $group->resource_id;
+		if ($viewer->getIdentity()) 
+		{
+			$friends = $viewer->getFriendsList();
+			foreach ($friends as $friend) {
+				$user_ids[] = $friend->getIdentity();
+			}
+			$followGroups = Engine_Api::_()->getDbTable('follow', 'advgroup')->getFollowGroups($viewer->getIdentity());		
+			foreach ($followGroups as $group) {
+				$group_ids[] = $group->resource_id;
+			}
 		}
-		
 		$arrNot = explode(',', $beforeStr);
 		
 		$table = Engine_Api::_()->getItemTable('video');

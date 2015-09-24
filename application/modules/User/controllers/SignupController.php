@@ -25,10 +25,9 @@ class User_SignupController extends Core_Controller_Action_Standard
   
   public function accountAction()
   {
-    $this -> _helper -> layout -> setLayout('default-simple');
+    //$this -> _helper -> layout -> setLayout('default-simple');
     // Get settings
     $settings = Engine_Api::_()->getApi('settings', 'core');
-
     // If the user is logged in, they can't sign up now can they?
     if( Engine_Api::_()->user()->getViewer()->getIdentity() ) {
       return $this->_helper->redirector->gotoRoute(array(), 'default', true);
