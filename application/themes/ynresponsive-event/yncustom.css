@@ -1083,7 +1083,7 @@ iframe.wysihtml5-sandbox {
 		}
 		&.right_menu_active
 		{
-		    background: #B1C991;
+		    background: $theme_link_color;
 		}
 	    }
 	}

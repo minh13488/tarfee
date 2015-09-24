@@ -1495,6 +1495,13 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		{
 			$videoUrl = rtrim((constant('_ENGINE_SSL') ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'], '/') . $videoUrl;
 		}
+		
+		//Adding meta tags for sharing
+		$view = Zend_Registry::get('Zend_View');
+		$og = '<meta property="og:image" content="' . $photoUrl . '" />';
+		$og .= '<meta property="og:title" content="' . $video -> getTitle() . '" />';
+		$og .= '<meta property="og:url" content="' . $videoUrl . '" />';
+		$view -> layout() -> headIncludes .= $og;
 
 		$watchLaterTbl = Engine_Api::_() -> getDbTable('watchlaters', 'ynvideo');
 		$watchLaterTbl -> update(array(
