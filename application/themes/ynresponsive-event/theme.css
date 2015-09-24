@@ -5814,7 +5814,8 @@ body[id^=global_page_ynsocialads] #global_content .layout_main,
 #global_page_payment-settings-confirm form.global_form,
 #global_page_ynvideo-index-popup-view .show_on_page,
 #global_page_payment-subscription-gateway form.global_form,
-#global_page_user-signup-account form.global_form
+#global_page_user-signup-account form.global_form,
+#global_page_user-signup-account #global_content_simple
 {
 	background-color: white;
   	 -webkit-border-radius: 5px;

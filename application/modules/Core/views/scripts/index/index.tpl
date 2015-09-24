@@ -130,17 +130,17 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 				<?php echo $this->content()->renderWidget('social-connect.login'); ?>
 			    </div>
 			    <div class="register-box">
-				<form id="user_form_login" enctype="application/x-www-form-urlencoded" class="global_form" action="//<?php echo $_SERVER['HTTP_HOST']?>/index.php/signup/account" method="post">
+				<form id="user_form_login" enctype="application/x-www-form-urlencoded" class="global_form" action="<?php echo $this -> url(array(),'user_signup1', true)?>" method="post">
 				    <div class="form-elements">
 					<div id="code-wrapper" class="form-wrapper">
 					    <div style="margin-top:5px">
-						<a title="Sign in Facebook" href="javascript: void(sopopup('//<?php echo $_SERVER['HTTP_HOST']?>/index.php/openid-start/facebook'));">
+						<a title="Sign in Facebook" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'facebook'),'connect_signin', true)?>'));">
 						<img alt="Facebook" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/facebook.png" class="ynsc_sprite"></a>
-						<a title="Sign in Twitter" href="javascript: void(sopopup('//<?php echo $_SERVER['HTTP_HOST']?>/index.php/openid-start/twitter'));">
+						<a title="Sign in Twitter" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'twitter'),'connect_signin', true)?>'));">
 						<img alt="Twitter" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/twitter.png" class="ynsc_sprite"></a>
-						<a title="Sign in Google" href="javascript: void(sopopup('//<?php echo $_SERVER['HTTP_HOST']?>/index.php/openid-start/google'));">
+						<a title="Sign in Google" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'google'),'connect_signin', true)?>'));">
 						<img alt="Google" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/google.png" class="ynsc_sprite"></a>
-						<a title="Sign in Linkedin" href="javascript: void(sopopup('//<?php echo $_SERVER['HTTP_HOST']?>/index.php/openid-start/linkedin'));">
+						<a title="Sign in Linkedin" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'linkedin'),'connect_signin', true)?>'));">
 						<img alt="Linkedin" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/linkedin.png" class="ynsc_sprite">
 						</a>
 					</div>
@@ -187,7 +187,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					<input type="hidden" name="email" value="" id="email">
 					<input type="hidden" name="email_field" value="dlA5bmEwZ1VSRg==" id="email_field">
 					<h4 style="margin-top: 15px;">
-					    <input type="hidden" name="terms" value=""><input type="checkbox" name="terms" id="terms" value="1" tabindex="3" checked="checked">
+					    <input type="hidden" name="terms" value=""><input type="checkbox" name="terms" id="terms" value="1" tabindex="3" style="margin-right: 10px" checked="checked">
 					    Creating an account means you’re okay with Tarfee's  <a target="_blank" href="/index.php/help/terms">Terms of Service</a>  and Privacy Policy.
 					</h4>
 				    </div>
