@@ -8,11 +8,11 @@ var slideshowSpeed = 8000;
 // Variable to store the images we need to set as background
 // which also includes some text and url's.
 var photos = [ {
-		"image" : "//tarfee.com/landing/new_landing/img/bgslider/bg1.jpg",
+		"image" : "/landing/new_landing/img/bgslider/bg1.jpg",
 	}, {
-		"image" : "//tarfee.com/landing/new_landing/img/bgslider/bg2.jpg",
+		"image" : "/landing/new_landing/img/bgslider/bg2.jpeg",
 	}, {
-		"image" : "//tarfee.com/landing/new_landing/img/bgslider/bg3.jpg",
+		"image" : "/landing/new_landing/img/bgslider/bg3.jpg",
 	}
 ];
 
