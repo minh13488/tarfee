@@ -539,6 +539,25 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		echo $html;
 		return;
 	}
+	public function finalizeUrl($url)
+	{
+		if ($url)
+		{
+			if (strpos($url, 'https://') === FALSE && strpos($url, 'http://') === FALSE)
+			{
+				$pageURL = 'http';
+				if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
+				{
+					$pageURL .= "s";
+				}
+				$pageURL .= "://";
+				$pageURL .= $_SERVER["SERVER_NAME"];
+				$url = $pageURL . '/'. ltrim( $url, '/');
+			}
+		}
+	
+		return $url;
+	}
 
 	public function viewAction()
 	{
@@ -556,6 +575,11 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		if(!$playerCard -> isViewable()) {
 			return $this -> _helper -> requireAuth() -> forward();
 		}
+		
+		$view = Zend_Registry::get('Zend_View');
+    	$view->doctype('XHTML1_RDFA');
+		if($playerCard->photo_id)
+			$view->headMeta() -> setProperty('og:image', $this -> finalizeUrl($playerCard->getPhotoUrl()));
 		
 		// Check if edit/delete is allowed
 		$this -> view -> can_edit = $can_edit = $this -> _helper -> requireAuth() -> setAuthParams($playerCard, null, 'edit') -> checkRequire();
