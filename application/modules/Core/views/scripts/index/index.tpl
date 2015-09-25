@@ -148,7 +148,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					    <div id="buttons-wrapper" class="form-wrapper">							
 						<div id="code-element-label" class="form-label">&nbsp;</div>
 						<div id="buttons-element" class="form-element">
-						    <button name="submit" id="submit" type="submit" tabindex="4"><?php echo $this -> translate('Sign up')?></button>
+						    <button name="submit" id="submit" type="submit" tabindex="4"><?php echo $this -> translate('Register')?></button>
 						</div>
 					    </div>
 					</fieldset>
@@ -156,7 +156,9 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					<input type="hidden" name="email_field" value="dlA5bmEwZ1VSRg==" id="email_field">
 					<h4 style="margin-top: 15px;">
 					    <input type="hidden" name="terms" id="terms" value="1" tabindex="3" checked="checked">
-					    <?php echo $this -> translate("Creating an account means you’re okay with Tarfee's Terms of Service and Privacy Policy.");?>
+					    <?php echo $this -> translate("Creating an account means you’re okay with Tarfee's ");?>
+					    	<a target="_blank"href="/index.php/help/terms"><?php echo $this -> translate('Terms of Service');?> </a> and 
+					    	<a target="_blank" href="/index.php/help/privacy"><?php echo $this -> translate('Privacy Policy');?></a>
 					</h4>
 				    </div>
 				</form>
@@ -166,8 +168,8 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 		</div>		    
 
 	    <div class="menu-footer">
-			<a target="_blank" href="/index.php/help/privacy"><?php echo $this -> translate('Privacy');?></a>
-			<a target="_blank"href="/index.php/help/terms"><?php echo $this -> translate('Terms of Service');?></a>
+			<a target="_blank" href="/index.php/help/privacy"><?php echo $this -> translate('Privacy');?></a> |
+			<a target="_blank"href="/index.php/help/terms"><?php echo $this -> translate('Terms of Service');?></a> |
 			<a target="_blank" href="/index.php/help/contact"><?php echo $this -> translate('Contact Us');?></a>
 			<span class="ynresponsive_languages-popup">
 			    <?php if( 1 !== count($this->languageNameList) ):?>
