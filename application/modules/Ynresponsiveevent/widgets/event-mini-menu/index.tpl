@@ -15,6 +15,39 @@
 			 ? $this->htmlLink(($this -> logo_link)?$this -> logo_link:$route, $this->htmlImage($logo, array('class' => 'navbar-brand')))
 			 : $this->htmlLink(($this -> site_link)?$this -> site_link:$route, $site_name, array('class' => 'navbar-brand'));
 		?>
+		<span class="ynresponsive_languges">
+	     <?php if( 1 !== count($this->languageNameList) ):?>
+	        <form id="form_language" method="post" action="<?php echo $this->url(array('controller' => 'utility', 'action' => 'locale'), 'default', true) ?>" style="display:inline-block">
+	            <?php 
+	            if($this -> countryLanguage)
+			  	{
+			  		$this->translate()->setLocale($this -> countryLanguage);
+			  	}
+	            $selectedLanguage = $this->translate()->getLocale() ?>
+	            <div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown">
+	            	<i class="fa fa-globe"></i>
+	          		<span><?php echo strtoupper(substr($selectedLanguage, 0, 2))?></span>
+	            	<ul>
+	            		<?php foreach($this->languageNameList as $key => $language):?>
+	            		<li>
+	            			<a onclick="changeLanguages('<?php echo $key?>')" data-locale="<?php echo $key?>" class="locale old-app"><?php echo strtoupper(substr($key,0, 2))?></a>
+	            		</li>
+	            		<?php endforeach;?>
+	            	</ul>
+	
+	            </div>
+	            <?php echo $this->formHidden('language', $selectedLanguage);?>
+	            <?php echo $this->formHidden('return', $this->url()) ?>
+	        </form>
+	        <script type="text/javascript">
+	        var changeLanguages = function(lang)
+	        {
+	        	$('language').value = lang;
+	        	$('form_language').submit();
+	        }
+	        </script>
+	     <?php endif; ?>
+		</span>
 	</div>
     <?php if($this->search_check):?>
 		<div id="global_search_form_container">

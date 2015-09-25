@@ -3787,6 +3787,8 @@ span.tf_button_action{
 .ynresponsive_languges{
     display: inline-block;
     position: relative;
+    top: 6px;
+    margin-left: 10px;
 }
 .language-dropdown{
     display: block;
@@ -3803,18 +3805,18 @@ span.tf_button_action{
 	display: none;
 	list-style: none;
 	color: #555;
-	border-radius: 4px 4px 0 0;
+	border-radius: 0px 0px 4px 4px;
 	margin: 0;
 	overflow: hidden;
 	background: inherit;
 	position: absolute;
-	bottom: 22px;
+	top: 21px;
 	z-index: 3;
 	width: 100%;
 	border: 1px solid rgba(255, 255, 255, 0.2);
 	border-bottom: 0;
 	left: 0px;
-
+	border-top: 0;
 	li{a{  
 	       color: inherit;
 	       display: block;

@@ -4449,7 +4449,7 @@ Shows the mini menu and search widget
     
     #global_search_form_container {   
     	display: inline-block;
-    	margin-left: 30px;
+    	margin-left: 15px;
     	position: relative;
     	top: 20px;
 
