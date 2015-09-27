@@ -42,13 +42,14 @@ class Core_IndexController extends Core_Controller_Action_Standard {
 	      }
 	    }
 		
-		$ch = curl_init('ipinfo.io/country');
+		$ch = curl_init('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']);
 		curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
-	    $country = substr(curl_exec($ch), 0, 2);
+		$response = unserialize(curl_exec($ch));
+		$country = $response['geoplugin_countryCode'];
 		curl_close($ch);
 		// check mapping
 		$table = Engine_Api::_() -> getDbTable('langcountrymappings', 'core');
-		$select = $table -> select() -> where('country_code = ?', $country) -> limit(1);
+		$select = $table -> select() -> where('country_code LIKE ?', $country) -> limit(1);
 		$countryLanguage = '';
 		if($row = $table -> fetchRow($select))
 		{
