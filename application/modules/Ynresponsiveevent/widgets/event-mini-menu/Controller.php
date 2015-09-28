@@ -102,21 +102,31 @@ class Ynresponsiveevent_Widget_EventMiniMenuController extends Engine_Content_Wi
       }
     }
 	
-	$ch = curl_init('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']);
-	curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
-	$response = unserialize(curl_exec($ch));
-	$country = $response['geoplugin_countryCode'];
-	curl_close($ch);
-	// check mapping
-	$table = Engine_Api::_() -> getDbTable('langcountrymappings', 'core');
-	$select = $table -> select() -> where('country_code = ?', $country) -> limit(1);
-	$countryLanguage = '';
-	if($row = $table -> fetchRow($select))
+	if(empty($_COOKIE['en4_language']) || empty($_COOKIE['en4_locale']))
 	{
-		$countryLanguage = $row -> language_code;
+		$ch = curl_init('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']);
+		curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+		$response = unserialize(curl_exec($ch));
+		$country = $response['geoplugin_countryCode'];
+		curl_close($ch);
+		// check mapping
+		$table = Engine_Api::_() -> getDbTable('langcountrymappings', 'core');
+		$select = $table -> select() -> where('country_code = ?', $country) -> limit(1);
+		$countryLanguage = '';
+		if($row = $table -> fetchRow($select))
+		{
+			$countryLanguage = $row -> language_code;
+		}
+		$this -> view -> countryLanguage = $countryLanguage;
+    	setcookie('en4_language', $countryLanguage, time() + (86400*365), '/');
+		setcookie('en4_locale', $countryLanguage, time() + (86400*365), '/');
+		header("Refresh:0");
 	}
-	$this -> view -> countryLanguage = $countryLanguage;
-
+	elseif(!empty($_COOKIE['en4_language'])) 
+	{
+		$this -> view -> countryLanguage = $_COOKIE['en4_language'];
+	}
+	
     // Prepare language name list
     $languageNameList  = array();
     $languageDataList  = Zend_Locale_Data::getList(null, 'language');
