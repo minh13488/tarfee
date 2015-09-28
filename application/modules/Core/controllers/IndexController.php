@@ -62,9 +62,6 @@ class Core_IndexController extends Core_Controller_Action_Standard {
 			setcookie('en4_locale', $countryLanguage, time() + (86400*365), '/');
 			header("Refresh:0");
 		}
-		elseif(!empty($_COOKIE['en4_language'])) {
-			$this -> view -> countryLanguage = $_COOKIE['en4_language'];
-		}
 	
 	    // Prepare language name list
 	    $languageNameList  = array();
