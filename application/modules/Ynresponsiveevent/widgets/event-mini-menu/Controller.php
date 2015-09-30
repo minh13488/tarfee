@@ -118,9 +118,12 @@ class Ynresponsiveevent_Widget_EventMiniMenuController extends Engine_Content_Wi
 			$countryLanguage = $row -> language_code;
 		}
 		$this -> view -> countryLanguage = $countryLanguage;
-    	setcookie('en4_language', $countryLanguage, time() + (86400*365), '/');
-		setcookie('en4_locale', $countryLanguage, time() + (86400*365), '/');
-		header("Refresh:0");
+    	if($countryLanguage)
+		{
+			setcookie('en4_language', $countryLanguage, time() + (86400*365), '/');
+			setcookie('en4_locale', $countryLanguage, time() + (86400*365), '/');
+			header("Refresh:0");
+		}
 	}
 	
     // Prepare language name list

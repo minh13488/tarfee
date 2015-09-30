@@ -324,7 +324,10 @@ button#submit:focus,button#submit:visited,button#submit:active{
 {
     display: block;
 }
-
+.open_options ul
+{
+	display: block!important;
+}
 .language-dropdown i.fa
 {
     font-size: 17px;

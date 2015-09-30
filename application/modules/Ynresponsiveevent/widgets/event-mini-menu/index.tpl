@@ -24,10 +24,10 @@
 			  		$this->translate()->setLocale($this -> countryLanguage);
 			  	}
 	            $selectedLanguage = $this->translate()->getLocale() ?>
-	            <div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown">
+	            <div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown" onclick="toggle_languages_bar(this)">
 	            	<i class="fa fa-globe"></i>
 	          		<span><?php echo strtoupper(substr($selectedLanguage, 0, 2))?></span>
-	            	<ul>
+	            	<ul <?php if(Engine_Api::_()->ynresponsive1()->isMobile()):?> style = "display: none" <?php endif; ?>>
 	            		<?php foreach($this->languageNameList as $key => $language):?>
 	            		<li>
 	            			<a onclick="changeLanguages('<?php echo $key?>')" data-locale="<?php echo $key?>" class="locale old-app"><?php echo strtoupper(substr($key,0, 2))?></a>
@@ -234,6 +234,11 @@
     } else {
       element.className='updates_pulldown';
     }
+  }
+  
+  var toggle_languages_bar = function(obj)
+  {
+  	obj.toggleClass('open_options');
   }
 	
   var toggleSortPulldown = function(event, element, user_id) {

@@ -91,7 +91,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 			?>
 			<div class="button-switch-box">
 			    <button onclick="switch_screen('login-box');" id="sign-in"><?php echo $this -> translate('Sign in')?></button>
-			    <button onclick="switch_screen('register-box');" style="display: none;" id="sign-up"><?php echo $this -> translate('Sign up')?></button>
+			    <button onclick="switch_screen('register-box');" style="display: none;" id="sign-up"><?php echo $this -> translate('landing_register')?></button>
 				<?php if($enableSkipLogin):?>
 			    	<button onclick="skips_sign_in();"><?php echo $this -> translate('Skip')?></button>
 				<?php endif; ?>
@@ -148,7 +148,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					    <div id="buttons-wrapper" class="form-wrapper">							
 						<div id="code-element-label" class="form-label">&nbsp;</div>
 						<div id="buttons-element" class="form-element">
-						    <button name="submit" id="submit" type="submit" tabindex="4"><?php echo $this -> translate('Register')?></button>
+						    <button name="submit" id="submit" type="submit" tabindex="4"><?php echo $this -> translate('landing_register')?></button>
 						</div>
 					    </div>
 					</fieldset>
@@ -180,10 +180,10 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 			  		$this->translate()->setLocale($this -> countryLanguage);
 			  	}
 				$selectedLanguage = $this->translate()->getLocale() ?>
-				<div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown">
+				<div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown" onclick="toggle_languages_bar(this)">
 				    <i class="fa fa-globe"></i>
 				    <span><?php echo strtoupper(substr($selectedLanguage, 0, 2))?></span>
-				    <ul>
+				    <ul <?php if(Engine_Api::_()->ynresponsive1()->isMobile()):?> style = "display: none" <?php endif; ?>>
 					<?php foreach($this->languageNameList as $key => $language):?>
 					<li>
 					    <a onclick="changeLanguages('<?php echo $key?>')" data-locale="<?php echo $key?>" class="locale old-app"><?php echo strtoupper(substr($key,0, 2))?></a>
@@ -637,23 +637,27 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 	<script src="//<?php echo $_SERVER['HTTP_HOST']?>/landing/new_landing/js/custom.js"></script>
 
 	<script type="text/javascript">
-				function switch_screen(selector) {
-				    if (selector === 'login-box') {
-					$('.register-box').hide().fadeOut(2000);
-					$('#sign-in').hide().fadeOut(2000);
-					$('#sign-up').hide().fadeIn(2000);
-					$('.' + selector).hide().fadeIn(2000);
-				    } else {
-					$('.login-box').hide().fadeOut(2000);
-					$('#sign-up').hide().fadeOut(2000);
-					$('#sign-in').hide().fadeIn(2000);
-					$('.' + selector).hide().fadeIn(2000);
-				    }
-				}
-				function skips_sign_in() {
-				    //$('#skip_form_login').submit();
-				    window.location.href = '<?php echo $this -> url(array('action' => 'home'), 'user_general', true)?>';
-				}
+		var toggle_languages_bar = function(obj)
+	  	{
+	  		obj.toggleClass('open_options');
+	  	} 
+		function switch_screen(selector) {
+		    if (selector === 'login-box') {
+			$('.register-box').hide().fadeOut(2000);
+			$('#sign-in').hide().fadeOut(2000);
+			$('#sign-up').hide().fadeIn(2000);
+			$('.' + selector).hide().fadeIn(2000);
+		    } else {
+			$('.login-box').hide().fadeOut(2000);
+			$('#sign-up').hide().fadeOut(2000);
+			$('#sign-in').hide().fadeIn(2000);
+			$('.' + selector).hide().fadeIn(2000);
+		    }
+		}
+		function skips_sign_in() {
+		    //$('#skip_form_login').submit();
+		    window.location.href = '<?php echo $this -> url(array('action' => 'home'), 'user_general', true)?>';
+		}
 	</script>
     </body>
 </html>
