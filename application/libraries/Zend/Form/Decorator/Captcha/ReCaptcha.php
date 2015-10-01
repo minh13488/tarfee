@@ -81,34 +81,10 @@ class Zend_Form_Decorator_Captcha_ReCaptcha extends Zend_Form_Decorator_Abstract
         // values with those produced by ReCaptcha
         // zendBindEvent mediates between Mozilla's addEventListener and
         // IE's sole support for addEvent.
-        $js =<<<EOJ
-<script type="text/javascript" language="JavaScript">
-function windowOnLoad(fn) {
-    var old = window.onload;
-    window.onload = function() {
-        if (old) {
-            old();
-        }
-        fn();
-    };
-}
-function zendBindEvent(el, eventName, eventHandler) {
-    if (el.addEventListener){
-        el.addEventListener(eventName, eventHandler, false); 
-    } else if (el.attachEvent){
-        el.attachEvent('on'+eventName, eventHandler);
-    }
-}
-windowOnLoad(function(){
-    zendBindEvent(
-        document.getElementById("$challengeId").form,
-        'submit',
-        function(e) {
-            document.getElementById("$challengeId").value = document.getElementById("recaptcha_challenge_field").value;
-            document.getElementById("$responseId").value = document.getElementById("recaptcha_response_field").value;
-        }    
-    );
-});
+        $js ="";
+        $markup = <<<EOJ
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<div class="g-recaptcha" data-sitekey="6Lca5w0TAAAAAG9nlXhv_l0Ingf12nVBXk_KvVb0"></div>
 </script>
 EOJ;
 

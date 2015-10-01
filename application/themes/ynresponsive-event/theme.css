@@ -5953,3 +5953,29 @@ body[id^=global_page_social-connect] #global_content,
 		}
 	}
 }
+
+.plan-table.contact-us table tr:last-child td:nth-child(3){
+    background: #a0a0a0 !important;
+    border-radius: 0 !important;
+    
+    button.contact-us{
+        background-color: #A2B758 !important;
+        color: #FFF !important;
+        
+        &:hover{
+            background-color: #f63 !important;
+        }
+    }
+}
+
+.plan-table.contact-us table tr:last-child td:nth-child(4){
+    background: #ACACAC !important;
+    button.contact-us{
+        background-color: #A2B758 !important;
+        color: #FFF !important;
+        
+        &:hover{
+            background-color: #f63 !important;
+        }
+    }
+}

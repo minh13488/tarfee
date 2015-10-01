@@ -220,6 +220,34 @@ class Zend_Captcha_ReCaptcha extends Zend_Captcha_Base
      */
     public function isValid($value, $context = null)
     {
+        if (empty($_POST['g-recaptcha-response'])) {
+            $this->_error(self::MISSING_VALUE);
+            return false;
+        }
+
+        if(true){
+            $url = 'https://www.google.com/recaptcha/api/siteverify';
+            $fields = http_build_query(array(
+                    'secret'=> $this -> getPrivkey(),
+                    'response'=> $_POST['g-recaptcha-response'],
+                    'remoteip'=> $_SERVER['REMOTE_ADDR']
+                ), null,'&'); 
+            $ch = curl_init($url);
+            curl_setopt($ch,CURLOPT_POST,1);
+            curl_setopt($ch,CURLOPT_POSTFIELDS, $fields);
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+            $result = json_decode(curl_exec($ch), true);
+
+            curl_close($ch);
+
+            if($result['success'] !== true){
+                $this->_error(self::ERR_CAPTCHA);
+                return false;
+            }
+
+            return true;
+        }
+
         if (!is_array($value) && !is_array($context)) {
             $this->_error(self::MISSING_VALUE);
             return false;

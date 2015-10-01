@@ -109,9 +109,14 @@
       <?php endif;?>
        <?php endif;?>
       <!-- end discount -->
-	  
+	  <?php
+		$action = 'confirm';
+		if(isset($payment_settings['disableUpgrade']) && $payment_settings['disableUpgrade'] == 1)
+		{
+			$action = 'contact-us';
+		}?>
       <div class="plan">
-			<div class="plan-table">
+			<div class="plan-table <?php echo $action?>">
 				<table cellpadding="0" cellspacing="1px">
 					<tr>
 						<th class="title-width"></th>
@@ -161,12 +166,6 @@
 						<td class="no-border">&nbsp;</td>
 						<?php foreach ($levels as $id=>$level):?>						
 							<td>
-								<?php
-								$action = 'confirm';
-								if(isset($payment_settings['disableUpgrade']) && $payment_settings['disableUpgrade'] == 1)
-								{
-									$action = 'contact-us';
-								}?>
 								<form method="get" action="<?php echo $this->baseUrl();?>/payment/settings/<?php echo $action;?>">
 									<input class="discount-input" type="hidden" value="<?php echo (isset($_SESSION['ref_code']))? $_SESSION['ref_code']: " ";?>" id="discount" name="discount">
 									<?php if (isset($level_plans[$id])):?>
@@ -175,13 +174,15 @@
 												<option value="<?php echo $plan->getIdentity();?>"><?php echo $plan->getTitle();?></option>
 											<?php endforeach;?>
 										</select>
-										<p class="price_title">
-											<?php $index = 0;?>
-											<?php foreach ($level_plans[$id] as $plan):?>
-												<span id="plan_<?php echo $plan->getIdentity();?>" class="plan" style="<?php if ($index != 0) echo 'display:none;';$index++; ?>"><?php echo $api->getTextPrice($plan);?></span>
-											<?php endforeach;?>
-										</p>
-										<button name="submit" id="submit" type="submit" tabindex="4"><?php echo $this->translate('Upgrade Now!');?></button>
+										<?php if($action != 'contact-us'):?>
+											<p class="price_title">
+												<?php $index = 0;?>
+												<?php foreach ($level_plans[$id] as $plan):?>
+													<span id="plan_<?php echo $plan->getIdentity();?>" class="plan" style="<?php if ($index != 0) echo 'display:none;';$index++; ?>"><?php echo $api->getTextPrice($plan);?></span>
+												<?php endforeach;?>
+											</p>
+										<?php endif;?>
+										<button class="<?php echo $action?>" name="submit" id="submit" type="submit" tabindex="4"><?php if($action == 'contact-us') echo $this->translate('Request Now'); else echo $this->translate('Upgrade Now!');?></button>
 									<?php endif;?>
 								</form>
 							</td>

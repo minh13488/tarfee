@@ -60,7 +60,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 	<script type="text/javascript" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/User/externals/scripts/core.js"></script>
 	<script type="text/javascript" src="//<?php echo $_SERVER['HTTP_HOST']?>/externals/smoothbox/smoothbox4.js"></script>
 	<script type="text/javascript" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/scripts/core.js"></script>
-
+	<script src='//www.google.com/recaptcha/api.js'></script>
     </head>
 
     <body class="bg-blur">
@@ -86,8 +86,8 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 			<?php
 					$settings = Engine_Api::_()->getApi('settings', 'core');
 					$enableInviteCode = $settings->getSetting('user.signup.inviteonly');
-					//$enableSkipLogin = $settings->getSetting('user.signup.checkskiplogin');
 					$enableSkipLogin = Engine_Api::_() -> getApi('settings', 'core') -> getSetting('core.general.portal', 1);
+					$enableCaptcha = Engine_Api::_()->getApi('settings', 'core')->core_spam_signup;
 			?>
 			<div class="button-switch-box">
 			    <button onclick="switch_screen('login-box');" id="sign-in"><?php echo $this -> translate('Sign in')?></button>
@@ -143,7 +143,24 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 							</div>
 						</div>		
 					<?php endif;?>
-
+					
+				    <?php if( $enableCaptcha ):
+				    	$spamSettings = Engine_Api::_()->getApi('settings', 'core')->core_spam;
+						if( (!empty($spamSettings['recaptchaenabled']) &&
+				        	! empty($spamSettings['recaptchapublic']) &&
+				        	! empty($spamSettings['recaptchaprivate'])) ):
+				    	?>
+				    	<div id="captcha-wrapper" class="form-wrapper" >
+				    		<div id="captcha-element-label" class="form-label">&nbsp;</div>
+				    		<div id="captcha-element" class="form-element">
+				    			<input type="hidden" name="recaptcha_challenge_field" value="" id="captcha-challenge">
+				    			<input type="hidden" name="recaptcha_response_field" value="" id="captcha-response">
+				    			<div class="g-recaptcha" data-sitekey="<?php echo $spamSettings['recaptchapublic']?>"></div>
+				    		</div>
+				    	</div>
+				    	<?php endif;?>
+				    <?php endif;?>
+				    
 					<fieldset id="fieldset-buttons" style="margin-top: 15px;">
 					    <div id="buttons-wrapper" class="form-wrapper">							
 						<div id="code-element-label" class="form-label">&nbsp;</div>
