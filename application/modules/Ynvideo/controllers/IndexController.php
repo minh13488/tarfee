@@ -956,11 +956,11 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			throw $e;
 		}
 		
-	    $overrallValue = $tableRating -> getRatingOfType($rating_type, $video -> getIdentity());
+	    //$overrallValue = $tableRating -> getRatingOfType($rating_type, $video -> getIdentity());
 
 		$data = array();
 		$data[] = array(
-			'rating' => $overrallValue,
+			'rating' => $rating,
 			'rating_type' => $rating_type,
 		);
 

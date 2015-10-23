@@ -11,6 +11,8 @@
         <span id="rate_3_<?php echo $item -> getIdentity();?>" class="fa fa-star "></span>
         <span id="rate_4_<?php echo $item -> getIdentity();?>" class="fa fa-star "></span>
         <span id="rate_5_<?php echo $item -> getIdentity();?>" class="fa fa-star "></span>
+        <?php $overrallValue = $tableRating -> getRatingOfType($item -> getIdentity(), $this -> video_id);?>
+        <span style="font-size: 8pt; color: #555"><?php echo $this -> translate("Ave:")." ".number_format($overrallValue, 2);?></span>
     </div>
     <input type="hidden" id="review_rating_<?php echo $item -> getIdentity();?>" name="review_rating_<?php echo $item -> getIdentity();?>" />
   </div>

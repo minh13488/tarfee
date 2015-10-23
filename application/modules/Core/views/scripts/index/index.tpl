@@ -85,9 +85,14 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 			</div>
 			<?php
 					$settings = Engine_Api::_()->getApi('settings', 'core');
-					$enableInviteCode = $settings->getSetting('user.signup.inviteonly');
-					$enableSkipLogin = Engine_Api::_() -> getApi('settings', 'core') -> getSetting('core.general.portal', 1);
-					$enableCaptcha = Engine_Api::_()->getApi('settings', 'core')->core_spam_signup;
+					$enableInviteCode = $settings -> getSetting('user.signup.inviteonly');
+					$enableSkipLogin = $settings -> getSetting('core.general.portal', 1);
+					$enableCaptcha = $settings -> core_spam_signup;
+					$cookieSignTab = 0;
+					if(!empty($_COOKIE['sign_in_tab']))
+					{
+						$cookieSignTab = 1;
+					}
 			?>
 			<div class="button-switch-box">
 			    <button onclick="switch_screen('login-box');" id="sign-in"><?php echo $this -> translate('Sign in')?></button>
@@ -143,8 +148,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 							</div>
 						</div>		
 					<?php endif;?>
-					
-				    <?php if( $enableCaptcha ):
+					<?php if( $enableCaptcha ):
 				    	$spamSettings = Engine_Api::_()->getApi('settings', 'core')->core_spam;
 						if( (!empty($spamSettings['recaptchaenabled']) &&
 				        	! empty($spamSettings['recaptchapublic']) &&
@@ -152,7 +156,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 				    	?>
 				    	<div id="captcha-wrapper" class="form-wrapper" >
 				    		<div id="captcha-element-label" class="form-label">&nbsp;</div>
-				    		<div id="captcha-element" class="form-element">
+				    		<div id="captcha-element">
 				    			<input type="hidden" name="recaptcha_challenge_field" value="" id="captcha-challenge">
 				    			<input type="hidden" name="recaptcha_response_field" value="" id="captcha-response">
 				    			<div class="g-recaptcha" data-sitekey="<?php echo $spamSettings['recaptchapublic']?>"></div>
@@ -173,9 +177,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					<input type="hidden" name="email_field" value="dlA5bmEwZ1VSRg==" id="email_field">
 					<h4 style="margin-top: 15px;">
 					    <input type="hidden" name="terms" id="terms" value="1" tabindex="3" checked="checked">
-					    <?php echo $this -> translate("Creating an account means you’re okay with Tarfee's ");?>
-					    	<a target="_blank"href="/index.php/help/terms"><?php echo $this -> translate('Terms of Service');?> </a> and 
-					    	<a target="_blank" href="/index.php/help/privacy"><?php echo $this -> translate('Privacy Policy');?></a>
+					    <?php echo $this -> translate("agree_term_policy");?> </a>
 					</h4>
 				    </div>
 				</form>
@@ -197,10 +199,10 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 			  		$this->translate()->setLocale($this -> countryLanguage);
 			  	}
 				$selectedLanguage = $this->translate()->getLocale() ?>
-				<div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown" onclick="toggle_languages_bar(this)">
+				<div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown">
 				    <i class="fa fa-globe"></i>
 				    <span><?php echo strtoupper(substr($selectedLanguage, 0, 2))?></span>
-				    <ul <?php if(Engine_Api::_()->ynresponsive1()->isMobile()):?> style = "display: none" <?php endif; ?>>
+				    <ul>
 					<?php foreach($this->languageNameList as $key => $language):?>
 					<li>
 					    <a onclick="changeLanguages('<?php echo $key?>')" data-locale="<?php echo $key?>" class="locale old-app"><?php echo strtoupper(substr($key,0, 2))?></a>
@@ -654,27 +656,29 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 	<script src="//<?php echo $_SERVER['HTTP_HOST']?>/landing/new_landing/js/custom.js"></script>
 
 	<script type="text/javascript">
-		var toggle_languages_bar = function(obj)
-	  	{
-	  		obj.toggleClass('open_options');
-	  	} 
-		function switch_screen(selector) {
-		    if (selector === 'login-box') {
-			$('.register-box').hide().fadeOut(2000);
-			$('#sign-in').hide().fadeOut(2000);
-			$('#sign-up').hide().fadeIn(2000);
-			$('.' + selector).hide().fadeIn(2000);
-		    } else {
-			$('.login-box').hide().fadeOut(2000);
-			$('#sign-up').hide().fadeOut(2000);
-			$('#sign-in').hide().fadeIn(2000);
-			$('.' + selector).hide().fadeIn(2000);
-		    }
-		}
-		function skips_sign_in() {
-		    //$('#skip_form_login').submit();
-		    window.location.href = '<?php echo $this -> url(array('action' => 'home'), 'user_general', true)?>';
-		}
+	<?php if($cookieSignTab):?>
+		window.addEvent('domready', function()
+		{
+			switch_screen('login-box');
+		});
+	<?php endif;?>
+	function switch_screen(selector) {
+	    if (selector === 'login-box') {
+		$('.register-box').hide().fadeOut(2000);
+		$('#sign-in').hide().fadeOut(2000);
+		$('#sign-up').hide().fadeIn(2000);
+		$('.' + selector).hide().fadeIn(2000);
+	    } else {
+		$('.login-box').hide().fadeOut(2000);
+		$('#sign-up').hide().fadeOut(2000);
+		$('#sign-in').hide().fadeIn(2000);
+		$('.' + selector).hide().fadeIn(2000);
+	    }
+	}
+	function skips_sign_in() {
+	    //$('#skip_form_login').submit();
+	    window.location.href = '<?php echo $this -> url(array('action' => 'home'), 'user_general', true)?>';
+	}
 	</script>
     </body>
 </html>

@@ -70,6 +70,50 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
 			return $this -> rating;
 		}
 	}
+
+	public function getMyAveRating($total = false) 
+	{
+		$user_id = Engine_Api::_() -> user() -> getViewer() -> getIdentity();
+		if($this -> parent_type == "user_playercard") {
+			$ratingTable = Engine_Api::_() -> getDbTable('reviewRatings', 'ynvideo');
+			$user_id = Engine_Api::_() -> user() -> getViewer() -> getIdentity();
+			// get all ratings of this user for this video
+			$params = array(
+				'resource_id' => $this -> video_id,
+				'user_id' => $user_id,
+			);
+			$ratings = $ratingTable -> getRatingsBy($params);
+			$ratingCount = 0;
+			$ratingTotal = 0;
+			$overrall = 0;
+			// loop for each rating then count the overall rating of user for this video
+			foreach ($ratings as $rating)
+			{
+				$ratingTotal += $rating -> rating;
+				$ratingCount++;
+			}
+			if($ratingCount != 0) {
+				$overrall = round(($ratingTotal/$ratingCount), 2);
+			} 
+			else 
+			{
+				$overrall = 0;
+			}
+			return $overrall;
+		} 
+		else 
+		{
+			$table  = Engine_Api::_()->getDbTable('ratings', 'ynvideo');
+			$rName = $table->info('name');
+		    $select = $table->select()
+		                 ->setIntegrityCheck(false)
+		                    ->where('video_id = ?', $this -> getIdentity())
+		                    ->where('user_id = ?', $user_id)
+		                    ->limit(1);
+		    $row = $table->fetchAll($select);
+			return $row -> rating;
+		}
+	}
 	
 	public function getPopupHref($params = array())
 	{

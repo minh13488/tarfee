@@ -5,7 +5,7 @@
 	
 <?php foreach($this -> ratingTypes as $item) :?>
     <div class="ynvideo_rating_player">
-    	<?php echo $this -> translate($item -> title);?>	
+    	<?php echo $this -> translate($item -> title);?>
     	<div id="video_rating_<?php echo $item -> getIdentity();?>" class="rating" onmouseout="set_rating(<?php echo $item -> getIdentity();?>);">
             <span id="rate_1_<?php echo $item -> getIdentity();?>" class="fa fa-star" onclick="rate(1, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(1, <?php echo $item -> getIdentity();?>);">
             </span>
@@ -21,6 +21,8 @@
 
             <span id="rate_5_<?php echo $item -> getIdentity();?>" class=" fa fa-star  fa fa-star" onclick="rate(5, <?php echo $item -> getIdentity();?>);" onmouseover="rating_over(5, <?php echo $item -> getIdentity();?>);">
             </span>
+            <?php $overrallValue = $tableRating -> getRatingOfType($item -> getIdentity(), $this -> video_id);?>
+            <span style="font-size: 8pt; color: #555"><?php echo $this -> translate("Ave:")." ".number_format($overrallValue, 2);?></span>
         </div>
         <input type="hidden" id="review_rating_<?php echo $item -> getIdentity();?>" name="review_rating_<?php echo $item -> getIdentity();?>" />
     </div>
@@ -110,14 +112,17 @@
     
     <?php foreach($this -> ratingTypes as $item) :?>
 		is_click = 1;
-		<?php $overrallValue = $tableRating -> getRatingOfType($item -> getIdentity(), $this -> video_id);?>
-		<?php if(empty($overrallValue)) :?>
-			<?php $overrallValue = 0;?>
-		<?php endif;?>
-		new_rate = <?php echo $overrallValue;?>;
+		<?php 
+		$myRatedObj = $tableRating -> getRowRatingThisType($item -> getIdentity(), $this -> video_id, $viewer -> getIdentity());
+		$myRated = 0;
+		if($myRatedObj)
+		{
+			$myRated = $myRatedObj -> rating;
+		}?>
+		new_rate = <?php echo $myRated;?>;
 		set_rating(<?php echo $item -> getIdentity()?>);
 		//reset
-   		new_rate = 0;
+		new_rate = 0;
    		is_click =0;
     <?php endforeach;?>
     

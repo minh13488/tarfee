@@ -8,12 +8,17 @@
  * @author     YouNet Company
  */
 if($this -> video -> parent_type == 'user_playercard'):
+$myAve = $totalAve = $this->video->getRating();
+if(Engine_Api::_() -> user() -> getViewer() -> getIdentity())
+{
+	$myAve = $this -> video -> getMyAveRating();
+}
 ?>
-<div class="tf_video_rating" title="<?php echo number_format($this->video->getRating(), 2);?>">
-    <?php for ($x = 1; $x <= $this->video->getRating(); $x++): ?>
+<div class="tf_video_rating" title="<?php echo number_format($myAve, 2);?>">
+    <?php for ($x = 1; $x <= $myAve; $x++): ?>
         <span class="rating_star_generic"><i class="fa fa-star"></i></span>
     <?php endfor; ?>
-    <?php if ((round($this->video->getRating()) - $this->video->getRating()) > 0): $x ++; ?>
+    <?php if ((round($myAve) - $myAve) > 0): $x ++; ?>
         <span class="rating_star_generic"><i class="fa fa-star-half-o"></i></span>
     <?php endif; ?>
     <?php if ($x <= 5) :?>
@@ -21,6 +26,8 @@ if($this -> video -> parent_type == 'user_playercard'):
             <span class="rating_star_generic"><i class="fa fa-star-o"></i></span>   
         <?php endfor; ?>
     <?php endif; ?>
-    
+    <span style="font-size: 10pt">
+    	<?php echo $this -> translate("Ave:")." ".number_format($totalAve, 2)?>
+    </span>
 </div>
 <?php endif;?>

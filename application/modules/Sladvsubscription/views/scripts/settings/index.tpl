@@ -65,16 +65,25 @@
       <h3>
         <?php echo $this->translate('Membership') ?>
       </h3>
+      <?php $payment_settings = Engine_Api::_()->getApi('settings', 'core')->payment;?>
+      <?php
+		$action = 'confirm';
+		if(isset($payment_settings['disableUpgrade']) && $payment_settings['disableUpgrade'] == 1)
+		{
+			$action = 'contact-us';
+		}?>
       <?php if( $this->currentPackage && $this->currentSubscription ): ?>
         <p class="form-description">
           <?php echo $this->translate('The plan you are currently subscribed ' .
               'to is: %1$s', '<strong>' .
               $this->translate($this->currentPackage->title) . '</strong>') ?>
-          <br />
-          <?php echo $this->translate('You are currently paying: %1$s',
-              '<strong>' . $this->currentPackage->getPackageDescription()
-              . '</strong>') ?>
-        </p>
+          <?php if($action != 'contact-us'):?>
+	          <br />
+	          <?php echo $this->translate('You are currently paying: %1$s',
+	              '<strong>' . $this->currentPackage->getPackageDescription()
+	              . '</strong>') ?>
+	        </p>
+	      <?php endif;?>
         <p style="padding-top: 15px; padding-bottom: 15px;">
           <?php echo $this->translate('If you would like to change your ' .
               'sembership, please select an option below.') ?>
@@ -85,7 +94,6 @@
               'sembership plan. Please choose one now below.') ?>
         </p>
       <?php endif; ?>
-	  <?php $payment_settings = Engine_Api::_()->getApi('settings', 'core')->payment;?>
 	   <!-- discount -->
       <?php 
       if(isset($payment_settings['disableUpgrade']) && $payment_settings['disableUpgrade'] == 0):
@@ -109,12 +117,6 @@
       <?php endif;?>
        <?php endif;?>
       <!-- end discount -->
-	  <?php
-		$action = 'confirm';
-		if(isset($payment_settings['disableUpgrade']) && $payment_settings['disableUpgrade'] == 1)
-		{
-			$action = 'contact-us';
-		}?>
       <div class="plan">
 			<div class="plan-table <?php echo $action?>">
 				<table cellpadding="0" cellspacing="1px">

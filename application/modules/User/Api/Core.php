@@ -227,6 +227,8 @@ class User_Api_Core extends Core_Api_Abstract
   public function setViewer(User_Model_User $viewer = null)
   {
     $this->_viewer = $viewer;
+	// Save visited cookie
+	setcookie('sign_in_tab', 1, time() + (86400*365), '/');
     return $this;
   }
 
