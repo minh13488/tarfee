@@ -2378,6 +2378,7 @@ body#global_page_user-profile-index {
 	display: inline-flex;
 	position: relative;
 	float: right;
+	margin-bottom: 8px;
 	& > div{
 	    overflow: hidden;
 	    img{
@@ -2679,7 +2680,6 @@ body#global_page_user-profile-index {
 	    text-align: right;
 	    float: right;
 	    display: inline-block;
-		margin-top: 8px;
 	    .rating{
 		float: right;
 		color: $theme_link_color;
