@@ -26,6 +26,7 @@ class Advgroup_Form_Create extends Engine_Form
     $establish = new Engine_Form_Element_Date('establish_date');
     $establish->setLabel("Establish Date");
     $establish->setAllowEmpty(false);
+	$establish -> setYearMin(1699);
     $this->addElement($establish);
 	
 /*

@@ -328,7 +328,7 @@ class Advgroup_Model_Group extends Core_Model_Item_Abstract
 		$image -> open($file);
 		if ($angle != 0)
 			$image -> rotate($angle);
-		$image -> resize(240, 240) -> write($path . '/p_' . $name) -> destroy();
+		$image -> resize(273, 222) -> write($path . '/p_' . $name) -> destroy();
 
 
 		// Store

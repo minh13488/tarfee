@@ -5854,9 +5854,9 @@ body[id^=global_page_ynsocialads] #global_content .layout_ynsocialads_main_menu 
 	 overflow: hidden
 }
 #global_page_sladvsubscription-settings-index .payment_form_settings,
+#global_page_user-edit-profile #global_content .global_form,
 #global_page_advgroup-group-edit #global_content .global_form,
 #global_page_advgroup-index-create #global_content .global_form,
-#global_page_user-edit-profile #global_content .global_form,
 #global_page_user-edit-photo #global_content .global_form,
 #global_page_user-edit-style #global_content .global_form,
 #global_page_ynmember-edit-cover-photo #global_content .ynmember-container,
@@ -5872,6 +5872,11 @@ body[id^=global_page_ynsocialads] #global_content .layout_ynsocialads_main_menu 
 	  	-moz-border-radius: 5px;
 	  	border-radius: 5px;
 	 }
+}
+#global_page_advgroup-group-edit #global_content .global_form,
+#global_page_advgroup-index-create #global_content .global_form
+{
+	 padding: 0;
 }
 #global_page_ynmember-edit-cover-photo #global_content .ynmember-container,
 #global_page_ynmember-edit-place #global_content .ynmember-container,
