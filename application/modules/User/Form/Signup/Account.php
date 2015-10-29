@@ -260,7 +260,7 @@ class User_Form_Signup_Account extends Engine_Form_Email
     }
 
     // Element: captcha
-    if( Engine_Api::_()->getApi('settings', 'core')->core_spam_signup ) {
+    if( Engine_Api::_()->getApi('settings', 'core')->core_spam_signup && !Engine_Api::_()->getApi('settings', 'core') -> getSetting('user.signup.inviteonly')) {
       $this->addElement('captcha', 'captcha', Engine_Api::_()->core()->getCaptchaOptions(array(
         'tabindex' => $tabIndex++,
       )));

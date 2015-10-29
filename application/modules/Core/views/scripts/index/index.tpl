@@ -88,6 +88,10 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 					$enableInviteCode = $settings -> getSetting('user.signup.inviteonly');
 					$enableSkipLogin = $settings -> getSetting('core.general.portal', 1);
 					$enableCaptcha = $settings -> core_spam_signup;
+					
+					$enableSkipLogin = ($enableSkipLogin && !$enableInviteCode);
+					$enableCaptcha = ($enableCaptcha && !$enableInviteCode);
+					
 					$cookieSignTab = 0;
 					if(!empty($_COOKIE['sign_in_tab']))
 					{
@@ -99,6 +103,9 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 			    <button onclick="switch_screen('register-box');" style="display: none;" id="sign-up"><?php echo $this -> translate('landing_register')?></button>
 				<?php if($enableSkipLogin):?>
 			    	<button onclick="skips_sign_in();"><?php echo $this -> translate('Skip')?></button>
+				<?php endif; ?>
+				<?php if($enableInviteCode):?>
+			    	<button onclick="request_invite();"><?php echo $this -> translate('Request Invite')?></button>
 				<?php endif; ?>
 			</div>
 			
@@ -199,15 +206,15 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 			  		$this->translate()->setLocale($this -> countryLanguage);
 			  	}
 				$selectedLanguage = $this->translate()->getLocale() ?>
-				<div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown">
+				<div class="language-dropdown render-once" data-view="LanguageDropdown" data-hash="LanguageDropdown" onclick="toggle_languages_bar(this)">
 				    <i class="fa fa-globe"></i>
 				    <span><?php echo strtoupper(substr($selectedLanguage, 0, 2))?></span>
-				    <ul>
-					<?php foreach($this->languageNameList as $key => $language):?>
-					<li>
-					    <a onclick="changeLanguages('<?php echo $key?>')" data-locale="<?php echo $key?>" class="locale old-app"><?php echo strtoupper(substr($key,0, 2))?></a>
-					</li>
-					<?php endforeach;?>
+				    <ul <?php if(Engine_Api::_()->ynresponsive1()->isMobile()):?> style = "display: none" <?php endif; ?>>
+						<?php foreach($this->languageNameList as $key => $language):?>
+							<li>
+							    <a onclick="changeLanguages('<?php echo $key?>')" data-locale="<?php echo $key?>" class="locale old-app"><?php echo strtoupper(substr($key,0, 2))?></a>
+							</li>
+						<?php endforeach;?>
 				    </ul>
 				</div>
 				<?php echo $this->formHidden('language', $selectedLanguage);?>
@@ -218,6 +225,10 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 				{
 				    $('#language').val(lang);
 				    $('#form_language').submit();
+				}
+				var toggle_languages_bar = function(obj)
+				{
+				  	obj.toggleClass('open_options');
 				}
 			    </script>
 			    <?php endif; ?>
@@ -678,6 +689,10 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 	function skips_sign_in() {
 	    //$('#skip_form_login').submit();
 	    window.location.href = '<?php echo $this -> url(array('action' => 'home'), 'user_general', true)?>';
+	}
+	function request_invite()
+	{
+		Smoothbox.open('<?php echo $this -> url(array(), 'user_request', true)?>');
 	}
 	</script>
     </body>
