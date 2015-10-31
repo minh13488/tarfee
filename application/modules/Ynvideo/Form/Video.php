@@ -36,8 +36,8 @@ class Ynvideo_Form_Video extends Engine_Form
 		$playerTable = Engine_Api::_() -> getDbTable('playercards', 'user');
 		$select = $playerTable -> select() 
 					-> where('user_id = ?', $user -> getIdentity())
-					-> order('first_name')
-					-> where('parent_type = ?', 'user');
+					-> order('first_name');
+					//-> where('parent_type = ?', 'user');
 		foreach($playerTable -> fetchAll($select) as $player)
 		{
 			$players[$player -> playercard_id] = $player -> first_name . ' ' . $player -> last_name;
