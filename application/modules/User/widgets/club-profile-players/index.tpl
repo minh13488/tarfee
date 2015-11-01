@@ -262,7 +262,7 @@
 							?>
 						</p>
 					</div>
-					<ul class="tarfee_count">
+					<ul class="tarfee_count clearfix">
 						<li>
 							<?php $eyeons = $player->getEyeOns(); ?>
 							<?php $url = $this->url(array('action'=>'view-eye-on', 'player_id'=>$player->getIdentity()), 'user_playercard' , true)?>
@@ -288,7 +288,6 @@
 						</li>
 						-->
 					</ul>
-					
 					<div class="nickname">
 						<?php echo $this->htmlLink($player -> getOwner()->getHref(), $this->itemPhoto($player -> getOwner(), 'thumb.icon', $player -> getOwner()->getTitle(), array('style' => 'width: auto')), array('class' => 'members_thumb')) ?>
 						<div class='members_info'>
@@ -299,7 +298,8 @@
 					          <?php echo $this->timestamp($player -> getOwner() -> creation_date) ?>
 					        </div>
 				      	</div>
-			     	</div><!-- nickname-->
+			     	</div>
+					<!-- nickname-->
 
 				</div>
 	        </li>

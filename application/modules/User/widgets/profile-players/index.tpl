@@ -304,7 +304,7 @@
 							?>
 						</p>
 					</div>
-					<ul class="tarfee_count">
+					<ul class="tarfee_count clearfix">
 						<li>
 							<?php $eyeons = $player->getEyeOns(); ?>
 							<?php $url = $this->url(array('action'=>'view-eye-on', 'player_id'=>$player->getIdentity()), 'user_playercard' , true)?>
