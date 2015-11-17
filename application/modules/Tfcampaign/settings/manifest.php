@@ -38,7 +38,7 @@
  	// Routes ---------------------------------------------------------------------
 	'routes' => array(
 		'tfcampaign_extended' => array(
-			'route' => 'campaigns/:controller/:action/*',
+			'route' => 'e-tryouts/:controller/:action/*',
 			'defaults' => array(
 				'module' => 'tfcampaign',
 				'controller' => 'index',
@@ -50,7 +50,7 @@
 			)
 		),
 		'tfcampaign_general' => array(
-			'route' => 'campaigns/:action/*',
+			'route' => 'e-tryouts/:action/*',
 			'defaults' => array(
 				'module' => 'tfcampaign',
 				'controller' => 'index',
@@ -61,7 +61,7 @@
 	        )
 		),
 		'tfcampaign_specific' => array(
-			'route' => 'campaigns/:action/:campaign_id/*',
+			'route' => 'e-tryouts/:action/:campaign_id/*',
 	        'defaults' => array(
 	            'module' => 'tfcampaign',
 	            'controller' => 'campaign',
@@ -73,7 +73,7 @@
 	        )
 	    ),
 	    'tfcampaign_profile' => array(
-			'route' => 'campaigns/:id/:slug/*',
+			'route' => 'e-tryouts/:id/:slug/*',
 			'defaults' => array(
 					'module' => 'tfcampaign',
 					'controller' => 'profile',

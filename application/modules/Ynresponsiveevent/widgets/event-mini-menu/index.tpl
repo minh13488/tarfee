@@ -177,7 +177,14 @@
         	if($this->viewer->getIdentity()) : 
             	{
             		$img = $this->itemPhoto($this->viewer(), 'thumb.profile');
-
+					if($this->viewer -> level_id == 7)
+					{
+						$group = Engine_Api::_() -> advgroup() -> getGroupUser($this->viewer);
+						if($group)
+						{
+							$img = $this->itemPhoto($group, 'thumb.profile');
+						}
+					}
             		if($this->viewer()->getTitle() == 'admin')
             		{
             			echo "<div data-toggle='collapse' data-target='.user-profile-submenu' id='user-profile-info' class='user-profile-info collapsed'>" .$img. "<span>".$this->translate('Admin') . "</span><i class='ynicon-setting-w'></i></div>";

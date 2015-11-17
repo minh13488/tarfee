@@ -104,36 +104,104 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 				<?php if($enableSkipLogin):?>
 			    	<button onclick="skips_sign_in();"><?php echo $this -> translate('Skip')?></button>
 				<?php endif; ?>
-				<?php if($enableInviteCode):?>
-			    	<button onclick="request_invite();"><?php echo $this -> translate('Request Invite')?></button>
-				<?php endif; ?>
 			</div>
 			
 			<div class="col-md-8 col-md-offset-2 home-headline">
 			    <div class="login-box" style="display: none;">
-				<?php echo $this->content()->renderWidget('social-connect.login'); ?>
+			    	<div>
+						<div class="generic_layout_container layout_social_connect_login">
+							<form id="user_form_login" enctype="application/x-www-form-urlencoded" class="global_form_box" action="<?php echo $this -> url(array(),'user_login', true)?>" method="post">
+								<div>
+									<div>
+										<div class="form-elements">
+											<div id="cT4L9i9VAf-wrapper" class="form-wrapper">
+												<div id="cT4L9i9VAf-label" class="form-label">
+													<label for="cT4L9i9VAf" class="required"><?php echo $this -> translate('Email Address')?></label>
+												</div>
+												<div id="cT4L9i9VAf-element" class="form-element">
+													<input type="email" name="cT4L9i9VAf" id="cT4L9i9VAf" value="" class="text" tabindex="1" autofocus="autofocus" placeholder="<?php echo $this -> translate('Your Email')?>">
+												</div>
+											</div>
+											<div id="password-wrapper" class="form-wrapper">
+												<div id="password-label" class="form-label">&nbsp;</div>
+												<div id="password-element" class="form-element">
+													<input type="password" name="password" id="password" value="" tabindex="2" placeholder="<?php echo $this -> translate('Your Password')?>">
+												</div>
+											</div>
+											<?php if( $settings -> core_spam_login ):
+										    	$spamSettings = $settings->core_spam;
+												if( (!empty($spamSettings['recaptchaenabled']) &&
+										        	! empty($spamSettings['recaptchapublic']) &&
+										        	! empty($spamSettings['recaptchaprivate'])) ):
+										    	?>
+										    	<div id="captcha-wrapper" class="form-wrapper" >
+										    		<div id="captcha-element-label" class="form-label">&nbsp;</div>
+										    		<div id="captcha-element">
+										    			<input type="hidden" name="recaptcha_challenge_field" value="" id="captcha-challenge">
+										    			<input type="hidden" name="recaptcha_response_field" value="" id="captcha-response">
+										    			<div class="g-recaptcha" data-sitekey="<?php echo $spamSettings['recaptchapublic']?>"></div>
+										    		</div>
+										    	</div>
+										    	<?php endif;?>
+										    <?php endif;?>
+											<div class="form-wrapper" id="buttons-wrapper">
+												<fieldset id="fieldset-buttons">
+													<div id="submit-wrapper" class="form-wrapper">
+														<div id="submit-label" class="form-label">&nbsp;</div>
+														<div id="submit-element" class="form-element">
+															<button name="submit" id="submit" type="submit" tabindex="4"><?php echo $this -> translate('Log in')?></button>
+														</div>
+													</div>
+												</fieldset>
+											</div>
+											<div id="signin_using-wrapper" class="form-wrapper">
+												<div id="signin_using-label" class="form-label">&nbsp;</div>
+												<div id="signin_using-element" class="form-element">
+													<?php $forgot =  Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array(
+														'module' => 'user',
+														'controller' => 'auth',
+														'action' => 'forgot'
+													), 'default', true)?>
+													<span><a href="<?php echo $forgot?>" target="_blank"><?php echo $this -> translate('Forgot Password?')?></a></span>
+												</div>
+											</div>
+											<input type="hidden" name="return_url" value="" tabindex="3" id="return_url">
+											<input type="hidden" name="email" value="" id="email">
+											<input type="hidden" name="email_field" value="Y1Q0TDlpOVZBZg==" id="email_field">
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
 			    </div>
 			    <div class="register-box">
+		    	<?php if($enableInviteCode):?>
+					<div><?php echo $this -> translate("Tarfee is currently an invite-only platform")?></div>
+					<div class="request_invitation"><?php echo $this -> translate("Please %s here", '<button onclick="request_invite();">'.$this -> translate('request invitation').'</button>')?></div>
+					<span class="tf-text-or"><?php echo $this -> translate('OR')?></span>
+					<div><?php echo $this -> translate("If you already have an invite code, register here")?></div>
+				<?php endif; ?>
 				<form id="user_form_login" enctype="application/x-www-form-urlencoded" class="global_form" action="<?php echo $this -> url(array(),'user_signup1', true)?>" method="post">
 				    <div class="form-elements">
-					<div id="code-wrapper" class="form-wrapper">
-					    <div style="margin-top:5px">
-						<a title="Sign in Facebook" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'facebook'),'connect_signin', true)?>'));">
-						<img alt="Facebook" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/facebook.png" class="ynsc_sprite"></a>
-						<a title="Sign in Twitter" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'twitter'),'connect_signin', true)?>'));">
-						<img alt="Twitter" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/twitter.png" class="ynsc_sprite"></a>
-						<a title="Sign in Google" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'google'),'connect_signin', true)?>'));">
-						<img alt="Google" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/google.png" class="ynsc_sprite"></a>
-						<a title="Sign in Linkedin" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'linkedin'),'connect_signin', true)?>'));">
-						<img alt="Linkedin" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/linkedin.png" class="ynsc_sprite">
-						</a>
-					</div>
-					</div>
-					<div id="lineform-label" class="form-label">&nbsp;</div>
-
-					<span class="tf-text-or"><?php echo $this -> translate('OR')?></span>
-
+			    	<?php if(!$enableInviteCode):?>
+						<div id="code-wrapper" class="form-wrapper">
+						    <div style="margin-top:5px">
+								<a title="Sign in Facebook" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'facebook'),'connect_signin', true)?>'));">
+								<img alt="Facebook" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/facebook.png" class="ynsc_sprite"></a>
+								<a title="Sign in Twitter" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'twitter'),'connect_signin', true)?>'));">
+								<img alt="Twitter" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/twitter.png" class="ynsc_sprite"></a>
+								<a title="Sign in Google" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'google'),'connect_signin', true)?>'));">
+								<img alt="Google" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/google.png" class="ynsc_sprite"></a>
+								<a title="Sign in Linkedin" href="javascript: void(sopopup('<?php echo $this -> url(array('service' => 'linkedin'),'connect_signin', true)?>'));">
+								<img alt="Linkedin" src="//<?php echo $_SERVER['HTTP_HOST']?>/application/modules/SocialConnect/externals/images/linkedin.png" class="ynsc_sprite">
+								</a>
+							</div>
+						</div>
+						<div id="lineform-label" class="form-label">&nbsp;</div>
+						<span class="tf-text-or"><?php echo $this -> translate('OR')?></span>
 						<br/>
+					<?php endif;?>
 					<div id="vP9na0gURF-wrapper" class="form-wrapper">
 					    <div id="code-element-label" class="form-label">&nbsp;</div>
 					    <div id="vP9na0gURF-element" class="form-element">
@@ -194,8 +262,9 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 		</div>		    
 
 	    <div class="menu-footer">
+			<a target="_blank" href="/landing/new_landing/about_us/about_us.html"><?php echo $this -> translate('About Us');?></a> |
 			<a target="_blank" href="/index.php/help/privacy"><?php echo $this -> translate('Privacy');?></a> |
-			<a target="_blank"href="/index.php/help/terms"><?php echo $this -> translate('Terms of Service');?></a> |
+			<a target="_blank" href="/index.php/help/terms"><?php echo $this -> translate('Terms of Service');?></a> |
 			<a target="_blank" href="/index.php/help/contact"><?php echo $this -> translate('Contact Us');?></a>
 			<span class="ynresponsive_languages-popup">
 			    <?php if( 1 !== count($this->languageNameList) ):?>

@@ -182,6 +182,22 @@ class User_Form_Playercard_Create extends Engine_Form
         ));
       }
     }
+	/*
+	// init email
+    $this->addElement('Text', 'user_email', array(
+      'label' => 'External User Email',
+      'required' => false,
+      'validators' => array(
+        'EmailAddress'
+      ),
+    ));
+	
+	$this -> addElement('checkbox', 'allow_outside', array(
+		'label' => "PLAYERCARD_OUTSIDE_EDITING_DESCRIPTION",
+		'value' => 0
+	));
+	 * 
+	 */
 
     // Buttons
     $this->addElement('Button', 'submit', array(

@@ -2759,13 +2759,18 @@ body#global_page_user-friends-list-all-following, body#global_page_user-friends-
         background: $theme_link_color;
         border: 2px solid $theme_link_color;
     }
-
-
-
 	}
 }
 #global_page_ynvideo-index-popup-view .ynvideo_popup_left .player-info .player_info_detail span a
 {
 	  margin-left: 5px;
   	  padding-bottom: 2px;
+}
+
+#user_form_request
+{
+	.global_form div.form-label
+	{
+		width: 200px;
+	}
 }

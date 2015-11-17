@@ -156,9 +156,13 @@ class User_SignupController extends Core_Controller_Action_Standard
       }
       $viewer->save();
     }
-    
+    $redirect = Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'home'), 'user_general', true);
+	if($viewer -> level_id == 7)
+	{
+		$redirect = Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'create'), 'group_general', true);
+	}
 	return $this -> _forward('success', 'utility', 'core', array(
-		'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'home'), 'user_general', true),
+		'parentRedirect' => $redirect,
 		'smoothboxClose' => true,
 		'parentRefresh' => true,
 		'messages' => $this->view->translate("Please wait..."),
@@ -493,13 +497,30 @@ class User_SignupController extends Core_Controller_Action_Standard
 	{
 		return;
 	}
+	$posts = $this -> getRequest() -> getPost();
+	// Location
+	$provincesAssoc = array();
+	$country_id = $posts['country_id'];
+	if ($country_id) {
+		$provincesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($country_id);
+		$provincesAssoc = array('0'=>'') + $provincesAssoc;
+	}
+	$form -> getElement('province_id') -> setMultiOptions($provincesAssoc);
+	
+	$citiesAssoc = array();
+	$province_id = $posts['province_id'];
+	if ($province_id) {
+		$citiesAssoc = Engine_Api::_()->getDbTable('locations', 'user')->getLocationsAssoc($province_id);
+		$citiesAssoc = array('0'=>'') + $citiesAssoc;
+	}
+	$form -> getElement('city_id') -> setMultiOptions($citiesAssoc);
 
-	// Check data
-	if (!$form -> isValid($this -> getRequest() -> getPost()))
+	if (!$form -> isValid($posts))
 	{
 		return;
 	}
 	$values = $form -> getValues();
+	
     // Get verify user
     $userTable = Engine_Api::_()->getDbtable('users', 'user');
     $user = $userTable->fetchRow($userTable->select()->where('email = ?', $values['email']));

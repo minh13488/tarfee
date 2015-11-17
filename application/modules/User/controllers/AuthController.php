@@ -75,7 +75,7 @@ class User_AuthController extends Core_Controller_Action_Standard
 			$this -> view -> error = Zend_Registry::get('Zend_Translate') -> _('No action taken');
 			return;
 		}
-
+		
 		// Form not valid
 		if (!$form -> isValid($this -> getRequest() -> getPost()))
 		{
@@ -83,7 +83,6 @@ class User_AuthController extends Core_Controller_Action_Standard
 			$this -> view -> error = Zend_Registry::get('Zend_Translate') -> _('Invalid data');
 			return;
 		}
-
 		// Check login creds
 		extract($form -> getValues());
 		// $email, $password, $remember
@@ -370,6 +369,14 @@ class User_AuthController extends Core_Controller_Action_Standard
 		// Do redirection only if normal context
 		if (null === $this -> _helper -> contextSwitch -> getCurrentContext())
 		{
+			if($viewer -> level_id == 7)
+			{
+				$group = Engine_Api::_() -> advgroup() -> getGroupUser($viewer);
+				if(!$group)
+					return $this -> _helper -> redirector -> gotoRoute(array('action' => 'create'), 'group_general', true);
+				else
+					$this -> _redirectCustom($group);
+			}
 			// Redirect by form
 			$uri = $form -> getValue('return_url');
 			if ($uri)

@@ -64,8 +64,43 @@ class User_Plugin_Menus {
 
 	public function onMenuInitialize_CoreMiniProfile($row) {
 		$viewer = Engine_Api::_() -> user() -> getViewer();
-		if ($viewer -> getIdentity()) {
-			return array('label' => $row -> label, 'uri' => $viewer -> getHref(), );
+		if ($viewer -> getIdentity()) 
+		{
+			if($viewer -> level_id == 7)
+			{
+				return false;
+			}
+			else {
+				return array('label' => $row -> label, 'uri' => $viewer -> getHref(), );
+			}
+			
+		}
+
+		return false;
+	}
+	
+	public function onMenuInitialize_CoreMiniOrganization($row) {
+		$viewer = Engine_Api::_() -> user() -> getViewer();
+		if ($viewer -> getIdentity()) 
+		{
+			$group = Engine_Api::_() -> advgroup() -> getGroupUser($viewer);
+			if( Engine_Api::_()->authorization()->isAllowed('group', $viewer, 'create') ) 
+			{
+		        $checkGroupUser = Engine_Api::_() -> advgroup() -> checkGroupUser();
+				if($checkGroupUser) {
+					$canCreate = false;
+				} else {
+					$canCreate = true;
+				}
+		    }
+			if($group)
+			{
+				return array('label' => 'My Organization Page', 'uri' => $group -> getHref(), );
+			}
+			elseif($canCreate) 
+			{
+				return array('label' => 'Create Organization Page', 'route' => 'group_general', 'params' => array('action' => 'create',));
+			}
 		}
 
 		return false;
@@ -83,7 +118,7 @@ class User_Plugin_Menus {
 	public function onMenuInitialize_CoreMiniAuth($row) {
 		$viewer = Engine_Api::_() -> user() -> getViewer();
 		if ($viewer -> getIdentity()) {
-			return array('label' => 'Sign Out', 'route' => 'user_logout', 'class' => 'no-dloader', );
+			return array('label' => 'Log Out', 'route' => 'user_logout', 'class' => 'no-dloader', );
 		} else {
 			return array('label' => 'Sign In', 'route' => 'user_login', 'params' => array(
 			// Nasty hack

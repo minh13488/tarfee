@@ -52,7 +52,14 @@ class User_ProfileController extends Core_Controller_Action_Standard
   {
     $subject = Engine_Api::_()->core()->getSubject();
     $viewer = Engine_Api::_()->user()->getViewer();
-
+	
+	if($viewer -> level_id == 7)
+	{
+		$group = Engine_Api::_() -> advgroup() -> getGroupUser($viewer);
+		if($group)
+			$this -> _redirectCustom($group);
+	}
+	
     // check public settings
     $require_check = Engine_Api::_()->getApi('settings', 'core')->core_general_profile;
     if( !$require_check && !$this->_helper->requireUser()->isValid() ) {

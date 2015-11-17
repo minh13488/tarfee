@@ -4976,7 +4976,9 @@ span.tf_button_action{
     display: none;
 }
 
-#user_form_request div#message-element {
+#user_form_request div#message-label,
+#user_form_request div#message-element
+{
     width: 100%;
     max-width: 100%;
 }

@@ -86,7 +86,7 @@
 <?php else: ?>
   <div class="tip" style="margin: 10px">
     <span>
-      <?php echo $this->translate('No campaigns have been added to this club yet.');?>
+      <?php echo $this->translate('No e-tryouts have been added to this club yet.');?>
     </span>
   </div>
 <?php endif; ?>

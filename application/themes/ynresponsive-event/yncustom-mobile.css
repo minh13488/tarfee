@@ -599,6 +599,28 @@
 	.layout_page_invite_index_index #friendship {
 		margin-left: 0 !important;
 	}
+	#global_page_user-signup-request-invite
+    {
+    	.global_form div.form-label, .global_form div.form-element
+    	{
+    		float: left;
+    		width: 40%;
+    		margin-bottom: 5px;
+    		padding: 0px;
+    	}
+    	.global_form select
+    	{
+    		width: 100%;
+    	}
+    	.global_form p.description
+    	{
+    		margin-bottom: 0px;
+    	}
+    	#global_content_simple form textarea
+    	{
+		    min-height: 50px;
+    	}
+    }
 }
 
 @media screen and (max-width: 480px ) {
@@ -654,6 +676,28 @@
     .popular-event-item,
     .hot-event-item {
         width: 100%;
+    }
+    #global_page_user-signup-request-invite
+    {
+    	.global_form div.form-label, .global_form div.form-element
+    	{
+    		float: left;
+    		width: 40%;
+    		margin-bottom: 5px;
+    		padding: 0px;
+    	}
+    	.global_form select
+    	{
+    		width: 100%;
+    	}
+    	.global_form p.description
+    	{
+    		margin-bottom: 0px;
+    	}
+    	#global_content_simple form textarea
+    	{
+		    min-height: 50px;
+    	}
     }
  }
  

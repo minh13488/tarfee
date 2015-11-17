@@ -54,6 +54,15 @@ class User_Model_User extends Core_Model_Item_Abstract
     } else {
       return 'javascript:void(0);';
     }
+	if($this -> level_id == 7)
+	{
+		$group = Engine_Api::_() -> advgroup() -> getGroupUser($this);
+		if($group)
+		{
+			return $group -> getHref();
+		}
+	}
+	
     return Zend_Controller_Front::getInstance()->getBaseUrl().'/'.$profileAddress;
   }
 

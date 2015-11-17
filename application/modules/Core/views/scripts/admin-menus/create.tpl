@@ -21,7 +21,7 @@
 
   <script type="text/javascript">
     setTimeout(function() {
-      parent.window.location.replace( '<?php echo $this->url(array('action' => 'index', 'name' => $this->selectedMenu->name)) ?>' )
+      parent.window.location.replace( '<?php echo $this->url(array('module' => 'core', 'controller' => 'menus', 'action' => 'index', 'name' => $this->selectedMenu->name), 'admin_default', true) ?>' )
     }, 500);
   </script>
 

@@ -251,6 +251,9 @@ return array(
         'module' => 'user',
         'controller' => 'player-card',
         'action' => 'create'
+      ),
+      'reqs' => array(
+        'action' => '(create|outside-access)',
       )
     ),
     'playercard_profile' => array(

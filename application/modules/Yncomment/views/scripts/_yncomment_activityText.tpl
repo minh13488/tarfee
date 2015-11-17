@@ -281,13 +281,13 @@
       <?php // Main Content ?>
       <span class="<?php echo ( empty($action->getTypeInfo()->is_generated) ? 'feed_item_posted' : 'feed_item_generated' ) ?>">
         <?php 
-        if($this -> subject() && $this -> subject() -> getType() == 'group')
+        /*if($this -> subject() && $this -> subject() -> getType() == 'group')
 		{
 			 echo $this -> subject() -> getOwner();
 		}
-		else {
+		else {*/
 			 echo @$action->getContent();
-		}
+		//}
         $mdash = false;
         $str_content = '<span class = "ynfeed_with_checkin">';
         $feedApiCore = Engine_Api::_ ()->ynfeed ();

@@ -2,59 +2,59 @@
 return array(
 	
 	array(
-        'title' => 'Campaign - Filter Campaigns',
-        'description' => 'Displays filter campaigns in home page.',
-        'category' => 'Campaign',
+        'title' => 'e-Tryouts - Filter e-Tryouts',
+        'description' => 'Displays filter e-Tryouts in home page.',
+        'category' => 'e-Tryouts',
         'type' => 'widget',
         'name' => 'tfcampaign.filter-campaigns'
 	),
 	
 	array(
-        'title' => 'Campaign - My saved Campaigns',
-        'description' => 'Displays saved campaigns of user.',
-        'category' => 'Campaign',
+        'title' => 'e-Tryouts - My saved e-Tryouts',
+        'description' => 'Displays saved e-Tryouts of user.',
+        'category' => 'e-Tryouts',
         'type' => 'widget',
         'name' => 'tfcampaign.my-saved-campaigns'
 	),
 	
 	array(
-        'title' => 'Campaign - My Campaigns',
-        'description' => 'Displays campaigns which are belong to user.',
-        'category' => 'Campaign',
+        'title' => 'e-Tryouts - My e-Tryouts',
+        'description' => 'Displays e-Tryouts which are belong to user.',
+        'category' => 'e-Tryouts',
         'type' => 'widget',
         'name' => 'tfcampaign.my-campaigns'
 	),
 	
 	array(
-        'title' => 'Campaign - My submissions',
+        'title' => 'e-Tryouts - My submissions',
         'description' => 'Displays submissions which are belong to user.',
-        'category' => 'Campaign',
+        'category' => 'e-Tryouts',
         'type' => 'widget',
         'name' => 'tfcampaign.my-submissions'
 	),
 	
 	array(
-        'title' => 'Campaign - User Profile Campaigns',
+        'title' => 'e-Tryouts - User Profile e-Tryouts',
         'description' => 'Displays campaign on user profile page.',
-        'category' => 'Campaign',
+        'category' => 'e-Tryouts',
         'type' => 'widget',
         'isPaginated' => true,
         'name' => 'tfcampaign.user-profile-campaign'
 	),
 	
 	array(
-        'title' => 'Campaign - Club Profile Campaigns',
+        'title' => 'e-Tryouts - Club Profile e-Tryouts',
         'description' => 'Displays campaign on club profile page.',
-        'category' => 'Campaign',
+        'category' => 'e-Tryouts',
         'type' => 'widget',
         'isPaginated' => true,
         'name' => 'tfcampaign.club-profile-campaign'
 	),
 	
 	array(
-        'title' => 'Campaign - Profile Player Fulfill Info',
+        'title' => 'e-Tryouts - Profile Player Fulfill Info',
         'description' => 'Displays Suggest Info for users to fulfill the campaign info on Campaign Detail page',
-        'category' => 'Campaign',
+        'category' => 'e-Tryouts',
         'type' => 'widget',
         'name' => 'tfcampaign.profile-fulfill-info',
         'requirements' => array(
@@ -63,18 +63,18 @@ return array(
     ),
     
 	array(
-        'title' => 'Campaign - Recent Campaigns',
-        'description' => 'Displays recent campaigns on main page.',
-        'category' => 'Campaign',
+        'title' => 'e-Tryouts - Recent e-Tryouts',
+        'description' => 'Displays recent e-Tryouts on main page.',
+        'category' => 'e-Tryouts',
         'type' => 'widget',
         'isPaginated' => true,
         'name' => 'tfcampaign.recent-campaign'
 	),
 	
 	array(
-        'title' => 'Campaign - Profile Player Submissions',
+        'title' => 'e-Tryouts - Profile Player Submissions',
         'description' => 'Displays Player Submissions on campaign Detail page',
-        'category' => 'Campaign',
+        'category' => 'e-Tryouts',
         'type' => 'widget',
         'name' => 'tfcampaign.profile-submission',
         'requirements' => array(
@@ -83,9 +83,9 @@ return array(
     ),
     
 	array(
-        'title' => 'Campaign - Profile Hidden Submissions',
+        'title' => 'e-Tryouts - Profile Hidden Submissions',
         'description' => 'Displays Player Hidden Submissions on campaign Detail page',
-        'category' => 'Campaign',
+        'category' => 'e-Tryouts',
         'type' => 'widget',
         'name' => 'tfcampaign.profile-hidden-submission',
         'requirements' => array(
