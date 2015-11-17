@@ -768,12 +768,9 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
     //view map view
     public function displayMapViewAction()
     {
-        
         $tab = $this->_getParam('tab','tab_events_popular');
         $itemCount = $this->_getParam('itemCount',5);
         $viewer = Engine_Api::_() -> user() -> getViewer();
-        
-        
 
         $table = Engine_Api::_()->getItemTable('group');
         switch ($tab) {
@@ -857,7 +854,12 @@ class Advgroup_IndexController extends Core_Controller_Action_Standard
                             ->limit($count);    
                 $groups = $table->fetchAll($select);                
                 break;  
-        
+        	default:
+        		if($this->_getParam('id', 0))
+				{
+					$groups[] = Engine_Api::_() -> getItem('group', $this->_getParam('id', 0));
+				}
+        		break;
         }
         
         $datas = array();

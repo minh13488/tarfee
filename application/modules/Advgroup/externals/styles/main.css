@@ -7345,3 +7345,158 @@ div[class*="group_videos"] > .icon_group_video_new {
 #global_page_advgroup-group-crop-photo .global_form div.form-element {
     max-width: none!important;
 }
+
+body#global_page_advgroup-profile-index 
+{
+	.tabs_parent
+	{
+	    ul#main_tabs 
+	    {
+	        background: $theme_body_background_color;
+	        border-radius: 5px;
+	        -webki-border-radius: 5px;
+	        -moz-border-radius: 5px;
+	        -ms-border-radius: 5px;
+	        border: none;
+		    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+		    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+		    display: -ms-flexbox;      /* TWEENER - IE 10 */
+		    display: -webkit-flex;     /* NEW - Chrome */
+		    display: flex;   
+	
+	        li {
+	            text-align: center;
+	            width: 100%;
+	            border-color: $theme_border_dark_color;
+	            margin-top: 4px;
+	            margin-bottom: 4px;
+	            display: inline-block;
+	
+	            &:last-child {
+	                border-right: 0 !important;
+	            }
+	            a {
+	                color: $theme_font_color;
+	                font-size: 16px;
+	                position: relative;
+	
+	                &:hover {
+	                    color: $theme_link_color;
+	                }
+	                &:before {
+	                    content: "";
+	                    background-repeat: no-repeat;
+	                }
+	            }
+	        }
+	        li.active {
+	            position: relative;
+	
+	            a {
+	                color: $theme_link_color;                
+	            }
+	            &:after {
+	                content: "";
+	                width: 0;
+	                position: absolute;
+	                bottom: -4px;
+	                height: 0;
+	                border-left: 10px solid transparent;
+	                border-right: 10px solid transparent;
+	                border-bottom: 10px solid #dedede;
+	            }
+	        }
+	    }
+	}
+	.layout_advgroup_profile_info
+	{
+		padding: 10px;
+		.club_profile_info_header
+		{
+			margin-bottom: 20px;
+			div
+			{
+				text-align: center;
+				color: $theme_link_color; 
+			}
+			.club-title
+			{
+				font-size: 20px;
+			}
+		}
+		.club_contact_us
+		{
+			display: none;
+		}
+	}
+	.club_profile_info_left
+	{
+		position: relative;
+		div
+		{
+			text-align: center;
+			padding: 10px;
+		}
+		a 
+		{
+			color: $theme_font_color;
+			 &:hover 
+			 {
+                color: $theme_link_color;
+             }
+             border-bottom: 2px solid $theme_border_dark_color;
+		     padding-bottom: 6px;
+		     padding-left: 10px;
+		     padding-right: 10px;
+		}
+		div.active
+		{
+			a {
+                color: $theme_link_color;                
+            }
+            &:after {
+	                content: "";
+	                width: 0;
+	                position: absolute;
+	                right: 0px;
+				    border-left: 15px solid transparent;
+				    border-right: 10px solid $theme_border_dark_color;
+				    border-bottom: 12px solid transparent;
+				    border-top: 12px solid transparent;
+	            }
+		}
+	    width: 150px;
+	    float: left;
+	    margin-left: -10px;
+	}
+	.club_profile_info_right
+	{
+		margin-bottom: 50px;
+		.club_profile_line
+		{
+			border-top: 2px solid #CCC;
+		    margin-right: 100px;
+		    margin-left: 60px;
+		}
+		overflow: hidden;
+    	padding-left: 40px;
+    	border-left: 2px solid $theme_border_dark_color;
+	    min-height: 100px;
+	    div
+	    {
+	    	padding-top: 10px;
+	    }
+	    .club_contact_us
+	    {
+	    	margin-right: 40px;
+	    	#club_google_map_component
+	    	{
+	    		margin-left: -10px;
+	    	}
+	    	ul li{
+	    		margin-bottom: 10px;
+	    	}
+	    }
+	}
+}
+

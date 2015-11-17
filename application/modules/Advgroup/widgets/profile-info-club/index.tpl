@@ -74,22 +74,16 @@
 	</div>
 	<?php if($this->aJoinButton && is_array($this->aJoinButton)):?>
         <?php if (count($this->aJoinButton) == '2'):?>
-			<div id="advgroup_widget_cover_invitation_proceed">               				
-				<a title="<?php echo $this->aJoinButton[0]['label']; ?>" class='smoothbox <?php echo $this->aJoinButton[0]['class'];?>' href="<?php echo $this->url($this->aJoinButton[0]['params'], $this->aJoinButton[0]['route'], array());?>">
+				<a title="<?php echo $this->aJoinButton[0]['label']; ?>" class='smoothbox club_info_edit <?php echo $this->aJoinButton[0]['class'];?>' href="<?php echo $this->url($this->aJoinButton[0]['params'], $this->aJoinButton[0]['route'], array());?>">
 					<?php echo $this -> translate($this->aJoinButton[0]['label']);?>
 				</a>
-			</div>
-			<div id="advgroup_widget_cover_invitation_proceed">               				
-				<a title="<?php echo $this->aJoinButton[1]['label']; ?>" class='smoothbox <?php echo $this->aJoinButton[1]['class'];?>' href="<?php echo $this->url($this->aJoinButton[1]['params'], $this->aJoinButton[1]['route'], array());?>">
+				<a title="<?php echo $this->aJoinButton[1]['label']; ?>" class='smoothbox club_info_edit <?php echo $this->aJoinButton[1]['class'];?>' href="<?php echo $this->url($this->aJoinButton[1]['params'], $this->aJoinButton[1]['route'], array());?>">
 					<?php echo $this -> translate($this->aJoinButton[0]['label']);?>
 				</a>
-			</div>
 		<?php else:?>
-			<div class="tf_btn_action">
-            	<a href="<?php echo $this->url($this->aJoinButton['params'], $this->aJoinButton['route'], array());?>" class="<?php echo $this->aJoinButton['class'];?>" title="<?php echo $this->aJoinButton['label']; ?>">
-            		<?php echo $this -> translate($this->aJoinButton['label']);?>
-            	</a>
-			</div>
+        	<a href="<?php echo $this->url($this->aJoinButton['params'], $this->aJoinButton['route'], array());?>" class="club_info_edit <?php echo $this->aJoinButton['class'];?>" title="<?php echo $this->aJoinButton['label']; ?>">
+        		<?php echo $this -> translate($this->aJoinButton['label']);?>
+        	</a>
 		<?php endif;?>                
     <?php endif;?>
     <?php if($this -> group -> isOwner($this -> viewer())):?>
@@ -99,5 +93,28 @@
          <?php echo $this->htmlLink(array('route' => 'group_specific', 'action' => 'delete', 'group_id' => $this -> group->getIdentity()), $this->translate('Delete'), array(
                   'class' => 'club_info_edit smoothbox'
                 )) ?>
+	<?php endif;?>
+	<?php if (Engine_Api::_()->ynfbpp()->_allowMessage($this->viewer(), $this->group -> getOwner())) :?>
+            <?php echo $this->htmlLink(array(
+                'route' => 'messages_general',
+                'action' => 'compose',
+                'to' => $this->group -> getOwner() ->getIdentity()
+            ), $this -> translate("Send Message"), array(
+                'class' => 'club_info_edit smoothbox', 
+                'style' => 'margin-top:1px',
+                'title' => $this -> translate("Send Message")
+            ));
+            ?>
+         <?php elseif (Engine_Api::_()->ynfbpp()->_allowMail($this->viewer(), $this->group -> getOwner())) :?>
+            <?php echo $this->htmlLink(array(
+                'route' => 'user_general',
+                'action' => 'in-mail',
+                'to' =>  $this->group -> getOwner() ->getIdentity()
+            ), $this -> translate("Send Email"), array(
+                'class' => 'smoothbox club_info_edit', 
+                'style' => 'margin-top:1px',
+                'title' => $this -> translate("Send Email")
+            ));
+            ?>
 	<?php endif;?>
 </div>

@@ -738,6 +738,12 @@ class Ynfbpp_Api_Core
         $this -> view -> actions = $actions = $this -> _getGroupActions($subject, $viewer);
         return $this -> view -> render('index/render-group.tpl');
     }
+	
+	public function renderGroupTooltip($groupId)
+    {
+        $this -> view -> subject = $subject = Engine_Api::_() -> getItem('group', $groupId);
+        return $this -> view -> render('index/render-group-contact.tpl');
+    }
 
     public function renderEvent($eventId)
     {

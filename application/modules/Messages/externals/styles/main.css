@@ -347,7 +347,7 @@ html[dir="rtl"] #messages_compose #compose-menu .buttonlink
 }
 #global_page_messages-messages-compose #global_content_simple .form-label
 {
-  width: auto;
+  width: 100px;
 }
 
 

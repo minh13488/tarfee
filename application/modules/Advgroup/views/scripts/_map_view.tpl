@@ -21,7 +21,7 @@ if($this->datas != '[]'):?>
 	    	center: center
   	  	};
   	  	
-	  	map = new google.maps.Map(document.getElementById('layout_adv_list_most_items-map-canvas'),mapOptions);
+	  	map = new google.maps.Map(document.getElementById('layout_advgroup_list_most_items-map-canvas'),mapOptions);
       
       	for (var i = 0; i < neighborhoods.length; i++) {
       		addMarker(i);

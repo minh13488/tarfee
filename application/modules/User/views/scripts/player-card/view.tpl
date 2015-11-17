@@ -47,12 +47,12 @@ if($player ->city_id && $city = Engine_Api::_() -> getItem('user_location', $pla
 		</div>
 		<div class="tf-player-content clearfix">
 			<div class="tf-player-description">
-				<span class="label">Year of Birth</span>
+				<span class="label"><?php echo $this -> translate("Year of Birth");?></span>
 				<span class="value"><?php echo date("Y", strtotime($player -> birth_date));?></span>
 			</div>
 
 			<div class="tf-player-description">
-				<span class="label">Location</span>
+				<span class="label"><?php echo $this -> translate("Location");?></span>
 				<span class="value"><?php if($locationName) echo join($locationName, ',')?></span>
 			</div>
 			<div class="tf-player-description">

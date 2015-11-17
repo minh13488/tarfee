@@ -270,13 +270,14 @@ class Ynvideo_Model_Video extends Core_Model_Item_Abstract
           	$totalDislike = Engine_Api::_() -> getDbtable('dislikes', 'yncomment') -> getDislikeCount($this);
 			
 			$videoEmbedded = '<div class="video_info">' .$title . $description . '</div>'.$thumb . '<div id="video_object_' . $this -> video_id . '" class="video_object ' . $class_html5 . '">' . $videoEmbedded . '</div>';
-			
+			/*
 			$view = Zend_Registry::get('Zend_View');  
 			$videoEmbedded .= '<div class="tfvideo_statistics">
           	<span>'. $view->translate(array('%s like', '%s likes', $totalLike), $totalLike). '</span>
           	<span>'. $view->translate(array('%s dislike', '%s dislikes', $totalDislike), $totalDislike). '</span>
           	<span>'. $view->translate(array('%s comment', '%s comments', $this -> comment_count), $this -> comment_count).'</span>
       		</div>';
+			 */
 		}
 
 		return $videoEmbedded;

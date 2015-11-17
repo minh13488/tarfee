@@ -1401,11 +1401,11 @@ body#global_page_user-profile-index {
             -moz-border-radius: 0 0 5px 5px;
             -ms-border-radius: 0 0 5px 5px;
             border: none;
-	    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
-	    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
-	    display: -ms-flexbox;      /* TWEENER - IE 10 */
-	    display: -webkit-flex;     /* NEW - Chrome */
-	    display: flex;   
+		    display: -webkit-box;      /* OLD - iOS 6-, Safari 3.1-6 */
+		    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */
+		    display: -ms-flexbox;      /* TWEENER - IE 10 */
+		    display: -webkit-flex;     /* NEW - Chrome */
+		    display: flex;   
 
             li {
                 text-align: center;
@@ -1429,7 +1429,7 @@ body#global_page_user-profile-index {
                     }
                     &:before {
                         content: "";
-			/*                        font-family: FontAwesome;
+			/*          font-family: FontAwesome;
 						font-style: normal;
 						font-weight: normal;
 						text-decoration: inherit;
@@ -1542,8 +1542,6 @@ body#global_page_user-profile-index {
     }
 }
 
-
-
 .layout_ynresponsiveevent_event_mini_menu{
 
     textarea:focus,
@@ -1572,10 +1570,6 @@ body#global_page_user-profile-index {
 #profile_groups_events li .ynevents_info .ynevents_desc{
     max-height: 54px !important;
 }
-/*#profile_groups_events li .ynevents_button a {
-	padding: 10px 5px !important;
-}
-*/
 .ynevents_profile_tab,
 #profile_groups_events{
     background: #fff;
@@ -2025,14 +2019,12 @@ body#global_page_user-profile-index {
 .layout_tfcampaign_my_saved_campaigns,
 .layout_tfcampaign_my_submissions,
 .layout_ynevent_recent_events,
-.layout_user_club_profile_players,
-.layout_advgroup_recent_group_videos,
-.layout_user_club_profile_players,
 .layout_advgroup_profile_videos_by_fans,
 .layout_tfcampaign_club_profile_campaign,
 .layout_ynevent_attended_events,
 .layout_ynevent_my_events,
-.layout_advgroup_profile_info_club
+.layout_advgroup_profile_info_club,
+.layout_advgroup_profile_info
 {
     background: #fff;
     overflow: hidden;
@@ -2896,7 +2888,19 @@ body#global_page_advgroup-profile-index{
 	    width: 320px;
 	}
     }
-    .ynfeed_pulldown_btn{display: none !important;}
+    .ynfeed_pulldown_btn_wrapper 
+    {
+    	top: 5px;
+    	right: 10px;
+    }
+    button#ynfeed-compose-submit
+    {
+    	background-color: $theme_link_color;
+    	&:hover{
+		    background: $theme_link_color_hover;
+		}
+    }
+    
 }
 
 
@@ -3008,20 +3012,31 @@ body#global_page_advgroup-profile-index{
 	    outline: 0;
 	}
 }
+=tarfee_border_radius($radius){
+    border-radius: $radius;
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+}
 /*Player of club profile*/
 .layout_user_club_profile_players{
-
-    .player_contents{
-        ul.players_browse{
+    .player_contents
+    {
+    	.group_album_options
+    	{
+    		margin: 0 -10px;
+    	}
+        ul.players_browse
+        {
             > li {
                 float: left;
-                /*margin-bottom: 10px;*/
-                border-bottom: 10px solid #dadada;
-                width: 100%;
+                margin-bottom: 10px;
+                width: 32%;
+                margin-left: 2%;
                 overflow: hidden;
-
-                &:last-child{
-		    border-bottom: none;
+                +tarfee_border_radius(5px);
+                &:nth-child(3n+1){
+                    margin-left: 0;
                 }
 
                 #profile_photo {
@@ -3381,8 +3396,6 @@ span.tf_button_action{
     }
 }
 
-
-/*layout_advgroup_recent_group_videos*/
 .layout_advgroup_recent_group_videos,
 .tfplayer_videos{
     +border-radius(5px);
@@ -3553,7 +3566,37 @@ span.tf_button_action{
 	margin: 10px;
     }
 }
-
+.layout_advgroup_recent_group_videos
+{
+	ul.videos_browse > li
+	{
+	    float: left;
+	    margin-bottom: 10px;
+	    width: 32%;
+	    margin-left: 2%;
+	    overflow: hidden;
+	    +tarfee_border_radius(5px);
+	    &:nth-child(3n+1){
+	        margin-left: 0;
+	    }
+	    background-color: #fff;
+	    .player-info-author
+	    {
+	    	padding: 15px 0px 0px 10px;
+	    }
+	    padding-bottom: 10px!important;
+	}
+	ul.videos_browse
+	{
+		background: transparent!important;
+		padding: 15px 0!important;
+	}
+    background: transparent!important;
+    a.tf_button_action
+    {
+    	margin: 0;
+    }
+}
 
 #global_page_advgroup-profile-index{
     #activity-feed{
@@ -3642,123 +3685,15 @@ span.tf_button_action{
 }
 
 
-#global_page_advgroup-profile-index {
-    ul.feed div.feed_item_date > ul > li.feed_item_option_share{
-	display: none !important;
-    }
-
-    /*.feed_item_option_like,
-    .feed_item_option_unlike{
-	    display: none !important;
-    }
-    .comment-likes-activity-item{display: none;}*/
-    .tfvideo_statistics{
-	clear: both;
-	padding-left: 15px;
-	display: none;
-	margin-bottom: 5px;
-
-	span{
-	    color: $theme_font_color;
-	    font-size: 12px;
-	    margin-right: 15px;
+#global_page_advgroup-profile-index 
+{
+	ul.yncomment_feed
+	{
+		li.clearfix
+		{
+			padding: 15px;
+		}
 	}
-    }
-    #activity-feed{
-	& > li{position: relative;}
-    }
-    ul.feed .feed_item_icon{
-	padding-left: 0;
-	background-image: none;
-    }
-    ul.feed .feed_item_photo{
-	float: none !important;
-	margin: 15px;
-
-	img{
-	    width: 50px;
-	    height: 50px;
-	    border-radius: 5px;
-	    -webkit-border-radius: 5px;
-	    -moz-border-radius: 5px;
-	    -ms-border-radius: 5px;
-	}
-    }
-    ul.yncomment_feed .feed_item_body{
-	margin-left: 0;
-    }
-
-    ul.feed .feed_item_generated{
-	position: absolute;
-	left: 75px;
-	top: 20px;
-    }
-    ul.feed .feed_item_date > ul > li > span.timestamp {
-	color: #bbb;
-	padding: 0;
-	position: absolute;
-	top: 0;
-	left: 75px;
-	top: 45px;
-    }
-    .feed_item_generated a{
-	color: $theme_font_color;
-	font-weight: bold;
-	&:hover{
-	    color: $theme_link_color;
-	}
-    }
-    .video_length{display: none}
-    .video_desc{
-	font-size: 12px;
-	color: $theme_font_color_light;
-	margin-bottom: 10px;
-    }
-    ul.feed > li + li{
-	padding-top: 0;
-    }
-    .video_info{
-	padding: 0 15px;
-    }
-    .feed_item_attachments .video_thumb_wrapper{
-	width: 100%;
-	max-width: 100%;
-	margin-bottom: 15px;
-	height: 325px;
-	margin-right: 0;
-
-	&:after{
-	    content: "";
-	    background-image: url(~/application/themes/ynresponsive-event/images/icon-play-large.png);
-	    position: absolute;
-	    top: 0;
-	    left: 0;
-	    width: 100%;
-	    height: 100%;
-	    display: block;
-	    background-position: center;
-	    background-repeat: no-repeat;
-	    background-color: rgba(0, 0, 0, 0.4);
-	}
-
-	img{
-	    width: 100%;
-	    height: 100%;
-	}
-    }
-
-    li[class*=feed_item_option]{
-	margin-left: 10px;
-	& > span{
-	    display: none;
-	}
-    }
-    .yncomment_wrap{
-	margin-left: 10px;
-	& > span{
-	    display: none;
-	}
-    }
     .vimeo_iframe_big{
 	width: 640px;
 	height: 360px;

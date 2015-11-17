@@ -158,6 +158,10 @@
  	
  	window.addEvent('domready', function() 
 	{
+		if($('location-label'))
+	  	{
+	  		$('location-label').innerHTML = '<?php echo $this -> translate("Location")?>';
+	  	}
 		if ($$('#province_id option').length <= 1)
 		{
 			$('province_id-wrapper').hide();

@@ -354,6 +354,15 @@ function(href) {
 	}
 	return false;
 },function(href) {
+	var match = href.match(/\/clubs\/index\/more-info\/club_id\/(\d+)(\/)?/i);
+	if(match != null && match != undefined && match[1]) {
+		return {
+			match_id : decodeURIComponent(match[1]),
+			match_type : 'groupTooltip'
+		}
+	}
+	return false;
+},function(href) {
 	var match = href.match(/\/event\/(\d+)(\/)?/i);
 	if(match != null && match != undefined) {
 		return {
