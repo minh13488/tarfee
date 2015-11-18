@@ -313,11 +313,16 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 				{
 					$subject -> membership() -> addMember($viewer) -> setUserApproved($viewer);
 				}
-				if(!$subject -> getOwner() -> membership() -> isMember($viewer))
+				$user = $subject -> getOwner();
+				if(!$user -> membership() -> isMember($viewer))
 				{
-					$subject -> getOwner() -> membership()
+					$user -> membership()
 				        ->addMember($viewer)
 				        ->setUserApproved($viewer);
+						
+					$viewer -> membership()
+				        ->addMember($user)
+				        ->setUserApproved($user);
 				}
 		
 				// Set the request as handled
@@ -523,6 +528,15 @@ class Advgroup_MemberController extends Core_Controller_Action_Standard
 					{
 						$row -> delete();
 					}
+					
+					$user = $subject -> getOwner();
+			        $viewer->membership()->removeMember($user);
+			        $user->membership()->removeMember($viewer);
+			
+			      	// Remove from lists?
+			      	// @todo make sure this works with one-way friendships
+			      	$user->lists()->removeFriendFromLists($viewer);
+			      	$viewer->lists()->removeFriendFromLists($user);
 				
 					$db -> commit();
 				}

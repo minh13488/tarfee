@@ -1,6 +1,6 @@
 <?php if(count($this->ads) > 0) :?>
 <div class="ynsocial_ads" >
-	<div class="ynsocial_ads_content">
+	<li class="ynsocial_ads_content">
 		<?php foreach($this->ads as $ad) :?>
 		<div class="ynsocial_ads_item">
 			<?php 
@@ -21,7 +21,7 @@
 			</div>	
 		</div>	
 		<?php endforeach;?>
-	</div>
+	</li>
 </div>
 <?php endif; ?>	
 

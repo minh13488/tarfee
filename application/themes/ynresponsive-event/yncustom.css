@@ -3692,6 +3692,7 @@ span.tf_button_action{
 		li.clearfix
 		{
 			padding: 15px;
+			padding-bottom: 5px;
 		}
 	}
     .vimeo_iframe_big{

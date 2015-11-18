@@ -7348,6 +7348,23 @@ div[class*="group_videos"] > .icon_group_video_new {
 
 body#global_page_advgroup-profile-index 
 {
+	.layout_middle>div+div
+	{
+		margin-top: 0px;
+	}
+	.layout_ynsocialads_ads_content
+	{
+		margin-bottom: 15px;
+	}
+	#feed-ads .ynsocial_ads_content
+	{
+		margin-top: 10px;
+	    background-color: #fff;
+	    -webkit-border-radius: 5px;
+	    -moz-border-radius: 5px;
+	    border-radius: 5px;
+	    list-style: none;
+	}
 	.tabs_parent
 	{
 	    ul#main_tabs 
