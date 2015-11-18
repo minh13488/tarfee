@@ -3,18 +3,16 @@ class Ynblog_Form_Delete extends Engine_Form
 {
   public function init()
   {
-    $this->setTitle('Delete Entry')
-      ->setDescription('Are you sure you want to delete this blog entry?')
+    $this->setTitle('Delete Talk')
+      ->setDescription('Are you sure you want to delete this talk?')
       ->setAttrib('class', 'global_form_popup')
       ->setAction(Zend_Controller_Front::getInstance()->getRouter()->assemble(array()))
       ->setMethod('POST');
       ;
 
-    //$this->addElement('Hash', 'token');
-    
     // Buttons
     $this->addElement('Button', 'submit', array(
-      'label' => 'Delete Entry',
+      'label' => 'Delete Talk',
       'type' => 'submit',
       'ignore' => true,
       'decorators' => array('ViewHelper')

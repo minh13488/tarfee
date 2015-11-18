@@ -1070,12 +1070,8 @@ body#global_page_yncomment-like-dislikelist{
 
 /*SET WIDTH FOR POPUP WHEN RESPONSIVE*/
 @media screen and (min-width: 400px){
-	.ynfeed_members_popup ,
-	.yncomment_members_popup{
-		width: 	400px;
-	}
 	.item_member {
-	width: 48%;
+	width: 100%;
 	overflow: hidden;
 	display: block;
 	float: left;
@@ -1090,18 +1086,10 @@ body#global_page_yncomment-like-dislikelist{
 	&:hover {
 	background: $theme_border_color;
 	}
-
-		&:nth-child(even) {
-			margin-left: 4%;
-		}
 	}
 }
 
 @media screen and (max-width: 400px){
-	.ynfeed_members_popup ,
-	.yncomment_members_popup{
-		width: 270px;
-	}
 	.item_member {
 		width: 100%;
 		overflow: hidden;
@@ -1117,10 +1105,6 @@ body#global_page_yncomment-like-dislikelist{
 
 		&:hover {
 		background: $theme_border_color;
-		}
-
-		&:nth-child(even) {
-			margin-left: 0%;
 		}
 	}
 }
@@ -1128,10 +1112,6 @@ body#global_page_yncomment-like-dislikelist{
 
 /*SET CONTENT IN POPUP WHEN POPUP = 300PX*/
 @media screen and (max-width: 300px){
-/*	.ynfeed_members_popup ,
-	.yncomment_members_popup{
-		width: 300px;
-	}*/
 	.item_member {
 		width: 100%;
 		overflow: hidden;
@@ -1147,10 +1127,6 @@ body#global_page_yncomment-like-dislikelist{
 
 		&:hover {
 		background: $theme_border_color;
-		}
-
-		&:nth-child(even) {
-			margin-left: 0%;
 		}
 	}
 }

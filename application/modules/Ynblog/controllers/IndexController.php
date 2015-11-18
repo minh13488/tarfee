@@ -115,9 +115,6 @@ class Ynblog_IndexController extends Core_Controller_Action_Standard {
 			$this->view->maximum_reach = true;
 		}
 
-		// Get navigation
-		$this->view->navigation = $navigation = Engine_Api::_ ()->getApi ( 'menus', 'core' )->getNavigation ( 'ynblog_main' );
-
 		// Prepare form
 		$this->view->form = $form = new Ynblog_Form_Create ();
 
@@ -212,9 +209,7 @@ class Ynblog_IndexController extends Core_Controller_Action_Standard {
 			throw $e;
 		}
 
-		return $this->_helper->redirector->gotoRoute ( array (
-				'action' => 'manage'
-		) );
+		$this -> _redirectCustom($blog);
 	}
 
 	/* ----- User Blogs Manage Page Function ----- */
@@ -285,9 +280,6 @@ class Ynblog_IndexController extends Core_Controller_Action_Standard {
 			return;
 		if (! $this->_helper->requireAuth ()->setAuthParams ( $blog, $viewer, 'edit' )->isValid ())
 			return;
-
-			// Get navigation
-		$this->view->navigation = $navigation = Engine_Api::_ ()->getApi ( 'menus', 'core' )->getNavigation ( 'ynblog_main' );
 
 		// Prepare form
 		$this->view->form = $form = new Ynblog_Form_Edit ();
@@ -411,15 +403,7 @@ class Ynblog_IndexController extends Core_Controller_Action_Standard {
 			$db->rollBack ();
 			throw $e;
 		}
-		if($this -> _getParam('browse', false))
-		{
-			return $this->_helper->redirector->gotoRoute (array(),'blog_general', true);
-		}
-		else {
-			return $this->_helper->redirector->gotoRoute (array(
-				'action' => 'manage'
-			) );
-		}
+		$this -> _redirectCustom($blog);
 	}
 
 	/* ----- Blog Delete Action ----- */
@@ -463,11 +447,10 @@ class Ynblog_IndexController extends Core_Controller_Action_Standard {
 		}
 
 		$this->view->status = true;
-		$this->view->message = Zend_Registry::get ( 'Zend_Translate' )->_ ( 'Your blog entry has been deleted.' );
+		$this->view->message = Zend_Registry::get ( 'Zend_Translate' )->_ ( 'Your talk has been deleted.' );
 		return $this->_forward ( 'success', 'utility', 'core', array (
-				'parentRedirect' => Zend_Controller_Front::getInstance ()->getRouter ()->assemble ( array (
-						'action' => 'manage'
-				), 'blog_general', true ),
+				'smoothboxClose' => true,
+				'parentRefresh' => true,
 				'messages' => Array (
 						$this->view->message
 				)

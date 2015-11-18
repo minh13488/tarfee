@@ -5735,7 +5735,9 @@ body[id^=global_page_social-connect],
 #global_page_payment-settings-confirm,
 #global_page_ynvideo-index-popup-view,
 #global_page_user-signup-account,
-#global_page_core-error-requireuser
+#global_page_core-error-requireuser,
+#global_page_ynblog-index-edit,
+#global_page_ynfeed-index-edit-post
 {
 	#global_wrapper
 	{
@@ -5815,7 +5817,10 @@ body[id^=global_page_ynsocialads] #global_content .layout_main,
 #global_page_ynvideo-index-popup-view .show_on_page,
 #global_page_payment-subscription-gateway form.global_form,
 #global_page_user-signup-account form.global_form,
-#global_page_user-signup-account #global_content_simple
+#global_page_user-signup-account #global_content_simple,
+#global_page_ynblog-index-edit #global_content .layout_main,
+#global_page_ynfeed-index-edit-post #global_content h2,
+#global_page_ynfeed-index-edit-post #global_content div.ynfeed-post-container
 {
 	background-color: white;
   	 -webkit-border-radius: 5px;
@@ -5823,6 +5828,15 @@ body[id^=global_page_ynsocialads] #global_content .layout_main,
   	border-radius: 5px;
   	padding: 15px;
   	margin: 15px;
+}
+#global_page_ynblog-index-edit #global_content .layout_main .global_form > div
+{
+	border: 0;
+	padding: 10px;
+	h3
+	{
+		margin-top: 0;
+	}
 }
 #global_page_ynvideo-index-popup-view .show_on_page
 {
@@ -5914,7 +5928,9 @@ body[id^=global_page_social-connect] #global_content,
 #global_page_payment-settings-confirm #global_content,
 #global_page_ynvideo-index-popup-view #global_content,
 #global_page_payment-subscription-gateway #global_content,
-#global_page_user-signup-account #global_content
+#global_page_user-signup-account #global_content,
+#global_page_ynblog-index-edit #global_content,
+#global_page_ynfeed-index-edit-post #global_content
 {
 	padding-bottom: 10px;
 }

@@ -177,11 +177,6 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 
 			$db -> commit();
 			
-			if ($player_card -> parent_type == 'group') {
-				$club = Engine_Api::_()->getItem('group', $player_card -> parent_id);
-				return $this -> _redirectCustom($club);
-			}
-			
 			// Redirect
 			$tab = $this -> _getParam('tab', '');
 			$pageURL = 'http';
@@ -190,8 +185,16 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 				$pageURL .= "s";
 			}
 			$pageURL .= "://";
-			
-			$url = $pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref().'/view/tab/'.$tab;
+			if($player_card -> parent_type == 'group')
+			{
+				$parent = $player_card -> getParent();
+				$url = $pageURL . $_SERVER['HTTP_HOST'] . $parent -> getHref().'/tab/'.$tab;
+			}
+			else 
+			{
+				$url = $pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref().'/tab/'.$tab;
+				
+			}
 			return $this -> _helper -> redirector -> gotoUrl($url);
 		}
 		catch( Engine_Image_Exception $e )
@@ -494,7 +497,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		{
 			return;
 		}
-
+		$parent = $player_card -> getParent();
 		$table = Engine_Api::_() -> getItemTable('user_playercard');
 		$db = $table -> getAdapter();
 		$db -> beginTransaction();
@@ -510,11 +513,20 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			$db -> rollBack();
 			throw $e;
 		}
-		return $this -> _forward('success', 'utility', 'core', array(
-			'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Player card deleted.')),
-			'layout' => 'default-simple',
-			'parentRefresh' => true,
-		));
+		if($parent -> getType() == 'group')
+		{
+			return $this -> _forward('success', 'utility', 'core', array(
+				'parentRedirect' => $parent -> getHref().'/tab/1959',
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Player card deleted.')),
+			));
+		}
+		else {
+			return $this -> _forward('success', 'utility', 'core', array(
+				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Player card deleted.')),
+				'layout' => 'default-simple',
+				'parentRefresh' => true,
+			));
+		}
 	}
 
 	public function subcategoriesAction()

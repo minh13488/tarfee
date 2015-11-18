@@ -37,7 +37,6 @@ class Advgroup_ProfileController extends Core_Controller_Action_Standard
   
 public function indexAction()
   {
-  	
     if(!Engine_Api::_()->core()->hasSubject()) return $this->renderScript("_error.tpl");
     $subject = Engine_Api::_()->core()->getSubject();
 	
@@ -72,6 +71,29 @@ public function indexAction()
     if( null !== $row && !empty($row->style) ) {
       $this->view->headStyle()->appendStyle($row->style);
     }
+	
+	//Get Photo Url
+	$photoUrl = $subject -> getPhotoUrl('thumb.profile');
+	$pos = strpos($photoUrl, "http");
+	if ($pos === false)
+	{
+		$photoUrl = rtrim((constant('_ENGINE_SSL') ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'], '/') . $photoUrl;
+	}
+
+	//Get Video Url
+	$clubUrl = $subject -> getHref();
+	$pos = strpos($clubUrl, "http");
+	if ($pos === false)
+	{
+		$clubUrl = rtrim((constant('_ENGINE_SSL') ? 'https://' : 'http://') . $_SERVER['HTTP_HOST'], '/') . $clubUrl;
+	}
+		
+	//Adding meta tags for sharing
+	$view = Zend_Registry::get('Zend_View');
+	$og = '<meta property="og:image" content="' . $photoUrl . '" />';
+	$og .= '<meta property="og:title" content="' . $subject -> getTitle() . '" />';
+	$og .= '<meta property="og:url" content="' . $clubUrl . '" />';
+	$view -> layout() -> headIncludes .= $og;
 
     // Render
     $this->_helper->content

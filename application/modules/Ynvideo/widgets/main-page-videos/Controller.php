@@ -41,6 +41,7 @@ class Ynvideo_Widget_MainPageVideosController extends Engine_Content_Widget_Abst
 		else {
 			$select->where('0 = 1');
 		}
+		$select->where('search = 1');
 		if($arrNot)
 		{
 			$select -> where("video_id NOT IN (?)", $arrNot);

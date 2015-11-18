@@ -7348,6 +7348,29 @@ div[class*="group_videos"] > .icon_group_video_new {
 
 body#global_page_advgroup-profile-index 
 {
+	.layout_ynfeed_feed #activity-feed
+	{
+		padding-top: 0;
+	}
+	.yncomment_feed
+	{
+		.yncomment_feed_item_date li.yncomment_wrap
+		{ 
+			color: $theme_link_color;
+		}
+		li.feed_item_option_like a,
+		li.feed_item_option_unlike a
+		{
+			color: $theme_font_color_light;
+			&:hover {
+	            color: $theme_link_color_hover;
+	        }
+		}
+	}
+	.ynfeed_tabs_feed > ul
+	{
+		float: left;
+	}
 	div.feed_viewmore a
 	{
 		display: block!important;
@@ -7423,9 +7446,8 @@ body#global_page_advgroup-profile-index
 	        }
 	        li.active {
 	            position: relative;
-	
 	            a {
-	                color: $theme_link_color;                
+	                color: $theme_link_color;   
 	            }
 	            &:after {
 	                content: "";
@@ -7484,7 +7506,8 @@ body#global_page_advgroup-profile-index
 		div.active
 		{
 			a {
-                color: $theme_link_color;                
+                color: $theme_link_color;        
+                border-color: $theme_link_color;         
             }
             &:after {
 	                content: "";

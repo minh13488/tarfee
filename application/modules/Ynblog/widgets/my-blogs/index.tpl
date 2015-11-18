@@ -32,8 +32,6 @@
               'route' => 'blog_specific',
               'action' => 'edit',
               'blog_id' => $item->getIdentity(),
-              'reset' => true,
-              'browse' => true,
             ), $this->translate('Edit'), array(
               'class' => 'tftalk_action',
             ));?>

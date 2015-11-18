@@ -332,17 +332,21 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		if ($video -> parent_type == 'group')
 		{
 			$group = $video -> getParent('group');
-			$this -> _redirectCustom($group);
+			$tab = $this -> _getParam('tab', '');
+			$pageURL = 'http';
+			if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
+			{
+				$pageURL .= "s";
+			}
+			$pageURL .= "://";
+			$url = $pageURL . $_SERVER['HTTP_HOST'] . $group -> getHref().'/tab/'.$tab;
+			return $this -> _helper -> redirector -> gotoUrl($url);
 		}
 		else
 		if ($video -> parent_type == 'user_playercard')
 		{
 			$user_playercard = Engine_Api::_() -> getItem($video -> parent_type, $video -> parent_id);
 			$this -> _redirectCustom($user_playercard);
-		}
-		else if ($video -> type == Ynvideo_Plugin_Factory::getUploadedType())
-		{
-			return $this -> _helper -> redirector -> gotoRoute(array('action' => 'manage'), 'video_general', true);
 		}
 		else
 		{
@@ -864,7 +868,7 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			$this -> view -> error = Zend_Registry::get('Zend_Translate') -> _('Invalid request method');
 			return;
 		}
-
+		$parent = $video -> getParent();
 		$db = $video -> getTable() -> getAdapter();
 		$db -> beginTransaction();
 
@@ -878,13 +882,25 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			$db -> rollBack();
 			throw $e;
 		}
+		
 
 		$this -> view -> status = true;
 		$this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('Video has been deleted.');
-		return $this -> _forward('success', 'utility', 'core', array(
-			'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'manage'), 'video_general', true),
+		
+		if($parent -> getType() == 'group')
+		{
+			return $this -> _forward('success', 'utility', 'core', array(
+				'parentRedirect' => $parent -> getHref().'/tab/918',
+				'messages' => Array($this -> view -> message)
+			));
+		}
+		else {
+			return $this -> _forward('success', 'utility', 'core', array(
+			'smoothboxClose' => true,
+			'parentRefresh' => true,
 			'messages' => Array($this -> view -> message)
 		));
+		}
 	}
 	
 	public function ratingAction()
@@ -1245,11 +1261,7 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 					}
 				}
 
-				// If video is from the composer, keep it hidden until the post is complete
-				if ($composer_type)
-				{
-					$video -> search = 0;
-				}
+				$video -> search = 0;
 				$video -> status = 1;
 				$video -> save();
 
@@ -1286,7 +1298,7 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			$this -> view -> photo_id = $video -> photo_id;
 			$this -> view -> title = $video -> title;
             $this -> view -> type = $video -> type;
-			$this -> view -> description = $video -> description;
+			$this -> view -> description = $this -> view -> string() -> truncate($video -> description, 250);
 			if ($video_type == Ynvideo_Plugin_Factory::getVideoURLType() || $video_type == 6)
 			{
 				$this -> view -> src = Zend_Registry::get('StaticBaseUrl') . 'application/modules/Video/externals/images/video.png';

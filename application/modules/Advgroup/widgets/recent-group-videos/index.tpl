@@ -13,6 +13,7 @@
 				'action' => 'create',
 				'parent_type' =>'group',
 				'subject_id' =>  $this->group->group_id,
+				'tab' => '918'
 			), $this->translate('Add Video'), array(
 			'class' => 'tf_button_action'
 			)) ;
@@ -24,6 +25,7 @@
 				'action' => 'create',
 				'parent_type' =>'group',
 				'subject_id' =>  $this->group->getGuid(),
+				'tab' => '918'
 			), $this->translate('Add Video'), array(
 			'class' => 'tf_button_action'
 			)) ;

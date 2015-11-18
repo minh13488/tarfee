@@ -288,53 +288,6 @@ if (empty($this->actions)) {
                   </li>
            <?php endif ?>
           
-          <?php // Share ?>
-          <?php  $title = $this->translate('Share');
-               if(!$showLikeWithoutIcon)
-               {
-                   $title = '<i class="fa fa-share-alt ynfontawesome"></i> '.$title;
-               }?> 
-          <?php if( $action->getTypeInfo()->shareable && $this->viewer()->getIdentity() && (!$optionFeedTable -> getOptionFeed($action->getSubject(), $action->action_id, 'lock') || $this->viewer()->isSelf($action->getSubject()))): ?>
-            <?php if( $action->getTypeInfo()->shareable == 1 && $action->attachment_count == 1 && ($attachment = $action->getFirstAttachment()) ): ?>
-              <li class="feed_item_option_share">
-                <span>&nbsp;-&nbsp;</span>
-                <?php echo $this->htmlLink(array('route' => 'default', 'module' => 'activity', 'controller' => 'index', 'action' => 'share', 'type' => $attachment->item->getType(), 'id' => $attachment->item->getIdentity(), 'format' => 'smoothbox'), $title, array('class' => 'smoothbox', 'title' => 'Share')) ?>
-              </li>
-            <?php elseif( $action->getTypeInfo()->shareable == 2 ): ?>
-              <li class="feed_item_option_share">
-                <span>&nbsp;-&nbsp;</span>
-                <?php echo $this->htmlLink(array('route' => 'default', 'module' => 'activity', 'controller' => 'index', 'action' => 'share', 'type' => $subject->getType(), 'id' => $subject->getIdentity(), 'format' => 'smoothbox'), $title, array('class' => 'smoothbox', 'title' => 'Share')) ?>
-              </li>
-            <?php elseif( $action->getTypeInfo()->shareable == 3 ): ?>
-              <li class="feed_item_option_share">
-                    <span>&nbsp;-&nbsp;</span>
-                    <?php echo $this->htmlLink(array('route' => 'default', 'module' => 'activity', 'controller' => 'index', 'action' => 'share', 'type' => $object->getType(), 'id' => $object->getIdentity(), 'format' => 'smoothbox'), $title, array('class' => 'smoothbox', 'title' => 'Share')) ?>
-              </li>
-            <?php elseif( $action->getTypeInfo()->shareable == 4 ): ?>
-              <li class="feed_item_option_share">
-                    <span>&nbsp;-&nbsp;</span>
-                    <?php echo $this->htmlLink(array('route' => 'default', 'module' => 'activity', 'controller' => 'index', 'action' => 'share', 'type' => $action->getType(), 'id' => $action->getIdentity(), 'format' => 'smoothbox'), $title, array('class' => 'smoothbox', 'title' => 'Share')) ?>
-              </li>
-            <?php endif; ?>
-            <?php
-             $type = "";
-             $id = 0;
-             if(count($action->getAttachments()) > 0)
-             {
-                $atts = $action->getAttachments();
-                $type = $atts[0] -> item -> getType();
-                $id = $atts[0] -> item -> getIdentity();
-             }
-             $shared = $feedApiCore -> getShareds($action -> getIdentity(), $type, $id); 
-             if(count($shared)):?>
-                 <li class="feed_item_shared">
-                    <a title="<?php echo $this -> translate("Total shared")?>" class="smoothbox" href="<?php echo $this->url(array('controller' => 'index', 'action' => 'view-shared', 'id' => $action->getIdentity()), 'ynfeed_extended', true);?>">
-                        <div class="yfshare_number feed_item_date"><?php echo count($shared)?></div>
-                        <div class="activity_icon_share"></div>
-                    </a>
-                 </li>
-             <?php endif;?>
-          <?php endif; ?>
       
       <!-- // show comment statistics -->
       <?php if ($canComment && $this->ynfeed_comment_like_box): ?> 
