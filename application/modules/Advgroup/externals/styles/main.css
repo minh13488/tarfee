@@ -7348,22 +7348,37 @@ div[class*="group_videos"] > .icon_group_video_new {
 
 body#global_page_advgroup-profile-index 
 {
+	div.feed_viewmore a
+	{
+		display: block!important;
+	    background: $theme_link_color!important;
+    	color: #fff!important;
+    	-webkit-border-radius: 5px;
+		-moz-border-radius: 5px;
+		border-radius: 5px;
+    	&:hover {
+            background: $theme_button_background_color!important;
+        }
+	}
 	.layout_middle>div+div
 	{
 		margin-top: 0px;
 	}
-	.layout_ynsocialads_ads_content
+	.feed-ads 
 	{
-		margin-bottom: 15px;
-	}
-	#feed-ads .ynsocial_ads_content
-	{
-		margin-top: 10px;
-	    background-color: #fff;
-	    -webkit-border-radius: 5px;
-	    -moz-border-radius: 5px;
-	    border-radius: 5px;
-	    list-style: none;
+		padding-bottom: 0;
+		padding-top: 0;
+		.ynsocial_ads_content
+		{
+		    background-color: #fff;
+		    -webkit-border-radius: 5px;
+		    -moz-border-radius: 5px;
+		    border-radius: 5px;
+		    .ynsocial_ads_item
+		    {
+		    	padding: 0;
+		    }
+		}
 	}
 	.tabs_parent
 	{

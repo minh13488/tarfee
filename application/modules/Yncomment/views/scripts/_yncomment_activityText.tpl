@@ -123,8 +123,11 @@
 
 <?php if( !$this->getUpdate && !$this->feedOnly && !$this->onlyactivity): ?>
     <ul class='feed yncomment_feed' id="activity-feed">
+    	<li class="feed-ads"></li>
 <?php endif ?>
-  
+<?php if($this->feedOnly && !$this -> getUpdate && !$this -> onlyactivity):?>
+	<li class="feed-ads"></li>
+<?php endif ?>
 <?php
   $saveFeedTable =  Engine_Api::_() -> getDbTable('saveFeeds', 'ynfeed');
   $optionFeedTable =  Engine_Api::_() -> getDbTable('optionFeeds', 'ynfeed');
