@@ -332,15 +332,7 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 		if ($video -> parent_type == 'group')
 		{
 			$group = $video -> getParent('group');
-			$tab = $this -> _getParam('tab', '');
-			$pageURL = 'http';
-			if (isset($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] == "on")
-			{
-				$pageURL .= "s";
-			}
-			$pageURL .= "://";
-			$url = $pageURL . $_SERVER['HTTP_HOST'] . $group -> getHref().'/tab/'.$tab;
-			return $this -> _helper -> redirector -> gotoUrl($url);
+			return $this -> _redirectCustom($group);
 		}
 		else
 		if ($video -> parent_type == 'user_playercard')
@@ -826,21 +818,25 @@ class Ynvideo_IndexController extends Core_Controller_Action_Standard
 			$db -> rollBack();
 			throw $e;
 		}
-		if($video -> parent_type == 'group')
+		if ($video -> parent_type == 'group')
 		{
 			$group = $video -> getParent('group');
-			$this -> _redirectCustom($group);
+			return $this -> _redirectCustom($group);
 		}
-		elseif($video -> parent_type == 'user_playercard')
+		else
+		if ($video -> parent_type == 'user_playercard')
 		{
 			$user_playercard = Engine_Api::_() -> getItem($video -> parent_type, $video -> parent_id);
 			$this -> _redirectCustom($user_playercard);
 		}
-		elseif($video -> parent_type == 'user_library') {
+		elseif($video -> parent_type == 'user_library') 
+		{
 			$this -> _redirectCustom($video -> getOwner());
 		}
-
-		return $this -> _helper -> redirector -> gotoRoute(array('action' => 'manage'), 'video_general', true);
+		return $this -> _helper -> redirector -> gotoRoute(array(
+				'user_id' => $viewer -> getIdentity(),
+				'video_id' => $video -> getIdentity()
+			), 'video_view', true);
 	}
 
 	public function deleteAction()

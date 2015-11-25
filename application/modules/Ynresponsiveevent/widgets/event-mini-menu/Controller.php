@@ -104,25 +104,41 @@ class Ynresponsiveevent_Widget_EventMiniMenuController extends Engine_Content_Wi
 	
 	if(empty($_COOKIE['en4_language']) || empty($_COOKIE['en4_locale']))
 	{
-		$ch = curl_init('http://www.geoplugin.net/php.gp?ip='.$_SERVER['REMOTE_ADDR']);
-		curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
-		$response = unserialize(curl_exec($ch));
-		$country = $response['geoplugin_countryCode'];
-		curl_close($ch);
-		// check mapping
-		$table = Engine_Api::_() -> getDbTable('langcountrymappings', 'core');
-		$select = $table -> select() -> where('country_code = ?', $country) -> limit(1);
-		$countryLanguage = '';
-		if($row = $table -> fetchRow($select))
+		$ipaddress = '';
+	    if ($_SERVER['HTTP_CLIENT_IP'])
+	        $ipaddress = $_SERVER['HTTP_CLIENT_IP'];
+	    else if($_SERVER['HTTP_X_FORWARDED_FOR'])
+	        $ipaddress = $_SERVER['HTTP_X_FORWARDED_FOR'];
+	    else if($_SERVER['HTTP_X_FORWARDED'])
+	        $ipaddress = $_SERVER['HTTP_X_FORWARDED'];
+	    else if($_SERVER['HTTP_FORWARDED_FOR'])
+	        $ipaddress = $_SERVER['HTTP_FORWARDED_FOR'];
+	    else if($_SERVER['HTTP_FORWARDED'])
+	        $ipaddress = $_SERVER['HTTP_FORWARDED'];
+	    else if($_SERVER['REMOTE_ADDR'])
+	        $ipaddress = $_SERVER['REMOTE_ADDR'];
+		if($ipaddress)
 		{
-			$countryLanguage = $row -> language_code;
-		}
-		$this -> view -> countryLanguage = $countryLanguage;
-    	if($countryLanguage)
-		{
-			setcookie('en4_language', $countryLanguage, time() + (86400*365), '/');
-			setcookie('en4_locale', $countryLanguage, time() + (86400*365), '/');
-			header("Refresh:0");
+			$ch = curl_init('http://www.geoplugin.net/php.gp?ip='.$ipaddress);
+			curl_setopt($ch,CURLOPT_RETURNTRANSFER, 1);
+			$response = unserialize(curl_exec($ch));
+			$country = $response['geoplugin_countryCode'];
+			curl_close($ch);
+			// check mapping
+			$table = Engine_Api::_() -> getDbTable('langcountrymappings', 'core');
+			$select = $table -> select() -> where('country_code = ?', $country) -> limit(1);
+			$countryLanguage = '';
+			if($row = $table -> fetchRow($select))
+			{
+				$countryLanguage = $row -> language_code;
+			}
+			$this -> view -> countryLanguage = $countryLanguage;
+	    	if($countryLanguage)
+			{
+				setcookie('en4_language', $countryLanguage, time() + (86400*365), '/');
+				setcookie('en4_locale', $countryLanguage, time() + (86400*365), '/');
+				header("Refresh:0");
+			}
 		}
 	}
 	

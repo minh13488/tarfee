@@ -104,6 +104,8 @@
 
 									<li class="second">
 										<?php
+										if($player -> photo_id)
+										{
 							        		echo $this->htmlLink(array(
 									            'route' => 'user_extended',
 									            'controller' => 'player-card',
@@ -112,6 +114,7 @@
 									        ), '<i class="fa fa-crop"></i>', array(
 									            'class' => 'smoothbox', 'title' => $this -> translate('Crop Photo')
 									        ));
+										}
 										?>
 									</li>
 

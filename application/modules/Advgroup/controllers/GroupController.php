@@ -841,7 +841,7 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
 			list($x, $y, $w, $h) = explode(':', $form -> getValue('coordinates'));
 
 			$image = Engine_Image::factory();
-			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 200, 200) -> write($iName) -> destroy();
+			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, $w, $h) -> write($iName) -> destroy();
 
 			$iProfile -> store($iName);
 

@@ -7348,6 +7348,10 @@ div[class*="group_videos"] > .icon_group_video_new {
 
 body#global_page_advgroup-profile-index 
 {
+	.layout_middle .layout_ynsocialads_ads_content
+	{
+		display: none;
+	}
 	.layout_ynfeed_feed #activity-feed
 	{
 		padding-top: 0;

@@ -1,5 +1,4 @@
-
-<?php if( $this->subject()->photo_id !== null ): ?>
+<?php if( $this->subject()->photo_id): ?>
 
   <?php
     $this->headScript()
@@ -11,44 +10,49 @@
     if($this->subject() -> photo_id)
     	echo $this->itemPhoto($this->subject(), 'thumb.main', "", array('id' => 'lassoImg')); ?>
   </div>
+  <div style="font-size: 13px;  font-weight: bold;" id = 'coordinates_size'>w: 108  h: 108</div>
+  <!--
   <br />
   <div id="preview-thumbnail" class="preview-thumbnail">
     <?php echo $this->itemPhoto($this->subject(), 'thumb.icon', "", array('id' => 'previewimage')) ?>
   </div>
+  -->
   <div id="thumbnail-controller" class="thumbnail-controller">
     <?php if ($this->subject()->getPhotoUrl())
     echo '<a href="javascript:void(0);" onclick="lassoStart();">'.$this->translate('Edit Thumbnail').'</a>';?>
   </div>
   <script type="text/javascript">
-    var orginalThumbSrc;
     var originalSize;
     var loader = new Element('img',{ src: en4.core.staticBaseUrl + 'application/modules/Core/externals/images/loading.gif'});
     var lassoCrop;
     
     var lassoSetCoords = function(coords)
     {
-      var delta = (coords.w - 48) / coords.w;
+      //var delta = (coords.w - 48) / coords.w;
 
       $('coordinates').value =
         coords.x + ':' + coords.y + ':' + coords.w + ':' + coords.h;
+      $('coordinates_size').innerHTML = "w: " + coords.w + "  h: " + coords.h;
       
+      /*
       $('previewimage').setStyles({
         top : -( coords.y - (coords.y * delta) ),
         left : -( coords.x - (coords.x * delta) ),
         height : ( originalSize.y - (originalSize.y * delta) ),
         width : ( originalSize.x - (originalSize.x * delta) )
-      });
+      });*/
     }
 
     var lassoStart = function()
     {
-      if( !orginalThumbSrc ) orginalThumbSrc = $('previewimage').src;
+      //if( !orginalThumbSrc ) 
+      //	orginalThumbSrc = $('previewimage').src;
       originalSize = $("lassoImg").getSize();
       
       lassoCrop = new Lasso.Crop('lassoImg', {
-	  ratio : [1, 1],
+	  ratio : false,
 	  preset : [10,10,118,118],
-	  min : [100,100],
+	  min : [70,70],
 	  handleSize : 8,
 	  opacity : .6,
 	  color : '#7389AE',
@@ -57,7 +61,7 @@
 	        bgimage : ''
 	      });
 	
-	      $('previewimage').src = $('lassoImg').src;
+	      //$('previewimage').src = $('lassoImg').src;
 	      $('thumbnail-controller').innerHTML = '<a href="javascript:void(0);" onclick="lassoEnd();"><?php echo $this->translate('Apply Changes');?></a> <?php echo $this->translate('or');?> <a href="javascript:void(0);" onclick="lassoCancel();"><?php echo $this->translate('cancel');?></a>';
 	      $('coordinates').value = 10 + ':' + 10 + ':' + 118+ ':' + 118;
 	    }
@@ -69,7 +73,8 @@
 	    }
 	
 	    var lassoCancel = function() {
-	      $('preview-thumbnail').innerHTML = '<img id="previewimage" src="'+orginalThumbSrc+'"/>';
+	      //$('preview-thumbnail').innerHTML = '<img id="previewimage" src="'+orginalThumbSrc+'"/>';
+	      $('coordinates_size').innerHTML = "w: 108  h: 108";
 	      $('thumbnail-controller').innerHTML = '<a href="javascript:void(0);" onclick="lassoStart();"><?php echo $this->translate('Edit Thumbnail');?></a>';
 	      $('coordinates').value = "";
 	      lassoCrop.destroy();
@@ -81,7 +86,10 @@
 	      $('Filedata-wrapper').innerHTML = "";
 	      $('url-wrapper').innerHTML = "";
 	    }
-	    //window.addEvent('domready', function(){lassoStart();});
+	     jQuery(window).load(function()
+	    {
+			lassoStart();
+	    });
   </script>
 
 <?php endif; ?>

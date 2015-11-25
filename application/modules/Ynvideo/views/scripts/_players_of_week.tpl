@@ -47,6 +47,12 @@
 			<?php endif; ?>
 	    </div>
 	</div>
+	<?php else:?>
+		<?php 
+		    echo $this->htmlLink($this->video->getPopupHref(), 
+		            $this->string()->truncate($this->video->getTitle(), 30), 
+		            array('class' => 'tf_video_title smoothbox', 'title' => $this->video->getTitle())) 
+		?>
 	<?php endif;?>
 	<div class="video-statistic-rating">
 		<div class="video-rating">

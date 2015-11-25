@@ -3,7 +3,6 @@ class Ynblog_Widget_RecentBlogsController extends Engine_Content_Widget_Abstract
 {
 	public function indexAction()
   {
-
     //Get number of blogs display
     if($this->_getParam('max') != '' && $this->_getParam('max') >= 0){       
         $limitNblog = $this->_getParam('max');
@@ -22,7 +21,6 @@ class Ynblog_Widget_RecentBlogsController extends Engine_Content_Widget_Abstract
     //Select blogs
     $table  = Engine_Api::_()->getItemTable('blog');
     $select = Engine_Api::_()->ynblog()->getBlogsSelect($params);
-    
     $this->view->blogs = $blogs = $table->fetchAll($select);
 	if(count($blogs) <= 0)
 	{

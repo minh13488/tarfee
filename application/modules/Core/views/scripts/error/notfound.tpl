@@ -10,7 +10,7 @@
  * @author     John
  */
 ?>
-
+<div class = 'content_error'>
 <h2><?php echo $this->translate('Page Not Found') ?></h2>
 
 <p>
@@ -22,3 +22,4 @@
 <a class='buttonlink icon_back' href='javascript:void(0);' onClick='history.go(-1);'>
   <?php echo $this->translate('Go Back') ?>
 </a>
+</div>

@@ -296,7 +296,8 @@ ul.ynvideo_frame {
 
 
 /* ACTION TYPE ICONS */
-.activity_icon_comment_video
+.activity_icon_comment_video,
+.activity_icon_advgroup_video_create
 {
     background-image: url(~/application/modules/Core/externals/images/types/post.png);
 }
@@ -1405,4 +1406,16 @@ div.video_object
 .layout_ynvideo_profile_favorite_videos #ynvideo_favorite_videos li .video-title
 {
 	height: auto;
+}
+.layout_advgroup_recent_group_videos
+{
+	a.tf_video_title
+	{
+        color: $theme_font_color;
+        text-decoration: none;
+
+        &:hover{
+            color: $theme_link_color;
+        }
+    }
 }

@@ -647,6 +647,14 @@ window.addEvent('domready', function()
 	<?php if($this->viewer->getIdentity()):?>
 		getNotificationsTotal();
 	<?php endif;?>
+	$$('.core_mini_organization').addEvent('click', function()
+	{
+		resetCookie();
+	});
+	var resetCookie = function()
+	{
+		var expires = "expires="+ "";
+	    document.cookie = 'group-tab-cookie' + "=" + "" + "; " + expires;
+	}
 });
-
 </script>

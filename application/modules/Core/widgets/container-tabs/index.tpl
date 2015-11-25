@@ -10,7 +10,6 @@
  * @author     John
  */
 ?>
-
 <script type="text/javascript">
   en4.core.runonce.add(function() {
     var tabContainerSwitch = window.tabContainerSwitch = function(element) {
@@ -45,7 +44,15 @@
         $class[] = 'tab_' . $tab['id'];
         $class[] = 'tab_' . trim(str_replace('generic_layout_container', '', $tab['containerClass']));
         if( $this->activeTab == $tab['id'] || $this->activeTab == $tab['name'] )
-          $class[] = 'active';
+		{
+			if($this -> subject() && $this -> subject() -> getType() == 'group')
+			{
+				$class[] = '';
+			}
+			else {
+				$class[] = 'active';
+			}
+		}
         $class = join(' ', $class);
       ?>
       <?php if( $key < $this->max ): ?>
@@ -70,7 +77,10 @@
               $class   = array();
               $class[] = 'tab_' . $tab['id'];
               $class[] = 'tab_' . trim(str_replace('generic_layout_container', '', $tab['containerClass']));
-              if( $this->activeTab == $tab['id'] || $this->activeTab == $tab['name'] ) $class[] = 'active';
+              if( $this->activeTab == $tab['id'] || $this->activeTab == $tab['name'] ) 
+              {
+					$class[] = 'active';
+			  }
               $class = join(' ', array_filter($class));
             ?>
             <?php if( $key >= $this->max ): ?>

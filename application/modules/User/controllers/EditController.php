@@ -760,7 +760,7 @@ class User_EditController extends Core_Controller_Action_User
 			$image -> open($mName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 48, 48) -> write($iName) -> destroy();
 			$iSquare -> store($iName);
 			
-			$image -> open($mName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 200, 200) -> write($pName) -> destroy();
+			$image -> open($mName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, $w, $h) -> write($pName) -> destroy();
 			$iProfile -> store($pName);
 			
 			// Remove temp files

@@ -2,7 +2,7 @@
 	<?php $photoUrl = ($this ->group -> getPhotoUrl('thumb.profile')) ? $this ->group->getPhotoUrl('thumb.profile') : "application/modules/Advgroup/externals/images/nophoto_group_thumb_profile.png" ?>
 	<?php $url = $this->url(array('controller' => 'index','action'=>'more-info', 'club_id'=> $this -> group->getIdentity()), 'group_extended' , true)?>
 	<div class="club-photo" style="background-image: url(<?php echo $photoUrl; ?>)">
-		<?php if($this -> group -> isOwner($this -> viewer())):?>
+		<?php if($this -> group -> isOwner($this -> viewer()) && $this -> group -> photo_id):?>
 			<span class = "edit-photo-btn">
 				<?php echo $this->htmlLink(array(
 			            'route' => 'group_specific',

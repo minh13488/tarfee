@@ -548,6 +548,10 @@ class Ynvideo_Api_Core extends Core_Api_Abstract {
         Engine_Api::_()->getDbtable('ratings', 'ynvideo')->delete(array(
             'video_id = ?' => $video->video_id,
         ));
+		
+		Engine_Api::_()->getDbTable('mappings', 'user')->delete(array(
+	            'item_id = ?' => $video->video_id, 'item_type = ?' => 'video'
+	        ));
 
         // check to make sure the video did not fail, if it did we wont have files to remove
         if ($video->status == 1) {

@@ -1,4 +1,4 @@
-<?php if( $this->subject()->photo_id !== null ): ?>
+<?php if($this->subject()->photo_id): ?>
   <?php
     $this->headScript()
       ->appendFile($this->layout()->staticBaseUrl . 'externals/moolasso/Lasso.js')
@@ -7,6 +7,7 @@
   <div>
     <?php echo $this->itemPhoto($this->subject(), 'thumb.main', "", array('id' => 'lassoImg')) ?>
   </div>
+  <div style="text-align: center; font-size: 13px; font-weight: bold;" id = 'coordinates_size'>w: 108  h: 108</div>
   <script type="text/javascript">
     var originalSize;
     var loader = new Element('img',{ src: en4.core.staticBaseUrl + 'application/modules/Core/externals/images/loading.gif'});
@@ -16,15 +17,16 @@
     {
       $('coordinates').value =
         coords.x + ':' + coords.y + ':' + coords.w + ':' + coords.h;
+      $('coordinates_size').innerHTML = "w: " + coords.w + "  h: " + coords.h;
     }
 
     var lassoStart = function()
     {
       originalSize = $("lassoImg").getSize();
       lassoCrop = new Lasso.Crop('lassoImg', {
-	  ratio : [1, 1],
+	  ratio : false,
 	  preset : [10,10,118,118],
-	  min : [100,100],
+	  min : [70,70],
 	  handleSize : 8,
 	  opacity : .6,
 	  color : '#7389AE',

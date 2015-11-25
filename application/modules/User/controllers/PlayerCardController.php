@@ -188,11 +188,12 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			if($player_card -> parent_type == 'group')
 			{
 				$parent = $player_card -> getParent();
-				$url = $pageURL . $_SERVER['HTTP_HOST'] . $parent -> getHref().'/tab/'.$tab;
+				return $this -> _redirectCustom($parent);
+				//$url = $pageURL . $_SERVER['HTTP_HOST'] . $parent -> getHref().'/tab/'.$tab;
 			}
 			else 
 			{
-				$url = $pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref().'/tab/'.$tab;
+				$url = $pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref().'/view/tab/'.$tab;
 				
 			}
 			return $this -> _helper -> redirector -> gotoUrl($url);
@@ -448,10 +449,6 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			// Commit
 			$db -> commit();
 			
-			if ($player_card -> parent_type == 'group') {
-				$club = Engine_Api::_()->getItem('group', $player_card -> parent_id);
-				return $this -> _redirectCustom($club);
-			}
 			// Redirect
 			$tab = $this -> _getParam('tab', '');
 			$pageURL = 'http';
@@ -460,7 +457,18 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 				$pageURL .= "s";
 			}
 			$pageURL .= "://";
-			return $this -> _helper -> redirector -> gotoUrl($pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref().'/view/tab/'.$tab);
+			if($player_card -> parent_type == 'group')
+			{
+				$parent = $player_card -> getParent();
+				return $this -> _redirectCustom($parent);
+				//$url = $pageURL . $_SERVER['HTTP_HOST'] . $parent -> getHref().'/tab/'.$tab;
+			}
+			else 
+			{
+				$url = $pageURL . $_SERVER['HTTP_HOST'] . $viewer -> getHref().'/view/tab/'.$tab;
+				
+			}
+			return $this -> _helper -> redirector -> gotoUrl($url);
 		}
 		catch( Engine_Image_Exception $e )
 		{
@@ -504,6 +512,22 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 
 		try
 		{
+			// get all video belong player
+			$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+			$params['owner_type'] = $player_card -> getType();
+			$params['owner_id'] = $player_card -> getIdentity();
+			
+			$items = $mappingTable -> getItemsMapping('video', $params);
+			foreach($items as $item)
+			{
+				$video = Engine_Api::_() -> getItem($item -> item_type, $item -> item_id);
+				if($video)
+				{
+					Engine_Api::_() -> getApi('core', 'ynvideo') -> deleteVideo($video);
+				}
+				$item -> delete();
+			}
+			
 			$player_card -> delete();
 			$db -> commit();
 		}
@@ -516,7 +540,8 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 		if($parent -> getType() == 'group')
 		{
 			return $this -> _forward('success', 'utility', 'core', array(
-				'parentRedirect' => $parent -> getHref().'/tab/1959',
+				'smoothboxClose' => true,
+        		'parentRefresh' => true,
 				'messages' => array(Zend_Registry::get('Zend_Translate') -> _('Player card deleted.')),
 			));
 		}
@@ -636,7 +661,7 @@ class User_PlayerCardController extends Core_Controller_Action_Standard
 			list($x, $y, $w, $h) = explode(':', $form -> getValue('coordinates'));
 
 			$image = Engine_Image::factory();
-			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, 200, 200) -> write($iName) -> destroy();
+			$image -> open($pName) -> resample($x + .1, $y + .1, $w - .1, $h - .1, $w, $h) -> write($iName) -> destroy();
 
 			$iProfile -> store($iName);
 

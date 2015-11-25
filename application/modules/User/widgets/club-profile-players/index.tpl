@@ -26,7 +26,7 @@
 		            'controller' => 'player-card',
 		            'action' => 'create',
 		            'club_parent' => $this -> subject() -> getIdentity(),
-		            'tab' => '1959'
+		            //'tab' => '1959'
 		        ), $this->translate('Add Player'), array(
 		            'class' => 'tf_button_action'
 		        ))

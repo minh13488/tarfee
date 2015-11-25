@@ -33,17 +33,26 @@ class Core_Widget_ContainerTabsController extends Engine_Content_Widget_Abstract
     if( empty($activeTab) ) {
       $activeTab = Zend_Controller_Front::getInstance()->getRequest()->getParam('tab');
     }
-
+	
+	$subject = null;
+	if(Engine_Api::_()->core()->hasSubject('group'))
+		$subject = Engine_Api::_()->core()->getSubject('group');
     // Iterate over children
     $tabs = array();
     $childrenContent = '';
-    foreach( $element->getElements() as $child ) {
+    foreach( $element->getElements() as $child ) 
+    {
       // First tab is active if none supplied
-      if( null === $activeTab ) {
-        $activeTab = $child->getIdentity();
-      }
+      if(!$subject)
+	  {
+	      if( null === $activeTab ) 
+	      {
+	      	$activeTab = $child->getIdentity();
+	      }
+	  }
       // If not active, set to display none
-      if( $child->getIdentity() != $activeTab && $child->getName() != $activeTab) {
+      if( $child->getIdentity() != $activeTab && $child->getName() != $activeTab) 
+      {
         $child->getDecorator('Container')->setParam('style', 'display:none;');
       }
       // Set specific class name
