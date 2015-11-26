@@ -53,7 +53,7 @@ class User_ProfileController extends Core_Controller_Action_Standard
     $subject = Engine_Api::_()->core()->getSubject();
     $viewer = Engine_Api::_()->user()->getViewer();
 	
-	if($viewer -> level_id == 7)
+	if($viewer -> getIdentity() && $viewer -> level_id == 7)
 	{
 		$group = Engine_Api::_() -> advgroup() -> getGroupUser($viewer);
 		if($group)
