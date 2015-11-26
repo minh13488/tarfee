@@ -476,6 +476,55 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
                     $sub_group -> delete();
                 }
                 
+				// delete all items
+				$tableMapping = Engine_Api::_()->getItemTable('advgroup_mapping');
+				$mappings = $tableMapping -> getItemsMapping($group->getIdentity());
+				foreach($mappings as $mapping)
+				{
+					$item = Engine_Api::_() -> getItem($mapping -> type, $mapping -> item_id);
+					if($item)
+					{
+						if($item -> getType() == 'video')
+							Engine_Api::_() -> getApi('core', 'ynvideo') -> deleteVideo($item);
+						else {
+							$item -> delete();
+						}
+					}
+					$mapping -> delete();
+				}
+				$playercards = Engine_Api::_() -> getDbTable('playercards', 'user') -> getClubPlayersPaginator($group);
+				foreach($playercards as $playercard)
+				{
+					// get all video belong player
+					$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+					$params['owner_type'] = $playercard -> getType();
+					$params['owner_id'] = $playercard -> getIdentity();
+					
+					$videoitems = $mappingTable -> getItemsMapping('video', $params);
+					foreach($videoitems as $videoitem)
+					{
+						$video = Engine_Api::_() -> getItem($videoitem -> item_type, $videoitem -> item_id);
+						if($video)
+						{
+							Engine_Api::_() -> getApi('core', 'ynvideo') -> deleteVideo($video);
+						}
+						$videoitem -> delete();
+					}
+					$playercard -> delete();
+				}
+				$campaignTable = Engine_Api::_() -> getItemTable('tfcampaign_campaign');
+				$campaigns = $campaignTable -> getCampaignsByClub($group, 100);
+				foreach($campaigns as $campaign)
+				{
+					$campaign -> delete();
+				}
+				$events = $group->getEventsPaginator();
+				$events -> setItemCountPerPage(100);
+				foreach($events as $event)
+				{
+					$event -> delete();
+				}
+				
                 //Delete parent group
                 $group -> delete();
                 $db -> commit();
@@ -489,7 +538,7 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
             $this -> view -> message = Zend_Registry::get('Zend_Translate') -> _('The selected club has been deleted.');
 
             return $this -> _forward('success', 'utility', 'core', array(
-                'parentRedirect' => Zend_Controller_Front::getInstance() -> getRouter() -> assemble(array('action' => 'manage'), 'group_general', true),
+                'parentRedirect' => $viewer -> getHref(),
                 'messages' => Array($this -> view -> message)
             ));
         }
@@ -500,6 +549,55 @@ class Advgroup_GroupController extends Core_Controller_Action_Standard
 
             try
             {
+            	// delete all items
+				$tableMapping = Engine_Api::_()->getItemTable('advgroup_mapping');
+				$mappings = $tableMapping -> getItemsMapping($group->getIdentity());
+				foreach($mappings as $mapping)
+				{
+					$item = Engine_Api::_() -> getItem($mapping -> type, $mapping -> item_id);
+					if($item)
+					{
+						if($item -> getType() == 'video')
+							Engine_Api::_() -> getApi('core', 'ynvideo') -> deleteVideo($item);
+						else {
+							$item -> delete();
+						}
+					}
+					$mapping -> delete();
+				}
+				$playercards = Engine_Api::_() -> getDbTable('playercards', 'user') -> getClubPlayersPaginator($group);
+				foreach($playercards as $playercard)
+				{
+					// get all video belong player
+					$mappingTable = Engine_Api::_()->getDbTable('mappings', 'user');
+					$params['owner_type'] = $playercard -> getType();
+					$params['owner_id'] = $playercard -> getIdentity();
+					
+					$videoitems = $mappingTable -> getItemsMapping('video', $params);
+					foreach($videoitems as $videoitem)
+					{
+						$video = Engine_Api::_() -> getItem($videoitem -> item_type, $videoitem -> item_id);
+						if($video)
+						{
+							Engine_Api::_() -> getApi('core', 'ynvideo') -> deleteVideo($video);
+						}
+						$videoitem -> delete();
+					}
+					$playercard -> delete();
+				}
+				$campaignTable = Engine_Api::_() -> getItemTable('tfcampaign_campaign');
+				$campaigns = $campaignTable -> getCampaignsByClub($group, 100);
+				foreach($campaigns as $campaign)
+				{
+					$campaign -> delete();
+				}
+				$events = $group->getEventsPaginator();
+				$events -> setItemCountPerPage(100);
+				foreach($events as $event)
+				{
+					$event -> delete();
+				}
+				
                 $group -> delete();
                 $db -> commit();
             }

@@ -7348,6 +7348,10 @@ div[class*="group_videos"] > .icon_group_video_new {
 
 body#global_page_advgroup-profile-index 
 {
+	.layout_ynsocialads_ads_content img
+	{
+		max-width: 100%;	
+	}
 	.layout_middle .layout_ynsocialads_ads_content
 	{
 		display: none;
@@ -7435,6 +7439,10 @@ body#global_page_advgroup-profile-index
 	                border-right: 0 !important;
 	            }
 	            a {
+	            	span
+	            	{
+	            		margin-left: 0;
+	            	}
 	                color: $theme_font_color;
 	                font-size: 16px;
 	                position: relative;
@@ -7462,6 +7470,7 @@ body#global_page_advgroup-profile-index
 	                border-left: 10px solid transparent;
 	                border-right: 10px solid transparent;
 	                border-bottom: 10px solid #dedede;
+	                left: 46%;
 	            }
 	        }
 	    }

@@ -1429,11 +1429,6 @@ body#global_page_user-profile-index {
                     }
                     &:before {
                         content: "";
-			/*          font-family: FontAwesome;
-						font-style: normal;
-						font-weight: normal;
-						text-decoration: inherit;
-						font-size: 24px;*/
                         background-repeat: no-repeat;
                     }
                 }
@@ -1453,6 +1448,7 @@ body#global_page_user-profile-index {
                     border-left: 10px solid transparent;
                     border-right: 10px solid transparent;
                     border-bottom: 10px solid #dedede;
+                    left: 46%;
                 }
 
             }

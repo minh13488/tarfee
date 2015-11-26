@@ -10,14 +10,14 @@
 				if(count($arrEst) > 2 && $arrEst[0] > 0)
 				{
 					$arrEstShow[] = $arrEst[0];
-					if($arrEst[1] > 0)
+					/*if($arrEst[1] > 0)
 					{
 						$arrEstShow[] = $arrEst[1];
 					}
 					if($arrEst[1] > 0 && $arrEst[2] > 0)
 					{
 						$arrEstShow[] = $arrEst[2];
-					}
+					}*/
 				}	
 			?>
 			<div class="club-establish">

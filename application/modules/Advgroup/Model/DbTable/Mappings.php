@@ -183,4 +183,11 @@ class Advgroup_Model_DbTable_Mappings extends Engine_Db_Table
         }
         return $ids;
     }
+	
+	public function getItemsMapping($groupId = 0) {
+        $select = $this -> select();
+        $select -> where("group_id = ?", $groupId);
+        $mappings = $this->fetchAll($select);
+        return $mappings;
+    }
 }
