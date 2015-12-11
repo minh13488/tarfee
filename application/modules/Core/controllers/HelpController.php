@@ -21,7 +21,7 @@ class Core_HelpController extends Core_Controller_Action_Standard
 {
   public function init()
   {
-    $this->_helper->requireUser();
+    //$this->_helper->requireUser();
   }
   public function contactAction()
   {

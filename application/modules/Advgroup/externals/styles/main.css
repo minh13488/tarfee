@@ -7362,12 +7362,15 @@ body#global_page_advgroup-profile-index
 	}
 	.yncomment_feed
 	{
-		.yncomment_feed_item_date li.yncomment_wrap
+		.yncomment_feed_item_date li.yncomment_wrap,
+        .comments_info .comments_date .nstcomment_wrap
 		{ 
 			color: $theme_link_color;
 		}
 		li.feed_item_option_like a,
-		li.feed_item_option_unlike a
+		li.feed_item_option_unlike a,
+        li.comments_like a,
+        li.comments_unlike a
 		{
 			color: $theme_font_color_light;
 			&:hover {
