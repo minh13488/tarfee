@@ -276,5 +276,9 @@ class Ynblog_Model_Blog extends Core_Model_Item_Abstract
 		}
 		return null;
 	}
+	 public function getShortType($inflect = false)
+	 {
+	 	return 'talk';
+	 }
 }
 ?>

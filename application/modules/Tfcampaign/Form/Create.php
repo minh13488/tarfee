@@ -42,15 +42,17 @@ class Tfcampaign_Form_Create extends Engine_Form
       ),
     ));
 	$this -> description -> setAttrib('required', true);
-	
+
+	$currentDate = array('year' => date('Y', time()), 'month' => date('m', time()), 'day' => date('j', time()));
 	// Start time
-    $start = new Engine_Form_Element_CalendarDateTime('start_date');
+    $start = new Engine_Form_Element_Date('start_date');
     $start->setLabel("Start Time");
     $start->setAllowEmpty(false);
+	$start -> setValue($currentDate);
     $this->addElement($start);
 	
     // End time
-    $end = new Engine_Form_Element_CalendarDateTime('end_date');
+    $end = new Engine_Form_Element_Date('end_date');
     $end->setLabel("End Time");
     $end->setAllowEmpty(false);
     $this->addElement($end);

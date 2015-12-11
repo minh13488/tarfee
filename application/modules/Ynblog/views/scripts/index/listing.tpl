@@ -19,7 +19,7 @@
         <?php endif; ?>
 
         <div class="ynblog_entrylist_entry_body">
-           <?php echo $this -> viewMore($item -> body, 800); ?>
+           <?php echo $this -> viewMore($item -> body, 800, 10 * 1027); ?>
         </div>
 
         <div class="ynblog_entrylist_entry_date">

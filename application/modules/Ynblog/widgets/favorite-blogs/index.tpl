@@ -21,7 +21,7 @@
                 <?php echo $this->htmlLink($item->getHref(), $item->getTitle()) ?>
           </div>
           <div class="talk_description">
-                <?php echo $this -> viewMore($item->body); ?>
+                 <?php echo $this -> viewMore($item -> body, 800, 10 * 1027); ?>
           </div>
       </div>
 

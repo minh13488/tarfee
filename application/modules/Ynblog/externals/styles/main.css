@@ -209,7 +209,8 @@ ul.ynblogs_entrylist .ynblog_entrylist_entry_body
     }
 }
 
-ul.ynblogs_entrylist .ynblog_entrylist_entry_body img
+ul.ynblogs_entrylist .ynblog_entrylist_entry_body img,
+ul.tf_list_talk .tf_talk_info .talk_description img
 {
   max-width: 100%;
 }

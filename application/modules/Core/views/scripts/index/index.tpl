@@ -263,9 +263,9 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 
 	    <div class="menu-footer">
 			<a target="_blank" href="/landing/new_landing/about_us/about_us.html"><?php echo $this -> translate('About Us');?></a> |
-			<a target="_blank" href="/index.php/help/privacy"><?php echo $this -> translate('Privacy');?></a> |
-			<a target="_blank" href="/index.php/help/terms"><?php echo $this -> translate('Terms of Service');?></a> |
-			<a target="_blank" href="/index.php/help/contact"><?php echo $this -> translate('Contact Us');?></a>
+			<a target="_blank" href="/help/privacy"><?php echo $this -> translate('Privacy');?></a> |
+			<a target="_blank" href="/help/terms"><?php echo $this -> translate('Terms of Service');?></a> |
+			<a target="_blank" href="/help/contact"><?php echo $this -> translate('Contact Us');?></a>
 			<span class="ynresponsive_languages-popup">
 			    <?php if( 1 !== count($this->languageNameList) ):?>
 			    <form id="form_language" method="post" action="<?php echo $this->url(array('controller' => 'utility', 'action' => 'locale'), 'default', true) ?>" style="display:inline-block">
@@ -677,7 +677,7 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 	</section>
 	<!-- End contact -->
 	<div style="display: none;">
-	    <form id="skip_form_login" enctype="application/x-www-form-urlencoded" class="global_form" action="//<?php echo $_SERVER['HTTP_HOST']?>/index.php/login" method="post">
+	    <form id="skip_form_login" enctype="application/x-www-form-urlencoded" class="global_form" action="//<?php echo $_SERVER['HTTP_HOST']?>/login" method="post">
 		    <input type="hidden" name="email" value="guest@gmail.com"/>
 		    <input type="password" name="password" value="123456"/>
 		    <input type="hidden" name="level" value="5"/>
@@ -756,7 +756,6 @@ $_SERVER['HTTP_HOST'] = $_SERVER['HTTP_HOST'] .'';
 	    }
 	}
 	function skips_sign_in() {
-	    //$('#skip_form_login').submit();
 	    window.location.href = '<?php echo $this -> url(array('action' => 'home'), 'user_general', true)?>';
 	}
 	function request_invite()

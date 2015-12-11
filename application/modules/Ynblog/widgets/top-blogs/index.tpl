@@ -23,7 +23,7 @@
               </div>
           
               <div class="talk_description">
-                    <?php echo $this -> viewMore($item -> body); ?>
+                    <?php echo $this -> viewMore($item -> body, 800, 10 * 1027); ?>
               </div>
               <div class="talk_statistics">
 		          	<span><?php echo $this->translate(array('%s view','%s views', $item -> view_count), $item -> view_count)?></span>

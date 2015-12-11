@@ -5719,6 +5719,7 @@ body[id^=global_page_ynsocialads],
 body[id^=global_page_social-connect],
 #global_page_user-player-card-edit,
 #global_page_core-help-terms,
+#global_page_core-help-privacy,
 #global_page_advgroup-group-edit,
 #global_page_advgroup-index-create,
 #global_page_user-player-card-view,
@@ -5758,6 +5759,7 @@ body[id^=global_page_social-connect],
 			  .layout_page_contactimporter_index_import,
 			  .notifications_layout,
 			  .layout_page_core_help_terms,
+			  .layout_page_core_help_privacy,
 			  .layout_page_messages_messages_inbox,
 			  .layout_page_messages_messages_outbox,
 			  .layout_page_messages-messages-compose,
@@ -6004,4 +6006,9 @@ body[id^=global_page_social-connect] #global_content,
             background-color: #f63 !important;
         }
     }
+}
+.notifications .ynadvmenu_Contentlist_unread
+{
+	background-color: #E9E9E9;
+	padding: 10px;
 }
